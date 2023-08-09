@@ -1,10 +1,10 @@
 <script>
 	import Header from "../components/Header.svelte";
-	import Box from '../components/Box.svelte';
-	import { Progress } from '@svelteuidev/core';
+	// import Box from '../components/Box.svelte';
+	// import { Progress } from '@svelteuidev/core';
 	import { onMount } from 'svelte';
 	import Typewriter from 'svelte-typewriter';
-	import { Center, Text, Timeline } from '@svelteuidev/core';
+	// import { Center, Text, Timeline } from '@svelteuidev/core';
 	import PageTransitions from "../components/PageTransitions.svelte";
 
 	import Footer from "../components/footer.svelte"
@@ -88,7 +88,7 @@
 	
 	<div class= "currents">
 		<div class= current1>
-			<Box>
+			<!-- <Box>
 				<h2>Decoding Nobel Success: Traits of a Literary Laureate</h2>
 				<p class="desc" style="color:#7F393E" >Data Analysis | Data Vizualisation</p>
 			</Box>
@@ -143,7 +143,7 @@
 					<Text size='xs'>Task starting date is TBD</Text>
 					</Timeline.Item>
 			</Timeline>
-		</div>
+		</div> -->
 	
 		<div class= current2>
 
