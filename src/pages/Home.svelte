@@ -60,7 +60,7 @@
 <PageTransitions>
 	<div class="block-container1">
 		<div class="AboutMeIcon">
-			<img src="/src/1.png" alt="About Me">
+			<img src="/src/assets/1.png" alt="About Me">
 		  </div>
 		<p id="AboutMe">
 		Meet Ahmed Bendaly, a multi-talented data scientist, graphic designer, and engineer who weaves data into captivating stories.
@@ -75,14 +75,14 @@
 	
 	<div class="block-container2">
 		<div class="MyPhoto">
-			<img src="/src/PhotoMe.png" alt="My Photo">
+			<img src="/src/assets/PhotoMe.png" alt="My Photo">
 		</div>
 	</div>
 	
 	<hr class="dashed-line">
 	
 	<div class="CuurentProject">
-		<img src="/src/Current.png" alt="Current Project">
+		<img src="/src/assets/Current.png" alt="Current Project">
 	</div>
 	
 	
