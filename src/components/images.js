@@ -3,7 +3,7 @@ export const imageData = [
     url: "../src/MyProjects/ALL-Star/Thumbnail-AllStar.png",
     title: "The Decline of the All-Star game",
     desc: "Data Analysis | Data Vizualisation",
-    href: "/allStar",
+    // href: "/allStar",
   },
   // {
   //   url: "../src/MyProjects/Klay/Klay.gif",
