@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "Action Cond Regular Trial";
+  src: url("../Fonts/ActionCondensedRegular-Grade2-Trial.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "Futura";
+  src: url("../Fonts/futur.ttf") format("TrueType");
+}
+
+@font-face {
+  font-family: "Quicksand";
+  src: url("../Fonts/Quicksand-VariableFont_wght.ttf") format("TrueType");
+}
