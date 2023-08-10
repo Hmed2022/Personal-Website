@@ -10,6 +10,11 @@
 	import Footer from "../components/footer.svelte"
 
 	import pdfUrl from "../assets/Ahmed Bendaly.pdf"
+	import CurrentImg from "../assets/Current.png"
+	import AboutMe from "../assets/1.png"
+	import PhotoMe from "../assets/PhotoMe.png"
+
+
 
 	let showParagraph = true;
 
@@ -60,7 +65,7 @@
 <PageTransitions>
 	<div class="block-container1">
 		<div class="AboutMeIcon">
-			<img src="/src/assets/1.png" alt="About Me">
+			<img src="{AboutMe}" alt="About Me">
 		  </div>
 		<p id="AboutMe">
 		Meet Ahmed Bendaly, a multi-talented data scientist, graphic designer, and engineer who weaves data into captivating stories.
@@ -75,14 +80,14 @@
 	
 	<div class="block-container2">
 		<div class="MyPhoto">
-			<img src="/src/assets/PhotoMe.png" alt="My Photo">
+			<img src="{PhotoMe}" alt="My Photo">
 		</div>
 	</div>
 	
 	<hr class="dashed-line">
 	
 	<div class="CuurentProject">
-		<img src="/src/assets/Current.png" alt="Current Project">
+		<img src="{CurrentImg}" alt="Current Project">
 	</div>
 	
 	

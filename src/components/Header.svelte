@@ -1,8 +1,10 @@
-
+<script>
+	import Logo from "../assets/MyName.png"
+</script>
 <header>
 	<div class="logo">
 		<a href="/" >
-	  <img src="./src/MyName.png" alt="Logo">
+	  <img src="{Logo}" alt="Logo">
 		</a>
 	</div>
 	<!-- <nav>
