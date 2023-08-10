@@ -1,5 +1,4 @@
 <script>
-	import Header from "../components/Header.svelte";
 	// import Box from '../components/Box.svelte';
 	// import { Progress } from '@svelteuidev/core';
 	import { onMount } from 'svelte';
@@ -13,6 +12,8 @@
 	import CurrentImg from "../assets/Current.png"
 	import AboutMe from "../assets/1.png"
 	import PhotoMe from "../assets/PhotoMe.png"
+
+	import Logo from "../assets/MyName.png"
 
 
 
@@ -38,22 +39,15 @@
 
 </script>
 
+
 <body>
-
-
-  
-<Header />
-
-
-
-
 <!-- <Typewriter  on:done={handleTypewriterFinish}>
     <p id="IntroFirstPage"> Welcome to my personal website, a hub for showcasing my passions, projects, and creative ideas.
 	Join me as I delve into new concepts and pursue exciting endeavors.
    Connect with me and like-minded individuals who share similar interests and inspire growth together.</p>
 </Typewriter> -->
 
-    <p id="IntroFirstPage"> Welcome to my personal website , a hub for showcasing  passions, <a class="project" href="/projects">Projects</a>, and creative ideas.
+    <p id="IntroFirstPage"> Welcome to my personal website , a hub for showcasing my passions, <a class="project" href="/projects">Projects</a>, and creative ideas.
 	Join me as I delve into new concepts and pursue exciting endeavors.
    Connect with me and like-minded individuals who share similar interests and inspire growth together.</p>
 
@@ -69,12 +63,12 @@
 		  </div>
 		<p id="AboutMe">
 		Meet Ahmed Bendaly, a multi-talented data scientist, graphic designer, and engineer who weaves data into captivating stories.
-		Currently, Ahmed is a graduate student at the University of Michigan Dearborn, where he’s honing his skills
-		in data science and bringing his computer systems background to the table.,<br>
+		Currently, Ahmed is a graduate student at the <a href="https://umdearborn.edu/" style="color:#01274B;">University of Michigan Dearborn </a>, where he’s honing his skills
+		in data science.<br>
 		With a passion for original and creative work, Ahmed’s goal is to make complex subjects more accessible to the world. 
-		And, as a proud Tunisian, you’ll find a touch of his cultural heritage in some of his projects.<br> 
-		Get ready to be entertained and educated by a curious, silly, and goal-driven storyteller!” <br>
-		You can view the CV in <a href="{pdfUrl}" target="_blank" rel="noopener noreferrer" > here</a>!
+		And, as a proud <a href="https://en.wikipedia.org/wiki/Tunisia" style="color:#871B40">Tunisian</a>, you’ll find a touch of his cultural heritage in some of his projects.<br> 
+		<br>
+		Take a look at his Resume <a href="{pdfUrl}" target="_blank" rel="noopener noreferrer" > here</a>!
 		</p>
 	</div>	
 	
@@ -170,6 +164,28 @@
 
 <!-- This is the style of the Paragraphs -->
 <style>
+
+	img {
+		width: 450px;
+		height: auto;
+		
+	  }
+
+	  .logo {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	  }
+
+	header{
+
+		/* display: flex; */
+		align-items: center;
+		/* justify-content: space-between; */
+		padding: 20px;
+		/* background-color: #f1f1f1; */
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
 
 	.description{
 		text-align: center;

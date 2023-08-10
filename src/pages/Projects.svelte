@@ -1,11 +1,11 @@
 <script>
-	import Header from "../components/Header.svelte";
+	// import Header from "../components/Header.svelte";
 	import Projects from "../components/Projects.svelte";
 	import Footer from "../components/footer.svelte";
 </script>
   
 
-<Header />
+<!-- <Header /> -->
 <body>
 	
 	<Projects/>
