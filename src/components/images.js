@@ -29,6 +29,36 @@ export const imageData = [
     desc: "Data Analysis | Data Vizualisation",
     // href: "/allStar",
   },
+  {
+    url: "./src/assets/Thumbnail-AllStar.png",
+    title: "5",
+    desc: "Data Analysis | Data Vizualisation",
+    // href: "/allStar",
+  },
+  {
+    url: "./assets/Thumbnail-AllStar.png",
+    title: "6",
+    desc: "Data Analysis | Data Vizualisation",
+    // href: "/allStar",
+  },
+  {
+    url: "../src/assets/Thumbnail-AllStar.png",
+    title: "7",
+    desc: "Data Analysis | Data Vizualisation",
+    // href: "/allStar",
+  },
+  {
+    url: "./src/assets/Thumbnail-AllStar.png",
+    title: "8",
+    desc: "Data Analysis | Data Vizualisation",
+    // href: "/allStar",
+  },
+  {
+    url: "../assets/Thumbnail-AllStar.png",
+    title: "4",
+    desc: "Data Analysis | Data Vizualisation",
+    // href: "/allStar",
+  },
   // {
   //   url: "../src/MyProjects/Klay/Klay.gif",
   //   title: "Profanity in Tunisan Rap (Klay BBj)",
