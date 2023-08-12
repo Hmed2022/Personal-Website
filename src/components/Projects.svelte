@@ -3,7 +3,7 @@
     // import { Center}  from '@svelteuidev/core';
     import {fade} from 'svelte/transition'
     import {onMount} from 'svelte'
-    import { Link } from 'svelte-routing';
+   
 
     let show = false
 
@@ -20,7 +20,7 @@
         <div class="card__body">
         </div>
             
-                <img class="image" src={image.url} alt="card" />
+                <img class="image" src='{image.url}' alt="card" />
            
             <a href={image.href}>
             <div class="overlay">
