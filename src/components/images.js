@@ -1,10 +1,11 @@
 export const imageData = [
   {
-    url: "../src/assets/Thumbnails/Thumbnail-AllStar.png",
+    url: "./src/assets/Thumbnails/Thumbnail-AllStar.png",
     title: "The Decline of the All-Star game",
     desc: "Data Analysis | Data Vizualisation",
     // href: "/allStar",
   },
+
   // {
   //   url: "../src/MyProjects/Klay/Klay.gif",
   //   title: "Profanity in Tunisan Rap (Klay BBj)",
