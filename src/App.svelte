@@ -3,6 +3,7 @@
 	import Header from './components/Header.svelte';
 	import Home from './pages/Home.svelte';
 	import Projects from './pages/Projects.svelte';
+	import AllStarIntro from './MyProjects/All-Star/AllStarIntro.svelte'
   </script>
   
   <header>
@@ -17,7 +18,8 @@
 	
 	<Router routes={{
 		'/': Home,
-		'/projects': Projects
+		'/projects': Projects,
+		'/allstarintro': AllStarIntro
 	}} />
   </body>
   

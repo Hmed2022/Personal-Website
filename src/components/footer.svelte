@@ -33,8 +33,11 @@
       .icons a {
       margin-right: 10px;
           color: #8E8E8E;
+        
   }
-  
+   a {
+    text-decoration-color:#8E8E8E
+   }
     #linkedin:hover,#email:hover,#github:hover {
       transform: scale(1.2); /* Increase size on hover */
       transition: transform 0.2s ease-in-out;

@@ -1,9 +1,44 @@
 <script>
-    import { imageData } from "../components/images.js";
+    // import { imageData } from "../components/images.js";
     // import { Center}  from '@svelteuidev/core';
     import {fade} from 'svelte/transition'
     import {onMount} from 'svelte'
-   
+
+   const imageData = [
+  {
+    url: "./src/assets/Thumbnails/Thumbnail-AllStar.png",
+    title: "The Decline of the All-Star game",
+    desc: "Data Analysis | Data Vizualisation",
+    href: "/#/allstarintro",
+  },
+  {
+    url: "../assets/Thumbnails/Thumbnail-AllStar.png",
+    title: "1",
+    desc: "Data Analysis | Data Vizualisation",
+    href: "/#/allstarintro",
+  },
+
+  {
+    url: "./assets/Thumbnails/Thumbnail-AllStar.png",
+    title: "2",
+    desc: "Data Analysis | Data Vizualisation",
+    href: "/#/allstarintro",
+  },
+
+  {
+    url: "./src/assets/Thumbnail-AllStar.png",
+    title: "3",
+    desc: "Data Analysis | Data Vizualisation",
+    href: "/#/allstarintro",
+  },
+
+  {
+    url: "../assets/Thumbnail-AllStar.png",
+    title: "4",
+    desc: "Data Analysis | Data Vizualisation",
+    href: "/#/allstarintro",
+  },
+]
 
     let show = false
 
