@@ -5,7 +5,30 @@ export const imageData = [
     desc: "Data Analysis | Data Vizualisation",
     // href: "/allStar",
   },
-
+  {
+    url: "./assets/Thumbnails/Thumbnail-AllStar.png",
+    title: "1",
+    desc: "Data Analysis | Data Vizualisation",
+    // href: "/allStar",
+  },
+  {
+    url: "../src/assets/Thumbnails/Thumbnail-AllStar.png",
+    title: "2",
+    desc: "Data Analysis | Data Vizualisation",
+    // href: "/allStar",
+  },
+  {
+    url: "./src/assets/Thumbnails/Thumbnail-AllStar.png",
+    title: "3",
+    desc: "Data Analysis | Data Vizualisation",
+    // href: "/allStar",
+  },
+  {
+    url: "../assets/Thumbnails/Thumbnail-AllStar.png",
+    title: "4",
+    desc: "Data Analysis | Data Vizualisation",
+    // href: "/allStar",
+  },
   // {
   //   url: "../src/MyProjects/Klay/Klay.gif",
   //   title: "Profanity in Tunisan Rap (Klay BBj)",
