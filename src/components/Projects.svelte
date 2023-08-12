@@ -3,42 +3,7 @@
     // import { Center}  from '@svelteuidev/core';
     import {fade} from 'svelte/transition'
     import {onMount} from 'svelte'
-
-   const imageData = [
-  {
-    url: "./src/assets/Thumbnails/Thumbnail-AllStar.png",
-    title: "The Decline of the All-Star game",
-    desc: "Data Analysis | Data Vizualisation",
-    href: "/#/allstarintro",
-  },
-  {
-    url: "../assets/Thumbnails/Thumbnail-AllStar.png",
-    title: "1",
-    desc: "Data Analysis | Data Vizualisation",
-    href: "/#/allstarintro",
-  },
-
-  {
-    url: "./assets/Thumbnails/Thumbnail-AllStar.png",
-    title: "2",
-    desc: "Data Analysis | Data Vizualisation",
-    href: "/#/allstarintro",
-  },
-
-  {
-    url: "./src/assets/Thumbnail-AllStar.png",
-    title: "3",
-    desc: "Data Analysis | Data Vizualisation",
-    href: "/#/allstarintro",
-  },
-
-  {
-    url: "../assets/Thumbnail-AllStar.png",
-    title: "4",
-    desc: "Data Analysis | Data Vizualisation",
-    href: "/#/allstarintro",
-  },
-]
+    import { imageData } from '../components/images.js';
 
     let show = false
 
@@ -68,6 +33,27 @@
     {/each}
 </section>
 {/if}
+
+<!-- {#if show}
+<section>
+    {#each imageData as image, i}
+    <div class="card__wrapper" transition:fade={{delay: i*300}}>
+        <div class="card__body">
+        </div>
+            
+                <img class="image" src='{image.url}' alt="card" />
+           
+            <a href={image.href}>
+            <div class="overlay">
+                
+                <h2>{image.title} <br> <span class="cview">-Click to Read-</span> </h2>
+           
+              </div> 
+            </a>
+    </div>
+    {/each}
+</section>
+{/if} -->
 
   
   <style>
