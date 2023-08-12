@@ -33,7 +33,7 @@
    Connect with me and like-minded individuals who share similar interests and inspire growth together.</p>
 </Typewriter> -->
 
-    <p id="IntroFirstPage"> Welcome to my personal website , a hub for showcasing my passions, <a class="project" href="/projects">Projects</a>, and creative ideas.
+    <p id="IntroFirstPage"> Welcome to my personal website , a hub for showcasing my passions, <a class="project" href="/#/projects">Projects</a>, and creative ideas.
 	Join me as I delve into new concepts and pursue exciting endeavors.
    Connect with me and like-minded individuals who share similar interests and inspire growth together.</p>
 

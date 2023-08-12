@@ -79,7 +79,7 @@
         <a href="/">
             <h2 > Home</h2>
         </a>
-        <a href="/projects">
+        <a href="/#/projects">
       <h2> Projects</h2>
     </a>
       </div>

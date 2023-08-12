@@ -10,10 +10,10 @@
   </header>
   
   <body>
-	<nav>
+	<!-- <nav>
 		<a href="/">Home</a>
 		<a href="/#/projects">Projects</a>
-	</nav>
+	</nav> -->
 	
 	<Router routes={{
 		'/': Home,
