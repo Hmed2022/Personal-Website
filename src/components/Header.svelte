@@ -3,11 +3,7 @@
 </script>
 
 <style>
-	body {
-		margin: 0;
-		padding: 0;
-	}
-
+	
 	header {
 		align-items: center;
 		padding: 20px;
@@ -16,6 +12,7 @@
 
 	img {
 		width: 450px;
+		max-width: 100%;
 		height: auto;
 	}
 

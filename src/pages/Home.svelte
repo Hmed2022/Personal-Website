@@ -23,20 +23,6 @@
   		showParagraph = true;}
 
 
-	let progress = 0;
-	const milestones = [
-	{ position: 20, label: 'Step 1' },
-	{ position: 50, label: 'Step 2' },
-	{ position: 80, label: 'Step 3' },
-	{ position: 100, label: 'Finished' },
-	];
-
-	onMount(() => {
-	progress = 60
-	});
-
-	export { progress, milestones };
-
 </script>
 
 
@@ -50,10 +36,6 @@
     <p id="IntroFirstPage"> Welcome to my personal website , a hub for showcasing my passions, <a class="project" href="/projects">Projects</a>, and creative ideas.
 	Join me as I delve into new concepts and pursue exciting endeavors.
    Connect with me and like-minded individuals who share similar interests and inspire growth together.</p>
-
-
-
-
 
 
 <PageTransitions>

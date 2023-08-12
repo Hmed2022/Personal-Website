@@ -27,6 +27,7 @@
     "svelte-icons": "^2.1.0",
     "svelte-image-gallery": "^1.7.0",
     "svelte-motion": "^0.11.5",
+    "svelte-navigator": "^3.2.2",
     "svelte-routing": "^1.6.0",
     "svelte-slidy": "^2.8.7",
     "svelte-switch": "^0.0.5"
