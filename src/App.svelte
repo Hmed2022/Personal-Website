@@ -4,6 +4,7 @@
 	import Home from './pages/Home.svelte';
 	import Projects from './pages/Projects.svelte';
 	import AllStarIntro from './MyProjects/All-Star/AllStarIntro.svelte';
+	import NBA from "./MyProjects/All-Star/NBA.svelte"
 
 </script>
   
@@ -20,7 +21,8 @@
 	<Router routes={{
 		'/': Home,
 		'/projects': Projects,
-		'/allstarintro': AllStarIntro
+		'/allstarintro': AllStarIntro,
+		'/allstar': NBA
 	}} />
   </body>
   

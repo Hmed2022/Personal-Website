@@ -1,6 +1,11 @@
 <script>
 import Footer from "../../components/footer.svelte";
 import { style } from 'svelte-body';
+import AllstarURL from "../../assets/Projects/AllStar/NBAArticle.gif"
+
+function redirectToAllStar() {
+        window.location.hash = '/allstar';
+    }
 </script>
 
 
@@ -21,9 +26,16 @@ import { style } from 'svelte-body';
 		</p>
 
 		<div style="text-align:center">
-			<button on:click style="background-color: #476b8d">
-			    Click here to read the article
-			</button>
+
+           
+                <button on:click={redirectToAllStar}  style="background-color: #476b8d">
+                    Click here to read the article
+                </button>
+            
+
+            <div class="preview">
+                <img src="{AllstarURL}" alt="Preview Article">
+            </div>
 
 		</div>
 
@@ -65,6 +77,17 @@ import { style } from 'svelte-body';
 <Footer />
 
 <style>
+   
+    .preview{
+        margin-bottom: 5%;
+    }
+    img{
+        max-width: 550px;
+        height: auto;
+        border: 2px solid rgba(186, 146, 120, 0.655); 
+        padding: 5px;
+        
+    }
 	h3 {
 		font-family: Futura;
         font-size: 1.4rem;
@@ -108,6 +131,7 @@ import { style } from 'svelte-body';
         inset 0px -2px 3px rgba(0, 0, 0, 0.25); */
         font-family: Futura;
         font-weight:300;
+        margin-bottom: 5%;
     }
     button:hover {
         cursor: pointer;
