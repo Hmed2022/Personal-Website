@@ -34,28 +34,6 @@
 </section>
 {/if}
 
-<!-- {#if show}
-<section>
-    {#each imageData as image, i}
-    <div class="card__wrapper" transition:fade={{delay: i*300}}>
-        <div class="card__body">
-        </div>
-            
-                <img class="image" src='{image.url}' alt="card" />
-           
-            <a href={image.href}>
-            <div class="overlay">
-                
-                <h2>{image.title} <br> <span class="cview">-Click to Read-</span> </h2>
-           
-              </div> 
-            </a>
-    </div>
-    {/each}
-</section>
-{/if} -->
-
-  
   <style>
 
     /* img:hover { opacity: 0.7 } */
