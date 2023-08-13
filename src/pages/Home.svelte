@@ -15,6 +15,8 @@
 
 	import Logo from "../assets/MyName.png"
 
+	import Timeline from "../components/Timeline.svelte"
+
 
 
 	let showParagraph = true;
@@ -66,76 +68,24 @@
 		<img src="{CurrentImg}" alt="Current Project">
 	</div>
 	
+	<div class= "current2">
+
+		<h2> Description</h2>
+
+		<p class="description"> In this project, I will analyze Nobel Literature laureates' data to uncover the 
+			key traits defining their success. With Bob Dylan's groundbreaking win in 2016 as the first songwriter
+			 laureate, I aim to identify the essential criteria for winning and explore the exclusion of highly
+			  accomplished writers from consideration.<br> The objective is to create a concise profile outlining the
+			   minimum prerequisites for becoming a Nobel Literature laureate.</p>
+	</div>
+
 	
 	<div class= "currents">
-		<div class= current1>
-			<!-- <Box>
-				<h2>Decoding Nobel Success: Traits of a Literary Laureate</h2>
-				<p class="desc" style="color:#7F393E" >Data Analysis | Data Vizualisation</p>
-			</Box>
-			<Box>
-				<Center>
-					<p class="insideBox" style="color:#7F393E">Current task</p>
-				</Center>
-				<Progress value={5} label="5%" size="xl" radius="xl" color="#7F393E"/>
-				<Center>
-					<p class="insideBox" style="color:#7F393E">This Project Structure</p>
-				</Center>
-			<Progress
-				mt='md'
-				size="xl"
-				radius="xl"
-				sections={[
-					{ value: 55, color: '#7F393E', label: 'Data collection' },
-					{ value: 10, color: '#CC5B64', label: 'Viz' },
-					{ value: 10, color: '#FF727D', label: 'Storytelling' },
-					{ value: 25, color: '#FFBDC3', label: 'Development' },
-				]}/>
-			</Box>
-		
-			<Timeline color=#7F393E active={0} lineWidth={4} bulletSize={20}>
-				<Timeline.Item title='Data Collection' color="#7F393E" >
-				<Text color='dimmed' size='sm' >
-					Collecting data for Nobel Literature Winners.</Text
-				>
-				<Text size='xs'>Task Started on 08/13/23</Text>
-				</Timeline.Item>
-			
-				<Timeline.Item title='Craft the Story'>
-				<Text color='dimmed' size='sm'
-					> Build the story around the our data findings.
-					</Text
-				>
-				<Text size='xs'>Task starting date is TBD</Text>
-				</Timeline.Item>
-			
-				<Timeline.Item title='Data Visualization' lineVariant='dashed'>
-				<Text color='dimmed' size='sm'
-					>Vizualise the data in an interactive and insighful way.
-					</Text
-				>
-				<Text size='xs'>Task starting date is TBD</Text>
-				</Timeline.Item>
-			
-				<Timeline.Item title='Article Development' lineVariant='dashed'>
-					<Text color='dimmed' size='sm'
-						>Build the an interactive article to showcase the project.</Text
-					>
-					<Text size='xs'>Task starting date is TBD</Text>
-					</Timeline.Item>
-			</Timeline>
-		</div> -->
-	
-		<div class= current2>
-
-			<h2> Description</h2>
-
-			<p class="description"> In this project, I will analyze Nobel Literature laureates' data to uncover the 
-				key traits defining their success. With Bob Dylan's groundbreaking win in 2016 as the first songwriter
-				 laureate, I aim to identify the essential criteria for winning and explore the exclusion of highly
-				  accomplished writers from consideration.<br> The objective is to create a concise profile outlining the
-				   minimum prerequisites for becoming a Nobel Literature laureate.</p>
+		<div class= "current1">
+			<Timeline/>
 		</div>
+		
+		
 	</div>
 	
 	</PageTransitions>
@@ -180,10 +130,7 @@
 		margin-right: 20%; */
 	}
 
-	Footer {
-		display: flex;
-	}
-
+	
 	.project{
 		text-decoration: none;
 		background-color:#F2CD1C;
@@ -214,20 +161,19 @@
 	}
 
 	.current1{
-		max-width: 350px;
-    	float: left;
-		
+		max-width: 40rem;
+        margin: 1rem auto;
 	}
 	.current2{
-		margin-left: 10%;
-    	float: right;
+		max-width: 40rem;
+        margin: 1rem auto;
 		
 	}
 	.currents{
 		margin-top: 5%;
 		margin-left: 20%;
 		margin-right: 20%;
-		display: flex;
+
 	}
 	.dashed-line {
 		display: flex;
@@ -293,3 +239,60 @@
 	}
 	
   </style>
+
+
+<!-- <Box>
+				<h2>Decoding Nobel Success: Traits of a Literary Laureate</h2>
+				<p class="desc" style="color:#7F393E" >Data Analysis | Data Vizualisation</p>
+			</Box>
+			<Box>
+				<Center>
+					<p class="insideBox" style="color:#7F393E">Current task</p>
+				</Center>
+				<Progress value={5} label="5%" size="xl" radius="xl" color="#7F393E"/>
+				<Center>
+					<p class="insideBox" style="color:#7F393E">This Project Structure</p>
+				</Center>
+			<Progress
+				mt='md'
+				size="xl"
+				radius="xl"
+				sections={[
+					{ value: 55, color: '#7F393E', label: 'Data collection' },
+					{ value: 10, color: '#CC5B64', label: 'Viz' },
+					{ value: 10, color: '#FF727D', label: 'Storytelling' },
+					{ value: 25, color: '#FFBDC3', label: 'Development' },
+				]}/>
+			</Box>
+		
+			<Timeline color=#7F393E active={0} lineWidth={4} bulletSize={20}>
+				<Timeline.Item title='Data Collection' color="#7F393E" >
+				<Text color='dimmed' size='sm' >
+					Collecting data for Nobel Literature Winners.</Text
+				>
+				<Text size='xs'>Task Started on 08/13/23</Text>
+				</Timeline.Item>
+			
+				<Timeline.Item title='Craft the Story'>
+				<Text color='dimmed' size='sm'
+					> Build the story around the our data findings.
+					</Text
+				>
+				<Text size='xs'>Task starting date is TBD</Text>
+				</Timeline.Item>
+			
+				<Timeline.Item title='Data Visualization' lineVariant='dashed'>
+				<Text color='dimmed' size='sm'
+					>Vizualise the data in an interactive and insighful way.
+					</Text
+				>
+				<Text size='xs'>Task starting date is TBD</Text>
+				</Timeline.Item>
+			
+				<Timeline.Item title='Article Development' lineVariant='dashed'>
+					<Text color='dimmed' size='sm'
+						>Build the an interactive article to showcase the project.</Text
+					>
+					<Text size='xs'>Task starting date is TBD</Text>
+					</Timeline.Item>
+			</Timeline>-->

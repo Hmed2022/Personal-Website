@@ -3,8 +3,9 @@
 	import Header from './components/Header.svelte';
 	import Home from './pages/Home.svelte';
 	import Projects from './pages/Projects.svelte';
-	import AllStarIntro from './MyProjects/All-Star/AllStarIntro.svelte'
-  </script>
+	import AllStarIntro from './MyProjects/All-Star/AllStarIntro.svelte';
+
+</script>
   
   <header>
 	<Header />
@@ -23,3 +24,6 @@
 	}} />
   </body>
   
+  <style>
+  @import './app.css';
+  </style>
