@@ -4,14 +4,18 @@
     afterUpdate(() => {
       setTimeout(() => {
         const nbaImage = document.querySelector('.nba');
+        // @ts-ignore
         nbaImage.style.filter = 'sepia(1)';
+        // @ts-ignore
         nbaImage.style.opacity = '0.6';
       }, 6000);
     });
+
+    import NBAUrl from "../../../assets/Projects/AllStar/nba.svg"
   </script>
   
   <body>
-    <img class="nba" src="../src/MyProjects/All-Star/Assets/nba.svg" alt="nba">
+    <img class="nba" src="{NBAUrl}" alt="nba">
   </body>
   
   <style>

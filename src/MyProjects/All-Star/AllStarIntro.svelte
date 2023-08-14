@@ -58,15 +58,10 @@ function redirectToAllStar() {
 				</li>
 		</div>
 
+
         <h3>
-            Design:
+            About the Project:
         </h3>
-        <li>
-            <b>Fonts used:</b> Action Cond Regular Trial, Quicksand and Futura.
-        </li>
-        <li>
-            <b>Color Palette:</b>
-        </li>
 
 
 	</div>

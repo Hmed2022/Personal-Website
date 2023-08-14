@@ -14,6 +14,8 @@
 
     import { style } from 'svelte-body';
 
+    import Footer from "../../components/footer.svelte";
+
     
 
   // List of tab items with labels, values and assigned components
@@ -39,7 +41,7 @@
     <section id="intro">
         <div class="prose">
             <Title/>
-            <p class="Reference">By Ahmed Bendaly | June 2023</p>
+            <p class="Reference">By Ahmed Bendaly | July 2023</p>
             <br>
             <p>
                 The NBA All-Star Game has traditionally been one of the most anticipated events for NBA fans,
@@ -76,7 +78,7 @@
 
 
 </body>
-
+<Footer/>
 <svelte:body use:style={"background-color: #f4f1ed;"} />
 
 <style>

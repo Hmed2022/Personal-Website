@@ -2,6 +2,7 @@
  import { onMount } from 'svelte';
 import { afterUpdate } from 'svelte';
 import Logo from "./nba-logo.svelte"
+import starUrl from "../../../assets/Projects/AllStar/star.png"
 
   let rotationAngle = 0;
 
@@ -24,7 +25,7 @@ import Logo from "./nba-logo.svelte"
       <h1 class="thedecline">The Decline <span class="of">of the</span> </h1>
       <div class="align-container">
          <h1 class="allstar"> ALL</h1>
-         <img class="star" src="../src/MyProjects/All-Star/Assets/star.png" alt="star" style="transform: rotate({rotationAngle}deg)">
+         <img class="star" src="{starUrl}" alt="star" style="transform: rotate({rotationAngle}deg)">
           <h1 class="allstar"> STAR <span class="thedecline2">GAME</span> </h1>
       </div>
     </div>

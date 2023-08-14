@@ -82,7 +82,7 @@
 	 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Adjust column width as needed */
-    gap: 5%; /* Adjust gap size as needed */
+    /* gap: 5%;  */
   }
 
 	  .circle {
