@@ -16,6 +16,8 @@ function redirectToAllStar() {
 						The decline of the All star game 
 			</h1>
 		</div>
+		<div class="center-line1"></div>
+		<div class="center-line2"></div>
 			
 		<h3>
 				Brief Intoduction
@@ -60,8 +62,18 @@ function redirectToAllStar() {
 
 
         <h3>
-            About the Project:
+            Project Overview:
         </h3>
+		<div class="lists">
+			<li>
+			<b>Duration:</b> Approximately 3 months
+		</li>
+		<li>
+			<b>Process:</b> The majority of time was dedicated to web development, particularly with unfamiliar
+			tools like Svelte and D3. Data collection and transformation followed. Story creation 
+			was relatively swift due to a preconceived idea, though some outcomes proved surprising.
+		</li>
+</div>
 
 
 	</div>
@@ -72,6 +84,26 @@ function redirectToAllStar() {
 <Footer />
 
 <style>
+	
+	.center-line1 {
+		margin-right:20%;
+		margin-left: 20%;
+		align-content:center;
+    height: 4px;
+    background-color:#733122; /* Grey color */
+
+
+  }
+  .center-line2 {
+	margin-top: 1px;
+		margin-right:20%;
+		margin-left: 20%;
+		align-content:center;
+    height: 4px;
+    background-color:#4D6473; /* Grey color */
+
+
+  }
    
     .preview{
         margin-bottom: 5%;

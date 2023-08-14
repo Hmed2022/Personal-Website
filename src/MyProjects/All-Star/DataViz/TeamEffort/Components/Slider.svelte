@@ -29,8 +29,9 @@
 		
 	<label>
 		<p>
-			 <a class="GoodDefense" href="#graph"> <input type="checkbox" bind:checked={case1} />
-				 Good Defense, Good Offense: </a>
+			<input type="checkbox" bind:checked={case1} />
+			 <b class="GoodDefense"> 
+				 Good Defense, Good Offense: </b>
 				 These are the best team performances on both ends of the floor. The <b>1992 West </b>team stands out as 
 				 the best performance since 1978, aligning with the highest All-Star game rating and viewership.
 		</p> 
@@ -40,7 +41,8 @@
 
 	<label>
 		<p>
-		<a class="GoodDefense" href="#graph"> <input type="checkbox" bind:checked={case2} /> Good Defense, Bad Offense: </a>
+			<input type="checkbox" bind:checked={case2} />
+		<b class="GoodDefense">  Good Defense, Bad Offense: </b>
 		The last teams in this category are the <b>2006</b> West and East teams, marking a 17-year gap.
 		Since then, the offense has improved significantly.
 		</p>
@@ -49,7 +51,8 @@
 
 	<label>
 		<p>
-		<a class="BadDefense" href="#graph"> <input type="checkbox" bind:checked={case3} /> Bad Defense, Good Offense: </a>
+			<input type="checkbox" bind:checked={case3} />
+		<b class="BadDefense">  Bad Defense, Good Offense: </b>
 		This category comprises all the teams from the <b>2009 to 2023</b> All-Star games, showcasing the shift where
 		 teams emphasized offense while neglecting defense.
 		</p>
@@ -58,7 +61,8 @@
 
 	<label>
 		<p>
-			<a class="BadDefense" href="#graph"> <input type="checkbox" bind:checked={case4} /> Bad Defense, Bad Offense: </a>
+			<input type="checkbox" bind:checked={case4} />
+			<b class="BadDefense">  Bad Defense, Bad Offense: </b>
 			These teams are the losers from the Good Defense, Good Offense teams, and it's
 			 no surprise they ended up here.
 		</p>
@@ -71,15 +75,17 @@
 	.GoodDefense{
 		text-decoration: none;
 		font-weight: 700;
-		background-color: #4D6473;
-		color:#f4f1ed
+		border-bottom: 2px solid #4D6473;
+		/* background-color: #4D6473; */
+		color:#4D6473
 	}
 
 	.BadDefense{
 		text-decoration: none;
 		font-weight: 700;
-		background-color: #733122;
-		color:#f4f1ed
+		border-bottom: 2px solid #733122;
+		/* background-color: #733122; */
+		color:#733122
 	}
 
 
