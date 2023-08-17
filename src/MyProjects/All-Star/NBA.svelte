@@ -67,7 +67,7 @@
             <h1 class="faninterest"><mark class="nba_mark" >Fan Interest</mark></h1>
             <LineChart1/>
             <p> 
-                In this article, we'll explore the reasons for the drop in viewership and ratings. 
+                In this article, we will explore the reasons for the drop in viewership and ratings. 
                 We have chosen three specific measures to examine and explain in detail; Player Effort, The Three Point and Injuries.
             </p>
             
