@@ -25,7 +25,9 @@
             <a href={image.href}>
             <div class="overlay">
                 
-                <h2>{image.title} <br> <span class="cview">-Click to Read-</span> </h2>
+                <h2>{image.title} <br>
+                  <span class="cview">{image.desc}</span><br><br>
+                   <span class="cview">-Click to Read-</span> </h2>
            
               </div> 
             </a>
