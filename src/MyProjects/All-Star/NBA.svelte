@@ -60,7 +60,7 @@
 
             <p> The decline of the NBA All-Star Game can be succinctly summarized by All-Star coach <a href="https://en.wikipedia.org/wiki/Michael_Malone_(basketball)">Mike Malone</a> in a tweet following the game:</p>
             <div class="tweet">
-                <p><strong>"That is the worst basketball game ever played...I don't know if you can fix it." </strong> - Mike Malone on the NBA All-Star Game</p>
+                <p><strong>"That is the worst basketball game ever played... I don't know if you can fix it." </strong> - Mike Malone on the NBA All-Star Game</p>
         
             </div>
 
