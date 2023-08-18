@@ -27,8 +27,10 @@ function handleClick(year) {
 
 </script>
 
-<p>You can explore the data yourself by using the slider to navigate through different years. 
-  For instance, let's consider the <b>{SetYear}</b> NBA All-Star game as an example. </p>
+<p>Feel free to dive into the data by simply clicking on the bars within the chart. This will enable you to
+   navigate through various years. Additionally, you have the power to manage the selection
+    of the Top x players who have garnered the highest POV (Player Votes Percentage).
+</p>
 
 	<!-- <div class="range" style="--step:10; --min:1975; --max:2023">
 	  <input type="range" on:input={ColorsInput} bind:value={SetYear} min="1975" max="2023" step="1" >

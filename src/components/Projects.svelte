@@ -37,6 +37,13 @@
 {/if}
 
   <style>
+/* 
+      @font-face {
+        font-family: "Quicksand1";
+        src: url("./assets/Fonts/Quicksand-Regular.ttf") format("truetype");
+        font-weight: normal;
+      } */
+
 
     /* img:hover { opacity: 0.7 } */
 
