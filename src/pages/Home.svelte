@@ -138,6 +138,12 @@
 		color:#707070 ;
 	}
 
+	.project:hover{
+		text-decoration: none;
+		background-color:#CC5B64;
+		color:white ;
+	}
+
 	.insideBox{
 		margin: 0;
 		padding: 0;

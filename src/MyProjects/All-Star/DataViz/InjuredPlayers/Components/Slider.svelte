@@ -61,8 +61,10 @@ function handleClick(year) {
 </div>
 {/if}
 <p> The chart provides valuable information on the all-star game's status. However, it may be deceiving as it only considers the count of top X voted players,
-   not reflecting the percentage of votes. Let's take as an example the years <a href="#playergraph" on:click={() => handleClick(1989)}> 1989</a>, 
-   <a href="#playergraph" on:click={() => handleClick(2009)}> 2009</a>, and <a href="#playergraph" on:click={() => handleClick(2016)}> 2016</a>.</p>
+   not reflecting the percentage of votes. Let's take as an example the years <b on:click={() => handleClick(1989)}> 1989</b>, 
+   <b on:click={() => handleClick(2009)}> 2009</b>, and <b on:click={() => handleClick(2016)}> 2016</b>.
+  
+</p>
 
 <Table/>
 
