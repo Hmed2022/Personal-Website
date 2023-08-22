@@ -20,6 +20,7 @@
       {/if}
   {/each}
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Jost:wght@800&display=swap');
       .box {
           margin-bottom: 10px;
           padding: 40px;
@@ -48,7 +49,7 @@
       color: #403F3E;
       padding: 0.5rem 1rem;
       cursor: pointer;
-      font-family: futura;
+      font-family: 'Jost', sans-serif;
       font-weight: 800;
     }
   

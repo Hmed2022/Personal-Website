@@ -28,6 +28,7 @@
 </body>
 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;800&family=Quicksand&display=swap');
 
     img{
         width: 550px;
@@ -53,7 +54,7 @@ blockquote {
     p {
         display: block;
         text-align: justify;
-        font-family: Quicksand;
+        font-family: 'Quicksand', sans-serif;
         color: #403F3E;
         font-size: 1em;
         margin-block-start: 1em;
@@ -63,7 +64,7 @@ blockquote {
     }    
     h1 {
         text-align: center;
-        font-family: Futura;
+        font-family: 'Jost', sans-serif;
         font-size: 2em;
         text-transform: uppercase;
         font-weight: 800;

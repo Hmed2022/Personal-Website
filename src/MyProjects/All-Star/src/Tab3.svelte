@@ -101,9 +101,10 @@ Here are the <b>TOP 15</b> players who received the most fan votes in 1997.
 </body>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;800&family=Quicksand:wght@400;500;700&display=swap');
      h1 {
         text-align: center;
-        font-family: Futura;
+        font-family: 'Jost', sans-serif;
         font-size: 2em;
         text-transform: uppercase;
         font-weight: 800;
@@ -113,7 +114,7 @@ Here are the <b>TOP 15</b> players who received the most fan votes in 1997.
     p {
         display: block;
         text-align: justify;
-        font-family: Quicksand;
+        font-family: 'Quicksand', sans-serif;
         color: #403F3E;
         font-size: 1em;
         margin-block-start: 1em;
@@ -146,7 +147,7 @@ Here are the <b>TOP 15</b> players who received the most fan votes in 1997.
   .custom-table th,
   .custom-table td {
     padding: 6px;
-    font-family: Quicksand;
+    font-family: 'Quicksand', sans-serif;
     font-weight:500
 
   }
@@ -154,7 +155,7 @@ Here are the <b>TOP 15</b> players who received the most fan votes in 1997.
   .custom-table th {
     font-weight: 800;
     background-color: #eaded3;
-	font-family: Quicksand
+	font-family: 'Quicksand', sans-serif;
   }
 
   .custom-table tr:nth-child(even) {
