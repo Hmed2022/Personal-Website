@@ -98,6 +98,9 @@
 <!-- This is the style of the Paragraphs -->
 <style>
 
+
+  	@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300&family=Quicksand:wght@300&display=swap');
+
 	img {
 		width: 450px;
 		height: auto;
@@ -123,7 +126,7 @@
 	.description{
 		text-align: center;
     	color: #707070;
-		font-family: Futura;
+		font-family: 'Jost', sans-serif;
 		font-weight: 300;
 		font-size: 1.5em;
 		/* margin-top: 50px;
@@ -163,7 +166,7 @@
 
 	.desc{
 		text-align: center;
-		font-family: Futura;
+		font-family: 'Jost', sans-serif;
 		font-weight: 300;
 	}
 
@@ -229,7 +232,7 @@
 	#IntroFirstPage {
 		text-align: center;
     	color: #707070;
-		font-family: Futura;
+		font-family: 'Jost', sans-serif;
 		font-weight: 300;
 		font-size: 2em;
 		margin-top: 50px;
@@ -239,7 +242,7 @@
 
 	#AboutMe {
     	color: #707070;
-		font-family: Futura;
+		font-family: 'Jost', sans-serif;
 		font-weight: 300;
 		font-size: 1.5em;
 		margin-top: 50px;
