@@ -84,6 +84,8 @@ function redirectToAllStar() {
 <Footer />
 
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&display=swap');
 	
 	.center-line1 {
 		margin-right:20%;
@@ -116,13 +118,13 @@ function redirectToAllStar() {
         
     }
 	h3 {
-		font-family: Futura;
+		font-family: 'Jost', sans-serif;
         font-size: 1.4rem;
         color: #403F3E;
 	}
 
 	li,p{
-		font-family: Futura;
+		font-family: 'Jost', sans-serif;
 		font-weight:300;
         font-size: 1.2rem;
         color: #403F3E;
@@ -156,7 +158,7 @@ function redirectToAllStar() {
         transform-origin: center;
         /* box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25),
         inset 0px -2px 3px rgba(0, 0, 0, 0.25); */
-        font-family: Futura;
+        font-family: 'Jost', sans-serif;
         font-weight:300;
         margin-bottom: 5%;
     }

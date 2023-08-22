@@ -116,6 +116,10 @@
 		color:white ;
 	}
 
+	.cv{
+		color: #F2CD1C
+	}
+
 	.tunisia:hover{
 		background-color: #871B40;
 		color:white

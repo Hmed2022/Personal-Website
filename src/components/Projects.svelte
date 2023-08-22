@@ -37,13 +37,8 @@
 {/if}
 
   <style>
-/* 
-      @font-face {
-        font-family: "Quicksand1";
-        src: url("./assets/Fonts/Quicksand-Regular.ttf") format("truetype");
-        font-weight: normal;
-      } */
 
+    @import url('https://fonts.googleapis.com/css2?family=Jost:wght@500&family=Quicksand:wght@300;400;500;700&display=swap');
 
     /* img:hover { opacity: 0.7 } */
 
@@ -62,6 +57,7 @@
       margin-right: 10%;
       margin-top: 3%;
     }
+
     img {
       width: 100%;
       height: 100%;
@@ -99,7 +95,7 @@
     }
 
     h1,p {
-        font-family:Futura;
+      font-family: 'Jost', sans-serif;
         font-weight: 500;
     }
 
@@ -119,7 +115,7 @@
     }
     h2,h3 {
         color: white;
-        font-family: Quicksand;
+        font-family: 'Quicksand', sans-serif;
         font-size: 24px;
         text-align: center;
         margin-left: 5%;
