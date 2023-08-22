@@ -259,11 +259,12 @@ let value = "Regular Season: Avg 2pt/3pt attempted Shots"
 
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
 
 p {
         display: block;
         text-align: justify;
-        font-family: Quicksand;
+        font-family: 'Quicksand', sans-serif;
         color: #403F3E;
         font-size: 1em;
         margin-block-start: 1em;
@@ -273,7 +274,7 @@ p {
     }    
 	
 	span {
-		font-family: Quicksand;
+		font-family: 'Quicksand', sans-serif;
 		font-weight: 800;
 
 	}

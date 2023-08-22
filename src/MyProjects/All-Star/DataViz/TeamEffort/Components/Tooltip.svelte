@@ -15,6 +15,7 @@
 </div>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
   .tooltip {
 		text-align:center;
     padding: 6px;
@@ -26,7 +27,7 @@
 
 
 	p{
-		font-family: Quicksand;
+		font-family: 'Quicksand', sans-serif;
 		font-size:0.8rem;
 	}
 	

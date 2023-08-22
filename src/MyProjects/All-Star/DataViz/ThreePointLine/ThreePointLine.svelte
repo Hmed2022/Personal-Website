@@ -44,11 +44,12 @@
 </section>
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
 
 	.intro {
         display: block;
         text-align: justify;
-        font-family: Quicksand;
+        font-family: 'Quicksand', sans-serif;
         color: #403F3E;
         font-size: 1em;
         margin-block-start: 1em;
@@ -67,7 +68,7 @@
 	
 	
 	.curries {
-		font-family: Quicksand;
+		font-family: 'Quicksand', sans-serif;
 		font-weight: 700;
 		text-align: center;
 	}

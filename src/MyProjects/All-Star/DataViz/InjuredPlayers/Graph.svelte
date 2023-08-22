@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
 	// 	Note: Due to REPL limitations, full responsiveness may not work here. Download the example from here or from the website (https://layercake.graphics/example/ColumnStacked) and run locally to get all features.
 	// @ts-ignore
 	import { LayerCake, Svg, flatten } from 'layercake';
@@ -118,11 +120,12 @@
 
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap');
 
 	label {
 		text-align:center;
 		color: #024873;
-		font-family: Quicksand;
+		font-family: 'Quicksand', sans-serif;
 		font-size: 17px;
 		font-weight: 500;
 		

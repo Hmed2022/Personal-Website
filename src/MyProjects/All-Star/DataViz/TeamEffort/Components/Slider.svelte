@@ -71,6 +71,7 @@
 
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 
 	.GoodDefense{
 		text-decoration: none;
@@ -109,7 +110,7 @@
 
 /* min / max labels at the edges */
 .range::before, .range::after {
-  font: 15px Quicksand;
+  font: 15px 'Quicksand', sans-serif;
 	font-weight:700;
   content: counter(x);
   position: absolute;
@@ -134,8 +135,7 @@
 }
 
 	p{
-
-		font-family: Quicksand;
+		font-family: 'Quicksand', sans-serif;
 		font-size: 1em;
 	}
 

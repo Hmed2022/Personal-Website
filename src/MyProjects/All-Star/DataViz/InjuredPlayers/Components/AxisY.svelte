@@ -55,10 +55,11 @@
 </g>
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
 	.tick {
 		font-size: .8em;
-		font-weight: 200;
-		font-family: Quicksand;
+		font-weight: 300;
+		font-family: 'Quicksand', sans-serif;
 	}
 
 	.tick line {

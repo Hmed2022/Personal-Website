@@ -71,6 +71,8 @@
 
 <style>
 
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
 	.grid-item {
     display: flex;
     grid-template-rows: auto 1fr; /* Set the first row to auto to fit the image height */
@@ -116,7 +118,7 @@
 
 	p {
 		text-align:center;
-		font-family: Quicksand;
+		font-family: 'Quicksand', sans-serif;
     font-size: 0.9em;
 	}
 

@@ -24,7 +24,8 @@
 </g>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 	text {
-		font-family: Quicksand
+		font-family: 'Quicksand', sans-serif;
 	}
 </style>

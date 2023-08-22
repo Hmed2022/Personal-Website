@@ -82,6 +82,8 @@
 <svelte:body use:style={"background-color: #f4f1ed;"} />
 
 <style>
+     @import url('https://fonts.googleapis.com/css2?family=Jost:wght@600;700;800&family=Quicksand&display=swap');
+
     .dec {
         background-color: #eaded3;
         color: #b8a79a;
@@ -125,7 +127,7 @@
 
     h1 {
         text-align: center;
-        font-family: Futura;
+        font-family: 'Jost', sans-serif;
         font-size: 2.75em;
         text-transform: uppercase;
         font-weight: 800;

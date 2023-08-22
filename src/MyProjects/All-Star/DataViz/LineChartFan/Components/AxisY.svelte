@@ -39,9 +39,10 @@
 </g>
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap');
 
 	text {
-		font-family: Quicksand;
+		font-family: 'Quicksand', sans-serif;
 	}
 /* 	.ref1{
 		stroke: #476b8d;

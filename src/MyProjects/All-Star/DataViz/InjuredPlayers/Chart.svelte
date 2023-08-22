@@ -5,7 +5,7 @@
   export let data;
 
   let width = 600;
-  let height = 600;
+  let height = 800;
 
 	export let SetYear;
 
@@ -108,18 +108,20 @@
 
 
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
   
    :global(rect:focus) {
     outline: 2px solid #84776E; 
   }
 
 	.yaxis{
-		font-family: Quicksand;
+		font-family: 'Quicksand', sans-serif;
 		font-size: 0.7em
 	}
 
 	.xaxis{
-		font-family: Quicksand;
+		font-family: 'Quicksand', sans-serif;
 		font-size: 0.8em
 	}
 

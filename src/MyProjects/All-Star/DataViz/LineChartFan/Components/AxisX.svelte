@@ -30,6 +30,7 @@
 </g>
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap');
 	
 	.vert-line{
 		 stroke: #cecece;
@@ -37,7 +38,7 @@
 	}
 	
 	text {
-		font-family: Quicksand;
+		font-family: 'Quicksand', sans-serif;
 		font-size: 0.9em;
 	}
 </style>

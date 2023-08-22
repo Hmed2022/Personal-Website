@@ -73,6 +73,7 @@ function handleClick(year) {
 
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
 
   .notes {
     height:30px;
@@ -118,7 +119,7 @@ function handleClick(year) {
 
 /* min / max labels at the edges */
 .range::before, .range::after {
-  font: 15px Quicksand;
+  font: 15px 'Quicksand', sans-serif;
 	font-weight:700;
   content: counter(x);
   position: absolute;
@@ -145,7 +146,7 @@ function handleClick(year) {
 	p{
 		display: block;
         text-align: justify;
-        font-family: Quicksand;
+        font-family: 'Quicksand', sans-serif;
         color: #403F3E;
         font-size: 1em;
         margin-block-start: 1em;

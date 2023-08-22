@@ -70,6 +70,7 @@
 </div>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
 
 	.BarGraph{
 		align-content:center;
@@ -78,7 +79,7 @@
 	p{
 		display: block;
         text-align: justify;
-        font-family: Quicksand;
+        font-family: 'Quicksand', sans-serif;
         color: #403F3E;
         font-size: 1em;
         margin-block-start: 1em;
@@ -87,7 +88,7 @@
         margin-inline-end: 0px;
 	}
 	input {
-		font-family: Quicksand;
+		font-family: 'Quicksand', sans-serif;
 		font-weight:800;
 		font-size: 15px;
 		width:35px

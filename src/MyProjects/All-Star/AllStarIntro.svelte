@@ -125,7 +125,6 @@ function redirectToAllStar() {
 
 	li,p{
 		font-family: 'Jost', sans-serif;
-		font-weight:300;
         font-size: 1.2rem;
         color: #403F3E;
 	}

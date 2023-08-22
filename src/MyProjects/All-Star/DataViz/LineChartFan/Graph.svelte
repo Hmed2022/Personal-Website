@@ -289,6 +289,8 @@ mouseX = translatedXRem * parseFloat(getComputedStyle(document.documentElement).
 </div>
 
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
 	
 
 	.rating-underline{
@@ -307,7 +309,7 @@ mouseX = translatedXRem * parseFloat(getComputedStyle(document.documentElement).
 	p{
 		font-size:0.7em;
 		font-weight:700;
-		font-family:Quicksand;
+		font-family: 'Quicksand', sans-serif;
 		text-align:center;
 	}
 	

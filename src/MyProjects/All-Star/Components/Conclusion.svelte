@@ -60,14 +60,17 @@
 </div>
 
 <style>
+
+	@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700;800&family=Quicksand&display=swap');
+	
 	p{
 		text-align: justify;
-        font-family: Quicksand;
+        font-family: 'Quicksand', sans-serif;
         color: #403F3E;
 	}
 
 	h1 , h3{
-		font-family: Futura;
+		font-family: 'Jost', sans-serif;
         color: #403F3E
 	}
 

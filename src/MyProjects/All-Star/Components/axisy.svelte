@@ -39,6 +39,7 @@
 </g>
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 	.ref1{
 		stroke: #476b8d;
 		stroke-width: 4;
@@ -51,12 +52,12 @@
 	}
 	text {
 		font-size: 0.5em;
-		font-family: Quicksand;
+		font-family: 'Quicksand', sans-serif;
         color: #403F3E;
 	}
 
 	.small{
-		font-family: Quicksand;
+		font-family: 'Quicksand', sans-serif;
         color: #403F3E;
 		font-size: 0.5em;
 	}

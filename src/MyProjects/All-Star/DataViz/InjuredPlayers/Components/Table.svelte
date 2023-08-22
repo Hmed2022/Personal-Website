@@ -69,6 +69,8 @@
   </div>
   
   <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
   
     /* Custom table styles */
     .custom-table {
@@ -79,13 +81,13 @@
     .custom-table th,
     .custom-table td {
       padding: 6px;
-      font-family: Quicksand;
+      font-family: 'Quicksand', sans-serif;
       text-align:center;
     }
   
     .custom-table th {
       background-color: #eaded3;
-          font-family: Quicksand
+      font-family: 'Quicksand', sans-serif;
     }
   
     .custom-table tr:nth-child(even) {

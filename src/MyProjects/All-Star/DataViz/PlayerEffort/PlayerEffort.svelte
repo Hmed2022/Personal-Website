@@ -59,17 +59,18 @@
 
 <style>
 
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+
 	.hover {
 		font-size: 0.8em;
 	}
 	mark {
-		font-family: Quicksand;
+		font-family: 'Quicksand', sans-serif;
 		font-weight: 700;
 	}
 	
 	p {
-		font-family: Quicksand;
-		
+		font-family: 'Quicksand', sans-serif;
 		text-align: center;
 	}
 	.sumFTA{
