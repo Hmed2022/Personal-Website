@@ -98,8 +98,8 @@
 <!-- This is the style of the Paragraphs -->
 <style>
 
+  	@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;500;700;900&display=swap');
 
-  	@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300&family=Quicksand:wght@300&display=swap');
 
 	img {
 		width: 450px;
@@ -150,7 +150,7 @@
 	.insideBox{
 		margin: 0;
 		padding: 0;
-		font-family: Futura;
+		font-family: 'Jost', sans-serif;
 		font-weight: 500;
 	}
 
@@ -160,7 +160,7 @@
 
 	h2{
 		text-align: center;
-		font-family: Futura;
+		font-family: 'Jost', sans-serif;
 		color:#CC5B64
 	}
 

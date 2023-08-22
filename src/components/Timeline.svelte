@@ -56,6 +56,9 @@
   
   
   <style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300&family=Quicksand:wght@300;400;700&display=swap');
+
     .container {
       display: flex;
       flex-direction: column;
@@ -76,7 +79,7 @@
       font-size: 1.6rem;
       font-weight: bold;
       margin-bottom: 10px;
-      font-family: Quicksand;
+      font-family: 'Quicksand', sans-serif;
       color:#CC5B63
       
     }
@@ -84,7 +87,7 @@
     .subtitle {
       font-size: 16px;
       color: #666;
-      font-family: Futura;
+      font-family: 'Jost', sans-serif;
       font-weight: 300;
     }
   
@@ -92,13 +95,13 @@
           letter-spacing: 1px;
           margin: 0;
           padding: 0;
-          font-family: Quicksand
+          font-family: 'Quicksand', sans-serif
       }
       
       p {
           margin: 0;
           color: grey;
-          font-family: Quicksand
+          font-family: 'Quicksand', sans-serif
       }
   
       .desc {
