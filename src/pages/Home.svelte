@@ -48,12 +48,12 @@
 		  </div>
 		<p id="AboutMe">
 		Meet Ahmed Bendaly, a multi-talented data scientist, graphic designer, and engineer who weaves data into captivating stories.
-		Currently, Ahmed is a graduate student at the <a href="https://umdearborn.edu/" style="color:#01274B;">University of Michigan Dearborn </a>, where he’s honing his skills
+		Currently, Ahmed is a graduate student at the <a class="um" href="https://umdearborn.edu/">University of Michigan Dearborn</a>, where he’s honing his skills
 		in data science.<br>
 		With a passion for original and creative work, Ahmed’s goal is to make complex subjects more accessible to the world. 
-		And, as a proud <a href="https://en.wikipedia.org/wiki/Tunisia" style="color:#871B40">Tunisian</a>, you’ll find a touch of his cultural heritage in some of his projects.<br> 
+		And, as a proud <a class="tunisia" href="https://en.wikipedia.org/wiki/Tunisia">Tunisian</a>, you’ll find a touch of his cultural heritage in some of his projects.<br> 
 		<br>
-		Take a look at his Resume <a href="{pdfUrl}" target="_blank" rel="noopener noreferrer" > here</a>!
+		Take a look at his Resume <a class="cv" href="{pdfUrl}" target="_blank" rel="noopener noreferrer" > here</a>!
 		</p>
 	</div>	
 	
@@ -73,12 +73,16 @@
 
 		<h2> Description</h2>
 
-		<p class="description"> In this project, I will analyze Nobel Literature laureates' data to uncover the 
+		<p class="description"> This project is a departure from web-based data visualization,
+			 focusing instead on creating a visually rich infographic. It serves as a comprehensive
+			  representation of Tunisia, covering various facets such as politics, geography, and more.</p>
+
+			  <!-- In this project, I will analyze Nobel Literature laureates' data to uncover the 
 			key traits defining their success. With Bob Dylan's groundbreaking win in 2016 as the first songwriter
 			 laureate, I aim to identify the essential criteria for winning and explore the exclusion of highly
 			  accomplished writers from consideration.<br> The objective is to create a concise profile outlining the
-			   minimum prerequisites for becoming a Nobel Literature laureate.</p>
-	</div>
+			   minimum prerequisites for becoming a Nobel Literature laureate.</p>-->
+	</div> 
 
 	
 	<div class= "currents">
@@ -95,10 +99,34 @@
 
 
 
-<!-- This is the style of the Paragraphs -->
 <style>
 
   	@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;500;700;900&display=swap');
+
+	.um{
+		color:#01274B;
+	}
+
+	.tunisia{
+		color:#871B40;
+	}
+
+	.cv:hover{
+		background-color:#F2CD1C;
+		color:white ;
+	}
+
+	.tunisia:hover{
+		background-color: #871B40;
+		color:white
+
+	}
+
+	.um:hover{
+		background-color:#01274B;
+		color:white;
+
+	}
 
 
 	img {

@@ -5,6 +5,9 @@
   </script>
   
   <style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;500&display=swap');
+
     .center-line {
 		margin-right:20%;
 		margin-left: 20%;
@@ -44,12 +47,12 @@
     }
   .copy{
       color: #8E8E8E;
-      font-family: Futura;
+      font-family: 'Jost', sans-serif;
       font-weight: 300;
   }
       h2{
         color: #8E8E8E;
-          font-family: Futura;
+        font-family: 'Jost', sans-serif;
           font-weight: 500;
       }
   

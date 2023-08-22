@@ -15,17 +15,17 @@
       } from 'svelte-vertical-timeline';
   
       const options = [
-          { title: 'Data Collection', desc:'Collecting data for Nobel Literature Winners.', status:"in progress", time: 'Task Started on 08/13/23' },
-          { title: 'Craft the Story', desc:'Build the story around the our data findings.',status:"not yet", time: 'Task starting date is TBD' },
-          { title: 'Data Visualization',desc:'Vizualise the data in an interactive and insighful way.',status:"not yet", time: 'Task starting date is TBD' },
-          { title: 'Article Development',desc:'Build the an interactive article to showcase the project.',status:"not yet", time: 'Task starting date is TBD' }
+          { title: 'Data Collection', desc:'Collecting data for Tunisia.', status:"in progress", time: 'Task Starts on 08/28/23' },
+          { title: 'Data Visualization', desc:'Vizualise the data in an insighful way.',status:"not yet", time: 'Task starting date is TBD' },
+          { title: 'Infographic Creation',desc:'Create the Infographic',status:"not yet", time: 'Task starting date is TBD' },
+          { title: 'Article Development',desc:'Build the an article to showcase the project.',status:"not yet", time: 'Task starting date is TBD' }
       ];
   </script>
   
   <div class="container">
     <div class="title-box">
-      <div class="title">Decoding Nobel Success: Traits of a Literary Laureate</div>
-      <div class="subtitle">Data Analysis | Data Visualization</div>
+      <div class="title">Decoding Nobel Success: An Infographic Odyssey</div>
+      <div class="subtitle">Infographic | Data Visualization</div>
     </div>
   </div>
   
