@@ -86,7 +86,7 @@ const setShow = function () {
     {#each text as txt, i}
       <div class="step" class:active={currentStep === i}>
         <div class="step-content">
-          {@html txt}
+          <p>{@html txt}</p>
         </div>
       </div>
     {/each}
@@ -94,6 +94,7 @@ const setShow = function () {
 </section>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap');
   /* The fixed chart */
   .chart {
     position: sticky;
