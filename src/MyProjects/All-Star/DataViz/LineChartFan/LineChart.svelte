@@ -102,7 +102,7 @@ const setShow = function () {
     margin: auto;
 
   }
-
+  
   /* Scrollytelling CSS */
   .step {
     height: 80vh;
@@ -115,7 +115,7 @@ const setShow = function () {
     background: whitesmoke;
     color: #ccc;
     border-radius: 5px;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
