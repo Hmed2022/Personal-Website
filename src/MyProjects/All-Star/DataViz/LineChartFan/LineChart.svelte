@@ -115,7 +115,7 @@ const setShow = function () {
     background: whitesmoke;
     color: #ccc;
     border-radius: 5px;
-    padding: 1rem 1rem;
+    padding: 0.5rem 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
