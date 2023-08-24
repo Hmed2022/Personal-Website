@@ -24,7 +24,7 @@
   
   <div class="container">
     <div class="title-box">
-      <div class="title">Decoding Nobel Success: An Infographic Odyssey</div>
+      <div class="title">Tunisia in Graphics: An Infographic Odyssey</div>
       <div class="subtitle">Infographic | Data Visualization</div>
     </div>
   </div>

@@ -4,7 +4,9 @@
 	import Home from './pages/Home.svelte';
 	import Projects from './pages/Projects.svelte';
 	import AllStarIntro from './MyProjects/All-Star/AllStarIntro.svelte';
-	import NBA from "./MyProjects/All-Star/NBA.svelte"
+	import NBA from "./MyProjects/All-Star/NBA.svelte";
+	import TunInfo from './MyProjects/TunInfo/TunInfo.svelte';
+	import TunInfoIntro from './MyProjects/TunInfo/TunInfoIntro.svelte';
 
 </script>
   
@@ -22,7 +24,9 @@
 		'/': Home,
 		'/projects': Projects,
 		'/allstarintro': AllStarIntro,
-		'/allstar': NBA
+		'/allstar': NBA,
+		'/tuninfo': TunInfo,
+		'/tuninfointro': TunInfoIntro
 	}} />
   </body>
   

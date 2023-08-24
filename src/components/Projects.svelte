@@ -11,12 +11,57 @@
         show=true
     }
     )
+
+    let buttontag="all";
+    function SetButton(buttonName) {
+        // Reset all variables to false
+        buttontag="";
+
+        // Set the variable corresponding to the clicked button to true
+        if (buttonName === "All") {
+          buttontag = 'all';
+        } else if (buttonName === "Svelte") {
+          buttontag = 'svelte';
+        } else if (buttonName === "Data Visualization") {
+          buttontag = 'dataviz';
+        } else if (buttonName === "Infographic") {
+          buttontag = 'info';
+        } else if (buttonName === "Tunisia") {
+          buttontag = 'tunisia';
+        } else if (buttonName === "Machine Learning") {
+          buttontag = 'ml';
+        } else if (buttonName === "Story") {
+          buttontag = 'story';
+        } else if (buttonName === "Data Science") {
+          buttontag = 'ds';
+        } else if (buttonName === "D3") {
+          buttontag = 'd3';
+        } else if (buttonName === "SQL") {
+          buttontag = 'sql';
+        }
+    }
   </script>
-  
+
+
+<div class="buttons">
+  <button on:click={() => SetButton("All")} class="all">All</button>
+  <button on:click={() => SetButton("Svelte")} class="svelte">Svelte</button>
+  <button on:click={() => SetButton("Data Visualization")} class="Viz">Data Visualization</button>
+  <button on:click={() => SetButton("Infographic")} class="info">Infographic</button>
+  <button on:click={() => SetButton("Tunisia")} class="tunisia">Tunisia</button>
+  <button on:click={() => SetButton("Machine Learning")} class="ml">Machine Learning</button>
+  <button on:click={() => SetButton("Story")} class="story">Story</button>
+  <button on:click={() => SetButton("Data Science")} class="ds">Data Science</button>
+  <button on:click={() => SetButton("D3")} class="d3">D3</button>
+  <button on:click={() => SetButton("SQL")} class="sql">SQL</button>
+</div>
+
 {#if show}
 <section>
     {#each imageData as image, i}
-    <div class="card__wrapper" transition:fade={{delay: i*300}}>
+    {#if image.show && image.tags.includes(buttontag)}
+    <!-- <div class="card__wrapper" transition:fade={{delay:100}}> -->
+    <div class="card__wrapper">
         <div class="card__body">
         </div>
             
@@ -32,6 +77,7 @@
               </div> 
             </a>
     </div>
+    {/if}
     {/each}
 </section>
 {/if}
@@ -120,6 +166,36 @@
         text-align: center;
         margin-left: 5%;
         margin-right: 5%;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+        max-width: 60%;
+        text-align: center;
+        margin-right: 20%;
+        margin-left: 20%;
+        margin-top: 2%;
+    }
+
+    button {
+        transition-duration: 0.4s;
+        margin-right: 4px;
+        margin-bottom: 4px;
+				font-family: 'Jost', sans-serif;
+				font-size: 1.2rem;
+				background-color: white;
+			  color: #707171;
+			  border: none;
+				padding:4px;
+				border-radius: 5px;
+    }
+
+    button:hover {
+        background-color: #a0a0a0;
+        border: none;
+        color: white;
     }
 
   </style>
