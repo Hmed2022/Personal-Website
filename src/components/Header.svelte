@@ -6,10 +6,10 @@
 	 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;500&display=swap');
 
 	 @font-face {
-  font-family: "Action Cond Regular Trial";
-  src: url("../assets/Fonts/dkonnig.ttf")
-    format("truetype");
-}
+		font-family: "dkzonnig";
+		src: url("../assets/Fonts/dkzonnig.ttf")
+			format("truetype");
+	 }
 
 	 a {
     text-decoration-color:#707171

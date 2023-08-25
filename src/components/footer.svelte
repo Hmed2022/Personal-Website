@@ -60,7 +60,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px;
   }
   
   .container1 {
@@ -71,6 +70,7 @@
   
   .container2 {
       margin-right: 20%;
+      flex-wrap: wrap;
   }
   
   
