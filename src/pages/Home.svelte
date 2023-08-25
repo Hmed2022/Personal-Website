@@ -42,6 +42,7 @@
 
 
 <PageTransitions>
+	<div class="containers">
 	<div class="block-container1">
 		<div class="AboutMeIcon">
 			<img src="{AboutMe}" alt="About Me">
@@ -62,7 +63,7 @@
 			<img src="{PhotoMe}" alt="My Photo">
 		</div>
 	</div>
-	
+</div>
 	<hr class="dashed-line">
 	
 	<div class="CuurentProject">
@@ -243,22 +244,44 @@
 	height: auto;
 	}
 
-	.block-container1 {
+	/* .block-container1 {
 	margin-top: 50px;
 	margin-left: 10%;
     width: 40%;
     float: left;
+
   	}
 
 	.block-container2 {
     width: 40%;
     float: right;
-  	}
+  	} */
+
+	  .containers {
+		display: flex;
+		flex-wrap: wrap; /* This enables wrapping when the screen size is reduced */
+		justify-content: space-between; /* Spacing between the containers */
+		margin-left: 10%;
+		margin-right:10%;
+		text-align: center;
+		justify-content: center;
+		}
+
+		.block-container1 {
+			flex: 1; /* Take up equal space in a row, adjust as needed */
+			margin-right: 20px; /* Add margin between containers */
+		}
+
+		.block-container2 {
+			flex: 1; /* Take up equal space in a row, adjust as needed */
+			text-align: center;
+			margin-right: 0;
+		}
+
 
   	.AboutMeIcon img {
     width: 300px;
     height: auto;
-    margin-left: 200px;
 	}
 
 	#IntroFirstPage {
