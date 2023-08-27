@@ -65,7 +65,10 @@
             </div>
 
             <h1 class="faninterest"><mark class="nba_mark" >Fan Interest</mark></h1>
-            <LineChart1/>
+            <div class="chart">
+                <LineChart1/>
+            </div>
+           
             <p> 
                 In this article, we will explore the reasons for the drop in viewership and ratings. 
                 We have chosen three specific measures to examine and explain in detail; Player Effort, The Three Point and Injuries.
@@ -84,16 +87,7 @@
 <style>
      @import url('https://fonts.googleapis.com/css2?family=Jost:wght@600;700;800&family=Quicksand&display=swap');
 
-     @media (max-width: 768px) {
-        h1{
-            text-align: center;
-            font-family: 'Jost', sans-serif;
-            font-size: 2em;
-            text-transform: uppercase;
-            font-weight: 800;
-            margin-bottom: 5%;
-        }
-     }
+    
 
     .dec {
         background-color: #eaded3;
@@ -160,5 +154,17 @@
         margin: 2rem auto;
     }
 
+    @media (max-width: 768px) {
+        h1{
+            text-align: center;
+            font-family: 'Jost', sans-serif;
+            font-size: 2em;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+        .chart{
+            margin-top: 5%;
+        }
+     }
 
 </style>

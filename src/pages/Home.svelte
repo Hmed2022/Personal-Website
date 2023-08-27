@@ -8,7 +8,8 @@
 
 	import Footer from "../components/footer.svelte"
 
-	import pdfUrl from "../assets/Ahmed Bendaly.pdf"
+	import pdfUrl from "../assets/CV-Ahmed Bendaly.pdf"
+	import pdfUrl2 from "../assets/CV Detailed- Ahmed Bendaly .pdf"
 	import CurrentImg from "../assets/Current.png"
 	import AboutMe from "../assets/1.png"
 	import PhotoMe from "../assets/PhotoMe.png"
@@ -54,7 +55,8 @@
 		With a passion for original and creative work, Ahmed’s goal is to make complex subjects more accessible to the world. 
 		And, as a proud <a class="tunisia" href="https://en.wikipedia.org/wiki/Tunisia">Tunisian</a>, you’ll find a touch of his cultural heritage in some of his projects.<br> 
 		<br>
-		Take a look at his Resume <a class="cv" href="{pdfUrl}" target="_blank" rel="noopener noreferrer" > here</a>!
+		Take a look at his Resume <a class="cv" href="{pdfUrl}" target="_blank" rel="noopener noreferrer" > here</a>! 
+		(detailed <a class="cv" href="{pdfUrl2}" target="_blank" rel="noopener noreferrer" > version </a>)
 		</p>
 	</div>	
 	
