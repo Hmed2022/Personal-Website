@@ -86,7 +86,12 @@
 
      @media (max-width: 768px) {
         h1{
+            text-align: center;
+            font-family: 'Jost', sans-serif;
             font-size: 2em;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 5%;
         }
      }
 

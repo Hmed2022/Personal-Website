@@ -1,19 +1,27 @@
 <script>
-	let xTicks = [1975,1980,1985,1990,1995,2000,2005,2010,2015,2020,2025];
+	let xTicks = [1975,1980,1985,1990,1995,2000,2005,2010,2015,2023];
 	export let xScale;
 	export let height;
 	export let margin;
 </script>
 
 <g>
-{#each xTicks as tick}
-	<text x={xScale(tick)}
-				y={height - margin.bottom}
-				dy="-15"
-				dominant-baseline ="hanging"
-				> {tick}</text>
-{/each}
-</g>
+	{#each xTicks as tick,i}
+	{#if i == xTicks.length-1}
+		<text x={xScale(tick)-34}
+					y={height - margin.bottom}
+					dy="-15"
+					dominant-baseline ="hanging"
+					> {tick}</text>
+	{:else}		
+		<text x={xScale(tick)}
+						y={height - margin.bottom}
+						dy="-15"
+						dominant-baseline ="hanging"
+						> {tick}</text>	
+	{/if}	
+	{/each}
+	</g>
 
 <g>
 {#each xTicks as line}

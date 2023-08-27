@@ -3,7 +3,7 @@
   export let xScale;
   export let margin;
 
-  let xTicks = [90,95,100,105,110,115,120,125,130,135,140,145,150];
+  let xTicks = [90,95,100,105,110,115,120,125,130,135,140,145];
 </script>
 
 <g>
@@ -13,7 +13,7 @@
       y={height - margin.bottom}
       dy="6"
       dominant-baseline="hanging"
-      >{tick} {tick == 150 ? ' Drtg' : ''}</text>
+      >{tick} {tick == 145 ? ' Drtg' : ''}</text>
   {/each}
 </g>
 

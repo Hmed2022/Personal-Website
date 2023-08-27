@@ -10,11 +10,11 @@
   import { scaleLinear } from "d3-scale";
 	import {area } from 'd3-shape';
   $: xScale = scaleLinear()
-    .domain([90, 150])
+    .domain([90, 145])
     .range([40, width - margin.left - margin.right]);
 
   const yScale = scaleLinear()
-    .domain([90, 150])
+    .domain([90, 146])
     .range([height - margin.top - margin.bottom, 20]);
 
   import AxisX from "./Components/AxisX.svelte";

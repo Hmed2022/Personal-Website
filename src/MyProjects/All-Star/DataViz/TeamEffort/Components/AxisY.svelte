@@ -3,7 +3,7 @@
   export let yScale;
   export let margin;
 
-  let yTicks = [90,95,100,105,110,115,120,125,130,135,140,145,150];
+  let yTicks = [90,95,100,105,110,115,120,125,130,135,140,145];
 </script>
 
 <g transform="translate({margin.left} {margin.top})">
@@ -12,7 +12,7 @@
       x={0} 
       y={yScale(tick)}
       dy="-6"
-      >{tick} {tick == 150 ? ' Ofrg' : ''}</text>
+      >{tick} {tick == 145 ? ' Ofrg' : ''}</text>
 		
       <line 
         x1="0" 

@@ -20,7 +20,7 @@
 	
 	export let curry, curryStar;
 	
-	const margin = {top:20 , right:40, left:70, bottom:0};
+	const margin = {top:20 , right:40, left:30, bottom:0};
 	
 	// the scales
 		$: xScale = scaleLinear()

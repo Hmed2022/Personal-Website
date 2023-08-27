@@ -32,7 +32,7 @@
 	
 	let path, path2, length, length2;
 	
-	const margin = {top:20 , right:40, left:70, bottom:0};
+	const margin = {top:20 , right:40, left:50, bottom:0};
 	
 	// the scales
 		$: xScale = scaleLinear()
@@ -325,15 +325,23 @@ mouseX = translatedXRem * parseFloat(getComputedStyle(document.documentElement).
 	}
 
 	@media (max-width: 768px) {
+
 		.tooltip{
+		padding: 6px;
+		pointer-events: none;
+		top: 40px;
 		left: 230px;
 		}
 		.path1{
+			stroke: #476b8d;
 			stroke-width: 3;
+			fill: none;
 		}
 		.path2{
+			stroke: #894044;
 			stroke-width: 3;
-		}
+			fill: none;
+	}
     }
 
 	
