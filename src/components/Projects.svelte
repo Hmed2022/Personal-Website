@@ -198,5 +198,42 @@
         color: white;
     }
 
+    @media (max-width: 768px) {
+      button {
+        transition-duration: 0.4s;
+        margin-right: 4px;
+        margin-bottom: 4px;
+				font-family: 'Jost', sans-serif;
+				font-size: 1.05rem;
+				background-color: white;
+			  color: #707171;
+			  border: none;
+				padding:4px;
+				border-radius: 5px;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+        max-width: 100%;
+        text-align: center;
+        margin-right: 5%;
+        margin-left: 5%;
+        margin-top: 5%;
+    }
+
+    section {
+      display: grid;
+      max-width: 100vw;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      grid-gap: 0.2rem;
+      margin-left: 0;
+      margin-right: 0;
+      margin-top: 3%;
+    }
+
+    }
+
   </style>
   
