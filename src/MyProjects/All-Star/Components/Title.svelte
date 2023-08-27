@@ -76,7 +76,7 @@ import starUrl from "../../../assets/Projects/AllStar/star.png"
 
 @media (max-width: 768px) {
     h1 {
-        font-size: 5em; 
+        font-size: 5.5em; 
     }
 }
     .title {

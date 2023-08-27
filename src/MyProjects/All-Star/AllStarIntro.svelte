@@ -111,10 +111,10 @@ function redirectToAllStar() {
         margin-bottom: 5%;
     }
     img{
-        max-width: 550px;
+        max-width: 100%;
         height: auto;
         border: 2px solid rgba(186, 146, 120, 0.655); 
-        padding: 5px;
+        /* padding: 5px; */
         
     }
 	h3 {

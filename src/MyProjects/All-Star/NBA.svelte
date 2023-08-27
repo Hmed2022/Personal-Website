@@ -84,6 +84,12 @@
 <style>
      @import url('https://fonts.googleapis.com/css2?family=Jost:wght@600;700;800&family=Quicksand&display=swap');
 
+     @media (max-width: 768px) {
+        h1{
+            font-size: 2em;
+        }
+     }
+
     .dec {
         background-color: #eaded3;
         color: #b8a79a;

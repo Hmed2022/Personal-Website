@@ -27,6 +27,18 @@
       margin-left: 20%;
       margin-right: 20%;
     }
+
+    @media (max-width: 768px) {
+      .footer2 {
+      /* background-color: #f2f2f2; */
+      padding: 20px;
+      /* width: 100%; */
+      text-align: center;
+      margin-top: 7%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+}
   
     .icons {
           display: inline-flex;

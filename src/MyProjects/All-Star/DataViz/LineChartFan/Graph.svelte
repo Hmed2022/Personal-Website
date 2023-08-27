@@ -268,9 +268,7 @@ mouseX = translatedXRem * parseFloat(getComputedStyle(document.documentElement).
 	
 </svg>
 
-	<div class="tooltip" style="position:absolute;
-															top: 40px;
-															left: 500px">
+	<div class="tooltip">
 		<p><span class="views-underline">#Views (Mill)</span></p>
 		<p ><span class="rating-underline">RTG</span></p>
 		
@@ -321,8 +319,23 @@ mouseX = translatedXRem * parseFloat(getComputedStyle(document.documentElement).
 		/* border-radius: 20px; */
 		/* border-color: #eaded3; */
 /* 		transition: top 300ms ease, left 300ms ease; */
-		
+		position:absolute;
+		top: 40px;
+		left: 500px;
 	}
+
+	@media (max-width: 768px) {
+		.tooltip{
+		left: 230px;
+		}
+		.path1{
+			stroke-width: 3;
+		}
+		.path2{
+			stroke-width: 3;
+		}
+    }
+
 	
 	.path1 {
 		stroke: #476b8d;
