@@ -49,7 +49,7 @@
 	
 	import { pivot } from './Components/utils.js'
 	
-	let layout = 'stacked';  // stacked, grouped, percent, or separated
+	let layout = 'grouped';  // stacked, grouped, percent, or separated
 	
 	$: options = layout === 'grouped' ? { layout: 'grouped' }
 		: layout === 'stacked' ? { layout: 'stacked' }

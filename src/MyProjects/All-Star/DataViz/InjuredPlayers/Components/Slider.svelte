@@ -50,7 +50,7 @@ function handleClick(year) {
 
 {#if ShowGraph}
       <p id ="playergraph" > These are the players who missed the <b>{SetYear} </b>NBA All-Star game. Players who were ranked
-      in the top 10 in voting received are in <span style="background-color:#A9B8D9">blue</span> and the rest are in <span style="background-color:#D97761">red</span>. </p>
+      in the top 10 in voting received are in <span style="background-color:#A9B8D9"> blue </span> and the rest are in <span style="background-color:#D97761"> red </span>. </p>
 
 
 <div class="Container">
@@ -58,7 +58,7 @@ function handleClick(year) {
         <Players bind:SetYear={SetYear} />
       </div>
 
-      <div class="StackedChart" style="max-height:{Height}px">
+      <div class="StackedChart">
         <Graph bind:SetYear={SetYear} {Height} bind:keyColors={keyColors}/>
       </div>
 </div>
@@ -98,6 +98,14 @@ function handleClick(year) {
 
     .StackedChart {
         flex: 22%;
+        max-height: 400px;
+    }
+
+    @media (max-width: 768px){
+      .StackedChart {
+        flex: 22%;
+        max-height: 600px;
+    }
     }
  
 

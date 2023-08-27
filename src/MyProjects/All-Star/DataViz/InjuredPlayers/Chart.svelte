@@ -7,6 +7,19 @@
   let width = 600;
   let height = 800;
 
+  function updateVariables() {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth <= 768) { 
+      width = 350; 
+    } else {
+      width = 600; 
+    }
+  }
+
+  updateVariables();
+  window.addEventListener('resize', updateVariables);
+
 	export let SetYear;
 
 
@@ -33,7 +46,7 @@
     }
   }
 
-  const margin = { top: 20, right: 20, bottom: 20, left: 30 };
+  const margin = { top: 20, right: 30, bottom: 20, left: 30 };
   const innerHeight = height - margin.top - margin.bottom;
   const innerWidth = width - margin.left - margin.right;
 
@@ -51,60 +64,62 @@
 <!-- <div class="container" bind:clientWidth={width}>
 
 </div> -->
-<svg {width} {height}>
-  <g transform={`translate(${margin.left},${margin.top})`}>
-    {#each xTicks as tickValue}
-      <g transform={`translate(${xScale(tickValue)},0)`}>
-        <line y2={innerHeight} stroke="black" />
-        <text class="xaxis" text-anchor="middle" dy=".7em" y={innerHeight +3}>
-          {tickValue}
+
+  <svg {width} {height}>
+    <g transform={`translate(${margin.left},${margin.top})`}  >
+      {#each xTicks as tickValue}
+        <g transform={`translate(${xScale(tickValue)},0)`}>
+          <line y2={innerHeight} stroke="black" />
+          <text class="xaxis" text-anchor="middle" dy=".7em" y={innerHeight +3}>
+            {tickValue}
+          </text>
+        </g>
+      {/each}
+      {#each data as d}
+      {#if d.year!=0}
+        <text
+          class="yaxis"
+          text-anchor="end"
+          x="-3"
+          dy=".3em"
+          y={yScale(d.year) + yScale.bandwidth() / 2}
+        >
+          {d.year}
         </text>
-      </g>
-    {/each}
-    {#each data as d}
-    {#if d.year!=0}
-      <text
-				class="yaxis"
-        text-anchor="end"
-        x="-3"
-        dy=".3em"
-        y={yScale(d.year) + yScale.bandwidth() / 2}
-      >
-        {d.year}
-      </text>
-      {/if}
-			{#if d.year == SetYear}
-				 <rect
-        x="0"
-        y={yScale(d.year)}
-        width={xScale(d.count)}
-        height={yScale.bandwidth()}
-				fill="#9BACBC"
-				stroke="#B8A79A"
-				in:fade
-				out:fade
-      />
-			{:else}
-      <rect x="0"
+        {/if}
+        {#if d.year == SetYear}
+           <rect
+          x="0"
           y={yScale(d.year)}
           width={xScale(d.count)}
           height={yScale.bandwidth()}
-          fill={hoveredYear === d.year ? "#EADED3" : (SetYear === d.year ? "#9BACBC" : "#B8A79A")}
+          fill="#9BACBC"
+          stroke="#B8A79A"
           in:fade
           out:fade
-          on:click={() => handleClick(d)}
-          on:mouseenter={() => handleMouseEnter(d)}
-          on:mouseleave={handleMouseLeave}
-          on:keydown={(event) => handleKeyDown(event, d)} 
-          tabindex="0"
-          role="button"
-          aria-pressed="{SetYear === d.year}"
-      />
-			{/if}
-     
-    {/each}
-  </g>
-</svg>
+        />
+        {:else}
+        <rect x="0"
+            y={yScale(d.year)}
+            width={xScale(d.count)}
+            height={yScale.bandwidth()}
+            fill={hoveredYear === d.year ? "#EADED3" : (SetYear === d.year ? "#9BACBC" : "#B8A79A")}
+            in:fade
+            out:fade
+            on:click={() => handleClick(d)}
+            on:mouseenter={() => handleMouseEnter(d)}
+            on:mouseleave={handleMouseLeave}
+            on:keydown={(event) => handleKeyDown(event, d)} 
+            tabindex="0"
+            role="button"
+            aria-pressed="{SetYear === d.year}"
+        />
+        {/if}
+       
+      {/each}
+    </g>
+  </svg>
+
 
 
 <style>

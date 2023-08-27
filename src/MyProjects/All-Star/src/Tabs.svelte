@@ -25,11 +25,14 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Jost:wght@800&display=swap');
 
+
     .tabTitles{
       display: flex;
     justify-content: center;
     text-align: center;
     }
+
+  
       .box {
           margin-bottom: 10px;
           padding: 40px;
@@ -37,9 +40,19 @@
           border-radius: 0 0 .5rem .5rem;
           /* border-top: 0; */
       }
+
+      @media (max-width: 768px) {
+        .box {
+          margin-bottom: 10px;
+          padding: 20px;
+          border: 2px solid #eaded3;
+          border-radius: 0 0 .5rem .5rem;
+      }
+
+      }
     ul {
       display: flex;
-      flex-wrap: wrap;
+      /* flex-wrap: wrap; */
       /* padding-left: 13%;
       padding-right: 13%; */
       margin-bottom: 0;

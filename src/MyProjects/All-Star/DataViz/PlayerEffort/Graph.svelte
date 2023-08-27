@@ -77,7 +77,7 @@
 	}
 	
 	
-	const margin = {top:20 , right:30, left:30, bottom:0};
+	const margin = {top:20 , right:30, left:0, bottom:0};
 	
 	// the scales
 		$: xScale = scaleLinear()
