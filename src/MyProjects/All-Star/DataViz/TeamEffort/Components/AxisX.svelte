@@ -17,11 +17,35 @@
   {/each}
 </g>
 
+<g>
+  {#each xTicks as line}
+  <line
+            class="vert-line"
+            x1={xScale(line)}
+            x2={xScale(line)}
+            y1={height - margin.bottom}
+            y2={height-margin.top-10}
+          />
+  {/each}
+  </g>
 
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 	text {
 		font-family: 'Quicksand', sans-serif;
+	}
+
+  .vert-line{
+		 stroke: #cecece;
+		
+    
+	}
+
+  @media (max-width: 512px) {
+		text {
+		font-family: 'Quicksand', sans-serif;
+    font-size: 0.75em;
+	}
 	}
 </style>

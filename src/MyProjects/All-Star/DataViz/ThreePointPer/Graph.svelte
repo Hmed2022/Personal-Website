@@ -168,11 +168,7 @@ let value = "Regular Season: Avg 2pt/3pt attempted Shots"
 
 <p> The chart below illustrates the difference between 3-point and 2-point attempted shots in :</p>
 <div class="selector" >
-	<select bind:value style="font-size: 1.2em;
-    font-family: Quicksand;
-	 text-align: center;
-	 border: none;
-     background-color: #eaded3;">
+	<select bind:value class="selectorer">
         {#each items as item}
          <option value={item}>{item}</option> 
         {/each}
@@ -260,6 +256,24 @@ let value = "Regular Season: Avg 2pt/3pt attempted Shots"
 
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+
+	.selectorer{
+		font-size: 1.2em;
+		font-family: Quicksand;
+		text-align: center;
+		border: none;
+		background-color: #eaded3;
+	}
+
+	@media (max-width: 475px) {
+		.selectorer{
+		font-size: 1em;
+		font-family: Quicksand;
+		text-align: center;
+		border: none;
+		background-color: #eaded3;
+	}
+	}
 
 p {
         display: block;

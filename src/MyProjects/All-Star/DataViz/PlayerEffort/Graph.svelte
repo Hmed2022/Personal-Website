@@ -268,4 +268,32 @@
 		fill:none;
 	
 	}
+
+	@media (max-width: 512px) {
+		.path1 {
+		stroke: #d9a387;
+		stroke-width: 3;
+		fill:none;
+		
+	}
+	.path2{
+		stroke: #894044;
+		stroke-width: 3;
+		fill:none;
+	
+	}
+
+	.path3{
+		stroke: #a4be85;
+		stroke-width: 3;
+		fill:none;
+	
+	}
+	.path4{
+		stroke: #476B8D;
+		stroke-width: 3;
+		fill:none;
+	
+	}
+	}
 </style>

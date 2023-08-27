@@ -28,6 +28,19 @@
 
 	export let case1,case2,case3,case4;
 	
+  let wider =true
+	function updateVariables() {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth <= 512) { 
+      wider=false
+    } else {
+      wider =true
+    }
+  }
+
+  updateVariables();
+  window.addEventListener('resize', updateVariables);
 
 </script>
 
@@ -105,6 +118,7 @@
             tabIndex="0"
             />
 			{:else}
+      {#if wider}
 			<circle cx={xScale(team.drtg)} 
             cy={yScale(team.oftg)} 
             r={hovering && hoveredData == team ? "20" : "10"}
@@ -124,6 +138,27 @@
             }}
             tabIndex="0"
             />
+            {:else}
+            <circle cx={xScale(team.drtg)} 
+            cy={yScale(team.oftg)} 
+            r={hovering && hoveredData == team ? "12" : "7"}
+            opacity={hovering ?  hoveredData == team ? "1" : ".3" : "1"}
+            fill="#D9D4CC"
+            stroke="#8C5642" 
+						role="navigation"
+            on:mouseover={() => {
+              hoveredData = team
+							hovering = true;
+            }}
+						on:mouseleave={() => {
+              hovering = false
+            }}
+            on:focus={() => {
+              hoveredData = team;
+            }}
+            tabIndex="0"
+            />
+            {/if}
 		{/if}
   {/each}
   </g>

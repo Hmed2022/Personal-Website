@@ -28,4 +28,10 @@
 	text {
 		font-family: 'Quicksand', sans-serif;
 	}
+  @media (max-width: 512px) {
+		text {
+		font-family: 'Quicksand', sans-serif;
+    font-size: 0.75em;
+	}
+	}
 </style>

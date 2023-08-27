@@ -178,4 +178,15 @@ Here are the <b>TOP 15</b> players who received the most fan votes in 1997.
     align-items: center;
  
   } 
+
+  @media (max-width: 512px) {
+		h1 {
+        text-align: center;
+        font-family: 'Jost', sans-serif;
+        font-size: 1.7em;
+        text-transform: uppercase;
+        font-weight: 800;
+        margin-top: 0;
+    }
+	}
 </style>

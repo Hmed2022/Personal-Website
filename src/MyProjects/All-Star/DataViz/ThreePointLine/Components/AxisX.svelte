@@ -3,12 +3,27 @@
 	export let xScale;
 	export let height;
 	export let margin;
+
+	let space = 34
+
+	function updateVariables() {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth <= 475) { 
+      space = 28; 
+    } else {
+      space = 34; 
+    }
+  }
+
+  updateVariables();
+  window.addEventListener('resize', updateVariables);
 </script>
 
 <g>
 	{#each xTicks as tick,i}
 	{#if i == xTicks.length-1}
-		<text x={xScale(tick)-34}
+		<text x={xScale(tick)-space}
 					y={height - margin.bottom}
 					dy="-15"
 					dominant-baseline ="hanging"
@@ -47,5 +62,12 @@
 	text {
 		font-size: 0.9em;
 		font-family: 'Quicksand', sans-serif;
+	}
+
+	@media (max-width: 475px) {
+		text {
+		font-size: 0.75em;
+		font-family: 'Quicksand', sans-serif;
+	}
 	}
 </style>
