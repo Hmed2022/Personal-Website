@@ -123,7 +123,44 @@
 	}
 
 
-  @media (max-width: 768px) {
+
+  @media (max-width: 595px) {
+    p {
+		text-align:center;
+		font-family: 'Quicksand', sans-serif;
+    font-size: 0.65em;
+    margin-left: 5%;
+	}
+  .circle {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    border: 3px solid black;
+    border-radius: 50%;
+    background-color: #D97762;
+    overflow: hidden;
+  }
+
+	.circle2 {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    border: 3px solid black;
+    border-radius: 50%;
+    background-color: #A9B9D9;
+    overflow: hidden;
+  }
+
+  .grid-item {
+    display: flex;
+    grid-template-rows: auto 1fr; /* Set the first row to auto to fit the image height */
+    flex-direction:column;
+    justify-content: center; /* Center vertically */
+    align-items: center; 
+  }
+  }
+
+  @media (max-width: 425px) {
     p {
 		text-align:center;
 		font-family: 'Quicksand', sans-serif;
