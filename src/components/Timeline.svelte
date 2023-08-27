@@ -128,5 +128,16 @@
           color: black;
           font-size: 0.8rem
       }
+
+      @media (max-width: 768px) {
+        h3 {
+          letter-spacing: 0;
+          margin: 0;
+          padding: 0;
+          font-family: 'Quicksand', sans-serif;
+          font-size: 1rem;
+      }
+
+      }
   
   </style>

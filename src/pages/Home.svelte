@@ -302,7 +302,74 @@
 		font-size: 1.5em;
 		margin-top: 50px;
 	}
+
+	@media (max-width: 768px) {
+
+		#IntroFirstPage {
+		text-align: center;
+    	color: #707070;
+		font-family: 'Jost', sans-serif;
+		font-weight: 300;
+		font-size: 1.3em;
+		margin-top: 50px;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+
+	.AboutMeIcon img {
+    width: 230px;
+    height: auto;
+	}
+
 	
+
+	#AboutMe {
+    	color: #707070;
+		font-family: 'Jost', sans-serif;
+		font-weight: 300;
+		font-size: 1.3em;
+		margin-top: 22px;
+	}
+
+	.MyPhoto img{ 
+	margin-top: 0;	
+	margin-left: 0;	
+	width: 280px;
+	height: auto;
+	}
+
+	.CuurentProject img {
+
+		width: 230px;
+		height: auto;
+		display: inline-block;
+		}
+
+		.currents{
+		margin-top: 5%;
+		margin-left: 0;
+		margin-right: 0;
+
+	}
+
+	.description{
+		text-align: center;
+    	color: #707070;
+		font-family: 'Jost', sans-serif;
+		font-weight: 300;
+		font-size: 1.3em;
+	}
+
+	.containers {
+		display: flex;
+		flex-wrap: wrap; /* This enables wrapping when the screen size is reduced */
+		justify-content: space-between; /* Spacing between the containers */
+		margin-left: 5%;
+		margin-right:5%;
+		text-align: center;
+		justify-content: center;
+		}
+}
   </style>
 
 
