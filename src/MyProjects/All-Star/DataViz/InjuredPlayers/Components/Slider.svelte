@@ -49,7 +49,8 @@ function handleClick(year) {
   <Graph2 bind:SetYear={SetYear} />
 
 {#if ShowGraph}
-      <p id ="playergraph" > These are the players who missed the <b>{SetYear} </b>NBA All-Star game. </p>
+      <p id ="playergraph" > These are the players who missed the <b>{SetYear} </b>NBA All-Star game. Players who were ranked
+      in the top 10 in voting received are in <span style="background-color:#A9B8D9">blue</span> and the rest are in <span style="background-color:#D97761">red</span>. </p>
 
 
 <div class="Container">

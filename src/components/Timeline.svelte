@@ -30,7 +30,7 @@
   </div>
   
   <Timeline position="alternate">
-      {#each options as option}
+      {#each options as option,i}
           <TimelineItem>
               <TimelineOppositeContent slot="opposite-content">
                   <p>{option.time}</p>
@@ -50,6 +50,26 @@
                   <p class="desc">{option.desc}</p>
               </TimelineContent>
           </TimelineItem>
+          {#if i === options.length - 1}
+          <TimelineItem>
+            <TimelineOppositeContent slot="opposite-content">
+                <p>{option.time}</p>
+            </TimelineOppositeContent>
+            <TimelineSeparator>
+                {#if option.status == 'completed'}
+                <TimelineDot style={'background-color: #50D85D;'}/>
+                {:else if option.status == 'in progress'}
+                    <TimelineDot style={'background-color: #7CD5E2;'}/>
+                    {:else}
+                    <TimelineDot style={'background-color: #D85A50;'}/>
+                {/if}
+            </TimelineSeparator>
+            <TimelineContent>
+                <h3>{option.title}</h3>
+                <p class="desc">{option.desc}</p>
+            </TimelineContent>
+        </TimelineItem>
+          {/if}
       {/each}
   </Timeline>
   

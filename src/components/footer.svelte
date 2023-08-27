@@ -9,8 +9,8 @@
   @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;500&display=swap');
 
     .center-line {
-		margin-right:20%;
-		margin-left: 20%;
+		/* margin-right:20%;
+		margin-left: 20%; */
 		align-content:center;
     height: 2px;
     background-color: #ccc; /* Grey color */
@@ -21,9 +21,11 @@
     .footer2 {
       /* background-color: #f2f2f2; */
       padding: 20px;
-      width: 100%;
+      /* width: 100%; */
       text-align: center;
       margin-top: 7%;
+      margin-left: 20%;
+      margin-right: 20%;
     }
   
     .icons {
@@ -61,15 +63,20 @@
       justify-content: space-between;
       align-items: center;
   }
+
+  .icon{
+    max-height: 40px;
+    margin: 0;
+  }
   
   .container1 {
       margin-right: 20%;
           text-align: left;
-          margin-left:20%;
+          /* margin-left:20%; */
   }
   
   .container2 {
-      margin-right: 20%;
+      /* margin-right: 20%; */
       flex-wrap: wrap;
   }
   
@@ -95,15 +102,15 @@
           <h2> Contact me</h2>
     
           <div class="icons">
-              <div id="linkedin">
+              <div class="icon" id="linkedin">
                         <a href="https://www.linkedin.com/in/ahmed-bendaly/">
                       <IoLogoLinkedin/>  </a>
               </div>
-              <div id="email">
+              <div class="icon" id="email">
                        <a href="mailto:ahmedben@umich.edu">
                            <IoIosMail/> </a>
               </div>
-              <div id="github">
+              <div class="icon" id="github">
                        <a href="https://github.com/Hmed2022">
                            <IoLogoGithub/> </a>
               </div>

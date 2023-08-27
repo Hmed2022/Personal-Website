@@ -34,7 +34,7 @@
 		While Dfrtg considers Turnovers, Free Throw Attempts, and Offensive Rebounds, we can further observe
 		 the evolution by adding defensive metrics
 		  like <mark class="sumStocks" on:mouseenter={togglesumStocks}> Stocks</mark> (steals and blocks)
-		   and <mark class="sumPF" on:mouseenter={togglesumPF}> Perseonal Fouls</mark> over the years.
+		   and <mark class="sumPF" on:mouseenter={togglesumPF}> Personal Fouls</mark> over the years.
 		  As seen in the previous graph, defense shows a declining trend over time.
 	 </p>
 	
@@ -44,7 +44,7 @@
 <p>
 	<mark class="sumFTA" on:mouseenter={togglesumFTA}> Free Throws </mark>
 	<mark class="sumORB" on:mouseenter={togglesumORB}> Offensive Rebounds</mark>
-	<mark class="sumPF" on:mouseenter={togglesumPF}> Perseonal Fouls</mark>
+	<mark class="sumPF" on:mouseenter={togglesumPF}> Personal Fouls</mark>
 	<mark class="sumStocks" on:mouseenter={togglesumStocks}> Stocks</mark>
 </p>
   <div class="chart">
@@ -75,21 +75,21 @@
 	}
 	.sumFTA{
 		color: #ffffff;
-		background-color: #6DA0A6;	
+		background-color: #d9a387;	
 	}
 	.sumORB{
 		color: #ffffff;
-		background-color: #EEBE96
+		background-color: #894044
 	}
 	
 	.sumPF{
 		color: #ffffff;
-		background-color: #F2C2BD
+		background-color: #a4be85
 	}
 
 	.sumStocks{
 		color: #ffffff;
-		background-color: #B06961
+		background-color: #476B8D
 	}
 
 	

@@ -5,13 +5,16 @@
     const handleClick = tabValue => () => (activeTabValue = tabValue);
   </script>
   
-  <ul>
-  {#each items2 as item}
-      <li class={activeTabValue === item.value ? 'active' : ''}>
-          <span on:click={handleClick(item.value)}>{item.label}</span>
-      </li>
-  {/each}
-  </ul>
+  <div class="tabTitles">
+    <ul>
+      {#each items2 as item}
+          <li class={activeTabValue === item.value ? 'active' : ''}>
+              <span on:click={handleClick(item.value)}>{item.label}</span>
+          </li>
+      {/each}
+      </ul>
+  </div>
+  
   {#each items2 as item}
       {#if activeTabValue == item.value}
       <div class="box">
@@ -21,18 +24,24 @@
   {/each}
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Jost:wght@800&display=swap');
+
+    .tabTitles{
+      display: flex;
+    justify-content: center;
+    text-align: center;
+    }
       .box {
           margin-bottom: 10px;
           padding: 40px;
           border: 2px solid #eaded3;
-      border-radius: 0 0 .5rem .5rem;
-      border-top: 0;
+          border-radius: 0 0 .5rem .5rem;
+          /* border-top: 0; */
       }
     ul {
       display: flex;
       flex-wrap: wrap;
-      padding-left: 13%;
-      padding-right: 13%;
+      /* padding-left: 13%;
+      padding-right: 13%; */
       margin-bottom: 0;
       list-style: none;
       border-bottom: 2px solid #eaded3;

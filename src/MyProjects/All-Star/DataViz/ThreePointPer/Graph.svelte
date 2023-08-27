@@ -187,13 +187,13 @@ let value = "Regular Season: Avg 2pt/3pt attempted Shots"
 {#if value == "All-Star: 2pt/3pt attempted Shots"}
 	<div class="selector2" >
 <span class="two-att-underline"
-			style="color:#E39725;
+			style="color:#F27830;
 						 margin-right: 1%;"
 			role="button"
       tabindex="0"
       aria-label="Two Points Attempted">Two Points Attempted</span>
 	<span class="three-att-underline"
-				style="color:#A95106;
+				style="color:#894044;
 							 margin-left: 1%;"
 				role="button"
 	      tabindex="0"
@@ -280,11 +280,11 @@ p {
 	}
 
 	.two-att-underline{
-		border-bottom: 4px solid #E39725;
+		border-bottom: 4px solid #F27830;
 	}
 
 	.three-att-underline{
-		border-bottom: 4px solid #A95106;
+		border-bottom: 4px solid #894044;
 	}
 
 	.two-avg-underline{
@@ -309,13 +309,13 @@ p {
 	}
 
 	.path1 {
-		stroke: #E39725;
+		stroke: #F27830;;
 		stroke-width: 4;
 		fill:none;
 		
 	}
 	.path2{
-		stroke: #A95106;
+		stroke: #894044;
 		stroke-width: 4;
 		fill:none;
 	}

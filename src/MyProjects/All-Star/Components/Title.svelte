@@ -37,14 +37,21 @@ import starUrl from "../../../assets/Projects/AllStar/star.png"
   
   <style>
     .container1{
-      width: 80%;
+      /* width: 80%; */
       float: left;
 
     }
     .container2{
-      width: 20%;
+      /* width: 20%; */
       float: right;
+      display: block;
     }
+
+    @media (max-width: 768px) {
+    .container2 {
+        display: none; /* Hide .container2 on smaller screens */
+    }
+}
 
     .of{
       font-size: 0.3em;
@@ -64,6 +71,14 @@ import starUrl from "../../../assets/Projects/AllStar/star.png"
         font-size: 10em;
         margin: 0;
     }
+
+
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 5em; 
+    }
+}
     .title {
         margin-top: 15%;
         margin-bottom: 2%;
@@ -75,7 +90,7 @@ import starUrl from "../../../assets/Projects/AllStar/star.png"
     .align-container {
       display: flex;
       align-items: center;
-      justify-content: center;
+      /* justify-content: center; */
     }
 
     .allstar{
