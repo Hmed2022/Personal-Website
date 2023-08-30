@@ -32,8 +32,7 @@
 	Fan Interest chart data. To ensure its suitability 
 	for visualization purposes, we utilized SQL to process
 	and transform the raw data. If you are interested in
-	exploring the complete dataset, including both the raw
-	and transformed versions, you can access it through this <a href="https://www.kaggle.com/datasets/ahmedbendaly/nba-all-star-game-data">
+	exploring the complete dataset, you can access it through this <a href="https://www.kaggle.com/datasets/ahmedbendaly/nba-all-star-game-data">
 	link</a>. <br> Should you have any inquiries or
 	need further information regarding this subject, feel free 
 	to reach out to me at <a href = "mailto: ahmedben@umich.edu">ahmedben@umich.edu</a>. I'd be happy to assist
