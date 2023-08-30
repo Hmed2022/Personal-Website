@@ -1,6 +1,9 @@
-# Svelte + Vite
+# Personal-Website
 
-This template should help get you started developing with Svelte in Vite.
+This Project is made with Svelte.
+It's my personal website that I have created to showcase my projects and give you an idea on what I'd like to work on.
+
+You can have a look at the weboste following this link: [Personal Website](https://www.ahmedbendaly.com/)
 
 ## Recommended IDE Setup
 
@@ -42,6 +45,6 @@ If you have state that's important to retain within a component, consider creati
 ```js
 // store.js
 // An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
+import { writable } from "svelte/store";
+export default writable(0);
 ```
