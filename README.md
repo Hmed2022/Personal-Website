@@ -17,7 +17,7 @@ My personal Webbsite is a hub of my projects
 └── otherfile.txt
 ```
 
-'/root/folder1/folder2/file.txt'
+`/root/folder1/folder2/file.txt`
 
 You can access [file.txt](/root/folder1/folder2/file.txt) for more details.
 
