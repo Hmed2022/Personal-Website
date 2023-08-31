@@ -10,17 +10,17 @@ You can have a look at the weboste following this link: [Personal Website](https
 My personal Webbsite is a hub of my projects
 
 ```
-/root
-├── folder1
-│   ├── folder2
-│   │   └── file.txt
-└── otherfile.txt
+/src
+├── MyProjects
+│   ├── All-Star
+│   ├── TunInfo
+│   ├── Klay
 ```
 
-`/root/folder1/folder2/file.txt`
-
-You can access [file.txt](/root/folder1/folder2/file.txt) for more details.
+You can access [Peoject](src/MyProjects/All-Star) for more details.
 
 ## The Decline of the All-Star Game
 
 You can have a look at the weboste following this link: [Personal Website](https://www.ahmedbendaly.com/)
+
+`src/MyProjects/All-Star`
