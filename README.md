@@ -1,4 +1,4 @@
-# Personal-Website
+# Personal Website
 
 Welcome to my personal website, crafted with Svelte. This platform serves as a window into my world, showcasing my projects and providing insights into my passions and aspirations.
 
