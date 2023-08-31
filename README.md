@@ -5,10 +5,22 @@ It's my personal website that I have created to showcase my projects and give yo
 
 You can have a look at the weboste following this link: [Personal Website](https://www.ahmedbendaly.com/)
 
-## My Projects
+# My Projects
 
 My personal Webbsite is a hub of my projects
 
-# The Decline of the All-Star Game
+```
+/root
+├── folder1
+│   ├── folder2
+│   │   └── file.txt
+└── otherfile.txt
+```
+
+'/root/folder1/folder2/file.txt'
+
+You can access [file.txt](/root/folder1/folder2/file.txt) for more details.
+
+## The Decline of the All-Star Game
 
 You can have a look at the weboste following this link: [Personal Website](https://www.ahmedbendaly.com/)
