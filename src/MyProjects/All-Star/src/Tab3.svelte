@@ -27,7 +27,7 @@ import  data  from "./Data/data.js";
 
   // Function to handle the button click
   function toggleDNP() {
-    showDNP = !showDNP;
+    showDNP = true;
   }
 
   // Filter function to show/hide DNP rows based on the button click
