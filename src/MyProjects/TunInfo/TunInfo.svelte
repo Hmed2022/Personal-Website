@@ -1,19 +1,22 @@
 <script>
-    import FirstUrl from "./assests/1.png"
-
+    import Map from "./Data Viz/Map/Map.svelte"
     import Footer from "../../components/footer.svelte";
 </script>
+<!-- 
+<p style="text-align:center"> Choose Language:</p> -->
 
-<p style="text-align:center"> Tunisian Infographic</p>
 
-<div class="info">
-    <img src="{FirstUrl}" alt='Poltics'/>
+<div class="map">
+    <Map/>
 </div>
 
-
-<Footer/>
+<!-- <Footer/> -->
 
 <style>
+    .map{
+        margin-left: 10%;
+        margin-right: 10%;
+    }
     .info{
         max-width: 1000px
     }

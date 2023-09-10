@@ -15,8 +15,8 @@
       } from 'svelte-vertical-timeline';
   
       const options = [
-          { title: 'Data Collection', desc:'Collecting data for Tunisia.', status:"in progress", time: 'Task Starts on 08/28/23' },
-          { title: 'Data Visualization', desc:'Vizualise the data in an insighful way.',status:"not yet", time: 'Task starting date is TBD' },
+          { title: 'Data Collection', desc:'Collecting data for Tunisia.', status:"Completed", time: 'Task Started on 08/28/23' },
+          { title: 'Data Visualization', desc:'Vizualise the data in an insighful way.',status:"In progress", time: 'Task Started on 09/09/23' },
           { title: 'Infographic Creation',desc:'Create the Infographic',status:"not yet", time: 'Task starting date is TBD' },
           { title: 'Article Development',desc:'Build the an article to showcase the project.',status:"not yet", time: 'Task starting date is TBD' }
       ];
@@ -36,9 +36,9 @@
                   <p>{option.time}</p>
               </TimelineOppositeContent>
               <TimelineSeparator>
-                  {#if option.status == 'completed'}
+                  {#if option.status == 'Completed'}
                   <TimelineDot style={'background-color: #50D85D;'}/>
-                  {:else if option.status == 'in progress'}
+                  {:else if option.status == 'In progress'}
                       <TimelineDot style={'background-color: #7CD5E2;'}/>
                       {:else}
                       <TimelineDot style={'background-color: #D85A50;'}/>
