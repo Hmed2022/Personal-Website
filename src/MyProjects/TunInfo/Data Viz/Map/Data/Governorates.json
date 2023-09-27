@@ -10,7 +10,7 @@
     },
     {
       "Name": "Ariana",
-      "Name in Arabic": "أريانة",
+      "Name_in_Arabic": "أريانة",
       "Population": 567000,
       "Surface": 482,
       "Flag": "path/to/Ariana_flag.png",
@@ -18,7 +18,7 @@
     },
     {
       "Name": "Ben Arous",
-      "Name in Arabic": "بن عروس",
+      "Name_in_Arabic": "بن عروس",
       "Population": 631000,
       "Surface": 761,
       "Flag": "path/to/Ben_Arous_flag.png",
@@ -26,7 +26,7 @@
     },
     {
       "Name": "Manouba",
-      "Name in Arabic": "منوبة",
+      "Name_in_Arabic": "منوبة",
       "Population": 379000,
       "Surface": 1114,
       "Flag": "path/to/Manouba_flag.png",
@@ -34,7 +34,7 @@
     },
     {
       "Name": "Nabeul",
-      "Name in Arabic": "نابل",
+      "Name_in_Arabic": "نابل",
       "Population": 787000,
       "Surface": 2334,
       "Flag": "path/to/Nabeul_flag.png",
@@ -42,7 +42,7 @@
     },
     {
       "Name": "Zaghouan",
-      "Name in Arabic": "زغوان",
+      "Name_in_Arabic": "زغوان",
       "Population": 175000,
       "Surface": 2515,
       "Flag": "path/to/Zaghouan_flag.png",
@@ -50,7 +50,7 @@
     },
     {
       "Name": "Bizerte",
-      "Name in Arabic": "بنزرت",
+      "Name_in_Arabic": "بنزرت",
       "Population": 568000,
       "Surface": 3763,
       "Flag": "path/to/Bizerte_flag.png",
@@ -58,7 +58,7 @@
     },
     {
       "Name": "Beja",
-      "Name in Arabic": "باجة",
+      "Name_in_Arabic": "باجة",
       "Population": 307000,
       "Surface": 3038,
       "Flag": "path/to/Beja_flag.png",
@@ -66,7 +66,7 @@
     },
     {
       "Name": "Jendouba",
-      "Name in Arabic": "جندوبة",
+      "Name_in_Arabic": "جندوبة",
       "Population": 401000,
       "Surface": 3298,
       "Flag": "path/to/Jendouba_flag.png",
@@ -74,7 +74,7 @@
     },
     {
       "Name": "El Kef",
-      "Name in Arabic": "الكاف",
+      "Name_in_Arabic": "الكاف",
       "Population": 152000,
       "Surface": 5144,
       "Flag": "path/to/Le_Kef_flag.png",
@@ -82,7 +82,7 @@
     },
     {
       "Name": "Siliana",
-      "Name in Arabic": "سليانة",
+      "Name_in_Arabic": "سليانة",
       "Population": 218000,
       "Surface": 2862,
       "Flag": "path/to/Siliana_flag.png",
@@ -90,7 +90,7 @@
     },
     {
       "Name": "Kairouan",
-      "Name in Arabic": "القيروان",
+      "Name_in_Arabic": "القيروان",
       "Population": 570000,
       "Surface": 6712,
       "Flag": "path/to/Kairouan_flag.png",
@@ -98,7 +98,7 @@
     },
     {
       "Name": "Kasserine",
-      "Name in Arabic": "القصرين",
+      "Name_in_Arabic": "القصرين",
       "Population": 448000,
       "Surface": 7154,
       "Flag": "path/to/Kasserine_flag.png",
@@ -106,7 +106,7 @@
     },
     {
       "Name": "Sidi Bouzid",
-      "Name in Arabic": "سيدي بوزيد",
+      "Name_in_Arabic": "سيدي بوزيد",
       "Population": 441000,
       "Surface": 7393,
       "Flag": "path/to/Sidi_Bouzid_flag.png",
@@ -114,7 +114,7 @@
     },
     {
       "Name": "Gabes",
-      "Name in Arabic": "قابس",
+      "Name_in_Arabic": "قابس",
       "Population": 383000,
       "Surface": 7293,
       "Flag": "path/to/Gabes_flag.png",
@@ -122,7 +122,7 @@
     },
     {
       "Name": "Medenine",
-      "Name in Arabic": "مدنين",
+      "Name_in_Arabic": "مدنين",
       "Population": 485000,
       "Surface": 7400,
       "Flag": "path/to/Medenine_flag.png",
@@ -130,7 +130,7 @@
     },
     {
       "Name": "Tataouine",
-      "Name in Arabic": "تطاوين",
+      "Name_in_Arabic": "تطاوين",
       "Population": 150000,
       "Surface": 38261,
       "Flag": "path/to/Tataouine_flag.png",
@@ -138,7 +138,7 @@
     },
     {
       "Name": "Tozeur",
-      "Name in Arabic": "توزر",
+      "Name_in_Arabic": "توزر",
       "Population": 108000,
       "Surface": 47105,
       "Flag": "path/to/Tozeur_flag.png",
@@ -146,7 +146,7 @@
     },
     {
       "Name": "Kebili",
-      "Name in Arabic": "قبلي",
+      "Name_in_Arabic": "قبلي",
       "Population": 152000,
       "Surface": 22185,
       "Flag": "path/to/Kebili_flag.png",
@@ -154,7 +154,7 @@
     },
     {
       "Name": "Gafsa",
-      "Name in Arabic": "قفصة",
+      "Name_in_Arabic": "قفصة",
       "Population": 337000,
       "Surface": 7808,
       "Flag": "path/to/Gafsa_flag.png",
@@ -162,7 +162,7 @@
     },
     {
       "Name": "Sfax",
-      "Name in Arabic": "صفاقس",
+      "Name_in_Arabic": "صفاقس",
       "Population": 950000,
       "Surface": 7838,
       "Flag": "path/to/Sfax_flag.png",
@@ -170,7 +170,7 @@
     },
     {
       "Name": "Mahdia",
-      "Name in Arabic": "المهدية",
+      "Name_in_Arabic": "المهدية",
       "Population": 420000,
       "Surface": 2735,
       "Flag": "path/to/Mahdia_flag.png",
@@ -178,7 +178,7 @@
     },
     {
       "Name": "Monastir",
-      "Name in Arabic": "المنستير",
+      "Name_in_Arabic": "المنستير",
       "Population": 565000,
       "Surface": 1449,
       "Flag": "path/to/Monastir_flag.png",
@@ -186,7 +186,7 @@
     },
     {
       "Name": "Sousse",
-      "Name in Arabic": "سوسة",
+      "Name_in_Arabic": "سوسة",
       "Population": 691000,
       "Surface": 2458,
       "Flag": "path/to/Sousse_flag.png",

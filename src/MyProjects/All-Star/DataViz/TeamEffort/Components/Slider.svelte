@@ -13,9 +13,9 @@
 	</div>
 
 	<div id="graph">
-		<p class="intro"> Defensive (Drtg) and
-			 offensive (Ofrg) Team Rating from
-			  1978 until <b>{SetYear} </b>NBA All-Star games</p>
+		<p class="intro"> By adjusting the slider, you can emphasize teams from the year 1978 up to the year you've selected.
+			 For instance, you are currently highlighting teams from the 1978 to <b>{SetYear}</b> NBA All-Star Games.
+			 You'll now be able to explore the data and compare teams based on their Defensive (Drtg) and Offensive (Ofrg) Team Ratings during that period.</p>
 		<Graph  bind:SetYear={SetYear} {case1} {case2} {case3} {case4}/>
 	</div>
 
@@ -53,7 +53,7 @@
 		<p>
 			<input type="checkbox" bind:checked={case3} />
 		<b class="BadDefense">  Bad Defense, Good Offense: </b>
-		This category comprises all the teams from the <b>2009 to 2023</b> All-Star games, showcasing the shift where
+		This category comprises all the teams from the <b>2010 to 2023</b> All-Star games, showcasing the shift where
 		 teams emphasized offense while neglecting defense.
 		</p>
 	</label>

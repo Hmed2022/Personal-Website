@@ -7,7 +7,7 @@
   "features": [
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Tunis" },
+      "properties": { "gouv_fr": "Tunis", "gouv_ar": "تونس" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -82,7 +82,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Ben Arous" },
+      "properties": { "gouv_fr": "Ben Arous", "gouv_ar": "بن عروس" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -142,7 +142,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Ariana" },
+      "properties": { "gouv_fr": "Ariana", "gouv_ar": "أريانة" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -198,7 +198,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Nabeul" },
+      "properties": { "gouv_fr": "Nabeul", "gouv_ar": "نابل" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -261,7 +261,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Manouba" },
+      "properties": { "gouv_fr": "Manouba", "gouv_ar": "منوبة" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -327,7 +327,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Bizerte" },
+      "properties": { "gouv_fr": "Bizerte", "gouv_ar": "بنزرت" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -401,7 +401,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Zaghouan" },
+      "properties": { "gouv_fr": "Zaghouan", "gouv_ar": "زغوان" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -474,7 +474,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Jendouba" },
+      "properties": { "gouv_fr": "Jendouba", "gouv_ar": "جندوبة" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -529,7 +529,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Beja" },
+      "properties": { "gouv_fr": "Beja", "gouv_ar": "باجة" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -613,7 +613,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Tataouine" },
+      "properties": { "gouv_fr": "Tataouine", "gouv_ar": "تطاوين" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -693,7 +693,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Medenine" },
+      "properties": { "gouv_fr": "Medenine", "gouv_ar": "مدنين" },
       "geometry": {
         "type": "MultiPolygon",
         "coordinates": [
@@ -806,7 +806,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Gabes" },
+      "properties": { "gouv_fr": "Gabes", "gouv_ar": "قابس" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -870,7 +870,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Kebili" },
+      "properties": { "gouv_fr": "Kebili", "gouv_ar": "قبلي" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -952,7 +952,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Tozeur" },
+      "properties": { "gouv_fr": "Tozeur", "gouv_ar": "توزر" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -996,7 +996,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Gafsa" },
+      "properties": { "gouv_fr": "Gafsa", "gouv_ar": "قفصة" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1067,7 +1067,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Sousse" },
+      "properties": { "gouv_fr": "Sousse", "gouv_ar": "سوسة" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1149,7 +1149,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Monastir" },
+      "properties": { "gouv_fr": "Monastir", "gouv_ar": "المنستير" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1209,7 +1209,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Mahdia" },
+      "properties": { "gouv_fr": "Mahdia", "gouv_ar": "المهدية" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1287,7 +1287,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Sfax" },
+      "properties": { "gouv_fr": "Sfax", "gouv_ar": "صفاقس" },
       "geometry": {
         "type": "MultiPolygon",
         "coordinates": [
@@ -1387,7 +1387,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Kairouan" },
+      "properties": { "gouv_fr": "Kairouan", "gouv_ar": "القيروان" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1476,7 +1476,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Kasserine" },
+      "properties": { "gouv_fr": "Kasserine", "gouv_ar": "القصرين" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1545,7 +1545,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Sidi Bouzid" },
+      "properties": { "gouv_fr": "Sidi Bouzid", "gouv_ar": "سيدي بوزيد" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1625,7 +1625,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "El Kef" },
+      "properties": { "gouv_fr": "El Kef", "gouv_ar": "الكاف" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -1689,7 +1689,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "gouv_fr": "Siliana" },
+      "properties": { "gouv_fr": "Siliana", "gouv_ar": "سليانة" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
