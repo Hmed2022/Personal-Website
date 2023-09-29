@@ -79,7 +79,7 @@
 	}
 	.sumORB{
 		color: #ffffff;
-		background-color: #894044
+		background-color: #59514A
 	}
 	
 	.sumPF{
@@ -89,7 +89,7 @@
 
 	.sumStocks{
 		color: #ffffff;
-		background-color: #476B8D
+		background-color: #9e9891
 	}
 
 	

@@ -1,32 +1,44 @@
 <script>
-  let SetYear = 1978;
+   let SetYear = 1978;
 
-	import Graph from "../Graph.svelte"
+import Graph from "../Graph.svelte"
 
+let case1,case2,case3,case4 = false
 
-	let case1,case2,case3,case4 = false
+export let area1, area2,area3,area4;
+export let SetYear2 = 1978;
+
+$: {
+	case1 = area1;
+	case2 = area2;
+	case3 = area3;
+		  case4 = area4;
+ SetYear = SetYear2
+}
 
 </script>
+		<h1><mark class="nba_mark">Team Efficiency</mark></h1>
+		<p>You are highlighting teams from the 1978 to <b>{SetYear==1978 ? SetYear : SetYear-1 }</b> NBA All-Star Games.</p>
 
 	<div class="range" style="--step:10; --min:1978; --max:2023">
 	  <input type="range" bind:value={SetYear} min="1978" max="2023" step="1" >
 	</div>
 
 	<div id="graph">
-		<p class="intro"> By adjusting the slider, you can emphasize teams from the year 1978 up to the year you've selected.
-			 For instance, you are currently highlighting teams from the 1978 to <b>{SetYear}</b> NBA All-Star Games.
-			 You'll now be able to explore the data and compare teams based on their Defensive (Drtg) and Offensive (Ofrg) Team Ratings during that period.</p>
+		
 		<Graph  bind:SetYear={SetYear} {case1} {case2} {case3} {case4}/>
+		<p class="intro"> By adjusting the slider, you can emphasize teams from the year 1978 up to the year you've selected.
+			You'll now be able to explore the data and compare teams based on their Defensive (Drtg) and Offensive (Ofrg) Team Ratings during that period.</p>
 	</div>
 
 
-<p>The lower the Drtg (&lt;110) and the higher the Ofrg (&gt;110), the better the team performance.
+<!-- <p>The lower the Drtg (&lt;110) and the higher the Ofrg (&gt;110), the better the team performance.
 	 The top-left represents the best performances, while the bottom-right shows the worst.<br>
 	 Click to highlight team performances based on offense/defense.
-</p>
+</p> -->
 
 
-		
+<!-- 		
 	<label>
 		<p>
 			<input type="checkbox" bind:checked={case1} />
@@ -66,18 +78,18 @@
 			These teams are the losers from the Good Defense, Good Offense teams, and it's
 			 no surprise they ended up here.
 		</p>
-	</label>
+	</label> -->
 
 
 
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 
-	.GoodDefense{
+	/* .GoodDefense{
 		text-decoration: none;
 		font-weight: 700;
 		border-bottom: 2px solid #4D6473;
-		/* background-color: #4D6473; */
+	
 		color:#4D6473
 	}
 
@@ -85,9 +97,24 @@
 		text-decoration: none;
 		font-weight: 700;
 		border-bottom: 2px solid #733122;
-		/* background-color: #733122; */
+	
 		color:#733122
-	}
+	} */
+
+	h1 {
+        text-align: center;
+        font-family: 'Jost', sans-serif;
+        font-size: 2em;
+        text-transform: uppercase;
+        font-weight: 800;
+        margin-top: 0;
+    }
+
+	.nba_mark{
+        background-color: #476b8d;
+        padding: 1%;
+        color: #f2efeb;
+    }
 
 
 

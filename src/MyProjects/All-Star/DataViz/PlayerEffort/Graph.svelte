@@ -250,7 +250,7 @@
 		
 	}
 	.path2{
-		stroke: #894044;
+		stroke: #59514A;
 		stroke-width: 4;
 		fill:none;
 	
@@ -263,21 +263,22 @@
 	
 	}
 	.path4{
-		stroke: #476B8D;
+		stroke: #9e9891;
 		stroke-width: 4;
 		fill:none;
 	
 	}
 
 	@media (max-width: 512px) {
-		.path1 {
+		
+	.path1 {
 		stroke: #d9a387;
 		stroke-width: 3;
 		fill:none;
 		
 	}
 	.path2{
-		stroke: #894044;
+		stroke: #59514A;
 		stroke-width: 3;
 		fill:none;
 	
@@ -290,7 +291,7 @@
 	
 	}
 	.path4{
-		stroke: #476B8D;
+		stroke: #9e9891;
 		stroke-width: 3;
 		fill:none;
 	
