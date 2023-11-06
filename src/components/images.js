@@ -1,7 +1,6 @@
 import nbaUrl from "../assets/Thumbnails/Thumbnail-AllStar.png";
 import klayUrl from "../assets/Thumbnails/Klay.gif";
-import tunUrl from "../assets/Thumbnails/Tunisiainfo.gif";
-import AllStarIntro from "../MyProjects/All-Star/AllStarIntro.svelte";
+import tunUrl from "../assets/Thumbnails/Tunisiainfo.png";
 
 export const imageData = [
   {
