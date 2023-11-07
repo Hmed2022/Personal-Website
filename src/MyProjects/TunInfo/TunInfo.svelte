@@ -3,6 +3,7 @@
     import Footer from "../../components/footer.svelte";
     import Title from "./Assets/Tunisian Banknotes.svg"
     import Timeline from "./Data Viz/Timeline/Timeline.svelte";
+    import Beeswarm from "./Data Viz/Beesawarm/Beeswarm.svelte";
 
     let selectedLanguage = "english"; // Default to English
 
@@ -49,6 +50,10 @@
 <div class="timeline">
 <Timeline/>
 </div>
+
+<div class="timeline">
+    <Beeswarm/>
+    </div>
 
 <!-- <svelte:body use:style={"background-color: #DCDDDB;"} />    -->
 

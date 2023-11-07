@@ -21,7 +21,7 @@ export const imageData = [
   },
   {
     url: tunUrl,
-    title: "Tunisia in Graphics: An Infographic Odyssey",
+    title: "Chronicales of Tunisian banknotes",
     desc: "Infographic | Data Visualization",
     href: "/#/tuninfointro",
     show: false,
@@ -33,3 +33,5 @@ export const imageData = [
   //   desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
   // },
 ];
+
+// title: "Tunisia in Graphics: An Infographic Odyssey",

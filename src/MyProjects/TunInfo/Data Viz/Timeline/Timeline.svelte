@@ -321,12 +321,12 @@
 {/if}
 		<ModalContent {showModal} data={hoveredData}/>
 </div>
-	 <!-- <div class="info-container">
+	 <div class="info-container">
 		<div class="info-container2">
 			<img class="imgRight" src="https://i.ibb.co/k5CnXXq/baknote-35.png" alt="Banknote" />
 		</div>
         
-    </div> -->
+    </div>
 </div>
 
 
@@ -402,14 +402,14 @@
 
 }
 .info-container2 {
-    width: 70vw;
-    height: 20vh;
-    background-color: green;
     position: sticky;
-    top: 10px;  /* this makes it stick 10px from the top of the viewport when you scroll */
+  	display:flex;
+	  align-items: start; 
 }
 
 .imgRight {
+	position: sticky;
+	display:flex;
     max-width: 300px; /* make sure the image fits inside the container */
     height: auto; /* maintain the image aspect ratio */
 }
