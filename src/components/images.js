@@ -24,7 +24,7 @@ export const imageData = [
     title: "Chronicales of Tunisian banknotes",
     desc: "Infographic | Data Visualization",
     href: "/#/tuninfointro",
-    show: true,
+    show: false,
     tags: "all,dataviz,info,tunisia",
   },
   // {
