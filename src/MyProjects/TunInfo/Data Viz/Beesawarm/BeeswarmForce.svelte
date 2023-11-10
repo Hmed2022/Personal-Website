@@ -2,7 +2,7 @@
 	@component
 	Generates an SVG Beeswarm chart using a [d3-force simulation](https://github.com/d3/d3-force).
  -->
-<script>
+ <script>
 	import { getContext } from 'svelte';
 	import { forceSimulation, forceX, forceY, forceCollide } from 'd3-force';
 	
@@ -10,22 +10,22 @@
 
 	const nodes = $data.map((d) => ({ ...d }));
 
-	/** @type {Number} [r=4]  The circle radius size in pixels. */
+	/** @type {Number} [r=4] â€“Â The circle radius size in pixels. */
 	export let r = 4;
 
-	/** @type {Number} [strokeWidth=1]  The circle's stroke width in pixels. */
+	/** @type {Number} [strokeWidth=1] â€“Â The circle's stroke width in pixels. */
 	export let strokeWidth = 1;
 
-	/** @type {String} [stroke='#fff']  The circle's stroke color. */
+	/** @type {String} [stroke='#fff'] â€“Â The circle's stroke color. */
 	export let stroke = '#fff';
 
-	/** @type {Number} [xStrength=0.95]  The value passed into the `.strength` method on `forceX`. See [the documentation](https://github.com/d3/d3-force#x_strength). */
+	/** @type {Number} [xStrength=0.95] â€“Â The value passed into the `.strength` method on `forceX`. See [the documentation](https://github.com/d3/d3-force#x_strength). */
 	export let xStrength = 0.95;
 
-	/** @type {Number} [yStrength=0.075]  The value passed into the `.strength` method on `forceY`. See [the documentation](https://github.com/d3/d3-force#y_strength). */
+	/** @type {Number} [yStrength=0.075] â€“Â The value passed into the `.strength` method on `forceY`. See [the documentation](https://github.com/d3/d3-force#y_strength). */
 	export let yStrength = 0.075;
 
-	/** @type {Function} [getTitle]  An accessor function to get the field on the data element to display as a hover label using a `<title>` tag. */
+	/** @type {Function} [getTitle]Â â€”Â An accessor function to get the field on the data element to display as a hover label using a `<title>` tag. */
 	export let getTitle = undefined;
 
 	let hoveredData;

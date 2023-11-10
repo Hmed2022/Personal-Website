@@ -4,6 +4,10 @@
     import Title from "./Assets/Tunisian Banknotes.svg"
     import Timeline from "./Data Viz/Timeline/Timeline.svelte";
     import Beeswarm from "./Data Viz/Beesawarm/Beeswarm.svelte";
+    import Landmarks from "./Data Viz/Landmarks.svelte";
+    import Color from "./Data Viz/Color/Color.svelte";
+    import Scatter from "./Data Viz/Scatter/Scatter.svelte";
+
 
     let selectedLanguage = "english"; // Default to English
 
@@ -28,33 +32,56 @@
 
 <div class="Title">
     <img src="{Title}" alt="title" />
-    <h1> My name is Ahmed Bendaly</h1>
+    <!-- <h1> My name is Ahmed Bendaly</h1> -->
     <p class="introText">
-        Banknotes, beyond their primary function as a medium of exchange, have long served 
-        as canvases that reflect the history, values, and aspirations of a nation. 
-        From their inception, these pieces of currency have been adorned with images of
-         influential figures, landmarks, and symbols that are emblematic of a country's 
-         shared identity. The individuals depicted on banknotes often represent pivotal moments 
-         or eras in a nation's history, capturing its political, economic, and cultural evolution.
-          For instance, the presence of a revered leader or visionary on a banknote can signify a 
-          period of political stability and national pride, while an influential economist or
-           industrialist might symbolize a phase of economic progress and innovation. 
-           Moreover, as societies evolve, so too does the imagery on their currency, reflecting 
-           shifts in values, priorities, and perspectives. Consequently, studying the faces 
-           and symbols on banknotes can offer profound insights into the heartbeat of a nation
-            and its journey through time.
+        Ready for a trip? Take a close look at your cash. It's not just for spending—it's your
+         first clue to what's cool and important in the country. Who are the folks on the money? 
+         What are the big, famous spots you should see? Our journey here dives into the Tunisian
+          banknote and shows you how every note is a story of the country's past. After all, money 
+          talks; you have just to listen!
     </p>
 </div>
 
+<h1>
+    The Tunisian Banknote Timeline
+</h1>
+<p>
+    Explore the history of Tunisian banknotes since 1956 through our interactive timeline. Click on a rectangle for details about each note.
+</p>
 
 <div class="timeline">
-<Timeline/>
+    <Timeline/>
+    </div>
+
+<h1>
+    Visually Vivid, Tactilely Telling
+</h1>
+<p>
+    The iconic green of the US Dollar and the Euro's understated, uniform color scheme are instantly identifiable symbols of their economies. In contrast, Tunisian currency lacks a distinctive visual identity that resonates with its rich heritage. A redesign of Tunisia's banknotes is imperative to infuse them with a sense of national pride and recognition … and That’s exactly what happened!
+</p>
+
+<h2>
+    Ever play the 'Guess That Bill by the color’ game?
+</h2>
+<div class="color">
+    <Color/>
 </div>
+
+<h2>
+    Does size matter?
+</h2>
+<div class="color">
+    <Scatter/>
+</div>
+
 
 <div class="timeline">
     <Beeswarm/>
     </div>
 
+    <div class="landmark">
+<Landmarks/>
+</div>
 <!-- <svelte:body use:style={"background-color: #DCDDDB;"} />    -->
 
 <!-- <div class="map">
@@ -64,6 +91,15 @@
 <Footer/>
 
 <style>
+
+    .color{
+        margin-right: 10%;
+        margin-left: 10%
+    }
+    
+    .landmark{
+        margin: 10%
+    }
 
     .introText{
         font-size: 1rem;
@@ -94,7 +130,7 @@
         max-width: 1000px
     } */
 
-    p, h1, option{
+    p, h1, h2,option{
         font-family: Quicksand;
     }
 </style>

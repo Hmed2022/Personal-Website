@@ -48,7 +48,7 @@
 	import ModalContent from './Components/ModalContent.svelte'
 	let showModal = false;
 
-	let height = 2000;
+	let height = 800;
 	let width = 900;
 
 	const margin = {top:20 , right:40, left:50, bottom:0};
@@ -70,7 +70,7 @@
     <button>7 November Era</button>
     <button>Post Revolution era</button>
 </div> -->
-<div class="container">
+
 <div class="chart-container">
 	<div class="tooltip">
 		{#each items as item (item.value)}
@@ -321,13 +321,8 @@
 {/if}
 		<ModalContent {showModal} data={hoveredData}/>
 </div>
-	 <div class="info-container">
-		<div class="info-container2">
-			<img class="imgRight" src="https://i.ibb.co/k5CnXXq/baknote-35.png" alt="Banknote" />
-		</div>
-        
-    </div>
-</div>
+	
+
 
 
 <style>
@@ -380,13 +375,6 @@
   }
 
 
-	.container {
-    display: flex;
-    /* justify-content: space-between; */
-    align-items: start; /* if you want both containers to align at the top */
-    width: 100%;
-    gap: 2rem; /* space between the two containers */
-}
 
 .chart-container {
     /* flex: 1; 
@@ -394,24 +382,5 @@
 	align-items: start; 
 }
 
-.info-container {
-    border: 1px solid #ccc; /* optional */
-    padding: 1rem; /* optional */
-	display: flex;
-	align-items: start; 
-
-}
-.info-container2 {
-    position: sticky;
-  	display:flex;
-	  align-items: start; 
-}
-
-.imgRight {
-	position: sticky;
-	display:flex;
-    max-width: 300px; /* make sure the image fits inside the container */
-    height: auto; /* maintain the image aspect ratio */
-}
 
 </style>
