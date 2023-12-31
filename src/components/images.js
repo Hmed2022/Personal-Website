@@ -16,7 +16,7 @@ export const imageData = [
     title: "Profanity in Tunisan Rap (Klay BBj)",
     desc: "Data Analysis | Data Vizualisation",
     href: "/#/klay",
-    show: true,
+    show: false,
     tags: "all,svelte,d3,dataviz,story,sql,tunisia",
   },
   {
@@ -24,7 +24,7 @@ export const imageData = [
     title: "Chronicales of Tunisian banknotes",
     desc: "Infographic | Data Visualization",
     href: "/#/tuninfointro",
-    show: true,
+    show: false,
     tags: "all,dataviz,info,tunisia",
   },
   // {
