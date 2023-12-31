@@ -8,6 +8,8 @@
     import Color from "./Data Viz/Color/Color.svelte";
     import Scatter from "./Data Viz/Scatter/Scatter.svelte";
 
+  
+
 
     let selectedLanguage = "english"; // Default to English
 
@@ -82,12 +84,15 @@
     <div class="landmark">
 <Landmarks/>
 </div>
+
+<Map/>
 <!-- <svelte:body use:style={"background-color: #DCDDDB;"} />    -->
 
 <!-- <div class="map">
     <Map {selectedLanguage}/>
 </div> -->
 
+<svelte:body use:style={"background-color: #FDF6F5;"} />
 <Footer/>
 
 <style>

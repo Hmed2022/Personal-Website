@@ -7,6 +7,7 @@
 	import NBA from "./MyProjects/All-Star/NBA.svelte";
 	import TunInfo from './MyProjects/TunInfo/TunInfo.svelte';
 	import TunInfoIntro from './MyProjects/TunInfo/TunInfoIntro.svelte';
+	import Klay from './MyProjects/Klay/klay.svelte'
 
 </script>
   
@@ -26,7 +27,8 @@
 		'/allstarintro': AllStarIntro,
 		'/allstar': NBA,
 		'/tuninfo': TunInfo,
-		'/tuninfointro': TunInfoIntro
+		'/tuninfointro': TunInfoIntro,
+		'/klay': Klay
 	}} />
   </body>
   

@@ -17,14 +17,16 @@
         };
 </script>
             <div class="basemap2">
+              <button class="button2" on:click={zoomReset} >Reset Zoom</button>
               {#if language == "english"}
                 <BaseMap bind:zoomReset background = white>
                 <FeatureLayer
-                    styleAccessor={(feature) => ({
-                    'fill': '#FBF5F5',
-                    'stroke': '#CE897A',
+                    styleAccessor={(feature,selected) => ({
+                    'fill': '#CADEBC',
+                    'stroke': '#8CA975',
                     'vector-effect': 'non-scaling-stroke',
                     })}
+               
 									
                     geojson={filteredGeoJSON}
                         on:mount ={zoomReset}
@@ -72,7 +74,7 @@
                           </FeatureLayer>
                   </BaseMap>
                   {/if}
-                <button class="button2" on:click={zoomReset} >Reset Zoom</button>
+               
                 
                 </div>  
 
@@ -90,8 +92,8 @@
     font-family:'Hacen Saudi Arabia' ;
 }
 			.basemap2 {
-   border: black solid thin;
-    background-color: #F4EDDB;
+   /* border: black solid thin; */
+    /* background-color: #F4EDDB; */
     width: 250px;
     height: 250px;
     text-align:center;

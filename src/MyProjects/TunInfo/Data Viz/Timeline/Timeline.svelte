@@ -6,6 +6,7 @@
 
 	import AxisX from "./Components/AxisX.svelte";
 	import AxisY from "./Components/AxisY.svelte";
+		import { line, curveBasis,area,curveCatmullRom } from 'd3-shape';
 
 	let mouseY;
 
@@ -36,20 +37,20 @@
 	
 
 	  let items = [
-        { value: "0.5 TND", color: color0 },
-        { value: "1 TND", color: color1 },
-        { value: "5 TND", color: color5 },
-        { value: "10 TND", color: color10 },
-        { value: "20 TND", color: color20 },
-        { value: "30 TND", color: color30 },
-        { value: "50 TND", color: color50 },
+        { value: "0.5 ", color: color0, count1: "4", count2:"0",count3:"0"},
+        { value: "1", color: color1, count1: "5", count2:"0",count3:"0" },
+        { value: "5", color: color5, count1: "7" , count2:"1",count3:"2"},
+        { value: "10", color: color10, count1: "5" , count2:"3",count3:"2"},
+        { value: "20", color: color20 , count1: "2", count2:"1",count3:"2"},
+        { value: "30", color: color30 , count1: "0", count2:"1",count3:"0"},
+        { value: "50", color: color50 , count1: "0", count2:"1",count3:"2"},
     ];
 
 	import ModalContent from './Components/ModalContent.svelte'
 	let showModal = false;
 
-	let height = 800;
-	let width = 900;
+	let height = 1800;
+	let width = 1000;
 
 	const margin = {top:20 , right:40, left:50, bottom:0};
 	
@@ -63,17 +64,82 @@
 		.domain(extent(data.map(d => d.Issued)))
 		.domain([2023, 1957])
 		.range([height -margin.top - margin.bottom, 0]);
+
+
+	 import { onMount, onDestroy } from 'svelte';
+
+  let scrollTop = 0;
+
+  function handleScroll() {
+    // Get the scroll position of the window
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    console.log("Scroll position:", scrollTop);
+  }
+
+  onMount(() => {
+    window.addEventListener('scroll', handleScroll);
+  });
+
+  onDestroy(() => {
+    window.removeEventListener('scroll', handleScroll);
+  });
+
+	 function scrollToPosition() {
+    // Scroll to a specific position, e.g., 200 pixels from the top
+    window.scrollTo({
+      top: 1000,
+      behavior: 'smooth' // Optional: for smooth scrolling
+    });
+  }
+
+	function scrollToPosition1() {
+    // Scroll to a specific position, e.g., 200 pixels from the top
+    window.scrollTo({
+      top: 2000,
+      behavior: 'smooth' // Optional: for smooth scrolling
+    });
+  }
+
+	function scrollToPosition2() {
+    // Scroll to a specific position, e.g., 200 pixels from the top
+    window.scrollTo({
+      top: 2400,
+      behavior: 'smooth' // Optional: for smooth scrolling
+    });
+  }
+	
+	$: case1 = scrollTop >=514 && scrollTop <1650
+	$: case2 = scrollTop >=1650 && scrollTop <2200
+	$: case3 = scrollTop >=2200 && scrollTop <2700
 	
 </script>
-<!-- <div class="sticky-buttons">
-    <button>Habib Bourgiba Era</button>
-    <button>7 November Era</button>
-    <button>Post Revolution era</button>
-</div> -->
 
+<div class="content-wrapper">
+ 
 <div class="chart-container">
+	
 	<div class="tooltip">
-		{#each items as item (item.value)}
+			{#if case1}
+			<div>
+		<button style="background-color: black; color:white" on:click={scrollToPosition}>Habib Bourguiba Era </button>
+	 <button on:click={scrollToPosition1}>Zine Abedine Ben Ali Era</button>
+	 <button on:click={scrollToPosition2}>Post Revolution Era</button>
+		</div>
+			{:else if case2}
+					<div>
+		<button  on:click={scrollToPosition}>Habib Bourguiba Era </button>
+	 <button style="background-color: black; color:white" on:click={scrollToPosition1}>Zine Abedine Ben Ali Era</button>
+	 <button on:click={scrollToPosition2}>Post Revolution Era</button>
+		</div>
+			{:else}
+					<div>
+		<button  on:click={scrollToPosition}>Habib Bourguiba Era </button>
+	 <button on:click={scrollToPosition1}>Zine Abedine Ben Ali Era</button>
+	 <button style="background-color: black; color:white" on:click={scrollToPosition2}>Post Revolution Era</button>
+		</div>
+			{/if}
+			
+			{#each items as item (item.value)}
 			<div class="tooltip-item">
 				<div class="square" style="background-color: {item.color}">
 							</div> 
@@ -81,7 +147,11 @@
 			</div>
 		{/each}
 	</div>
+
+	
+	
 <svg {width} {height}>
+	
 	<AxisY {yScale} {width}/>
 	<g class="lines" transform="translate({margin.right})">
    <!-- <AxisX {xScale} {margin}/> -->
@@ -311,7 +381,37 @@
 					/>
 			{/if}
 {/each}
-		
+
+{#if case1}
+	 <rect class= "rectangles"
+      x={xScale(0)}  
+      y={yScale(1958)} 
+      width= {width}
+      height= {yScale(1992) - yScale(1958)} 
+      fill="#0588A6" 
+      opacity="0.2" 
+    />
+{:else if case2}
+		 <rect class= "rectangles"
+      x={xScale(0)}  
+      y={yScale(1992)} 
+      width= {width}
+      height= {yScale(2011) - yScale(1992)} 
+      fill="#4D6473" 
+      opacity="0.2" 
+    />
+{:else if case3}
+	 <rect class= "rectangles"
+      x={xScale(0)}  
+      y={yScale(2011)} 
+      width= {width}
+      height= {yScale(2023) - yScale(2011)} 
+      fill="#A85A3F" 
+      opacity="0.2" 
+	
+    />
+{/if}
+
 	</g>
 	
 </svg>
@@ -320,12 +420,117 @@
 	<Tooltip data={hoveredData} {xScale} {mouseY} />
 {/if}
 		<ModalContent {showModal} data={hoveredData}/>
+
+	{#if case1}
+  <div class="sticky-rectangle show-rectangle">
+	<p>
+		Following its independence in 1956 and the establishment of its central bank in 1958, Tunisia was led by its first president, Habib Bourguiba. His influence was so pervasive that it's reflected in the country's currency: through the series of 24 banknotes issued during his tenure, He was the only figure portraited in the notes. one can observe the subtle aging of his portrait, marking the passage of time in Tunisian history.
+	</p>
+  </div>
+{:else if case2}
+  <div class="sticky-rectangle show-rectangle">
+   <p>
+	After declaring himself president for life, Habib Bourguiba's reign ended with the coup d'état on November 7, 1987, ushering in Zine El Abidine Ben Ali as Tunisia's new president. In an effort to distance the nation from the previous era of autocracy, Ben Ali removed Bourguiba’s image from the banknotes. Instead, he featured historical figures, signifying a shift towards democratic values. However, this symbolic move was met with skepticism, as Ben Ali introduced the color purple, synonymous with his political party, the RCD, across the banknotes. Additionally, the reverse sides of the notes were imprinted with symbols commemorating the 7th of November coup — a topic we will explore further in this article.
+	</p>
+  </div>
+		{:else if case3}
+  <div class="sticky-rectangle show-rectangle">
+    <p>
+		Following the Jasmine Revolution on January 14, 2011, which led to the ousting of Ben Ali, Tunisia began a new chapter by issuing fresh banknotes, symbolizing the dawn of a dictatorship-free era. The transition was gradual: initially, the omnipresent purple hue and the symbols of the November 7 propaganda were removed from the currency. Subsequently, the nation sought to honor its contemporary leaders, national heroes, and influential change-makers by featuring their likenesses on the banknotes, moving away from merely historical figures to those who shaped Tunisia's modern identity.
+		</p>
+		</div>
+{/if}
+	
+</div>
+<div class="sidebar">
+	{#if case1}
+ 
+		<h3>
+			Habib Bourguiba Era
+		</h3>
+		<h4>
+			Some Stats
+		</h4>
+
+<div>
+	{#each items as item (item.value)}
+		<div class="tooltip-item2">
+			<div class="square2" style="background-color: {item.color}">
+						</div> 
+			<p class="items"><b>Count:</b> {item.count1}</p>
+		</div>
+	{/each}
 </div>
 	
 
+{:else if case2}
+
+    <h3>
+			Zine Abedine Ben Ali Era
+		</h3>
+
+		<h4>
+			Some Stats
+		</h4>
+
+<div>
+	{#each items as item (item.value)}
+		<div class="tooltip-item2">
+			<div class="square2" style="background-color: {item.color}">
+						</div> 
+			<p class="items"><b>Count:</b> {item.count2}</p>
+		</div>
+	{/each}
+</div>
+		{:else if case3}
+
+    <h3>
+			Post Revolution Era
+		</h3>
+
+		<h4>
+			Some Stats
+		</h4>
+
+<div>
+	{#each items as item (item.value)}
+		<div class="tooltip-item2">
+			<div class="square2" style="background-color: {item.color}">
+						</div> 
+			<p class="items"><b>Count:</b> {item.count3}</p>
+		</div>
+	{/each}
+</div>
+<!-- <img style="height:100px; width: auto" src="https://i.ibb.co/y6ms7Zz/baknote-05.png" alt="30TNd Preview">
+<p>
+	the 30 TND note was discontinued due to its low circulation and popularity among users
+</p>
+<img style="height:100px; width: auto" src="https://i.ibb.co/X5C6ZWr/svg.png" alt="30TNd Preview">
+<p>
+	The banknote features a portrait of Dr. Tawhida Ben Cheikh, the second Tunisian woman to grace the currency after the Phoenician-Carthaginian figure Dido. Notably, Dr. Tawhida is the first Arab woman to be represented on a banknote, a move that celebrates Tunisian women and honors health workers for their relentless efforts during the COVID-19 pandemic.
+</p> -->
+{/if}
+</div>
+</div>
 
 
 <style>
+
+	  .sticky-rectangle {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 10px;
+    border: 1px solid rgb(102, 102, 102);
+    transition: opacity 0.5s ease;
+    opacity: 0;
+  }
+
+  .show-rectangle {
+    opacity: 1;
+  }
 
 .items{
 		font-family: Quicksand;
@@ -335,17 +540,20 @@
 
 	.tooltip {
     position: sticky;
-    top: 10px;
+    top: 1px;
     right: 10px;
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 5px;
+    background-color: #FDF6F5;
+    padding: 10px;
     z-index: 1000;
-    pointer-events: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;  /* <-- Add this */
-    flex-direction: row; /* <-- Add this */
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items: center;
 }
+
+	.rectangles {
+		pointer-events: none;
+	}
 
 .tooltip-item {
     margin-right: 5px;  /* <-- Change this from margin-bottom */
@@ -353,10 +561,23 @@
     align-items: center;
 }
 
+.tooltip-item2 {
+    margin-right: 5px;  /* <-- Change this from margin-bottom */
+    align-items: center;
+	display: flex;
+}
+
 .square {
     width: 16px;
     height: 16px;
     margin-right: 8px;
+}
+
+.square2 {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+	margin-bottom: 5px;
 }
 
   .vertical-rectangle {
@@ -380,7 +601,31 @@
     /* flex: 1; 
 	display:flex; */
 	align-items: start; 
+	flex-grow: 1;
 }
 
+.content-wrapper {
+    display: flex;
+}
+
+.sidebar {
+    width: 300px; 
+    position: sticky;
+	padding: 25px;
+    top: 0;
+	text-align: center;
+    height: 100vh; /* Full height of the viewport */
+    overflow-y: auto; /* Enables scrolling if the content is too long */
+    /* Add more styling as needed (e.g., background color, padding, etc.) */
+}
+
+button{
+	padding: 3px 6px 4px 5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    border: 0.5px solid darkgrey;
+    font-weight: bold;
+    border-radius: 3px;
+}
 
 </style>

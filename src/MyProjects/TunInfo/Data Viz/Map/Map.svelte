@@ -34,10 +34,25 @@
     import UrlZaghouan from "./Flags/zaghouan_flag.png"
 
     import UrlFont from "../../Assets/Fonts/Hacen Saudi Arabia.ttf"
+    import Accordion from './Accordion.svelte'
 
-  export let selectedLanguage
+    import { scaleOrdinal } from 'd3-scale';
+  let ordinalScale = scaleOrdinal()
+		.range([
+            '#91B4BA', // color for 0
+            '#C8E5ED',// color for 1
+						'#759CA0', // color for 2
+						'#5A8083', // color for 3
+						'#416566', // color for 4
+            '#163435' // color for 26
+					 ]);  
+
+ import Gov from "./Gov.svelte"
 
 
+ let selectedLanguage = "english"
+
+  // export let selectedLanguage
     let selection = ["Tunis"] 
 
 	 let textElement
@@ -57,12 +72,14 @@
             
             <BaseMap bind:zoomReset background= white>
               <FeatureLayer
-                styleAccessor={(feature, selected) => ({
-                  'fill': '#D59C9D',
-                  'stroke': '#CE897A',
-                  'vector-effect': 'non-scaling-stroke',
-                  'fill-opacity': selected ? 0.5 : 0.1
-                })}
+              
+              styleAccessor={(feature, selected) => ({
+                "fill": selected ? '#9D6D79' : ordinalScale(feature.properties.landmarks),
+                "stroke": '#91B4BA',
+                "vector-effect": 'non-scaling-stroke',
+                
+              })}
+
                 geojson={Tun}
                 selectMode={1}
                 idAccessor={(feature) => feature.properties.gouv_fr}
@@ -90,23 +107,62 @@
     <div class="info">
         {#each Governorates.governorates as gov}
             {#if selection == gov.Name}
-                <p><span>Name: </span>{gov.Name} </p>
+
+              <!-- <Delegation {selection} language="english"/> -->
+                <!-- <p><span>Name: </span>{gov.Name} </p>
                 <p><span>Population: </span>{gov.Population} </p>
-                <p><span>Area: </span>{gov.Surface} km2 </p> 
+                <p> <span> Nb of Landmarks:</span> {gov.Landmarks}</p>
+                <p><span>Area: </span>{gov.Surface} km2 </p>  -->
                 {#if selection == "Ariana"}
-                <img src={UrlAriana} alt="Ariana Flag"/>
+                <!-- <img src={UrlAriana} alt="Ariana Flag"/> -->
                 {:else if selection == "Beja"}
-                <img src={UrlBeja} alt="Beja Flag"/>
+                <!-- <img src={UrlBeja} alt="Beja Flag"/> -->
+                <!-- <h3>
+                  <span>City:</span>Teboursouk
+                </h3> -->
+                <h2>
+                  Beja
+                </h2>
+                <Accordion open={true}>
+                  <span slot="head"> <h3>Teboursek (2) </h3></span>
+                  <div slot="details">
+                    <Gov  state = "Beja" city ="Teboursek"/>
+                  </div>
+                </Accordion>
                 {:else if selection == "Ben Arous"}
                 <img src={UrlBenArous} alt="Ben Arous Flag"/>
                 {:else if selection == "Bizerte"}
-                <img src={UrlBizerte} alt="Bizerte Flag"/>
+                <!-- <img src={UrlBizerte} alt="Bizerte Flag"/> -->
+                <h2>
+                  Bizerte
+                </h2>
+                <Accordion open={true}>
+                  <span slot="head"> <h3>Bizerte (2) </h3></span>
+                  <div slot="details">
+                    <Gov  state = "Bizerte" city ="Bizerte"/>
+                  </div>
+                </Accordion>
                 {:else if selection == "Gabes"}
                 <img src={UrlGabes} alt="Gabes Flag"/>
                 {:else if selection == "Gafsa"}
                 <img src={UrlGafsa} alt="Gafsa Flag"/>
                 {:else if selection == "Jendouba"}
-                <img src={UrlJendouba} alt="Jendouba Flag"/>
+                <!-- <img src={UrlJendouba} alt="Jendouba Flag"/> -->
+                <h2>
+                  Jendouba
+                </h2>
+                <Accordion open={true}>
+                  <span slot="head"> <h3>Fernena (1) </h3></span>
+                  <div slot="details">
+                    <Gov  state = "Jendouba" city= "Fernena"/>
+                  </div>
+                </Accordion>
+                <Accordion open={false}>
+                  <span slot="head"> <h3>Jendouba (2) </h3></span>
+                  <div slot="details">
+                    <Gov  state = "Jendouba" city= "Jendouba"/>
+                  </div>
+                </Accordion>
                 {:else if selection == "Kairouan"}
                 <img src={UrlKairouan} alt="Kairouan Flag"/>
                 {:else if selection == "Kebili"}
@@ -122,7 +178,17 @@
                 {:else if selection == "Monastir"}
                 <img src={UrlMonastir} alt="Monastir Flag"/>
                 {:else if selection == "Manouba"}
-                <img src={UrlManouba} alt="Manouba Flag"/>
+                <!-- <img src={UrlManouba} alt="Manouba Flag"/> -->
+                <h2>
+                  Manouba
+                </h2>
+                <Accordion open={true}>
+                  <span slot="head"> <h3>El Fahs (1) </h3></span>
+                  <div slot="details">
+                    <Gov  state = "Manouba" city ="El Fahs"/>
+                  </div>
+                </Accordion>
+              
                 {:else if selection == "Medenine"}
                 <img src={UrlMedenine} alt="Medenine Flag"/>
                 {:else if selection == "Nabeul"}
@@ -136,13 +202,23 @@
                 {:else if selection == "Sousse"}
                 <img src={UrlSousse} alt="Sousse Flag"/>
                 {:else if selection == "Tataouine"}
-                <img src={UrlTataouine} alt="Tataoin Flag"/>
+                <!-- <img src={UrlTataouine} alt="Tataoin Flag"/> -->
+
+                <h2>
+                  Tataouine
+                </h2>
+                <Accordion open={true}>
+                  <span slot="head"> <h3>Tataouine (1) </h3></span>
+                  <div slot="details">
+                    <Gov  state = "Tataouine" city= "Tataouine"/>
+                  </div>
+                </Accordion>
+          
                 {:else if selection == "Tozeur"}
                 <img src={UrlTozeur} alt="Tozeur Flag"/>
                 {:else if selection == "Zaghouan"}
                 <img src={UrlZaghouan} alt="Zaghouan Flag"/>
                 {/if}
-                <Delegation {selection} language="english"/>
             {/if}
         {/each}
 </div>  
@@ -238,7 +314,6 @@
             {:else if selection == "Zaghouan"}
             <img src={UrlZaghouan} alt="Zaghouan Flag"/>
             {/if}
-            <Delegation {selection} language="arabic"/>
         {/if}
     {/each}
 </div> 
@@ -317,7 +392,7 @@ span{
 }
 
   .basemap {
-   border: #CE897A solid 2px;
+   /* border: #CE897A solid 2px; */
     background-color: #F4EDDB;
     width: 500px;
     height: 500px;
@@ -331,12 +406,19 @@ span{
     text-align: center;
   }
 
-  .basemap2 {
-   /* border: black solid thin; */
-    background-color: #F4EDDB;
-    width: 200px;
-    height: 200px;
-    margin: 20px;
-		text-align:center;
-  }
+  h3 {
+          font-family:Quicksand;
+          font-size:1.4em;
+		      margin-top: 0;
+          margin-bottom:0;
+          color:white
+    }
+       h2 {
+          font-family:Quicksand;
+          font-size:1.7em;
+			     margin-top: 0;
+          margin-bottom:0;
+          color: #2C5056;
+    }
+
 </style>
