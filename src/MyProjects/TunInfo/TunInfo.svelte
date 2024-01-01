@@ -1,12 +1,13 @@
 <script>
     import Map from "./Data Viz/Map/Map.svelte"
     import Footer from "../../components/footer.svelte";
-    import Title from "./Assets/Tunisian Banknotes.svg"
+    // import Title from "./Assets/Tunisian Banknotes.svg"
     import Timeline from "./Data Viz/Timeline/Timeline.svelte";
     import Beeswarm from "./Data Viz/Beesawarm/Beeswarm.svelte";
     import Landmarks from "./Data Viz/Landmarks.svelte";
     import Color from "./Data Viz/Color/Color.svelte";
     import Scatter from "./Data Viz/Scatter/Scatter.svelte";
+    import Title from "./Components/Title.svelte"
 
   
 
@@ -33,8 +34,10 @@
 
 
 <div class="Title">
-    <img src="{Title}" alt="title" />
+    <Title/>
+    <!-- <img src="{Title}" alt="title" /> -->
     <!-- <h1> My name is Ahmed Bendaly</h1> -->
+   
     <p class="introText">
         Ready for a trip? Take a close look at your cash. It's not just for spending—it's your
          first clue to what's cool and important in the country. Who are the folks on the money? 
@@ -42,6 +45,7 @@
           banknote and shows you how every note is a story of the country's past. After all, money 
           talks; you have just to listen!
     </p>
+    <p class="Reference">By Ahmed Bendaly | Decemeber 2023</p>
 </div>
 
 <h1>
@@ -107,6 +111,7 @@
     }
 
     .introText{
+        margin-top: -10%;
         font-size: 1rem;
         margin-left: 10em;
         margin-right: 10em;
@@ -122,11 +127,12 @@
     }
     .Title{
         text-align: center;
+        margin-top: 5%;
     }
-    img{
+    /* img{
         width: 140vh;
         height: auto
-    }
+    } */
     /* .map{
         margin-left: 10%;
         margin-right: 10%;
@@ -137,5 +143,12 @@
 
     p, h1, h2,option{
         font-family: Quicksand;
+    }
+
+     .Reference{
+        color: rgb(139, 139, 139);
+        font-weight: 500;
+        text-align: center;
+        margin-top: 0;
     }
 </style>

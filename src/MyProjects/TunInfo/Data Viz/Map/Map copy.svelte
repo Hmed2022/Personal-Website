@@ -76,7 +76,7 @@
                   x={-0.5*textBoxWidth} 
                   y = -15
                   rx = 10  
-                  fill="white" 
+                  fill="#FDF6F5" 
                   opacity=0.8
                 />
                 <text text-anchor="middle" bind:this={textElement} >
@@ -172,7 +172,7 @@
               x={-0.5*textBoxWidth} 
               y = -15
               rx = 10  
-              fill="white" 
+              fill="#FDF6F5" 
               opacity=0.8
             />
             <text class="arabtext" text-anchor="middle" bind:this={textElement} >
@@ -318,7 +318,7 @@ span{
 
   .basemap {
    border: #CE897A solid 2px;
-    background-color: #F4EDDB;
+    background-color: #FDF6F5 ;
     width: 500px;
     height: 500px;
     margin: 20px;
