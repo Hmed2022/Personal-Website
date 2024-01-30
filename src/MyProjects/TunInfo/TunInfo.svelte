@@ -1,16 +1,19 @@
 <script>
+    // @ts-ignore
     import Map from "./Data Viz/Map/Map.svelte"
     import Footer from "../../components/footer.svelte";
     // import Title from "./Assets/Tunisian Banknotes.svg"
     import Timeline from "./Data Viz/Timeline/Timeline.svelte";
-    import Beeswarm from "./Data Viz/Beesawarm/Beeswarm.svelte";
-    import Landmarks from "./Data Viz/Landmarks.svelte";
+    import Beeswarm from "./Data Viz/Beesawarm/Graph.svelte";
+    // import Landmarks from "./Data Viz/Landmarks.svelte";
     import Color from "./Data Viz/Color/Color.svelte";
     import Scatter from "./Data Viz/Scatter/Scatter.svelte";
     import Title from "./Components/Title.svelte"
+    import Landmark from "./Data Viz/Landmarks/Landmark.svelte"
+    import Landmarks from "./Components/Landmarks.svelte"
 
-  
-
+    // @ts-ignore
+    import Propaganda from "./Components/Propaganda.svelte"
 
     let selectedLanguage = "english"; // Default to English
 
@@ -34,7 +37,10 @@
 
 
 <div class="Title">
-    <Title/>
+    <div class="svg">
+        <Title/>
+    </div>
+    
     <!-- <img src="{Title}" alt="title" /> -->
     <!-- <h1> My name is Ahmed Bendaly</h1> -->
    
@@ -59,26 +65,67 @@
     <Timeline/>
     </div>
 
-<h1>
-    Visually Vivid, Tactilely Telling
-</h1>
-<p>
-    The iconic green of the US Dollar and the Euro's understated, uniform color scheme are instantly identifiable symbols of their economies. In contrast, Tunisian currency lacks a distinctive visual identity that resonates with its rich heritage. A redesign of Tunisia's banknotes is imperative to infuse them with a sense of national pride and recognition … and That’s exactly what happened!
-</p>
+    <div class="prose">
+        <h1>
+            <span style="color:#FDF6F5; background-color:#BF5630"> Changes Between Eras</span>
+        </h1>
 
-<h2>
-    Ever play the 'Guess That Bill by the color’ game?
-</h2>
-<div class="color">
-    <Color/>
-</div>
+        <p>
+            The dominant political party throughout the Ben Ali era in Tunisia was the Constitutional Democratic Rally (CDR). The CDR, renowned for adopting <mark style="background-color:#C6AFC0; color:#FDF6F5">purple</mark> as its signature color, had such a profound influence that the color became a ubiquitous symbol of the party. This association was so strong that even everyday items, including the national currency, were perceived as extensions of the CDR's presence and power. In the wake of the revolution, one of the earliest and most symbolic changes was the replacement of these everyday items, signifying a break from the past and a step towards a new future.
+        </p>
 
-<h2>
-    Does size matter?
-</h2>
-<div class="color">
-    <Scatter/>
-</div>
+
+        <div class="images">
+            <div class="tounsi">
+                <div class="image-container">
+                    <img class="note" src="https://i.ibb.co/7V28gKG/baknote-06.png" alt="note"/>
+                    <div class="caption">20 Tnd 1992</div>
+                </div>
+                <img class="arrow" src="https://i.ibb.co/9bnxBHH/arrow.png" alt="arrow">
+                <div class="image-container">
+                    <img class="note" alt="note" src="https://i.ibb.co/s3dNyNX/baknote-02.png" />
+                    <div class="caption">20 Tnd 2011</div>
+                </div>
+            </div>
+            <div class="rashiq">
+                <div class="image-container">
+                    <img class="note" alt="note"src="https://i.ibb.co/GxwtLq8/baknote-14.png"/>
+                    <div class="caption">50 Tnd 2008</div>
+                </div>
+                <img class="arrow" src="https://i.ibb.co/9bnxBHH/arrow.png" alt="arrow">
+                <div class="image-container">
+                    <img class="note" alt="note"src="https://i.ibb.co/3BZMdM3/baknote-01.png"/>
+                    <div class="caption">50 Tnd 2011</div>
+                </div>
+            </div>
+        </div>
+
+        <Propaganda/>
+
+    
+
+    <h1>
+        <span style="color:#FDF6F5; background-color:#BF5630"> Visually Vivid, Tactilely Telling</span>  
+    </h1>
+    <p>
+        The iconic green of the US Dollar and the Euro's understated, uniform color scheme are instantly identifiable symbols of their economies. In contrast, Tunisian currency lacks a distinctive visual identity that resonates with its rich heritage. A redesign of Tunisia's banknotes is imperative to infuse them with a sense of national pride and recognition … and That’s exactly what happened!
+    </p>
+    
+    <h2>
+        <span style="color:#FDF6F5; background-color:#0588A6"> Ever play the 'Guess That Bill by the color’ game?</span>
+    </h2>
+    <div class="color">
+        <Color/>
+    </div>
+    
+    <h2>
+        <span style="color:#FDF6F5; background-color:#0588A6"> Does size matter? </span>
+    </h2>
+    <div class="color">
+        <Scatter/>
+    </div>
+    </div>
+   
 
 
 <div class="timeline">
@@ -89,7 +136,9 @@
 <Landmarks/>
 </div>
 
-<Map/>
+<Landmark/>
+
+<!-- <Map/> -->
 <!-- <svelte:body use:style={"background-color: #DCDDDB;"} />    -->
 
 <!-- <div class="map">
@@ -101,13 +150,47 @@
 
 <style>
 
+.images > div {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+            }
+        
+        .arrow {
+            height: 3vh;
+            margin:3%
+        }
+        
+        .note {
+            width: auto;
+            height: 20vh;
+            pointer-events: none;
+        }
+        
+        .caption {
+            margin-top: 0%;
+            text-align:center;
+            font-family: Quicksand;
+            color:#BF5630;
+            font-size: 0.75rem;
+            font-weight:bold
+        }
+
+
+    .prose{
+        max-width: 50rem;
+        margin: 1rem auto;
+    }
+
     .color{
         margin-right: 10%;
         margin-left: 10%
     }
     
     .landmark{
-        margin: 10%
+        margin: 10%;
+        margin-right:20%;
+        margin-left:20%
     }
 
     .introText{
@@ -125,9 +208,14 @@
     .lan{
         text-align: center;
     }
-    .Title{
+    /* .Title{
         text-align: center;
         margin-top: 5%;
+        display: block; 
+    } */
+
+    .svg {
+        display: inline-block; 
     }
     /* img{
         width: 140vh;

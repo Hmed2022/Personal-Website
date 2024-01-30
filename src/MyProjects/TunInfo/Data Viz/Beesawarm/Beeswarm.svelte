@@ -24,7 +24,7 @@ const seriesNames3 = new Set();
 const seriesColors = ['#89a057', '#3e558e', '#d5c4a1', '#d06f5f', '#8b5e3c', '#78a2b7', '#6f4e77', '#cfd8dc',"#D9669B"];
 const seriesColors2 = ["#417FA6", "#D9669B"]
 const seriesColors3 = ['#89a057', '#3e558e', '#d5c4a1', '#d06f5f', '#8b5e3c', '#78a2b7'];
-		let activeButton = 'occupation'; // Default to the first button
+		export let activeButton = 'occupation'; // Default to the first button
 
 function setActive(button) {
 	activeButton = button;
@@ -85,7 +85,7 @@ $: dataTrans = activeButton === "gender" ? dataTransformed2 :
 
 
 <div class='chart-container'>
-<div style="text-align:center; margin-bottom:5%">
+<!-- <div style="text-align:center; margin-bottom:5%">
 <button
 	on:click={() => setActive('occupation')}
 	class:active={activeButton === 'occupation'}>
@@ -101,7 +101,7 @@ $: dataTrans = activeButton === "gender" ? dataTransformed2 :
 	class:active={activeButton === 'appreciation'}>
 	Appreciation years
 </button>
-</div>
+</div> -->
 
 <LayerCake
 	padding={{bottom: 15}}
@@ -143,8 +143,8 @@ $: dataTrans = activeButton === "gender" ? dataTransformed2 :
 	expand to fill it.
 */
 .chart-container {
-	width: 500px;
-	height: 250px;
+	width: 600px;
+	height: 400px;
 }
 </style>
 

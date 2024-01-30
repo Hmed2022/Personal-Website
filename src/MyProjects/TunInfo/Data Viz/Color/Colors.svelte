@@ -1,10 +1,12 @@
 <script>
     let showModern = false;
   </script>
-  
-  <button on:click={() => showModern = !showModern}>
-    {showModern ? 'Show All Banknotes' : 'Show Modern Banknotes'}
-  </button>
+  <div style="text-align:center">
+    <button on:click={() => showModern = !showModern}>
+      {showModern ? 'Show All Banknotes' : 'Show Modern Banknotes'}
+    </button>
+  </div>
+ 
   {#if !showModern}
   <h1> 0.5 TND </h1>
   <h3> All Banknotes </h3>
@@ -16,7 +18,7 @@
   {/if}
   <h1> 5 TND </h1>
   {#if showModern}
-    <h3> Modern Banknotes: Post Bourguiba Era </h3>
+    <h3> Post Bourguiba Era </h3>
     <div class="rectangle"></div>
   {:else}
     <h3> All Banknotes </h3>
@@ -25,7 +27,7 @@
   
   <h1> 10 TND </h1>
   {#if showModern}
-    <h3> Modern Banknotes: Post Bourguiba Era </h3>
+    <h3> Post Bourguiba Era </h3>
     <div class="rectangle5"></div>
   {:else}
     <h3> All Banknotes </h3>
@@ -34,7 +36,7 @@
   
   <h1> 20 TND </h1>
   {#if showModern}
-    <h3> Modern Banknotes: Post Bourguiba Era </h3>
+    <h3> Post Bourguiba Era </h3>
     <div class="rectangle4"></div>
   {:else}
     <h3> All Banknotes </h3>
@@ -44,14 +46,14 @@
   
   {#if showModern}
       <h1> 30 TND </h1>
-    <h3> Modern Banknotes: Post Bourguiba Era </h3>
+    <h3> Post Bourguiba Era </h3>
     <div class="rectangle7"></div>
   {/if}
   
   
   {#if showModern}
       <h1> 50 TND </h1>
-    <h3> Modern Banknotes: Post Bourguiba Era </h3>
+    <h3> Post Bourguiba Era </h3>
     <div class="rectangle8"></div>
   {/if}
   <style>
@@ -319,6 +321,19 @@
       );
     }
       h1, h3{
-          margin: 0
+          margin: 0;
+          font-family: Quicksand;
+          font-size:medium
+      }
+
+      button{
+        font-family: Quicksand;
+        font-size: large;
+        font-weight: bold;
+        color:#2088A6;
+        border: 4px solid #2088A6; 
+        border-radius:5px;
+        background-color: #FDF6F5;
+       
       }
   </style>

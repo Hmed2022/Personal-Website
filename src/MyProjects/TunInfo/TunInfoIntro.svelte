@@ -1,5 +1,7 @@
 <script>
 
+    import tunURL from './Assets/Layout.png'
+
     import Footer from "../../components/footer.svelte";
     import { style } from 'svelte-body';
 
@@ -20,8 +22,14 @@
                 Portraits and Landmarks
             </h3>
 		</div>
-		<div class="center-line1"></div>
-		<div class="center-line2"></div>
+		<!-- <div class="center-line1"></div>
+		<div class="center-line2"></div> -->
+
+        <div style="text-align:center">
+            <div class="preview">
+                <img src="{tunURL}" alt="Preview Article">
+            </div>
+        </div>
 			
 		<h3>
 				Brief Intoduction
@@ -33,15 +41,15 @@
 
 		<div style="text-align:center">
 
+
+           
            
                 <button on:click={redirectToTunInfo}  style="background-color: #476b8d">
                     Click here to read the article
                 </button>
             
 
-            <!-- <div class="preview">
-                <img src="{AllstarURL}" alt="Preview Article">
-            </div> -->
+          
 
 		</div>
 
@@ -90,8 +98,14 @@
 
 <style>
 
+    @font-face {
+		font-family: "NeoSansMedium";
+		src: url("../../assets/Fonts/NeoSansMediumTR.ttf")
+			format("truetype");
+	 }
 
-        
+
+
         .center-line1 {
             margin-right:20%;
             margin-left: 20%;
@@ -115,6 +129,7 @@
         .preview{
             margin-bottom: 5%;
         }
+
         img{
             max-width: 100%;
             height: auto;
@@ -123,9 +138,9 @@
             
         }
         h3 {
-            font-family: 'Jost', sans-serif;
+            font-family: 'NeoSansMedium', sans-serif;
             font-size: 1.4rem;
-            color: #403F3E;
+            color: #2e4b4c;
         }
     
         li,p{
@@ -135,10 +150,10 @@
         }
     
         h1{
-            font-family: Action Cond Regular Trial;
-            font-size: 4.5rem;
-            margin:0;
-            color: #403F3E;
+            font-family: 'NeoSansMedium', sans-serif;
+            font-size: 2rem;
+            color: #2e4b4c;
+            margin-bottom: -3%;
         }
         .lists {
             margin-left: 5%

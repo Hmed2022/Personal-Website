@@ -5,11 +5,13 @@
  <div class="body">
   <div class="title">
     <h1>
-      The Chronicales of Tunisian Baknotes
+      The Chronicales <br> of Tunisian Baknotes
     </h1>
     <h4>
       Portraits and Landmarks
     </h4>
+<!-- 
+    <p class="Reference">By Ahmed Bendaly | Decemeber 2023</p> -->
   </div>
   <div class="portrait">
     <!-- Hannibaal New -->
@@ -90,10 +92,32 @@
  
  <style>
 
+/* .Reference{
+        color: rgb(139, 139, 139);
+        font-family: Quicksand;
+        font-family: 300;
+        font-size: 1.1rem;
+        margin-top: 2%;
+        text-align: center;
+        font-family: 'NeoSansMedium', sans-serif;
+    } */
+
+@font-face {
+		font-family: "NeoSansMedium";
+		src: url("../../assets/Fonts/NeoSansMediumTR.ttf")
+			format("truetype");
+	 }
+
+
   h1,h4{
     color: #205363;
     /* font-family: 'Jost', sans-serif; */
-    font-family: 'Noto Sans', sans-serif;
+    font-family: 'NeoSansMedium', sans-serif;
+    margin-bottom: -1%;
+  }
+
+  h1{
+    margin-top: -1%;
   }
 
   .title {
@@ -109,15 +133,17 @@
   }
 
 /* .body {
-  text-align: center;
-  justify-content: center;
+margin-left:20%;
 } */
+
 .portrait {
   position: relative;
   width: 100vw;  /* 100% of viewport width */
   height: 100vh; /* 100% of viewport height */
   max-width: 1000px;  /* maximum width */
   max-height: 1000px; 
+  display: block;
+  text-align: center;
 }
 
 .fade-wrapper {

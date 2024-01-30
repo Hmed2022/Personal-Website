@@ -37,6 +37,7 @@ Fast forward to the modern era, there’s been a strategic shift. Each denominat
     .containerText, .containerImg {
       flex: 1; /* This will make both containers take up equal width */
       padding: 10px; /* Add some spacing around the content */
+
     }
   
     .containerImg {
