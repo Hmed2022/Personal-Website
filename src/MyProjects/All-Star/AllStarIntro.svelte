@@ -23,7 +23,7 @@ function redirectToAllStar() {
 				Brief Intoduction
 			</h3>
 		<p>
-			Venturing into the realms of D3 and Svelte for the first time, I embarked on a visualization project. The result is a depiction of the decline of the All-Star game.
+			Venturing into D3 and Svelte for the first time, I embarked on a visualization project. The result is a depiction of the decline of the All-Star game.
 			<br>Observant fans recognize the game's issues, and this project employs data analysis and visualization to substantiate their intuitive concerns.
 		</p>
 

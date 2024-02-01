@@ -1,6 +1,6 @@
 <script>
 
-    import tunURL from './Assets/Layout.png'
+    import tunURL from './Components/Title-Tuninfo.gif'
 
     import Footer from "../../components/footer.svelte";
     import { style } from 'svelte-body';
@@ -35,8 +35,7 @@
 				Brief Intoduction
 			</h3>
 		<p>
-			Venturing into the realms of D3 and Svelte for the first time, I embarked on a visualization project. The result is a depiction of the decline of the All-Star game.
-			<br>Observant fans recognize the game's issues, and this project employs data analysis and visualization to substantiate their intuitive concerns.
+			This project isn't just a labor of love; it's a heartfelt tribute to my cherished Tunisia. But let's be clear: this isn't your average rundown of facts and figures. Oh no, we're turning the humble banknote from mere currency to a vibrant window, offering a glimpse into Tunisia's rich culture, monuments, and the ups and downs of its political and cultural scene. Who needs history books when you've got this data visualization? By the time you're done exploring, you'll be practically an expert on Tunisia, whether you're a traveler or a history enthusiast with a thirst for knowledge. <br> <br>So buckle up—we're about to take a deep dive into Tunisia's soul, one banknote at a time!
 		</p>
 
 		<div style="text-align:center">
@@ -58,8 +57,11 @@
 			</h3>
 
 		<div class="lists">
+            <li>
+                <b>D3.js & Svelte:</b> Web-based Data Visualization
+            </li>
 					<li>
-					<b>PostgreSQL:</b> Data Transformation
+					<b>Adobe Illsutrator/Photoshop & Figma:</b> Design
 				</li>
 				<li>
 					<b>Tableau:</b>  Data Visualization and Insight
@@ -67,13 +69,10 @@
 				<li>
 					<b>Svelte:</b>  Web Development
 				</li>
-				<li>
-					<b>D3.js & Svelte:</b> Web-based Data Visualization
-				</li>
 		</div>
 
 
-        <h3>
+        <!-- <h3>
             Project Overview:
         </h3>
 		<div class="lists">
@@ -81,11 +80,10 @@
 			<b>Duration:</b> Approximately 3 months
 		</li>
 		<li>
-			<b>Process:</b> The majority of time was dedicated to web development, particularly with unfamiliar
-			tools like Svelte and D3. Data collection and transformation followed. Story creation 
-			was relatively swift due to a preconceived idea, though some outcomes proved surprising.
+			<b>Process:</b> Most Time comusing projct from design Perspective, as I had to covert every Baknote 
+            to vector like using Illsutrarot and Figma. data collection was also tirint
 		</li>
-</div>
+</div> -->
 
 
 	</div>
