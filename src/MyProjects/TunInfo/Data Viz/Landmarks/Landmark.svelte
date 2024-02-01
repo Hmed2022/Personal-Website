@@ -36,13 +36,18 @@
 
     let ordinalScale = scaleOrdinal()
 		.range([
-            '#91B4BA', // color for 0
-            '#C8E5ED',// color for 1
-						'#759CA0', // color for 2
-						'#5A8083', // color for 3
-						'#416566', // color for 4
-            '#163435' // color for 26
-					 ]);  
+            '#C8E5ED'
+ ]);  
+
+        //              let ordinalScale = scaleOrdinal()
+		// .range([
+        //     '#91B4BA', // color for 0
+        //     '#C8E5ED',// color for 1
+		// 				'#759CA0', // color for 2
+		// 				'#5A8083', // color for 3
+		// 				'#416566', // color for 4
+        //     '#163435' // color for 26
+		// 			 ]);  
 
 $: selection = [selectedGovernorate]; 
 
@@ -61,58 +66,94 @@ $:textBoxWidth = textElement ? textElement.getComputedTextLength()+10 : 0
 let zoomReset
 let Zoom
 
+let selectedlandmark
+$: if (selectedGovernorate=='Tunis'){
+    selectedlandmark ='26 (6)'
+} else if (selectedGovernorate=='Ben Arous'){
+    selectedlandmark ='1 (1)'}
+    else if (selectedGovernorate=='Nabeul'){
+    selectedlandmark ='1 (1)'}
+    else if (selectedGovernorate=='Sousse'){
+    selectedlandmark ='4 (2)'}
+    else if (selectedGovernorate=='Monastir'){
+    selectedlandmark ='4 (1)'}
+    else if (selectedGovernorate=='Mahdia'){
+    selectedlandmark ='4 (1)'}
+    else if (selectedGovernorate=='Kairouan'){
+    selectedlandmark ='4 (2)'}
+    else if (selectedGovernorate=='Sfax'){
+    selectedlandmark ='2 (1)'}
+    else if (selectedGovernorate=='Tataouine'){
+    selectedlandmark ='1 (1)'}
+    else if (selectedGovernorate=='Gabes'){
+    selectedlandmark ='2 (1)'}
+    else if (selectedGovernorate=='Kasserine'){
+    selectedlandmark ='1 (1)'}
+    else if (selectedGovernorate=='Zaghouane'){
+    selectedlandmark ='2 (1)'}
+    else if (selectedGovernorate=='Jendouba'){
+    selectedlandmark ='3 (2)'}
+    else if (selectedGovernorate=='Beja'){
+    selectedlandmark ='2 (1)'}
+    else if (selectedGovernorate=='Manouba'){
+    selectedlandmark ='1 (1)'}
+    else if (selectedGovernorate=='Bizerte'){
+    selectedlandmark ='2 (1)'}
+
 
 </script>
 
+<div class="left">
+    <!-- <h1>Governorate</h1> <br>
+<div class="map">
+     <button on:click={zoomReset} >Reset Zoom</button> -->
+    <div class="basemap">
+        
+        <BaseMap bind:zoomReset background= #FDF6F5>
+          <FeatureLayer
+          
+          styleAccessor={(feature, selected) => ({
+            "fill": selected ? '#9D6D79' : ordinalScale(feature.properties.landmarks),
+            "stroke": '#91B4BA',
+            "vector-effect": 'non-scaling-stroke',
+            
+          })}
+
+            geojson={Tun}
+            selectMode={1}
+            idAccessor={(feature) => feature.properties.gouv_fr}
+            bind:selection={selection}
+
+                  on:mount ={zoomReset}
+            on:destroy = {zoomReset}
+              let:hoveredFeature >
+            <rect 
+              width={textBoxWidth} 
+              height = 21 
+              x={-0.5*textBoxWidth} 
+              y = -15
+              rx = 10  
+              fill="#FDF6F5" 
+              opacity=0.8
+            />
+            <text text-anchor="middle" bind:this={textElement} >
+              {hoveredFeature?.properties.gouv_fr}
+            </text>
+                   </FeatureLayer>
+        </BaseMap>
+        
+      
+      <h2 class="caption">{selectedGovernorate} </h2> 
+      <mark class="caption2">Nb Landmarks (Cities)<br>{selectedlandmark}</mark> 
+    </div>  
+</div>
 
 <div class="container">
-    <div class="left">
-				<h1>Governorate</h1> <br>
-			<h2>{selectedGovernorate} </h2>
-            <div class="map">
-                <!-- <button on:click={zoomReset} >Reset Zoom</button> -->
-                <div class="basemap">
-                    
-                    <BaseMap bind:zoomReset background= #FDF6F5>
-                      <FeatureLayer
-                      
-                      styleAccessor={(feature, selected) => ({
-                        "fill": selected ? '#9D6D79' : ordinalScale(feature.properties.landmarks),
-                        "stroke": '#91B4BA',
-                        "vector-effect": 'non-scaling-stroke',
-                        
-                      })}
-        
-                        geojson={Tun}
-                        selectMode={1}
-                        idAccessor={(feature) => feature.properties.gouv_fr}
-                        bind:selection={selection}
-            
-                              on:mount ={zoomReset}
-                        on:destroy = {zoomReset}
-                          let:hoveredFeature >
-                        <rect 
-                          width={textBoxWidth} 
-                          height = 21 
-                          x={-0.5*textBoxWidth} 
-                          y = -15
-                          rx = 10  
-                          fill="#FDF6F5" 
-                          opacity=0.8
-                        />
-                        <text text-anchor="middle" bind:this={textElement} >
-                          {hoveredFeature?.properties.gouv_fr}
-                        </text>
-                               </FeatureLayer>
-                    </BaseMap>
-                    
-                  </div>
-            </div>  
-        </div>
+  
 <div class="right">
 	<div class="btn">
-			<select bind:value={selectedGovernorate}>
-    <option value="">Select a Governorate</option>
+			<select style="color-background:#FAE4DD" bind:value={selectedGovernorate}>
+    <option value="" style="font-family:Quicksand">Select a Governorate</option>
     {#each governorates as governorate}
         <option value={governorate.name}>{governorate.name}</option>
     {/each}
@@ -136,14 +177,15 @@ let Zoom
         <div class="card__body">
         </div>
                 <img class="image" src='{image.src}' alt="card" />
-            <a href={image.url}>
+            <!-- <a href={image.url}> -->
             <div class="overlay">
-                
+         
                 <h2 class="title3">{image.landmark} <br>
                   <span class="cview">{image.bill}</span><br><br>
-                   <span class="cview">-Click to Read-</span> </h2>
+                  <img class="tag" src='{image.tags}' alt="Tag"  />
+                   <!-- <span class="cview">-Click to Read-</span> </h2> -->
               </div> 
-            </a>
+            <!-- </a> -->
     </div>
 			{/if}
     {/each}
@@ -160,14 +202,47 @@ let Zoom
 
   <style>
 
+.tag {
+			margin:2%;
+			height:35px;
+			opacity:0.8;
+		}
+
+    select{
+        font-family: Quicksand;
+        font-weight: bold;
+        font-size: 1rem;
+        color:#2088A6;
+        background-color:#C8E5ED;
+        border:none;
+        border-radius: 5px;
+    }
+
+    .caption{
+        font-family:Quicksand;
+        text-align: center;
+        color:#2088A6
+    }
+
+    .caption2{
+        margin-top:0;
+        font-weight: bold;
+        padding:3px;
+        font-family:Quicksand;
+        text-align: center;
+        color:#2088A6;
+        background-color:#C8E5ED
+    }
+
+
 .basemap {
    /* border: #CE897A solid 2px; */
     background-color: #FDF6F5 ;
-    width: 650px;
-    height: 650px;
-    margin: 20px;
-		float:left;
-        pointer-events: none;
+    width: 320px;
+    height: 320px;
+    margin-top: 20px;
+	float:left;
+    pointer-events: none;
 
   }
 		h1,h2{
@@ -179,7 +254,7 @@ let Zoom
 		}
     .cview{
         font-weight: 300;
-        font-size: 0.7em ;
+        font-size: 0.8em ;
     }
 
 
@@ -191,6 +266,9 @@ let Zoom
       margin-left: 10%;
       margin-right: 10%;
       margin-top: 3%;
+      max-width: 50rem;
+      margin: 1rem auto;
+  
     }
 
     .image {
@@ -209,6 +287,7 @@ let Zoom
     .card__wrapper{
         position: relative;
         display: inline-block;
+        
     }
 
     .card__body{
@@ -245,18 +324,20 @@ let Zoom
         margin-right: 5%;
     }
 
-		.container {
-        display: flex;
-    }
 
-    .left {
-			text-align: center;
-        width:30%; /* Adjust the width as needed */
-    }
+.left {
+    position: sticky; /* Makes the left div sticky */
+    top: 0; /* Aligns to the top of the viewport */
+    z-index: 10; /* Ensures it stays on top when scrolling */
+    width: 30%; /* Adjust the width as needed */
+    text-align: center;
+}
 
-    .right {
-         width:80%;  /* Adjust the width as needed */
-    }
+.right {
+    width: 70%; /* Adjust the width as needed */
+    margin-left: auto; /* Centers the right div */
+    margin-right: auto;
+}
 
     .map {
         width: auto;

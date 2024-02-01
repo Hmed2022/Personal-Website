@@ -9,7 +9,7 @@
     import { scaleLinear } from "d3-scale";
       import {area } from 'd3-shape';
     $: xScale = scaleLinear()
-      .domain([70, 96])
+      .domain([70, 99])
       .range([60, width - margin.left - margin.right]);
   
     const yScale = scaleLinear()
@@ -17,7 +17,7 @@
       .range([height - margin.top - margin.bottom, 20]);
   
     $: xScale2 = scaleLinear()
-      .domain([70, 80])
+      .domain([70, 83])
       .range([60, width - margin.left - margin.right]);
   
     const yScale2 = scaleLinear()
@@ -36,19 +36,22 @@
       let showModern = false;
   
        function getColor(value) {
-      return value === 50 ? "#D8F0D8" :
-             value === 30 ? "#909060" :
-             value === 20 ? "#EFC0A7" :
-             value === 10 ? "#A7C0D7" :
-             value === 5  ? "#BFEFA8" :
-             value === 1  ? "#C0C0C0" :
-             "#F0F0F0";
+      return value === 50 ? "#E0C29E" :
+             value === 30 ? "#AB7E56" :
+             value === 20 ? "#8C4D3F" :
+             value === 10 ? "#BF5630" :
+             value === 5  ? "#105D53" :
+             value === 1  ? "#135E73" :
+             "#2088A6";
     }
   
   </script>
-  <button on:click={() => showModern = !showModern}>
-    {showModern ? 'Show All Banknotes' : 'Show Modern Banknotes'}
-  </button>
+  <div style="text-align:center">
+    <button on:click={() => showModern = !showModern}>
+      {showModern ? 'Show All Banknotes' : 'Show Modern Banknotes'}
+    </button>
+  </div>
+
   
   <div class='chart-container' 
       role="navigation"
@@ -128,7 +131,16 @@
   <style>
       button {
           margin-bottom: 5%;
+          font-family: Quicksand;
+        font-weight: bold;
+        font-size: 1rem;
+        color:#2088A6;
+        background-color:#C8E5ED;
+        border:none;
+        border-radius: 5px;
       }
+
+  
     circle {
       transition: r 200ms ease, opacity 200ms ease;
       cursor: pointer;

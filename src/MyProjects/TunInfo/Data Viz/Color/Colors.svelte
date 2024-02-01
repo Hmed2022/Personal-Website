@@ -331,9 +331,9 @@
         font-size: large;
         font-weight: bold;
         color:#2088A6;
-        border: 4px solid #2088A6; 
-        border-radius:5px;
-        background-color: #FDF6F5;
+        background-color:#C8E5ED;
+        border:none;
+        border-radius: 5px;
        
       }
   </style>

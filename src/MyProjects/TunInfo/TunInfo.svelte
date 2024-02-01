@@ -1,5 +1,6 @@
 <script>
     // @ts-ignore
+    // @ts-ignore
     import Map from "./Data Viz/Map/Map.svelte"
     import Footer from "../../components/footer.svelte";
     // import Title from "./Assets/Tunisian Banknotes.svg"
@@ -9,6 +10,7 @@
     import Color from "./Data Viz/Color/Color.svelte";
     import Scatter from "./Data Viz/Scatter/Scatter.svelte";
     import Title from "./Components/Title.svelte"
+    // @ts-ignore
     import Landmark from "./Data Viz/Landmarks/Landmark.svelte"
     import Landmarks from "./Components/Landmarks.svelte"
 
@@ -22,10 +24,12 @@
     }
 
     import { style } from 'svelte-body';
+
+    import TitleImg from "./Assets/Title-Tuninfo.png"
 </script>
 <!-- 
 <p style="text-align:center"> Choose Language:</p> -->
-<div class="lan">
+<!-- <div class="lan">
     <p>
         Choose a Language
             <select bind:value={selectedLanguage} on:change={handleChange}>
@@ -33,17 +37,18 @@
           <option value="arabic">Arabic</option>
         </select>
     </p>
-</div>
+</div> -->
 
 
 <div class="Title">
     <div class="svg">
-        <Title/>
+        <!-- <Title/> -->
+        <img class="TitleImg" src={TitleImg} alt="Title"/>
     </div>
     
     <!-- <img src="{Title}" alt="title" /> -->
     <!-- <h1> My name is Ahmed Bendaly</h1> -->
-   
+ 
     <p class="introText">
         Ready for a trip? Take a close look at your cash. It's not just for spending—it's your
          first clue to what's cool and important in the country. Who are the folks on the money? 
@@ -54,12 +59,14 @@
     <p class="Reference">By Ahmed Bendaly | Decemeber 2023</p>
 </div>
 
-<h1>
-    The Tunisian Banknote Timeline
-</h1>
-<p>
-    Explore the history of Tunisian banknotes since 1956 through our interactive timeline. Click on a rectangle for details about each note.
-</p>
+    <h1>
+        <span style="color:#FDF6F5; background-color:#BF5630"> The Tunisian Banknote Timeline</span>  
+    </h1>
+    <p>
+        Explore the history of Tunisian banknotes since 1956 through our interactive timeline. Click on a rectangle for details about each note.
+    </p>
+
+
 
 <div class="timeline">
     <Timeline/>
@@ -119,23 +126,48 @@
     </div>
     
     <h2>
-        <span style="color:#FDF6F5; background-color:#0588A6"> Does size matter? </span>
+        <span style="color:#FDF6F5; background-color:#0588A6"> Size of the Bill </span>
     </h2>
     <div class="color">
         <Scatter/>
     </div>
-    </div>
-   
 
-
+    <h1>
+        <span style="color:#FDF6F5; background-color:#BF5630"> Celebrating Tunisian Figures and Landmarks</span>  
+    </h1>
+    <h2>
+        <span style="color:#FDF6F5; background-color:#0588A6"> Changing Faces</span>
+    </h2>
+<p style="margin-bottom:5%">
+    Tunisian banknotes have long served as canvases to honor the nation's diverse historical figures. The depiction of these figures has evolved through three distinct eras: the Bourguiba Era, the Zine Alabedine Era, and the Post-Revolution Era. Each era reflects changes in <b>occupation</b>, <b>gender representation</b>, and the <b>period of appreciation</b> posthumously afforded to these figures.
+</p>
+</div>
 <div class="timeline">
+    
     <Beeswarm/>
     </div>
 
+    <div class="prose">
+        <h2 style="margin-top:5%">
+            <span style="color:#FDF6F5; background-color:#0588A6"> Diverse Landmarks</span>
+        </h2>
+        <h3>
+            <span style="color:#FDF6F5; background-color:#89A058"> Distribution of Landmarks</span>
+        </h3>
+    </div>
     <div class="landmark">
 <Landmarks/>
 </div>
 
+<div class="prose">
+    <h3>
+        <span style="color:#FDF6F5; background-color:#89A058"> Tunisian Landmarks</span>
+    </h3>
+    <p>
+        In this section, you'll find landmarks and monuments from Tunisian banknotes. Choose a Governorate and city to view them.
+
+    </p>
+</div>
 <Landmark/>
 
 <!-- <Map/> -->
@@ -149,6 +181,11 @@
 <Footer/>
 
 <style>
+    .TitleImg{
+        height:auto;
+        width: 70%;
+    }
+
 
 .images > div {
                 display: flex;
@@ -188,13 +225,13 @@
     }
     
     .landmark{
-        margin: 10%;
+     
         margin-right:20%;
         margin-left:20%
     }
 
     .introText{
-        margin-top: -10%;
+        /* margin-top: -10%; */
         font-size: 1rem;
         margin-left: 10em;
         margin-right: 10em;
@@ -208,15 +245,15 @@
     .lan{
         text-align: center;
     }
-    /* .Title{
+    .Title{
         text-align: center;
         margin-top: 5%;
         display: block; 
-    } */
-
-    .svg {
-        display: inline-block; 
     }
+
+    /* .svg {
+        display: inline-block; 
+    } */
     /* img{
         width: 140vh;
         height: auto
@@ -229,7 +266,7 @@
         max-width: 1000px
     } */
 
-    p, h1, h2,option{
+    p, h1, h2,h3,option{
         font-family: Quicksand;
     }
 

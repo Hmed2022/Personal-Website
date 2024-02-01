@@ -37,7 +37,7 @@
 	
 
 	  let items = [
-        { value: "0.5 ", color: color0, count1: "4", count2:"0",count3:"0"},
+        { value: "1/2 ", color: color0, count1: "4", count2:"0",count3:"0"},
         { value: "1", color: color1, count1: "5", count2:"0",count3:"0" },
         { value: "5", color: color5, count1: "7" , count2:"1",count3:"2"},
         { value: "10", color: color10, count1: "5" , count2:"3",count3:"2"},
@@ -95,7 +95,7 @@
 	function scrollToPosition1() {
     // Scroll to a specific position, e.g., 200 pixels from the top
     window.scrollTo({
-      top: 2000,
+      top: 1650,
       behavior: 'smooth' // Optional: for smooth scrolling
     });
   }
@@ -103,14 +103,19 @@
 	function scrollToPosition2() {
     // Scroll to a specific position, e.g., 200 pixels from the top
     window.scrollTo({
-      top: 2400,
+      top: 2000,
       behavior: 'smooth' // Optional: for smooth scrolling
     });
   }
 	
 	$: case1 = scrollTop >=514 && scrollTop <1650
-	$: case2 = scrollTop >=1650 && scrollTop <2200
-	$: case3 = scrollTop >=2200 && scrollTop <2700
+	$: case2 = scrollTop >=1650 && scrollTop <2000
+	$: case3 = scrollTop >=2000 && scrollTop <2700
+
+
+	import old from './Assets/Old Bourguiba.png';
+	import young from './Assets/Young Bourguiba.png';
+	import tawhida from './Assets/Tawhida.png';
 	
 </script>
 
@@ -424,7 +429,7 @@
 	{#if case1}
   <div class="sticky-rectangle show-rectangle">
 	<p>
-		Following its independence in 1956 and the establishment of its central bank in 1958, Tunisia was led by its first president, Habib Bourguiba. His influence was so pervasive that it's reflected in the country's currency: through the series of 24 banknotes issued during his tenure, He was the only figure portraited in the notes. one can observe the subtle aging of his portrait, marking the passage of time in Tunisian history.
+		Following its independence in 1956 and the establishment of its central bank in 1958, Tunisia was led by its first president, Habib Bourguiba. His influence was so pervasive that it's reflected in the country's currency: through the series of 23 banknotes issued during his tenure, He was the only figure portraited in the notes. one can observe the subtle aging of his portrait, marking the passage of time in Tunisian history.
 	</p>
   </div>
 {:else if case2}
@@ -448,19 +453,32 @@
 		<h3>
 			Habib Bourguiba Era
 		</h3>
-		<h4>
-			Some Stats
-		</h4>
+		<p>
+			<b>Total number of Banknotes: </b> 23
+		</p>
 
-<div>
+<div class="count">
 	{#each items as item (item.value)}
 		<div class="tooltip-item2">
 			<div class="square2" style="background-color: {item.color}">
 						</div> 
-			<p class="items"><b>Count:</b> {item.count1}</p>
+						{#if item.count1 == "0"}
+						<p class="items" style="background-color: pink"><b>Count:</b> {item.count1}</p>
+					{:else}
+					<p class="items"><b>Count:</b> {item.count1}</p>
+					{/if}
 		</div>
 	{/each}
 </div>
+
+<img class="bourguiba" src={young} alt="young Bourguiba"/>
+<p style="margin-top:0">
+	4 Portraits of 'Young' Bourguiba
+</p>
+<img class="bourguiba" src={old} alt="young Bourguiba"/>
+<p style="margin-top:0">
+	19 Portraits of 'Young' Bourguiba
+</p>
 	
 
 {:else if case2}
@@ -468,38 +486,62 @@
     <h3>
 			Zine Abedine Ben Ali Era
 		</h3>
+		<p>
+			<b>Total number of Banknotes: </b> 7
+		</p>
 
-		<h4>
-			Some Stats
-		</h4>
-
+	
 <div>
 	{#each items as item (item.value)}
 		<div class="tooltip-item2">
 			<div class="square2" style="background-color: {item.color}">
-						</div> 
-			<p class="items"><b>Count:</b> {item.count2}</p>
+			</div> 
+						{#if item.count2 == "0"}
+							<p class="items" style="background-color: pink"><b>Count:</b> {item.count2}</p>
+						{:else}
+						<p class="items"><b>Count:</b> {item.count2}</p>
+						{/if}
 		</div>
 	{/each}
 </div>
-		{:else if case3}
 
+<p>
+	Inflation led to the discontinuation of the <b>0.5 TND and 1 TND</b> notes, while higher denominations like <b>30 TND and 50 TND</b> were introduced to meet economic demands.
+</p>
+
+		{:else if case3}
+<div class='sidebar2'>
     <h3>
 			Post Revolution Era
 		</h3>
 
-		<h4>
-			Some Stats
-		</h4>
+		<p>
+			<b>Total number of Banknotes: </b> 8
+		</p>
+
+
+		<p>
+			the 30 TND note was discontinued due to its low circulation and popularity among users
+		</p>
 
 <div>
 	{#each items as item (item.value)}
 		<div class="tooltip-item2">
 			<div class="square2" style="background-color: {item.color}">
 						</div> 
-			<p class="items"><b>Count:</b> {item.count3}</p>
+						{#if item.count3 == "0"}
+						<p class="items" style="background-color: pink"><b>Count:</b> {item.count3}</p>
+					{:else}
+					<p class="items"><b>Count:</b> {item.count3}</p>
+					{/if}
 		</div>
 	{/each}
+
+	<img class="bourguiba" src={tawhida} alt="Tawhida"/>
+	<p style="margin-top:0">
+		The 2020 edition of the 10 Tnd features a portrait of <b>Dr. Tawhida Ben Cheikh</b>, the second Tunisian woman to grace the currency after the Phoenician-Carthaginian figure Dido (10 Tnd 2005). <br> <br> Notably, Dr. Tawhida is the <b>first Arab woman</b> to be represented on a banknote, a move that celebrates Tunisian women and honors health workers for their relentless efforts during the COVID-19 pandemic.
+	</p>
+
 </div>
 <!-- <img style="height:100px; width: auto" src="https://i.ibb.co/y6ms7Zz/baknote-05.png" alt="30TNd Preview">
 <p>
@@ -509,12 +551,34 @@
 <p>
 	The banknote features a portrait of Dr. Tawhida Ben Cheikh, the second Tunisian woman to grace the currency after the Phoenician-Carthaginian figure Dido. Notably, Dr. Tawhida is the first Arab woman to be represented on a banknote, a move that celebrates Tunisian women and honors health workers for their relentless efforts during the COVID-19 pandemic.
 </p> -->
+</div>
 {/if}
+
 </div>
 </div>
 
 
 <style>
+
+.count {
+    /* display: grid;
+    place-items: center; */
+	margin-bottom:2%
+}
+	.bourguiba{
+		height:auto;
+		width:70%;
+	}
+
+	p, h3,h4{
+		font-family: Quicksand;
+	}
+
+	h3 {
+		color: #FDF6F5;
+		background-color: black;
+		padding: 3px;
+	}
 
 	  .sticky-rectangle {
     position: fixed;
@@ -526,6 +590,7 @@
     border: 1px solid rgb(102, 102, 102);
     transition: opacity 0.5s ease;
     opacity: 0;
+	z-index: 2;
   }
 
   .show-rectangle {
@@ -534,7 +599,7 @@
 
 .items{
 		font-family: Quicksand;
-		font-size:0.8em;
+		font-size:1em;
 		margin:0
 	}
 
@@ -574,8 +639,8 @@
 }
 
 .square2 {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     margin-right: 8px;
 	margin-bottom: 5px;
 }
@@ -618,6 +683,7 @@
     overflow-y: auto; /* Enables scrolling if the content is too long */
     /* Add more styling as needed (e.g., background color, padding, etc.) */
 }
+
 
 button{
 	padding: 3px 6px 4px 5px;

@@ -15,6 +15,19 @@
       { region: 'Siliana', landmarks: ['Maktaris ancient ruins'] },
       { region: 'Tozeur', landmarks: ['Tamerza Canyon Oasis'] }
     ];
+
+	  const categories = [
+			 { title: 'Modern Infrastructure (16)', imageUrl: 'https://i.ibb.co/jMDV5S9/Tunisian-BAnknotes-16.png' },
+    { title: 'Ancient Roman and Punic Sites (13)', imageUrl: 'https://i.ibb.co/28FCtPV/Tunisian-BAnknotes-10.png' },
+    { title: 'Islamic and Religious Sites (8)', imageUrl: 'https://i.ibb.co/3c6V4cn/Tunisian-BAnknotes-11.png' },
+     { title: 'Architectural and Urban Sites (8)', imageUrl: 'https://i.ibb.co/0jDjkfJ/Tunisian-BAnknotes-17.png' },
+			 { title: 'Cultural and Educational Institutions (8)', imageUrl: 'https://i.ibb.co/PNjRQVM/Tunisian-BAnknotes-15.png' },
+			    { title: 'Industrial and Energy Sites (4)', imageUrl: 'https://i.ibb.co/ch80mj8/Tunisian-BAnknotes-13.png' },
+			{ title: 'Government and Historical Buildings (2)', imageUrl: 'https://i.ibb.co/cCN4LXH/Tunisian-BAnknotes-12.png' },
+    { title: 'Natural Landscapes and Features (2)', imageUrl: 'https://i.ibb.co/0hPVVwq/Tunisian-BAnknotes-14.png' }
+   
+   
+  ];
 	
 	let count;
 	let index;
@@ -22,7 +35,13 @@
 	let progress;
 	let top = 0.1;
 	let threshold = 0.5;
-	let bottom = 0.9;
+	let bottom = 0.7;
+
+	import Map1 from '../Assets/Maps/map1.png'
+	import Map2 from '../Assets/Maps/map2.png'
+	import Map3 from '../Assets/Maps/map3.png'
+	import Map4 from '../Assets/Maps/map4.png'
+	import Map5 from '../Assets/Maps/map5.png'
 
 </script>
 
@@ -40,13 +59,15 @@
 	>
 	<div slot="background">
     {#if index == 0}
-        <img src="https://i.ibb.co/3dGB23k/Tunisian-BAnknotes-05.png" alt="map" >
+        <img src={Map1} alt="map" >
     {:else if index == 1}
-        <img src="https://i.ibb.co/YpcxRqp/Tunisian-BAnknotes-06.png" alt="map" >
+        <img src={Map2} alt="map" >
     {:else if index == 2}
-        <img src="https://i.ibb.co/RQ5c8WW/Tunisian-BAnknotes6.png" alt="map" >
+        <img src={Map3} alt="map" >
 			{:else if index == 3}
-        <img src="https://i.ibb.co/M6gGqWR/Tunisian-BAnknotes-07.png" alt="map" >
+        <img src={Map4} alt="map" >
+    {:else if index == 4}
+        <img src={Map5} alt="map" >
     {/if}
 </div>
 
@@ -84,11 +105,25 @@
             Eight governorates remain unhighlighted on the currency since independence and the current administrative division. It's time to explore and propose monuments and landmarks that could best symbolize the essence of these underrepresented regions:
                   </p>
           
-              <ul>
+              <ul style="text-align: left;">
                 {#each monuments as monument}
                   <strong>{monument.region}:</strong> {monument.landmarks.join(', ')} <br>
                 {/each}
               </ul>
+			</section>
+
+			<section>
+				<div>
+					<p>
+						We can categories these lanamarks into 8 categories as such:
+					 </p>
+				{#each categories as category}
+					<div class="category">
+					<img src={category.imageUrl} alt={category.title} />
+					<span class="category-title">{category.title}</span>
+					</div>
+  				{/each}
+</div>
 			</section>
 		</div>
 	</Scroller>
@@ -123,16 +158,31 @@
 	}
 	
 	section {
-		height: auto;
-		background-color: #C8E6EF;
-		color: #547C81;
+		height: 400px;
+		background-color: #FDF6F5;
+		color: #557C81;
 		padding: 2em;
 		margin: 0 0 8em 0;
 		text-align:center;
 		justify-content: center;
 		align-items: center; 
+		font-family: Quicksand;
 	
 	}
 
-	
+	  .category {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .category img {
+    width: 30px; /* Adjust the size of the image as needed */
+    margin-right: 10px;
+  }
+
+  .category-title {
+    font-weight: bold;
+		font-size: 0.8rem
+  }
 </style>

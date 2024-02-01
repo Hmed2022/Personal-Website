@@ -11,10 +11,10 @@ let activeButton;
 
 	$: if (currentStep == 0) {
 		activeButton= "occupation"
-  } else if (currentStep == 2) {
+  } else if (currentStep == 1) {
   activeButton= "gender"
   }
-	else if (currentStep == 3) {
+	else if (currentStep == 2) {
    activeButton="appreciation"
   }
 </script>

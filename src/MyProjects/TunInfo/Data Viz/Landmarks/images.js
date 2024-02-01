@@ -59,6 +59,15 @@ import medina9 from "./images/Medina9.png";
 import medina10 from "./images/Medina10.png";
 import kasserine from "./images/Kasserine.png";
 
+import infra from "./Tags/1.png";
+import roman from "./Tags/2.png";
+import islam from "./Tags/3.png";
+import urban from "./Tags/4.png";
+import cult from "./Tags/5.png";
+import indus from "./Tags/6.png";
+import gov from "./Tags/7.png";
+import nat from "./Tags/8.png";
+
 export const imageData = [
   {
     gov: "Beja",
@@ -67,7 +76,7 @@ export const imageData = [
     bill: "1/2 Tnd (1958)",
     url: "https://www.africanworldheritagesites.org/cultural-places/frontiers-of-the-roman-empire/dougga-thugga.html#:~:text=It's%20most%20prominent%20ruins%20are,Roman%20town%20in%20North%20Africa.",
     src: beja2,
-    tags: "Roman",
+    tags: roman,
   },
   {
     gov: "Beja",
@@ -76,7 +85,7 @@ export const imageData = [
     bill: "10 Tnd (2005)",
     url: "https://www.africanworldheritagesites.org/cultural-places/frontiers-of-the-roman-empire/dougga-thugga.html#:~:text=It's%20most%20prominent%20ruins%20are,Roman%20town%20in%20North%20Africa.",
     src: beja1,
-    tags: "Roman",
+    tags: roman,
   },
   {
     gov: "Tataouine",
@@ -85,7 +94,7 @@ export const imageData = [
     bill: "20 Tnd (2011)",
     url: "https://www.atlasobscura.com/places/ksar-ouleds",
     src: tataouine,
-    tags: "Roman",
+    tags: urban,
   },
   {
     gov: "Manouba",
@@ -94,7 +103,7 @@ export const imageData = [
     bill: "20 Tnd (2011)",
     url: "https://fr.wikipedia.org/wiki/Barrage_d%27El_Aroussia",
     src: manouba,
-    tags: "Roman",
+    tags: infra,
   },
   {
     gov: "Jendouba",
@@ -103,7 +112,7 @@ export const imageData = [
     bill: "1 Tnd (1958)",
     url: "https://fr.wikipedia.org/wiki/Barrage_de_Beni_M%27Tir",
     src: jendouba1,
-    tags: "Roman",
+    tags: infra,
   },
   {
     gov: "Jendouba",
@@ -112,7 +121,7 @@ export const imageData = [
     bill: "5 Tnd (1958)",
     url: "https://fr.wikipedia.org/wiki/Oued_Mell%C3%A8gue",
     src: jendouba2,
-    tags: "Roman",
+    tags: infra,
   },
   {
     gov: "Jendouba",
@@ -121,7 +130,7 @@ export const imageData = [
     bill: "5 Tnd (1962)",
     url: "https://fr.wikipedia.org/wiki/Oued_Mell%C3%A8gue",
     src: jendouba3,
-    tags: "Roman",
+    tags: infra,
   },
   {
     gov: "Bizerte",
@@ -130,7 +139,7 @@ export const imageData = [
     bill: "10 Tnd (1969)",
     url: "https://www.stir.com.tn/en/page.php?r=1&sr=1&ssr=",
     src: bizerte1,
-    tags: "Roman",
+    tags: indus,
   },
   {
     gov: "Bizerte",
@@ -139,7 +148,7 @@ export const imageData = [
     bill: "11 Tnd (1973)",
     url: "https://www.stir.com.tn/en/page.php?r=1&sr=1&ssr=",
     src: bizerte2,
-    tags: "Roman",
+    tags: indus,
   },
   {
     gov: "Ben Arous",
@@ -148,7 +157,7 @@ export const imageData = [
     bill: "50 Tnd (2009)",
     url: "https://www.terrasol.fr/en/realisations/tunisie-pont-de-rades-la-goulette",
     src: benarous,
-    tags: "Roman",
+    tags: infra,
   },
   {
     gov: "Gabes",
@@ -157,7 +166,7 @@ export const imageData = [
     bill: "10 Tnd (1969)",
     url: "https://medomed.org/featured_item/gabes-oasis-cultural-landscape-tunisia/",
     src: gabes1,
-    tags: "Roman",
+    tags: nat,
   },
   {
     gov: "Gabes",
@@ -166,7 +175,7 @@ export const imageData = [
     bill: "10 Tnd (1986)",
     url: "https://www.serept.com.tn/En/our-history_99_193_D64",
     src: gabes2,
-    tags: "Roman",
+    tags: indus,
   },
   {
     gov: "Nabeul",
@@ -175,7 +184,7 @@ export const imageData = [
     bill: "1 Tnd (1980)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: nabeul,
-    tags: "Roman",
+    tags: urban,
   },
   {
     gov: "Sfax",
@@ -184,7 +193,7 @@ export const imageData = [
     bill: "1 Tnd (1965)",
     url: "http://www.sulphuric-acid.com/sulphuric-acid-on-the-web/acid%20plants/Groupe%20Chimique%20%20-%20Sfax.htm",
     src: sfax1,
-    tags: "Roman",
+    tags: indus,
   },
   {
     gov: "Sfax",
@@ -193,7 +202,7 @@ export const imageData = [
     bill: "20 Tnd (1983)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: sfax2,
-    tags: "Roman",
+    tags: infra,
   },
   {
     gov: "Zaghouan",
@@ -202,7 +211,7 @@ export const imageData = [
     bill: "5 Tnd (1980)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: zaghouan1,
-    tags: "Roman",
+    tags: roman,
   },
   {
     gov: "Zaghouan",
@@ -211,7 +220,7 @@ export const imageData = [
     bill: "5 Tnd (2022)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: zaghouan2,
-    tags: "Roman",
+    tags: roman,
   },
   {
     gov: "Monastir",
@@ -220,7 +229,7 @@ export const imageData = [
     bill: "1/2 Tnd (1965)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: monastir1,
-    tags: "Roman",
+    tags: islam,
   },
   {
     gov: "Monastir",
@@ -229,7 +238,7 @@ export const imageData = [
     bill: "1/2 Tnd (1965)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: monastir2,
-    tags: "Roman",
+    tags: cult,
   },
   {
     gov: "Monastir",
@@ -238,7 +247,7 @@ export const imageData = [
     bill: "1 Tnd (1972)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: monastir3,
-    tags: "Roman",
+    tags: infra,
   },
   {
     gov: "Monastir",
@@ -247,7 +256,7 @@ export const imageData = [
     bill: "20 Tnd (1980)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: monastir4,
-    tags: "Roman",
+    tags: infra,
   },
   {
     gov: "Mahdia",
@@ -256,7 +265,7 @@ export const imageData = [
     bill: "5 Tnd (1972)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: mahdia1,
-    tags: "Roman",
+    tags: roman,
   },
   {
     gov: "Mahdia",
@@ -265,7 +274,7 @@ export const imageData = [
     bill: "20 Tnd (1980)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: mahdia2,
-    tags: "Roman",
+    tags: roman,
   },
   {
     gov: "Mahdia",
@@ -274,7 +283,7 @@ export const imageData = [
     bill: "20 Tnd (2017)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: mahdia3,
-    tags: "Roman",
+    tags: roman,
   },
   {
     gov: "Mahdia",
@@ -283,7 +292,7 @@ export const imageData = [
     bill: "20 Tnd (2017)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: mahdia4,
-    tags: "Roman",
+    tags: roman,
   },
   {
     gov: "Sousse",
@@ -292,7 +301,7 @@ export const imageData = [
     bill: "5 Tnd (1973)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: sousse1,
-    tags: "Roman",
+    tags: urban,
   },
   {
     gov: "Sousse",
@@ -301,7 +310,7 @@ export const imageData = [
     bill: "20 Tnd (1980)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: sousse2,
-    tags: "Roman",
+    tags: urban,
   },
   {
     gov: "Sousse",
@@ -310,7 +319,7 @@ export const imageData = [
     bill: "20 Tnd (1983)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: sousse3,
-    tags: "Roman",
+    tags: infra,
   },
   {
     gov: "Sousse",
@@ -319,7 +328,7 @@ export const imageData = [
     bill: "50 Tnd (2009)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: sousse4,
-    tags: "Roman",
+    tags: infra,
   },
   {
     gov: "Kairouan",
@@ -328,7 +337,7 @@ export const imageData = [
     bill: "0.5 Tnd (1958)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: kairouan1,
-    tags: "Roman",
+    tags: islam,
   },
   {
     gov: "Kairouan",
@@ -337,7 +346,7 @@ export const imageData = [
     bill: "5 Tnd (1958)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: kairouan2,
-    tags: "Roman",
+    tags: islam,
   },
   {
     gov: "Kairouan",
@@ -346,7 +355,7 @@ export const imageData = [
     bill: "5 Tnd (1962)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: kairouan3,
-    tags: "Roman",
+    tags: islam,
   },
   {
     gov: "Kairouan",
@@ -355,7 +364,7 @@ export const imageData = [
     bill: "10 Tnd (1980)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: kairouan4,
-    tags: "Roman",
+    tags: infra,
   },
   {
     gov: "Tunis",
@@ -364,7 +373,7 @@ export const imageData = [
     bill: "1/2 Tnd (1972)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: goulette,
-    tags: "Roman",
+    tags: infra,
   },
   {
     gov: "Tunis",
@@ -373,7 +382,7 @@ export const imageData = [
     bill: "20 Tnd (1992)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: bardo,
-    tags: "Roman",
+    tags: gov,
   },
   {
     gov: "Tunis",
@@ -382,7 +391,7 @@ export const imageData = [
     bill: "5 Tnd (1972)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: menzeh,
-    tags: "Roman",
+    tags: infra,
   },
   {
     gov: "Tunis",
@@ -391,7 +400,7 @@ export const imageData = [
     bill: "1 Tnd (1980)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: carthage1,
-    tags: "Roman",
+    tags: roman,
   },
   {
     gov: "Tunis",
@@ -400,7 +409,7 @@ export const imageData = [
     bill: "20 Tnd (1983)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: carthage2,
-    tags: "Roman",
+    tags: infra,
   },
   {
     gov: "Tunis",
@@ -409,7 +418,7 @@ export const imageData = [
     bill: "5 Tnd (1993)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: carthage3,
-    tags: "Roman",
+    tags: roman,
   },
   {
     gov: "Tunis",
@@ -418,7 +427,7 @@ export const imageData = [
     bill: "10 Tnd (2005)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: carthage4,
-    tags: "Roman",
+    tags: islam,
   },
   {
     gov: "Tunis",
@@ -427,7 +436,7 @@ export const imageData = [
     bill: "5 Tnd (2013)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: carthage5,
-    tags: "Roman",
+    tags: roman,
   },
   {
     gov: "Tunis",
@@ -436,7 +445,7 @@ export const imageData = [
     bill: "5 Tnd (2013)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: carthage6,
-    tags: "Roman",
+    tags: roman,
   },
   {
     gov: "Tunis",
@@ -445,7 +454,7 @@ export const imageData = [
     bill: "5 Tnd (1965)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: medina1,
-    tags: "Roman",
+    tags: cult,
   },
   {
     gov: "Tunis",
@@ -454,7 +463,7 @@ export const imageData = [
     bill: "1/2 Tnd (1972)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: medina2,
-    tags: "Roman",
+    tags: urban,
   },
   {
     gov: "Tunis",
@@ -463,7 +472,7 @@ export const imageData = [
     bill: "1 Tnd (1972)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: medina3,
-    tags: "Roman",
+    tags: islam,
   },
   {
     gov: "Tunis",
@@ -472,7 +481,7 @@ export const imageData = [
     bill: "5 Tnd (1980)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: medina4,
-    tags: "Roman",
+    tags: islam,
   },
   {
     gov: "Tunis",
@@ -481,7 +490,7 @@ export const imageData = [
     bill: "10 Tnd (1980)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: medina5,
-    tags: "Roman",
+    tags: cult,
   },
   {
     gov: "Tunis",
@@ -490,7 +499,7 @@ export const imageData = [
     bill: "20 Tnd (1992)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: medina6,
-    tags: "Roman",
+    tags: islam,
   },
   {
     gov: "Tunis",
@@ -499,7 +508,7 @@ export const imageData = [
     bill: "20 Tnd (2011)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: medina7,
-    tags: "Roman",
+    tags: cult,
   },
   {
     gov: "Tunis",
@@ -508,7 +517,7 @@ export const imageData = [
     bill: "10 Tnd (2013)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: medina8,
-    tags: "Roman",
+    tags: cult,
   },
   {
     gov: "Tunis",
@@ -517,7 +526,7 @@ export const imageData = [
     bill: "1/2 Tnd (1973)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: tunis1,
-    tags: "Roman",
+    tags: infra,
   },
   {
     gov: "Tunis",
@@ -526,7 +535,7 @@ export const imageData = [
     bill: "30 Tnd (1997)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: tunis2,
-    tags: "Roman",
+    tags: cult,
   },
   {
     gov: "Tunis",
@@ -535,7 +544,7 @@ export const imageData = [
     bill: "50 Tnd (2008)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: tunis3,
-    tags: "Roman",
+    tags: cult,
   },
   {
     gov: "Tunis",
@@ -544,7 +553,7 @@ export const imageData = [
     bill: "50 Tnd (2011)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: tunis4,
-    tags: "Roman",
+    tags: cult,
   },
   {
     gov: "Tunis",
@@ -553,7 +562,7 @@ export const imageData = [
     bill: "50 Tnd (2011)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: tunis5,
-    tags: "Roman",
+    tags: gov,
   },
   {
     gov: "Tunis",
@@ -562,7 +571,7 @@ export const imageData = [
     bill: "50 Tnd (2022)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: tunis6,
-    tags: "Roman",
+    tags: infra,
   },
   {
     gov: "Kasserine",
@@ -571,7 +580,7 @@ export const imageData = [
     bill: "5 Tnd (1965)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: kasserine,
-    tags: "Roman",
+    tags: roman,
   },
   {
     gov: "Tunis",
@@ -580,7 +589,7 @@ export const imageData = [
     bill: "10 Tnd (1994)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: medina9,
-    tags: "Roman",
+    tags: urban,
   },
   {
     gov: "Tunis",
@@ -589,7 +598,7 @@ export const imageData = [
     bill: "10 Tnd (1994)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: medina10,
-    tags: "Roman",
+    tags: urban,
   },
   {
     gov: "Gabes",
@@ -598,6 +607,6 @@ export const imageData = [
     bill: "5 Tnd (1983)",
     url: "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
     src: gabes3,
-    tags: "Roman",
+    tags: nat,
   },
 ];
