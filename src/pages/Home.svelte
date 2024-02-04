@@ -66,7 +66,7 @@
 		</div>
 	</div>
 </div>
-	<hr class="dashed-line">
+	<!-- <hr class="dashed-line">
 	
 	<div class="CuurentProject">
 		<img src="{CurrentImg}" alt="Current Project">
@@ -78,14 +78,14 @@
 
 		<p class="description"> This project is a departure from web-based data visualization,
 			 focusing instead on creating a visually rich infographic. It serves as a comprehensive
-			  representation of Tunisia, covering various facets such as politics, geography, and more.</p>
+			  representation of Tunisia, covering various facets such as politics, geography, and more.</p> -->
 
 			  <!-- In this project, I will analyze Nobel Literature laureates' data to uncover the 
 			key traits defining their success. With Bob Dylan's groundbreaking win in 2016 as the first songwriter
 			 laureate, I aim to identify the essential criteria for winning and explore the exclusion of highly
 			  accomplished writers from consideration.<br> The objective is to create a concise profile outlining the
 			   minimum prerequisites for becoming a Nobel Literature laureate.</p>-->
-	</div> 
+	<!-- </div> 
 
 	
 	<div class= "currents">
@@ -94,7 +94,7 @@
 		</div>
 		
 		
-	</div>
+	</div> -->
 	
 	</PageTransitions>
 	<Footer/>

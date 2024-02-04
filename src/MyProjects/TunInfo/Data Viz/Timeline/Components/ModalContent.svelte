@@ -58,7 +58,11 @@ function toggleStatus() {
         <div class="right">
             <h1> {data.ValueEndofCirculation}  USD</h1>
             <p class="diff {color2}"> {difference2}</p>
+            {#if data.EndofCirculation != 2023}
             <p class="text">Out of Circulation<br>{data.EndofCirculation}</p>
+            {:else }
+            <p class="text">Currently circulating <br>{data.EndofCirculation}</p>
+          {/if}
         </div>
     </div>
 
@@ -92,7 +96,7 @@ function toggleStatus() {
 	} */
 
 	img{
-		width: 30em;
+		width: 50em;
 	}
 	
 	

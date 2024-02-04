@@ -477,7 +477,7 @@
 </p>
 <img class="bourguiba" src={old} alt="young Bourguiba"/>
 <p style="margin-top:0">
-	19 Portraits of 'Young' Bourguiba
+	19 Portraits of 'old' Bourguiba
 </p>
 	
 
@@ -567,7 +567,7 @@
 }
 	.bourguiba{
 		height:auto;
-		width:70%;
+		width:50%;
 	}
 
 	p, h3,h4{
