@@ -25,11 +25,14 @@ Dive into this project here: [Project](https://www.ahmedbendaly.com/#/allstarint
 
 For a closer look at the project files, check out the repository:[Project](src/MyProjects/All-Star)
 
-## Tunisia in Graphics: An Infographic Odyssey
+## Chronicles of Tunisian Banknotes: Portraits and Landmarks
 
-This is your go-to source infographic for discovering fascinating insights about Tunisia. From culture to economics, this project compiles informative content to paint a comprehensive picture of my beloved country.
 
-(This Project is still a work in progress)
+This project, a tribute to Tunisia, turns banknotes into a vibrant exploration of its culture, monuments, and history, making you an expert on Tunisia through a unique visual journey, one banknote at a time.
+
+Dive into this project here: [Project](https://www.ahmedbendaly.com/#/tuninfointro)
+
+For a closer look at the project files, check out the repository:[Project](src/MyProjects/TunInfo)
 
 # Get in Touch
 
