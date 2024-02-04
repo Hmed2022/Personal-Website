@@ -78,7 +78,7 @@
         </h1>
 
         <p>
-            The dominant political party throughout the Ben Ali era in Tunisia was the Constitutional Democratic Rally (CDR). The CDR, renowned for adopting <mark style="background-color:#C6AFC0; color:#FDF6F5">purple</mark> as its signature color, had such a profound influence that the color became a ubiquitous symbol of the party. This association was so strong that even everyday items, including the national currency, were perceived as extensions of the CDR's presence and power. In the wake of the revolution, one of the earliest and most symbolic changes was the replacement of these everyday items, signifying a break from the past and a step towards a new future.
+            The dominant political party throughout the Ben Ali era in Tunisia was the Democratic Constitutional Rally (DCR). The DCR, renowned for adopting <mark style="background-color:#C6AFC0; color:#FDF6F5">purple</mark> as its signature color, had such a profound influence that the color became a ubiquitous symbol of the party. This association was so strong that even everyday items, including the national currency, were perceived as extensions of the DCR's presence and power. In the wake of the revolution, one of the earliest and most symbolic changes was the replacement of these everyday items, signifying a break from the past and a step towards a new future.
         </p>
 
 
@@ -170,6 +170,7 @@
 </div>
 <Landmark/>
 
+
 <!-- <Map/> -->
 <!-- <svelte:body use:style={"background-color: #DCDDDB;"} />    -->
 
@@ -181,6 +182,8 @@
 <Footer/>
 
 <style>
+
+
     .TitleImg{
         height:auto;
         width: 70%;

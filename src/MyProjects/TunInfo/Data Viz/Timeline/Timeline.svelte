@@ -429,19 +429,19 @@
 	{#if case1}
   <div class="sticky-rectangle show-rectangle">
 	<p>
-		Following its independence in 1956 and the establishment of its central bank in 1958, Tunisia was led by its first president, Habib Bourguiba. His influence was so pervasive that it's reflected in the country's currency: through the series of 23 banknotes issued during his tenure, He was the only figure portraited in the notes. one can observe the subtle aging of his portrait, marking the passage of time in Tunisian history.
+		Following its independence in 1956 and the establishment of its central bank in 1958, Tunisia was led by its <b> first president, Habib Bourguiba.</b>  His influence was so pervasive that it's reflected in the country's currency: through the series of <b>23 banknotes</b> issued during his tenure, He was the only figure portraited in the notes. one can observe the subtle aging of his portrait, marking the passage of time in Tunisian history.
 	</p>
   </div>
 {:else if case2}
   <div class="sticky-rectangle show-rectangle">
    <p>
-	After declaring himself president for life, Habib Bourguiba's reign ended with the coup d'état on November 7, 1987, ushering in Zine El Abidine Ben Ali as Tunisia's new president. In an effort to distance the nation from the previous era of autocracy, Ben Ali removed Bourguiba’s image from the banknotes. Instead, he featured historical figures, signifying a shift towards democratic values. However, this symbolic move was met with skepticism, as Ben Ali introduced the color purple, synonymous with his political party, the RCD, across the banknotes. Additionally, the reverse sides of the notes were imprinted with symbols commemorating the 7th of November coup — a topic we will explore further in this article.
+	After declaring himself president for life, Habib Bourguiba's reign ended with the <b> coup d'état on November 7, 1987,</b> ushering in <b> Zine El Abidine Ben Ali </b> as Tunisia's new president. In an effort to distance the nation from the previous era of autocracy, Ben Ali removed Bourguiba’s image from the banknotes. Instead, he featured historical figures, signifying a shift towards democratic values. However, this symbolic move was met with skepticism, as Ben Ali introduced the color <mark style="background-color:#C6AFC0; color:#FDF6F5">purple</mark> , synonymous with his political party, the DCR <a href="https://en.wikipedia.org/wiki/Democratic_Constitutional_Rally"> (Democratic Constitutional Rally)</a>, across the banknotes. Additionally, the reverse sides of the notes were imprinted with symbols commemorating the 7th of November coup — a topic we will explore further in this article.
 	</p>
   </div>
 		{:else if case3}
   <div class="sticky-rectangle show-rectangle">
     <p>
-		Following the Jasmine Revolution on January 14, 2011, which led to the ousting of Ben Ali, Tunisia began a new chapter by issuing fresh banknotes, symbolizing the dawn of a dictatorship-free era. The transition was gradual: initially, the omnipresent purple hue and the symbols of the November 7 propaganda were removed from the currency. Subsequently, the nation sought to honor its contemporary leaders, national heroes, and influential change-makers by featuring their likenesses on the banknotes, moving away from merely historical figures to those who shaped Tunisia's modern identity.
+		Following the Jasmine Revolution on <b> January 14, 2011</b>, which led to the expulsion of Ben Ali, Tunisia began a new chapter by issuing fresh banknotes, symbolizing the dawn of a dictatorship-free era. The transition was gradual: initially, the omnipresent purple hue and the symbols of the November 7 propaganda were removed from the currency. Subsequently, the nation sought to honor its contemporary leaders, national heroes, and influential change-makers by featuring their likenesses on the banknotes, moving away from merely historical figures to those who shaped Tunisia's modern identity.
 		</p>
 		</div>
 {/if}
