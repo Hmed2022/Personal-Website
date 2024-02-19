@@ -17,8 +17,8 @@ $: {
 }
 
 </script>
-		<h1><mark class="nba_mark">Team Efficiency</mark></h1>
-		<p>You are highlighting teams from the 1978 to <b>{SetYear==1978 ? SetYear : SetYear-1 }</b> NBA All-Star Games.</p>
+		<!-- <h1><mark class="nba_mark">Team Efficiency</mark></h1> -->
+		<p style="margin-bottom:0">You are highlighting teams from the 1978 to <b>{SetYear==1978 ? SetYear : SetYear-1 }</b> NBA All-Star Games.</p>
 
 	<div class="range" style="--step:10; --min:1978; --max:2023">
 	  <input type="range" bind:value={SetYear} min="1978" max="2023" step="1" >
@@ -104,10 +104,11 @@ $: {
 	h1 {
         text-align: center;
         font-family: 'Jost', sans-serif;
-        font-size: 2em;
+        font-size: 1.6em;
         text-transform: uppercase;
         font-weight: 800;
         margin-top: 0;
+		margin-bottom: 0;
     }
 
 	.nba_mark{

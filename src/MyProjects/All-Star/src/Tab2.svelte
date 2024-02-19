@@ -8,7 +8,7 @@
     <p> Having stars in the all-star game is vital, but let's face it, watching endless threes and defensive dunks can be as thrilling as watching paint dry.
          Now with data, we can analyze and study the player effort on both ends of the floor: Offense and defense.</p>
     
-     <!-- <h1><mark class="nba_mark">Team Efficiency</mark></h1> -->
+     <h1><mark class="nba_mark">Team Efficiency</mark></h1>
     <TeamEffort/>
 
     <!-- <blockquote class="twitter-tweet"><p lang="en" dir="ltr">&quot;I would not draft myself
