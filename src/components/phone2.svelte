@@ -61,9 +61,6 @@
 
 <style>
 	.container {
-        margin-top: 70%;
-		position: absolute;
-		display: flex;
 		align-items: center;
 		justify-content: center;
 		width: 100%;
@@ -78,7 +75,7 @@
 		flex-direction: column;
 		width: 50vmin;
 		height: 76vmin;
-		border: 1vmin solid rgb(255, 255, 255);
+		border: 1.2vmin solid rgb(75, 50, 50);;
 		padding: 2vmin;
 		border-radius: 2vmin;
 	}
@@ -94,7 +91,7 @@
 	button {
 		width: 100%;
 		height: 100%;
-		color: white;
+		color: grey;
 		font-size: 5vmin;
 		border: none;
 		margin: 0;

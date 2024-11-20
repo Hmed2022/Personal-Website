@@ -7,7 +7,7 @@ export default [
     arena: "State Farm Arena",
     date: "08/23/22",
     opp: "Hornets",
-    alt: "Crepuscular rays",
+    alt: "State Farm Arena Picture",
     path: "../src/NBALogo/hawks.jpg",
   },
   {
@@ -19,10 +19,10 @@ export default [
   },
   {
     logo: "../src/NBALogo/Nets.png",
-    disable: true,
+    disable: false,
     id: "3",
     alt: "Jellyfish",
-    path: "37707866@N00/3354331318",
+    path: "../src/NBALogo/nets.jpg",
   },
   {
     logo: "../src/NBALogo/Hornets.png",

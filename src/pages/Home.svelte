@@ -5,6 +5,7 @@
 	import Typewriter from 'svelte-typewriter';
 	// import { Center, Text, Timeline } from '@svelteuidev/core';
 	import PageTransitions from "../components/PageTransitions.svelte";
+	import BucketList from '../components/BucketList.svelte';
 
 	import Footer from "../components/footer.svelte"
 
@@ -65,6 +66,8 @@
 			<img src="{PhotoMe}" alt="My Photo">
 		</div>
 	</div>
+
+	<BucketList/>
 </div>
 	<!-- <hr class="dashed-line">
 	

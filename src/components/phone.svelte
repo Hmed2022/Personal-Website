@@ -60,11 +60,13 @@
 				<div class="photo" in:receive={{key:d.id}} out:send={{key:d.id}}>
 					<img
 						alt={d.alt}
-						src= {d.path}
-						on:click="{() => selected = null}"
-					>
+						src={d.path}
+						on:click={() => selected = null} />
+
+					<div class="details">
+						<p>{d.arena} - {d.date} </p>
+					</div>
 				</div>
-				<!-- {setName(d.name)} -->
 			{/await}
 		{/if}
 	</div>
@@ -72,9 +74,6 @@
 
 <style>
 	.container {
-        margin-top: 70%;
-		position: absolute;
-		display: flex;
 		align-items: center;
 		justify-content: center;
 		width: 100%;
@@ -89,7 +88,7 @@
 		flex-direction: column;
 		width: 50vmin;
 		height: 76vmin;
-		border: 1vmin solid rgb(255, 255, 255);
+		border: 1.2vmin solid rgb(111, 61, 61);;
 		padding: 2vmin;
 		border-radius: 2vmin;
 	}
@@ -105,7 +104,7 @@
 	button {
 		width: 100%;
 		height: 100%;
-		color: white;
+		color: grey;
 		font-size: 5vmin;
 		border: none;
 		margin: 0;
@@ -123,11 +122,19 @@
 
 	.photo {
 		display: flex;
+		text-align: center;
 		align-items: stretch;
 		justify-content: flex-end;
 		flex-direction: column;
 		will-change: transform;
 	}
+
+    .details {
+		display: relative;
+        margin-top: 5px;
+        font-size: 1rem;
+        color: rgb(195, 46, 46);
+    }
 
 	img {
 		object-fit: cover;

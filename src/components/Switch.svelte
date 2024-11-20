@@ -148,8 +148,8 @@
         border: none;
         padding: 0;
         white-space: nowrap;
-        color: #ffffff;
-		font-family: DK Zonnig;
+        color: #707070;
+		font-family: 'Jost', sans-serif;
     }
 
     /* .s--multi legend {
@@ -163,8 +163,8 @@
         line-height: 1.6;
         position: relative;
         z-index: 2;
-        color: #ffffff;
-		font-family: DK Zonnig;
+        color: #707070;
+		font-family: 'Jost', sans-serif;
     }
 
     .s--multi input {
