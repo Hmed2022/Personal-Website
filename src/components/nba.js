@@ -33,10 +33,10 @@ export default [
   },
   {
     logo: "../src/NBALogo/Bulls.png",
-    disable: true,
+    disable: false,
     id: "5",
     alt: "Underwater scene",
-    path: "25483059@N08/5548569010",
+    path: "../src/NBALogo/bull.jpg",
   },
   {
     logo: "../src/NBALogo/Cavaliers.png",
@@ -68,10 +68,10 @@ export default [
   },
   {
     logo: "../src/NBALogo/Bucks.png",
-    disable: true,
+    disable: false,
     id: "10",
     alt: "Postbox",
-    path: "31883499@N05/4216820032",
+    path: "../src/NBALogo/buck.jpg",
   },
   {
     logo: "../src/NBALogo/Knicks.png",

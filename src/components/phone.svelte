@@ -88,7 +88,7 @@
 		flex-direction: column;
 		width: 50vmin;
 		height: 76vmin;
-		border: 1.2vmin solid rgb(111, 61, 61);;
+		/* border: 1.2vmin solid rgb(111, 61, 61);; */
 		padding: 2vmin;
 		border-radius: 2vmin;
 	}

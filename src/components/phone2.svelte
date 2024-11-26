@@ -75,7 +75,7 @@
 		flex-direction: column;
 		width: 50vmin;
 		height: 76vmin;
-		border: 1.2vmin solid rgb(75, 50, 50);;
+		/* border: 1.2vmin solid rgb(75, 50, 50);; */
 		padding: 2vmin;
 		border-radius: 2vmin;
 	}
