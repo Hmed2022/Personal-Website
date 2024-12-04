@@ -3,10 +3,11 @@
 	import Arenas from "../components/phone.svelte";
 	import Arenas2 from "../components/phone2.svelte";
 	import Switch from "../components/Switch.svelte";
+	import basketballurl from "../assets/Basketball.png"
 	// import { name2 } from "../components/phone.svelte";
 	// console.log(name2);
 
-	let multiValue;
+	let multiValue = "East";
 </script>
 
 
@@ -15,7 +16,7 @@
 <div class="basketball">
 
 	<div class = 'imgbasket'>
-		<img class= 'volunPhoto' src="/src/Basketball.png" alt="Basketball">
+		<img class= 'volunPhoto' src={basketballurl} alt="Basketball">
 	</div>
 	
 	<p class ="aboutvol">
@@ -49,7 +50,7 @@ having already experienced the excitement at these venues:
 <div class='arena'>
 	{#if multiValue =='East'}
 		<Arenas/>
-	{:else}
+	{:else if multiValue =='West'}
 		<Arenas2/>
 	{/if}
 </div >

@@ -1,6 +1,37 @@
+import AtlLogo from "../assets/NBALogo/Atlanta.png";
+import AtlPath from "../assets/NBALogo/hawks.jpg";
+import BosLogo from "../assets/NBALogo/Celtics.png";
+// import BosPath from "../assets/NBALogo/celtics.jpg";
+import BknLogo from "../assets/NBALogo/Nets.png";
+import BknPath from "../assets/NBALogo/nets.jpg";
+import ChaLogo from "../assets/NBALogo/Hornets.png";
+// import ChaPath from "../assets/NBALogo/hornets.jpg";
+import ChiLogo from "../assets/NBALogo/Bulls.png";
+import ChiPath from "../assets/NBALogo/bull.jpg";
+import CleLogo from "../assets/NBALogo/Cavaliers.png";
+import ClePath from "../assets/NBALogo/clev.jpg";
+import DetLogo from "../assets/NBALogo/Detroit.png";
+import DetPath from "../assets/NBALogo/pis.jpg";
+import IndLogo from "../assets/NBALogo/Pacers.png";
+import IndPath from "../assets/NBALogo/pace.jpg";
+import MiaLogo from "../assets/NBALogo/Heat.png";
+// import MiaPath from "../assets/NBALogo/heat.jpg";
+import MilLogo from "../assets/NBALogo/Bucks.png";
+import MilPath from "../assets/NBALogo/buck.jpg";
+import NykLogo from "../assets/NBALogo/Knicks.png";
+// import NykPath from "../assets/NBALogo/knicks.jpg";
+import OrlLogo from "../assets/NBALogo/Magic.png";
+// import OrlPath from "../assets/NBALogo/magic.jpg";
+import PhiLogo from "../assets/NBALogo/Sixers.png";
+// import PhiPath from "../assets/NBALogo/sixers.jpg";
+import TorLogo from "../assets/NBALogo/Raptors.png";
+// import TorPath from "../assets/NBALogo/raptors.jpg";
+import WasLogo from "../assets/NBALogo/Wizards.png";
+import WasPath from "../assets/NBALogo/wiz.jpg";
+
 export default [
   {
-    logo: "../src/NBALogo/Atlanta.png",
+    logo: AtlLogo,
     id: "1",
     disable: false,
     name: "Atlanta Hawks",
@@ -8,104 +39,153 @@ export default [
     date: "08/23/22",
     opp: "Hornets",
     alt: "State Farm Arena Picture",
-    path: "../src/NBALogo/hawks.jpg",
+    path: AtlPath,
   },
   {
-    logo: "../src/NBALogo/Celtics.png",
-    disable: true,
+    logo: BosLogo,
     id: "2",
-    alt: "Lapland winter scene",
-    path: "25507134@N00/6527537485",
+    disable: false,
+    name: "Boston Celtics",
+    arena: "TD Garden",
+    date: "10/15/22",
+    opp: "76ers",
+    alt: "TD Garden Picture",
   },
   {
-    logo: "../src/NBALogo/Nets.png",
-    disable: false,
+    logo: BknLogo,
     id: "3",
-    alt: "Jellyfish",
-    path: "../src/NBALogo/nets.jpg",
+    disable: false,
+    name: "Brooklyn Nets",
+    arena: "Barclays Center",
+    date: "11/05/22",
+    opp: "Knicks",
+    alt: "Barclays Center Picture",
+    path: BknPath,
   },
   {
-    logo: "../src/NBALogo/Hornets.png",
-    disable: true,
+    logo: ChaLogo,
     id: "4",
-    alt: "A man scuba diving",
-    path: "32751486@N00/4608886209",
+    disable: false,
+    name: "Charlotte Hornets",
+    arena: "Spectrum Center",
+    date: "12/03/22",
+    opp: "Magic",
+    alt: "Spectrum Center Picture",
   },
   {
-    logo: "../src/NBALogo/Bulls.png",
-    disable: false,
+    logo: ChiLogo,
     id: "5",
-    alt: "Underwater scene",
-    path: "../src/NBALogo/bull.jpg",
+    disable: false,
+    name: "Chicago Bulls",
+    arena: "United Center",
+    date: "01/12/23",
+    opp: "Pistons",
+    alt: "United Center Picture",
+    path: ChiPath,
   },
   {
-    logo: "../src/NBALogo/Cavaliers.png",
-    disable: false,
+    logo: CleLogo,
     id: "6",
-    alt: "Ferns",
-    path: "../src/NBALogo/clev.jpg",
+    disable: false,
+    name: "Cleveland Cavaliers",
+    arena: "Rocket Mortgage FieldHouse",
+    date: "02/18/23",
+    opp: "Raptors",
+    alt: "Rocket Mortgage FieldHouse Picture",
+    path: ClePath,
   },
   {
-    logo: "../src/NBALogo/Detroit.png",
-    disable: false,
+    logo: DetLogo,
     id: "7",
-    alt: "Posters in a bar",
-    path: "../src/NBALogo/pis.jpg",
+    disable: false,
+    name: "Detroit Pistons",
+    arena: "Little Caesars Arena",
+    date: "03/25/23",
+    opp: "Pacers",
+    alt: "Little Caesars Arena Picture",
+    path: DetPath,
   },
   {
-    logo: "../src/NBALogo/Pacers.png",
-    disable: false,
+    logo: IndLogo,
     id: "8",
-    alt: "Daffodil",
-    path: "../src/NBALogo/pace.jpg",
+    disable: false,
+    name: "Indiana Pacers",
+    arena: "Gainbridge Fieldhouse",
+    date: "04/08/23",
+    opp: "Bucks",
+    alt: "Gainbridge Fieldhouse Picture",
+    path: IndPath,
   },
   {
-    logo: "../src/NBALogo/Heat.png",
-    disable: true,
+    logo: MiaLogo,
     id: "9",
-    alt: "Dust storm in Sydney",
-    path: "56068058@N00/3945496657",
+    disable: false,
+    name: "Miami Heat",
+    arena: "Kaseya Center",
+    date: "05/12/23",
+    opp: "Celtics",
+    alt: "Kaseya Center Picture",
   },
   {
-    logo: "../src/NBALogo/Bucks.png",
-    disable: false,
+    logo: MilLogo,
     id: "10",
-    alt: "Postbox",
-    path: "../src/NBALogo/buck.jpg",
-  },
-  {
-    logo: "../src/NBALogo/Knicks.png",
-    disable: true,
-    id: "11",
-    alt: "Fireworks",
-    path: "8484971@N07/2625506561",
-  },
-  {
-    logo: "../src/NBALogo/Magic.png",
-    disable: true,
-    id: "12",
-    alt: "The Stereophonics",
-    path: "58028312@N00/5385464371",
-  },
-  {
-    logo: "../src/NBALogo/Sixers.png",
-    disable: true,
-    id: "13",
-    alt: "The Stereophonffics",
-    path: "43428526@N03/7863279376",
-  },
-  {
-    logo: "../src/NBALogo/Raptors.png",
-    disable: true,
-    id: "14",
-    alt: "The Stffereophonics",
-    path: "43428526@N03/7863279376",
-  },
-  {
-    logo: "../src/NBALogo/Wizards.png",
     disable: false,
+    name: "Milwaukee Bucks",
+    arena: "Fiserv Forum",
+    date: "06/20/23",
+    opp: "76ers",
+    alt: "Fiserv Forum Picture",
+    path: MilPath,
+  },
+  {
+    logo: NykLogo,
+    id: "11",
+    disable: false,
+    name: "New York Knicks",
+    arena: "Madison Square Garden",
+    date: "07/15/23",
+    opp: "Nets",
+    alt: "Madison Square Garden Picture",
+  },
+  {
+    logo: OrlLogo,
+    id: "12",
+    disable: false,
+    name: "Orlando Magic",
+    arena: "Amway Center",
+    date: "08/22/23",
+    opp: "Hornets",
+    alt: "Amway Center Picture",
+  },
+  {
+    logo: PhiLogo,
+    id: "13",
+    disable: false,
+    name: "Philadelphia 76ers",
+    arena: "Wells Fargo Center",
+    date: "09/05/23",
+    opp: "Raptors",
+    alt: "Wells Fargo Center Picture",
+  },
+  {
+    logo: TorLogo,
+    id: "14",
+    disable: false,
+    name: "Toronto Raptors",
+    arena: "Scotiabank Arena",
+    date: "10/20/23",
+    opp: "Cavaliers",
+    alt: "Scotiabank Arena Picture",
+  },
+  {
+    logo: WasLogo,
     id: "15",
-    alt: "Daffodil",
-    path: "../src/NBALogo/wiz.jpg",
+    disable: false,
+    name: "Washington Wizards",
+    arena: "Capital One Arena",
+    date: "11/30/23",
+    opp: "Bulls",
+    alt: "Capital One Arena Picture",
+    path: WasPath,
   },
 ];
