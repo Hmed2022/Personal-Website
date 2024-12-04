@@ -2,9 +2,9 @@ export default [
   {
     logo: "../src/NBALogo/Dallas.png",
     id: "1",
-    disable: true,
+    disable: false,
     alt: "Crepuscular rays",
-    path: "../src/NBALogo/hawks.jpg",
+    path: "../src/NBALogo/mavs.jpg",
   },
   {
     logo: "../src/NBALogo/Denver.png",
@@ -22,10 +22,10 @@ export default [
   },
   {
     logo: "../src/NBALogo/Rockets.png",
-    disable: true,
+    disable: false,
     id: "4",
     alt: "A man scuba diving",
-    path: "32751486@N00/4608886209",
+    path: "../src/NBALogo/hou.jpg",
   },
   {
     logo: "../src/NBALogo/Clip.png",
