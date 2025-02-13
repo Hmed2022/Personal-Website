@@ -21,10 +21,9 @@
 	
 	<p class ="aboutvol">
 		As a basketball fanatic with a love for the game and its history,
-one of my life goals is to visit every NBA arena
-and take in the unique experiences each one has to offer.<br>
+one of my life goals is to visit every NBA arena.<br>
  With a total of 30 arenas on my bucket list, I am well on my way, 
-having already experienced the excitement at these venues:
+having already experienced the excitement at these arenas:
 	</p>	
 </div>
 
@@ -32,13 +31,14 @@ having already experienced the excitement at these venues:
 <div class="decArena">
 	<div class="decArena3">
 		<p class='descNBA'>
-			11/30</p>
+			12/30</p>
 			<p class='descNBA4'>
 				Atlanta Hawks, Celeveland Cavaliers,
 				Detroit Pistons, Indiana Pacers,
 				Washington Wizards, New Orleans Pelicans,
 				Brooklyn Nets, Chicago Bulls, Milwaukee Bucks,
-				Houston Rockets, Dallas Mavericks
+				Houston Rockets, Dallas Mavericks, Oklahoma
+				City Thunder
 			</p>
 	</div>
 	<div class="decArena2">

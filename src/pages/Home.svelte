@@ -39,8 +39,7 @@
 </Typewriter> -->
 
     <p id="IntroFirstPage"> Welcome to my personal website , a hub for showcasing my passions, <a class="project" href="/#/projects">Projects</a>, and creative ideas.
-	Join me as I delve into new concepts and pursue exciting endeavors.
-   Connect with me and like-minded individuals who share similar interests and inspire growth together.</p>
+	Let's connect and bring more exciting ideas to life!</p>
 
 
 <PageTransitions>
@@ -50,22 +49,18 @@
 			<img src="{AboutMe}" alt="About Me">
 		  </div>
 		<p id="AboutMe">
-		Meet Ahmed Bendaly, a multi-talented data scientist, graphic designer, and engineer who weaves data into captivating stories.
-		Currently, Ahmed is a graduate student at the <a class="um" href="https://umdearborn.edu/">University of Michigan Dearborn</a>, where he’s honing his skills
-		in data science.<br>
-		With a passion for original and creative work, Ahmed’s goal is to make complex subjects more accessible to the world. 
-		And, as a proud <a class="tunisia" href="https://en.wikipedia.org/wiki/Tunisia">Tunisian</a>, you’ll find a touch of his cultural heritage in some of his projects.<br> 
+		My name is Ahmed, a data scientist by profession, a visual designer by passion, and a statistics nerd by confession. I'm interested in basketball, weird stats, and all things <a class="tunisia" href="https://en.wikipedia.org/wiki/Tunisia">Tunisian</a>, you’ll find a touch of his cultural heritage in some of my projects.<br> 
 		<br>
-		Take a look at his Resume <a class="cv" href="{pdfUrl}" target="_blank" rel="noopener noreferrer" > here</a>! 
-		(detailed <a class="cv" href="{pdfUrl2}" target="_blank" rel="noopener noreferrer" > version </a>)
+		<!-- Take a look at my Resume <a class="cv" href="{pdfUrl}" target="_blank" rel="noopener noreferrer" > here</a>! 
+		(detailed <a class="cv" href="{pdfUrl2}" target="_blank" rel="noopener noreferrer" > version </a>) -->
 		</p>
 	</div>	
 	
-	<div class="block-container2">
+	<!-- <div class="block-container2">
 		<div class="MyPhoto">
 			<img src="{PhotoMe}" alt="My Photo">
 		</div>
-	</div>
+	</div> -->
 
 	<BucketList/>
 </div>

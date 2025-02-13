@@ -17,6 +17,7 @@ import MinLogo from "../assets/NBALogo/Timber.png";
 import NOLogo from "../assets/NBALogo/Pelicans.png";
 import NOPath from "../assets/NBALogo/peli.jpg";
 import OKCLogo from "../assets/NBALogo/Thunder.png";
+import OKCPath from "../assets/NBALogo/okc.jpg";
 // import OKCPath from "31883499@N05/4216820032";
 import PhxLogo from "../assets/NBALogo/Suns.png";
 // import PhxPath from "8484971@N07/2625506561";
@@ -114,10 +115,13 @@ export default [
   {
     logo: OKCLogo,
     id: "10",
-    disable: true,
+    disable: false,
     name: "Oklahoma City Thunder",
     arena: "Paycom Center",
     alt: "Postbox",
+    date: "10/15/22",
+    opp: "Lakers",
+    path: OKCPath,
   },
   {
     logo: PhxLogo,
