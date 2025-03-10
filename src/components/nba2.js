@@ -13,7 +13,7 @@ import LALLogo from "../assets/NBALogo/Lakers.png";
 import MemLogo from "../assets/NBALogo/Memphis.png";
 // import MemPath from "../assets/NBALogo/pis.jpg";
 import MinLogo from "../assets/NBALogo/Timber.png";
-// import MinPath from "../assets/NBALogo/pace.jpg";
+import MinPath from "../assets/NBALogo/wolves.jpg";
 import NOLogo from "../assets/NBALogo/Pelicans.png";
 import NOPath from "../assets/NBALogo/peli.jpg";
 import OKCLogo from "../assets/NBALogo/Thunder.png";
@@ -96,10 +96,11 @@ export default [
   {
     logo: MinLogo,
     id: "8",
-    disable: true,
+    disable: false,
     name: "Minnesota Timberwolves",
     arena: "Target Center",
     alt: "Daffodil",
+    path: MinPath,
   },
   {
     logo: NOLogo,

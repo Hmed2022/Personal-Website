@@ -31,14 +31,14 @@ having already experienced the excitement at these arenas:
 <div class="decArena">
 	<div class="decArena3">
 		<p class='descNBA'>
-			12/30</p>
+			13/30</p>
 			<p class='descNBA4'>
 				Atlanta Hawks, Celeveland Cavaliers,
 				Detroit Pistons, Indiana Pacers,
 				Washington Wizards, New Orleans Pelicans,
 				Brooklyn Nets, Chicago Bulls, Milwaukee Bucks,
 				Houston Rockets, Dallas Mavericks, Oklahoma
-				City Thunder
+				City Thunder, Minesota Timberwolves
 			</p>
 	</div>
 	<div class="decArena2">

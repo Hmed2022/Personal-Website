@@ -56,11 +56,11 @@
 		</p>
 	</div>	
 	
-	<!-- <div class="block-container2">
+	<div class="block-container2">
 		<div class="MyPhoto">
 			<img src="{PhotoMe}" alt="My Photo">
 		</div>
-	</div> -->
+	</div>
 
 	<BucketList/>
 </div>
