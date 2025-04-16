@@ -1,7 +1,7 @@
 import AtlLogo from "../assets/NBALogo/Atlanta.png";
 import AtlPath from "../assets/NBALogo/hawks.jpg";
 import BosLogo from "../assets/NBALogo/Celtics.png";
-// import BosPath from "../assets/NBALogo/celtics.jpg";
+import BosPath from "../assets/NBALogo/bos.jpg";
 import BknLogo from "../assets/NBALogo/Nets.png";
 import BknPath from "../assets/NBALogo/nets.jpg";
 import ChaLogo from "../assets/NBALogo/Hornets.png";
@@ -48,8 +48,9 @@ export default [
     name: "Boston Celtics",
     arena: "TD Garden",
     date: "10/15/22",
-    opp: "76ers",
+    opp: "Hornets",
     alt: "TD Garden Picture",
+    path: BosPath,
   },
   {
     logo: BknLogo,
