@@ -32,14 +32,23 @@ having already experienced the excitement at these arenas:
 	<div class="decArena3">
 		<p class='descNBA'>
 			14/30</p>
-			<p class='descNBA4'>
-				Atlanta Hawks, Celeveland Cavaliers,
+			
+			{#if multiValue =='East'}
+			<p class='descNBA4'  style='margin:2%'>
+				Atlanta Hawks, Cleveland Cavaliers,
 				Detroit Pistons, Indiana Pacers,
-				Washington Wizards, New Orleans Pelicans,
-				Brooklyn Nets, Chicago Bulls, Milwaukee Bucks,
-				Houston Rockets, Dallas Mavericks, Oklahoma
-				City Thunder, Minesota Timberwolves, Boston Celtics
+				Washington Wizards, Brooklyn Nets, Chicago Bulls,
+				Milwaukee Bucks, Boston Celtics
 			</p>
+			{:else if multiValue =='West'}
+			<p class='descNBA4' style='margin:2%'>
+				New Orleans Pelicans, Houston Rockets, Dallas Mavericks, Oklahoma
+				City Thunder, Minesota Timberwolves
+			</p>
+			{/if}
+
+			<p class='descNBA4'> <span style='background-color:#EF7779; color:white; margin:0'>Click on logo to see the photo!</span>
+			
 	</div>
 	<div class="decArena2">
 		<Switch bind:value={multiValue} label="Choose a conference" design="multi" options={['West', 'East']} fontSize={30}/>
@@ -75,7 +84,7 @@ having already experienced the excitement at these arenas:
 		color: #707070;
 		font-family: 'Jost', sans-serif;
 		font-weight: 300;
-		font-size: 1.5em;
+		font-size: 1.8em;
 
 	}
 
@@ -84,7 +93,7 @@ having already experienced the excitement at these arenas:
 		float:right;
 		width:40%;
 		margin-right: 10%;
-		margin-top: 7%;
+		/* margin-top: 7%; */
 	}
 
 	.descNBA{

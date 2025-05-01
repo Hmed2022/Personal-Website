@@ -49,7 +49,7 @@
 			<img src="{AboutMe}" alt="About Me">
 		  </div>
 		<p id="AboutMe">
-		My name is Ahmed, a data scientist by profession, a visual designer by passion, and a statistics nerd by confession. I'm interested in basketball, weird stats, and all things <a class="tunisia" href="https://en.wikipedia.org/wiki/Tunisia">Tunisian</a>, you’ll find a touch of his cultural heritage in some of my projects.<br> 
+		My name is Ahmed, a data scientist by profession, a visual designer by passion, and a statistics nerd by confession. I'm interested in basketball, weird stats, and all things <a class="tunisia" href="https://en.wikipedia.org/wiki/Tunisia">Tunisian</a>, you’ll find a touch of my cultural heritage in some of my projects.<br> 
 		<br>
 		<!-- Take a look at my Resume <a class="cv" href="{pdfUrl}" target="_blank" rel="noopener noreferrer" > here</a>! 
 		(detailed <a class="cv" href="{pdfUrl2}" target="_blank" rel="noopener noreferrer" > version </a>) -->
