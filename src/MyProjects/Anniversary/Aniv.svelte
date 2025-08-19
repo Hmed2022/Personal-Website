@@ -64,27 +64,7 @@
   </div>
 </form>
 
-<a href="./20082015.pdf" target="_blank" rel="noopener" class="enter" style="font-family: 'PompadourBold', sans-serif;">
-    Good Job, click to Enter1 
-  </a>
-
-
-  <a href="/20082015.pdf" target="_blank" rel="noopener" class="enter" style="font-family: 'PompadourBold', sans-serif;">
-    Good Job, click to Enter2
-  </a>
-
-  <a href="../MyProjects/Anniversary/20082015.pdf" target="_blank" rel="noopener" class="enter" style="font-family: 'PompadourBold', sans-serif;">
-    Good Job, click to Enter3
-  </a>
-
-  <a href="../../src/MyProjects/Anniversary/20082015.pdf" target="_blank" rel="noopener" class="enter" style="font-family: 'PompadourBold', sans-serif;">
-    Good Job, click to Enter4
-  </a>
-
-  <a href="./Anniversary/20082015.pdf" target="_blank" rel="noopener" class="enter" style="font-family: 'PompadourBold', sans-serif;">
-    Good Job, click to Enter5
-  </a>
-
+ 
 {#if isCorrect}
   <a href= {pdfUrl} target="_blank" rel="noopener noreferrer" class="enter" style="font-family: 'PompadourBold', sans-serif;">
     Good Job, click to Enter
