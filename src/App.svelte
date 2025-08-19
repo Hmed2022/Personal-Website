@@ -8,30 +8,39 @@
 	import TunInfo from './MyProjects/TunInfo/TunInfo.svelte';
 	import TunInfoIntro from './MyProjects/TunInfo/TunInfoIntro.svelte';
 	import Klay from './MyProjects/Klay/klay.svelte'
+	import Anniversary from './MyProjects/Anniversary/Aniv.svelte'
 
+
+	const routes = {
+    '/': Home,
+    '/projects': Projects,
+    '/allstarintro': AllStarIntro,
+    '/allstar': NBA,
+    '/tuninfo': TunInfo,
+    '/tuninfointro': TunInfoIntro,
+    '/klay': Klay,
+    '/Anniv': Anniversary
+  };
+
+  // Normalize current path from the router (works for hash or history)
+  $: normalizedPath =
+    ($location || '')
+      .toLowerCase()
+      .split('?')[0]       // drop ?query
+      .replace(/\/+$/, ''); // drop trailing slash
+
+  $: hideHeader = normalizedPath === '/anniv';
 </script>
-  
+
+{#if !hideHeader}
   <header>
-	<Header />
+    <Header />
   </header>
-  
-  <body>
-	<!-- <nav>
-		<a href="/">Home</a>
-		<a href="/#/projects">Projects</a>
-	</nav> -->
-	
-	<Router routes={{
-		'/': Home,
-		'/projects': Projects,
-		'/allstarintro': AllStarIntro,
-		'/allstar': NBA,
-		'/tuninfo': TunInfo,
-		'/tuninfointro': TunInfoIntro,
-		'/klay': Klay
-	}} />
-  </body>
-  
-  <style>
+{/if}
+
+<!-- Don’t wrap in <body> inside a Svelte component -->
+<Router {routes} />
+
+<style>
   @import './app.css';
-  </style>
+</style>
