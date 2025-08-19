@@ -3,6 +3,7 @@
   export let hint = "Hint: Take the I-44";
 	export let extraHint = "Another hint: We went to Sami Chaifi on this day (mmdd).";
   export let placeholder = "Enter a 4 digit number";
+  import pdfUrl from './20082015.pdf'
 
 
 	import { style } from 'svelte-body';
@@ -85,7 +86,7 @@
   </a>
 
 {#if isCorrect}
-  <a href="./Anniversary/20082015.pdf" target="_blank" rel="noopener" class="enter" style="font-family: 'PompadourBold', sans-serif;">
+  <a href= {pdfUrl} target="_blank" rel="noopener noreferrer" class="enter" style="font-family: 'PompadourBold', sans-serif;">
     Good Job, click to Enter
   </a>
 {/if}
