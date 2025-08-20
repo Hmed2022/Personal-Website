@@ -26,10 +26,46 @@
   };
 
   $: isCorrect = passwordInput === correctPassword;
+
+
+  import { flip } from 'svelte/animate';
+  import { quintOut } from 'svelte/easing';
+
+  let words = [
+    "Nawarry",
+    "Habibi",
+    "Rouhy",
+    "Nawarty",
+		"Tofla",
+    "Nour Inaya",
+    "Mezyena",
+    "Narvouzty",
+		"Habboubi",
+		"Mra",
+		"El Nouri",
+		"Sitt el kol",
+		"Mtaa el Matouia"
+  ];
+
+  let index = 0;
+
+  // change word every 0.5s
+  const interval = setInterval(() => {
+    index = (index + 1) % words.length;
+  }, 1000);
+
+
 </script>
 
 <div class="center">
-	<h1>Hello Nawarry!</h1>
+	<h1>
+        Aaslema<br>ya 
+        {#each [words[index]] as word (word)}
+          <span class="word" animate:flip={{ duration: 1000, easing: quintOut }}>
+            {word}!
+          </span>
+        {/each}
+      </h1>
 	<h3> We made it to one year of maa baadhina!! <br>
 	This is my gift to you this year, Hope you like it!</h3>
 	<h4> To see the gift, I need to verify that this is you<br>you need a password and it is the distance <br>between my house and yours in Miles.</h4>
@@ -49,8 +85,9 @@
     aria-describedby="pw-help"
     style="font-family: 'PompadourBold', sans-serif;"
   />
-    <button type="submit" class="check" style="font-family: 'PompadourBold', sans-serif;">Check</button>
   </div>
+  <button type="submit" class="check" style="font-family: 'PompadourBold', sans-serif;">Check</button>
+  
   <div id="pw-help" class="help" aria-live="polite">
     {#if checked && !isCorrect}
       <span class="error"style="font-family: 'PompadourBold', sans-serif;">Incorrect password. Try again.</span>
@@ -86,14 +123,22 @@
 		text-align: center;
 		justify-items: center;
 		margin-top: 10%;
+        margin-left: 10%;
+        margin-right: 10%;
 	}
 
-	h1{
+    h1{
 			margin-bottom:0;
 		color: #ca353d;
 		font-size: 3rem;
-        font-family: 'PompadourBold', sans-serif;
+		 display: inline-block;
+         font-family: 'PompadourBold', sans-serif;
+        perspective: 500px; /* to make 3D flip visible */
 	}
+  .word {
+    display: inline-block;
+    transform-origin: center;
+  }
 
 	h3 {
 		/* margin-top:-0.5%; */
@@ -109,8 +154,8 @@
 
 	 .gate { display: grid; gap: 0.5rem; max-width: 420px;}
   label { font-weight: 600; }
-  .input-row { display: grid; grid-template-columns: 1fr auto auto; gap: 0.5rem; align-items: center; }
-  input { padding: 0.6rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; width: 10rem;}
+  .input-row { display: grid; grid-template-columns: 1fr auto auto; align-items: center; }
+  input { padding: 0.6rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; }
   input:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,.15); }
   .check { padding: 0.6rem 0.9rem; border: 1px solid #4d4f4d; background: #4d4f4d; color: white; border-radius: 0.75rem; cursor: pointer; }
   .enter { margin-top: 0.25rem; padding: 0.75rem 1rem; border: 1px solid #feea00; background: #feea00; color: #4d4f4d; border-radius: 0.75rem; cursor: pointer; }
