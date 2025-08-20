@@ -83,7 +83,7 @@
     placeholder={placeholder}
     autocomplete="off"
     aria-describedby="pw-help"
-    style="font-family: 'PompadourBold', sans-serif;"
+    style="font-family: 'PompadourBold', sans-serif; font-size: 16px;"
   />
   </div>
   <button type="submit" class="check" style="font-family: 'PompadourBold', sans-serif;">Check</button>
