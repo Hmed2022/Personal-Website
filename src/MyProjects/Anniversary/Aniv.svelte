@@ -36,15 +36,22 @@
     "Habibi",
     "Rouhy",
     "Nawarty",
-		"Tofla",
+    "Tofla",
     "Nour Inaya",
     "Mezyena",
     "Narvouzty",
-		"Habboubi",
-		"Mra",
-		"El Nouri",
-		"Sitt el kol",
-		"Mtaa el Matouia"
+    "Habboubi",
+    "Mra",
+    "El Nouri",
+    "Mtaa el Burgundy",
+    "Sitt el kol",
+    "Mtaa el Matouia",
+    "Mannequin",
+    "Halloufa",
+    "Khabbeza",
+    "Mtaa limech",
+    "Princessa",
+    "❤️"    
   ];
 
   let index = 0;
@@ -68,7 +75,7 @@
       </h1>
 	<h3> We made it to one year of maa baadhina!! <br>
 	This is my gift to you this year, Hope you like it!</h3>
-	<h4> To see the gift, I need to verify that this is you<br>you need a password and it is the distance <br>between my house and yours in Miles.</h4>
+	<h4> To see the gift, I need to verify that this is truly you<br>You will need a password and it is the distance <br>between my house and yours in Miles.</h4>
 
 
 <form on:submit|preventDefault={handleCheck} class="gate">
