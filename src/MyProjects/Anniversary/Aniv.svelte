@@ -51,6 +51,7 @@
     "Khabbeza",
     "Mtaa limech",
     "Princessa",
+    "Sahebty",
     "❤️"    
   ];
 
