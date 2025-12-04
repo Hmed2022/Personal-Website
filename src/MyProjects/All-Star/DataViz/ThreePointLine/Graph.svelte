@@ -25,7 +25,7 @@
 	// the scales
 		$: xScale = scaleLinear()
 		.domain(extent(data.map(d => d.edition_year)))
-		.domain([1980, 2023])
+		.domain([1980, 2026])
 		.range([0, width - margin.left - margin.right]);
 	
 		const yScale1 = scaleLinear()

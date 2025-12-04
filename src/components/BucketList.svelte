@@ -20,10 +20,10 @@
 	</div>
 	
 	<p class ="aboutvol">
-		As a basketball fanatic with a love for the game and its history,
+		As a basketball fan with a love for the game and its history,
 one of my life goals is to visit every NBA arena.<br>
  With a total of 30 arenas on my bucket list, I am well on my way, 
-having already experienced the excitement at these arenas:
+having already attended games in these arenas:
 	</p>	
 </div>
 
@@ -31,14 +31,15 @@ having already experienced the excitement at these arenas:
 <div class="decArena">
 	<div class="decArena3">
 		<p class='descNBA'>
-			14/30</p>
+			16/30</p>
 			
 			{#if multiValue =='East'}
 			<p class='descNBA4'  style='margin:2%'>
 				Atlanta Hawks, Cleveland Cavaliers,
 				Detroit Pistons, Indiana Pacers,
 				Washington Wizards, Brooklyn Nets, Chicago Bulls,
-				Milwaukee Bucks, Boston Celtics
+				Milwaukee Bucks, Boston Celtics, Philadelphia 76ers,
+				New York Knicks
 			</p>
 			{:else if multiValue =='West'}
 			<p class='descNBA4' style='margin:2%'>

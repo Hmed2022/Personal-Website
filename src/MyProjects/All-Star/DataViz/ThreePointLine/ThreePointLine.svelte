@@ -31,7 +31,7 @@
 <p class="curries">
 	<!-- <mark class="Curry" on:mouseenter={toggleCurry} > Stephen Curry Joining the NBA</mark>
 	<mark class="CurryStar" on:mouseenter={toggleCurryStar}> Stephen Curry in All-Star Game</mark> -->
-	<mark class="Curry"> Stephen Curry Joining the NBA</mark>
+	<mark class="Curry"> Stephen Curry not an All-Star</mark>
 	<mark class="CurryStar" > Stephen Curry in All-Star Game</mark>
 	<br> <br>
 	<span class="att-underline" style="color:#894044" >Three Points Attempted</span>

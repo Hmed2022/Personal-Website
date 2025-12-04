@@ -515,4 +515,28 @@ export default [
     total_threepa: "126",
     three_point_percentage: "36.50793650793650793700",
   },
+  {
+    edition_year: "2024",
+    total_threep: "67",
+    total_threepa: "168",
+    three_point_percentage: "39.88",
+  },
+  {
+    edition_year: "2024",
+    total_threep: "67",
+    total_threepa: "168",
+    three_point_percentage: "39.88",
+  },
+  {
+    edition_year: "2025",
+    total_threep: "32",
+    total_threepa: "88",
+    three_point_percentage: "36.36363636",
+  },
+  {
+    edition_year: "2025",
+    total_threep: "32",
+    total_threepa: "88",
+    three_point_percentage: "36.36363636",
+  },
 ];

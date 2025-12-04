@@ -28,7 +28,7 @@
 	export let data;
 	export let show = true;
 	let height = 450;
-	let width = 1300;
+	let width = 1500;
 	
 	let path, path2, length, length2;
 	
@@ -37,7 +37,7 @@
 	// the scales
 		$: xScale = scaleLinear()
 		.domain(extent(data.map(d => d.edition_year)))
-		.domain([1990, 2023])
+		.domain([1990, 2025])
 		.range([0, width - margin.left - margin.right]);
 	
 		const yScale1 = scaleLinear()

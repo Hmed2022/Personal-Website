@@ -3,6 +3,8 @@ import Footer from "../../components/footer.svelte";
 import { style } from 'svelte-body';
 import AllstarURL from "../../assets/Projects/AllStar/NBAArticle.gif"
 
+//'YourNewStrongPassword!'
+
 function redirectToAllStar() {
         window.location.hash = '/allstar';
     }
@@ -13,7 +15,7 @@ function redirectToAllStar() {
 	<div class="prose">
 		<div style='text-align:center'>
 			<h1>
-						The decline of the All star game 
+				The decline of the All star game 
 			</h1>
 		</div>
 		<div class="center-line1"></div>

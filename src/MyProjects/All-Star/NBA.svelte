@@ -42,6 +42,7 @@
         <div class="prose">
             <Title/>
             <p class="Reference">By Ahmed Bendaly | July 2023</p>
+            <p class="Reference2"><b>Data update:</b>This dataset covers all data through the 2025 All-Star Game</p>
             <br>
             <p>
                 The NBA All-Star Game has traditionally been one of the most anticipated events for NBA fans,
@@ -105,6 +106,14 @@
         font-weight: 500;
         text-align: center;
         margin-top: 0;
+        margin-bottom: 0;
+    }
+    .Reference2{
+        color: rgb(139, 139, 139);
+        font-weight: 300;
+        text-align: center;
+        margin-top: 0;
+        font-size: 0.9em;
     }
     .tweet{
         display: flex;

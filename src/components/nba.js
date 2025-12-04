@@ -19,11 +19,11 @@ import MiaLogo from "../assets/NBALogo/Heat.png";
 import MilLogo from "../assets/NBALogo/Bucks.png";
 import MilPath from "../assets/NBALogo/buck.jpg";
 import NykLogo from "../assets/NBALogo/Knicks.png";
-// import NykPath from "../assets/NBALogo/knicks.jpg";
+import NykPath from "../assets/NBALogo/knicks.jpg";
 import OrlLogo from "../assets/NBALogo/Magic.png";
 // import OrlPath from "../assets/NBALogo/magic.jpg";
 import PhiLogo from "../assets/NBALogo/Sixers.png";
-// import PhiPath from "../assets/NBALogo/sixers.jpg";
+import PhiPath from "../assets/NBALogo/sixers.jpg";
 import TorLogo from "../assets/NBALogo/Raptors.png";
 // import TorPath from "../assets/NBALogo/raptors.jpg";
 import WasLogo from "../assets/NBALogo/Wizards.png";
@@ -147,6 +147,7 @@ export default [
     date: "07/15/23",
     opp: "Nets",
     alt: "Madison Square Garden Picture",
+    path: NykPath,
   },
   {
     logo: OrlLogo,
@@ -167,6 +168,7 @@ export default [
     date: "09/05/23",
     opp: "Raptors",
     alt: "Wells Fargo Center Picture",
+    path: PhiPath,
   },
   {
     logo: TorLogo,

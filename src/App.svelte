@@ -9,6 +9,7 @@
 	import TunInfoIntro from './MyProjects/TunInfo/TunInfoIntro.svelte';
 	import Klay from './MyProjects/Klay/klay.svelte'
 	import Anniversary from './MyProjects/Anniversary/Aniv.svelte'
+  import Names from './MyProjects/Names/names.svelte'
 
 
 	const routes = {
@@ -19,7 +20,8 @@
     '/tuninfo': TunInfo,
     '/tuninfointro': TunInfoIntro,
     '/klay': Klay,
-    '/Anniv': Anniversary
+    // '/Anniv': Anniversary,
+    '/Names': Names
   };
 
   // Normalize current path from the router (works for hash or history)

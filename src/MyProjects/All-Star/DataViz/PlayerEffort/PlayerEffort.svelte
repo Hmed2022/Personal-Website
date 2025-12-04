@@ -1,5 +1,5 @@
 <script>
-	import data from './Data/PlayerEffort';
+	import data from './Data/PlayerEffort.js';
 	import Graph from './Graph.svelte';
 	
 	 let show = true;

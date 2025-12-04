@@ -82,7 +82,7 @@
 	// the scales
 		$: xScale = scaleLinear()
 		.domain(extent(data.map(d => d.edition_year)))
-		.domain([1974, 2025])
+		.domain([1974, 2026])
 		.range([0, width - margin.left - margin.right]);
 	
 		const yScale1 = scaleLinear()
@@ -99,12 +99,12 @@
 	
 		$: pathLine2 = line()
 		.x(d => xScale(d.edition_year))
-		.y(d => yScale1(d.sum_pf))
+		.y(d => yScale1(d.sum_orb))
 		.curve(curveBasis);
 
 		$: pathLine3 = line()
 		.x(d => xScale(d.edition_year))
-		.y(d => yScale1(d.sum_orb))
+		.y(d => yScale1(d.sum_pf))
 		.curve(curveBasis);
 
 

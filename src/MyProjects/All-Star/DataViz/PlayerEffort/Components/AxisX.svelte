@@ -1,5 +1,5 @@
 <script>
-	let xTicks = [1975,1980,1985,1990,1995,2000,2005,2010,2015,2023];
+	let xTicks = [1975,1980,1985,1990,1995,2000,2005,2010,2014,2018,2025];
 	export let xScale;
 	export let height;
 	export let margin;
