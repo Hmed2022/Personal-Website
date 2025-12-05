@@ -1,53 +1,67 @@
 <script>
+    import { nameId } from '../Stores/misc';
+    import  names  from './names.js';
+    
     const BASE   = '#613D25';
     const HOVER  = '#B89867';
     const ACTIVE = '#AC8B7E';
         
-      export let lineGap = 100;   // distance between first line and second line
-      export let lineGap2 = 60;  
+    export let lineGap = 100;   // distance between first line and second line
+    export let lineGap2 = 60;  
     export let lineGap3 = 478;  // distance between first line and second line
     
-   let activeGroup = null;
-let hoverGroup = null;
-    
-    let name =''
+    let activeGroup = null;
+    let hoverGroup = null;
     
     // Initialize all fills
-let fills = Array(107).fill(BASE);
+    let fills = Array(107).fill(BASE);
 
-function updateFills() {
-  for (let i = 0; i < 107; i++) {
-    const id = i + 1;
-    fills[i] = activeGroup === id ? ACTIVE : hoverGroup === id ? HOVER : BASE;
-  }
-}
+    function updateFills() {
+        for (let i = 0; i < 107; i++) {
+            const id = i + 1;
+            fills[i] = activeGroup === id ? ACTIVE : hoverGroup === id ? HOVER : BASE;
+        }
+    }
 
-function handleClick(id) {
-  console.log('Group clicked:', id);
-  activeGroup = id;
-  updateFills();
-}
+    function handleClick(id) {
+        console.log('Group clicked:', id);
+        activeGroup = id;
+        
+        // 1. Update the store with the clicked id
+        nameId.set(id);
+        
+        // 2. The name display will automatically update through the reactive statement
+        updateFills();
+    }
 
-function handleHover(id) {
-  hoverGroup = id;
-  updateFills();
-}
+    function handleHover(id) {
+        hoverGroup = id;
+        updateFills();
+    }
 
-function handleLeave() {
-  hoverGroup = null;
-  updateFills();
-}
+    function handleLeave() {
+        hoverGroup = null;
+        updateFills();
+    }
 
-function handleKey(id, event) {
-  if (event.key === 'Enter' || event.key === ' ') {
-    event.preventDefault();
-    handleClick(id);
-  }
-}
+    function handleKey(id, event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            handleClick(id);
+        }
+    }
     
-    
-    
-    </script>
+    // Reactive statement: automatically updates when $nameId changes
+    $: currentName = $nameId && names[$nameId] ? names[$nameId] : null;
+</script>
+
+<!-- Display area for the selected name -->
+{#if currentName}
+<div class="name-display">
+    <p class="english-name">{currentName.englishName}</p>
+    <p class="arabic-name">{currentName.arabicName}</p>
+</div>
+{/if}
     
     <svg
       id="Layer_1"
@@ -56,9 +70,6 @@ function handleKey(id, event) {
       viewBox="0 0 740.2 1400"
     
     >
-    
-      
-    
     
          <g
         style="fill: {fills[0]};"
@@ -1591,14 +1602,35 @@ function handleKey(id, event) {
     
     </svg>
             
-    <style>
-      g[tabindex]:focus {
-        outline: none;
-      }
-      /* Some browsers also require this: */
-      g[tabindex]:focus-visible {
-        outline: none;
-      }
+   <style>
+    .name-display {
+        padding: 20px;
+        margin: 20px 0;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        text-align: center;
+    }
     
+    .english-name {
+        font-size: 28px;
+        font-weight: bold;
+        color: #613D25;
+        margin: 10px 0;
+    }
     
-    </style>
+    .arabic-name {
+        font-size: 36px;
+        font-weight: bold;
+        color: #B89867;
+        margin: 10px 0;
+        direction: rtl;
+    }
+    
+    g[tabindex]:focus {
+        outline: none;
+    }
+    
+    g[tabindex]:focus-visible {
+        outline: none;
+    }
+</style>
