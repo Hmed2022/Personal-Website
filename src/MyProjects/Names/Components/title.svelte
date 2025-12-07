@@ -6,8 +6,10 @@
   export let fill = "#613D25";
   export let duration = 500;
   export let delayStep = 20;
+  export let pauseDuration = 5000; // 5 seconds pause after animation
   
   let show = false;
+  let animationKey = 0;
   
   const rects = [
     { x: 32.5, y: 50.2, width: 7.7, height: 7.7 },
@@ -47,81 +49,105 @@
   ];
   
   const baseDelay = rects.length * delayStep;
+  const totalAnimationDuration = baseDelay + duration + 300;
+  
+  let variations = [];
+  
+  function generateVariations() {
+    // Generate completely new variations each time
+    variations = rects.map(() => ({
+      y: Math.random() * 80 - 40, // Random between -40 and 40
+      x: Math.random() * 40 - 20, // Random X offset too
+    }));
+  }
   
   onMount(() => {
+    generateVariations();
     show = true;
+    
+    // Loop: wait for animation to complete + pause, then restart
+    const loop = () => {
+      setTimeout(() => {
+        show = false;
+        setTimeout(() => {
+          animationKey++;
+          generateVariations(); // Generate new variations
+          show = true;
+          loop(); // Continue loop
+        }, 300); // Brief delay for out transition
+      }, totalAnimationDuration + pauseDuration);
+    };
+    
+    loop();
   });
-  
-  function replay() {
-    show = false;
-    setTimeout(() => {
-      show = true;
-    }, 50);
-  }
 </script>
 
 <div>
   <svg
-   viewBox="0 0 226.2 67" width="740.2"
+    viewBox="0 0 226.2 67"
+    width="740.2"
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden="true"
     class="svg-main"
   >
-    {#if show}
-      <!-- Rectangles with staggered animations -->
-      {#each rects as r, i}
-        <rect
-          x={r.x}
-          y={r.y}
-          width={r.width}
-          height={r.height}
+    {#key animationKey}
+      {#if show}
+        <!-- Rectangles with staggered animations and variations -->
+        {#each rects as r, i}
+          <rect
+            x={r.x}
+            y={r.y}
+            width={r.width}
+            height={r.height}
+            fill={fill}
+            in:fly|global={{ 
+              y: variations[i]?.y || 40,
+              x: variations[i]?.x || 0,
+              opacity: 0, 
+              duration, 
+              delay: i * delayStep, 
+              easing: cubicOut 
+            }}
+            out:fly|global={{ y: -30, opacity: 0, duration: 250 }}
+          />
+        {/each}
+        
+        <!-- Paths -->
+        <path
           fill={fill}
-          in:fly|global={{ y: 40, opacity: 0, duration, delay: i * delayStep, easing: cubicOut }}
-          out:fly|global={{ y: 40, opacity: 0, duration: 200 }}
+          d="M172.2,22.7h-7.7v22.9h23.1v-22.9h-7.7M179.9,37.9h-7.8v-7.6h7.8v7.6Z"
+          in:fly|global={{ y: variations[rects.length]?.y || 20, opacity: 0, duration, delay: baseDelay + 120, easing: cubicOut }}
+          out:fly|global={{ y: -20, opacity: 0, duration: 250 }}
         />
-      {/each}
-      
-      <!-- Paths -->
-      <path
-        fill={fill}
-        d="M172.2,22.7h-7.7v22.9h23.1v-22.9h-7.7M179.9,37.9h-7.8v-7.6h7.8v7.6Z"
-        in:fly|global={{ y: 20, opacity: 0, duration, delay: baseDelay + 120, easing: cubicOut }}
-        out:fly|global={{ y: 20, opacity: 0, duration: 200 }}
-      />
-      <path
-        fill={fill}
-        d="M107.3,44.1h-7.7v22.9h23.1v-22.9h-7.7M115,59.3h-7.8v-7.6h7.8v7.6Z"
-        in:fly|global={{ y: 20, opacity: 0, duration, delay: baseDelay + 180, easing: cubicOut }}
-        out:fly|global={{ y: 20, opacity: 0, duration: 200 }}
-      />
-      
-      <!-- Polygons -->
-      <polygon
-        fill={fill}
-        points="225.7 4 225.7 0 217.6 0 217.6 7.4 214 7.4 214 11.6 225.7 11.6 225.7 7.4 221.8 7.4 221.8 4 225.7 4"
-        in:fly|global={{ y: -20, opacity: 0, duration, delay: baseDelay + 240, easing: cubicOut }}
-        out:fly|global={{ y: -20, opacity: 0, duration: 200 }}
-      />
-      <polygon
-        fill={fill}
-        points="204.8 31.4 208.8 31.4 208.8 23.4 201.5 23.4 201.5 19.8 197.3 19.8 197.3 31.4 201.5 31.4 201.5 27.6 204.8 27.6 204.8 31.4"
-        in:fly|global={{ y: -20, opacity: 0, duration, delay: baseDelay + 300, easing: cubicOut }}
-        out:fly|global={{ y: -20, opacity: 0, duration: 200 }}
-      />
-    {/if}
+        <path
+          fill={fill}
+          d="M107.3,44.1h-7.7v22.9h23.1v-22.9h-7.7M115,59.3h-7.8v-7.6h7.8v7.6Z"
+          in:fly|global={{ y: variations[rects.length + 1]?.y || 20, opacity: 0, duration, delay: baseDelay + 180, easing: cubicOut }}
+          out:fly|global={{ y: -20, opacity: 0, duration: 250 }}
+        />
+        
+        <!-- Polygons -->
+        <polygon
+          fill={fill}
+          points="225.7 4 225.7 0 217.6 0 217.6 7.4 214 7.4 214 11.6 225.7 11.6 225.7 7.4 221.8 7.4 221.8 4 225.7 4"
+          in:fly|global={{ y: -25, opacity: 0, duration, delay: baseDelay + 240, easing: cubicOut }}
+          out:fly|global={{ y: 20, opacity: 0, duration: 250 }}
+        />
+        <polygon
+          fill={fill}
+          points="204.8 31.4 208.8 31.4 208.8 23.4 201.5 23.4 201.5 19.8 197.3 19.8 197.3 31.4 201.5 31.4 201.5 27.6 204.8 27.6 204.8 31.4"
+          in:fly|global={{ y: -25, opacity: 0, duration, delay: baseDelay + 300, easing: cubicOut }}
+          out:fly|global={{ y: 20, opacity: 0, duration: 250 }}
+        />
+      {/if}
+    {/key}
   </svg>
-  
 </div>
 
 <style>
-
-  
   .svg-main {
     width: 100%;
     max-width: 800px;
     height: auto;
-    /* filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3)); */
   }
-  
-
 </style>

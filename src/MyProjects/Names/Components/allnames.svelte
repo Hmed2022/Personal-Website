@@ -1,5 +1,5 @@
 <script>
-    import { nameId } from '../Stores/misc';
+    import { nameId} from '../Stores/misc';
     import  names  from './names.js';
     
     const BASE   = '#613D25';
@@ -10,7 +10,7 @@
     export let lineGap2 = 60;  
     export let lineGap3 = 478;  // distance between first line and second line
     
-    let activeGroup = null;
+    $: activeGroup = $nameId;
     let hoverGroup = null;
     
     // Initialize all fills
@@ -50,24 +50,27 @@
             handleClick(id);
         }
     }
+
+
     
     // Reactive statement: automatically updates when $nameId changes
     $: currentName = $nameId && names[$nameId] ? names[$nameId] : null;
 </script>
 
-<!-- Display area for the selected name -->
+
 {#if currentName}
-<div class="name-display">
-    <p class="english-name">{currentName.englishName}</p>
+  <div class="name-display">
     <p class="arabic-name">{currentName.arabicName}</p>
-</div>
+    <span class="separator">|</span>
+    <p class="english-name">{currentName.englishName}</p>
+  </div>
 {/if}
     
     <svg
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
-      viewBox="0 0 740.2 1400"
+      viewBox="0 0 740.2 1200"
     
     >
     
@@ -1601,36 +1604,66 @@
     
     
     </svg>
-            
-   <style>
-    .name-display {
-        padding: 20px;
-        margin: 20px 0;
-        background-color: #f5f5f5;
-        border-radius: 8px;
-        text-align: center;
-    }
-    
-    .english-name {
-        font-size: 28px;
-        font-weight: bold;
-        color: #613D25;
-        margin: 10px 0;
-    }
-    
-    .arabic-name {
-        font-size: 36px;
-        font-weight: bold;
-        color: #B89867;
-        margin: 10px 0;
-        direction: rtl;
-    }
-    
-    g[tabindex]:focus {
-        outline: none;
-    }
-    
-    g[tabindex]:focus-visible {
-        outline: none;
-    }
+
+
+<style>
+  @font-face {
+    font-family: 'NotoKufiArabic';
+    src: url('../Assests/NotoKufiArabic-Regular.ttf') format('truetype');
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: 'NotoKufiArabic';
+    src: url('../Assests/NotoKufiArabic-Bold.ttf') format('truetype');
+    font-weight: 700;
+  }
+
+  @font-face {
+    font-family: 'JawiKufi';
+    src: url('../Assests/JawiKufi-nOR1.ttf') format('truetype');
+    font-weight: 400;
+  }
+
+  .name-display {
+    display: flex;
+    justify-content: space-between; /* pushes items to edges */
+    align-items: center;
+    width: 100%; /* takes full width */
+  }
+
+  .arabic-name {
+    font-family: 'NotoKufiArabic', sans-serif;
+    font-weight: 700;
+    font-size: 2.5vw;
+    direction: rtl;
+    margin: 0;
+    color: #603D25;
+    order: 3; /* appears on the right */
+  }
+
+  .separator {
+    order: 2; /* appears in center */
+     font-size: 6vw;
+    color: #603D25;
+    position: absolute; /* position it absolutely */
+    left: 50%; /* center horizontally */
+    transform: translateX(-50%); /* adjust for element width */
+  }
+
+  .english-name {
+    font-family: 'JawiKufi', sans-serif;
+     font-size: 5vw;
+    color: #603D25;
+    margin: 0;
+    order: 1; /* appears on the left */
+  }
+
+  g[tabindex]:focus {
+    outline: none;
+  }
+  
+  g[tabindex]:focus-visible {
+    outline: none;
+  }
 </style>

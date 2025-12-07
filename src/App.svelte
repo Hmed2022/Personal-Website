@@ -31,7 +31,13 @@
       .split('?')[0]       // drop ?query
       .replace(/\/+$/, ''); // drop trailing slash
 
-  $: hideHeader = normalizedPath === '/anniv';
+
+ $: hideHeader = 
+    normalizedPath === '/anniv' ||
+    normalizedPath === '/names' ||
+    normalizedPath === '/allstar' ||
+    normalizedPath === '/tuninfo';
+
 </script>
 
 {#if !hideHeader}

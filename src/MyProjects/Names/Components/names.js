@@ -6,6 +6,9 @@ export default {
     englishName: "Ar-Rahman",
     arabicName: "ٱلرَّحْمَٰنُ",
     frequency: 57,
+    timestamp1: 29,
+    timestamp2: null,
+    timestamp3: null,
   },
   12: {
     id: 12,
@@ -13,6 +16,9 @@ export default {
     englishName: "Ar-Raheem",
     arabicName: "ٱلرَّحِيمُ",
     frequency: 123,
+    timestamp1: 30,
+    timestamp2: null,
+    timestamp3: null,
   },
   8: {
     id: 8,
@@ -20,6 +26,9 @@ export default {
     englishName: "Al-Malik",
     arabicName: "ٱلْمَلِكُ",
     frequency: null,
+    timestamp1: 32,
+    timestamp2: null,
+    timestamp3: null,
   },
   11: {
     id: 11,
@@ -27,6 +36,9 @@ export default {
     englishName: "Al-Quddus",
     arabicName: "ٱلْقُدُّوسُ",
     frequency: 2,
+    timestamp1: 12,
+    timestamp2: null,
+    timestamp3: null,
   },
   10: {
     id: 10,
@@ -34,6 +46,9 @@ export default {
     englishName: "As-Salam",
     arabicName: "ٱلسَّلَامُ",
     frequency: 1,
+    timestamp1: 15,
+    timestamp2: null,
+    timestamp3: null,
   },
   9: {
     id: 9,
@@ -41,6 +56,9 @@ export default {
     englishName: "Al-Mu'min",
     arabicName: "ٱلْمُؤْمِنُ",
     frequency: 1,
+    timestamp1: 18,
+    timestamp2: null,
+    timestamp3: null,
   },
   18: {
     id: 18,
@@ -48,6 +66,9 @@ export default {
     englishName: "Al-Muhaymin",
     arabicName: "ٱلْمُهَيْمِنُ",
     frequency: null,
+    timestamp1: 21,
+    timestamp2: null,
+    timestamp3: null,
   },
   19: {
     id: 19,
@@ -55,6 +76,9 @@ export default {
     englishName: "Al-'Aziz",
     arabicName: "ٱلْعَزِيزُ",
     frequency: null,
+    timestamp1: 24,
+    timestamp2: null,
+    timestamp3: null,
   },
   14: {
     id: 14,
@@ -62,6 +86,9 @@ export default {
     englishName: "Al-Jabbar",
     arabicName: "ٱلْجَبَّارُ",
     frequency: null,
+    timestamp1: 27,
+    timestamp2: null,
+    timestamp3: null,
   },
   15: {
     id: 15,
@@ -69,6 +96,9 @@ export default {
     englishName: "Al-Mutakabbir",
     arabicName: "ٱلْمُتَكَبِّرُ",
     frequency: null,
+    timestamp1: 30,
+    timestamp2: null,
+    timestamp3: null,
   },
   16: {
     id: 16,
@@ -76,6 +106,9 @@ export default {
     englishName: "Al-Khaliq",
     arabicName: "ٱلْخَالِقُ",
     frequency: null,
+    timestamp1: 33,
+    timestamp2: null,
+    timestamp3: null,
   },
   17: {
     id: 17,
@@ -83,6 +116,9 @@ export default {
     englishName: "Al-Bari'",
     arabicName: "ٱلْبَارِئُ",
     frequency: null,
+    timestamp1: 36,
+    timestamp2: null,
+    timestamp3: null,
   },
   27: {
     id: 27,
@@ -90,6 +126,9 @@ export default {
     englishName: "Al-Musawwir",
     arabicName: "ٱلْمُصَوِّرُ",
     frequency: null,
+    timestamp1: 39,
+    timestamp2: null,
+    timestamp3: null,
   },
   64: {
     id: 64,
@@ -97,6 +136,9 @@ export default {
     englishName: "Al-Ghaffar",
     arabicName: "ٱلْغَفَّارُ",
     frequency: null,
+    timestamp1: 42,
+    timestamp2: null,
+    timestamp3: null,
   },
   65: {
     id: 65,
@@ -104,6 +146,9 @@ export default {
     englishName: "Al-Qahhar",
     arabicName: "ٱلْقَهَّارُ",
     frequency: null,
+    timestamp1: 45,
+    timestamp2: null,
+    timestamp3: null,
   },
   58: {
     id: 58,
@@ -111,6 +156,9 @@ export default {
     englishName: "Al-Wahhab",
     arabicName: "ٱلْوَهَّابُ",
     frequency: null,
+    timestamp1: 48,
+    timestamp2: null,
+    timestamp3: null,
   },
   66: {
     id: 66,
@@ -118,6 +166,9 @@ export default {
     englishName: "Ar-Razzaq",
     arabicName: "ٱلرَّزَّاقُ",
     frequency: null,
+    timestamp1: 51,
+    timestamp2: null,
+    timestamp3: null,
   },
   67: {
     id: 67,
@@ -125,6 +176,9 @@ export default {
     englishName: "Al-Fattah",
     arabicName: "ٱلْفَتَّاحُ",
     frequency: null,
+    timestamp1: 54,
+    timestamp2: null,
+    timestamp3: null,
   },
   63: {
     id: 63,
@@ -132,6 +186,9 @@ export default {
     englishName: "Al-'Alim",
     arabicName: "ٱلْعَلِيمُ",
     frequency: null,
+    timestamp1: 57,
+    timestamp2: null,
+    timestamp3: null,
   },
   28: {
     id: 28,
@@ -139,6 +196,9 @@ export default {
     englishName: "Al-Qabid",
     arabicName: "ٱلْقَابِضُ",
     frequency: null,
+    timestamp1: 60,
+    timestamp2: null,
+    timestamp3: null,
   },
   29: {
     id: 29,
@@ -146,6 +206,9 @@ export default {
     englishName: "Al-Basit",
     arabicName: "ٱلْبَاسِطُ",
     frequency: null,
+    timestamp1: 63,
+    timestamp2: null,
+    timestamp3: null,
   },
   57: {
     id: 57,
@@ -153,6 +216,9 @@ export default {
     englishName: "Al-Khafid",
     arabicName: "ٱلْخَافِضُ",
     frequency: null,
+    timestamp1: 66,
+    timestamp2: null,
+    timestamp3: null,
   },
   59: {
     id: 59,
@@ -160,6 +226,9 @@ export default {
     englishName: "Ar-Rafi'",
     arabicName: "ٱلرَّافِعُ",
     frequency: null,
+    timestamp1: 69,
+    timestamp2: null,
+    timestamp3: null,
   },
   60: {
     id: 60,
@@ -167,6 +236,9 @@ export default {
     englishName: "Al-Mu'izz",
     arabicName: "ٱلْمُعِزُّ",
     frequency: null,
+    timestamp1: 72,
+    timestamp2: null,
+    timestamp3: null,
   },
   46: {
     id: 46,
@@ -174,6 +246,9 @@ export default {
     englishName: "Al-Mudhill",
     arabicName: "ٱلْمُذِلُّ",
     frequency: null,
+    timestamp1: 75,
+    timestamp2: null,
+    timestamp3: null,
   },
   45: {
     id: 45,
@@ -181,6 +256,9 @@ export default {
     englishName: "As-Sami'",
     arabicName: "ٱلسَّمِيعُ",
     frequency: null,
+    timestamp1: 78,
+    timestamp2: null,
+    timestamp3: null,
   },
   43: {
     id: 43,
@@ -188,6 +266,9 @@ export default {
     englishName: "Al-Basir",
     arabicName: "ٱلْبَصِيرُ",
     frequency: null,
+    timestamp1: 81,
+    timestamp2: null,
+    timestamp3: null,
   },
   25: {
     id: 25,
@@ -195,6 +276,9 @@ export default {
     englishName: "Al-Hakam",
     arabicName: "ٱلْحَكَمُ",
     frequency: null,
+    timestamp1: 84,
+    timestamp2: null,
+    timestamp3: null,
   },
   26: {
     id: 26,
@@ -202,6 +286,9 @@ export default {
     englishName: "Al-'Adl",
     arabicName: "ٱلْعَدْلُ",
     frequency: null,
+    timestamp1: 87,
+    timestamp2: null,
+    timestamp3: null,
   },
   61: {
     id: 61,
@@ -209,6 +296,9 @@ export default {
     englishName: "Al-Latif",
     arabicName: "ٱللَّطِيفُ",
     frequency: null,
+    timestamp1: 90,
+    timestamp2: null,
+    timestamp3: null,
   },
   47: {
     id: 47,
@@ -216,6 +306,9 @@ export default {
     englishName: "Al-Khabir",
     arabicName: "ٱلْخَبِيرُ",
     frequency: null,
+    timestamp1: 93,
+    timestamp2: null,
+    timestamp3: null,
   },
   56: {
     id: 56,
@@ -223,6 +316,9 @@ export default {
     englishName: "Al-Halim",
     arabicName: "ٱلْحَلِيمُ",
     frequency: null,
+    timestamp1: 96,
+    timestamp2: null,
+    timestamp3: null,
   },
   44: {
     id: 44,
@@ -230,6 +326,9 @@ export default {
     englishName: "Al-'Azim",
     arabicName: "ٱلْعَظِيمُ",
     frequency: null,
+    timestamp1: 99,
+    timestamp2: null,
+    timestamp3: null,
   },
   42: {
     id: 42,
@@ -237,6 +336,9 @@ export default {
     englishName: "Al-Ghafur",
     arabicName: "ٱلْغَفُورُ",
     frequency: null,
+    timestamp1: 102,
+    timestamp2: null,
+    timestamp3: null,
   },
   62: {
     id: 62,
@@ -244,6 +346,9 @@ export default {
     englishName: "Ash-Shakur",
     arabicName: "ٱلشَّكُورُ",
     frequency: null,
+    timestamp1: 105,
+    timestamp2: null,
+    timestamp3: null,
   },
   35: {
     id: 35,
@@ -251,6 +356,9 @@ export default {
     englishName: "Al-'Aliyy",
     arabicName: "ٱلْعَلِيُّ",
     frequency: null,
+    timestamp1: 108,
+    timestamp2: null,
+    timestamp3: null,
   },
   50: {
     id: 50,
@@ -258,6 +366,9 @@ export default {
     englishName: "Al-Kabir",
     arabicName: "ٱلْكَبِيرُ",
     frequency: null,
+    timestamp1: 111,
+    timestamp2: null,
+    timestamp3: null,
   },
   48: {
     id: 48,
@@ -265,6 +376,9 @@ export default {
     englishName: "Al-Hafiz",
     arabicName: "ٱلْحَفِيظُ",
     frequency: null,
+    timestamp1: 114,
+    timestamp2: null,
+    timestamp3: null,
   },
   30: {
     id: 30,
@@ -272,6 +386,9 @@ export default {
     englishName: "Al-Muqit",
     arabicName: "ٱلْمُقِيتُ",
     frequency: null,
+    timestamp1: 117,
+    timestamp2: null,
+    timestamp3: null,
   },
   41: {
     id: 41,
@@ -279,6 +396,9 @@ export default {
     englishName: "Al-Hasib",
     arabicName: "ٱلْحَسِيبُ",
     frequency: null,
+    timestamp1: 120,
+    timestamp2: null,
+    timestamp3: null,
   },
   34: {
     id: 34,
@@ -286,6 +406,9 @@ export default {
     englishName: "Al-Jalil",
     arabicName: "ٱلْجَلِيلُ",
     frequency: null,
+    timestamp1: 123,
+    timestamp2: null,
+    timestamp3: null,
   },
   40: {
     id: 40,
@@ -293,6 +416,9 @@ export default {
     englishName: "Al-Karim",
     arabicName: "ٱلْكَرِيمُ",
     frequency: null,
+    timestamp1: 126,
+    timestamp2: null,
+    timestamp3: null,
   },
   55: {
     id: 55,
@@ -300,6 +426,9 @@ export default {
     englishName: "Ar-Raqib",
     arabicName: "ٱلرَّقِيبُ",
     frequency: null,
+    timestamp1: 129,
+    timestamp2: null,
+    timestamp3: null,
   },
   49: {
     id: 49,
@@ -307,6 +436,9 @@ export default {
     englishName: "Al-Mujib",
     arabicName: "ٱلْمُجِيبُ",
     frequency: null,
+    timestamp1: 132,
+    timestamp2: null,
+    timestamp3: null,
   },
   24: {
     id: 24,
@@ -314,6 +446,9 @@ export default {
     englishName: "Al-Wasi'",
     arabicName: "ٱلْوَاسِعُ",
     frequency: null,
+    timestamp1: 135,
+    timestamp2: null,
+    timestamp3: null,
   },
   31: {
     id: 31,
@@ -321,6 +456,9 @@ export default {
     englishName: "Al-Hakim",
     arabicName: "ٱلْحَكِيمُ",
     frequency: null,
+    timestamp1: 138,
+    timestamp2: null,
+    timestamp3: null,
   },
   23: {
     id: 23,
@@ -328,6 +466,9 @@ export default {
     englishName: "Al-Wadud",
     arabicName: "ٱلْوَدُودُ",
     frequency: null,
+    timestamp1: 141,
+    timestamp2: null,
+    timestamp3: null,
   },
   36: {
     id: 36,
@@ -335,6 +476,9 @@ export default {
     englishName: "Al-Majid",
     arabicName: "ٱلْمَجِيدُ",
     frequency: null,
+    timestamp1: 144,
+    timestamp2: null,
+    timestamp3: null,
   },
   51: {
     id: 51,
@@ -342,6 +486,9 @@ export default {
     englishName: "Al-Ba'ith",
     arabicName: "ٱلْبَاعِثُ",
     frequency: null,
+    timestamp1: 147,
+    timestamp2: null,
+    timestamp3: null,
   },
   52: {
     id: 52,
@@ -349,6 +496,9 @@ export default {
     englishName: "Ash-Shahid",
     arabicName: "ٱلشَّهِيدُ",
     frequency: null,
+    timestamp1: 150,
+    timestamp2: null,
+    timestamp3: null,
   },
   53: {
     id: 53,
@@ -356,6 +506,9 @@ export default {
     englishName: "Al-Haqq",
     arabicName: "ٱلْحَقُّ",
     frequency: null,
+    timestamp1: 153,
+    timestamp2: null,
+    timestamp3: null,
   },
   33: {
     id: 33,
@@ -363,6 +516,9 @@ export default {
     englishName: "Al-Wakil",
     arabicName: "ٱلْوَكِيلُ",
     frequency: null,
+    timestamp1: 156,
+    timestamp2: null,
+    timestamp3: null,
   },
   37: {
     id: 37,
@@ -370,6 +526,9 @@ export default {
     englishName: "Al-Qawiyy",
     arabicName: "ٱلْقَوِيُّ",
     frequency: null,
+    timestamp1: 159,
+    timestamp2: null,
+    timestamp3: null,
   },
   39: {
     id: 39,
@@ -377,6 +536,9 @@ export default {
     englishName: "Al-Matin",
     arabicName: "ٱلْمَتِينُ",
     frequency: null,
+    timestamp1: 162,
+    timestamp2: null,
+    timestamp3: null,
   },
   20: {
     id: 20,
@@ -384,6 +546,9 @@ export default {
     englishName: "Al-Waliyy",
     arabicName: "ٱلْوَلِيُّ",
     frequency: null,
+    timestamp1: 165,
+    timestamp2: null,
+    timestamp3: null,
   },
   54: {
     id: 54,
@@ -391,6 +556,9 @@ export default {
     englishName: "Al-Hamid",
     arabicName: "ٱلْحَمِيدُ",
     frequency: null,
+    timestamp1: 168,
+    timestamp2: null,
+    timestamp3: null,
   },
   21: {
     id: 21,
@@ -398,6 +566,9 @@ export default {
     englishName: "Al-Muhsi",
     arabicName: "ٱلْمُحْصِي",
     frequency: null,
+    timestamp1: 171,
+    timestamp2: null,
+    timestamp3: null,
   },
   32: {
     id: 32,
@@ -405,6 +576,9 @@ export default {
     englishName: "Al-Mubdi'",
     arabicName: "ٱلْمُبْدِئُ",
     frequency: null,
+    timestamp1: 174,
+    timestamp2: null,
+    timestamp3: null,
   },
   38: {
     id: 38,
@@ -412,6 +586,9 @@ export default {
     englishName: "Al-Mu'id",
     arabicName: "ٱلْمُعِيدُ",
     frequency: null,
+    timestamp1: 177,
+    timestamp2: null,
+    timestamp3: null,
   },
   22: {
     id: 22,
@@ -419,6 +596,9 @@ export default {
     englishName: "Al-Muhyi",
     arabicName: "ٱلْمُحْيِي",
     frequency: null,
+    timestamp1: 180,
+    timestamp2: null,
+    timestamp3: null,
   },
   102: {
     id: 102,
@@ -426,6 +606,9 @@ export default {
     englishName: "Al-Mumit",
     arabicName: "ٱلْمُمِيتُ",
     frequency: null,
+    timestamp1: 183,
+    timestamp2: null,
+    timestamp3: null,
   },
   68: {
     id: 68,
@@ -433,6 +616,9 @@ export default {
     englishName: "Al-Hayy",
     arabicName: "ٱلْحَيُّ",
     frequency: 5,
+    timestamp1: 186,
+    timestamp2: null,
+    timestamp3: null,
   },
   89: {
     id: 89,
@@ -440,6 +626,9 @@ export default {
     englishName: "Al-Qayyum",
     arabicName: "ٱلْقَيُّومُ",
     frequency: 3,
+    timestamp1: 189,
+    timestamp2: null,
+    timestamp3: null,
   },
   90: {
     id: 90,
@@ -447,6 +636,9 @@ export default {
     englishName: "Al-Wajid",
     arabicName: "ٱلْوَاجِدُ",
     frequency: null,
+    timestamp1: 192,
+    timestamp2: null,
+    timestamp3: null,
   },
   100: {
     id: 100,
@@ -454,6 +646,9 @@ export default {
     englishName: "Al-Majid",
     arabicName: "ٱلْمَاجِدُ",
     frequency: null,
+    timestamp1: 195,
+    timestamp2: null,
+    timestamp3: null,
   },
   70: {
     id: 70,
@@ -461,6 +656,9 @@ export default {
     englishName: "Al-Wahid",
     arabicName: "ٱلْوَاحِدُ",
     frequency: null,
+    timestamp1: 198,
+    timestamp2: null,
+    timestamp3: null,
   },
   71: {
     id: 71,
@@ -468,6 +666,9 @@ export default {
     englishName: "As-Samad",
     arabicName: "ٱلصَّمَدُ",
     frequency: null,
+    timestamp1: 204,
+    timestamp2: null,
+    timestamp3: null,
   },
   88: {
     id: 88,
@@ -475,6 +676,9 @@ export default {
     englishName: "Al-Qadir",
     arabicName: "ٱلْقَادِرُ",
     frequency: null,
+    timestamp1: 207,
+    timestamp2: null,
+    timestamp3: null,
   },
   101: {
     id: 101,
@@ -482,6 +686,9 @@ export default {
     englishName: "Al-Muqtadir",
     arabicName: "ٱلْمُقْتَدِرُ",
     frequency: null,
+    timestamp1: 210,
+    timestamp2: null,
+    timestamp3: null,
   },
   99: {
     id: 99,
@@ -489,6 +696,9 @@ export default {
     englishName: "Al-Muqaddim",
     arabicName: "ٱلْمُقَدِّمُ",
     frequency: null,
+    timestamp1: 213,
+    timestamp2: null,
+    timestamp3: null,
   },
   104: {
     id: 104,
@@ -496,6 +706,9 @@ export default {
     englishName: "Al-Mu'akhkhir",
     arabicName: "ٱلْمُؤَخِّرُ",
     frequency: null,
+    timestamp1: 216,
+    timestamp2: null,
+    timestamp3: null,
   },
   69: {
     id: 69,
@@ -503,6 +716,9 @@ export default {
     englishName: "Al-Awwal",
     arabicName: "ٱلْأَوَّلُ",
     frequency: null,
+    timestamp1: 219,
+    timestamp2: null,
+    timestamp3: null,
   },
   105: {
     id: 105,
@@ -510,6 +726,9 @@ export default {
     englishName: "Al-Akhir",
     arabicName: "ٱلْآخِرُ",
     frequency: null,
+    timestamp1: 222,
+    timestamp2: null,
+    timestamp3: null,
   },
   75: {
     id: 75,
@@ -517,6 +736,9 @@ export default {
     englishName: "Az-Zahir",
     arabicName: "ٱلْظَّاهِرُ",
     frequency: null,
+    timestamp1: 225,
+    timestamp2: null,
+    timestamp3: null,
   },
   77: {
     id: 77,
@@ -524,6 +746,9 @@ export default {
     englishName: "Al-Batin",
     arabicName: "ٱلْبَاطِنُ",
     frequency: null,
+    timestamp1: 228,
+    timestamp2: null,
+    timestamp3: null,
   },
   73: {
     id: 73,
@@ -531,6 +756,9 @@ export default {
     englishName: "Al-Wali",
     arabicName: "ٱلْوَالِي",
     frequency: null,
+    timestamp1: 231,
+    timestamp2: null,
+    timestamp3: null,
   },
   91: {
     id: 91,
@@ -538,6 +766,9 @@ export default {
     englishName: "Al-Muta'ali",
     arabicName: "ٱلْمُتَعَالِي",
     frequency: null,
+    timestamp1: 234,
+    timestamp2: null,
+    timestamp3: null,
   },
   92: {
     id: 92,
@@ -545,6 +776,9 @@ export default {
     englishName: "Al-Barr",
     arabicName: "ٱلْبَرُّ",
     frequency: null,
+    timestamp1: 237,
+    timestamp2: null,
+    timestamp3: null,
   },
   93: {
     id: 93,
@@ -552,6 +786,9 @@ export default {
     englishName: "At-Tawwab",
     arabicName: "ٱلتَّوَّابُ",
     frequency: null,
+    timestamp1: 240,
+    timestamp2: null,
+    timestamp3: null,
   },
   86: {
     id: 86,
@@ -559,6 +796,9 @@ export default {
     englishName: "Al-Muntaqim",
     arabicName: "ٱلْمُنْتَقِمُ",
     frequency: null,
+    timestamp1: 243,
+    timestamp2: null,
+    timestamp3: null,
   },
   76: {
     id: 76,
@@ -566,6 +806,9 @@ export default {
     englishName: "Al-'Afuww",
     arabicName: "ٱلْعَفُوُّ",
     frequency: null,
+    timestamp1: 246,
+    timestamp2: null,
+    timestamp3: null,
   },
   103: {
     id: 103,
@@ -573,6 +816,9 @@ export default {
     englishName: "Ar-Ra'uf",
     arabicName: "ٱلرَّؤُوفُ",
     frequency: null,
+    timestamp1: 249,
+    timestamp2: null,
+    timestamp3: null,
   },
   72: {
     id: 72,
@@ -580,6 +826,9 @@ export default {
     englishName: "Malik-ul-Mulk",
     arabicName: "مَالِكُ ٱلْمُلْكِ",
     frequency: null,
+    timestamp1: 252,
+    timestamp2: null,
+    timestamp3: null,
   },
   106: {
     id: 106,
@@ -587,6 +836,9 @@ export default {
     englishName: "Dhul-Jalali wal-Ikram",
     arabicName: "ذُو ٱلْجَلَالِ وَٱلْإِكْرَامِ",
     frequency: null,
+    timestamp1: 255,
+    timestamp2: null,
+    timestamp3: null,
   },
   85: {
     id: 85,
@@ -594,6 +846,9 @@ export default {
     englishName: "Al-Muqsit",
     arabicName: "ٱلْمُقْسِطُ",
     frequency: null,
+    timestamp1: 258,
+    timestamp2: null,
+    timestamp3: null,
   },
   81: {
     id: 81,
@@ -601,6 +856,9 @@ export default {
     englishName: "Al-Jami'",
     arabicName: "ٱلْجَامِعُ",
     frequency: null,
+    timestamp1: 261,
+    timestamp2: null,
+    timestamp3: null,
   },
   84: {
     id: 84,
@@ -608,6 +866,9 @@ export default {
     englishName: "Al-Ghaniyy",
     arabicName: "ٱلْغَنِيُّ",
     frequency: null,
+    timestamp1: 264,
+    timestamp2: null,
+    timestamp3: null,
   },
   95: {
     id: 95,
@@ -615,6 +876,9 @@ export default {
     englishName: "Al-Mughni",
     arabicName: "ٱلْمُغْنِي",
     frequency: null,
+    timestamp1: 267,
+    timestamp2: null,
+    timestamp3: null,
   },
   94: {
     id: 94,
@@ -622,6 +886,9 @@ export default {
     englishName: "Al-Mani'",
     arabicName: "ٱلْمَانِعُ",
     frequency: null,
+    timestamp1: 270,
+    timestamp2: null,
+    timestamp3: null,
   },
   87: {
     id: 87,
@@ -629,6 +896,9 @@ export default {
     englishName: "Ad-Darr",
     arabicName: "ٱلضَّارَّ",
     frequency: null,
+    timestamp1: 273,
+    timestamp2: null,
+    timestamp3: null,
   },
   80: {
     id: 80,
@@ -636,6 +906,9 @@ export default {
     englishName: "An-Nafi'",
     arabicName: "ٱلنَّافِعُ",
     frequency: null,
+    timestamp1: 276,
+    timestamp2: null,
+    timestamp3: null,
   },
   78: {
     id: 78,
@@ -643,6 +916,9 @@ export default {
     englishName: "An-Nur",
     arabicName: "ٱلنُّورُ",
     frequency: null,
+    timestamp1: 279,
+    timestamp2: null,
+    timestamp3: null,
   },
   74: {
     id: 74,
@@ -650,6 +926,9 @@ export default {
     englishName: "Al-Hadi",
     arabicName: "ٱلْهَادِي",
     frequency: null,
+    timestamp1: 282,
+    timestamp2: null,
+    timestamp3: null,
   },
   97: {
     id: 97,
@@ -657,6 +936,9 @@ export default {
     englishName: "Al-Badi'",
     arabicName: "ٱلْبَدِيعُ",
     frequency: null,
+    timestamp1: 285,
+    timestamp2: null,
+    timestamp3: null,
   },
   96: {
     id: 96,
@@ -664,6 +946,9 @@ export default {
     englishName: "Al-Baqi",
     arabicName: "ٱلْبَاقِي",
     frequency: null,
+    timestamp1: 288,
+    timestamp2: null,
+    timestamp3: null,
   },
   79: {
     id: 79,
@@ -671,6 +956,9 @@ export default {
     englishName: "Al-Warith",
     arabicName: "ٱلْوَارِثُ",
     frequency: null,
+    timestamp1: 291,
+    timestamp2: null,
+    timestamp3: null,
   },
   82: {
     id: 82,
@@ -678,6 +966,9 @@ export default {
     englishName: "Ar-Rashid",
     arabicName: "ٱلْرَّشِيدُ",
     frequency: null,
+    timestamp1: 294,
+    timestamp2: null,
+    timestamp3: null,
   },
   83: {
     id: 83,
@@ -685,5 +976,8 @@ export default {
     englishName: "As-Sabur",
     arabicName: "ٱلصَّبُورُ",
     frequency: null,
+    timestamp1: 297,
+    timestamp2: null,
+    timestamp3: null,
   },
 };
