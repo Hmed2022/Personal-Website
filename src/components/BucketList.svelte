@@ -31,7 +31,7 @@ having already attended games in these arenas:
 <div class="decArena">
 	<div class="decArena3">
 		<p class='descNBA'>
-			16/30</p>
+			17/30</p>
 			
 			{#if multiValue =='East'}
 			<p class='descNBA4'  style='margin:2%'>
@@ -39,7 +39,7 @@ having already attended games in these arenas:
 				Detroit Pistons, Indiana Pacers,
 				Washington Wizards, Brooklyn Nets, Chicago Bulls,
 				Milwaukee Bucks, Boston Celtics, Philadelphia 76ers,
-				New York Knicks
+				New York Knicks, Charlotte Hornets
 			</p>
 			{:else if multiValue =='West'}
 			<p class='descNBA4' style='margin:2%'>

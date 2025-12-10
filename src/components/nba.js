@@ -5,7 +5,7 @@ import BosPath from "../assets/NBALogo/bos.jpg";
 import BknLogo from "../assets/NBALogo/Nets.png";
 import BknPath from "../assets/NBALogo/nets.jpg";
 import ChaLogo from "../assets/NBALogo/Hornets.png";
-// import ChaPath from "../assets/NBALogo/hornets.jpg";
+import ChaPath from "../assets/NBALogo/hornet.jpg";
 import ChiLogo from "../assets/NBALogo/Bulls.png";
 import ChiPath from "../assets/NBALogo/bull.jpg";
 import CleLogo from "../assets/NBALogo/Cavaliers.png";
@@ -72,6 +72,7 @@ export default [
     date: "12/03/22",
     opp: "Magic",
     alt: "Spectrum Center Picture",
+    path: ChaPath,
   },
   {
     logo: ChiLogo,
