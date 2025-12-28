@@ -27,43 +27,54 @@ having already attended games in these arenas:
 	</p>	
 </div>
 
-
-<div class="decArena">
-	<div class="decArena3">
-		<p class='descNBA'>
-			17/30</p>
-			
-			{#if multiValue =='East'}
-			<p class='descNBA4'  style='margin:2%'>
-				Atlanta Hawks, Cleveland Cavaliers,
-				Detroit Pistons, Indiana Pacers,
-				Washington Wizards, Brooklyn Nets, Chicago Bulls,
-				Milwaukee Bucks, Boston Celtics, Philadelphia 76ers,
-				New York Knicks, Charlotte Hornets
-			</p>
-			{:else if multiValue =='West'}
-			<p class='descNBA4' style='margin:2%'>
-				New Orleans Pelicans, Houston Rockets, Dallas Mavericks, Oklahoma
-				City Thunder, Minesota Timberwolves
-			</p>
-			{/if}
-
-			<p class='descNBA4'> <span style='background-color:#EF7779; color:white; margin:0'>Click on logo to see the photo!</span>
-			
+<div class="content-wrapper">
+	<div class='arena'>
+		{#if multiValue =='East'}
+			<Arenas/>
+		{:else if multiValue =='West'}
+			<Arenas2/>
+		{/if}
 	</div>
-	<div class="decArena2">
-		<Switch bind:value={multiValue} label="Choose a conference" design="multi" options={['West', 'East']} fontSize={30}/>
+
+	<div class="decArena">
+		<div class="decArena3">
+			<p class='descNBA'>
+				17/30</p>
+
+				{#if multiValue =='East'}
+				<ul class='descNBA4'  style='margin:2%'>
+					<li>Atlanta Hawks</li>
+					<li>Cleveland Cavaliers</li>
+					<li>Detroit Pistons</li>
+					<li>Indiana Pacers</li>
+					<li>Washington Wizards</li>
+					<li>Brooklyn Nets</li>
+					<li>Chicago Bulls</li>
+					<li>Milwaukee Bucks</li>
+					<li>Boston Celtics</li>
+					<li>Philadelphia 76ers</li>
+					<li>New York Knicks</li>
+					<li>Charlotte Hornets</li>
+				</ul>
+				{:else if multiValue =='West'}
+				<ul class='descNBA4' style='margin:2%'>
+					<li>New Orleans Pelicans</li>
+					<li>Houston Rockets</li>
+					<li>Dallas Mavericks</li>
+					<li>Oklahoma City Thunder</li>
+					<li>Minesota Timberwolves</li>
+				</ul>
+				{/if}
+
+				<p class='descNBA4'> <span style='background-color:#EF7779; color:white; margin:0'>Click on logo to see the photo!</span>
+
+		</div>
+		<div class="decArena2">
+			<Switch bind:value={multiValue} label="Choose a conference" design="multi" options={['West', 'East']} fontSize={30}/>
+		</div>
+
 	</div>
-	
 </div>
-
-<div class='arena'>
-	{#if multiValue =='East'}
-		<Arenas/>
-	{:else if multiValue =='West'}
-		<Arenas2/>
-	{/if}
-</div >
 
 
 
@@ -71,13 +82,18 @@ having already attended games in these arenas:
 
 
 <style>
+	.content-wrapper {
+		clear: both;
+	}
+
 	.decArena2{
-		display: block; 
-	
+		display: block;
+
 	}
 	.decArena3{
-		display: block; 
+		display: block;
 		text-align: center;
+		min-height: 400px;
 
 	}
 
@@ -85,16 +101,42 @@ having already attended games in these arenas:
 		color: #707070;
 		font-family: 'Jost', sans-serif;
 		font-weight: 300;
-		font-size: 1.8em;
+		font-size: 1.4vw;
 
 	}
 
 	.decArena{
-		/* display: flex;  */
-		float:right;
-		width:40%;
-		margin-right: 10%;
-		/* margin-top: 7%; */
+		float: left;
+		width: 42%;
+		margin-left: 8%;
+	}
+
+	@media (max-width: 1024px) {
+		.content-wrapper {
+			display: flex;
+			flex-direction: column-reverse;
+		}
+
+		.decArena {
+			float: none;
+			width: 100%;
+			margin-left: 0;
+			margin-bottom: 20px;
+		}
+
+		.arena {
+			float: none;
+			width: 100%;
+			margin-top: 20px;
+		}
+
+		.decArena3 {
+			min-height: auto;
+		}
+
+		.descNBA4 {
+			font-size: 2.5vw;
+		}
 	}
 
 	.descNBA{
@@ -107,9 +149,9 @@ having already attended games in these arenas:
 
 	.arena{
 		position: relative;
-		/* display: flex; */
-		float:left;
-		width:40%;
+		float: right;
+		width: 42%;
+		margin-right: 8%;
 	}
 	
     .WCPhoto{

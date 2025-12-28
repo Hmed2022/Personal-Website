@@ -4,10 +4,21 @@
     let currentTime = 0;
     let duration = 0;
     let selectedSong = '../../../../src/MyProjects/Names/Assests/Names1.mp3';
+    let showDropdown = false;
     let isDragging = false;
     let progressBar;
     import {language, nameId } from '../Stores/misc';
     import namesData from './names.js';
+
+    $:songs = [
+        { value: '../../../../src/MyProjects/Names/Assests/Names1.mp3', label: $language === 'English' ? 'Lotfi Bouchnek - Asmaa Allah Al Hosna' : 'لطفي بوشناق - أسماء اللّه الحسنى' },
+   ];
+
+    //  $:songs = [
+    //     { value: '../../../../src/MyProjects/Names/Assests/Names1.mp3', label: $language === 'English' ? 'Lotfi Bouchnek - Asmaa Allah Al Hosna' : 'لطفي بوشناق - أسماء اللّه الحسنى' },
+    //     { value: '../../../../src/MyProjects/Names/Assests/Names2.mp3', label: $language === 'English' ? 'Sami Yusuf - The 99 Names' : 'سامي يوسف - أسماء الله الحسنى' },
+    //     { value: '../../../../src/MyProjects/Names/Assests/Names3.mp3', label: $language === 'English' ? 'Hisham Abbas - Asmaa Allah Al Hosna'  : 'هشام عبّاس - أسماء اللّه الحسنى'}
+    // ];
 
     function togglePlay() {
         if (isPlaying) {
@@ -84,15 +95,37 @@
         const percentage = x / rect.width;
         currentTime = percentage * duration;
     }
-
+    
+    function selectSong(song) {
+        const wasPlaying = isPlaying;
+        if (isPlaying) {
+            audio.pause();
+        }
+        selectedSong = song;
+        showDropdown = false;
+        
+        // Wait for audio element to update, then play if it was playing before
+        setTimeout(() => {
+            if (wasPlaying) {
+                audio.play();
+                isPlaying = true;
+            }
+        }, 100);
+    }
+    
+    function toggleDropdown() {
+        showDropdown = !showDropdown;
+    }
+    
     function formatTime(seconds) {
         if (isNaN(seconds)) return '0:00';
         const mins = Math.floor(seconds / 60);
         const secs = Math.floor(seconds % 60);
         return `${mins}:${secs.toString().padStart(2, '0')}`;
     }
-
+    
     $: progress = duration > 0 ? (currentTime / duration) * 100 : 0;
+    $: selectedLabel = songs.find(s => s.value === selectedSong)?.label || 'Select Song';
     $: currentTimeFormatted = formatTime(currentTime);
     $: durationFormatted = formatTime(duration);
 </script>
@@ -116,6 +149,52 @@
     </button>
     
     <div class="controls">
+        <div class="dropdown-container">
+          {#if $language === 'English'}
+            <button class="dropdown-button-en" on:click={toggleDropdown}>
+                <span>{selectedLabel}</span>
+                <svg class="arrow" class:open={showDropdown} viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M7 10l5 5 5-5z"/>
+                </svg>
+            </button>
+
+            {#if showDropdown}
+                <div class="dropdown-menu">
+                    {#each songs as song}
+                        <button 
+                            class="dropdown-item-en"
+                            class:active={selectedSong === song.value}
+                            on:click={() => selectSong(song.value)}
+                        >
+                            {song.label}
+                        </button>
+                    {/each}
+                </div>
+             {/if}
+        {:else}
+            <button class="dropdown-button-ar" on:click={toggleDropdown}>
+                <span>{selectedLabel}</span>
+                <svg class="arrow" class:open={showDropdown} viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M7 10l5 5 5-5z"/>
+                </svg>
+            </button>
+              {#if showDropdown}
+                <div class="dropdown-menu">
+                    {#each songs as song}
+                               <button 
+                            class="dropdown-item-ar"
+                            class:active={selectedSong === song.value}
+                            on:click={() => selectSong(song.value)}
+                        >
+                            {song.label}
+                        </button>
+                    {/each}
+                </div>
+            {/if}
+        {/if}
+            
+        </div>
+        
         <div class="progress-container">
             <span class="time-display">{currentTimeFormatted}</span>
             <div
@@ -202,7 +281,137 @@
         flex-direction: column;
         gap: 1rem;
     }
+    
+    .dropdown-container {
+        position: relative;
+    }
+    
+     .dropdown-button-ar {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        background-color: white;
+        border: 2px solid #603D25;
+        cursor: pointer;
+        font-family: 'NotoKufiArabic', sans-serif;
+        font-size: 1vw;
+        direction: rtl;
+        font-weight: 700;
+        color: #603D25;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background-color 0.2s;
+    }
 
+    .dropdown-button-en {
+        width: 100%;
+       padding: 1rem 1.5rem 0rem 1.5rem;  
+        background-color: white;
+        border: 2px solid #603D25;
+        cursor: pointer;
+        font-family: 'JawiKufi', sans-serif;
+        font-size: 3vw;
+        color: #603D25;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background-color 0.2s;
+    }
+    .dropdown-button-en:hover {
+        background-color: #f9f9f9;
+    }
+
+      .dropdown-button-ar:hover {
+        background-color: #f9f9f9;
+    }
+    
+    .dropdown-button-en .arrow {
+        width: 24px;
+        height: 24px;
+        transition: transform 0.3s;
+    }
+
+      .dropdown-button-ar .arrow {
+        width: 24px;
+        height: 24px;
+        transition: transform 0.3s;
+    }
+    
+    .dropdown-button-ar .arrow.open {
+        transform: rotate(180deg);
+    }
+      .dropdown-button-en .arrow.open {
+        transform: rotate(180deg);
+    }
+    
+    .dropdown-menu {
+        position: absolute;
+        bottom: 100%; /* Changed from top: 100% */
+        left: 0;
+        right: 0;
+        background-color: white;
+        border: 2px solid #603D25;
+        border-bottom: none; /* Changed from border-top: none */
+        z-index: 1000;
+    }
+    
+    .dropdown-item-en {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        background-color: white;
+        font-family: 'JawiKufi', sans-serif;
+        font-size: 2vw;
+        margin-bottom: -1vw;
+        border: none;
+        border-bottom: 1px solid #e0e0e0;
+        cursor: pointer;
+        color: #603D25;
+        text-align: left;
+        transition: background-color 0.2s;
+    }
+
+     .dropdown-item-ar {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        background-color: #D98C5F;
+        border: none;
+        font-family: 'NotoKufiArabic', sans-serif;
+        font-weight: 700;
+        border-bottom: 1px solid #e0e0e0;
+        cursor: pointer;
+        direction: rtl;
+        font-size: 1rem;
+        color: #603D25;
+        text-align: left;
+        transition: background-color 0.2s;
+    }
+    
+    .dropdown-item-ar:last-child {
+        border-bottom: none;
+    }
+    
+    .dropdown-item-ar:hover {
+        background-color: #f0f0f0;
+    }
+    
+    .dropdown-item-ar.active {
+        background-color: #603D25;
+        color: white;
+    }
+
+     .dropdown-item-en:last-child {
+        border-bottom: none;
+    }
+    
+    .dropdown-item-en:hover {
+        background-color: #f0f0f0;
+    }
+    
+    .dropdown-item-en.active {
+        background-color: #603D25;
+        color: white;
+    }
+    
     .progress-container {
         display: flex;
         align-items: center;

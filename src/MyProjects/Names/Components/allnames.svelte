@@ -2,8 +2,8 @@
     import { nameId} from '../Stores/misc';
     import  names  from './names.js';
     
-    const BASE   = '#613D25';
-    const HOVER  = '#B89867';
+    const BASE   = '#266F8C';
+    const HOVER  = '#5AADBF';
     const ACTIVE = '#AC8B7E';
         
     export let lineGap = 100;   // distance between first line and second line
@@ -12,7 +12,7 @@
     
     $: activeGroup = $nameId;
     let hoverGroup = null;
-    
+
     // Initialize all fills
     let fills = Array(107).fill(BASE);
 
@@ -21,6 +21,11 @@
             const id = i + 1;
             fills[i] = activeGroup === id ? ACTIVE : hoverGroup === id ? HOVER : BASE;
         }
+    }
+
+    // Reactively update fills whenever activeGroup or hoverGroup changes
+    $: if (activeGroup !== undefined || hoverGroup !== undefined) {
+        updateFills();
     }
 
     function handleClick(id) {
@@ -58,13 +63,7 @@
 </script>
 
 
-{#if currentName}
-  <div class="name-display">
-    <p class="arabic-name">{currentName.arabicName}</p>
-    <span class="separator">|</span>
-    <p class="english-name">{currentName.englishName}</p>
-  </div>
-{/if}
+
     
     <svg
       id="Layer_1"
@@ -1604,6 +1603,8 @@
     
     
     </svg>
+
+
 
 
 <style>

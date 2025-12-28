@@ -3,7 +3,7 @@
   import { fly } from "svelte/transition";
   import { cubicOut } from "svelte/easing";
   
-  export let fill = "#613D25";
+  export let fill = "#266F8C";
   export let duration = 500;
   export let delayStep = 20;
   export let pauseDuration = 5000; // 5 seconds pause after animation

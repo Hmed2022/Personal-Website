@@ -64,7 +64,9 @@
 						on:click={() => selected = null} />
 
 					<div class="details">
-						<p>{d.arena} - {d.date} </p>
+						<p class="team-name">{d.name}</p>
+						<p class="arena-name">{d.arena}</p>
+						<p class="date">{d.date}</p>
 					</div>
 				</div>
 			{/await}
@@ -130,11 +132,35 @@
 	}
 
     .details {
-		display: relative;
-        margin-top: 5px;
-        font-size: 1rem;
-        color: rgb(195, 46, 46);
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		padding: 2vmin 2vmin 1vmin 2vmin;
+		background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0) 100%);
+		pointer-events: none;
     }
+
+	.details p {
+		margin: 0.3vmin 0;
+		pointer-events: auto;
+	}
+
+	.team-name {
+		font-size: 1.8vmin;
+		font-weight: bold;
+		color: #333;
+	}
+
+	.arena-name {
+		font-size: 1.5vmin;
+		color: #555;
+	}
+
+	.date {
+		font-size: 1.3vmin;
+		color: #777;
+	}
 
 	img {
 		object-fit: cover;

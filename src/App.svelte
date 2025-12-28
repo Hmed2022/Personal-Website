@@ -1,7 +1,7 @@
 <script>
 	import Router, {location, link} from 'svelte-spa-router';
 	import Header from './components/Header.svelte';
-	import Home from './pages/Home.svelte';
+	import Home from './pages/Home_old.svelte';
 	import Projects from './pages/Projects.svelte';
 	import AllStarIntro from './MyProjects/All-Star/AllStarIntro.svelte';
 	import NBA from "./MyProjects/All-Star/NBA.svelte";
