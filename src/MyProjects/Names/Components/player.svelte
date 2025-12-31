@@ -3,11 +3,12 @@
     let isPlaying = false;
     let currentTime = 0;
     let duration = 0;
-    let selectedSong = '../../../../src/MyProjects/Names/Assests/Names1.mp3';
+    let selectedSong = '../../../../src/assets/Projects/Names/Names1.mp3';
     let isDragging = false;
     let progressBar;
     import {language, nameId } from '../Stores/misc';
     import namesData from './names.js';
+
 
     function togglePlay() {
         if (isPlaying) {

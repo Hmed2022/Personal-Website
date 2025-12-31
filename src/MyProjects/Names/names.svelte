@@ -10,6 +10,7 @@ import  names  from './Components/names.js';
 import Back from './Components/background.svelte'
 import quranData from './Assests/quran.json';
 import surahsData from './Assests/surahs.json';
+import Frequency from './Components/frequency.svelte';
 
 
     // Reactive statement: automatically updates when $nameId changes
@@ -165,38 +166,61 @@ import surahsData from './Assests/surahs.json';
 
 </script>
 
-
+<svelte:head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
+</svelte:head>
 
 <!-- Language Buttons -->
 
-
+ <div class="language-buttons2">
+    {#if $language === 'Arabic'}
+        <p class="language-label-arabic">اختر لغة</p>
+    {:else}
+        <p class="language-label-english">Choose a language</p>
+    {/if}
+    <div style="display: flex; gap: 0.5rem;">
+        <button
+            class:active={$language === 'English'}
+            on:click={() => setLanguage('English')}
+        >
+            {#if $language === 'Arabic'}
+                الإنجليزية
+            {:else}
+                English
+            {/if}
+        </button>
+        <button
+            class:active={$language === 'Arabic'}
+            on:click={() => setLanguage('Arabic')}
+        >
+            {#if $language === 'Arabic'}
+                العربية
+            {:else}
+                Arabic
+            {/if}
+        </button>
+    </div>
+</div>
 
 <body>
 
     <Back/>
+    
 
     <div class="title">
     <Title/>
+      {#if $language === 'Arabic'}
+    <h1 class='ArTitle'> الأسماء التي حفظناها قبل أن نفهمها</h1>
+    {:else}
+     <h1 class='ENTitle'> The Names We Memorized Before We Understood</h1>
+    {/if}
     </div>
 
     <div class="text">
         <p class="Reference">By Ahmed Bendaly | December 2025</p> <br>
 
-        <div class="language-buttons2">
-            <p>Choose a language</p>
-    <button 
-        class:active={$language === 'English'}
-        on:click={() => setLanguage('English')}
-    >
-        English
-    </button>
-    <button 
-        class:active={$language === 'Arabic'}
-        on:click={() => setLanguage('Arabic')}
-    >
-        Arabic
-    </button>
-</div>
 
         <!-- Test paragraph -->
 <p class="ArabicText">
@@ -218,24 +242,12 @@ import surahsData from './Assests/surahs.json';
 
 ولكثيرٍ من المسلمين، تكون هذه الأسماء مألوفة قبل أن تُدرَس رسميًا؛ تُتعلَّم من الأسرة، ومن الثقافة، ومن الأناشيد خصوصًا. ففي تونس — على سبيل المثال — يكاد يكون الأمر عادةً رمضانية: قبل لحظات من الإفطار، يصدح نشيد أسماء الله الحُسنى في المنازل، ليصبح جزءًا من الذاكرة والروح والهوية.
     {:else}
-        <p>
-            It is often said that the greater something is, the more names it is known by. In Islam, God is the Greatest, and His Names reflect His perfection. Each of the Beautiful Names of Allah (Asmaa’ Allah al-Husnaa) describes a divine attribute — the All-Merciful, the All-Powerful, the All-Knowing, the Giver of Peace, the Sustainer, the Light. These Names are not merely titles; they are invitations to understand who Allah truly is.
-
-The Prophet Muhammad ﷺ taught:
-
-“Allah has ninety-nine names — one hundred minus one — whoever enumerates them will enter Paradise.”
-(Sahih al-Bukhari & Sahih Muslim)
-
-In this project, we will explore these Names from their authentic sources — the Qur’an, the Sunnah, and classical Islamic scholarship — and examine how they were collected, interpreted, and preserved throughout Islamic tradition. Along the way, we will also create visual insights to highlight patterns, frequencies, meanings, and connections across the Names.
-
-This is not a theological deep dive, but rather a guided discovery:
-✨ Where do the Names come from?
-✨ How often do they appear in the Qur’an?
-✨ What do they tell us about the nature of Allah?
-✨ How can data and visualization help us appreciate them more deeply?
-
-For many Muslims, these Names are familiar long before they are formally studied. They are learned through family, culture, and especially songs. In Tunisia, for example, it is almost a tradition: moments before breaking the fast in Ramadan, the melodious recitation of Asmaa’ Allah al-Husnaa fills the home — a sound that becomes part of memory, spirituality, and identity.
-        </p>
+        <p class=EnglishText>It’s the first day of Ramadan in Tunisia. <br><br>
+We’ve been fasting all day, and now we’re making the final touches to the dining table. On TV, the Qur’an is being recited by Ali Al-Barrak, a familiar signal that iftar is only minutes away. The sun sets. The adhan rises—one call from the nearby mosque, another from farther away, and a third from the television, all overlapping.
+We break our fast with dates and water. After a long day of fasting, that first sip is deeply satisfying. <br><br>
+Then a familiar song begins to play in the background. <br><br>
+It’s a song everyone knows—not because we chose to learn it, but because we hear it every day for thirty days, year after year. The unmistakable voice of Lotfi Bouchnak fills the room, carrying a rhythmic chant of the Names of Allah. I remember singing along while cutting lemons and baguettes.
+ </p>
     {/if}
 </p>
 
@@ -244,6 +256,24 @@ For many Muslims, these Names are familiar long before they are formally studied
         <Player/>
     </div>
 
+    <p class="ArabicText">
+    {#if $language === 'Arabic'}
+       يُقال كثيرًا إنَّ عِظَم الشيء يُعرَف بكثرة أسمائه. وفي الإسلام، الله جلّ جلاله هو الأعظم، وتنعكس أسماؤه على كماله. فكلّ اسم من أسماء الله الحُسنى يصف صفةً إلهية سامية — كالرَّحمن، القدير، العليم، السلام، القيّوم، النور. فهذه الأسماء ليست عناوين جامدة، بل هي دعوات للتعرّف إلى حقيقة الله ومعاني صفاته.
+ولكثيرٍ من المسلمين، تكون هذه الأسماء مألوفة قبل أن تُدرَس رسميًا؛ تُتعلَّم من الأسرة، ومن الثقافة، ومن الأناشيد خصوصًا. ففي تونس — على سبيل المثال — يكاد يكون الأمر عادةً رمضانية: قبل لحظات من الإفطار، يصدح نشيد أسماء الله الحُسنى في المنازل، ليصبح جزءًا من الذاكرة والروح والهوية.
+    {:else}
+        <p class=EnglishText>
+            
+            The song is nostalgic. It signals family, gathering, and the moment we finally eat together. But years later, listening to it again, I realized something: we learned these names long before we understood them.<br><br> The beauty is that all Tunisians share the same song, The same childhood memory But rarely stop to ask how it was assembled.
+This project begins there—by returning to the names we memorized by sound, and taking a closer look at them through the text itself.
+<br><br>
+<i style='font-weight:300'>Please Note: This project does not attempt to define the “correct” 99 Names of Allah, nor to correct religious practice or offer theological interpretation.
+It documents how a familiar list—learned through culture and memory—appears when examined against the Qur’anic text, using a simple and transparent method.
+       </i> 
+    
+    <br> <br>
+    Below is the list of the Names, each Name will be highlighted when it is mentioned in the song,</p>
+    {/if}
+</p>
        
     </div>
 
@@ -345,15 +375,106 @@ For many Muslims, these Names are familiar long before they are formally studied
         {/if}
       </div>
     {:else}
-      <!-- English Version (keep original) -->
+      <!-- English Version -->
       <div class="name-display">
         <p class="arabic-name">{currentName.arabicName}</p>
         <span class="separator">|</span>
         <p class="english-name">{currentName.englishName}</p>
       </div>
+
+      <!-- English Description -->
+      {#if currentName.descEn}
+        <p class="description-english">{currentName.descEn}</p>
+      {/if}
+
+      <!-- Source Information -->
+      <div class="source-info">
+        {#if currentName.quran_hadith === 'Quran'}
+          <!-- Quran Source with Frequency -->
+          <div class="source-columns">
+           
+            <div class="source-column">
+              <p class="source-label-english">Mentioned in the Quran</p>
+            </div>
+
+             <div class="source-column">
+              {#if currentName.frequency === 1}
+                <p class="frequency-text-english">Once</p>
+              {:else if currentName.frequency === 2}
+                <p class="frequency-text-english">Twice</p>
+              {:else if currentName.frequency >= 3}
+                <p class="frequency-text-english">{currentName.frequency} times</p>
+              {:else}
+                <p class="frequency-text-english">0 times</p>
+              {/if}
+            </div>
+          </div>
+
+          <!-- Quranic Verses Carousel -->
+          {#if quranVerses.length > 0}
+            <div class="quran-carousel">
+              <div class="carousel-content">
+                {#if quranVerses.length > 1}
+                  <button class="carousel-arrow carousel-arrow-left" on:click={prevVerse} disabled={currentVerseIndex === 0}>
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                  </button>
+                {/if}
+
+                <div class="verse-container">
+                  <p class="quran-text">{@html highlightName(quranVerses[currentVerseIndex].text, currentName.arabicName)}</p>
+                  <p class="verse-reference">
+                   <b> Surah {quranVerses[currentVerseIndex].surahName} - Verse {quranVerses[currentVerseIndex].ayahNumber} <b/>
+                  </p>
+                  {#if quranVerses.length > 1}
+                    <p class="verse-counter">{currentVerseIndex + 1} / {quranVerses.length}</p>
+                  {/if}
+                </div>
+
+                {#if quranVerses.length > 1}
+                  <button class="carousel-arrow carousel-arrow-right" on:click={nextVerse} disabled={currentVerseIndex === quranVerses.length - 1}>
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                  </button>
+                {/if}
+              </div>
+            </div>
+          {/if}
+        {:else if currentName.quran_hadith === 'Hadith'}
+          <!-- Hadith Source -->
+          <div class="source-hadith">
+            <p class="source-label-english">Mentioned in Hadith</p>
+          </div>
+        {/if}
+      </div>
     {/if}
   </div>
 {/if}
+
+
+<p class="ArabicText">
+    {#if $language === 'Arabic'}
+       يُقال كثيرًا إنَّ عِظَم الشيء يُعرَف بكثرة أسمائه. وفي الإسلام، الله جلّ جلاله هو الأعظم، وتنعكس أسماؤه على كماله. فكلّ اسم من أسماء الله الحُسنى يصف صفةً إلهية سامية — كالرَّحمن، القدير، العليم، السلام، القيّوم، النور. فهذه الأسماء ليست عناوين جامدة، بل هي دعوات للتعرّف إلى حقيقة الله ومعاني صفاته.
+ولكثيرٍ من المسلمين، تكون هذه الأسماء مألوفة قبل أن تُدرَس رسميًا؛ تُتعلَّم من الأسرة، ومن الثقافة، ومن الأناشيد خصوصًا. ففي تونس — على سبيل المثال — يكاد يكون الأمر عادةً رمضانية: قبل لحظات من الإفطار، يصدح نشيد أسماء الله الحُسنى في المنازل، ليصبح جزءًا من الذاكرة والروح والهوية.
+    {:else}
+        <p class=EnglishText>
+            For a long time, I assumed that all of these Names were explicitly mentioned in the Qur’an. When examined closely, however, a more nuanced picture emerges.
+
+Some of the Names appear verbatim in the Qur’anic text. Others do not appear as standalone names, but are derived from attributes, descriptions, or linguistic roots used in reference to Allah. A number of Names are also supported through prophetic traditions (hadith).
+<br> <br>
+What is consistent across scholarly traditions is not the exact composition of the list, but its number: ninety-nine Names, as referenced in a well-known hadith of the Prophet Muhammad ﷺ. {/if}
+</p>
+
+
+</body>
+
+<div class="frequency-section">
+<Frequency/>
+</div>
+
+<body>
 
 
 </body>
@@ -380,15 +501,34 @@ For many Muslims, these Names are familiar long before they are formally studied
     font-weight: 400;
   }
 
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Quicksand:wght@300..700&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
         .Reference{
         color: #266F8C;
-        font-weight: 500;
+        /* font-weight: 200; */
         text-align: center;
         margin-top: 0;
         margin-bottom: 0;
+        font-family: 'JawiKufi';
+        font-size: 3vw;
+    }
+
+    .ENTitle{
+         font-family: 'JawiKufi';
+         color: #266F8C;
+         font-size: 4vw;
+    }
+
+    .ArTitle{
+        font-family: "Reem Kufi", sans-serif;
+        font-weight: 600;
+        color: #266F8C;
+        font-size: 3vw;
+        font-optical-sizing: auto;
+        font-style: normal;
     }
 
         .player-sticky-container {
@@ -422,9 +562,48 @@ For many Muslims, these Names are familiar long before they are formally studied
 }
 
   .language-buttons2 {
-    text-align: center;
-    gap: 1rem;
+    position: sticky;
+    top: 1vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    z-index: 1000;
+    float: right;
+    margin-left: auto;
+    margin-right: 2vw;
+    padding: 0.5vw;
+
 }
+
+  .language-label-english {
+    margin: 0 0 0.3rem 0;
+    font-size: 2vw;
+    color: #266F8C;
+    font-family: 'JawiKufi', sans-serif;
+  }
+
+  .language-label-arabic {
+    margin: 0 0 0.3rem 0;
+    font-size: 1.7vw;
+    color: #266F8C;
+    font-family: "Reem Kufi", sans-serif;
+    direction: rtl;
+  }
+
+  .language-buttons2 button {
+    padding: 0.5rem 1rem;
+    font-size: 2vw;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .language-buttons2 button.active {
+    background-color: #266F8C;
+    color: #FDEEDB;
+    border-color: #266F8C;
+  }
 
 
 
@@ -472,7 +651,7 @@ For many Muslims, these Names are familiar long before they are formally studied
   }
     button{
     font-family: 'JawiKufi', sans-serif;
-     font-size: 3vw;
+     font-size: 4vw;
     color: #266F8C;
 
     background-color: #FDEDDB;
@@ -507,9 +686,29 @@ For many Muslims, these Names are familiar long before they are formally studied
         margin-left:25%
     }
 
+    .frequency-section {
+        margin-right: 0;
+        margin-left: 0;
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+    }
+
+    .EnglishText{
+         font-family: "Quicksand", sans-serif;
+        font-size: 1.1vw;
+        text-align: center;
+        justify-items: center;
+        direction: ltr;
+    }
+
+
     p{
-         font-family: 'JawiKufi', sans-serif;
-     font-size: 2vw;
+        font-family: "Funnel Display", sans-serif;
+        font-size: 1vw;
         text-align: center;
         justify-items: center;
     }
@@ -517,8 +716,19 @@ For many Muslims, these Names are familiar long before they are formally studied
     /* Arabic Description */
     .description-arabic {
         font-family: 'NotoKufiArabic', sans-serif;
-        font-size: 1.8vw;
+        font-size: 1.4vw;
         direction: rtl;
+        text-align: center;
+        color: #603D25;
+        margin: 2rem 0;
+        line-height: 1.8;
+    }
+
+    /* English Description */
+    .description-english {
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.4vw;
+        direction: ltr;
         text-align: center;
         color: #603D25;
         margin: 2rem 0;
@@ -551,6 +761,15 @@ For many Muslims, these Names are familiar long before they are formally studied
         direction: rtl;
     }
 
+    .source-label-english {
+        font-family: 'Nunito', sans-serif;
+        font-size: 2vw;
+        font-weight: 700;
+        color: #266F8C;
+        margin: 0;
+        direction: ltr;
+    }
+
     .frequency-text {
         font-family: 'NotoKufiArabic', sans-serif;
         font-size: 2vw;
@@ -558,6 +777,15 @@ For many Muslims, these Names are familiar long before they are formally studied
         color: #AB8A7E;
         margin: 0;
         direction: rtl;
+    }
+
+    .frequency-text-english {
+        font-family: 'Nunito', sans-serif;
+        font-size: 2vw;
+        font-weight: 700;
+        color: #AB8A7E;
+        margin: 0;
+        direction: ltr;
     }
 
     .source-hadith {
@@ -621,7 +849,7 @@ For many Muslims, these Names are familiar long before they are formally studied
     .quran-text {
         font-family: 'Amiri Quran', serif;
         font-weight: 400;
-        font-size: 2.2vw;
+        font-size: 1.5vw;
         direction: rtl;
         text-align: center;
         color: #603D25;
@@ -648,6 +876,7 @@ For many Muslims, these Names are familiar long before they are formally studied
 
     .verse-counter {
         font-family: 'NotoKufiArabic', sans-serif;
+        font-weight: 900;
         font-size: 1.2vw;
         text-align: center;
         color: #AB8A7E;
@@ -657,7 +886,7 @@ For many Muslims, these Names are familiar long before they are formally studied
 
     .name-display-container {
         background-color: none;
-        padding: 2rem;
+        /* padding: 2rem; */
         width: 100%;
     }
 </style>
