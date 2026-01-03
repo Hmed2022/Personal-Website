@@ -79,8 +79,15 @@
           <path d="M699.7,40.7h.2v12.4h-12.4v-26.3h-40.4v40.2h26.5v12.7h-26.5v13.9h40.4v-26.6h12.4v12.7h-.2v13.9h40.4V26.8h-40.4v13.9ZM661.1,53.1v-12.4h12.6v12.4h-12.6ZM726.2,79.7h-12.4v-12.7h12.4v12.7ZM726.2,53.1h-12.4v-12.4h12.4v12.4Z" />
         </g>
     
-      <g
-        style="fill: {fills[1]};">
+        <g
+        style="fill: {fills[1]}; cursor: pointer;"
+        on:mouseenter={() => handleHover(2)}
+        on:mouseleave={handleLeave}
+        on:click={() => handleClick(2)}
+        on:keydown={(e) => handleKey(2, e)}
+        tabindex="0"
+        role="button"
+      >
           <rect x="647.2" y=".6" width="93" height="13.9" />
           <path d="M619.4,79.7h-12.3V.6h-13.9v79.1h-13.7V.6h-41.5v39.9h13.9V14.5h13.7v38.7h-27.6v40.4h0c0,0,93,0,93,0h0c0,0,2.3,0,2.3,0V.6h-13.9v79.1ZM551.9,67h13.7v12.7h-13.7v-12.7Z" />
         </g>

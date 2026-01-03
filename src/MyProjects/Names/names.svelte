@@ -9,6 +9,7 @@ import {language,nameId } from './Stores/misc.js';
 import  names  from './Components/names.js';
 import Back from './Components/background.svelte'
 import quranData from './Assests/quran.json';
+import quranDataEN from './Assests/QuranEN.json';
 import surahsData from './Assests/surahs.json';
 import Frequency from './Components/frequency.svelte';
 
@@ -19,7 +20,7 @@ import Frequency from './Components/frequency.svelte';
     // Carousel state for Quranic verses
     let currentVerseIndex = 0;
 
-    // Get Quranic verses for current name
+    // Get Quranic verses for current name (Arabic)
     $: quranVerses = currentName && currentName.reference ? currentName.reference.map(ref => {
         const surahVerses = quranData[ref.surah.toString()];
         if (surahVerses) {
@@ -28,6 +29,23 @@ import Frequency from './Components/frequency.svelte';
             return {
                 text: verse ? verse.text : '',
                 surahName: surahInfo ? surahInfo.name : '',
+                surahNumber: ref.surah,
+                ayahNumber: ref.ayah
+            };
+        }
+        return null;
+    }).filter(v => v !== null) : [];
+
+    // Get Quranic verses for current name (English)
+    $: quranVersesEN = currentName && currentName.reference ? currentName.reference.map(ref => {
+        const surahVerses = quranDataEN[ref.surah.toString()];
+        if (surahVerses) {
+            const verse = surahVerses.find(v => v.verse === ref.ayah);
+            const surahInfo = surahsData.find(s => s.id === ref.surah);
+            return {
+                text: verse ? verse.text : '',
+                surahName: surahInfo ? surahInfo.transliteration : '',
+                surahTranslation: surahInfo ? surahInfo.translation : '',
                 surahNumber: ref.surah,
                 ayahNumber: ref.ayah
             };
@@ -347,7 +365,7 @@ It documents how a familiar list—learned through culture and memory—appears 
                   </button>
                 {/if}
 
-                <div class="verse-container">
+                <div class={currentName.quran_hadith === "Hadith" ? "verse-container-hadith" : "verse-container"}>
                   <p class="quran-text">{@html highlightName(quranVerses[currentVerseIndex].text, currentName.arabicName)}</p>
                   <p class="verse-reference">
                    <b> سورة {quranVerses[currentVerseIndex].surahName} - آية {quranVerses[currentVerseIndex].ayahNumber} <b/>
@@ -372,12 +390,26 @@ It documents how a familiar list—learned through culture and memory—appears 
           <div class="source-hadith">
             <p class="source-label">ذكرت في الحديث</p>
           </div>
+
+          <!-- Verse reference for Hadith -->
+          {#if quranVerses.length > 0}
+            <div class="quran-carousel">
+              <div class="carousel-content">
+                <div class="verse-container-hadith">
+                  <p class="quran-text">{@html highlightName(quranVerses[0].text, currentName.arabicName)}</p>
+                  <p class="verse-reference">
+                   <b> سورة {quranVerses[0].surahName} - آية {quranVerses[0].ayahNumber} <b/>
+                  </p>
+                </div>
+              </div>
+            </div>
+          {/if}
         {/if}
       </div>
     {:else}
       <!-- English Version -->
       <div class="name-display">
-        <p class="arabic-name">{currentName.arabicName}</p>
+        <p class="english-mean">{currentName.englishMean}</p>
         <span class="separator">|</span>
         <p class="english-name">{currentName.englishName}</p>
       </div>
@@ -411,10 +443,10 @@ It documents how a familiar list—learned through culture and memory—appears 
           </div>
 
           <!-- Quranic Verses Carousel -->
-          {#if quranVerses.length > 0}
+          {#if quranVersesEN.length > 0}
             <div class="quran-carousel">
               <div class="carousel-content">
-                {#if quranVerses.length > 1}
+                {#if quranVersesEN.length > 1}
                   <button class="carousel-arrow carousel-arrow-left" on:click={prevVerse} disabled={currentVerseIndex === 0}>
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
@@ -422,18 +454,18 @@ It documents how a familiar list—learned through culture and memory—appears 
                   </button>
                 {/if}
 
-                <div class="verse-container">
-                  <p class="quran-text">{@html highlightName(quranVerses[currentVerseIndex].text, currentName.arabicName)}</p>
+                <div class={currentName.quran_hadith === "Hadith" ? "verse-container-hadith" : "verse-container"}>
+                  <p class="quran-text">{quranVersesEN[currentVerseIndex].text}</p>
                   <p class="verse-reference">
-                   <b> Surah {quranVerses[currentVerseIndex].surahName} - Verse {quranVerses[currentVerseIndex].ayahNumber} <b/>
+                   <b> Surah {quranVersesEN[currentVerseIndex].surahName} <i class="translation-text">({quranVersesEN[currentVerseIndex].surahTranslation})</i> - Verse {quranVersesEN[currentVerseIndex].ayahNumber} <b/>
                   </p>
-                  {#if quranVerses.length > 1}
-                    <p class="verse-counter">{currentVerseIndex + 1} / {quranVerses.length}</p>
+                  {#if quranVersesEN.length > 1}
+                    <p class="verse-counter">{currentVerseIndex + 1} / {quranVersesEN.length}</p>
                   {/if}
                 </div>
 
-                {#if quranVerses.length > 1}
-                  <button class="carousel-arrow carousel-arrow-right" on:click={nextVerse} disabled={currentVerseIndex === quranVerses.length - 1}>
+                {#if quranVersesEN.length > 1}
+                  <button class="carousel-arrow carousel-arrow-right" on:click={nextVerse} disabled={currentVerseIndex === quranVersesEN.length - 1}>
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
                     </svg>
@@ -447,6 +479,20 @@ It documents how a familiar list—learned through culture and memory—appears 
           <div class="source-hadith">
             <p class="source-label-english">Mentioned in Hadith</p>
           </div>
+
+          <!-- Verse reference for Hadith -->
+          {#if quranVersesEN.length > 0}
+            <div class="quran-carousel">
+              <div class="carousel-content">
+                <div class="verse-container-hadith">
+                  <p class="quran-text">{quranVersesEN[0].text}</p>
+                  <p class="verse-reference">
+                   <b> Surah {quranVersesEN[0].surahName} <i class="translation-text">({quranVersesEN[0].surahTranslation})</i> - Verse {quranVersesEN[0].ayahNumber} <b/>
+                  </p>
+                </div>
+              </div>
+            </div>
+          {/if}
         {/if}
       </div>
     {/if}
@@ -649,6 +695,18 @@ What is consistent across scholarly traditions is not the exact composition of t
     margin: 0;
     order: 1; /* appears on the left */
   }
+
+   .english-mean {
+    font-family: 'JawiKufi', sans-serif;
+     font-size: 4vw;
+     font-weight: 900;
+    color: #603D25;
+    margin: 0;
+    order: 3; /* appears on the left */
+  }
+
+
+
     button{
     font-family: 'JawiKufi', sans-serif;
      font-size: 4vw;
@@ -846,6 +904,15 @@ What is consistent across scholarly traditions is not the exact composition of t
         border: 2px solid #266F8C;
     }
 
+    .verse-container-hadith {
+        flex: 1;
+        max-width: 800px;
+        background-color: rgba(171, 71, 71, 0.05);
+        padding: 2rem;
+        border-radius: 12px;
+        border: 2px solid #AB4747;
+    }
+
     .quran-text {
         font-family: 'Amiri Quran', serif;
         font-weight: 400;
@@ -872,6 +939,10 @@ What is consistent across scholarly traditions is not the exact composition of t
         text-align: center;
         color: #266F8C;
         margin: 0.5rem 0;
+    }
+
+    .translation-text {
+        font-weight: 300;
     }
 
     .verse-counter {
