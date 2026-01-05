@@ -15,7 +15,8 @@ export default {
     arabicName: "ٱللَّهُ",
     frequency: 2153,
     timestamp1: 22.5,
-    descAr: "كلمة 'الله'، الاسم العَلَم لله، تدل على أن الله هو الإله الحق الذي يستحق العبادة وحده، الذي تعبده جميع المخلوقات حباً، وتسبّح بعظمته، وتوقّره وتلجأ إليه في أوقات الحاجة والشدة. وفي الحقيقة، يشتمل هذا الاسم على جميع معاني أسمائه الحسنى.",
+    descAr:
+      "كلمة 'الله'، الاسم العَلَم لله، تدل على أن الله هو الإله الحق الذي يستحق العبادة وحده، الذي تعبده جميع المخلوقات حباً، وتسبّح بعظمته، وتوقّره وتلجأ إليه في أوقات الحاجة والشدة. وفي الحقيقة، يشتمل هذا الاسم على جميع معاني أسمائه الحسنى.",
     descEn:
       "The word 'Allah', the proper name of God, indicates that Allah is the true God who alone deserves to be worshipped, whom all creatures worship out of love, praise His greatness, revere Him and turn to Him in times of need and adversity. In fact, this name comprises all the meanings of His beautiful names.",
     pronounciation: "al-BA-ri",
@@ -1744,7 +1745,8 @@ export default {
     arabicName: "ٱلْمَلِكُ",
     frequency: 5,
     timestamp1: 32,
-    descAr: "هو الذي له الملك المطلق للسماوات والأرض وكل ما فيهما. الكون كله تحت سيطرته. لا شيء فوقه. له وحده الملك الحقيقي والأعلى ويتصرف في الكون كله كما يشاء. هو مالك كل شيء. واسم الملك يشير إلى سيادة الله المطلقة والمجيدة.",
+    descAr:
+      "هو الذي له الملك المطلق للسماوات والأرض وكل ما فيهما. الكون كله تحت سيطرته. لا شيء فوقه. له وحده الملك الحقيقي والأعلى ويتصرف في الكون كله كما يشاء. هو مالك كل شيء. واسم الملك يشير إلى سيادة الله المطلقة والمجيدة.",
     descEn:
       "He is the One to whom belongs the absolute dominion of the heavens and the earth and everything in them. The entire universe is under His control. There is nothing above Him. He alone has true and supreme dominion and disposes of the entire universe in the manner He pleases. He is the owner of everything. The name Al-Maleek points to Allah's absolute and glorious sovereignty.",
     pronounciation: "al-ma-LEEK",
@@ -1792,12 +1794,13 @@ export default {
     id: 9,
     rank: 6,
     englishName: "Al-Mu'min",
-    englishMean: "The Giver of Security",
+    englishMean: "The Granter of Security",
     arabicName: "ٱلْمُؤْمِنُ",
     frequency: 1,
     timestamp1: 35.5,
     descAr: "يشهد على الوحدانية بالبراهين؛ يمنح السلام للعباد الصالحين",
-    descEn: "Testifies to Oneness with evidence; grants peace to righteous servants",
+    descEn:
+      "Testifies to Oneness with evidence; grants peace to righteous servants",
     pronounciation: "al-mu'-MIN",
     quran_hadith: "Quran",
     reference: [{ surah: 59, ayah: 23 }],
@@ -1806,12 +1809,13 @@ export default {
     id: 18,
     rank: 7,
     englishName: "Al-Muhaymin",
-    englishMean: "The Guardian",
+    englishMean: "The Overseer",
     arabicName: "ٱلْمُهَيْمِنُ",
     frequency: 1,
     timestamp1: 36.5,
     descAr: "يراقب المخلوقات؛ مطّلع تماماً على جميع الأمور والأرزاق والآجال",
-    descEn: "Watches over creatures; fully aware of all affairs, sustenance, and terms",
+    descEn:
+      "Watches over creatures; fully aware of all affairs, sustenance, and terms",
     pronounciation: "al-mu-HAY-min",
     quran_hadith: "Quran",
     reference: [{ surah: 59, ayah: 23 }],
@@ -1822,7 +1826,7 @@ export default {
     englishName: "Al-'Aziz",
     englishMean: "The Almighty",
     arabicName: "ٱلْعَزِيزُ",
-    frequency: 64,
+    frequency: 60,
     timestamp1: 38,
     descAr: "المهيمن الأعلى، الحاكم الأعظم؛ جميع المخلوقات خاضعة له",
     descEn: "All-dominant, reigning supreme; all creatures humbled before Him",
@@ -1837,10 +1841,10 @@ export default {
       { surah: 5, ayah: 118 },
       { surah: 6, ayah: 96 },
       { surah: 11, ayah: 66 },
-      { surah: 12, ayah: 30 },
-      { surah: 12, ayah: 51 },
-      { surah: 12, ayah: 78 },
-      { surah: 12, ayah: 88 },
+      // { surah: 12, ayah: 30 },
+      // { surah: 12, ayah: 51 },
+      // { surah: 12, ayah: 78 },
+      // { surah: 12, ayah: 88 },
       { surah: 14, ayah: 1 },
       { surah: 14, ayah: 4 },
       { surah: 16, ayah: 60 },
@@ -1904,7 +1908,8 @@ export default {
     frequency: 1,
     timestamp1: 39,
     descAr: "العليّ القاهر؛ قضاؤه نافذ حتماً؛ يُبرئ القلوب المنكسرة",
-    descEn: "Most High, Irresistible; decrees certainly come to pass; heals broken-hearted",
+    descEn:
+      "Most High, Irresistible; decrees certainly come to pass; heals broken-hearted",
     pronounciation: "al-jab-BAAR",
     quran_hadith: "Quran",
     reference: [{ surah: 59, ayah: 23 }],
@@ -1964,7 +1969,8 @@ export default {
     frequency: 1,
     timestamp1: 48,
     descAr: "يُوجد ما يشاء؛ يُصوّر المخلوقات في أشكال مختلفة",
-    descEn: "Brings existence what He wills; shapes creatures in different forms",
+    descEn:
+      "Brings existence what He wills; shapes creatures in different forms",
     pronounciation: "al-mu-SAW-wir",
     quran_hadith: "Quran",
     reference: [{ surah: 59, ayah: 24 }],
@@ -1975,7 +1981,7 @@ export default {
     englishName: "Al-Ghaffar",
     englishMean: "The Oft-Forgiving",
     arabicName: "ٱلْغَفَّارُ",
-    frequency: 3,
+    frequency: 4,
     timestamp1: 49,
     descAr: "المغفرة العظيمة والدائمة للذنوب",
     descEn: "Immense and constant forgiveness of sins",
@@ -1985,6 +1991,7 @@ export default {
       { surah: 38, ayah: 66 },
       { surah: 39, ayah: 5 },
       { surah: 40, ayah: 42 },
+      { surah: 20, ayah: 82 },
     ],
   },
   65: {
@@ -2049,7 +2056,8 @@ export default {
     frequency: 1,
     timestamp1: 54,
     descAr: "يحكم بين العباد؛ يفتح أبواب الرزق والرحمة واليُسر",
-    descEn: "Judges between servants; opens doors of sustenance, mercy, and ease",
+    descEn:
+      "Judges between servants; opens doors of sustenance, mercy, and ease",
     pronounciation: "al-fat-TAH",
     quran_hadith: "Quran",
     reference: [{ surah: 34, ayah: 26 }],
@@ -2063,7 +2071,8 @@ export default {
     frequency: 32,
     timestamp1: 55,
     descAr: "العلم الشامل الممتد إلى المرئي والغيب، الظاهر والخفي",
-    descEn: "Comprehensive knowledge extending to seen and unseen, apparent and hidden",
+    descEn:
+      "Comprehensive knowledge extending to seen and unseen, apparent and hidden",
     pronounciation: "al-a-LEEM",
     quran_hadith: "Quran",
     reference: [
@@ -2124,7 +2133,8 @@ export default {
     frequency: 0,
     timestamp1: 57,
     descAr: "يمنح الرزق والرحمة؛ يبسط يديه للمؤمنين ليتوبوا",
-    descEn: "Gives provision and mercy; stretches Hands for believers to repent",
+    descEn:
+      "Gives provision and mercy; stretches Hands for believers to repent",
     pronounciation: "al-BA-sit",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -2138,7 +2148,8 @@ export default {
     frequency: 0,
     timestamp1: 58.5,
     descAr: "الذي يخفض من يشاء؛ يُذل المتكبرين والظالمين",
-    descEn: "The One who lowers whoever He willed; abases the proud and oppressors",
+    descEn:
+      "The One who lowers whoever He willed; abases the proud and oppressors",
     pronounciation: "al-KHA-fid",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -2152,7 +2163,8 @@ export default {
     frequency: 0,
     timestamp1: 60,
     descAr: "الذي يرفع من يشاء؛ يُعلي ويُعزّ المتواضعين",
-    descEn: "The One who raises whoever He wills; elevates and exalts the humble",
+    descEn:
+      "The One who raises whoever He wills; elevates and exalts the humble",
     pronounciation: "ar-ra-FEE",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -2163,12 +2175,12 @@ export default {
     englishName: "Al-Mu'izz",
     englishMean: "The Honorer",
     arabicName: "ٱلْمُعِزُّ",
-    frequency: 1,
+    frequency: 0,
     timestamp1: 61,
     descAr: "مانح الشرف والقوة للعباد المطيعين المحبين",
     descEn: "The Giver of honor and strength to obedient and loving servants",
     pronounciation: "al-mu-IZZ",
-    quran_hadith: "Quran",
+    quran_hadith: "Hadith",
     reference: [{ surah: 6, ayah: 143 }],
   },
   46: {
@@ -2194,7 +2206,8 @@ export default {
     frequency: 19,
     timestamp1: 63.5,
     descAr: "يسمع جميع الأسرار دون استثناء؛ يستجيب لدعاء الداعين",
-    descEn: "Hears all secrets without exception; answers prayers of supplicants",
+    descEn:
+      "Hears all secrets without exception; answers prayers of supplicants",
     pronounciation: "as-sa-MEE",
     quran_hadith: "Quran",
     reference: [
@@ -2244,21 +2257,14 @@ export default {
     englishName: "Al-Hakam",
     englishMean: "The Judge",
     arabicName: "ٱلْحَكَمُ",
-    frequency: 7,
+    frequency: 0,
     timestamp1: 66,
     descAr: "يحكم بعدل مطلق بناءً على المشيئة والتشريع والعدل",
-    descEn: "Judges with absolute fairness based on will, legislation, and justice",
+    descEn:
+      "Judges with absolute fairness based on will, legislation, and justice",
     pronounciation: "al-HA-kam",
-    quran_hadith: "Quran",
-    reference: [
-      { surah: 6, ayah: 57 },
-      { surah: 6, ayah: 62 },
-      { surah: 12, ayah: 40 },
-      { surah: 12, ayah: 67 },
-      { surah: 19, ayah: 12 },
-      { surah: 28, ayah: 70 },
-      { surah: 28, ayah: 88 },
-    ],
+    quran_hadith: "Hadith",
+    reference: [{ surah: 6, ayah: 57 }],
   },
   26: {
     id: 26,
@@ -2269,7 +2275,8 @@ export default {
     frequency: 0,
     timestamp1: 67,
     descAr: "العادل الذي يُصلح الأمور بطريقة منصفة، يعطي كلاً ما يستحق",
-    descEn: "The Just who rectifies matters in equitable manner, giving each what they deserve",
+    descEn:
+      "The Just who rectifies matters in equitable manner, giving each what they deserve",
     pronounciation: "al-ADL",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -2321,10 +2328,53 @@ export default {
     frequency: 1,
     timestamp1: 70.5,
     descAr: "الصبور الحليم؛ لا يعاقب فوراً؛ يمنح فرصة للتوبة",
-    descEn: "Patient and forbearing; does not punish immediately; gives opportunity to repent",
+    descEn:
+      "Patient and forbearing; does not punish immediately; gives opportunity to repent",
     pronounciation: "al-ha-LEEM",
     quran_hadith: "Quran",
-    reference: [{ surah: 11, ayah: 87 }],
+    reference: [
+      { surah: 11, ayah: 87 },
+      // {
+      //   surah: 2,
+      //   ayah: 225,
+      // },
+      // {
+      //   surah: 2,
+      //   ayah: 235,
+      // },
+      // {
+      //   surah: 2,
+      //   ayah: 263,
+      // },
+      // {
+      //   surah: 3,
+      //   ayah: 155,
+      // },
+      // {
+      //   surah: 4,
+      //   ayah: 12,
+      // },
+      // {
+      //   surah: 5,
+      //   ayah: 101,
+      // },
+      // {
+      //   surah: 9,
+      //   ayah: 114,
+      // },
+      // {
+      //   surah: 22,
+      //   ayah: 59,
+      // },
+      // {
+      //   surah: 37,
+      //   ayah: 101,
+      // },
+      // {
+      //   surah: 64,
+      //   ayah: 17,
+      // },
+    ],
   },
   44: {
     id: 44,
@@ -2332,49 +2382,50 @@ export default {
     englishName: "Al-'Azim",
     englishMean: "The Magnificent",
     arabicName: "ٱلْعَظِيمُ",
-    frequency: 36,
+    frequency: 5,
     timestamp1: 72,
     descAr: "يشمل كل العظمة والجلال والمجد في الذات والصفات",
-    descEn: "Comprises all greatness, majesty, and glory in being and attributes",
+    descEn:
+      "Comprises all greatness, majesty, and glory in being and attributes",
     pronounciation: "al-a-ZHEEM",
     quran_hadith: "Quran",
     reference: [
-      { surah: 2, ayah: 105 },
+      // { surah: 2, ayah: 105 },
       { surah: 2, ayah: 255 },
-      { surah: 3, ayah: 74 },
-      { surah: 4, ayah: 13 },
-      { surah: 5, ayah: 119 },
-      { surah: 8, ayah: 29 },
-      { surah: 9, ayah: 63 },
-      { surah: 9, ayah: 72 },
-      { surah: 9, ayah: 89 },
-      { surah: 9, ayah: 100 },
-      { surah: 9, ayah: 111 },
-      { surah: 9, ayah: 129 },
-      { surah: 10, ayah: 64 },
-      { surah: 15, ayah: 87 },
-      { surah: 21, ayah: 76 },
-      { surah: 23, ayah: 86 },
-      { surah: 26, ayah: 63 },
-      { surah: 27, ayah: 26 },
-      { surah: 37, ayah: 60 },
-      { surah: 37, ayah: 76 },
-      { surah: 37, ayah: 115 },
-      { surah: 40, ayah: 9 },
-      { surah: 42, ayah: 4 },
-      { surah: 44, ayah: 57 },
-      { surah: 56, ayah: 46 },
+      // { surah: 3, ayah: 74 },
+      // { surah: 4, ayah: 13 },
+      // { surah: 5, ayah: 119 },
+      // { surah: 8, ayah: 29 },
+      // { surah: 9, ayah: 63 },
+      // { surah: 9, ayah: 72 },
+      // { surah: 9, ayah: 89 },
+      // { surah: 9, ayah: 100 },
+      // { surah: 9, ayah: 111 },
+      // { surah: 9, ayah: 129 },
+      // { surah: 10, ayah: 64 },
+      // { surah: 15, ayah: 87 },
+      // { surah: 21, ayah: 76 },
+      // { surah: 23, ayah: 86 },
+      // { surah: 26, ayah: 63 },
+      // { surah: 27, ayah: 26 },
+      // { surah: 37, ayah: 60 },
+      // { surah: 37, ayah: 76 },
+      // { surah: 37, ayah: 115 },
+      // { surah: 40, ayah: 9 },
+      // { surah: 42, ayah: 4 },
+      // { surah: 44, ayah: 57 },
+      // { surah: 56, ayah: 46 },
       { surah: 56, ayah: 74 },
       { surah: 56, ayah: 96 },
-      { surah: 57, ayah: 12 },
-      { surah: 57, ayah: 21 },
-      { surah: 57, ayah: 29 },
-      { surah: 61, ayah: 12 },
-      { surah: 62, ayah: 4 },
-      { surah: 64, ayah: 9 },
+      // { surah: 57, ayah: 12 },
+      // { surah: 57, ayah: 21 },
+      // { surah: 57, ayah: 29 },
+      // { surah: 61, ayah: 12 },
+      // { surah: 62, ayah: 4 },
+      // { surah: 64, ayah: 9 },
       { surah: 69, ayah: 33 },
       { surah: 69, ayah: 52 },
-      { surah: 78, ayah: 2 },
+      // { surah: 78, ayah: 2 },
     ],
   },
   42: {
@@ -2386,7 +2437,8 @@ export default {
     frequency: 11,
     timestamp1: 73.5,
     descAr: "يغفر الذنوب؛ يقبل التوبة؛ يستر الذنوب؛ يُظهر الرحمة اللامتناهية",
-    descEn: "Forgives sins; accepts repentance; conceals sins; shows endless compassion",
+    descEn:
+      "Forgives sins; accepts repentance; conceals sins; shows endless compassion",
     pronounciation: "al-gha-FOOR",
     quran_hadith: "Quran",
     reference: [
@@ -2444,22 +2496,22 @@ export default {
     englishName: "Al-Kabir",
     englishMean: "The Great",
     arabicName: "ٱلْكَبِيرُ",
-    frequency: 8,
+    frequency: 5,
     timestamp1: 77,
     descAr: "العظيم السامي؛ لا يوجد ما هو أعظم",
     descEn: "Magnificent and Sublime; nothing greater exists",
     pronounciation: "al-ka-BEER",
     quran_hadith: "Quran",
     reference: [
-      { surah: 2, ayah: 255 },
+      // { surah: 2, ayah: 255 },
       { surah: 13, ayah: 9 },
       { surah: 22, ayah: 62 },
       { surah: 31, ayah: 30 },
       { surah: 34, ayah: 23 },
-      { surah: 35, ayah: 32 },
+      // { surah: 35, ayah: 32 },
       { surah: 40, ayah: 12 },
-      { surah: 42, ayah: 22 },
-      { surah: 85, ayah: 11 },
+      // { surah: 42, ayah: 22 },
+      // { surah: 85, ayah: 11 },
     ],
   },
   48: {
@@ -2471,7 +2523,8 @@ export default {
     frequency: 0,
     timestamp1: 78,
     descAr: "يحفظ السماوات والأرض؛ يُسجّل الأعمال؛ يحمي المؤمنين من الخطر",
-    descEn: "Protects heavens and earth; records deeds; protects believers from danger",
+    descEn:
+      "Protects heavens and earth; records deeds; protects believers from danger",
     pronounciation: "al-ha-FEEZ",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -2485,7 +2538,8 @@ export default {
     frequency: 0,
     timestamp1: 79.5,
     descAr: "له القدرة على كل شيء؛ يرزق؛ يحفظ بعطاياه",
-    descEn: "Has power over all things; provides sustenance; preserves with His grants",
+    descEn:
+      "Has power over all things; provides sustenance; preserves with His grants",
     pronounciation: "al-mu-QEET",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -2499,7 +2553,8 @@ export default {
     frequency: 0,
     timestamp1: 80.5,
     descAr: "كافٍ لمن يتوكل عليه؛ عالم بالعباد؛ يُحاسب على الأعمال",
-    descEn: "Sufficient for those who rely; aware of slaves; takes account of actions",
+    descEn:
+      "Sufficient for those who rely; aware of slaves; takes account of actions",
     pronounciation: "al-ha-SEEB",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -2513,7 +2568,8 @@ export default {
     frequency: 0,
     timestamp1: 82,
     descAr: "الجليل؛ العظيم فوق الجميع في الكرامة والمرتبة والعظمة المهيبة",
-    descEn: "The Majestic; great one above all in dignity, rank, and awe-inspiring greatness",
+    descEn:
+      "The Majestic; great one above all in dignity, rank, and awe-inspiring greatness",
     pronounciation: "al-ja-LEEL",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -2527,7 +2583,8 @@ export default {
     frequency: 3,
     timestamp1: 83,
     descAr: "يُعطي بسخاء وينفع بلا حدود؛ يمنح قبل الاستحقاق",
-    descEn: "Gives abundantly and benefits immeasurably; bestows before deserving",
+    descEn:
+      "Gives abundantly and benefits immeasurably; bestows before deserving",
     pronounciation: "al-ka-REEM",
     quran_hadith: "Quran",
     reference: [
@@ -2573,7 +2630,8 @@ export default {
     frequency: 0,
     timestamp1: 87,
     descAr: "يشمل كل شيء بالرحمة والعلم؛ الرزق يصل إلى الجميع",
-    descEn: "Embraces everything in mercy and knowledge; sustenance reaches all",
+    descEn:
+      "Embraces everything in mercy and knowledge; sustenance reaches all",
     pronounciation: "al-WA-si",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -2584,7 +2642,7 @@ export default {
     englishName: "Al-Hakim",
     englishMean: "The Wise",
     arabicName: "ٱلْحَكِيمُ",
-    frequency: 42,
+    frequency: 38,
     timestamp1: 88,
     descAr: "الحكمة العليا في جميع الأقدار والتشريع والحكم",
     descEn: "Supreme wisdom in all decrees, legislation, and judgment",
@@ -2595,13 +2653,13 @@ export default {
       { surah: 2, ayah: 129 },
       { surah: 3, ayah: 6 },
       { surah: 3, ayah: 18 },
-      { surah: 3, ayah: 58 },
+      // { surah: 3, ayah: 58 },
       { surah: 3, ayah: 62 },
       { surah: 3, ayah: 126 },
       { surah: 5, ayah: 118 },
       { surah: 6, ayah: 18 },
       { surah: 6, ayah: 73 },
-      { surah: 10, ayah: 1 },
+      // { surah: 10, ayah: 1 },
       { surah: 12, ayah: 83 },
       { surah: 12, ayah: 100 },
       { surah: 14, ayah: 4 },
@@ -2610,12 +2668,12 @@ export default {
       { surah: 29, ayah: 26 },
       { surah: 29, ayah: 42 },
       { surah: 30, ayah: 27 },
-      { surah: 31, ayah: 2 },
+      // { surah: 31, ayah: 2 },
       { surah: 31, ayah: 9 },
       { surah: 34, ayah: 1 },
       { surah: 34, ayah: 27 },
       { surah: 35, ayah: 2 },
-      { surah: 36, ayah: 2 },
+      // { surah: 36, ayah: 2 },
       { surah: 39, ayah: 1 },
       { surah: 40, ayah: 8 },
       { surah: 42, ayah: 3 },
@@ -2644,7 +2702,8 @@ export default {
     frequency: 1,
     timestamp1: 89,
     descAr: "يُحب الأنبياء والرسل والعباد المطيعين؛ الأحب الجدير بالمحبة",
-    descEn: "Loves prophets, messengers, and obedient servants; most beloved deserving love",
+    descEn:
+      "Loves prophets, messengers, and obedient servants; most beloved deserving love",
     pronounciation: "al-wa-DOOD",
     quran_hadith: "Quran",
     reference: [{ surah: 85, ayah: 14 }],
@@ -2655,16 +2714,13 @@ export default {
     englishName: "Al-Majid",
     englishMean: "The Glorious",
     arabicName: "ٱلْمَجِيدُ",
-    frequency: 2,
+    frequency: 0,
     timestamp1: 90.5,
     descAr: "الصفات الكاملة؛ الأفعال العظيمة؛ الكرم اللامحدود",
     descEn: "Perfect attributes; greatest actions; boundless generosity",
     pronounciation: "al-ma-JEED",
-    quran_hadith: "Quran",
-    reference: [
-      { surah: 50, ayah: 1 },
-      { surah: 85, ayah: 15 },
-    ],
+    quran_hadith: "Derived",
+    reference: [{ surah: 11, ayah: 73 }],
   },
   51: {
     id: 51,
@@ -2675,7 +2731,8 @@ export default {
     frequency: 0,
     timestamp1: 92,
     descAr: "الباعث الذي يبعث جميع الخلائق للحساب في الآخرة",
-    descEn: "The Resurrector who raises all beings to judgment in the afterlife",
+    descEn:
+      "The Resurrector who raises all beings to judgment in the afterlife",
     pronounciation: "al-BA-ith",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -2700,165 +2757,166 @@ export default {
     englishName: "Al-Haqq",
     englishMean: "The Truth",
     arabicName: "ٱلْحَقُّ",
-    frequency: 109,
+    frequency: 9,
     timestamp1: 94.5,
     descAr: "موجود حقاً؛ كلامه وقضاؤه وتشريعه صادق مطلقاً",
-    descEn: "Truly exists; His speech, decree, and legislation are absolutely truthful",
+    descEn:
+      "Truly exists; His speech, decree, and legislation are absolutely truthful",
     pronounciation: "al-HAQQ",
     quran_hadith: "Quran",
     reference: [
+      // {
+      //   surah: 2,
+      //   ayah: 26,
+      // },
+      // {
+      //   surah: 2,
+      //   ayah: 42,
+      // },
+      // {
+      //   surah: 2,
+      //   ayah: 61,
+      // },
+      // {
+      //   surah: 2,
+      //   ayah: 91,
+      // },
+      // {
+      //   surah: 2,
+      //   ayah: 109,
+      // },
+      // {
+      //   surah: 2,
+      //   ayah: 144,
+      // },
+      // {
+      //   surah: 2,
+      //   ayah: 146,
+      // },
+      // {
+      //   surah: 2,
+      //   ayah: 147,
+      // },
+      // {
+      //   surah: 2,
+      //   ayah: 213,
+      // },
+      // {
+      //   surah: 2,
+      //   ayah: 282,
+      // },
+      // {
+      //   surah: 3,
+      //   ayah: 60,
+      // },
+      // {
+      //   surah: 3,
+      //   ayah: 62,
+      // },
+      // {
+      //   surah: 3,
+      //   ayah: 71,
+      // },
+      // {
+      //   surah: 3,
+      //   ayah: 154,
+      // },
+      // {
+      //   surah: 4,
+      //   ayah: 171,
+      // },
+      // {
+      //   surah: 5,
+      //   ayah: 48,
+      // },
+      // {
+      //   surah: 5,
+      //   ayah: 77,
+      // },
+      // {
+      //   surah: 5,
+      //   ayah: 83,
+      // },
+      // {
+      //   surah: 5,
+      //   ayah: 84,
+      // },
+      // {
+      //   surah: 6,
+      //   ayah: 57,
+      // },
       {
-        surah: 2,
-        ayah: 26,
-      },
-      {
-        surah: 2,
-        ayah: 42,
-      },
-      {
-        surah: 2,
-        ayah: 61,
-      },
-      {
-        surah: 2,
-        ayah: 91,
-      },
-      {
-        surah: 2,
-        ayah: 109,
-      },
-      {
-        surah: 2,
-        ayah: 144,
-      },
-      {
-        surah: 2,
-        ayah: 146,
-      },
-      {
-        surah: 2,
-        ayah: 147,
-      },
-      {
-        surah: 2,
-        ayah: 213,
-      },
-      {
-        surah: 2,
-        ayah: 282,
-      },
-      {
-        surah: 3,
-        ayah: 60,
-      },
-      {
-        surah: 3,
+        surah: 6,
         ayah: 62,
       },
-      {
-        surah: 3,
-        ayah: 71,
-      },
-      {
-        surah: 3,
-        ayah: 154,
-      },
-      {
-        surah: 4,
-        ayah: 171,
-      },
-      {
-        surah: 5,
-        ayah: 48,
-      },
-      {
-        surah: 5,
-        ayah: 77,
-      },
-      {
-        surah: 5,
-        ayah: 83,
-      },
-      {
-        surah: 5,
-        ayah: 84,
-      },
-      {
-        surah: 6,
-        ayah: 57,
-      },
-      {
-        surah: 6,
-        ayah: 62,
-      },
-      {
-        surah: 6,
-        ayah: 66,
-      },
-      {
-        surah: 6,
-        ayah: 73,
-      },
-      {
-        surah: 6,
-        ayah: 93,
-      },
-      {
-        surah: 7,
-        ayah: 8,
-      },
-      {
-        surah: 7,
-        ayah: 33,
-      },
-      {
-        surah: 7,
-        ayah: 105,
-      },
-      {
-        surah: 7,
-        ayah: 118,
-      },
-      {
-        surah: 7,
-        ayah: 146,
-      },
-      {
-        surah: 7,
-        ayah: 169,
-      },
-      {
-        surah: 8,
-        ayah: 6,
-      },
-      {
-        surah: 8,
-        ayah: 7,
-      },
-      {
-        surah: 8,
-        ayah: 8,
-      },
-      {
-        surah: 8,
-        ayah: 32,
-      },
-      {
-        surah: 9,
-        ayah: 29,
-      },
-      {
-        surah: 9,
-        ayah: 33,
-      },
-      {
-        surah: 9,
-        ayah: 48,
-      },
-      {
-        surah: 10,
-        ayah: 23,
-      },
+      // {
+      //   surah: 6,
+      //   ayah: 66,
+      // },
+      // {
+      //   surah: 6,
+      //   ayah: 73,
+      // },
+      // {
+      //   surah: 6,
+      //   ayah: 93,
+      // },
+      // {
+      //   surah: 7,
+      //   ayah: 8,
+      // },
+      // {
+      //   surah: 7,
+      //   ayah: 33,
+      // },
+      // {
+      //   surah: 7,
+      //   ayah: 105,
+      // },
+      // {
+      //   surah: 7,
+      //   ayah: 118,
+      // },
+      // {
+      //   surah: 7,
+      //   ayah: 146,
+      // },
+      // {
+      //   surah: 7,
+      //   ayah: 169,
+      // },
+      // {
+      //   surah: 8,
+      //   ayah: 6,
+      // },
+      // {
+      //   surah: 8,
+      //   ayah: 7,
+      // },
+      // {
+      //   surah: 8,
+      //   ayah: 8,
+      // },
+      // {
+      //   surah: 8,
+      //   ayah: 32,
+      // },
+      // {
+      //   surah: 9,
+      //   ayah: 29,
+      // },
+      // {
+      //   surah: 9,
+      //   ayah: 33,
+      // },
+      // {
+      //   surah: 9,
+      //   ayah: 48,
+      // },
+      // {
+      //   surah: 10,
+      //   ayah: 23,
+      // },
       {
         surah: 10,
         ayah: 30,
@@ -2867,114 +2925,110 @@ export default {
         surah: 10,
         ayah: 32,
       },
-      {
-        surah: 10,
-        ayah: 35,
-      },
-      {
-        surah: 10,
-        ayah: 36,
-      },
-      {
-        surah: 10,
-        ayah: 76,
-      },
-      {
-        surah: 10,
-        ayah: 82,
-      },
-      {
-        surah: 10,
-        ayah: 94,
-      },
-      {
-        surah: 10,
-        ayah: 108,
-      },
-      {
-        surah: 11,
-        ayah: 17,
-      },
-      {
-        surah: 11,
-        ayah: 45,
-      },
-      {
-        surah: 11,
-        ayah: 120,
-      },
-      {
-        surah: 12,
-        ayah: 51,
-      },
-      {
-        surah: 13,
-        ayah: 1,
-      },
-      {
-        surah: 13,
-        ayah: 14,
-      },
-      {
-        surah: 13,
-        ayah: 17,
-      },
-      {
-        surah: 13,
-        ayah: 19,
-      },
-      {
-        surah: 14,
-        ayah: 22,
-      },
-      {
-        surah: 17,
-        ayah: 81,
-      },
-      {
-        surah: 18,
-        ayah: 29,
-      },
+      // {
+      //   surah: 10,
+      //   ayah: 35,
+      // },
+      // {
+      //   surah: 10,
+      //   ayah: 36,
+      // },
+      // {
+      //   surah: 10,
+      //   ayah: 76,
+      // },
+      // {
+      //   surah: 10,
+      //   ayah: 82,
+      // },
+      // {
+      //   surah: 10,
+      //   ayah: 94,
+      // },
+      // {
+      //   surah: 10,
+      //   ayah: 108,
+      // },
+      // {
+      //   surah: 11,
+      //   ayah: 17,
+      // },
+      // {
+      //   surah: 11,
+      //   ayah: 45,
+      // },
+      // {
+      //   surah: 11,
+      //   ayah: 120,
+      // },
+      // {
+      //   surah: 12,
+      //   ayah: 51,
+      // },
+      // {
+      //   surah: 13,
+      //   ayah: 1,
+      // },
+      // {
+      //   surah: 13,
+      //   ayah: 14,
+      // },
+      // {
+      //   surah: 13,
+      //   ayah: 17,
+      // },
+      // {
+      //   surah: 13,
+      //   ayah: 19,
+      // },
+      // {
+      //   surah: 14,
+      //   ayah: 22,
+      // },
+      // {
+      //   surah: 17,
+      //   ayah: 81,
+      // },
+      // {
+      //   surah: 18,
+      //   ayah: 29,
+      // },
       {
         surah: 18,
         ayah: 44,
       },
-      {
-        surah: 18,
-        ayah: 56,
-      },
-      {
-        surah: 19,
-        ayah: 34,
-      },
+      // {
+      //   surah: 18,
+      //   ayah: 56,
+      // },
+      // {
+      //   surah: 19,
+      //   ayah: 34,
+      // },
       {
         surah: 20,
         ayah: 114,
       },
-      {
-        surah: 21,
-        ayah: 24,
-      },
-      {
-        surah: 21,
-        ayah: 97,
-      },
+      // {
+      //   surah: 21,
+      //   ayah: 24,
+      // },
+      // {
+      //   surah: 21,
+      //   ayah: 97,
+      // },
       {
         surah: 22,
         ayah: 6,
       },
-      {
-        surah: 22,
-        ayah: 54,
-      },
-      {
-        surah: 22,
-        ayah: 62,
-      },
-      {
-        surah: 23,
-        ayah: 71,
-      },
+      // {
+      //   surah: 22,
+      //   ayah: 54,
+      // },
+      // {
+      //   surah: 23,
+      //   ayah: 71,
+      // },
       {
         surah: 23,
         ayah: 116,
@@ -2983,142 +3037,142 @@ export default {
         surah: 24,
         ayah: 25,
       },
-      {
-        surah: 24,
-        ayah: 49,
-      },
-      {
-        surah: 25,
-        ayah: 26,
-      },
-      {
-        surah: 27,
-        ayah: 79,
-      },
-      {
-        surah: 28,
-        ayah: 39,
-      },
-      {
-        surah: 28,
-        ayah: 48,
-      },
-      {
-        surah: 28,
-        ayah: 53,
-      },
-      {
-        surah: 28,
-        ayah: 75,
-      },
+      // {
+      //   surah: 24,
+      //   ayah: 49,
+      // },
+      // {
+      //   surah: 25,
+      //   ayah: 26,
+      // },
+      // {
+      //   surah: 27,
+      //   ayah: 79,
+      // },
+      // {
+      //   surah: 28,
+      //   ayah: 39,
+      // },
+      // {
+      //   surah: 28,
+      //   ayah: 48,
+      // },
+      // {
+      //   surah: 28,
+      //   ayah: 53,
+      // },
+      // {
+      //   surah: 28,
+      //   ayah: 75,
+      // },
       {
         surah: 31,
         ayah: 30,
       },
-      {
-        surah: 32,
-        ayah: 3,
-      },
-      {
-        surah: 33,
-        ayah: 4,
-      },
-      {
-        surah: 33,
-        ayah: 53,
-      },
-      {
-        surah: 34,
-        ayah: 6,
-      },
-      {
-        surah: 34,
-        ayah: 23,
-      },
-      {
-        surah: 34,
-        ayah: 49,
-      },
-      {
-        surah: 35,
-        ayah: 31,
-      },
-      {
-        surah: 40,
-        ayah: 5,
-      },
-      {
-        surah: 40,
-        ayah: 75,
-      },
-      {
-        surah: 41,
-        ayah: 15,
-      },
-      {
-        surah: 41,
-        ayah: 53,
-      },
-      {
-        surah: 42,
-        ayah: 18,
-      },
-      {
-        surah: 42,
-        ayah: 24,
-      },
-      {
-        surah: 42,
-        ayah: 42,
-      },
-      {
-        surah: 43,
-        ayah: 29,
-      },
-      {
-        surah: 43,
-        ayah: 30,
-      },
-      {
-        surah: 46,
-        ayah: 20,
-      },
-      {
-        surah: 46,
-        ayah: 30,
-      },
-      {
-        surah: 47,
-        ayah: 2,
-      },
-      {
-        surah: 47,
-        ayah: 3,
-      },
-      {
-        surah: 48,
-        ayah: 28,
-      },
-      {
-        surah: 53,
-        ayah: 28,
-      },
-      {
-        surah: 57,
-        ayah: 16,
-      },
-      {
-        surah: 60,
-        ayah: 1,
-      },
-      {
-        surah: 61,
-        ayah: 9,
-      },
-      {
-        surah: 78,
-        ayah: 39,
-      },
+      // {
+      //   surah: 32,
+      //   ayah: 3,
+      // },
+      // {
+      //   surah: 33,
+      //   ayah: 4,
+      // },
+      // {
+      //   surah: 33,
+      //   ayah: 53,
+      // },
+      // {
+      //   surah: 34,
+      //   ayah: 6,
+      // },
+      // {
+      //   surah: 34,
+      //   ayah: 23,
+      // },
+      // {
+      //   surah: 34,
+      //   ayah: 49,
+      // },
+      // {
+      //   surah: 35,
+      //   ayah: 31,
+      // },
+      // {
+      //   surah: 40,
+      //   ayah: 5,
+      // },
+      // {
+      //   surah: 40,
+      //   ayah: 75,
+      // },
+      // {
+      //   surah: 41,
+      //   ayah: 15,
+      // },
+      // {
+      //   surah: 41,
+      //   ayah: 53,
+      // },
+      // {
+      //   surah: 42,
+      //   ayah: 18,
+      // },
+      // {
+      //   surah: 42,
+      //   ayah: 24,
+      // },
+      // {
+      //   surah: 42,
+      //   ayah: 42,
+      // },
+      // {
+      //   surah: 43,
+      //   ayah: 29,
+      // },
+      // {
+      //   surah: 43,
+      //   ayah: 30,
+      // },
+      // {
+      //   surah: 46,
+      //   ayah: 20,
+      // },
+      // {
+      //   surah: 46,
+      //   ayah: 30,
+      // },
+      // {
+      //   surah: 47,
+      //   ayah: 2,
+      // },
+      // {
+      //   surah: 47,
+      //   ayah: 3,
+      // },
+      // {
+      //   surah: 48,
+      //   ayah: 28,
+      // },
+      // {
+      //   surah: 53,
+      //   ayah: 28,
+      // },
+      // {
+      //   surah: 57,
+      //   ayah: 16,
+      // },
+      // {
+      //   surah: 60,
+      //   ayah: 1,
+      // },
+      // {
+      //   surah: 61,
+      //   ayah: 9,
+      // },
+      // {
+      //   surah: 78,
+      //   ayah: 39,
+      // },
     ],
   },
   33: {
@@ -3130,7 +3184,8 @@ export default {
     frequency: 1,
     timestamp1: 95.5,
     descAr: "يُدبّر أمور جميع المخلوقات؛ يرزق؛ يُلبّي الحاجات؛ يحمي الصالحين",
-    descEn: "Disposes all creatures' affairs; provides; fulfills needs; protects righteous",
+    descEn:
+      "Disposes all creatures' affairs; provides; fulfills needs; protects righteous",
     pronounciation: "al-wa-KEEL",
     quran_hadith: "Quran",
     reference: [{ surah: 3, ayah: 173 }],
@@ -3218,7 +3273,8 @@ export default {
     frequency: 0,
     timestamp1: 101.5,
     descAr: "المُحصي بحساب كامل؛ يحفظ سجلاً تاماً لجميع الأعمال",
-    descEn: "The Reckoner with perfect accounting; keeps complete record of all deeds",
+    descEn:
+      "The Reckoner with perfect accounting; keeps complete record of all deeds",
     pronounciation: "al-muh-SEE",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -3232,7 +3288,8 @@ export default {
     frequency: 0,
     timestamp1: 103,
     descAr: "مُبدئ كل الخلق؛ بادئ كل شيء من العدم",
-    descEn: "The Originator of all creation; beginner of all things from nothing",
+    descEn:
+      "The Originator of all creation; beginner of all things from nothing",
     pronounciation: "al-mub-DEE",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -3246,7 +3303,8 @@ export default {
     frequency: 0,
     timestamp1: 104,
     descAr: "المُعيد الذي يُرجع ويُجدّد؛ يمنح حياة جديدة بعد الموت",
-    descEn: "The Restorer who brings back and regenerates; gives new life after death",
+    descEn:
+      "The Restorer who brings back and regenerates; gives new life after death",
     pronounciation: "al-mu-EED",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -3260,7 +3318,8 @@ export default {
     frequency: 0,
     timestamp1: 105,
     descAr: "واهب الحياة الذي يخلق الحي من الميت ويُحيي القلوب بالعلم",
-    descEn: "The Giver of Life who creates living from lifeless and revives hearts with knowledge",
+    descEn:
+      "The Giver of Life who creates living from lifeless and revives hearts with knowledge",
     pronounciation: "al-muh-YEE",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -3285,20 +3344,22 @@ export default {
     englishName: "Al-Hayy",
     englishMean: "The Ever-Living",
     arabicName: "ٱلْحَيُّ",
-    frequency: 12,
+    frequency: 4,
     timestamp1: 108,
-    descAr: "الحياة الكاملة الأبدية التي تستلزم جميع الصفات الكاملة وتنفي النقائص",
-    descEn: "Perfect, eternal life requiring all perfect attributes and negating imperfections",
+    descAr:
+      "الحياة الكاملة الأبدية التي تستلزم جميع الصفات الكاملة وتنفي النقائص",
+    descEn:
+      "Perfect, eternal life requiring all perfect attributes and negating imperfections",
     pronounciation: "al-HAYY",
     quran_hadith: "Quran",
     reference: [
       { surah: 2, ayah: 255 },
       { surah: 3, ayah: 2 },
-      { surah: 3, ayah: 27 },
-      { surah: 6, ayah: 95 },
-      { surah: 10, ayah: 31 },
+      // { surah: 3, ayah: 27 },
+      // { surah: 6, ayah: 95 },
+      // { surah: 10, ayah: 31 },
       { surah: 25, ayah: 58 },
-      { surah: 30, ayah: 19 },
+      // { surah: 30, ayah: 19 },
       { surah: 40, ayah: 65 },
     ],
   },
@@ -3357,7 +3418,8 @@ export default {
     frequency: 6,
     timestamp1: 115,
     descAr: "فريد بلا شركاء، واحد في الذات والصفات والأفعال والربوبية",
-    descEn: "Unique without partners, one in being, attributes, actions, and lordship",
+    descEn:
+      "Unique without partners, one in being, attributes, actions, and lordship",
     pronounciation: "al-WA-hid",
     quran_hadith: "Quran",
     reference: [
@@ -3378,7 +3440,8 @@ export default {
     frequency: 1,
     timestamp1: 116.5,
     descAr: "السيد ذو السيادة المطلقة؛ جميع القلوب تتوجه إليه للحاجات",
-    descEn: "Master with absolute sovereignty; all hearts turn to Him for needs",
+    descEn:
+      "Master with absolute sovereignty; all hearts turn to Him for needs",
     pronounciation: "as-sa-MAD",
     quran_hadith: "Quran",
     reference: [{ surah: 112, ayah: 2 }],
@@ -3434,7 +3497,8 @@ export default {
     frequency: 0,
     timestamp1: 121,
     descAr: "يُؤخّر ما يشاء؛ يُمهل ما يشاء بحكمة وعدل",
-    descEn: "Postpones what He wills; delays what He pleases in wisdom and justice",
+    descEn:
+      "Postpones what He wills; delays what He pleases in wisdom and justice",
     pronounciation: "al-mu-AKH-khir",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -3445,14 +3509,14 @@ export default {
     englishName: "Al-Awwal",
     englishMean: "The First",
     arabicName: "ٱلْأَوَّلُ",
-    frequency: 2,
+    frequency: 1,
     timestamp1: 122,
     descAr: "لا شيء كان قبله؛ خلق كل شيء من العدم المطلق",
     descEn: "Nothing existed before Him; He created all from absolute nothing",
     pronounciation: "al-AW-wal",
     quran_hadith: "Quran",
     reference: [
-      { surah: 50, ayah: 15 },
+      // { surah: 50, ayah: 15 },
       { surah: 57, ayah: 3 },
     ],
   },
@@ -3493,7 +3557,8 @@ export default {
     frequency: 1,
     timestamp1: 126,
     descAr: "الأقرب من كل شيء بسبب الاطّلاع التام على الأسرار والأمور الخفية",
-    descEn: "Nearest to everything due to full awareness of secrets and hidden matters",
+    descEn:
+      "Nearest to everything due to full awareness of secrets and hidden matters",
     pronounciation: "al-BA-tin",
     quran_hadith: "Quran",
     reference: [{ surah: 57, ayah: 3 }],
@@ -3521,7 +3586,8 @@ export default {
     frequency: 1,
     timestamp1: 130,
     descAr: "المتعالي؛ العالي السامي المتجاوز لكل الخلق",
-    descEn: "The Most High; supremely elevated and transcendent above all creation",
+    descEn:
+      "The Most High; supremely elevated and transcendent above all creation",
     pronounciation: "al-mu-ta-AA-li",
     quran_hadith: "Quran",
     reference: [{ surah: 13, ayah: 9 }],
@@ -3532,29 +3598,30 @@ export default {
     englishName: "Al-Barr",
     englishMean: "The Source of Goodness",
     arabicName: "ٱلْبَرُّ",
-    frequency: 19,
+    frequency: 1,
     timestamp1: 132.5,
     descAr: "يُمطر النعم الظاهرة والخفية؛ يُضاعف الثواب؛ يغفر للمخطئين",
-    descEn: "Showers apparent and hidden blessings; multiplies rewards; forgives wrongdoers",
+    descEn:
+      "Showers apparent and hidden blessings; multiplies rewards; forgives wrongdoers",
     pronounciation: "al-BARR",
     quran_hadith: "Quran",
     reference: [
-      { surah: 2, ayah: 177 },
-      { surah: 2, ayah: 189 },
-      { surah: 3, ayah: 92 },
-      { surah: 5, ayah: 2 },
-      { surah: 5, ayah: 96 },
-      { surah: 6, ayah: 59 },
-      { surah: 6, ayah: 63 },
-      { surah: 6, ayah: 97 },
-      { surah: 10, ayah: 22 },
-      { surah: 17, ayah: 67 },
-      { surah: 17, ayah: 68 },
-      { surah: 17, ayah: 70 },
-      { surah: 27, ayah: 63 },
-      { surah: 29, ayah: 65 },
-      { surah: 30, ayah: 41 },
-      { surah: 31, ayah: 32 },
+      // { surah: 2, ayah: 177 },
+      // { surah: 2, ayah: 189 },
+      // { surah: 3, ayah: 92 },
+      // { surah: 5, ayah: 2 },
+      // { surah: 5, ayah: 96 },
+      // { surah: 6, ayah: 59 },
+      // { surah: 6, ayah: 63 },
+      // { surah: 6, ayah: 97 },
+      // { surah: 10, ayah: 22 },
+      // { surah: 17, ayah: 67 },
+      // { surah: 17, ayah: 68 },
+      // { surah: 17, ayah: 70 },
+      // { surah: 27, ayah: 63 },
+      // { surah: 29, ayah: 65 },
+      // { surah: 30, ayah: 41 },
+      // { surah: 31, ayah: 32 },
       { surah: 52, ayah: 28 },
     ],
   },
@@ -3564,7 +3631,7 @@ export default {
     englishName: "At-Tawwab",
     englishMean: "The Acceptor of Repentance",
     arabicName: "ٱلتَّوَّابُ",
-    frequency: 6,
+    frequency: 5,
     timestamp1: 133,
     descAr: "يُعين العباد على التوبة؛ يقبل التوبة ويعفو عن الذنوب",
     descEn: "Helps servants repent; accepts repentance and pardons sins",
@@ -3598,15 +3665,15 @@ export default {
     englishName: "Al-'Afuww",
     englishMean: "The Pardoner",
     arabicName: "ٱلْعَفُوُّ",
-    frequency: 2,
+    frequency: 0,
     timestamp1: 135.5,
     descAr: "يعفو ويتجاوز عن الذنوب؛ يمنح العفو الذي يمحو كل الخطايا",
     descEn: "Forgives and overlooks wrongdoing; grants pardon erasing all sins",
     pronounciation: "al-a-FOO",
-    quran_hadith: "Quran",
+    quran_hadith: "Derived",
     reference: [
       { surah: 2, ayah: 219 },
-      { surah: 7, ayah: 199 },
+      // { surah: 7, ayah: 199 },
     ],
   },
   103: {
@@ -3632,7 +3699,8 @@ export default {
     frequency: 1,
     timestamp1: 139,
     descAr: "مالك الملك؛ المالك الوحيد لكل السيادة بسلطة مطلقة",
-    descEn: "The Owner of Sovereignty; sole possessor of all dominion with absolute authority",
+    descEn:
+      "The Owner of Sovereignty; sole possessor of all dominion with absolute authority",
     pronounciation: "MA-lik-ul-MULK",
     quran_hadith: "Quran",
     reference: [{ surah: 3, ayah: 26 }],
@@ -3677,7 +3745,8 @@ export default {
     frequency: 0,
     timestamp1: 147,
     descAr: "الجامع الذي يوحّد؛ يجمع الأشياء المتفرقة ويحشر الخلق للحساب",
-    descEn: "The Gatherer who unites; brings together scattered things and gathers creation for judgment",
+    descEn:
+      "The Gatherer who unites; brings together scattered things and gathers creation for judgment",
     pronounciation: "al-JA-mi",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -3714,7 +3783,8 @@ export default {
     frequency: 0,
     timestamp1: 149,
     descAr: "المُغني الذي يمنح الغنى المادي والروحي لمن يشاء",
-    descEn: "The Enricher who grants wealth and spiritual richness to whomever He wills",
+    descEn:
+      "The Enricher who grants wealth and spiritual richness to whomever He wills",
     pronounciation: "al-mugh-NEE",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -3728,7 +3798,8 @@ export default {
     frequency: 0,
     timestamp1: 151,
     descAr: "المانع الذي يمنع الضرر أو يمسك الرزق بحكمته",
-    descEn: "The Withholder who prevents harm or withholds provision in His wisdom",
+    descEn:
+      "The Withholder who prevents harm or withholds provision in His wisdom",
     pronounciation: "al-MA-ni",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -3767,23 +3838,13 @@ export default {
     englishName: "An-Nur",
     englishMean: "The Light",
     arabicName: "ٱلنُّورُ",
-    frequency: 10,
+    frequency: 0,
     timestamp1: 154.5,
     descAr: "النور الذي ينير الخلق ويهدي القلوب",
     descEn: "The Light who illuminates creation and guides hearts",
     pronounciation: "an-NOOR",
-    quran_hadith: "Quran",
-    reference: [
-      { surah: 2, ayah: 257 },
-      { surah: 5, ayah: 16 },
-      { surah: 7, ayah: 157 },
-      { surah: 14, ayah: 1 },
-      { surah: 14, ayah: 5 },
-      { surah: 33, ayah: 43 },
-      { surah: 35, ayah: 20 },
-      { surah: 57, ayah: 9 },
-      { surah: 65, ayah: 11 },
-    ],
+    quran_hadith: "Derived",
+    reference: [{ surah: 2, ayah: 257 }],
   },
   74: {
     id: 74,
@@ -3794,7 +3855,8 @@ export default {
     frequency: 0,
     timestamp1: 155.5,
     descAr: "يُعين الخلق على معرفة ربهم؛ يهدي إلى المصالح والصراط المستقيم",
-    descEn: "Helps creation know their Lord; guides to best interests and Right Path",
+    descEn:
+      "Helps creation know their Lord; guides to best interests and Right Path",
     pronounciation: "al-HA-di",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -3808,7 +3870,8 @@ export default {
     frequency: 0,
     timestamp1: 157,
     descAr: "المُبدع الذي لا مثيل له؛ خلق الكون دون سابقة أو مثال",
-    descEn: "The Incomparable Originator; created universe without precedent or example",
+    descEn:
+      "The Incomparable Originator; created universe without precedent or example",
     pronounciation: "al-ba-DEE",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -3822,7 +3885,8 @@ export default {
     frequency: 0,
     timestamp1: 158.5,
     descAr: "الباقي الذي يبقى إلى الأبد؛ الوجود الأبدي غير المتأثر بالزمن",
-    descEn: "The Everlasting who remains forever; endless existence unaffected by time",
+    descEn:
+      "The Everlasting who remains forever; endless existence unaffected by time",
     pronounciation: "al-BA-qi",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],
@@ -3833,12 +3897,13 @@ export default {
     englishName: "Al-Warith",
     englishMean: "The Inheritor",
     arabicName: "ٱلْوَارِثُ",
-    frequency: 1,
+    frequency: 0,
     timestamp1: 159.5,
     descAr: "يبقى بعد فناء الخلق؛ يستعيد النعم الممنوحة بعد الموت",
-    descEn: "Remains after creation perishes; repossesses granted blessings after death",
+    descEn:
+      "Remains after creation perishes; repossesses granted blessings after death",
     pronounciation: "al-WA-rith",
-    quran_hadith: "Quran",
+    quran_hadith: "Derived",
     reference: [{ surah: 2, ayah: 233 }],
   },
   82: {
@@ -3850,7 +3915,8 @@ export default {
     frequency: 1,
     timestamp1: 160.5,
     descAr: "الهادي إلى الطريق الصحيح؛ المعلم الصالح والمرشد المعصوم",
-    descEn: "The Guide to the Right Path; Righteous Teacher and Infallible Guide",
+    descEn:
+      "The Guide to the Right Path; Righteous Teacher and Infallible Guide",
     pronounciation: "ar-ra-SHEED",
     quran_hadith: "Quran",
     reference: [{ surah: 11, ayah: 87 }],
@@ -3864,7 +3930,8 @@ export default {
     frequency: 0,
     timestamp1: 161.5,
     descAr: "الصبور الذي لا يستعجل؛ يتصرف في كل أمر في وقته المناسب",
-    descEn: "The Most Patient who is not hasty; disposes each thing at proper time",
+    descEn:
+      "The Most Patient who is not hasty; disposes each thing at proper time",
     pronounciation: "as-sa-BOOR",
     quran_hadith: "Hadith",
     reference: [{ surah: 2, ayah: 129 }],

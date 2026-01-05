@@ -349,7 +349,7 @@ It documents how a familiar list—learned through culture and memory—appears 
               {/if}
             </div>
             <div class="source-column">
-              <p class="source-label">ذكرت في القرآن</p>
+              <p class="source-label">ذكر في القرآن الكريم</p>
             </div>
           </div>
 
@@ -365,7 +365,7 @@ It documents how a familiar list—learned through culture and memory—appears 
                   </button>
                 {/if}
 
-                <div class={currentName.quran_hadith === "Hadith" ? "verse-container-hadith" : "verse-container"}>
+                <div class={currentName.quran_hadith === "Hadith" ? "verse-container-hadith" : currentName.quran_hadith === "Derived" ? "verse-container-derived" : "verse-container"}>
                   <p class="quran-text">{@html highlightName(quranVerses[currentVerseIndex].text, currentName.arabicName)}</p>
                   <p class="verse-reference">
                    <b> سورة {quranVerses[currentVerseIndex].surahName} - آية {quranVerses[currentVerseIndex].ayahNumber} <b/>
@@ -388,7 +388,7 @@ It documents how a familiar list—learned through culture and memory—appears 
         {:else if currentName.quran_hadith === 'Hadith'}
           <!-- Hadith Source -->
           <div class="source-hadith">
-            <p class="source-label">ذكرت في الحديث</p>
+            <p class="source-label">ذكر في الحديث الصحيح</p>
           </div>
 
           <!-- Verse reference for Hadith -->
@@ -396,6 +396,25 @@ It documents how a familiar list—learned through culture and memory—appears 
             <div class="quran-carousel">
               <div class="carousel-content">
                 <div class="verse-container-hadith">
+                  <p class="quran-text">{@html highlightName(quranVerses[0].text, currentName.arabicName)}</p>
+                  <p class="verse-reference">
+                   <b> سورة {quranVerses[0].surahName} - آية {quranVerses[0].ayahNumber} <b/>
+                  </p>
+                </div>
+              </div>
+            </div>
+          {/if}
+        {:else if currentName.quran_hadith === 'Derived'}
+          <!-- Derived Source -->
+          <div class="source-hadith">
+            <p class="source-label">مشتق من القرآن الكريم</p>
+          </div>
+
+          <!-- Verse reference for Derived -->
+          {#if quranVerses.length > 0}
+            <div class="quran-carousel">
+              <div class="carousel-content">
+                <div class="verse-container-derived">
                   <p class="quran-text">{@html highlightName(quranVerses[0].text, currentName.arabicName)}</p>
                   <p class="verse-reference">
                    <b> سورة {quranVerses[0].surahName} - آية {quranVerses[0].ayahNumber} <b/>
@@ -426,7 +445,7 @@ It documents how a familiar list—learned through culture and memory—appears 
           <div class="source-columns">
            
             <div class="source-column">
-              <p class="source-label-english">Mentioned in the Quran</p>
+              <p class="source-label-english">Mentioned in The Holy Quran</p>
             </div>
 
              <div class="source-column">
@@ -454,7 +473,7 @@ It documents how a familiar list—learned through culture and memory—appears 
                   </button>
                 {/if}
 
-                <div class={currentName.quran_hadith === "Hadith" ? "verse-container-hadith" : "verse-container"}>
+                <div class={currentName.quran_hadith === "Hadith" ? "verse-container-hadith" : currentName.quran_hadith === "Derived" ? "verse-container-derived" : "verse-container"}>
                   <p class="quran-text">{quranVersesEN[currentVerseIndex].text}</p>
                   <p class="verse-reference">
                    <b> Surah {quranVersesEN[currentVerseIndex].surahName} <i class="translation-text">({quranVersesEN[currentVerseIndex].surahTranslation})</i> - Verse {quranVersesEN[currentVerseIndex].ayahNumber} <b/>
@@ -477,7 +496,7 @@ It documents how a familiar list—learned through culture and memory—appears 
         {:else if currentName.quran_hadith === 'Hadith'}
           <!-- Hadith Source -->
           <div class="source-hadith">
-            <p class="source-label-english">Mentioned in Hadith</p>
+            <p class="source-label-english">Mentioned in Hadith Sahih</p>
           </div>
 
           <!-- Verse reference for Hadith -->
@@ -485,6 +504,25 @@ It documents how a familiar list—learned through culture and memory—appears 
             <div class="quran-carousel">
               <div class="carousel-content">
                 <div class="verse-container-hadith">
+                  <p class="quran-text">{quranVersesEN[0].text}</p>
+                  <p class="verse-reference">
+                   <b> Surah {quranVersesEN[0].surahName} <i class="translation-text">({quranVersesEN[0].surahTranslation})</i> - Verse {quranVersesEN[0].ayahNumber} <b/>
+                  </p>
+                </div>
+              </div>
+            </div>
+          {/if}
+        {:else if currentName.quran_hadith === 'Derived'}
+          <!-- Derived Source -->
+          <div class="source-hadith">
+            <p class="source-label-english">Derived From The Holy Quran</p>
+          </div>
+
+          <!-- Verse reference for Derived -->
+          {#if quranVersesEN.length > 0}
+            <div class="quran-carousel">
+              <div class="carousel-content">
+                <div class="verse-container-derived">
                   <p class="quran-text">{quranVersesEN[0].text}</p>
                   <p class="verse-reference">
                    <b> Surah {quranVersesEN[0].surahName} <i class="translation-text">({quranVersesEN[0].surahTranslation})</i> - Verse {quranVersesEN[0].ayahNumber} <b/>
@@ -545,6 +583,13 @@ What is consistent across scholarly traditions is not the exact composition of t
     font-family: 'JawiKufi';
     src: url('../Assests/JawiKufi-nOR1.ttf') format('truetype');
     font-weight: 400;
+  }
+
+    @font-face {
+    font-family: 'KFGQPCUthmanicScriptHAFS';
+    src: url('../Assests/KFGQPC%20Uthmanic%20Script%20HAFS%20Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
   }
 
     @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
@@ -907,20 +952,29 @@ What is consistent across scholarly traditions is not the exact composition of t
     .verse-container-hadith {
         flex: 1;
         max-width: 800px;
-        background-color: rgba(171, 71, 71, 0.05);
+        background-color: rgba(128, 90, 168, 0.05);
         padding: 2rem;
         border-radius: 12px;
-        border: 2px solid #AB4747;
+        border: 2px solid #805AA8;
+    }
+
+    .verse-container-derived {
+        flex: 1;
+        max-width: 800px;
+        background-color: rgba(76, 140, 76, 0.05);
+        padding: 2rem;
+        border-radius: 12px;
+        border: 2px solid #4C8C4C;
     }
 
     .quran-text {
-        font-family: 'Amiri Quran', serif;
+        font-family: 'KFGQPCUthmanicScriptHAFS', 'Amiri Quran', serif !important;
         font-weight: 400;
-        font-size: 1.5vw;
+        font-size: 1.8vw;
         direction: rtl;
         text-align: center;
         color: #603D25;
-        line-height: 2.2;
+        line-height: 2.5;
         margin: 0 0 1.5rem 0;
     }
 
