@@ -14,6 +14,9 @@
 	import CurrentImg from "../assets/Current.png"
 	import AboutMe from "../assets/1.png"
 	import PhotoMe from "../assets/PhotoMe.png"
+	import ProjectsAnimated from '../components/ProjectsAnimated.svelte';
+
+	import projectPhoto from '../projects.png'
 
 	import Logo from "../assets/MyName.png"
 
@@ -61,9 +64,18 @@
 			<img src="{PhotoMe}" alt="My Photo">
 		</div>
 	</div>
-
-	<BucketList/>
 </div>
+
+	<div class="projects">
+			<img src="{projectPhoto}" alt="Projects">
+		</div>
+
+
+
+	<ProjectsAnimated/>
+
+	<!-- <BucketList/> -->
+
 	<!-- <hr class="dashed-line">
 	
 	<div class="CuurentProject">
@@ -106,6 +118,15 @@
 
 	.um{
 		color:#01274B;
+	}
+
+	.projects img{
+		width: 17%;
+		height: auto;
+	}
+
+	.projects{
+			text-align: center;
 	}
 
 	.tunisia{

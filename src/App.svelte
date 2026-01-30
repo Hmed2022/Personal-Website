@@ -32,7 +32,7 @@
       .replace(/\/+$/, ''); // drop trailing slash
 
 
- $: hideHeader = 
+ $: hideHeader =
     normalizedPath === '/anniv' ||
     normalizedPath === '/names' ||
     normalizedPath === '/allstar' ||
@@ -46,7 +46,7 @@
   </header>
 {/if}
 
-<!-- Don’t wrap in <body> inside a Svelte component -->
+<!-- Don't wrap in <body> inside a Svelte component -->
 <Router {routes} />
 
 <style>
