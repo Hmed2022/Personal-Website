@@ -21,6 +21,7 @@ export default {
       "The word 'Allah', the proper name of God, indicates that Allah is the true God who alone deserves to be worshipped, whom all creatures worship out of love, praise His greatness, revere Him and turn to Him in times of need and adversity. In fact, this name comprises all the meanings of His beautiful names.",
     pronounciation: "al-BA-ri",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 1, ayah: 1 },
       { surah: 2, ayah: 7 },
@@ -1639,6 +1640,7 @@ export default {
       "Allah’s comprehensive mercy which He shows to all His creation without exception by creating them and providing for them",
     pronounciation: "ar-rah-MAAN",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 1, ayah: 1 },
       { surah: 1, ayah: 3 },
@@ -1700,6 +1702,7 @@ export default {
       "The particular mercy that He has exclusively for the believers, both in this life and in the hereafter.",
     pronounciation: "ar-ra-HEEM",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 1, ayah: 1 },
       { surah: 1, ayah: 3 },
@@ -1751,6 +1754,7 @@ export default {
       "He is the One to whom belongs the absolute dominion of the heavens and the earth and everything in them. The entire universe is under His control. There is nothing above Him. He alone has true and supreme dominion and disposes of the entire universe in the manner He pleases. He is the owner of everything. The name Al-Maleek points to Allah's absolute and glorious sovereignty.",
     pronounciation: "al-ma-LEEK",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 3, ayah: 26 },
       { surah: 20, ayah: 114 },
@@ -1771,6 +1775,7 @@ export default {
     descEn: "Free of imperfection; all sublime attributes belong to Him alone",
     pronounciation: "al-qud-DOOS",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 59, ayah: 23 },
       { surah: 62, ayah: 1 },
@@ -1788,6 +1793,7 @@ export default {
     descEn: "Free of imperfection; grants peace and security to creation",
     pronounciation: "as-sa-LAAM",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 59, ayah: 23 }],
   },
   9: {
@@ -1803,6 +1809,7 @@ export default {
       "Testifies to Oneness with evidence; grants peace to righteous servants",
     pronounciation: "al-mu'-MIN",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 59, ayah: 23 }],
   },
   18: {
@@ -1818,6 +1825,7 @@ export default {
       "Watches over creatures; fully aware of all affairs, sustenance, and terms",
     pronounciation: "al-mu-HAY-min",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 59, ayah: 23 }],
   },
   19: {
@@ -1832,6 +1840,7 @@ export default {
     descEn: "All-dominant, reigning supreme; all creatures humbled before Him",
     pronounciation: "al-a-ZEEZ",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 2, ayah: 129 },
       { surah: 3, ayah: 6 },
@@ -1912,6 +1921,7 @@ export default {
       "Most High, Irresistible; decrees certainly come to pass; heals broken-hearted",
     pronounciation: "al-jab-BAAR",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 59, ayah: 23 }],
   },
   15: {
@@ -1926,6 +1936,7 @@ export default {
     descEn: "Supreme Being; exalted above creation's attributes",
     pronounciation: "al-mu-ta-KAB-bir",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 59, ayah: 23 }],
   },
   16: {
@@ -1940,6 +1951,7 @@ export default {
     descEn: "Creates things from nothing without precedents",
     pronounciation: "al-KHA-liq",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 15, ayah: 86 },
       { surah: 36, ayah: 81 },
@@ -1958,6 +1970,7 @@ export default {
     descEn: "Causes decreed things to exist from nothing in specific manner",
     pronounciation: "al-BA-ri",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 59, ayah: 24 }],
   },
   27: {
@@ -1973,6 +1986,7 @@ export default {
       "Brings existence what He wills; shapes creatures in different forms",
     pronounciation: "al-mu-SAW-wir",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 59, ayah: 24 }],
   },
   64: {
@@ -1987,6 +2001,7 @@ export default {
     descEn: "Immense and constant forgiveness of sins",
     pronounciation: "al-ghaf-FAR",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 38, ayah: 66 },
       { surah: 39, ayah: 5 },
@@ -2006,6 +2021,7 @@ export default {
     descEn: "Prevails over all creation; all submit",
     pronounciation: "al-qah-HAR",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 12, ayah: 39 },
       { surah: 13, ayah: 16 },
@@ -2027,6 +2043,7 @@ export default {
     descEn: "Generous; grants whatever He wills to whomever He wills",
     pronounciation: "al-wah-HAB",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 3, ayah: 8 },
       { surah: 38, ayah: 9 },
@@ -2045,6 +2062,7 @@ export default {
     descEn: "Abundant provision and plentiful sustenance",
     pronounciation: "ar-raz-ZAQ",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 51, ayah: 58 }],
   },
   67: {
@@ -2060,6 +2078,7 @@ export default {
       "Judges between servants; opens doors of sustenance, mercy, and ease",
     pronounciation: "al-fat-TAH",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 34, ayah: 26 }],
   },
   63: {
@@ -2075,6 +2094,7 @@ export default {
       "Comprehensive knowledge extending to seen and unseen, apparent and hidden",
     pronounciation: "al-a-LEEM",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 2, ayah: 32 },
       { surah: 2, ayah: 127 },
@@ -2122,7 +2142,8 @@ export default {
     descEn: "Takes away souls, provision, and whatsoever He pleases",
     pronounciation: "al-QA-bid",
     quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    disputed: "No",
+    reference: [{ id: 1 }],
   },
   29: {
     id: 29,
@@ -2137,7 +2158,8 @@ export default {
       "Gives provision and mercy; stretches Hands for believers to repent",
     pronounciation: "al-BA-sit",
     quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    disputed: "No",
+    reference: [{ id: 1 }],
   },
   57: {
     id: 57,
@@ -2151,8 +2173,13 @@ export default {
     descEn:
       "The One who lowers whoever He willed; abases the proud and oppressors",
     pronounciation: "al-KHA-fid",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 56, ayah: 3 },
+      { surah: 95, ayah: 5 },
+      { surah: 89, ayah: 16 },
+    ],
   },
   59: {
     id: 59,
@@ -2166,8 +2193,14 @@ export default {
     descEn:
       "The One who raises whoever He wills; elevates and exalts the humble",
     pronounciation: "ar-ra-FEE",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 6, ayah: 83 },
+      { surah: 58, ayah: 11 },
+      { surah: 40, ayah: 15 },
+      { surah: 94, ayah: 4 },
+    ],
   },
   60: {
     id: 60,
@@ -2180,8 +2213,12 @@ export default {
     descAr: "مانح الشرف والقوة للعباد المطيعين المحبين",
     descEn: "The Giver of honor and strength to obedient and loving servants",
     pronounciation: "al-mu-IZZ",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 6, ayah: 143 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 3, ayah: 26 },
+      { surah: 35, ayah: 10 },
+    ],
   },
   46: {
     id: 46,
@@ -2194,8 +2231,12 @@ export default {
     descAr: "المُذِل الذي يُخزي المتكبرين",
     descEn: "The Humiliator who abases the arrogant",
     pronounciation: "al-mu-DHILL",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 3, ayah: 26 },
+      { surah: 39, ayah: 26 },
+    ],
   },
   45: {
     id: 45,
@@ -2210,6 +2251,7 @@ export default {
       "Hears all secrets without exception; answers prayers of supplicants",
     pronounciation: "as-sa-MEE",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 2, ayah: 127 },
       { surah: 2, ayah: 137 },
@@ -2244,6 +2286,7 @@ export default {
     descEn: "Sight encompasses everything conceivable, hidden or apparent",
     pronounciation: "al-ba-SEER",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 17, ayah: 1 },
       { surah: 40, ayah: 20 },
@@ -2263,8 +2306,12 @@ export default {
     descEn:
       "Judges with absolute fairness based on will, legislation, and justice",
     pronounciation: "al-HA-kam",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 6, ayah: 57 }],
+    quran_hadith: "Derived",
+    disputed: "No",
+    reference: [
+      { surah: 5, ayah: 50 },
+      { surah: 10, ayah: 109 },
+    ],
   },
   26: {
     id: 26,
@@ -2278,8 +2325,13 @@ export default {
     descEn:
       "The Just who rectifies matters in equitable manner, giving each what they deserve",
     pronounciation: "al-ADL",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 4, ayah: 40 },
+      { surah: 16, ayah: 90 },
+      { surah: 6, ayah: 115 },
+    ],
   },
   61: {
     id: 61,
@@ -2293,6 +2345,7 @@ export default {
     descEn: "Aware of subtle matters; shows mercy in ways known only to Him",
     pronounciation: "al-la-TEEF",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 6, ayah: 103 },
       { surah: 67, ayah: 14 },
@@ -2310,6 +2363,7 @@ export default {
     descEn: "Fully aware of apparent, hidden, and most concealed matters",
     pronounciation: "al-kha-BEER",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 6, ayah: 18 },
       { surah: 6, ayah: 73 },
@@ -2332,6 +2386,7 @@ export default {
       "Patient and forbearing; does not punish immediately; gives opportunity to repent",
     pronounciation: "al-ha-LEEM",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 11, ayah: 87 },
       // {
@@ -2389,6 +2444,7 @@ export default {
       "Comprises all greatness, majesty, and glory in being and attributes",
     pronounciation: "al-a-ZHEEM",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       // { surah: 2, ayah: 105 },
       { surah: 2, ayah: 255 },
@@ -2441,6 +2497,7 @@ export default {
       "Forgives sins; accepts repentance; conceals sins; shows endless compassion",
     pronounciation: "al-gha-FOOR",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 10, ayah: 107 },
       { surah: 12, ayah: 98 },
@@ -2466,8 +2523,14 @@ export default {
     descAr: "يرضى بالشكر القليل؛ يُكافئ على الطاعة",
     descEn: "Pleased with little gratitude; rewarding for obedience",
     pronounciation: "ash-sha-KOOR",
-    quran_hadith: "Quran",
-    reference: [{ surah: 34, ayah: 13 }],
+    quran_hadith: "Derived",
+    disputed: "No",
+    reference: [
+      { surah: 2, ayah: 158 },
+      { surah: 4, ayah: 147 },
+      { surah: 35, ayah: 34 },
+      { surah: 42, ayah: 23 },
+    ],
   },
   35: {
     id: 35,
@@ -2481,6 +2544,7 @@ export default {
     descEn: "Absolute highness in Being, position, attributes, and dominance",
     pronounciation: "al-a-LEE",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 2, ayah: 255 },
       { surah: 22, ayah: 62 },
@@ -2502,6 +2566,7 @@ export default {
     descEn: "Magnificent and Sublime; nothing greater exists",
     pronounciation: "al-ka-BEER",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       // { surah: 2, ayah: 255 },
       { surah: 13, ayah: 9 },
@@ -2526,8 +2591,14 @@ export default {
     descEn:
       "Protects heavens and earth; records deeds; protects believers from danger",
     pronounciation: "al-ha-FEEZ",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "No",
+    reference: [
+      { surah: 11, ayah: 57 },
+      { surah: 15, ayah: 9 },
+      { surah: 12, ayah: 64 },
+      { surah: 2, ayah: 255 },
+    ],
   },
   30: {
     id: 30,
@@ -2541,8 +2612,14 @@ export default {
     descEn:
       "Has power over all things; provides sustenance; preserves with His grants",
     pronounciation: "al-mu-QEET",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "No",
+    reference: [
+      { surah: 4, ayah: 85 },
+      { surah: 11, ayah: 6 },
+      { surah: 14, ayah: 32 },
+      { surah: 6, ayah: 14 },
+    ],
   },
   41: {
     id: 41,
@@ -2556,8 +2633,13 @@ export default {
     descEn:
       "Sufficient for those who rely; aware of slaves; takes account of actions",
     pronounciation: "al-ha-SEEB",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "No",
+    reference: [
+      { surah: 33, ayah: 39 },
+      { surah: 4, ayah: 86 },
+      { surah: 21, ayah: 47 },
+    ],
   },
   34: {
     id: 34,
@@ -2571,8 +2653,12 @@ export default {
     descEn:
       "The Majestic; great one above all in dignity, rank, and awe-inspiring greatness",
     pronounciation: "al-ja-LEEL",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 55, ayah: 27 },
+      { surah: 7, ayah: 143 },
+    ],
   },
   40: {
     id: 40,
@@ -2587,6 +2673,7 @@ export default {
       "Gives abundantly and benefits immeasurably; bestows before deserving",
     pronounciation: "al-ka-REEM",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 23, ayah: 116 },
       { surah: 44, ayah: 49 },
@@ -2605,6 +2692,7 @@ export default {
     descEn: "Hearing, seeing, and knowledge encompass everything",
     pronounciation: "ar-ra-QEEB",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 5, ayah: 117 }],
   },
   49: {
@@ -2618,8 +2706,13 @@ export default {
     descAr: "يستجيب للدعاء بفضل؛ يُلبّي الطلبات",
     descEn: "Favorably responds to supplications; answers requests",
     pronounciation: "al-mu-JEEB",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "No",
+    reference: [
+      { surah: 11, ayah: 61 },
+      { surah: 40, ayah: 60 },
+      { surah: 2, ayah: 186 },
+    ],
   },
   24: {
     id: 24,
@@ -2633,8 +2726,15 @@ export default {
     descEn:
       "Embraces everything in mercy and knowledge; sustenance reaches all",
     pronounciation: "al-WA-si",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "No",
+    reference: [
+      { surah: 2, ayah: 115 },
+      { surah: 2, ayah: 268 },
+      { surah: 39, ayah: 53 },
+      { surah: 4, ayah: 130 },
+      { surah: 3, ayah: 73 },
+    ],
   },
   31: {
     id: 31,
@@ -2648,6 +2748,7 @@ export default {
     descEn: "Supreme wisdom in all decrees, legislation, and judgment",
     pronounciation: "al-ha-KEEM",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 2, ayah: 32 },
       { surah: 2, ayah: 129 },
@@ -2706,6 +2807,7 @@ export default {
       "Loves prophets, messengers, and obedient servants; most beloved deserving love",
     pronounciation: "al-wa-DOOD",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 85, ayah: 14 }],
   },
   36: {
@@ -2720,6 +2822,7 @@ export default {
     descEn: "Perfect attributes; greatest actions; boundless generosity",
     pronounciation: "al-ma-JEED",
     quran_hadith: "Derived",
+    disputed: "No",
     reference: [{ surah: 11, ayah: 73 }],
   },
   51: {
@@ -2734,8 +2837,15 @@ export default {
     descEn:
       "The Resurrector who raises all beings to judgment in the afterlife",
     pronounciation: "al-BA-ith",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 46, ayah: 33 },
+      { surah: 22, ayah: 7 },
+      { surah: 62, ayah: 2 },
+      { surah: 6, ayah: 60 },
+      { surah: 3, ayah: 169 },
+    ],
   },
   52: {
     id: 52,
@@ -2748,8 +2858,15 @@ export default {
     descAr: "مطّلع على كل شيء بالتفصيل؛ لا شيء يخفى عليه",
     descEn: "Aware of everything in detail; nothing hidden from Him",
     pronounciation: "ash-sha-HEED",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "No",
+    reference: [
+      { surah: 9, ayah: 94 },
+      { surah: 12, ayah: 81 },
+      { surah: 58, ayah: 6 },
+      { surah: 4, ayah: 79 },
+      { surah: 41, ayah: 53 },
+    ],
   },
   53: {
     id: 53,
@@ -2764,6 +2881,7 @@ export default {
       "Truly exists; His speech, decree, and legislation are absolutely truthful",
     pronounciation: "al-HAQQ",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       // {
       //   surah: 2,
@@ -3188,6 +3306,7 @@ export default {
       "Disposes all creatures' affairs; provides; fulfills needs; protects righteous",
     pronounciation: "al-wa-KEEL",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 3, ayah: 173 }],
   },
   37: {
@@ -3202,6 +3321,7 @@ export default {
     descEn: "Perfect power; commands executed; decree never averted",
     pronounciation: "al-qa-WEE",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 11, ayah: 66 },
       { surah: 28, ayah: 26 },
@@ -3220,6 +3340,7 @@ export default {
     descEn: "Ultimate strength and ability; endures no hardship or weariness",
     pronounciation: "al-ma-TEEN",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 51, ayah: 58 }],
   },
   20: {
@@ -3234,6 +3355,7 @@ export default {
     descEn: "Guardian managing all; Creator and Ruler deserving worship",
     pronounciation: "al-wa-LEE",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 42, ayah: 9 },
       { surah: 42, ayah: 28 },
@@ -3251,6 +3373,7 @@ export default {
     descEn: "Worthy of praise for all actions, attributes, and legislation",
     pronounciation: "al-ha-MEED",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 14, ayah: 1 },
       { surah: 22, ayah: 24 },
@@ -3276,8 +3399,16 @@ export default {
     descEn:
       "The Reckoner with perfect accounting; keeps complete record of all deeds",
     pronounciation: "al-muh-SEE",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 72, ayah: 28 },
+      { surah: 78, ayah: 29 },
+      { surah: 18, ayah: 49 },
+      { surah: 14, ayah: 34 },
+      { surah: 36, ayah: 12 },
+      { surah: 2, ayah: 284 },
+    ],
   },
   32: {
     id: 32,
@@ -3291,8 +3422,15 @@ export default {
     descEn:
       "The Originator of all creation; beginner of all things from nothing",
     pronounciation: "al-mub-DEE",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 29, ayah: 19 },
+      { surah: 30, ayah: 30 },
+      { surah: 10, ayah: 34 },
+      { surah: 27, ayah: 64 },
+      { surah: 85, ayah: 13 },
+    ],
   },
   38: {
     id: 38,
@@ -3306,8 +3444,15 @@ export default {
     descEn:
       "The Restorer who brings back and regenerates; gives new life after death",
     pronounciation: "al-mu-EED",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 21, ayah: 104 },
+      { surah: 10, ayah: 34 },
+      { surah: 27, ayah: 64 },
+      { surah: 85, ayah: 13 },
+      { surah: 29, ayah: 19 },
+    ],
   },
   22: {
     id: 22,
@@ -3321,8 +3466,15 @@ export default {
     descEn:
       "The Giver of Life who creates living from lifeless and revives hearts with knowledge",
     pronounciation: "al-muh-YEE",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 2, ayah: 28 },
+      { surah: 7, ayah: 158 },
+      { surah: 10, ayah: 56 },
+      { surah: 57, ayah: 2 },
+      { surah: 5, ayah: 110 },
+    ],
   },
   102: {
     id: 102,
@@ -3335,8 +3487,14 @@ export default {
     descAr: "مُسبّب الموت الذي يُميت الأحياء",
     descEn: "The Causer of Death who renders the living dead",
     pronounciation: "al-mu-MEET",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 2, ayah: 28 },
+      { surah: 7, ayah: 158 },
+      { surah: 10, ayah: 56 },
+      { surah: 57, ayah: 2 },
+    ],
   },
   68: {
     id: 68,
@@ -3352,6 +3510,7 @@ export default {
       "Perfect, eternal life requiring all perfect attributes and negating imperfections",
     pronounciation: "al-HAYY",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 2, ayah: 255 },
       { surah: 3, ayah: 2 },
@@ -3375,6 +3534,7 @@ export default {
     descEn: "Self-sufficient Master on whom all existence depends",
     pronounciation: "al-qay-YOOM",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 2, ayah: 255 },
       { surah: 3, ayah: 2 },
@@ -3393,7 +3553,13 @@ export default {
     descEn: "The Finder; the Rich One who is never poor",
     pronounciation: "al-WA-jid",
     quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    disputed: "Yes",
+    reference: [
+      { surah: 93, ayah: 7 },
+      { surah: 93, ayah: 8 },
+      { surah: 4, ayah: 78 },
+      { surah: 24, ayah: 39 },
+    ],
   },
   100: {
     id: 100,
@@ -3406,8 +3572,9 @@ export default {
     descAr: "الصفات الكاملة؛ الأفعال العظيمة؛ الكرم اللامحدود",
     descEn: "Perfect attributes; greatest actions; boundless generosity",
     pronounciation: "al-MA-jid",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [{ surah: 11, ayah: 73 }],
   },
   70: {
     id: 70,
@@ -3422,6 +3589,7 @@ export default {
       "Unique without partners, one in being, attributes, actions, and lordship",
     pronounciation: "al-WA-hid",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 12, ayah: 39 },
       { surah: 13, ayah: 16 },
@@ -3444,6 +3612,7 @@ export default {
       "Master with absolute sovereignty; all hearts turn to Him for needs",
     pronounciation: "as-sa-MAD",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 112, ayah: 2 }],
   },
   88: {
@@ -3458,6 +3627,7 @@ export default {
     descEn: "Able to do whatever He wills; nothing escapes Him",
     pronounciation: "al-QA-dir",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 6, ayah: 65 }],
   },
   101: {
@@ -3471,8 +3641,13 @@ export default {
     descAr: "صيغة مبالغة تؤكد القدرة الكاملة",
     descEn: "Intensive form stressing perfect ability",
     pronounciation: "al-muq-ta-DIR",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "No",
+    reference: [
+      { surah: 54, ayah: 55 },
+      { surah: 18, ayah: 45 },
+      { surah: 54, ayah: 42 },
+    ],
   },
   99: {
     id: 99,
@@ -3486,7 +3661,8 @@ export default {
     descEn: "Places things where they belong; advances what He wills",
     pronounciation: "al-mu-QAD-dim",
     quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    disputed: "No",
+    reference: [{ id: 3 }],
   },
   104: {
     id: 104,
@@ -3501,7 +3677,8 @@ export default {
       "Postpones what He wills; delays what He pleases in wisdom and justice",
     pronounciation: "al-mu-AKH-khir",
     quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    disputed: "No",
+    reference: [{ id: 3 }],
   },
   69: {
     id: 69,
@@ -3515,6 +3692,7 @@ export default {
     descEn: "Nothing existed before Him; He created all from absolute nothing",
     pronounciation: "al-AW-wal",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       // { surah: 50, ayah: 15 },
       { surah: 57, ayah: 3 },
@@ -3532,6 +3710,7 @@ export default {
     descEn: "Nothing comes after Him; He exists infinitely for all eternity",
     pronounciation: "al-A-khir",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 57, ayah: 3 }],
   },
   75: {
@@ -3546,6 +3725,7 @@ export default {
     descEn: "Most Great, above everything with nothing above Him",
     pronounciation: "az-ZA-hir",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 57, ayah: 3 }],
   },
   77: {
@@ -3561,6 +3741,7 @@ export default {
       "Nearest to everything due to full awareness of secrets and hidden matters",
     pronounciation: "al-BA-tin",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 57, ayah: 3 }],
   },
   73: {
@@ -3574,8 +3755,14 @@ export default {
     descAr: "الوالي والحامي؛ حافظ كل الخلق",
     descEn: "The Governor and Protector; guardian of all creation",
     pronounciation: "al-WA-li",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 8, ayah: 30 },
+      { surah: 3, ayah: 26 },
+      { surah: 6, ayah: 102 },
+      { surah: 2, ayah: 257 },
+    ],
   },
   91: {
     id: 91,
@@ -3590,6 +3777,7 @@ export default {
       "The Most High; supremely elevated and transcendent above all creation",
     pronounciation: "al-mu-ta-AA-li",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 13, ayah: 9 }],
   },
   92: {
@@ -3605,6 +3793,7 @@ export default {
       "Showers apparent and hidden blessings; multiplies rewards; forgives wrongdoers",
     pronounciation: "al-BARR",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       // { surah: 2, ayah: 177 },
       // { surah: 2, ayah: 189 },
@@ -3637,6 +3826,7 @@ export default {
     descEn: "Helps servants repent; accepts repentance and pardons sins",
     pronounciation: "at-taw-WAB",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 2, ayah: 54 },
       { surah: 2, ayah: 128 },
@@ -3656,8 +3846,13 @@ export default {
     descAr: "المنتقم الذي يُعاقب الظالمين بعدل",
     descEn: "The Avenger who justly punishes wrongdoers",
     pronounciation: "al-mun-ta-QIM",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "No",
+    reference: [
+      { surah: 43, ayah: 41 },
+      { surah: 44, ayah: 16 },
+      { surah: 3, ayah: 4 },
+    ],
   },
   76: {
     id: 76,
@@ -3671,8 +3866,11 @@ export default {
     descEn: "Forgives and overlooks wrongdoing; grants pardon erasing all sins",
     pronounciation: "al-a-FOO",
     quran_hadith: "Derived",
+    disputed: "No",
     reference: [
-      { surah: 2, ayah: 219 },
+      { surah: 4, ayah: 149 },
+      { surah: 22, ayah: 60 },
+      { surah: 3, ayah: 26 },
       // { surah: 7, ayah: 199 },
     ],
   },
@@ -3687,8 +3885,15 @@ export default {
     descAr: "يمنح أعلى أشكال الرحمة للخلق في الدنيا والآخرة",
     descEn: "Bestows highest form of mercy to creation in world and hereafter",
     pronounciation: "ar-ra-OOF",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "No",
+    reference: [
+      { surah: 59, ayah: 10 },
+      { surah: 57, ayah: 9 },
+      { surah: 24, ayah: 20 },
+      { surah: 9, ayah: 117 },
+      { surah: 2, ayah: 207 },
+    ],
   },
   72: {
     id: 72,
@@ -3703,6 +3908,7 @@ export default {
       "The Owner of Sovereignty; sole possessor of all dominion with absolute authority",
     pronounciation: "MA-lik-ul-MULK",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 3, ayah: 26 }],
   },
   106: {
@@ -3717,6 +3923,7 @@ export default {
     descEn: "The Possessor of Majesty and Honor; Owner of Glory and Generosity",
     pronounciation: "dhul-ja-LA-li wal-ik-RAM",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 55, ayah: 27 },
       { surah: 55, ayah: 78 },
@@ -3733,8 +3940,14 @@ export default {
     descAr: "العادل الذي هو الأكثر إنصافاً ويُكافئ أي خير بما يفوق الحد",
     descEn: "The Just One who is most fair and rewards any good beyond measure",
     pronounciation: "al-muq-SIT",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 21, ayah: 47 },
+      { surah: 3, ayah: 18 },
+      { surah: 5, ayah: 42 },
+      { surah: 49, ayah: 9 },
+    ],
   },
   81: {
     id: 81,
@@ -3748,8 +3961,14 @@ export default {
     descEn:
       "The Gatherer who unites; brings together scattered things and gathers creation for judgment",
     pronounciation: "al-JA-mi",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 75, ayah: 3 },
+      { surah: 3, ayah: 9 },
+      { surah: 42, ayah: 7 },
+      { surah: 77, ayah: 38 },
+    ],
   },
   84: {
     id: 84,
@@ -3763,6 +3982,7 @@ export default {
     descEn: "Not in need of creation; creation needs Him",
     pronounciation: "al-gha-NEE",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [
       { surah: 6, ayah: 133 },
       { surah: 10, ayah: 68 },
@@ -3786,8 +4006,9 @@ export default {
     descEn:
       "The Enricher who grants wealth and spiritual richness to whomever He wills",
     pronounciation: "al-mugh-NEE",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "No",
+    reference: [{ surah: 28, ayah: 24 }],
   },
   94: {
     id: 94,
@@ -3801,8 +4022,12 @@ export default {
     descEn:
       "The Withholder who prevents harm or withholds provision in His wisdom",
     pronounciation: "al-MA-ni",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 59, ayah: 7 },
+      { surah: 22, ayah: 38 },
+    ],
   },
   87: {
     id: 87,
@@ -3815,8 +4040,13 @@ export default {
     descAr: "الضار الذي يسمح بالضرر أو المشقة اختباراً أو عدلاً",
     descEn: "The Distresser who allows harm or difficulty as test or justice",
     pronounciation: "ad-DARR",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 4, ayah: 78 },
+      { surah: 10, ayah: 106 },
+      { surah: 6, ayah: 71 },
+    ],
   },
   80: {
     id: 80,
@@ -3829,8 +4059,13 @@ export default {
     descAr: "النافع الذي يمنح المنفعة والخير والبركة",
     descEn: "The Propitious who grants benefit, good, and blessing",
     pronounciation: "an-NA-fi",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "No",
+    reference: [
+      { surah: 4, ayah: 78 },
+      { surah: 10, ayah: 106 },
+      { surah: 6, ayah: 71 },
+    ],
   },
   78: {
     id: 78,
@@ -3844,7 +4079,13 @@ export default {
     descEn: "The Light who illuminates creation and guides hearts",
     pronounciation: "an-NOOR",
     quran_hadith: "Derived",
-    reference: [{ surah: 2, ayah: 257 }],
+    disputed: "No",
+    reference: [
+      { surah: 5, ayah: 15 },
+      { surah: 24, ayah: 35 },
+      { surah: 57, ayah: 13 },
+      { surah: 66, ayah: 8 },
+    ],
   },
   74: {
     id: 74,
@@ -3858,8 +4099,14 @@ export default {
     descEn:
       "Helps creation know their Lord; guides to best interests and Right Path",
     pronounciation: "al-HA-di",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "No",
+    reference: [
+      { surah: 7, ayah: 158 },
+      { surah: 20, ayah: 50 },
+      { surah: 87, ayah: 3 },
+      { surah: 17, ayah: 9 },
+    ],
   },
   97: {
     id: 97,
@@ -3873,8 +4120,12 @@ export default {
     descEn:
       "The Incomparable Originator; created universe without precedent or example",
     pronounciation: "al-ba-DEE",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 2, ayah: 117 },
+      { surah: 6, ayah: 101 },
+    ],
   },
   96: {
     id: 96,
@@ -3888,8 +4139,12 @@ export default {
     descEn:
       "The Everlasting who remains forever; endless existence unaffected by time",
     pronounciation: "al-BA-qi",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 16, ayah: 96 },
+      { surah: 55, ayah: 27 },
+    ],
   },
   79: {
     id: 79,
@@ -3904,7 +4159,12 @@ export default {
       "Remains after creation perishes; repossesses granted blessings after death",
     pronounciation: "al-WA-rith",
     quran_hadith: "Derived",
-    reference: [{ surah: 2, ayah: 233 }],
+    disputed: "No",
+    reference: [
+      { surah: 15, ayah: 23 },
+      { surah: 21, ayah: 89 },
+      { surah: 28, ayah: 58 },
+    ],
   },
   82: {
     id: 82,
@@ -3919,6 +4179,7 @@ export default {
       "The Guide to the Right Path; Righteous Teacher and Infallible Guide",
     pronounciation: "ar-ra-SHEED",
     quran_hadith: "Quran",
+    disputed: "No",
     reference: [{ surah: 11, ayah: 87 }],
   },
   83: {
@@ -3933,7 +4194,13 @@ export default {
     descEn:
       "The Most Patient who is not hasty; disposes each thing at proper time",
     pronounciation: "as-sa-BOOR",
-    quran_hadith: "Hadith",
-    reference: [{ surah: 2, ayah: 129 }],
+    quran_hadith: "Derived",
+    disputed: "Yes",
+    reference: [
+      { surah: 16, ayah: 127 },
+      { surah: 2, ayah: 153 },
+      { surah: 3, ayah: 200 },
+      { surah: 70, ayah: 5 },
+    ],
   },
 };

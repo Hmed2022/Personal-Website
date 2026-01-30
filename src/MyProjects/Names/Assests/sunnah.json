@@ -1,0 +1,113 @@
+{
+  "hadiths": [
+    {
+      "id": 1,
+      "collection": "Sunan Abi Dawud",
+      "reference": {
+        "hadith_number": 3451,
+        "book_number": 24,
+        "book_title_english": "Wages (Kitab Al-Ijarah)",
+        "book_title_arabic": "كتاب الإجارة",
+        "hadith_in_book": 36,
+        "english_translation_reference": "Book 23, Hadith 3444",
+        "chapter_number": 15,
+        "chapter_title_english": "Regarding Fixing Prices",
+        "chapter_title_arabic": "باب فِي التَّسْعِيرِ"
+      },
+      "narrator": "Anas ibn Malik",
+      "text": {
+        "english": "The people said: Messenger of Allah, prices have shot up, so fix prices for us. Thereupon the Messenger of Allah (ﷺ) said: Allah is the one Who fixes prices, Who withholds, gives lavishly and provides, and I hope that when I meet Allah, none of you will have any claim on me for an injustice regarding blood or property.",
+        "arabic": "حَدَّثَنَا عُثْمَانُ بْنُ أَبِي شَيْبَةَ، حَدَّثَنَا عَفَّانُ، حَدَّثَنَا حَمَّادُ بْنُ سَلَمَةَ، أَخْبَرَنَا ثَابِتٌ، عَنْ أَنَسٍ، وَقَتَادَةُ، وَحُمَيْدٌ، عَنْ أَنَسٍ، قَالَ قَالَ النَّاسُ يَا رَسُولَ اللَّهِ غَلاَ السِّعْرُ فَسَعِّرْ لَنَا ‏.‏ فَقَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ إِنَّ اللَّهَ هُوَ الْمُسَعِّرُ الْقَابِضُ الْبَاسِطُ الرَّازِقُ وَإِنِّي لأَرْجُو أَنْ أَلْقَى اللَّهَ وَلَيْسَ أَحَدٌ مِنْكُمْ يُطَالِبُنِي بِمَظْلَمَةٍ فِي دَمٍ وَلاَ مَالٍ ‏\"‏ ‏.‏"
+      },
+      "chain_of_narration": {
+        "narrators": [
+          "Uthman ibn Abi Shaybah",
+          "Affan",
+          "Hammad ibn Salamah",
+          "Thabit",
+          "Anas",
+          "Qatadah",
+          "Humayd"
+        ]
+      },
+      "grade": {
+        "classification": "Sahih",
+        "graded_by": "Al-Albani",
+        "arabic": "صحيح (الألباني)"
+      },
+      "url": "https://sunnah.com/abudawud:3451"
+    },
+    {
+      "id": 2,
+      "collection": "Sahih al-Bukhari",
+      "reference": {
+        "hadith_number": 6398,
+        "book_number": 80,
+        "book_title_english": "Invocations",
+        "book_title_arabic": "كتاب الدعوات",
+        "hadith_in_book": 93,
+        "english_translation_reference": "Vol. 8, Book 75, Hadith 407",
+        "chapter_number": 60,
+        "chapter_title_english": "\"O Allah! Forgive my past and future sins.\"",
+        "chapter_title_arabic": "باب قَوْلِ النَّبِيِّ صلى الله عليه وسلم ‏\"‏ اللَّهُمَّ اغْفِرْ لِي مَا قَدَّمْتُ وَمَا أَخَّرْتُ ‏\"‏‏.‏"
+      },
+      "narrator": "Abu Musa",
+      "text": {
+        "english": "The Prophet (ﷺ) used to invoke Allah with the following invocation: 'Rabbi-ghfir-li Khati 'ati wa jahli wa israfi fi `Amri kullihi, wa ma anta a'lamu bihi minni. Allahumma ighfirli khatayaya wa 'amdi, wa jahli wa jiddi, wa kullu dhalika'indi. Allahumma ighrifli ma qaddamtu wa ma akhartu wa ma asrartu wa ma a'lantu. Anta-l-muqaddimu wa anta-l-mu'akh-khiru, wa anta 'ala kulli shai'in qadir.'",
+        "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ بَشَّارٍ، حَدَّثَنَا عَبْدُ الْمَلِكِ بْنُ صَبَّاحٍ، حَدَّثَنَا شُعْبَةُ، عَنْ أَبِي إِسْحَاقَ، عَنِ ابْنِ أَبِي مُوسَى، عَنْ أَبِيهِ، عَنِ النَّبِيِّ صلى الله عليه وسلم أَنَّهُ كَانَ يَدْعُو بِهَذَا الدُّعَاءِ ‏ \"‏ رَبِّ اغْفِرْ لِي خَطِيئَتِي وَجَهْلِي وَإِسْرَافِي فِي أَمْرِي كُلِّهِ، وَمَا أَنْتَ أَعْلَمُ بِهِ مِنِّي، اللَّهُمَّ اغْفِرْ لِي خَطَايَاىَ وَعَمْدِي وَجَهْلِي وَهَزْلِي، وَكُلُّ ذَلِكَ عِنْدِي، اللَّهُمَّ اغْفِرْ لِي مَا قَدَّمْتُ وَمَا أَخَّرْتُ وَمَا أَسْرَرْتُ وَمَا أَعْلَنْتُ، أَنْتَ الْمُقَدِّمُ، وَأَنْتَ الْمُؤَخِّرُ، وَأَنْتَ عَلَى كُلِّ شَىْءٍ قَدِيرٌ ‏\"‏‏.‏ وَقَالَ عُبَيْدُ اللَّهِ بْنُ مُعَاذٍ وَحَدَّثَنَا أَبِي، حَدَّثَنَا شُعْبَةُ، عَنْ أَبِي إِسْحَاقَ، عَنْ أَبِي بُرْدَةَ بْنِ أَبِي مُوسَى، عَنْ أَبِيهِ، عَنِ النَّبِيِّ صلى الله عليه وسلم‏ بِنَحْوِهِ.‏"
+      },
+      "chain_of_narration": {
+        "narrators": [
+          "Muhammad ibn Bashar",
+          "Abdul Malik ibn Sabbah",
+          "Shu'bah",
+          "Abu Ishaq",
+          "Ibn Abi Musa",
+          "Abu Musa"
+        ]
+      },
+      "grade": {
+        "classification": "Sahih",
+        "graded_by": "Imam Bukhari",
+        "note": "This hadith is from Sahih al-Bukhari, which is considered authentic"
+      },
+      "url": "https://sunnah.com/bukhari:6398"
+    },
+    {
+      "id": 3,
+      "collection": "Sahih al-Bukhari",
+      "reference": {
+        "hadith_number": 6398,
+        "book_number": 80,
+        "book_title_english": "Invocations",
+        "book_title_arabic": "كتاب الدعوات",
+        "hadith_in_book": 93,
+        "english_translation_reference": "Vol. 8, Book 75, Hadith 407",
+        "chapter_number": 60,
+        "chapter_title_english": "\"O Allah! Forgive my past and future sins.\"",
+        "chapter_title_arabic": "باب قَوْلِ النَّبِيِّ صلى الله عليه وسلم ‏\"‏ اللَّهُمَّ اغْفِرْ لِي مَا قَدَّمْتُ وَمَا أَخَّرْتُ ‏\"‏‏.‏"
+      },
+      "narrator": "Abu Musa",
+      "text": {
+        "english": "The Prophet (ﷺ) used to invoke Allah with the following invocation: 'Rabbi-ghfir-li Khati 'ati wa jahli wa israfi fi `Amri kullihi, wa ma anta a'lamu bihi minni. Allahumma ighfirli khatayaya wa 'amdi, wa jahli wa jiddi, wa kullu dhalika'indi. Allahumma ighrifli ma qaddamtu wa ma akhartu wa ma asrartu wa ma a'lantu. Anta-l-muqaddimu wa anta-l-mu'akh-khiru, wa anta 'ala kulli shai'in qadir.'",
+        "arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ بَشَّارٍ، حَدَّثَنَا عَبْدُ الْمَلِكِ بْنُ صَبَّاحٍ، حَدَّثَنَا شُعْبَةُ، عَنْ أَبِي إِسْحَاقَ، عَنِ ابْنِ أَبِي مُوسَى، عَنْ أَبِيهِ، عَنِ النَّبِيِّ صلى الله عليه وسلم أَنَّهُ كَانَ يَدْعُو بِهَذَا الدُّعَاءِ ‏ \"‏ رَبِّ اغْفِرْ لِي خَطِيئَتِي وَجَهْلِي وَإِسْرَافِي فِي أَمْرِي كُلِّهِ، وَمَا أَنْتَ أَعْلَمُ بِهِ مِنِّي، اللَّهُمَّ اغْفِرْ لِي خَطَايَاىَ وَعَمْدِي وَجَهْلِي وَهَزْلِي، وَكُلُّ ذَلِكَ عِنْدِي، اللَّهُمَّ اغْفِرْ لِي مَا قَدَّمْتُ وَمَا أَخَّرْتُ وَمَا أَسْرَرْتُ وَمَا أَعْلَنْتُ، أَنْتَ الْمُقَدِّمُ، وَأَنْتَ الْمُؤَخِّرُ، وَأَنْتَ عَلَى كُلِّ شَىْءٍ قَدِيرٌ ‏\"‏‏.‏ وَقَالَ عُبَيْدُ اللَّهِ بْنُ مُعَاذٍ وَحَدَّثَنَا أَبِي، حَدَّثَنَا شُعْبَةُ، عَنْ أَبِي إِسْحَاقَ، عَنْ أَبِي بُرْدَةَ بْنِ أَبِي مُوسَى، عَنْ أَبِيهِ، عَنِ النَّبِيِّ صلى الله عليه وسلم‏ بِنَحْوِهِ.‏"
+      },
+      "chain_of_narration": {
+        "narrators": [
+          "Muhammad ibn Bashar",
+          "Abdul Malik ibn Sabbah",
+          "Shu'bah",
+          "Abu Ishaq",
+          "Ibn Abi Musa",
+          "Abu Musa"
+        ]
+      },
+      "grade": {
+        "classification": "Sahih",
+        "graded_by": "Imam Bukhari",
+        "note": "This hadith is from Sahih al-Bukhari, which is considered authentic"
+      },
+      "url": "https://sunnah.com/bukhari:6398"
+    }
+  ]
+}

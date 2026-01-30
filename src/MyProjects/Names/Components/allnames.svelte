@@ -1,10 +1,16 @@
 <script>
-    import { nameId} from '../Stores/misc';
+    import { nameId, filterQuran, filterDerived, filterHadith, showDisputed } from '../Stores/misc';
     import  names  from './names.js';
-    
+
     const BASE   = '#266F8C';
     const HOVER  = '#5AADBF';
     const ACTIVE = '#AC8B7E';
+    const QURAN_FILTER = '#266F8C';
+    const DERIVED_FILTER = '#4C8C4C';
+    const HADITH_FILTER = '#8A63BF';
+    const QURAN_HOVER = '#7EB8CC';
+    const DERIVED_HOVER = '#83B383';
+    const HADITH_HOVER = '#B399C9';
         
     export let lineGap = 100;   // distance between first line and second line
     export let lineGap2 = 60;  
@@ -13,18 +19,66 @@
     $: activeGroup = $nameId;
     let hoverGroup = null;
 
-    // Initialize all fills
+    // Initialize all fills and strokes
     let fills = Array(107).fill(BASE);
+    let strokes = Array(107).fill('none');
+    let strokeWidths = Array(107).fill(0);
 
     function updateFills() {
         for (let i = 0; i < 107; i++) {
             const id = i + 1;
-            fills[i] = activeGroup === id ? ACTIVE : hoverGroup === id ? HOVER : BASE;
+            const name = names[id];
+
+            // Determine base color based on active/hover state
+            let baseColor = BASE;
+
+            // Handle active state (clicked name)
+            if (activeGroup === id) {
+                baseColor = ACTIVE;
+            }
+            // Handle hover state with filter awareness
+            else if (hoverGroup === id) {
+                // If a filter is active and this name matches, use filter's hover color
+                if (name) {
+                    if ($filterQuran && name.quran_hadith === 'Quran') {
+                        baseColor = QURAN_HOVER;
+                    } else if ($filterDerived && name.quran_hadith === 'Derived') {
+                        baseColor = DERIVED_HOVER;
+                    } else if ($filterHadith && name.quran_hadith === 'Hadith') {
+                        baseColor = HADITH_HOVER;
+                    } else {
+                        baseColor = HOVER;
+                    }
+                } else {
+                    baseColor = HOVER;
+                }
+            }
+            // Apply filter colors when not hovering or active
+            else if (name) {
+                if ($filterQuran && name.quran_hadith === 'Quran') {
+                    baseColor = QURAN_FILTER;
+                } else if ($filterDerived && name.quran_hadith === 'Derived') {
+                    baseColor = DERIVED_FILTER;
+                } else if ($filterHadith && name.quran_hadith === 'Hadith') {
+                    baseColor = HADITH_FILTER;
+                }
+            }
+
+            fills[i] = baseColor;
+
+            // Apply disputed stroke if showDisputed is true
+            if ($showDisputed && name && name.disputed === 'Yes') {
+                strokes[i] = '#B86F65';
+                strokeWidths[i] = 3;
+            } else {
+                strokes[i] = 'none';
+                strokeWidths[i] = 0;
+            }
         }
     }
 
-    // Reactively update fills whenever activeGroup or hoverGroup changes
-    $: if (activeGroup !== undefined || hoverGroup !== undefined) {
+    // Reactively update fills whenever any relevant state changes
+    $: if (activeGroup !== undefined || hoverGroup !== undefined || $filterQuran !== undefined || $filterDerived !== undefined || $filterHadith !== undefined || $showDisputed !== undefined) {
         updateFills();
     }
 
@@ -74,13 +128,13 @@
     >
     
          <g
-        style="fill: {fills[0]};"
+        style="fill: {fills[0]}; stroke: {strokes[0]}; stroke-width: {strokeWidths[0]};"
       >
           <path d="M699.7,40.7h.2v12.4h-12.4v-26.3h-40.4v40.2h26.5v12.7h-26.5v13.9h40.4v-26.6h12.4v12.7h-.2v13.9h40.4V26.8h-40.4v13.9ZM661.1,53.1v-12.4h12.6v12.4h-12.6ZM726.2,79.7h-12.4v-12.7h12.4v12.7ZM726.2,53.1h-12.4v-12.4h12.4v12.4Z" />
         </g>
-    
+
         <g
-        style="fill: {fills[1]}; cursor: pointer;"
+        style="fill: {fills[1]}; stroke: {strokes[1]}; stroke-width: {strokeWidths[1]}; cursor: pointer;"
         on:mouseenter={() => handleHover(2)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(2)}
@@ -93,7 +147,7 @@
         </g>
     
           <g
-        style="fill: {fills[2]};"
+        style="fill: {fills[2]}; stroke: {strokes[2]}; stroke-width: {strokeWidths[2]};"
       >
           <rect x="458.2" y="26.8" width="13.9" height="13.9" />
           <rect x="512.1" y=".6" width="13.9" height="93" />
@@ -102,27 +156,27 @@
         </g>
     
           <g
-        style="fill: {fills[3]};"
+        style="fill: {fills[3]}; stroke: {strokes[3]}; stroke-width: {strokeWidths[3]};"
       >
           <path d="M323.8,40.5h13.5V.3h-13.9v26.3h-12.9V.3h-13.9v40.2h13.3v12.7h-13.1v40.5h40.5v-.3h.3v-40.2h-13.8v-12.7ZM310.6,67h13.1v12.7h-13.1v-12.7Z" />
         </g>
     
           <g
-        style="fill: {fills[4]};"
+        style="fill: {fills[4]}; stroke: {strokes[4]}; stroke-width: {strokeWidths[4]};"
       >
           <rect x="269.8" y=".6" width="13.9" height="93" />
           <path d="M242.8,79.7h-13.1V0h-40.9v40.5h13.9V13.9h13.1v39.4h-27v40.3h0c0,0,64.7,0,64.7,0h0c0,0,3.3,0,3.3,0V.6h-13.9v79.1ZM202.6,67.2h13.1v12.5h-13.1v-12.5Z" />
         </g>
     
           <g
-        style="fill: {fills[5]};"
+        style="fill: {fills[5]}; stroke: {strokes[5]}; stroke-width: {strokeWidths[5]};"
       >
           <rect x="161.7" y=".5" width="13.9" height="93" />
           <path d="M134.8,40.5h13.5V.3h-13.9v26.3h-12.9V.3h-.6v-.3H.6v13.9h106.9v26.6h13.3v12.7h-13.1v40.5h40.5v-.3h.3v-40.2h-13.8v-12.7ZM121.6,67h13.1v12.7h-13.1v-12.7Z" />
         </g>
     
           <g
-        style="fill: {fills[6]};"
+        style="fill: {fills[6]}; stroke: {strokes[6]}; stroke-width: {strokeWidths[6]};"
       >
           <path d="M94.4,26.6h-40.2v.4h-.3v26.2h-13v-26.6H.6v.4h-.6v40.3h13.9c0-.1,13-.1,13-.1v12.7H.6v13.9h40.2v-26.6h13v26.6h40.8V26.9h-.3v-.4ZM13.9,53.1v-12.7h13v12.7h-13ZM80.8,79.7h-13v-12.7h13v12.7ZM67.8,53.1v-12.7h13v12.7h-13Z" />
         </g>
@@ -132,7 +186,7 @@
       <g transform={`translate(0, ${lineGap})`}>
             
          <g
-        style="fill: {fills[7]}; cursor: pointer;"
+        style="fill: {fills[7]}; stroke: {strokes[7]}; stroke-width: {strokeWidths[7]}; cursor: pointer;"
         on:mouseenter={() => handleHover(8)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(8)}
@@ -144,7 +198,7 @@
         <path d="M493,.2h-5.9c0-.1-7.7-.1-7.7-.1h0v22.2h7.7V7.9h5.9v22h-13.5v.5h0v14.7h-7.7V0h-7.7v45h-7.6v-14.9h-30.1v-7.2h29.2v-7.7h-36.9v22.6h0s30.1,0,30.1,0v7.2h-30.2v7.7h82.1v-.5h.1V0h-7.7ZM487.1,37.6h5.9v7.5h-5.9v-7.5Z"/>
       </g>
         <g
-        style="fill: {fills[8]}; cursor: pointer;"
+        style="fill: {fills[8]}; stroke: {strokes[8]}; stroke-width: {strokeWidths[8]}; cursor: pointer;"
         on:mouseenter={() => handleHover(9)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(9)}
@@ -158,7 +212,7 @@
         <path d="M67.1,36.1v-20h-.6c0-.1-21.6-.1-21.6-.1h0v13.9h-7.8v-13.9h-7.7v13.9H7.7V7.7h29.6V0H0v37.6h67.1v-1.5ZM52.6,23.7h6.8v6.2h-6.8v-6.2Z"/>
       </g>
         <g
-        style="fill: {fills[9]}; cursor: pointer;"
+        style="fill: {fills[9]}; stroke: {strokes[9]}; stroke-width: {strokeWidths[9]}; cursor: pointer;"
         on:mouseenter={() => handleHover(10)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(10)}
@@ -171,7 +225,7 @@
         <path d="M150,0v52.8h7.7s13.7,0,13.7,0h0v-23.9h-7.7v16.2h-6v-21.3h6s7.7,0,7.7,0h0V0h0s-21.4,0-21.4,0h0ZM163.7,16.1h-6V7.7h6v8.4Z"/>
       </g>
        <g
-        style="fill: {fills[10]}; cursor: pointer;"
+        style="fill: {fills[10]}; stroke: {strokes[10]}; stroke-width: {strokeWidths[10]}; cursor: pointer;"
         on:mouseenter={() => handleHover(11)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(11)}
@@ -187,7 +241,7 @@
         <polygon points="307.7 37.6 307.7 37.5 307.7 29.9 307.7 15.6 300 15.6 300 29.9 292.2 29.9 292.2 15.3 284.5 15.3 284.5 29.9 276.5 29.9 276.5 15.6 268.8 15.6 268.8 45.1 252.6 45.1 252.6 52.8 276.5 52.8 276.5 52.7 276.5 45.1 276.5 37.6 307.7 37.6"/>
       </g>
         <g
-        style="fill: {fills[11]}; cursor: pointer;"
+        style="fill: {fills[11]}; stroke: {strokes[11]}; stroke-width: {strokeWidths[11]}; cursor: pointer;"
         on:mouseenter={() => handleHover(12)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(12)}
@@ -202,7 +256,7 @@
         <polygon points="613.2 .2 613.2 7.9 658.1 7.9 658.1 23.5 665.8 23.5 665.8 7.9 665.8 3.3 665.8 .2 613.2 .2"/>
       </g>
         <g
-        style="fill: {fills[12]}; cursor: pointer;"
+        style="fill: {fills[12]}; stroke: {strokes[12]}; stroke-width: {strokeWidths[12]}; cursor: pointer;"
         on:mouseenter={() => handleHover(13)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(13)}
@@ -219,7 +273,7 @@
               <g transform={`translate(0, ${lineGap2})`}>
     
          <g
-        style="fill: {fills[13]}; cursor: pointer;"
+        style="fill: {fills[13]}; stroke: {strokes[13]}; stroke-width: {strokeWidths[13]}; cursor: pointer;"
         on:mouseenter={() => handleHover(14)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(14)}
@@ -234,7 +288,7 @@
         <rect x="389.3" y="44.5" width="7.7" height="7.7"/>
       </g>
         <g
-        style="fill: {fills[14]}; cursor: pointer;"
+        style="fill: {fills[14]}; stroke: {strokes[14]}; stroke-width: {strokeWidths[14]}; cursor: pointer;"
         on:mouseenter={() => handleHover(15)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(15)}
@@ -249,7 +303,7 @@
         <rect x="268.8" y="44.5" width="7.7" height="7.7"/>
       </g>
         <g
-        style="fill: {fills[15]}; cursor: pointer;"
+        style="fill: {fills[15]}; stroke: {strokes[15]}; stroke-width: {strokeWidths[15]}; cursor: pointer;"
         on:mouseenter={() => handleHover(16)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(16)}
@@ -265,7 +319,7 @@
         <rect x="134.3" width="7.7" height="7.7"/>
       </g>
         <g
-        style="fill: {fills[16]}; cursor: pointer;"
+        style="fill: {fills[16]}; stroke: {strokes[16]}; stroke-width: {strokeWidths[16]}; cursor: pointer;"
         on:mouseenter={() => handleHover(17)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(17)}
@@ -280,7 +334,7 @@
         <rect x="90.2" y="44.5" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[17]}; cursor: pointer;"
+        style="fill: {fills[17]}; stroke: {strokes[17]}; stroke-width: {strokeWidths[17]}; cursor: pointer;"
         on:mouseenter={() => handleHover(18)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(18)}
@@ -295,7 +349,7 @@
         <rect x="583.3" y="29.9" width="7.7" height="7.7"/>
       </g>
          <g
-        style="fill: {fills[18]}; cursor: pointer;"
+        style="fill: {fills[18]}; stroke: {strokes[18]}; stroke-width: {strokeWidths[18]}; cursor: pointer;"
         on:mouseenter={() => handleHover(19)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(19)}
@@ -315,7 +369,7 @@
       <g transform={`translate(0, ${lineGap2})`}>
             
        <g
-        style="fill: {fills[19]}; cursor: pointer;"
+        style="fill: {fills[19]}; stroke: {strokes[19]}; stroke-width: {strokeWidths[19]}; cursor: pointer;"
         on:mouseenter={() => handleHover(20)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(20)}
@@ -328,7 +382,7 @@
         <path d="M687.9,426.3h30.9v23.1h-7.6v-15.7h-7.7s-8,0-8,0h0s-7.7,0-7.7,0v23.3h15.7v5.6h-15.7v7.7h23.4v-13.3h7.6v13.3h7.7v-51.7h-38.6v7.7ZM695.6,449.4v-8h8v8h-8Z"/>
       </g>
        <g
-        style="fill: {fills[20]}; cursor: pointer;"
+        style="fill: {fills[20]}; stroke: {strokes[20]}; stroke-width: {strokeWidths[20]}; cursor: pointer;"
         on:mouseenter={() => handleHover(21)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(21)}
@@ -340,7 +394,7 @@
         <polygon points="426.7 418.6 426.7 403.5 419 403.5 419 426.3 420 426.3 426.7 426.3 516.2 426.3 516.2 418.6 426.7 418.6"/>
       </g>
         <g
-        style="fill: {fills[21]}; cursor: pointer;"
+        style="fill: {fills[21]}; stroke: {strokes[21]}; stroke-width: {strokeWidths[21]}; cursor: pointer;"
         on:mouseenter={() => handleHover(22)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(22)}
@@ -352,7 +406,7 @@
         <rect x=".1" y="418.5" width="97.2" height="7.7"/>
       </g>
         <g
-        style="fill: {fills[22]}; cursor: pointer;"
+        style="fill: {fills[22]}; stroke: {strokes[22]}; stroke-width: {strokeWidths[22]}; cursor: pointer;"
         on:mouseenter={() => handleHover(23)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(23)}
@@ -367,7 +421,7 @@
         <polygon points="90.2 321.8 90.2 321.8 90.2 337.7 97.9 337.7 97.9 321.8 105.1 321.8 105.1 344.1 90.2 344.1 90.2 351.8 105.1 351.8 111.9 351.8 112.8 351.8 112.8 321.8 112.8 314.5 112.8 314.1 90.2 314.1 90.2 321.8"/>
       </g>
         <g
-        style="fill: {fills[23]}; cursor: pointer;"
+        style="fill: {fills[23]}; stroke: {strokes[23]}; stroke-width: {strokeWidths[23]}; cursor: pointer;"
         on:mouseenter={() => handleHover(24)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(24)}
@@ -381,7 +435,7 @@
         <path d="M433.7,299.6v7.7h30.2v21.2h-8.1v-14.1h-22.2v21.7h14.5v8.5h-13.6v7.7h21.3v-16.1h8.1v16.2h7.7v-52.8h-37.9ZM441.4,328.5v-6.4h6.8v6.4h-6.8Z"/>
       </g>
         <g
-        style="fill: {fills[24]}; cursor: pointer;"
+        style="fill: {fills[24]}; stroke: {strokes[24]}; stroke-width: {strokeWidths[24]}; cursor: pointer;"
         on:mouseenter={() => handleHover(25)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(25)}
@@ -393,7 +447,7 @@
         <path d="M359.1,165.3h-7.5v-30.6h-21.9v7.7h0v14.6h7.7v-14.6h6.5v22.9h-21.9v-7.7h0v-7.7h0v-15.2h-29.6v-6.9h59.7v-7.7h-67.3v22.3h29.6v7.5h-37.4v-29.8h-22.9v52.8h39.8v-7.7h-32.1v-22.9h7.6v15.1h.3c0,0,44.8,0,44.8,0v15.1h0v.3h52.5v-52.5h-7.7v44.9ZM261.7,134.8v-6.9h7.6v6.9h-7.6Z"/>
       </g>
        <g
-        style="fill: {fills[25]}; cursor: pointer;"
+        style="fill: {fills[25]}; stroke: {strokes[25]}; stroke-width: {strokeWidths[25]}; cursor: pointer;"
         on:mouseenter={() => handleHover(26)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(26)}
@@ -406,7 +460,7 @@
         <path d="M224.7,179.6h-7.5v-14.8h-7.4v-7.3h7.5v-22.5h0v-.6h-22.7v23.1h7.5v7.3h-6.7v14.8h-8.2v-45.2h-23.1v38.6h7.7v-30.9h7.7v37.6h-15.4v7.7h38.9v-15.4h6.4v15.4h0s15.1,0,15.1,0h7.7v-83h-7.7v75.3ZM209.6,142.1v7.4h-7.3v-7.4h7.3Z"/>
       </g>
        <g
-        style="fill: {fills[26]}; cursor: pointer;"
+        style="fill: {fills[26]}; stroke: {strokes[26]}; stroke-width: {strokeWidths[26]}; cursor: pointer;"
         on:mouseenter={() => handleHover(27)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(27)}
@@ -419,7 +473,7 @@
         <polygon points="613.8 44.5 598.7 44.5 598.7 52.2 613.8 52.2 619.8 52.2 621.4 52.2 621.4 15.6 613.8 15.6 613.8 44.5"/>
       </g>
        <g
-        style="fill: {fills[27]}; cursor: pointer;"
+        style="fill: {fills[27]}; stroke: {strokes[27]}; stroke-width: {strokeWidths[27]}; cursor: pointer;"
         on:mouseenter={() => handleHover(28)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(28)}
@@ -436,7 +490,7 @@
         <rect x="524.4" y="60.5" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[28]}; cursor: pointer;"
+        style="fill: {fills[28]}; stroke: {strokes[28]}; stroke-width: {strokeWidths[28]}; cursor: pointer;"
         on:mouseenter={() => handleHover(29)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(29)}
@@ -450,7 +504,7 @@
         <rect x="479.4" y="104.6" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[29]}; cursor: pointer;"
+        style="fill: {fills[29]}; stroke: {strokes[29]}; stroke-width: {strokeWidths[29]}; cursor: pointer;"
         on:mouseenter={() => handleHover(30)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(30)}
@@ -468,7 +522,7 @@
         <rect x="389.5" y="298.9" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[30]}; cursor: pointer;"
+        style="fill: {fills[30]}; stroke: {strokes[30]}; stroke-width: {strokeWidths[30]}; cursor: pointer;"
         on:mouseenter={() => handleHover(31)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(31)}
@@ -482,7 +536,7 @@
         <rect x="239.9" y="344.1" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[31]}; cursor: pointer;"
+        style="fill: {fills[31]}; stroke: {strokes[31]}; stroke-width: {strokeWidths[31]}; cursor: pointer;"
         on:mouseenter={() => handleHover(32)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(32)}
@@ -496,7 +550,7 @@
         <rect x="299.4" y="462.7" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[32]}; cursor: pointer;"
+        style="fill: {fills[32]}; stroke: {strokes[32]}; stroke-width: {strokeWidths[32]}; cursor: pointer;"
         on:mouseenter={() => handleHover(33)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(33)}
@@ -511,7 +565,7 @@
         <rect x="269.3" y="404.5" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[33]}; cursor: pointer;"
+        style="fill: {fills[33]}; stroke: {strokes[33]}; stroke-width: {strokeWidths[33]}; cursor: pointer;"
         on:mouseenter={() => handleHover(34)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(34)}
@@ -526,7 +580,7 @@
         <rect x="127.3" y="283.5" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[34]}; cursor: pointer;"
+        style="fill: {fills[34]}; stroke: {strokes[34]}; stroke-width: {strokeWidths[34]}; cursor: pointer;"
         on:mouseenter={() => handleHover(35)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(35)}
@@ -540,7 +594,7 @@
         <rect x="15.6" y="204" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[35]}; cursor: pointer;"
+        style="fill: {fills[35]}; stroke: {strokes[35]}; stroke-width: {strokeWidths[35]}; cursor: pointer;"
         on:mouseenter={() => handleHover(36)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(36)}
@@ -555,7 +609,7 @@
         <rect x="30" y="360" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[36]}; cursor: pointer;"
+        style="fill: {fills[36]}; stroke: {strokes[36]}; stroke-width: {strokeWidths[36]}; cursor: pointer;"
         on:mouseenter={() => handleHover(37)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(37)}
@@ -570,7 +624,7 @@
         <rect x="179.8" y="358.7" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[37]}; cursor: pointer;"
+        style="fill: {fills[37]}; stroke: {strokes[37]}; stroke-width: {strokeWidths[37]}; cursor: pointer;"
         on:mouseenter={() => handleHover(38)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(38)}
@@ -584,7 +638,7 @@
         <rect x="119.8" y="462.7" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[38]}; cursor: pointer;"
+        style="fill: {fills[38]}; stroke: {strokes[38]}; stroke-width: {strokeWidths[38]}; cursor: pointer;"
         on:mouseenter={() => handleHover(39)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(39)}
@@ -601,7 +655,7 @@
         <rect x="14.6" y="388.1" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[39]}; cursor: pointer;"
+        style="fill: {fills[39]}; stroke: {strokes[39]}; stroke-width: {strokeWidths[39]}; cursor: pointer;"
         on:mouseenter={() => handleHover(40)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(40)}
@@ -616,7 +670,7 @@
         <rect x=".1" y="284.2" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[40]}; cursor: pointer;"
+        style="fill: {fills[40]}; stroke: {strokes[40]}; stroke-width: {strokeWidths[40]}; cursor: pointer;"
         on:mouseenter={() => handleHover(41)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(41)}
@@ -631,7 +685,7 @@
         <rect x="202.6" y="283.5" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[41]}; cursor: pointer;"
+        style="fill: {fills[41]}; stroke: {strokes[41]}; stroke-width: {strokeWidths[41]}; cursor: pointer;"
         on:mouseenter={() => handleHover(42)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(42)}
@@ -646,7 +700,7 @@
         <rect x="344.3" y="179.6" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[42]}; cursor: pointer;"
+        style="fill: {fills[42]}; stroke: {strokes[42]}; stroke-width: {strokeWidths[42]}; cursor: pointer;"
         on:mouseenter={() => handleHover(43)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(43)}
@@ -661,7 +715,7 @@
         <rect x="492.9" y="164.9" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[43]}; cursor: pointer;"
+        style="fill: {fills[43]}; stroke: {strokes[43]}; stroke-width: {strokeWidths[43]}; cursor: pointer;"
         on:mouseenter={() => handleHover(44)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(44)}
@@ -676,7 +730,7 @@
         <rect x="463.9" y="179.8" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[44]}; cursor: pointer;"
+        style="fill: {fills[44]}; stroke: {strokes[44]}; stroke-width: {strokeWidths[44]}; cursor: pointer;"
         on:mouseenter={() => handleHover(45)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(45)}
@@ -690,7 +744,7 @@
         <rect x="569.2" y="165.3" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[45]}; cursor: pointer;"
+        style="fill: {fills[45]}; stroke: {strokes[45]}; stroke-width: {strokeWidths[45]}; cursor: pointer;"
         on:mouseenter={() => handleHover(46)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(46)}
@@ -704,7 +758,7 @@
         <rect x="673.5" y="120.2" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[46]}; cursor: pointer;"
+        style="fill: {fills[46]}; stroke: {strokes[46]}; stroke-width: {strokeWidths[46]}; cursor: pointer;"
         on:mouseenter={() => handleHover(47)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(47)}
@@ -720,7 +774,7 @@
         <rect x="658.2" y="224.8" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[47]}; cursor: pointer;"
+        style="fill: {fills[47]}; stroke: {strokes[47]}; stroke-width: {strokeWidths[47]}; cursor: pointer;"
         on:mouseenter={() => handleHover(48)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(48)}
@@ -736,7 +790,7 @@
         <rect x="538.1" y="299.6" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[48]}; cursor: pointer;"
+        style="fill: {fills[48]}; stroke: {strokes[48]}; stroke-width: {strokeWidths[48]}; cursor: pointer;"
         on:mouseenter={() => handleHover(49)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(49)}
@@ -752,7 +806,7 @@
         <rect x="537.8" y="344.3" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[49]}; cursor: pointer;"
+        style="fill: {fills[49]}; stroke: {strokes[49]}; stroke-width: {strokeWidths[49]}; cursor: pointer;"
         on:mouseenter={() => handleHover(50)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(50)}
@@ -767,7 +821,7 @@
         <rect x="673.5" y="284.2" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[50]}; cursor: pointer;"
+        style="fill: {fills[50]}; stroke: {strokes[50]}; stroke-width: {strokeWidths[50]}; cursor: pointer;"
         on:mouseenter={() => handleHover(51)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(51)}
@@ -784,7 +838,7 @@
         <rect x="614.1" y="388.4" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[51]}; cursor: pointer;"
+        style="fill: {fills[51]}; stroke: {strokes[51]}; stroke-width: {strokeWidths[51]}; cursor: pointer;"
         on:mouseenter={() => handleHover(52)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(52)}
@@ -801,7 +855,7 @@
         <rect x="479.5" y="404.6" width="7.7" height="7.7"/>
       </g>
        <g
-        style="fill: {fills[52]}; cursor: pointer;"
+        style="fill: {fills[52]}; stroke: {strokes[52]}; stroke-width: {strokeWidths[52]}; cursor: pointer;"
         on:mouseenter={() => handleHover(53)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(53)}
@@ -815,7 +869,7 @@
         <rect x="388.8" y="359.2" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[53]}; cursor: pointer;"
+        style="fill: {fills[53]}; stroke: {strokes[53]}; stroke-width: {strokeWidths[53]}; cursor: pointer;"
         on:mouseenter={() => handleHover(54)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(54)}
@@ -829,7 +883,7 @@
         <rect x="523.3" y="462.7" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[54]}; cursor: pointer;"
+        style="fill: {fills[54]}; stroke: {strokes[54]}; stroke-width: {strokeWidths[54]}; cursor: pointer;"
         on:mouseenter={() => handleHover(55)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(55)}
@@ -847,7 +901,7 @@
         <rect x="613.5" y="344.7" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[55]}; cursor: pointer;"
+        style="fill: {fills[55]}; stroke: {strokes[55]}; stroke-width: {strokeWidths[55]}; cursor: pointer;"
         on:mouseenter={() => handleHover(56)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(56)}
@@ -861,7 +915,7 @@
         <rect x="553.2" y="209.9" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[56]}; cursor: pointer;"
+        style="fill: {fills[56]}; stroke: {strokes[56]}; stroke-width: {strokeWidths[56]}; cursor: pointer;"
         on:mouseenter={() => handleHover(57)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(57)}
@@ -877,7 +931,7 @@
         <rect x="239.8" y="60" width="7.7" height="7.7"/>
       </g>
      <g
-        style="fill: {fills[57]}; cursor: pointer;"
+        style="fill: {fills[57]}; stroke: {strokes[57]}; stroke-width: {strokeWidths[57]}; cursor: pointer;"
         on:mouseenter={() => handleHover(58)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(58)}
@@ -892,7 +946,7 @@
         <rect x="224.7" y="60" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[58]}; cursor: pointer;"
+        style="fill: {fills[58]}; stroke: {strokes[58]}; stroke-width: {strokeWidths[58]}; cursor: pointer;"
         on:mouseenter={() => handleHover(59)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(59)}
@@ -907,7 +961,7 @@
         <rect x="119.7" y="60.2" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[59]}; cursor: pointer;"
+        style="fill: {fills[59]}; stroke: {strokes[59]}; stroke-width: {strokeWidths[59]}; cursor: pointer;"
         on:mouseenter={() => handleHover(60)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(60)}
@@ -920,7 +974,7 @@
         <rect x=".1" y="60.6" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[60]}; cursor: pointer;"
+        style="fill: {fills[60]}; stroke: {strokes[60]}; stroke-width: {strokeWidths[60]}; cursor: pointer;"
         on:mouseenter={() => handleHover(61)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(61)}
@@ -935,7 +989,7 @@
         <rect x="75" y="165.3" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[61]}; cursor: pointer;"
+        style="fill: {fills[61]}; stroke: {strokes[61]}; stroke-width: {strokeWidths[61]}; cursor: pointer;"
         on:mouseenter={() => handleHover(62)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(62)}
@@ -951,7 +1005,7 @@
         <rect x="224.7" y="194.6" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[62]}; cursor: pointer;"
+        style="fill: {fills[62]}; stroke: {strokes[62]}; stroke-width: {strokeWidths[62]}; cursor: pointer;"
         on:mouseenter={() => handleHover(63)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(63)}
@@ -965,7 +1019,7 @@
         <rect x="673.5" y="90.1" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[63]}; cursor: pointer;"
+        style="fill: {fills[63]}; stroke: {strokes[63]}; stroke-width: {strokeWidths[63]}; cursor: pointer;"
         on:mouseenter={() => handleHover(64)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(64)}
@@ -980,7 +1034,7 @@
         <rect x="537.8" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[64]}; cursor: pointer;"
+        style="fill: {fills[64]}; stroke: {strokes[64]}; stroke-width: {strokeWidths[64]}; cursor: pointer;"
         on:mouseenter={() => handleHover(65)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(65)}
@@ -995,7 +1049,7 @@
         <rect x="419" y="15.6" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[65]}; cursor: pointer;"
+        style="fill: {fills[65]}; stroke: {strokes[65]}; stroke-width: {strokeWidths[65]}; cursor: pointer;"
         on:mouseenter={() => handleHover(66)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(66)}
@@ -1013,7 +1067,7 @@
         <rect x="135.2" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[66]}; cursor: pointer;"
+        style="fill: {fills[66]}; stroke: {strokes[66]}; stroke-width: {strokeWidths[66]}; cursor: pointer;"
         on:mouseenter={() => handleHover(67)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(67)}
@@ -1030,7 +1084,7 @@
       </g>
      <g transform={`translate(0, ${lineGap3})`}>
    <g
-        style="fill: {fills[67]}; cursor: pointer;"
+        style="fill: {fills[67]}; stroke: {strokes[67]}; stroke-width: {strokeWidths[67]}; cursor: pointer;"
         on:mouseenter={() => handleHover(68)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(68)}
@@ -1042,7 +1096,7 @@
         <polygon points="597.8 45.3 591.6 45.3 591.6 .6 590.9 .6 583.9 .6 568.3 .6 568.3 .9 568.3 8.3 568.3 37.9 576 37.9 576 8.3 583.9 8.3 583.9 45.3 560.8 45.3 560.8 23.5 560.8 15.9 560.8 15.9 537.8 15.9 537.8 15.9 537.8 23.5 537.8 44.8 530.9 44.8 530.9 8.3 561.4 8.3 561.4 .6 530.9 .6 523.3 .6 523.3 .6 523.3 8.3 523.3 8.3 523.3 44.8 523.3 44.8 523.3 52.4 523.3 52.4 530.9 52.4 537.8 52.4 545.5 52.4 545.5 44.8 545.5 23.5 553.2 23.5 553.2 52.9 558.6 52.9 558.6 53 600.6 53 600.6 52.9 605.4 52.9 605.4 0 597.8 0 597.8 45.3"/>
       </g>
       <g
-        style="fill: {fills[68]}; cursor: pointer;"
+        style="fill: {fills[68]}; stroke: {strokes[68]}; stroke-width: {strokeWidths[68]}; cursor: pointer;"
         on:mouseenter={() => handleHover(69)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(69)}
@@ -1056,7 +1110,7 @@
         <path d="M44.4,75.7h-15.5v22.9h15.5v7.4h-15.5v7.7h23.1v-38h-7.7ZM44.4,90.9h-7.8v-7.6h7.8v7.6Z"/>
       </g>
       <g
-        style="fill: {fills[69]}; cursor: pointer;"
+        style="fill: {fills[69]}; stroke: {strokes[69]}; stroke-width: {strokeWidths[69]}; cursor: pointer;"
         on:mouseenter={() => handleHover(70)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(70)}
@@ -1070,7 +1124,7 @@
         <rect x="59.2" y=".6" width="7.7" height="36.8"/>
       </g>
       <g
-        style="fill: {fills[70]}; cursor: pointer;"
+        style="fill: {fills[70]}; stroke: {strokes[70]}; stroke-width: {strokeWidths[70]}; cursor: pointer;"
         on:mouseenter={() => handleHover(71)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(71)}
@@ -1082,7 +1136,7 @@
         <path d="M718.8,61.2h-30.8v7.7h30.8v37.1h-7.8v-30.7h-29.9v-6.4h-7.7v37.1h-6.7v-30.5h-23.1v30.5h-7.7v-29.9h0v-.8h-22.6v22.6h7.7v-15h7.3v23h-14.9v7.7h38v-15.2h7.8v15.2h36v-16h8.2v16h23.1v-52.4h-7.7ZM651.3,90.7v-7.6h7.8v7.6h-7.8ZM687.5,90v1.3h0v14.7h-6.3v-23h22.2v7.1h-15.8Z"/>
       </g>
       <g
-        style="fill: {fills[71]}; cursor: pointer;"
+        style="fill: {fills[71]}; stroke: {strokes[71]}; stroke-width: {strokeWidths[71]}; cursor: pointer;"
         on:mouseenter={() => handleHover(72)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(72)}
@@ -1096,7 +1150,7 @@
         <polygon points="261.7 202.4 269.4 202.4 269.4 186.9 306.5 186.9 306.5 179.2 261.7 179.2 261.7 186.9 261.7 186.9 261.7 202.4"/>
       </g>
      <g
-        style="fill: {fills[72]}; cursor: pointer;"
+        style="fill: {fills[72]}; stroke: {strokes[72]}; stroke-width: {strokeWidths[72]}; cursor: pointer;"
         on:mouseenter={() => handleHover(73)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(73)}
@@ -1110,7 +1164,7 @@
         <polygon points="329.1 150.4 321.8 150.4 321.8 120.1 321.4 120.1 314.1 120.1 306.9 120.1 300.1 120.1 299.2 120.1 299.2 172.6 300.1 172.6 306.9 172.6 336.8 172.6 336.8 164.9 306.9 164.9 306.9 127.8 314.1 127.8 314.1 158.1 315.4 158.1 321.8 158.1 329.1 158.1 336.8 158.1 336.8 150.4 336.8 120.6 329.1 120.6 329.1 150.4"/>
       </g>
       <g
-        style="fill: {fills[73]}; cursor: pointer;"
+        style="fill: {fills[73]}; stroke: {strokes[73]}; stroke-width: {strokeWidths[73]}; cursor: pointer;"
         on:mouseenter={() => handleHover(74)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(74)}
@@ -1124,7 +1178,7 @@
         <polygon points="247.8 299.3 246.9 299.3 246.9 344.1 246.9 351.8 254.6 351.8 277.2 351.8 284.9 351.8 284.9 344.1 284.9 329.4 277.2 329.4 277.2 329.4 269.4 329.4 269.4 321.1 284.7 321.1 284.7 313.4 261.7 313.4 261.7 321.1 261.7 321.1 261.7 329.4 261.7 329.4 261.7 337.1 277.2 337.1 277.2 344.1 254.6 344.1 254.6 307 313.9 307 313.9 299.3 254.6 299.3 247.8 299.3"/>
       </g>
       <g
-        style="fill: {fills[74]}; cursor: pointer;"
+        style="fill: {fills[74]}; stroke: {strokes[74]}; stroke-width: {strokeWidths[74]}; cursor: pointer;"
         on:mouseenter={() => handleHover(75)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(75)}
@@ -1138,7 +1192,7 @@
         <rect x="613.4" y="134.1" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[75]}; cursor: pointer;"
+        style="fill: {fills[75]}; stroke: {strokes[75]}; stroke-width: {strokeWidths[75]}; cursor: pointer;"
         on:mouseenter={() => handleHover(76)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(76)}
@@ -1151,7 +1205,7 @@
         <rect x="493.6" y="179.2" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[76]}; cursor: pointer;"
+        style="fill: {fills[76]}; stroke: {strokes[76]}; stroke-width: {strokeWidths[76]}; cursor: pointer;"
         on:mouseenter={() => handleHover(77)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(77)}
@@ -1166,7 +1220,7 @@
         <rect x="419" y="150" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[77]}; cursor: pointer;"
+        style="fill: {fills[77]}; stroke: {strokes[77]}; stroke-width: {strokeWidths[77]}; cursor: pointer;"
         on:mouseenter={() => handleHover(78)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(78)}
@@ -1180,7 +1234,7 @@
         <rect x="456.3" y="299.2" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[78]}; cursor: pointer;"
+        style="fill: {fills[78]}; stroke: {strokes[78]}; stroke-width: {strokeWidths[78]}; cursor: pointer;"
         on:mouseenter={() => handleHover(79)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(79)}
@@ -1198,7 +1252,7 @@
         <rect x="478.9" y="373.8" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[79]}; cursor: pointer;"
+        style="fill: {fills[79]}; stroke: {strokes[79]}; stroke-width: {strokeWidths[79]}; cursor: pointer;"
         on:mouseenter={() => handleHover(80)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(80)}
@@ -1213,7 +1267,7 @@
         <rect x="537.8" y="299.1" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[80]}; cursor: pointer;"
+        style="fill: {fills[80]}; stroke: {strokes[80]}; stroke-width: {strokeWidths[80]}; cursor: pointer;"
         on:mouseenter={() => handleHover(81)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(81)}
@@ -1227,7 +1281,7 @@
         <rect x="403.6" y="284.4" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[81]}; cursor: pointer;"
+        style="fill: {fills[81]}; stroke: {strokes[81]}; stroke-width: {strokeWidths[81]}; cursor: pointer;"
         on:mouseenter={() => handleHover(82)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(82)}
@@ -1245,7 +1299,7 @@
         <rect x="313.9" y="403.7" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[82]}; cursor: pointer;"
+        style="fill: {fills[82]}; stroke: {strokes[82]}; stroke-width: {strokeWidths[82]}; cursor: pointer;"
         on:mouseenter={() => handleHover(83)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(83)}
@@ -1259,7 +1313,7 @@
         <rect x="254" y="403.7" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[83]}; cursor: pointer;"
+        style="fill: {fills[83]}; stroke: {strokes[83]}; stroke-width: {strokeWidths[83]}; cursor: pointer;"
         on:mouseenter={() => handleHover(84)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(84)}
@@ -1273,7 +1327,7 @@
         <rect x="239.4" y="239.5" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[84]}; cursor: pointer;"
+        style="fill: {fills[84]}; stroke: {strokes[84]}; stroke-width: {strokeWidths[84]}; cursor: pointer;"
         on:mouseenter={() => handleHover(85)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(85)}
@@ -1287,7 +1341,7 @@
         <rect x="568.6" y="254.3" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[85]}; cursor: pointer;"
+        style="fill: {fills[85]}; stroke: {strokes[85]}; stroke-width: {strokeWidths[85]}; cursor: pointer;"
         on:mouseenter={() => handleHover(86)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(86)}
@@ -1304,7 +1358,7 @@
         <rect x="673.5" y="194.3" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[86]}; cursor: pointer;"
+        style="fill: {fills[86]}; stroke: {strokes[86]}; stroke-width: {strokeWidths[86]}; cursor: pointer;"
         on:mouseenter={() => handleHover(87)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(87)}
@@ -1318,7 +1372,7 @@
         <rect x="703.6" y="299.6" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[87]}; cursor: pointer;"
+        style="fill: {fills[87]}; stroke: {strokes[87]}; stroke-width: {strokeWidths[87]}; cursor: pointer;"
         on:mouseenter={() => handleHover(88)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(88)}
@@ -1334,7 +1388,7 @@
         <rect x="553.2" y="60.5" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[88]}; cursor: pointer;"
+        style="fill: {fills[88]}; stroke: {strokes[88]}; stroke-width: {strokeWidths[88]}; cursor: pointer;"
         on:mouseenter={() => handleHover(89)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(89)}
@@ -1351,7 +1405,7 @@
         <rect x="418.9" y="45.4" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[89]}; cursor: pointer;"
+        style="fill: {fills[89]}; stroke: {strokes[89]}; stroke-width: {strokeWidths[89]}; cursor: pointer;"
         on:mouseenter={() => handleHover(90)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(90)}
@@ -1366,7 +1420,7 @@
         <rect x="299.8" y="45.4" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[90]}; cursor: pointer;"
+        style="fill: {fills[90]}; stroke: {strokes[90]}; stroke-width: {strokeWidths[90]}; cursor: pointer;"
         on:mouseenter={() => handleHover(91)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(91)}
@@ -1381,7 +1435,7 @@
         <rect x="239.5" y="134.7" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[91]}; cursor: pointer;"
+        style="fill: {fills[91]}; stroke: {strokes[91]}; stroke-width: {strokeWidths[91]}; cursor: pointer;"
         on:mouseenter={() => handleHover(92)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(92)}
@@ -1394,7 +1448,7 @@
         <rect x="120" y="164.2" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[92]}; cursor: pointer;"
+        style="fill: {fills[92]}; stroke: {strokes[92]}; stroke-width: {strokeWidths[92]}; cursor: pointer;"
         on:mouseenter={() => handleHover(93)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(93)}
@@ -1411,7 +1465,7 @@
         <rect x="45.1" y="119.4" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[93]}; cursor: pointer;"
+        style="fill: {fills[93]}; stroke: {strokes[93]}; stroke-width: {strokeWidths[93]}; cursor: pointer;"
         on:mouseenter={() => handleHover(94)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(94)}
@@ -1425,7 +1479,7 @@
         <rect x="30.3" y="239.5" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[94]}; cursor: pointer;"
+        style="fill: {fills[94]}; stroke: {strokes[94]}; stroke-width: {strokeWidths[94]}; cursor: pointer;"
         on:mouseenter={() => handleHover(95)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(95)}
@@ -1439,7 +1493,7 @@
         <rect x="164.5" y="254.3" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[95]}; cursor: pointer;"
+        style="fill: {fills[95]}; stroke: {strokes[95]}; stroke-width: {strokeWidths[95]}; cursor: pointer;"
         on:mouseenter={() => handleHover(96)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(96)}
@@ -1455,7 +1509,7 @@
         <rect x="44.3" y="299" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[96]}; cursor: pointer;"
+        style="fill: {fills[96]}; stroke: {strokes[96]}; stroke-width: {strokeWidths[96]}; cursor: pointer;"
         on:mouseenter={() => handleHover(97)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(97)}
@@ -1471,14 +1525,14 @@
         <rect x="232" y="344.1" width="7.7" height="7.7"/>
       </g>
       <g 
-        style="fill: {fills[97]};">
+        style="fill: {fills[97]}; stroke: {strokes[97]}; stroke-width: {strokeWidths[97]};">
         <rect x="613.4" y="61.2" width="52.8" height="7.7"/>
         <rect x="195" y="119.4" width="66.7" height="7.7"/>
         <rect y="43.2" width="7.7" height="39"/>
         <rect x="178.6" y="179.2" width="16.4" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[98]}; cursor: pointer;"
+        style="fill: {fills[98]}; stroke: {strokes[98]}; stroke-width: {strokeWidths[98]}; cursor: pointer;"
         on:mouseenter={() => handleHover(99)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(99)}
@@ -1493,7 +1547,7 @@
         <rect x="269.5" y="61.2" width="7.7" height="7.7"/>
       </g>
      <g
-        style="fill: {fills[99]}; cursor: pointer;"
+        style="fill: {fills[99]}; stroke: {strokes[99]}; stroke-width: {strokeWidths[99]}; cursor: pointer;"
         on:mouseenter={() => handleHover(100)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(100)}
@@ -1507,7 +1561,7 @@
         <rect x="180.1" y="45.4" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[100]}; cursor: pointer;"
+        style="fill: {fills[100]}; stroke: {strokes[100]}; stroke-width: {strokeWidths[100]}; cursor: pointer;"
         on:mouseenter={() => handleHover(101)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(101)}
@@ -1524,7 +1578,7 @@
         <rect x="389.6" y="75.5" width="7.7" height="7.7"/>
       </g>
       <g
-        style="fill: {fills[101]}; cursor: pointer;"
+        style="fill: {fills[101]}; stroke: {strokes[101]}; stroke-width: {strokeWidths[101]}; cursor: pointer;"
         on:mouseenter={() => handleHover(102)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(102)}
@@ -1540,7 +1594,7 @@
         <rect x="642.9" y=".2" width="7.7" height="7.7"/>
       </g>
      <g
-        style="fill: {fills[102]}; cursor: pointer;"
+        style="fill: {fills[102]}; stroke: {strokes[102]}; stroke-width: {strokeWidths[102]}; cursor: pointer;"
         on:mouseenter={() => handleHover(103)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(103)}
@@ -1556,7 +1610,7 @@
         <polygon points="442.3 186.9 438.5 186.9 438.5 183.5 442.3 183.5 442.3 179.5 434.3 179.5 434.3 186.9 430.7 186.9 430.7 191.1 442.3 191.1 442.3 186.9"/>
       </g>
       <g
-        style="fill: {fills[103]}; cursor: pointer;"
+        style="fill: {fills[103]}; stroke: {strokes[103]}; stroke-width: {strokeWidths[103]}; cursor: pointer;"
         on:mouseenter={() => handleHover(104)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(104)}
@@ -1571,7 +1625,7 @@
         <polygon points="189.5 77.2 189.5 73.2 181.4 73.2 181.4 80.5 177.8 80.5 177.8 84.7 189.5 84.7 189.5 80.5 185.6 80.5 185.6 77.2 189.5 77.2"/>
       </g>
       <g
-        style="fill: {fills[104]}; cursor: pointer;"
+        style="fill: {fills[104]}; stroke: {strokes[104]}; stroke-width: {strokeWidths[104]}; cursor: pointer;"
         on:mouseenter={() => handleHover(105)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(105)}
@@ -1585,7 +1639,7 @@
         <path d="M726.5,119.6h-7.7v13.7h-7.2v-13.7h-7.7v21.4h7.1v8.1h-7.7v15.3h-30.1v7.7h53.2v-22.9h-7.7v-8.1h7.8v-7.7h0v-13.7ZM718.8,164.4h-7.8v-7.6h7.8v7.6Z"/>
       </g>
       <g
-        style="fill: {fills[105]}; cursor: pointer;"
+        style="fill: {fills[105]}; stroke: {strokes[105]}; stroke-width: {strokeWidths[105]}; cursor: pointer;"
         on:mouseenter={() => handleHover(106)}
         on:mouseleave={handleLeave}
         on:click={() => handleClick(106)}
