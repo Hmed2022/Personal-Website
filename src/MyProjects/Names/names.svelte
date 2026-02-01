@@ -5,7 +5,7 @@ import AllNames from './Components/allnames.svelte'
 import Title from './Components/title.svelte'
 import Player from './Components/player.svelte';
 import { style } from 'svelte-body';
-import {language,nameId, filterQuran, filterDerived, filterHadith, showDisputed } from './Stores/misc.js';
+import {language,nameId, filterQuran, filterDerived, filterHadith, showDisputed, audioPlaying, audioCurrentTime } from './Stores/misc.js';
 import  names  from './Components/names.js';
 import Back from './Components/background.svelte'
 import quranData from './Assests/quran.json';
@@ -13,6 +13,7 @@ import quranDataEN from './Assests/QuranEN.json';
 import surahsData from './Assests/surahs.json';
 import sunnahData from './Assests/sunnah.json';
 import Frequency from './Components/frequency.svelte';
+import video from '../../assets/Projects/Names/video.mp4'
 
 
     // Reactive statement: automatically updates when $nameId changes
@@ -158,14 +159,34 @@ import Frequency from './Components/frequency.svelte';
         language.set(lang);
     }
 
-      let showPlayer = false;
+    let showPlayer = false;
     let allNamesElement;
     let bottomNameElement;
     let allNamesVisible = false;
     let bottomNameVisible = false;
+    let videoElement;
 
     // Reactive statement to control showPlayer based on both elements
-    $: showPlayer = allNamesVisible && !bottomNameVisible;
+    // $: showPlayer = allNamesVisible && !bottomNameVisible;
+
+     $: showPlayer = true;
+
+    // Sync video with audio player (play/pause)
+    $: if (videoElement) {
+        if ($audioPlaying) {
+            videoElement.play();
+        } else {
+            videoElement.pause();
+        }
+    }
+
+    // Sync video currentTime with audio currentTime
+    $: if (videoElement && $audioCurrentTime !== undefined) {
+        // Only update if the difference is significant to avoid constant updates
+        if (Math.abs(videoElement.currentTime - $audioCurrentTime) > 0.1) {
+            videoElement.currentTime = $audioCurrentTime;
+        }
+    }
 
     onMount(() => {
         const allNamesObserver = new IntersectionObserver(
@@ -295,10 +316,17 @@ It’s a song everyone knows—not because we chose to learn it, but because we 
     {/if}
 </p>
 
-
-    <div class="player-sticky-container2">
-        <Player/>
-    </div>
+<div class="video-container">
+    <video
+        class="names-video"
+        bind:this={videoElement}
+        muted
+        playsinline
+    >
+        <source src={video} type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
 
     <p class="ArabicText">
     {#if $language === 'Arabic'}
@@ -330,13 +358,18 @@ It documents how a familiar list—learned through culture and memory—appears 
 
 {#if showPlayer}
     <div class="player-sticky-container">
-          {#if currentName}
-  <div class="name-display2">
-    <p class="arabic-name">{currentName.arabicName}</p>
-    <span class="separator">|</span>
-    <p class="english-name">{currentName.englishName}</p>
-  </div>
-{/if}
+        <div class="player-wrapper">
+            <Player/>
+        </div>
+        {#if currentName}
+            <div class="name-display-sticky">
+                {#if $language === 'Arabic'}
+                    <p class="current-name-sticky">{currentName.arabicName}</p>
+                {:else}
+                    <p class="current-name-sticky">{currentName.englishName}</p>
+                {/if}
+            </div>
+        {/if}
     </div>
 {/if}
 
@@ -678,8 +711,27 @@ It documents how a familiar list—learned through culture and memory—appears 
 </div> -->
 
 <body>
-
-
+    <div class="conclusion-section">
+        {#if $language === 'Arabic'}
+            <h2 class="section-title-ar">الخاتمة والمنهجية</h2>
+            <p class="ArabicText">
+                في هذا المشروع، استكشفنا أسماء الله الحسنى من خلال منظور البيانات والتصور البصري، محاولين فهم كيفية ظهور هذه الأسماء في النصوص المقدسة وكيف تم جمعها وحفظها عبر التاريخ الإسلامي.
+                <br><br>
+                اعتمدت المنهجية على تحليل القرآن الكريم والسنة النبوية، مع التركيز على تكرار الأسماء وسياقاتها المختلفة. استخدمنا أدوات التصور البصري لإبراز الأنماط والعلاقات بين هذه الأسماء، مما يساعد على فهم أعمق لمعانيها وأهميتها الروحية.
+                <br><br>
+                هذا العمل ليس محاولة لتقديم تفسير ديني نهائي، بل هو دعوة لإعادة اكتشاف هذه الأسماء التي حفظناها قبل أن نفهمها، وللتأمل في عظمة الله من خلال أسمائه الحسنى.
+            </p>
+        {:else}
+            <h2 class="section-title-en">Conclusion and Methodology</h2>
+            <p class="EnglishText">
+                In this project, we explored the Names of Allah through the lens of data visualization, seeking to understand how these names appear in sacred texts and how they have been compiled and preserved throughout Islamic history.
+                <br><br>
+                The methodology was based on analyzing the Quran and Sunnah, focusing on the frequency and different contexts of these names. We used visualization tools to highlight patterns and relationships between the names, enabling a deeper understanding of their meanings and spiritual significance.
+                <br><br>
+                This work is not an attempt to provide a definitive religious interpretation, but rather an invitation to rediscover the names we memorized before we understood them, and to contemplate the greatness of Allah through His beautiful names.
+            </p>
+        {/if}
+    </div>
 </body>
 
 <svelte:body use:style={"background-color: #FDEEDB;"} />
@@ -744,20 +796,52 @@ It documents how a familiar list—learned through culture and memory—appears 
         .player-sticky-container {
         position: fixed;
         bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 50%;
-        max-width: 1000px;
+        left: 0;
+        right: 0;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        background-color: #FDEEDB;
+        padding: 0 3rem;
         z-index: 1000;
-
-        /* box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15); */
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+        margin: 0;
+        height: auto;
+        min-height: 120px;
     }
 
+    .player-wrapper {
+        flex: 1;
+        min-width: 400px;
+        max-width: 800px;
+    }
 
-        .player-sticky-container2 {
+    .player-wrapper :global(.player-container) {
+        max-width: none;
+        padding: 1rem 0;
+        margin: 0;
+    }
 
-        padding: 1rem;
-        /* box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15); */
+    .name-display-sticky {
+        flex: 0 1 auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        min-width: 200px;
+        max-width: 400px;
+    }
+
+    .current-name-sticky {
+        font-family: 'NotoKufiArabic', sans-serif;
+        font-weight: 700;
+        font-size: clamp(1.5rem, 2.5vw, 3rem);
+        color: #266F8C;
+        margin: 0;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
    .language-buttons {
@@ -925,6 +1009,60 @@ It documents how a familiar list—learned through culture and memory—appears 
         text-align: center;
         justify-items: center;
         direction: ltr;
+    }
+
+    .conclusion-section {
+        margin-top: 8%;
+        margin-bottom: 10%;
+        padding: 3rem 0;
+    }
+
+    .section-title-ar {
+        font-family: 'NotoKufiArabic', sans-serif;
+        font-size: 3vw;
+        font-weight: 700;
+        color: #266F8C;
+        text-align: center;
+        margin-bottom: 2rem;
+        direction: rtl;
+    }
+
+    .section-title-en {
+        font-family: 'JawiKufi', sans-serif;
+        font-size: 3vw;
+        font-weight: 700;
+        color: #266F8C;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .conclusion-section .ArabicText {
+        font-size: 1.2vw;
+        line-height: 1.8;
+        text-align: justify;
+    }
+
+    .conclusion-section .EnglishText {
+        font-size: 1.2vw;
+        line-height: 1.8;
+        text-align: justify;
+    }
+
+    .video-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 4rem 0;
+        padding: 0;
+    }
+
+    .names-video {
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+        border: 8px solid #266F8C;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(38, 111, 140, 0.3);
     }
 
 

@@ -6,7 +6,7 @@
     let selectedSong = '../../../../src/assets/Projects/Names/Names1.mp3';
     let isDragging = false;
     let progressBar;
-    import {language, nameId } from '../Stores/misc';
+    import {language, nameId, audioPlaying, audioCurrentTime } from '../Stores/misc';
     import namesData from './names.js';
 
 
@@ -17,11 +17,13 @@
             audio.play();
         }
         isPlaying = !isPlaying;
+        audioPlaying.set(isPlaying);
     }
 
     function handleTimeUpdate() {
         if (!isDragging) {
             currentTime = audio.currentTime;
+            audioCurrentTime.set(currentTime);
             updateNameIdBasedOnTime();
         }
     }
@@ -56,6 +58,7 @@
         const x = event.clientX - rect.left;
         const percentage = x / rect.width;
         audio.currentTime = percentage * duration;
+        audioCurrentTime.set(audio.currentTime);
     }
 
     function handleMouseDown(event) {
@@ -141,7 +144,10 @@
         src={selectedSong}
         on:timeupdate={handleTimeUpdate}
         on:loadedmetadata={handleLoadedMetadata}
-        on:ended={() => isPlaying = false}
+        on:ended={() => {
+            isPlaying = false;
+            audioPlaying.set(false);
+        }}
     />
 </div>
 

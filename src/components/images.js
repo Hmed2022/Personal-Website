@@ -6,6 +6,7 @@ import namesUrl from "../assets/Thumbnails/names.gif";
 export const imageData = [
   {
     url: nbaUrl,
+    rank: 1,
     title: "The Decline of the All-Star game",
     desc: "Data Analysis | Data Vizualisation",
     description:
@@ -15,7 +16,8 @@ export const imageData = [
     tags: "all,svelte,d3,dataviz,story,sql",
   },
   {
-    url: klayUrl,
+    url: namesUrl,
+    rank: 1.5,
     title: "Profanity in Tunisan Rap (Klay BBj)",
     desc: "Data Analysis | Data Vizualisation",
     description:
@@ -26,6 +28,7 @@ export const imageData = [
   },
   {
     url: tunUrl,
+    rank: 2,
     title: "Chronicales of Tunisian banknotes",
     desc: "Infographic | Data Visualization",
     description:
@@ -36,6 +39,7 @@ export const imageData = [
   },
   {
     url: namesUrl,
+    rank: 3,
     title: "Rediscovery of the Names of Allah",
     desc: "Story | Data Visualization",
     description:

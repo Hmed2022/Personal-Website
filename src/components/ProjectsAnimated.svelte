@@ -35,6 +35,15 @@
           buttontag = 'sql';
         }
     }
+
+    // Sort projects by rank (highest rank number first)
+    $: sortedImageData = imageData
+        .slice()
+        .sort((a, b) => {
+            const rankA = a.rank !== undefined ? a.rank : 0;
+            const rankB = b.rank !== undefined ? b.rank : 0;
+            return rankB - rankA;
+        });
 </script>
 
 <div class="buttons">
@@ -52,7 +61,7 @@
 
 {#if show}
 <section>
-    {#each imageData as image, i}
+    {#each sortedImageData as image, i}
     {#if image.show && image.tags.includes(buttontag)}
     <a href={image.href} class="card__link">
         <div class="card__wrapper" transition:fade={{delay: i * 50}}>
