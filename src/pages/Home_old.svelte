@@ -13,7 +13,7 @@
 	import pdfUrl2 from "../assets/CV Detailed- Ahmed Bendaly .pdf"
 	import CurrentImg from "../assets/Current.png"
 	import AboutMe from "../assets/1.png"
-	import PhotoMe from "../assets/PhotoMe.png"
+	import PhotoMe from "../PhotoMe.svg"
 	import ProjectsAnimated from '../components/ProjectsAnimated.svelte';
 
 	import projectPhoto from '../projects.png'
@@ -41,8 +41,7 @@
    Connect with me and like-minded individuals who share similar interests and inspire growth together.</p>
 </Typewriter> -->
 
-    <p id="IntroFirstPage"> Welcome to my personal website , a hub for showcasing my passions, <a class="project" href="/#/projects">Projects</a>, and creative ideas.
-	Let's connect and bring more exciting ideas to life!</p>
+    <p id="IntroFirstPage"> Welcome to my personal website, a place to showcase my passions and <a class="project" href="/#/projects">Projects</a>.</p>
 
 
 <PageTransitions>
@@ -52,8 +51,9 @@
 			<img src="{AboutMe}" alt="About Me">
 		  </div>
 		<p id="AboutMe">
-		My name is Ahmed, a data scientist by profession, a visual designer by passion, and a statistics nerd by confession. I'm interested in basketball, weird stats, and all things <a class="tunisia" href="https://en.wikipedia.org/wiki/Tunisia">Tunisian</a>, you’ll find a touch of my cultural heritage in some of my projects.<br> 
+		My name is Ahmed, I design and code. <br>I'm interested in sports, weird stats, and all things <a class="tunisia" href="https://en.wikipedia.org/wiki/Tunisia" target="_blank" rel="noopener noreferrer">Tunisian</a>. <br> You'll find a touch of my cultural heritage in most of my projects.<br> 
 		<br>
+		If you want to connect, you can reach out to me via <a class="cv" href="mailto:ahmedben@umich.edu">email</a>.
 		<!-- Take a look at my Resume <a class="cv" href="{pdfUrl}" target="_blank" rel="noopener noreferrer" > here</a>! 
 		(detailed <a class="cv" href="{pdfUrl2}" target="_blank" rel="noopener noreferrer" > version </a>) -->
 		</p>
@@ -61,7 +61,9 @@
 	
 	<div class="block-container2">
 		<div class="MyPhoto">
-			<img src="{PhotoMe}" alt="My Photo">
+			<a href="https://www.instagram.com/leghreeb/" target="_blank" rel="noopener noreferrer">
+				<img src="{PhotoMe}" alt="My Photo">
+			</a>
 		</div>
 	</div>
 </div>
@@ -121,7 +123,7 @@
 	}
 
 	.projects img{
-		width: 17%;
+		width: 300px;
 		height: auto;
 	}
 
@@ -258,11 +260,30 @@
   text-align: center;
 	}
 
-	.MyPhoto img{ 
-	margin-top: 40px;	
-	margin-left: 20px;	
-	width: 400px;
+	.MyPhoto img{
+	margin-top: 40px;
+	margin-left: 20px;
+	width: 180px;
 	height: auto;
+	cursor: pointer;
+	animation: rotatePhoto 3s ease-in-out infinite;
+	}
+
+	.MyPhoto img:hover {
+		animation-play-state: paused;
+		transform: rotate(5deg);
+	}
+
+	@keyframes rotatePhoto {
+		0%, 100% {
+			transform: rotate(0deg);
+		}
+		25% {
+			transform: rotate(-5deg);
+		}
+		75% {
+			transform: rotate(5deg);
+		}
 	}
 
 	/* .block-container1 {
@@ -331,7 +352,7 @@
     	color: #707070;
 		font-family: 'Jost', sans-serif;
 		font-weight: 300;
-		font-size: 1.3em;
+		font-size: 1.5em;
 		margin-top: 50px;
 		margin-left: 5%;
 		margin-right: 5%;
@@ -340,6 +361,20 @@
 	.AboutMeIcon img {
     width: 230px;
     height: auto;
+	}
+
+	.projects img{
+		width: 230px;
+		height: auto;
+	}
+
+	.MyPhoto img{
+	margin-left: 20px;
+	margin-bottom: 20px;
+	width: 180px;
+	height: auto;
+	cursor: pointer;
+	animation: rotatePhoto 3s ease-in-out infinite;
 	}
 
 	
@@ -352,12 +387,6 @@
 		margin-top: 22px;
 	}
 
-	.MyPhoto img{ 
-	margin-top: 0;	
-	margin-left: 0;	
-	width: 280px;
-	height: auto;
-	}
 
 	.CuurentProject img {
 

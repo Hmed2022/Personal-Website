@@ -189,6 +189,9 @@ import video from '../../assets/Projects/Names/video.mp4'
     }
 
     onMount(() => {
+        // Scroll to top when component mounts
+        window.scrollTo(0, 0);
+
         const allNamesObserver = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
@@ -284,7 +287,7 @@ import video from '../../assets/Projects/Names/video.mp4'
     </div>
 
     <div class="text">
-        <p class="Reference">By Ahmed Bendaly | December 2025</p> <br>
+        <!-- <p class="Reference">By Ahmed Bendaly | February 2026</p> <br> -->
 
 
         <!-- Test paragraph -->
@@ -364,9 +367,12 @@ It documents how a familiar list—learned through culture and memory—appears 
         {#if currentName}
             <div class="name-display-sticky">
                 {#if $language === 'Arabic'}
-                    <p class="current-name-sticky">{currentName.arabicName}</p>
+                    <p class="current-name-sticky-arabic">{currentName.arabicName}</p>
                 {:else}
-                    <p class="current-name-sticky">{currentName.englishName}</p>
+                    <p class="current-name-sticky-english">{currentName.englishName}</p>
+                {/if}
+                {#if currentName.rank !== undefined}
+                    <span class="name-rank">{currentName.rank}</span>
                 {/if}
             </div>
         {/if}
@@ -780,14 +786,17 @@ It documents how a familiar list—learned through culture and memory—appears 
 
     .ENTitle{
          font-family: 'JawiKufi';
-         color: #266F8C;
+         background-color: #266F8C;
+         padding-top: 2%;
+         color: #FEEEDB;
          font-size: 4vw;
     }
 
     .ArTitle{
         font-family: "Reem Kufi", sans-serif;
         font-weight: 600;
-        color: #266F8C;
+        background-color: #266F8C;
+        color: #FEEEDB;
         font-size: 3vw;
         font-optical-sizing: auto;
         font-style: normal;
@@ -832,7 +841,7 @@ It documents how a familiar list—learned through culture and memory—appears 
         max-width: 400px;
     }
 
-    .current-name-sticky {
+    .current-name-sticky-arabic {
         font-family: 'NotoKufiArabic', sans-serif;
         font-weight: 700;
         font-size: clamp(1.5rem, 2.5vw, 3rem);
@@ -842,6 +851,28 @@ It documents how a familiar list—learned through culture and memory—appears 
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        direction: rtl;
+    }
+
+    .current-name-sticky-english {
+        font-family: 'JawiKufi', sans-serif;
+        font-weight: 700;
+        font-size: clamp(1.5rem, 2.5vw, 3rem);
+        color: #266F8C;
+        margin: 0;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .name-rank {
+        font-family: 'JawiKufi', sans-serif;
+        font-weight: 700;
+        font-size: clamp(1.8rem, 3vw, 3.5rem);
+        color: #EEDCC9;
+        margin-left: 2rem;
+        flex-shrink: 0;
     }
 
    .language-buttons {
@@ -923,14 +954,14 @@ It documents how a familiar list—learned through culture and memory—appears 
     font-size: 2.5vw;
     direction: rtl;
     margin: 0;
-    color: #603D25;
+    color: #266F8C;
     order: 3; /* appears on the right */
   }
 
   .separator {
     order: 2; /* appears in center */
      font-size: 6vw;
-    color: #603D25;
+    color: #266F8C;
     position: absolute; /* position it absolutely */
     left: 50%; /* center horizontally */
     transform: translateX(-50%); /* adjust for element width */
@@ -939,7 +970,7 @@ It documents how a familiar list—learned through culture and memory—appears 
   .english-name {
     font-family: 'JawiKufi', sans-serif;
      font-size: 5vw;
-    color: #603D25;
+    color: #266F8C;
     margin: 0;
     order: 1; /* appears on the left */
   }
@@ -948,7 +979,7 @@ It documents how a familiar list—learned through culture and memory—appears 
     font-family: 'JawiKufi', sans-serif;
      font-size: 4vw;
      font-weight: 900;
-    color: #603D25;
+    color: #266F8C;
     margin: 0;
     order: 3; /* appears on the left */
   }
@@ -988,8 +1019,8 @@ It documents how a familiar list—learned through culture and memory—appears 
         text-align: center;
     }
     body {
-        margin-right: 25%;
-        margin-left:25%
+        margin-right: 25vw;
+        margin-left:25vw
     }
 
     .frequency-section {
