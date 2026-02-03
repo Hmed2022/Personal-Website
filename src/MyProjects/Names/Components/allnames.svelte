@@ -1,5 +1,5 @@
 <script>
-    import { nameId, filterQuran, filterDerived, filterHadith, showDisputed } from '../Stores/misc';
+    import { nameId, filterQuran, filterDerived, filterHadith, showDisputed, seekToTime } from '../Stores/misc';
     import  names  from './names.js';
 
     const BASE   = '#266F8C';
@@ -85,11 +85,17 @@
     function handleClick(id) {
         console.log('Group clicked:', id);
         activeGroup = id;
-        
+
         // 1. Update the store with the clicked id
         nameId.set(id);
-        
-        // 2. The name display will automatically update through the reactive statement
+
+        // 2. Seek to the name's timestamp in the audio player
+        const name = names[id];
+        if (name && name.timestamp1 !== undefined && name.timestamp1 !== null) {
+            seekToTime.set(name.timestamp1);
+        }
+
+        // 3. The name display will automatically update through the reactive statement
         updateFills();
     }
 

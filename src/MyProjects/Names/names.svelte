@@ -243,12 +243,12 @@ import video from '../../assets/Projects/Names/video.mp4'
 <!-- Language Buttons -->
 
  <div class="language-buttons2">
-    {#if $language === 'Arabic'}
+    <!-- {#if $language === 'Arabic'}
         <p class="language-label-arabic">اختر لغة</p>
     {:else}
         <p class="language-label-english">Choose a language</p>
-    {/if}
-    <div style="display: flex; gap: 0.5rem;">
+    {/if} -->
+    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
         <button
             class:active={$language === 'English'}
             on:click={() => setLanguage('English')}
@@ -280,7 +280,7 @@ import video from '../../assets/Projects/Names/video.mp4'
     <div class="title">
     <Title/>
       {#if $language === 'Arabic'}
-    <h1 class='ArTitle'> الأسماء التي حفظناها قبل أن نفهمها</h1>
+    <h1 class='ArTitle'>الأَسْمَاءُ الَّتِي حَفِظْنَاهَا قَبْلَ أَنْ نَفْهَمَهَا</h1>
     {:else}
      <h1 class='ENTitle'> The Names We Memorized Before We Understood</h1>
     {/if}
@@ -292,29 +292,17 @@ import video from '../../assets/Projects/Names/video.mp4'
 
         <!-- Test paragraph -->
 <p class="ArabicText">
-    {#if $language === 'Arabic'}
-       يُقال كثيرًا إنَّ عِظَم الشيء يُعرَف بكثرة أسمائه. وفي الإسلام، الله جلّ جلاله هو الأعظم، وتنعكس أسماؤه على كماله. فكلّ اسم من أسماء الله الحُسنى يصف صفةً إلهية سامية — كالرَّحمن، القدير، العليم، السلام، القيّوم، النور. فهذه الأسماء ليست عناوين جامدة، بل هي دعوات للتعرّف إلى حقيقة الله ومعاني صفاته.
-
-وقد علّم النبي محمد ﷺ:
-
-«إنّ لله تسعةً وتسعين اسمًا، مائةً إلا واحدًا، مَن أحصاها دخل الجنة.»
-(صحيح البخاري وصحيح مسلم)
-
-في هذا المشروع سنقوم باستكشاف هذه الأسماء من مصادرها الأصيلة — القرآن الكريم، والسُّنّة النبوية، وتراث العلماء — ونتعرّف كيف جُمِعت، وفُسِّرت، وحُفظت عبر التاريخ الإسلامي. كما سنُنشئ تصوّرات بصرية توضّح الأنماط والتكرارات والمعاني والروابط بين هذه الأسماء.
-
-هذا ليس بحثًا عقديًّا معمّقًا، بل هو رحلة اكتشاف موجَّهة:
-✨ من أين جاءت هذه الأسماء؟
-✨ كم مرّة وردت في القرآن الكريم؟
-✨ ماذا تكشف لنا عن حقيقة الله وصفاته؟
-✨ وكيف يمكن للبيانات والتصوّر البصري أن يعمّق فهمنا لها؟
-
-ولكثيرٍ من المسلمين، تكون هذه الأسماء مألوفة قبل أن تُدرَس رسميًا؛ تُتعلَّم من الأسرة، ومن الثقافة، ومن الأناشيد خصوصًا. ففي تونس — على سبيل المثال — يكاد يكون الأمر عادةً رمضانية: قبل لحظات من الإفطار، يصدح نشيد أسماء الله الحُسنى في المنازل، ليصبح جزءًا من الذاكرة والروح والهوية.
+    {#if $language === 'Arabic'}إنه اليوم الأول من رمضان في تونس. <br><br>
+صمنا طوال النهار، والآن نضع اللمسات الأخيرة على مائدة الإفطار. على شاشة التلفاز، يُتلى القرآن بصوت علي البرّاك، إشارة مألوفة بأن الإفطار لم يبقَ عليه سوى دقائق. تغرب الشمس. يرتفع الأذان — نداء من المسجد القريب، وآخر من بعيد، وثالث من التلفاز، تتداخل جميعها.
+نُفطر على التمر والماء. بعد يوم طويل من الصيام، تلك الرشفة الأولى مُرضية للغاية. <br><br>
+ثم تبدأ أغنية مألوفة في الخلفية. <br><br>
+إنها أغنية يعرفها الجميع — ليس لأننا اخترنا تعلّمها، بل لأننا نسمعها كل يوم لثلاثين يومًا، سنة بعد سنة. يملأ صوت لطفي بوشناق المميز الغرفة، حاملًا ترنيمة إيقاعية لأسماء الله الحُسنى. أتذكر أنني كنت أُردد معها وأنا أقطع الليمون والخبز الفرنسي.
     {:else}
-        <p class=EnglishText>It’s the first day of Ramadan in Tunisia. <br><br>
-We’ve been fasting all day, and now we’re making the final touches to the dining table. On TV, the Qur’an is being recited by Ali Al-Barrak, a familiar signal that iftar is only minutes away. The sun sets. The adhan rises—one call from the nearby mosque, another from farther away, and a third from the television, all overlapping.
+        <p class=EnglishText>It's the first day of Ramadan in Tunisia. <br><br>
+We've been fasting all day, and now we're making the final touches to the dining table. On TV, the Qur'an is being recited by Ali Al-Barrak, a familiar signal that iftar is only minutes away. The sun sets. The adhan rises—one call from the nearby mosque, another from farther away, and a third from the television, all overlapping.
 We break our fast with dates and water. After a long day of fasting, that first sip is deeply satisfying. <br><br>
 Then a familiar song begins to play in the background. <br><br>
-It’s a song everyone knows—not because we chose to learn it, but because we hear it every day for thirty days, year after year. The unmistakable voice of Lotfi Bouchnak fills the room, carrying a rhythmic chant of the Names of Allah. I remember singing along while cutting lemons and baguettes.
+It's a song everyone knows—not because we chose to learn it, but because we hear it every day for thirty days, year after year. The unmistakable voice of Lotfi Bouchnak fills the room, carrying a rhythmic chant of the Names of Allah. I remember singing along while cutting lemons and baguettes.
  </p>
     {/if}
 </p>
@@ -333,18 +321,23 @@ It’s a song everyone knows—not because we chose to learn it, but because we 
 
     <p class="ArabicText">
     {#if $language === 'Arabic'}
-       يُقال كثيرًا إنَّ عِظَم الشيء يُعرَف بكثرة أسمائه. وفي الإسلام، الله جلّ جلاله هو الأعظم، وتنعكس أسماؤه على كماله. فكلّ اسم من أسماء الله الحُسنى يصف صفةً إلهية سامية — كالرَّحمن، القدير، العليم، السلام، القيّوم، النور. فهذه الأسماء ليست عناوين جامدة، بل هي دعوات للتعرّف إلى حقيقة الله ومعاني صفاته.
-ولكثيرٍ من المسلمين، تكون هذه الأسماء مألوفة قبل أن تُدرَس رسميًا؛ تُتعلَّم من الأسرة، ومن الثقافة، ومن الأناشيد خصوصًا. ففي تونس — على سبيل المثال — يكاد يكون الأمر عادةً رمضانية: قبل لحظات من الإفطار، يصدح نشيد أسماء الله الحُسنى في المنازل، ليصبح جزءًا من الذاكرة والروح والهوية.
+الأغنية تبعث على الحنين. تُشير إلى العائلة، والاجتماع، واللحظة التي نأكل فيها أخيرًا معًا. لكن بعد سنوات، وأنا أستمع إليها مجددًا، أدركت شيئًا: لقد تعلّمنا هذه الأسماء قبل أن نفهمها بوقت طويل.<br><br>
+يبدأ هذا المشروع من هناك — بالعودة إلى الأسماء التي حفظناها بالصوت، وإلقاء نظرة أعمق عليها من خلال النص نفسه.
+<br><br>
+<i style='font-weight:300'>ملاحظة: لا يسعى هذا المشروع إلى تحديد أسماء الله الحُسنى "الصحيحة" التسعة والتسعين، ولا إلى تصحيح الممارسة الدينية أو تقديم تفسير عقدي.
+إنه يوثّق كيف تبدو قائمة مألوفة — تعلّمناها من الثقافة والذاكرة — عند فحصها مقابل النص القرآني، باستخدام منهج بسيط وشفاف.</i>
+<br><br>
+فيما يلي قائمة الأسماء، سيتم تمييز كل اسم عند ذكره في الأغنية،
     {:else}
         <p class=EnglishText>
-            
+
             The song is nostalgic. It signals family, gathering, and the moment we finally eat together. But years later, listening to it again, I realized something: we learned these names long before we understood them.<br><br> The beauty is that all Tunisians share the same song, The same childhood memory But rarely stop to ask how it was assembled.
 This project begins there—by returning to the names we memorized by sound, and taking a closer look at them through the text itself.
 <br><br>
-<i style='font-weight:300'>Please Note: This project does not attempt to define the “correct” 99 Names of Allah, nor to correct religious practice or offer theological interpretation.
-It documents how a familiar list—learned through culture and memory—appears when examined against the Qur’anic text, using a simple and transparent method.
-       </i> 
-    
+<i style='font-weight:300'>Please Note: This project does not attempt to define the "correct" 99 Names of Allah, nor to correct religious practice or offer theological interpretation.
+It documents how a familiar list—learned through culture and memory—appears when examined against the Qur'anic text, using a simple and transparent method.
+       </i>
+
     <br> <br>
     Below is the list of the Names, each Name will be highlighted when it is mentioned in the song,</p>
     {/if}
@@ -361,6 +354,11 @@ It documents how a familiar list—learned through culture and memory—appears 
 
 {#if showPlayer}
     <div class="player-sticky-container">
+        {#if currentName && currentName.rank !== undefined}
+            <div class="rank-display-sticky">
+                <span class="name-rank">{currentName.rank}</span>
+            </div>
+        {/if}
         <div class="player-wrapper">
             <Player/>
         </div>
@@ -370,9 +368,6 @@ It documents how a familiar list—learned through culture and memory—appears 
                     <p class="current-name-sticky-arabic">{currentName.arabicName}</p>
                 {:else}
                     <p class="current-name-sticky-english">{currentName.englishName}</p>
-                {/if}
-                {#if currentName.rank !== undefined}
-                    <span class="name-rank">{currentName.rank}</span>
                 {/if}
             </div>
         {/if}
@@ -719,7 +714,7 @@ It documents how a familiar list—learned through culture and memory—appears 
 <body>
     <div class="conclusion-section">
         {#if $language === 'Arabic'}
-            <h2 class="section-title-ar">الخاتمة والمنهجية</h2>
+            <h2 class="section-title-ar">الخَاتِمَةُ وَالْمَنْهَجِيَّةُ</h2>
             <p class="ArabicText">
                 في هذا المشروع، استكشفنا أسماء الله الحسنى من خلال منظور البيانات والتصور البصري، محاولين فهم كيفية ظهور هذه الأسماء في النصوص المقدسة وكيف تم جمعها وحفظها عبر التاريخ الإسلامي.
                 <br><br>
@@ -745,7 +740,12 @@ It documents how a familiar list—learned through culture and memory—appears 
 
 
 <style>
-      @font-face {
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Quicksand:wght@300..700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+    @font-face {
     font-family: 'NotoKufiArabic';
     src: url('../Assests/NotoKufiArabic-Regular.ttf') format('truetype');
     font-weight: 400;
@@ -769,11 +769,6 @@ It documents how a familiar list—learned through culture and memory—appears 
     font-style: normal;
   }
 
-    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Quicksand:wght@300..700&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-
         .Reference{
         color: #266F8C;
         /* font-weight: 200; */
@@ -793,11 +788,12 @@ It documents how a familiar list—learned through culture and memory—appears 
     }
 
     .ArTitle{
-        font-family: "Reem Kufi", sans-serif;
+        font-family: 'NotoKufiArabic', sans-serif;
         font-weight: 600;
         background-color: #266F8C;
         color: #FEEEDB;
-        font-size: 3vw;
+        margin-top: 5%;
+        font-size: 2vw;
         font-optical-sizing: auto;
         font-style: normal;
     }
@@ -810,41 +806,50 @@ It documents how a familiar list—learned through culture and memory—appears 
         width: 100vw;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         gap: 2rem;
         background-color: #FDEEDB;
-        padding: 0 3rem;
+        padding: 0.5rem 2rem;
         z-index: 1000;
         box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
         margin: 0;
         height: auto;
-        min-height: 120px;
+        min-height: 80px;
+    }
+
+    .rank-display-sticky {
+        flex: 0 0 80px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
     }
 
     .player-wrapper {
         flex: 1;
-        min-width: 400px;
-        max-width: 800px;
+        display: flex;
+        justify-content: center;
+        max-width: 600px;
     }
 
     .player-wrapper :global(.player-container) {
         max-width: none;
-        padding: 1rem 0;
+        padding: 0.5rem 0;
         margin: 0;
+        width: 100%;
     }
 
     .name-display-sticky {
-        flex: 0 1 auto;
+        flex: 0 0 auto;
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        min-width: 200px;
-        max-width: 400px;
+        min-width: 150px;
     }
 
     .current-name-sticky-arabic {
         font-family: 'NotoKufiArabic', sans-serif;
         font-weight: 700;
-        font-size: clamp(1.5rem, 2.5vw, 3rem);
+        font-size: 2rem;
         color: #266F8C;
         margin: 0;
         text-align: right;
@@ -857,7 +862,7 @@ It documents how a familiar list—learned through culture and memory—appears 
     .current-name-sticky-english {
         font-family: 'JawiKufi', sans-serif;
         font-weight: 700;
-        font-size: clamp(1.5rem, 2.5vw, 3rem);
+        font-size: 2rem;
         color: #266F8C;
         margin: 0;
         text-align: right;
@@ -869,9 +874,8 @@ It documents how a familiar list—learned through culture and memory—appears 
     .name-rank {
         font-family: 'JawiKufi', sans-serif;
         font-weight: 700;
-        font-size: clamp(1.8rem, 3vw, 3.5rem);
-        color: #EEDCC9;
-        margin-left: 2rem;
+        font-size: 2.5rem;
+        color: #8B7355; /* darker brown shade */
         flex-shrink: 0;
     }
 
@@ -880,8 +884,8 @@ It documents how a familiar list—learned through culture and memory—appears 
     top: 0; /* This is essential for sticky to work */
     left:0;
     display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    gap: 1vw; /* 1rem */
+    margin-bottom: 2vw; /* 2rem */
     padding: 3vw; /* Add some padding for better appearance */
     z-index: 100; /* Ensures buttons stay on top of other content */
 }
@@ -892,7 +896,7 @@ It documents how a familiar list—learned through culture and memory—appears 
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 0.5rem;
+    gap: 0.5vw; /* 0.5rem */
     z-index: 1000;
     float: right;
     margin-left: auto;
@@ -902,24 +906,24 @@ It documents how a familiar list—learned through culture and memory—appears 
 }
 
   .language-label-english {
-    margin: 0 0 0.3rem 0;
+    margin: 0 0 0.3vw 0; /* 0 0 0.3rem 0 */
     font-size: 2vw;
     color: #266F8C;
     font-family: 'JawiKufi', sans-serif;
   }
 
   .language-label-arabic {
-    margin: 0 0 0.3rem 0;
+    margin: 0 0 0.3vw 0; /* 0 0 0.3rem 0 */
     font-size: 1.7vw;
     color: #266F8C;
-    font-family: "Reem Kufi", sans-serif;
+    font-family: 'NotoKufiArabic', sans-serif;
     direction: rtl;
   }
 
   .language-buttons2 button {
-    padding: 0.5rem 1rem;
+    padding: 0.5vw 1vw; /* 0.5rem 1rem */
     font-size: 2vw;
-    border-radius: 5px;
+    border-radius: 0.3vw; /* 5px */
     cursor: pointer;
     transition: all 0.3s ease;
   }
@@ -992,7 +996,7 @@ It documents how a familiar list—learned through culture and memory—appears 
     color: #266F8C;
 
     background-color: #FDEDDB;
-   border: 2px solid #FDEDDB;
+   border: 0.125vw solid #FDEDDB; /* 2px */
 
     }
 
@@ -1036,8 +1040,10 @@ It documents how a familiar list—learned through culture and memory—appears 
 
     .EnglishText{
          font-family: "Quicksand", sans-serif;
+         font-weight: 900;
         font-size: 1.1vw;
         text-align: center;
+        color:#276F8C ;
         justify-items: center;
         direction: ltr;
     }
@@ -1045,16 +1051,17 @@ It documents how a familiar list—learned through culture and memory—appears 
     .conclusion-section {
         margin-top: 8%;
         margin-bottom: 10%;
-        padding: 3rem 0;
+        padding: 3vw 0; /* 3rem 0 */
     }
 
     .section-title-ar {
         font-family: 'NotoKufiArabic', sans-serif;
-        font-size: 3vw;
+        font-size: 2vw;
         font-weight: 700;
-        color: #266F8C;
+        background-color: #266F8C;
+        color: #FEEEDB;
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: 2vw; /* 2rem */
         direction: rtl;
     }
 
@@ -1062,12 +1069,14 @@ It documents how a familiar list—learned through culture and memory—appears 
         font-family: 'JawiKufi', sans-serif;
         font-size: 3vw;
         font-weight: 700;
-        color: #266F8C;
+        background-color: #266F8C;
+        padding-top:2%;
+        color: #FEEEDB;
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: 2vw; /* 2rem */
     }
 
-    .conclusion-section .ArabicText {
+    /* .conclusion-section .ArabicText {
         font-size: 1.2vw;
         line-height: 1.8;
         text-align: justify;
@@ -1077,23 +1086,23 @@ It documents how a familiar list—learned through culture and memory—appears 
         font-size: 1.2vw;
         line-height: 1.8;
         text-align: justify;
-    }
+    } */
 
     .video-container {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 4rem 0;
+        margin: 4vw 0; /* 4rem 0 */
         padding: 0;
     }
 
     .names-video {
         width: 100%;
-        max-width: 800px;
+        max-width: 50vw; /* 800px */
         height: auto;
-        border: 8px solid #266F8C;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(38, 111, 140, 0.3);
+        border: 0.5vw solid #266F8C; /* 8px */
+        border-radius: 0.5vw; /* 8px */
+        box-shadow: 0 0.25vw 0.75vw rgba(38, 111, 140, 0.3); /* 0 4px 12px */
     }
 
 
@@ -1111,7 +1120,7 @@ It documents how a familiar list—learned through culture and memory—appears 
         direction: rtl;
         text-align: center;
         color: #603D25;
-        margin: 2rem 0;
+        margin: 2vw 0; /* 2rem 0 */
         line-height: 1.8;
     }
 
@@ -1122,21 +1131,21 @@ It documents how a familiar list—learned through culture and memory—appears 
         direction: ltr;
         text-align: center;
         color: #603D25;
-        margin: 2rem 0;
+        margin: 2vw 0; /* 2rem 0 */
         line-height: 1.8;
     }
 
     /* Source Information */
     .source-info {
-        margin-top: 2rem;
+        margin-top: 2vw; /* 2rem */
         width: 100%;
     }
 
     .source-columns {
         display: flex;
         justify-content: center;
-        gap: 2rem;
-        margin-bottom: 2rem;
+        gap: 2vw; /* 2rem */
+        margin-bottom: 2vw; /* 2rem */
     }
 
     .source-column {
@@ -1186,20 +1195,20 @@ It documents how a familiar list—learned through culture and memory—appears 
     /* Quran Carousel */
     .quran-carousel {
         width: 100%;
-        margin: 2rem 0;
+        margin: 2vw 0; /* 2rem 0 */
     }
 
     .carousel-content {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 1rem;
+        gap: 1vw; /* 1rem */
         position: relative;
     }
 
     .carousel-arrow {
-        width: 50px;
-        height: 50px;
+        width: 3.125vw; /* 50px */
+        height: 3.125vw; /* 50px */
         border-radius: 50%;
         background-color: #266F8C;
         border: none;
@@ -1223,36 +1232,36 @@ It documents how a familiar list—learned through culture and memory—appears 
     }
 
     .carousel-arrow svg {
-        width: 24px;
-        height: 24px;
+        width: 1.5vw; /* 24px */
+        height: 1.5vw; /* 24px */
         color: #FDEDDB;
     }
 
     .verse-container {
         flex: 1;
-        max-width: 800px;
+        max-width: 50vw; /* 800px */
         background-color: rgba(38, 111, 140, 0.05);
-        padding: 2rem;
-        border-radius: 12px;
-        border: 2px solid #266F8C;
+        padding: 2vw; /* 2rem */
+        border-radius: 0.75vw; /* 12px */
+        border: 0.125vw solid #266F8C; /* 2px */
     }
 
     .verse-container-hadith {
         flex: 1;
-        max-width: 800px;
+        max-width: 50vw; /* 800px */
         background-color: rgba(128, 90, 168, 0.05);
-        padding: 2rem;
-        border-radius: 12px;
-        border: 2px solid #805AA8;
+        padding: 2vw; /* 2rem */
+        border-radius: 0.75vw; /* 12px */
+        border: 0.125vw solid #805AA8; /* 2px */
     }
 
     .verse-container-derived {
         flex: 1;
-        max-width: 800px;
+        max-width: 50vw; /* 800px */
         background-color: rgba(76, 140, 76, 0.05);
-        padding: 2rem;
-        border-radius: 12px;
-        border: 2px solid #4C8C4C;
+        padding: 2vw; /* 2rem */
+        border-radius: 0.75vw; /* 12px */
+        border: 0.125vw solid #4C8C4C; /* 2px */
     }
 
     .quran-text {
@@ -1263,15 +1272,15 @@ It documents how a familiar list—learned through culture and memory—appears 
         text-align: center;
         color: #603D25;
         line-height: 2.5;
-        margin: 0 0 1.5rem 0;
+        margin: 0 0 1.5vw 0; /* 0 0 1.5rem 0 */
     }
 
     .quran-text :global(.highlighted-name) {
         font-weight: 700;
         color: #266F8C;
         background-color: rgba(171, 138, 126, 0.2);
-        padding: 0.2em 0.4em;
-        border-radius: 4px;
+        padding: 0.2vw 0.4vw; /* 0.2em 0.4em */
+        border-radius: 0.25vw; /* 4px */
     }
 
     .verse-reference {
@@ -1280,7 +1289,7 @@ It documents how a familiar list—learned through culture and memory—appears 
         direction: rtl;
         text-align: center;
         color: #266F8C;
-        margin: 0.5rem 0;
+        margin: 0.5vw 0; /* 0.5rem 0 */
     }
 
     .translation-text {
@@ -1293,7 +1302,7 @@ It documents how a familiar list—learned through culture and memory—appears 
         font-size: 1.2vw;
         text-align: center;
         color: #AB8A7E;
-        margin: 0.5rem 0 0 0;
+        margin: 0.5vw 0 0 0; /* 0.5rem 0 0 0 */
         direction: ltr;
     }
 
@@ -1307,33 +1316,33 @@ It documents how a familiar list—learned through culture and memory—appears 
     .filter-section {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
-        margin: 2rem 0;
-        padding: 1.5rem;
+        gap: 1vw; /* 1rem */
+        margin: 2vw 0; /* 2rem 0 */
+        padding: 1.5vw; /* 1.5rem */
         background-color: rgba(171, 138, 126, 0.1);
-        border-radius: 8px;
+        border-radius: 0.5vw; /* 8px */
     }
 
     .filter-checkbox {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
-        padding: 0.75rem 1rem;
-        border-radius: 6px;
+        gap: 0.75vw; /* 0.75rem */
+        padding: 0.75vw 1vw; /* 0.75rem 1rem */
+        border-radius: 0.375vw; /* 6px */
         cursor: pointer;
         transition: all 0.2s;
         font-family: 'Nunito', sans-serif;
-        font-size: 1.1rem;
+        font-size: 1.1vw; /* 1.1rem */
         font-weight: 500;
     }
 
     .filter-checkbox:hover {
-        transform: translateX(5px);
+        transform: translateX(0.3vw); /* 5px */
     }
 
     .quran-filter {
         background-color: rgba(38, 111, 140, 0.15);
-        border: 2px solid #266F8C;
+        border: 0.125vw solid #266F8C; /* 2px */
     }
 
     .quran-filter:hover {
@@ -1342,7 +1351,7 @@ It documents how a familiar list—learned through culture and memory—appears 
 
     .derived-filter {
         background-color: rgba(76, 140, 76, 0.15);
-        border: 2px solid #4C8C4C;
+        border: 0.125vw solid #4C8C4C; /* 2px */
     }
 
     .derived-filter:hover {
@@ -1351,7 +1360,7 @@ It documents how a familiar list—learned through culture and memory—appears 
 
     .hadith-filter {
         background-color: rgba(128, 90, 168, 0.15);
-        border: 2px solid #805AA8;
+        border: 0.125vw solid #805AA8; /* 2px */
     }
 
     .hadith-filter:hover {
@@ -1359,8 +1368,8 @@ It documents how a familiar list—learned through culture and memory—appears 
     }
 
     .filter-checkbox input[type="checkbox"] {
-        width: 20px;
-        height: 20px;
+        width: 1.25vw; /* 20px */
+        height: 1.25vw; /* 20px */
         cursor: pointer;
         accent-color: #603D25;
     }
@@ -1386,35 +1395,35 @@ It documents how a familiar list—learned through culture and memory—appears 
     .filter-section-arabic {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
-        margin: 2rem 0;
-        padding: 1.5rem;
+        gap: 1vw; /* 1rem */
+        margin: 2vw 0; /* 2rem 0 */
+        padding: 1.5vw; /* 1.5rem */
         background-color: rgba(171, 138, 126, 0.1);
-        border-radius: 8px;
+        border-radius: 0.5vw; /* 8px */
         direction: rtl;
     }
 
     .filter-checkbox-arabic {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
-        padding: 0.75rem 1rem;
-        border-radius: 6px;
+        gap: 0.75vw; /* 0.75rem */
+        padding: 0.75vw 1vw; /* 0.75rem 1rem */
+        border-radius: 0.375vw; /* 6px */
         cursor: pointer;
         transition: all 0.2s;
         font-family: 'NotoKufiArabic', sans-serif;
-        font-size: 1.1rem;
+        font-size: 1.1vw; /* 1.1rem */
         font-weight: 500;
         direction: rtl;
     }
 
     .filter-checkbox-arabic:hover {
-        transform: translateX(-5px);
+        transform: translateX(-0.3vw); /* -5px */
     }
 
     .filter-checkbox-arabic input[type="checkbox"] {
-        width: 20px;
-        height: 20px;
+        width: 1.25vw; /* 20px */
+        height: 1.25vw; /* 20px */
         cursor: pointer;
         accent-color: #603D25;
     }
@@ -1422,4 +1431,105 @@ It documents how a familiar list—learned through culture and memory—appears 
     .filter-checkbox-arabic span {
         color: #603D25;
     }
+
+
+    	@media (max-width: 768px) {
+
+        body {
+            margin-right: 10vw;
+            margin-left: 10vw
+        }
+
+        .ArabicText {
+            font-size: 2.5vw; /* was 1vw */
+        }
+
+        .EnglishText {
+            font-size: 2.5vw; /* was 1.1vw */
+        }
+
+        p {
+            font-size: 2.5vw; /* was 1vw */
+        }
+
+        /* Current name display */
+        .english-name {
+            font-size: 6vw; /* was 5vw */
+        }
+
+        .arabic-name {
+            font-size: 5vw; /* was 2.5vw */
+        }
+
+        .english-mean {
+            font-size: 5vw; /* was 4vw */
+        }
+
+        /* Description sections */
+        .description-arabic {
+            font-size: 2.5vw; /* was 1.4vw */
+        }
+
+        .description-english {
+            font-size: 2.5vw; /* was 1.4vw */
+        }
+
+        /* Source labels */
+        .source-label {
+            font-size: 3vw; /* was 2vw */
+        }
+
+        .source-label-english {
+            font-size: 3vw; /* was 2vw */
+        }
+
+        .frequency-text {
+            font-size: 3vw; /* was 2vw */
+        }
+
+        .frequency-text-english {
+            font-size: 3vw; /* was 2vw */
+        }
+
+        /* Carousel / Quran verse */
+        .quran-text {
+            font-size: 3vw; /* was 1.8vw */
+        }
+
+        .verse-reference {
+            font-size: 2.5vw; /* was 1.4vw */
+        }
+
+        .verse-counter {
+            font-size: 2.5vw; /* was 1.2vw */
+        }
+
+        .carousel-arrow {
+            width: 6vw; /* was 3.125vw */
+            height: 6vw; /* was 3.125vw */
+        }
+
+        .carousel-arrow svg {
+            width: 3vw; /* was 1.5vw */
+            height: 3vw; /* was 1.5vw */
+        }
+
+        /* Filter checkboxes */
+        .filter-checkbox {
+            font-size: 2.5vw; /* was 1.1vw */
+            padding: 1.5vw 2vw;
+        }
+
+        .filter-checkbox-arabic {
+            font-size: 2.5vw; /* was 1.1vw */
+            padding: 1.5vw 2vw;
+        }
+
+        .filter-checkbox input[type="checkbox"],
+        .filter-checkbox-arabic input[type="checkbox"] {
+            width: 3vw;
+            height: 3vw;
+        }
+
+      }
 </style>

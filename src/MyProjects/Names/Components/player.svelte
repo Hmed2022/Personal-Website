@@ -6,8 +6,16 @@
     let selectedSong = '../../../../src/assets/Projects/Names/Names1.mp3';
     let isDragging = false;
     let progressBar;
-    import {language, nameId, audioPlaying, audioCurrentTime } from '../Stores/misc';
+    import {language, nameId, audioPlaying, audioCurrentTime, seekToTime } from '../Stores/misc';
     import namesData from './names.js';
+
+    // Subscribe to seekToTime to jump to a specific timestamp when a name is clicked
+    $: if ($seekToTime !== null && audio) {
+        audio.currentTime = $seekToTime;
+        currentTime = $seekToTime;
+        audioCurrentTime.set($seekToTime);
+        seekToTime.set(null); // Reset after seeking
+    }
 
 
     function togglePlay() {
@@ -172,16 +180,16 @@
     .player-container {
         display: flex;
         align-items: center;
-        gap: 2rem;
-        padding: 2rem;
+        gap: 1.5vw; /* 1.5rem */
+        padding: 1vw; /* 1rem */
         background-color: none;
-        max-width: 1200px;
-        /* margin: 2rem auto; */
+        max-width: 100%;
+        width: 100%;
     }
-    
+
     .play-button {
-        width: 80px;
-        height: 80px;
+        width: 3.75vw; /* 60px */
+        height: 3.75vw; /* 60px */
         border-radius: 50%;
         background-color: #266F8C;
         border: none;
@@ -192,66 +200,64 @@
         transition: transform 0.2s;
         flex-shrink: 0;
     }
-    
+
     .play-button:hover {
         transform: scale(1.05);
     }
-    
+
     .play-button svg {
-        width: 36px;
-        height: 36px;
+        width: 1.75vw; /* 28px */
+        height: 1.75vw; /* 28px */
         color: #FDEDDB;
     }
-    
+
     .controls {
         flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 0.5vw; /* 0.5rem */
     }
 
     .progress-container {
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: 1vw; /* 1rem */
     }
-    
+
     .time-display {
         font-family: 'JawiKufi', sans-serif;
-        font-size: 2vw;
+        font-size: 1.8vw; /* 1.8rem */
         color: #266F8C;
         font-weight: 500;
-        min-width: 45px;
-        margin-bottom: -1vw;
+        min-width: 3.75vw; /* 60px */
         text-align: center;
     }
-    
+
     .progress-bar {
         position: relative;
         flex: 1;
-        height: 12px;
+        height: 0.625vw; /* 10px */
         background-color: #d0d0d0;
-        border-radius: 6px;
+        border-radius: 0.3vw; /* 5px */
         cursor: pointer;
-        overflow: hidden;
     }
-    
+
     .progress-fill {
         position: absolute;
         top: 0;
         left: 0;
         height: 100%;
         background-color: #AB8A7E;
-        border-radius: 6px;
+        border-radius: 0.3vw; /* 5px */
         transition: width 0.1s linear;
     }
-    
+
     .progress-handle {
         position: absolute;
         top: 50%;
         transform: translate(-50%, -50%);
-        width: 20px;
-        height: 20px;
+        width: 1.125vw; /* 18px */
+        height: 1.125vw; /* 18px */
         background-color: #266F8C;
         border-radius: 50%;
         transition: left 0.1s linear;

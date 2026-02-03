@@ -8,3 +8,4 @@ export const filterHadith = writable(false);
 export const showDisputed = writable(false);
 export const audioPlaying = writable(false);
 export const audioCurrentTime = writable(0);
+export const seekToTime = writable(null);
