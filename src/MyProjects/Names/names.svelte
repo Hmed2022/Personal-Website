@@ -287,7 +287,9 @@ import video from '../../assets/Projects/Names/video.mp4'
     </div>
 
     <div class="text">
-        <!-- <p class="Reference">By Ahmed Bendaly | February 2026</p> <br> -->
+        <div class="reference-wrapper">
+            <p class="Reference">By Ahmed Bendaly | February 2026</p>
+        </div> <br>
 
 
         <!-- Test paragraph -->
@@ -770,13 +772,21 @@ It documents how a familiar list—learned through culture and memory—appears 
   }
 
         .Reference{
-        color: #266F8C;
-        /* font-weight: 200; */
+        color: #FEEEDB;
+        background-color: #AC8B7E;
         text-align: center;
         margin-top: 0;
         margin-bottom: 0;
-        font-family: 'JawiKufi';
-        font-size: 3vw;
+        font-weight: 500;
+        font-family: "Quicksand", sans-serif;
+        font-size: 1vw;
+        display: inline-block; /* makes background span only the text */
+        padding: 0.3vw 1vw; /* add some padding around text */
+    }
+
+    .reference-wrapper {
+        text-align: center;
+        width: 100%;
     }
 
     .ENTitle{
@@ -809,12 +819,13 @@ It documents how a familiar list—learned through culture and memory—appears 
         justify-content: space-between;
         gap: 2rem;
         background-color: #FDEEDB;
-        padding: 0.5rem 2rem;
+        padding: 0.5rem 4rem 0.5rem 2rem; /* more padding on right */
         z-index: 1000;
         box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
         margin: 0;
         height: auto;
         min-height: 80px;
+        box-sizing: border-box;
     }
 
     .rank-display-sticky {
@@ -862,7 +873,7 @@ It documents how a familiar list—learned through culture and memory—appears 
     .current-name-sticky-english {
         font-family: 'JawiKufi', sans-serif;
         font-weight: 700;
-        font-size: 2rem;
+        font-size: 3rem;
         color: #266F8C;
         margin: 0;
         text-align: right;
@@ -1049,8 +1060,8 @@ It documents how a familiar list—learned through culture and memory—appears 
     }
 
     .conclusion-section {
-        margin-top: 8%;
-        margin-bottom: 10%;
+        /* margin-top: 8%; */
+        margin-bottom: 15%;
         padding: 3vw 0; /* 3rem 0 */
     }
 

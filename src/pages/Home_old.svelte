@@ -371,7 +371,7 @@
 	.MyPhoto img{
 	margin-left: 20px;
 	margin-bottom: 20px;
-	width: 180px;
+	width: 120px;
 	height: auto;
 	cursor: pointer;
 	animation: rotatePhoto 3s ease-in-out infinite;

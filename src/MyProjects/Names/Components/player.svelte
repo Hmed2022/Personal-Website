@@ -1,9 +1,11 @@
 <script>
+    import audioSrc from '../../../assets/Projects/Names/Names1.mp3';
+
     let audio;
     let isPlaying = false;
     let currentTime = 0;
     let duration = 0;
-    let selectedSong = '../../../../src/assets/Projects/Names/Names1.mp3';
+    let selectedSong = audioSrc;
     let isDragging = false;
     let progressBar;
     import {language, nameId, audioPlaying, audioCurrentTime, seekToTime } from '../Stores/misc';
@@ -226,10 +228,10 @@
 
     .time-display {
         font-family: 'JawiKufi', sans-serif;
-        font-size: 1.8vw; /* 1.8rem */
+        font-size: 2.5vw; /* increased from 1.8vw */
         color: #266F8C;
         font-weight: 500;
-        min-width: 3.75vw; /* 60px */
+        min-width: 5vw; /* 80px */
         text-align: center;
     }
 
