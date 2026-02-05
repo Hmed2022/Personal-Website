@@ -9,7 +9,7 @@ export default {
   // },
   2: {
     id: 2,
-    rank: 0,
+    rank: 1,
     englishName: "Allah'",
     englishMean: "God",
     arabicName: "ٱللَّهُ",
@@ -1628,7 +1628,7 @@ export default {
   // },
   13: {
     id: 13,
-    rank: 1,
+    rank: 2,
     englishName: "Ar-Rahman",
     englishMean: "The Most Gracious",
     arabicName: "ٱلرَّحْمَٰنُ",
@@ -1691,7 +1691,7 @@ export default {
   },
   12: {
     id: 12,
-    rank: 2,
+    rank: 3,
     englishName: "Ar-Raheem",
     englishMean: "The Most Merciful",
     arabicName: "ٱلرَّحِيمُ",
@@ -1742,7 +1742,7 @@ export default {
   },
   8: {
     id: 8,
-    rank: 3,
+    rank: 4,
     englishName: "Al-Malik",
     englishMean: "The Sovereign - King",
     arabicName: "ٱلْمَلِكُ",
@@ -1765,7 +1765,7 @@ export default {
   },
   11: {
     id: 11,
-    rank: 4,
+    rank: 5,
     englishName: "Al-Quddus",
     englishMean: "The Holy",
     arabicName: "ٱلْقُدُّوسُ",
@@ -1783,7 +1783,7 @@ export default {
   },
   10: {
     id: 10,
-    rank: 5,
+    rank: 6,
     englishName: "As-Salam",
     englishMean: "The Source of Peace",
     arabicName: "ٱلسَّلَامُ",
@@ -1798,7 +1798,7 @@ export default {
   },
   9: {
     id: 9,
-    rank: 6,
+    rank: 7,
     englishName: "Al-Mu'min",
     englishMean: "The Granter of Security",
     arabicName: "ٱلْمُؤْمِنُ",
@@ -1814,7 +1814,7 @@ export default {
   },
   18: {
     id: 18,
-    rank: 7,
+    rank: 8,
     englishName: "Al-Muhaymin",
     englishMean: "The Overseer",
     arabicName: "ٱلْمُهَيْمِنُ",
@@ -1830,7 +1830,7 @@ export default {
   },
   19: {
     id: 19,
-    rank: 8,
+    rank: 9,
     englishName: "Al-'Aziz",
     englishMean: "The Almighty",
     arabicName: "ٱلْعَزِيزُ",
@@ -1910,7 +1910,7 @@ export default {
   },
   14: {
     id: 14,
-    rank: 9,
+    rank: 10,
     englishName: "Al-Jabbar",
     englishMean: "The Compeller",
     arabicName: "ٱلْجَبَّارُ",
@@ -1926,7 +1926,7 @@ export default {
   },
   15: {
     id: 15,
-    rank: 10,
+    rank: 11,
     englishName: "Al-Mutakabbir",
     englishMean: "The Supreme",
     arabicName: "ٱلْمُتَكَبِّرُ",
@@ -1941,7 +1941,7 @@ export default {
   },
   16: {
     id: 16,
-    rank: 11,
+    rank: 12,
     englishName: "Al-Khaliq",
     englishMean: "The Creator",
     arabicName: "ٱلْخَالِقُ",
@@ -1960,7 +1960,7 @@ export default {
   },
   17: {
     id: 17,
-    rank: 12,
+    rank: 13,
     englishName: "Al-Bari'",
     englishMean: "The Maker",
     arabicName: "ٱلْبَارِئُ",
@@ -1975,7 +1975,7 @@ export default {
   },
   27: {
     id: 27,
-    rank: 13,
+    rank: 14,
     englishName: "Al-Musawwir",
     englishMean: "The Fashioner",
     arabicName: "ٱلْمُصَوِّرُ",
@@ -1991,7 +1991,7 @@ export default {
   },
   64: {
     id: 64,
-    rank: 14,
+    rank: 15,
     englishName: "Al-Ghaffar",
     englishMean: "The Oft-Forgiving",
     arabicName: "ٱلْغَفَّارُ",
@@ -2011,7 +2011,7 @@ export default {
   },
   65: {
     id: 65,
-    rank: 15,
+    rank: 16,
     englishName: "Al-Qahhar",
     englishMean: "The Subduer",
     arabicName: "ٱلْقَهَّارُ",
@@ -2033,7 +2033,7 @@ export default {
   },
   58: {
     id: 58,
-    rank: 16,
+    rank: 17,
     englishName: "Al-Wahhab",
     englishMean: "The Bestower",
     arabicName: "ٱلْوَهَّابُ",
@@ -2052,7 +2052,7 @@ export default {
   },
   66: {
     id: 66,
-    rank: 17,
+    rank: 18,
     englishName: "Ar-Razzaq",
     englishMean: "The Provider",
     arabicName: "ٱلرَّزَّاقُ",
@@ -2067,7 +2067,7 @@ export default {
   },
   67: {
     id: 67,
-    rank: 18,
+    rank: 19,
     englishName: "Al-Fattah",
     englishMean: "The Opener",
     arabicName: "ٱلْفَتَّاحُ",
@@ -2083,7 +2083,7 @@ export default {
   },
   63: {
     id: 63,
-    rank: 19,
+    rank: 20,
     englishName: "Al-'Alim",
     englishMean: "The All-Knowing",
     arabicName: "ٱلْعَلِيمُ",
@@ -2132,7 +2132,7 @@ export default {
   },
   28: {
     id: 28,
-    rank: 20,
+    rank: 21,
     englishName: "Al-Qabid",
     englishMean: "The Withholder",
     arabicName: "ٱلْقَابِضُ",
@@ -2147,7 +2147,7 @@ export default {
   },
   29: {
     id: 29,
-    rank: 21,
+    rank: 22,
     englishName: "Al-Basit",
     englishMean: "The Extender",
     arabicName: "ٱلْبَاسِطُ",
@@ -2163,7 +2163,7 @@ export default {
   },
   57: {
     id: 57,
-    rank: 22,
+    rank: 23,
     englishName: "Al-Khafid",
     englishMean: "The Abaser",
     arabicName: "ٱلْخَافِضُ",
@@ -2183,7 +2183,7 @@ export default {
   },
   59: {
     id: 59,
-    rank: 23,
+    rank: 24,
     englishName: "Ar-Rafi'",
     englishMean: "The Exalter",
     arabicName: "ٱلرَّافِعُ",
@@ -2204,7 +2204,7 @@ export default {
   },
   60: {
     id: 60,
-    rank: 24,
+    rank: 25,
     englishName: "Al-Mu'izz",
     englishMean: "The Honorer",
     arabicName: "ٱلْمُعِزُّ",
@@ -2222,7 +2222,7 @@ export default {
   },
   46: {
     id: 46,
-    rank: 25,
+    rank: 26,
     englishName: "Al-Mudhill",
     englishMean: "The Humiliator",
     arabicName: "ٱلْمُذِلُّ",
@@ -2240,7 +2240,7 @@ export default {
   },
   45: {
     id: 45,
-    rank: 26,
+    rank: 27,
     englishName: "As-Sami'",
     englishMean: "The All-Hearing",
     arabicName: "ٱلسَّمِيعُ",
@@ -2276,7 +2276,7 @@ export default {
   },
   43: {
     id: 43,
-    rank: 27,
+    rank: 28,
     englishName: "Al-Basir",
     englishMean: "The All-Seeing",
     arabicName: "ٱلْبَصِيرُ",
@@ -2296,7 +2296,7 @@ export default {
   },
   25: {
     id: 25,
-    rank: 28,
+    rank: 29,
     englishName: "Al-Hakam",
     englishMean: "The Judge",
     arabicName: "ٱلْحَكَمُ",
@@ -2315,7 +2315,7 @@ export default {
   },
   26: {
     id: 26,
-    rank: 29,
+    rank: 30,
     englishName: "Al-'Adl",
     englishMean: "The Just",
     arabicName: "ٱلْعَدْلُ",
@@ -2335,7 +2335,7 @@ export default {
   },
   61: {
     id: 61,
-    rank: 30,
+    rank: 31,
     englishName: "Al-Latif",
     englishMean: "The Subtle",
     arabicName: "ٱللَّطِيفُ",
@@ -2353,7 +2353,7 @@ export default {
   },
   47: {
     id: 47,
-    rank: 31,
+    rank: 32,
     englishName: "Al-Khabir",
     englishMean: "The All-Aware",
     arabicName: "ٱلْخَبِيرُ",
@@ -2375,7 +2375,7 @@ export default {
   },
   56: {
     id: 56,
-    rank: 32,
+    rank: 33,
     englishName: "Al-Halim",
     englishMean: "The Forbearing",
     arabicName: "ٱلْحَلِيمُ",
@@ -2433,7 +2433,7 @@ export default {
   },
   44: {
     id: 44,
-    rank: 33,
+    rank: 34,
     englishName: "Al-'Azim",
     englishMean: "The Magnificent",
     arabicName: "ٱلْعَظِيمُ",
@@ -2486,7 +2486,7 @@ export default {
   },
   42: {
     id: 42,
-    rank: 34,
+    rank: 35,
     englishName: "Al-Ghafur",
     englishMean: "The Forgiving",
     arabicName: "ٱلْغَفُورُ",
@@ -2514,7 +2514,7 @@ export default {
   },
   62: {
     id: 62,
-    rank: 35,
+    rank: 36,
     englishName: "Ash-Shakur",
     englishMean: "The Appreciative",
     arabicName: "ٱلشَّكُورُ",
@@ -2534,7 +2534,7 @@ export default {
   },
   35: {
     id: 35,
-    rank: 36,
+    rank: 37,
     englishName: "Al-'Aliyy",
     englishMean: "The Most High",
     arabicName: "ٱلْعَلِيُّ",
@@ -2556,7 +2556,7 @@ export default {
   },
   50: {
     id: 50,
-    rank: 37,
+    rank: 38,
     englishName: "Al-Kabir",
     englishMean: "The Great",
     arabicName: "ٱلْكَبِيرُ",
@@ -2581,7 +2581,7 @@ export default {
   },
   48: {
     id: 48,
-    rank: 38,
+    rank: 39,
     englishName: "Al-Hafiz",
     englishMean: "The Preserver",
     arabicName: "ٱلْحَفِيظُ",
@@ -2602,7 +2602,7 @@ export default {
   },
   30: {
     id: 30,
-    rank: 39,
+    rank: 40,
     englishName: "Al-Muqit",
     englishMean: "The Sustainer",
     arabicName: "ٱلْمُقِيتُ",
@@ -2623,7 +2623,7 @@ export default {
   },
   41: {
     id: 41,
-    rank: 40,
+    rank: 41,
     englishName: "Al-Hasib",
     englishMean: "The Reckoner",
     arabicName: "ٱلْحَسِيبُ",
@@ -2643,7 +2643,7 @@ export default {
   },
   34: {
     id: 34,
-    rank: 41,
+    rank: 42,
     englishName: "Al-Jalil",
     englishMean: "The Majestic",
     arabicName: "ٱلْجَلِيلُ",
@@ -2662,7 +2662,7 @@ export default {
   },
   40: {
     id: 40,
-    rank: 42,
+    rank: 43,
     englishName: "Al-Karim",
     englishMean: "The Generous",
     arabicName: "ٱلْكَرِيمُ",
@@ -2682,7 +2682,7 @@ export default {
   },
   55: {
     id: 55,
-    rank: 43,
+    rank: 44,
     englishName: "Ar-Raqib",
     englishMean: "The Watchful",
     arabicName: "ٱلرَّقِيبُ",
@@ -2697,7 +2697,7 @@ export default {
   },
   49: {
     id: 49,
-    rank: 44,
+    rank: 45,
     englishName: "Al-Mujib",
     englishMean: "The Responsive",
     arabicName: "ٱلْمُجِيبُ",
@@ -2716,7 +2716,7 @@ export default {
   },
   24: {
     id: 24,
-    rank: 45,
+    rank: 46,
     englishName: "Al-Wasi'",
     englishMean: "The All-Encompassing",
     arabicName: "ٱلْوَاسِعُ",
@@ -2738,7 +2738,7 @@ export default {
   },
   31: {
     id: 31,
-    rank: 46,
+    rank: 47,
     englishName: "Al-Hakim",
     englishMean: "The Wise",
     arabicName: "ٱلْحَكِيمُ",
@@ -2796,7 +2796,7 @@ export default {
   },
   23: {
     id: 23,
-    rank: 47,
+    rank: 48,
     englishName: "Al-Wadud",
     englishMean: "The Loving",
     arabicName: "ٱلْوَدُودُ",
@@ -2812,7 +2812,7 @@ export default {
   },
   36: {
     id: 36,
-    rank: 48,
+    rank: 49,
     englishName: "Al-Majid",
     englishMean: "The Glorious",
     arabicName: "ٱلْمَجِيدُ",
@@ -2827,7 +2827,7 @@ export default {
   },
   51: {
     id: 51,
-    rank: 49,
+    rank: 50,
     englishName: "Al-Ba'ith",
     englishMean: "The Resurrector",
     arabicName: "ٱلْبَاعِثُ",
@@ -2849,7 +2849,7 @@ export default {
   },
   52: {
     id: 52,
-    rank: 50,
+    rank: 51,
     englishName: "Ash-Shahid",
     englishMean: "The Witness",
     arabicName: "ٱلشَّهِيدُ",
@@ -2870,7 +2870,7 @@ export default {
   },
   53: {
     id: 53,
-    rank: 51,
+    rank: 52,
     englishName: "Al-Haqq",
     englishMean: "The Truth",
     arabicName: "ٱلْحَقُّ",
@@ -3295,7 +3295,7 @@ export default {
   },
   33: {
     id: 33,
-    rank: 52,
+    rank: 53,
     englishName: "Al-Wakil",
     englishMean: "The Trustee",
     arabicName: "ٱلْوَكِيلُ",
@@ -3311,7 +3311,7 @@ export default {
   },
   37: {
     id: 37,
-    rank: 53,
+    rank: 54,
     englishName: "Al-Qawiyy",
     englishMean: "The Strong",
     arabicName: "ٱلْقَوِيُّ",
@@ -3330,7 +3330,7 @@ export default {
   },
   39: {
     id: 39,
-    rank: 54,
+    rank: 55,
     englishName: "Al-Matin",
     englishMean: "The Firm",
     arabicName: "ٱلْمَتِينُ",
@@ -3345,7 +3345,7 @@ export default {
   },
   20: {
     id: 20,
-    rank: 55,
+    rank: 56,
     englishName: "Al-Waliyy",
     englishMean: "The Protecting Friend",
     arabicName: "ٱلْوَلِيُّ",
@@ -3363,7 +3363,7 @@ export default {
   },
   54: {
     id: 54,
-    rank: 56,
+    rank: 57,
     englishName: "Al-Hamid",
     englishMean: "The Praiseworthy",
     arabicName: "ٱلْحَمِيدُ",
@@ -3389,7 +3389,7 @@ export default {
   },
   21: {
     id: 21,
-    rank: 57,
+    rank: 58,
     englishName: "Al-Muhsi",
     englishMean: "The Accounter",
     arabicName: "ٱلْمُحْصِي",
@@ -3412,7 +3412,7 @@ export default {
   },
   32: {
     id: 32,
-    rank: 58,
+    rank: 59,
     englishName: "Al-Mubdi'",
     englishMean: "The Originator",
     arabicName: "ٱلْمُبْدِئُ",
@@ -3434,7 +3434,7 @@ export default {
   },
   38: {
     id: 38,
-    rank: 59,
+    rank: 60,
     englishName: "Al-Mu'id",
     englishMean: "The Restorer",
     arabicName: "ٱلْمُعِيدُ",
@@ -3456,7 +3456,7 @@ export default {
   },
   22: {
     id: 22,
-    rank: 60,
+    rank: 61,
     englishName: "Al-Muhyi",
     englishMean: "The Giver of Life",
     arabicName: "ٱلْمُحْيِي",
@@ -3478,7 +3478,7 @@ export default {
   },
   102: {
     id: 102,
-    rank: 61,
+    rank: 62,
     englishName: "Al-Mumit",
     englishMean: "The Bringer of Death",
     arabicName: "ٱلْمُمِيتُ",
@@ -3498,7 +3498,7 @@ export default {
   },
   68: {
     id: 68,
-    rank: 62,
+    rank: 63,
     englishName: "Al-Hayy",
     englishMean: "The Ever-Living",
     arabicName: "ٱلْحَيُّ",
@@ -3524,7 +3524,7 @@ export default {
   },
   89: {
     id: 89,
-    rank: 63,
+    rank: 64,
     englishName: "Al-Qayyum",
     englishMean: "The Self-Sustaining",
     arabicName: "ٱلْقَيُّومُ",
@@ -3543,7 +3543,7 @@ export default {
   },
   90: {
     id: 90,
-    rank: 64,
+    rank: 65,
     englishName: "Al-Wajid",
     englishMean: "The Finder",
     arabicName: "ٱلْوَاجِدُ",
@@ -3552,7 +3552,7 @@ export default {
     descAr: "الواجد؛ الغني الذي لا يفتقر أبداً",
     descEn: "The Finder; the Rich One who is never poor",
     pronounciation: "al-WA-jid",
-    quran_hadith: "Hadith",
+    quran_hadith: "Derived",
     disputed: "Yes",
     reference: [
       { surah: 93, ayah: 7 },
@@ -3563,7 +3563,7 @@ export default {
   },
   100: {
     id: 100,
-    rank: 65,
+    rank: 66,
     englishName: "Al-Majid",
     englishMean: "The Noble",
     arabicName: "ٱلْمَاجِدُ",
@@ -3578,7 +3578,7 @@ export default {
   },
   70: {
     id: 70,
-    rank: 66,
+    rank: 67,
     englishName: "Al-Wahid",
     englishMean: "The One",
     arabicName: "ٱلْوَاحِدُ",

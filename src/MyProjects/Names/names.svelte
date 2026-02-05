@@ -716,22 +716,68 @@ It documents how a familiar list—learned through culture and memory—appears 
 <body>
     <div class="conclusion-section">
         {#if $language === 'Arabic'}
-            <h2 class="section-title-ar">الخَاتِمَةُ وَالْمَنْهَجِيَّةُ</h2>
+            <h2 class="section-title-ar">الخَاتِمَةُ وَالْمَرَاجِع</h2>
             <p class="ArabicText">
-                في هذا المشروع، استكشفنا أسماء الله الحسنى من خلال منظور البيانات والتصور البصري، محاولين فهم كيفية ظهور هذه الأسماء في النصوص المقدسة وكيف تم جمعها وحفظها عبر التاريخ الإسلامي.
+                بدأ هذا المشروع كرحلة شخصية — فرصة لإعادة التواصل مع الأسماء التي حفظتها في طفولتي ولفهمها بشكل أعمق، روحياً وتقنياً. كانت أيضاً فرصة لتجربة SVGs والتصور البياني كأدوات لاستكشاف المعنى.
                 <br><br>
-                اعتمدت المنهجية على تحليل القرآن الكريم والسنة النبوية، مع التركيز على تكرار الأسماء وسياقاتها المختلفة. استخدمنا أدوات التصور البصري لإبراز الأنماط والعلاقات بين هذه الأسماء، مما يساعد على فهم أعمق لمعانيها وأهميتها الروحية.
+                ما فاجأني أكثر هو اكتشاف أن ليس كل اسم في القائمة يظهر مباشرة في القرآن — وأنه لا يوجد حديث صحيح واحد يسرد جميع الأسماء التسعة والتسعين. الأحاديث التي تعددها مصنفة كضعيفة من قبل علماء الحديث. هذا لا يقلل من الأهمية الروحية للأسماء، لكنه يكشف شيئاً مهماً: القائمة التي نحفظها عن ظهر قلب هي نتيجة قرون من التفسير العلمي، تجمع الأسماء من القرآن وأدب الحديث والصفات الإلهية المذكورة في سياقات مختلفة.
                 <br><br>
-                هذا العمل ليس محاولة لتقديم تفسير ديني نهائي، بل هو دعوة لإعادة اكتشاف هذه الأسماء التي حفظناها قبل أن نفهمها، وللتأمل في عظمة الله من خلال أسمائه الحسنى.
+                فهم هذا التمييز لا يقلل من جمال القائمة — بل يعمقه، مذكراً إيانا بأن التقليد الإسلامي مبني على الوحي والجهد العلمي عبر الأجيال.
+                <br><br>
+                أشارك هذا خلال رمضان — نفس الشهر الذي أصبحت فيه هذه الأسماء جزءاً من ذاكرتي، تُغنى في الخلفية بينما نحضر الإفطار. يبدو أنه الوقت المناسب لإعادة زيارتها بعيون جديدة وفضول أعمق.
+                <br><br>
+                في النهاية، هذا ليس عن تصحيح فهم أي شخص. إنه عن التوقف للسؤال من أين يأتي شيء عرفناه دائماً، وإيجاد طرق جديدة لتقديره.
+                <br><br>
+                هذا مشروع تعليمي، وأرحب بأفكاركم. إذا لاحظتم شيئاً يمكن توضيحه، أو لديكم رؤى علمية للمشاركة، أو ببساطة تريدون التأمل في تجربتكم الخاصة مع هذه الأسماء، يسعدني أن أسمع منكم.
+            </p>
+
+            <h3 class="subsection-title-ar">مصادر البيانات</h3>
+            <p class="ArabicText">
+                <b>Qur'an JSON:</b> استُخدم للنص القرآني والترجمة الإنجليزية وحساب تكرار كل اسم
+                <br>
+                <b>LearnIslam و MyIslam:</b> مراجع لأوصاف الأسماء وأصولها (ذكر قرآني مباشر، صفة مشتقة، أو مبني على الحديث)
+            </p>
+
+            <h3 class="subsection-title-ar">الأصول المرئية</h3>
+            <p class="ArabicText">
+                الأعمال الفنية المستخدمة في هذا المقال لم أصنعها — قمت بتحويل التصاميم الموجودة إلى صيغة SVG للاستخدام التفاعلي.
+            </p>
+
+            <h3 class="subsection-title-ar">ملاحظة منهجية</h3>
+            <p class="ArabicText">
+                تصنيف الأسماء (مذكور / مشتق / حديث) يتبع المنح الإسلامية المرجعية الشائعة لكنه ليس متفقاً عليه عالمياً. القراء المهتمون بنقاش لاهوتي أعمق مدعوون لاستشارة التفسير الكلاسيكي وأدب الحديث.
             </p>
         {:else}
-            <h2 class="section-title-en">Conclusion and Methodology</h2>
+            <h2 class="section-title-en">Conclusion & References</h2>
             <p class="EnglishText">
-                In this project, we explored the Names of Allah through the lens of data visualization, seeking to understand how these names appear in sacred texts and how they have been compiled and preserved throughout Islamic history.
+                This project began as a personal journey—a chance to reconnect with the Names I memorized as a child and to understand them more deeply, both spiritually and technically. It was also an opportunity to experiment with SVGs and data visualization as tools for exploring meaning.
                 <br><br>
-                The methodology was based on analyzing the Quran and Sunnah, focusing on the frequency and different contexts of these names. We used visualization tools to highlight patterns and relationships between the names, enabling a deeper understanding of their meanings and spiritual significance.
+                What surprised me most was learning that not every name on the list appears directly in the Qur'an—and that there is no single authentic hadith that lists all 99 names. The hadiths that do enumerate them are classified as da'if (weak) by hadith scholars. This doesn't diminish the spiritual significance of the Names, but it does reveal something important: the list we know by heart is the result of centuries of scholarly interpretation, compiling names from across the Qur'an, hadith literature, and divine attributes mentioned in various contexts.
                 <br><br>
-                This work is not an attempt to provide a definitive religious interpretation, but rather an invitation to rediscover the names we memorized before we understood them, and to contemplate the greatness of Allah through His beautiful names.
+                Understanding this distinction doesn't diminish the beauty of the list—it deepens it, reminding us that Islamic tradition is built on both revelation and scholarly effort across generations.
+                <br><br>
+                I'm sharing this during Ramadan—the same month when these Names first became part of my memory, sung in the background while we prepared iftar. It feels like the right time to revisit them with fresh eyes and a deeper curiosity.
+                <br><br>
+                Ultimately, this isn't about correcting anyone's understanding. It's about pausing to ask where something we've always known actually comes from, and finding new ways to appreciate it.
+                <br><br>
+                This is a learning project, and I welcome your thoughts. If you notice something that could be clarified, have scholarly insights to share, or simply want to reflect on your own experience with these Names, I'd love to hear from you.
+            </p>
+
+            <h3 class="subsection-title-en">Data Sources</h3>
+            <p class="EnglishText">
+                <b>Qur'an JSON:</b> Used for Qur'anic text, English translation, and calculating the frequency of each name
+                <br>
+                <b>LearnIslam and MyIslam:</b> Referenced for descriptions of the Names and their origins (direct Qur'anic mention, derived attribute, or hadith-based)
+            </p>
+
+            <h3 class="subsection-title-en">Visual Assets</h3>
+            <p class="EnglishText">
+                The artwork used in this article was not created by me—I converted existing designs into SVG format for interactive use.
+            </p>
+
+            <h3 class="subsection-title-en">Methodology Note</h3>
+            <p class="EnglishText">
+                The classification of names (Mentioned / Derived / Hadith) follows commonly referenced Islamic scholarship but is not universally agreed upon. Readers interested in deeper theological discussion are encouraged to consult classical tafsir and hadith literature.
             </p>
         {/if}
     </div>
@@ -1085,6 +1131,33 @@ It documents how a familiar list—learned through culture and memory—appears 
         color: #FEEEDB;
         text-align: center;
         margin-bottom: 2vw; /* 2rem */
+    }
+
+    .subsection-title-ar {
+        color: #FEEEDB;
+        background-color: #AC8B7E;
+        text-align: center;
+        margin-top: 2vw;
+        margin-bottom: 0.3vw;
+        font-weight: 500;
+        font-family: 'NotoKufiArabic', sans-serif;
+        font-size: 1vw;
+        display: inline-block;
+        padding: 0.3vw 1vw;
+        direction: rtl;
+    }
+
+    .subsection-title-en {
+        color: #FEEEDB;
+        background-color: #AC8B7E;
+        text-align: center;
+        margin-top: 2vw;
+        margin-bottom: 0.3vw;
+        font-weight: 500;
+        font-family: "Quicksand", sans-serif;
+        font-size: 1vw;
+        display: inline-block;
+        padding: 0.3vw 1vw;
     }
 
     /* .conclusion-section .ArabicText {
