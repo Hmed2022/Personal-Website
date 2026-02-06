@@ -275,4 +275,45 @@
     .progress-bar {
         user-select: none;
     }
+
+    /* Mobile responsive styles */
+    @media (max-width: 768px) {
+        .player-container {
+            gap: 4vw;
+            padding: 2vw;
+        }
+
+        .play-button {
+            width: 5vw;
+            height: 5vw;
+        }
+
+        .play-button svg {
+            width: 5vw;
+            height: 5vw;
+        }
+
+        .time-display {
+            font-size: 5vw;
+            min-width: 4vw;
+        }
+
+        .progress-container {
+            gap: 2vw;
+        }
+
+        .progress-bar {
+            height: 1.5vw;
+            border-radius: 0.75vw;
+        }
+
+        .progress-fill {
+            border-radius: 0.75vw;
+        }
+
+        .progress-handle {
+            width: 4vw;
+            height: 4vw;
+        }
+    }
 </style>

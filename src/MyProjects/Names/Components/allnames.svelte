@@ -5,12 +5,12 @@
     const BASE   = '#266F8C';
     const HOVER  = '#5AADBF';
     const ACTIVE = '#AC8B7E';
-    const QURAN_FILTER = '#266F8C';
-    const DERIVED_FILTER = '#4C8C4C';
-    const HADITH_FILTER = '#8A63BF';
-    const QURAN_HOVER = '#7EB8CC';
-    const DERIVED_HOVER = '#83B383';
-    const HADITH_HOVER = '#B399C9';
+    const QURAN_FILTER = '#3E8BA9';     // Teal blue
+    const DERIVED_FILTER = '#047857';   // Emerald green (paradise)
+    const HADITH_FILTER = '#C2452D';    // Terracotta/rust (North African)
+    const QURAN_HOVER = '#6AAFC7';      // Lighter teal blue
+    const DERIVED_HOVER = '#4FB397';    // Lighter emerald green
+    const HADITH_HOVER = '#D4796A';     // Lighter terracotta
         
     export let lineGap = 100;   // distance between first line and second line
     export let lineGap2 = 60;  

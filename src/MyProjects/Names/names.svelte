@@ -253,21 +253,15 @@ import video from '../../assets/Projects/Names/video.mp4'
             class:active={$language === 'English'}
             on:click={() => setLanguage('English')}
         >
-            {#if $language === 'Arabic'}
-                الإنجليزية
-            {:else}
-                English
-            {/if}
+            <span class="lang-full">English</span>
+            <span class="lang-short">EN</span>
         </button>
         <button
             class:active={$language === 'Arabic'}
             on:click={() => setLanguage('Arabic')}
         >
-            {#if $language === 'Arabic'}
-                العربية
-            {:else}
-                Arabic
-            {/if}
+            <span class="lang-full">Arabic</span>
+            <span class="lang-short">AR</span>
         </button>
     </div>
 </div>
@@ -298,13 +292,13 @@ import video from '../../assets/Projects/Names/video.mp4'
 صمنا طوال النهار، والآن نضع اللمسات الأخيرة على مائدة الإفطار. على شاشة التلفاز، يُتلى القرآن بصوت علي البرّاك، إشارة مألوفة بأن الإفطار لم يبقَ عليه سوى دقائق. تغرب الشمس. يرتفع الأذان — نداء من المسجد القريب، وآخر من بعيد، وثالث من التلفاز، تتداخل جميعها.
 نُفطر على التمر والماء. بعد يوم طويل من الصيام، تلك الرشفة الأولى مُرضية للغاية. <br><br>
 ثم تبدأ أغنية مألوفة في الخلفية. <br><br>
-إنها أغنية يعرفها الجميع — ليس لأننا اخترنا تعلّمها، بل لأننا نسمعها كل يوم لثلاثين يومًا، سنة بعد سنة. يملأ صوت لطفي بوشناق المميز الغرفة، حاملًا ترنيمة إيقاعية لأسماء الله الحُسنى. أتذكر أنني كنت أُردد معها وأنا أقطع الليمون والخبز الفرنسي.
+إنها أغنية يعرفها الجميع — ليس لأننا اخترنا تعلّمها، بل لأننا نسمعها كل يوم لثلاثين يومًا، سنة بعد سنة. يملأ صوت لطفي بوشناق — أحب مطربي تونس — الغرفة، حاملًا ترنيمة إيقاعية لأسماء الله الحُسنى. بالنسبة للتونسيين، هذه الأغنية مألوفة كالنشيد الوطني — فهي تُعلن لحظة الإفطار كل يوم طوال شهر كامل. أتذكر أنني كنت أُردد معها وأنا أقطع الليمون والخبز الفرنسي.
     {:else}
         <p class=EnglishText>It's the first day of Ramadan in Tunisia. <br><br>
-We've been fasting all day, and now we're making the final touches to the dining table. On TV, the Qur'an is being recited by Ali Al-Barrak, a familiar signal that iftar is only minutes away. The sun sets. The adhan rises—one call from the nearby mosque, another from farther away, and a third from the television, all overlapping.
+We've been fasting all day, and now we're making the final touches to the dining table. On TV, the Holy Qur'an is being recited by Ali Al-Barrak, a familiar signal that iftar is only minutes away. The sun sets. The adhan rises—one call from the nearby mosque, another from farther away, and a third from the television, all overlapping.
 We break our fast with dates and water. After a long day of fasting, that first sip is deeply satisfying. <br><br>
 Then a familiar song begins to play in the background. <br><br>
-It's a song everyone knows—not because we chose to learn it, but because we hear it every day for thirty days, year after year. The unmistakable voice of Lotfi Bouchnak fills the room, carrying a rhythmic chant of the Names of Allah. I remember singing along while cutting lemons and baguettes.
+It's a song everyone knows—not because we chose to learn it, but because we hear it every day for thirty days, year after year. The unmistakable voice of Lotfi Bouchnak—Tunisia's most beloved singer—fills the room, carrying a rhythmic chant of the Names of Allah. For Tunisians, this song is as familiar as a national anthem—it marks the moment of breaking fast every single day for a month. I remember singing along while cutting lemons and baguettes.
  </p>
     {/if}
 </p>
@@ -329,7 +323,7 @@ It's a song everyone knows—not because we chose to learn it, but because we he
 <i style='font-weight:300'>ملاحظة: لا يسعى هذا المشروع إلى تحديد أسماء الله الحُسنى "الصحيحة" التسعة والتسعين، ولا إلى تصحيح الممارسة الدينية أو تقديم تفسير عقدي.
 إنه يوثّق كيف تبدو قائمة مألوفة — تعلّمناها من الثقافة والذاكرة — عند فحصها مقابل النص القرآني، باستخدام منهج بسيط وشفاف.</i>
 <br><br>
-فيما يلي قائمة الأسماء، سيتم تمييز كل اسم عند ذكره في الأغنية،
+فيما يلي القائمة التفاعلية للأسماء التسعة والتسعين. عند تشغيل الأغنية، سيتم تمييز كل اسم في الوقت الفعلي عندما يُنشده لطفي بوشناق. يمكنك أيضاً التصفية حسب الفئة لمعرفة الأسماء المذكورة مباشرة في القرآن، والمشتقة من صفات قرآنية، والتي تظهر فقط في أدب الحديث.
     {:else}
         <p class=EnglishText>
 
@@ -337,11 +331,11 @@ It's a song everyone knows—not because we chose to learn it, but because we he
 This project begins there—by returning to the names we memorized by sound, and taking a closer look at them through the text itself.
 <br><br>
 <i style='font-weight:300'>Please Note: This project does not attempt to define the "correct" 99 Names of Allah, nor to correct religious practice or offer theological interpretation.
-It documents how a familiar list—learned through culture and memory—appears when examined against the Qur'anic text, using a simple and transparent method.
+It documents how a familiar list—learned through culture and memory—appears when examined against the Holy Qur'anic text, using a simple and transparent method.
        </i>
 
     <br> <br>
-    Below is the list of the Names, each Name will be highlighted when it is mentioned in the song,</p>
+    Below is the interactive list of the 99 Names. As you play the song, each name will highlight in real-time when Lotfi Bouchnak sings it. You can also filter by category to see which names come directly from the Holy Qur'an, which are derived from Holy Qur'anic attributes, and which appear only in hadith literature.</p>
     {/if}
 </p>
        
@@ -646,19 +640,22 @@ It documents how a familiar list—learned through culture and memory—appears 
 
         <div class="filter-section-arabic">
             <label class="filter-checkbox-arabic quran-filter">
-                <span>ذُكر في القرآن الكريم</span>
+                <span><b>ذُكر في القرآن الكريم</b> — 55 اسمًا (55.6%)</span>
                 <input type="checkbox" bind:checked={$filterQuran} />
             </label>
+            <p class="filter-description-arabic">الاسم يظهر صراحةً في النص القرآني كصفة إلهية.</p>
 
             <label class="filter-checkbox-arabic derived-filter">
-                <span>مُشتق من القرآن الكريم</span>
+                <span><b>مُشتق من القرآن الكريم</b> — 40 اسمًا (40.4%)</span>
                 <input type="checkbox" bind:checked={$filterDerived} />
             </label>
+            <p class="filter-description-arabic">الاسم مأخوذ من صفات إلهية أو أوصاف موجودة في الآيات، وإن لم يُذكر كاسم مباشرة.</p>
 
             <label class="filter-checkbox-arabic hadith-filter">
-                <span>ذُكر في الحديث الصحيح</span>
+                <span><b>ذُكر في الحديث الصحيح</b> — 4 أسماء (4.0%)</span>
                 <input type="checkbox" bind:checked={$filterHadith} />
             </label>
+            <p class="filter-description-arabic">الاسم يظهر في الأحاديث النبوية الصحيحة لكن ليس في القرآن.</p>
         </div>
 
         <p class="ArabicText">
@@ -673,24 +670,27 @@ It documents how a familiar list—learned through culture and memory—appears 
         </p>
     {:else}
         <p class=EnglishText>
-            For a long time, I assumed that all of these Names were explicitly mentioned in the Qur'an. When examined closely, however, a more nuanced picture emerges.
+            For a long time, I assumed that all of these Names were explicitly mentioned in the Holy Qur'an. When examined closely, however, a more nuanced picture emerges.
         </p>
 
         <div class="filter-section">
             <label class="filter-checkbox quran-filter">
                 <input type="checkbox" bind:checked={$filterQuran} />
-                <span>Mentioned in the Qur'an</span>
+                <span><b>Mentioned in the Holy Qur'an</b> — 55 names (55.6%)</span>
             </label>
+            <p class="filter-description">The exact name appears explicitly in the Holy Qur'anic text as a divine attribute.</p>
 
             <label class="filter-checkbox derived-filter">
                 <input type="checkbox" bind:checked={$filterDerived} />
-                <span>Derived from the Qur'an</span>
+                <span><b>Derived from the Holy Qur'an</b> — 40 names (40.4%)</span>
             </label>
+            <p class="filter-description">The name is drawn from divine attributes or descriptions found in verses, though not stated as a name directly.</p>
 
             <label class="filter-checkbox hadith-filter">
                 <input type="checkbox" bind:checked={$filterHadith} />
-                <span>Mentioned in Sahih Hadith</span>
+                <span><b>Mentioned in Sahih Hadith</b> — 4 names (4.0%)</span>
             </label>
+            <p class="filter-description">The name appears in authenticated prophetic traditions but not in the Holy Qur'an.</p>
         </div>
 
         <p class="EnglishText">
@@ -731,17 +731,24 @@ It documents how a familiar list—learned through culture and memory—appears 
                 هذا مشروع تعليمي، وأرحب بأفكاركم. إذا لاحظتم شيئاً يمكن توضيحه، أو لديكم رؤى علمية للمشاركة، أو ببساطة تريدون التأمل في تجربتكم الخاصة مع هذه الأسماء، يسعدني أن أسمع منكم.
             </p>
 
-            <h3 class="subsection-title-ar">مصادر البيانات</h3>
-            <p class="ArabicText">
-                <b>Qur'an JSON:</b> استُخدم للنص القرآني والترجمة الإنجليزية وحساب تكرار كل اسم
-                <br>
-                <b>LearnIslam و MyIslam:</b> مراجع لأوصاف الأسماء وأصولها (ذكر قرآني مباشر، صفة مشتقة، أو مبني على الحديث)
-            </p>
-
-            <h3 class="subsection-title-ar">الأصول المرئية</h3>
-            <p class="ArabicText">
-                الأعمال الفنية المستخدمة في هذا المقال لم أصنعها — قمت بتحويل التصاميم الموجودة إلى صيغة SVG للاستخدام التفاعلي.
-            </p>
+            <div class="sources-columns-ar">
+                <div class="source-col-ar">
+                    <h3 class="subsection-title-ar">مصادر البيانات</h3>
+                    <p class="ArabicText">
+                        <b><a href="https://github.com/risan/quran-json/tree/main" target="_blank" class="source-link">Qur'an JSON</a>:</b> استُخدم للنص القرآني والترجمة الإنجليزية وحساب تكرار كل اسم
+                        <br>
+                        <b><a href="https://learn-islam.org/allah-names" target="_blank" class="source-link">LearnIslam</a> و <a href="https://myislam.org/99-names-of-allah/" target="_blank" class="source-link">MyIslam</a>:</b> مراجع لأوصاف الأسماء وأصولها (ذكر قرآني مباشر، صفة مشتقة، أو مبني على الحديث)
+                    </p>
+                </div>
+                <div class="source-col-ar">
+                    <h3 class="subsection-title-ar">الأصول المرئية</h3>
+                    <p class="ArabicText">
+                        الأعمال الفنية المستخدمة في هذا المقال لم أصنعها — قمت بتحويل التصاميم الموجودة إلى صيغة SVG للاستخدام التفاعلي.
+                        <br>
+                        <a href="https://www.pinterest.com/pin/37717715626215055/" target="_blank" class="source-link">الخلفية</a> | <a href="https://www.pinterest.com/pin/257690409908415932/" target="_blank" class="source-link">فن الأسماء</a>
+                    </p>
+                </div>
+            </div>
 
             <h3 class="subsection-title-ar">ملاحظة منهجية</h3>
             <p class="ArabicText">
@@ -763,17 +770,24 @@ It documents how a familiar list—learned through culture and memory—appears 
                 This is a learning project, and I welcome your thoughts. If you notice something that could be clarified, have scholarly insights to share, or simply want to reflect on your own experience with these Names, I'd love to hear from you.
             </p>
 
-            <h3 class="subsection-title-en">Data Sources</h3>
-            <p class="EnglishText">
-                <b>Qur'an JSON:</b> Used for Qur'anic text, English translation, and calculating the frequency of each name
-                <br>
-                <b>LearnIslam and MyIslam:</b> Referenced for descriptions of the Names and their origins (direct Qur'anic mention, derived attribute, or hadith-based)
-            </p>
-
-            <h3 class="subsection-title-en">Visual Assets</h3>
-            <p class="EnglishText">
-                The artwork used in this article was not created by me—I converted existing designs into SVG format for interactive use.
-            </p>
+            <div class="sources-columns">
+                <div class="source-col">
+                    <h3 class="subsection-title-en">Data Sources</h3>
+                    <p class="EnglishText">
+                        <b><a href="https://github.com/risan/quran-json/tree/main" target="_blank" class="source-link">Qur'an JSON</a>:</b> Used for Holy Qur'anic text, English translation, and calculating the frequency of each name
+                        <br>
+                        <b><a href="https://learn-islam.org/allah-names" target="_blank" class="source-link">LearnIslam</a> and <a href="https://myislam.org/99-names-of-allah/" target="_blank" class="source-link">MyIslam</a>:</b> Referenced for descriptions of the Names and their origins (direct Holy Qur'anic mention, derived attribute, or hadith-based)
+                    </p>
+                </div>
+                <div class="source-col">
+                    <h3 class="subsection-title-en">Visual Assets</h3>
+                    <p class="EnglishText">
+                        The artwork used in this article was not created by me—I converted existing designs into SVG format for interactive use.
+                        <br>
+                        <a href="https://www.pinterest.com/pin/37717715626215055/" target="_blank" class="source-link">Background</a> | <a href="https://www.pinterest.com/pin/257690409908415932/" target="_blank" class="source-link">All Names Art</a>
+                    </p>
+                </div>
+            </div>
 
             <h3 class="subsection-title-en">Methodology Note</h3>
             <p class="EnglishText">
@@ -885,7 +899,7 @@ It documents how a familiar list—learned through culture and memory—appears 
         flex: 1;
         display: flex;
         justify-content: center;
-        max-width: 600px;
+        max-width: 40vw;
     }
 
     .player-wrapper :global(.player-container) {
@@ -948,18 +962,15 @@ It documents how a familiar list—learned through culture and memory—appears 
 }
 
   .language-buttons2 {
-    position: sticky;
+    position: fixed;
     top: 1vw;
+    right: 2vw;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: 0.5vw; /* 0.5rem */
     z-index: 1000;
-    float: right;
-    margin-left: auto;
-    margin-right: 2vw;
     padding: 0.5vw;
-
 }
 
   .language-label-english {
@@ -989,6 +1000,14 @@ It documents how a familiar list—learned through culture and memory—appears 
     background-color: #266F8C;
     color: #FDEEDB;
     border-color: #266F8C;
+  }
+
+  .lang-full {
+    display: inline;
+  }
+
+  .lang-short {
+    display: none;
   }
 
 
@@ -1139,12 +1158,48 @@ It documents how a familiar list—learned through culture and memory—appears 
         text-align: center;
         margin-top: 2vw;
         margin-bottom: 0.3vw;
+        margin-left: auto;
+        margin-right: auto;
         font-weight: 500;
         font-family: 'NotoKufiArabic', sans-serif;
         font-size: 1vw;
-        display: inline-block;
+        display: block;
+        width: fit-content;
         padding: 0.3vw 1vw;
         direction: rtl;
+    }
+
+    .sources-columns {
+        display: flex;
+        gap: 3vw;
+        margin: 2vw 0;
+    }
+
+    .source-col {
+        flex: 1;
+        text-align: center;
+    }
+
+    .sources-columns-ar {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 3vw;
+        margin: 2vw 0;
+    }
+
+    .source-col-ar {
+        flex: 1;
+        text-align: center;
+    }
+
+    .source-link {
+        color: #266F8C;
+        text-decoration: underline;
+        transition: color 0.2s;
+    }
+
+    .source-link:hover {
+        color: #AC8B7E;
     }
 
     .subsection-title-en {
@@ -1153,10 +1208,13 @@ It documents how a familiar list—learned through culture and memory—appears 
         text-align: center;
         margin-top: 2vw;
         margin-bottom: 0.3vw;
+        margin-left: auto;
+        margin-right: auto;
         font-weight: 500;
         font-family: "Quicksand", sans-serif;
         font-size: 1vw;
-        display: inline-block;
+        display: block;
+        width: fit-content;
         padding: 0.3vw 1vw;
     }
 
@@ -1418,6 +1476,8 @@ It documents how a familiar list—learned through culture and memory—appears 
         font-family: 'Nunito', sans-serif;
         font-size: 1.1vw; /* 1.1rem */
         font-weight: 500;
+        direction: ltr;
+        text-align: left;
     }
 
     .filter-checkbox:hover {
@@ -1425,30 +1485,30 @@ It documents how a familiar list—learned through culture and memory—appears 
     }
 
     .quran-filter {
-        background-color: rgba(38, 111, 140, 0.15);
-        border: 0.125vw solid #266F8C; /* 2px */
+        background-color: rgba(62, 139, 169, 0.15); /* Teal blue */
+        border: 0.125vw solid #3E8BA9; /* 2px */
     }
 
     .quran-filter:hover {
-        background-color: rgba(38, 111, 140, 0.25);
+        background-color: rgba(62, 139, 169, 0.25);
     }
 
     .derived-filter {
-        background-color: rgba(76, 140, 76, 0.15);
-        border: 0.125vw solid #4C8C4C; /* 2px */
+        background-color: rgba(4, 120, 87, 0.15); /* Emerald green */
+        border: 0.125vw solid #047857; /* 2px */
     }
 
     .derived-filter:hover {
-        background-color: rgba(76, 140, 76, 0.25);
+        background-color: rgba(4, 120, 87, 0.25);
     }
 
     .hadith-filter {
-        background-color: rgba(128, 90, 168, 0.15);
-        border: 0.125vw solid #805AA8; /* 2px */
+        background-color: rgba(194, 69, 45, 0.15); /* Terracotta/rust */
+        border: 0.125vw solid #C2452D; /* 2px */
     }
 
     .hadith-filter:hover {
-        background-color: rgba(128, 90, 168, 0.25);
+        background-color: rgba(194, 69, 45, 0.25);
     }
 
     .filter-checkbox input[type="checkbox"] {
@@ -1514,6 +1574,31 @@ It documents how a familiar list—learned through culture and memory—appears 
 
     .filter-checkbox-arabic span {
         color: #603D25;
+    }
+
+    /* Filter Description Styles */
+    .filter-description {
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.95vw;
+        color: #603D25;
+        margin: 0 0 0.5vw 2vw;
+        padding: 0;
+        font-style: italic;
+        opacity: 0.85;
+        direction: ltr;
+        text-align: left;
+    }
+
+    .filter-description-arabic {
+        font-family: 'NotoKufiArabic', sans-serif;
+        font-size: 0.95vw;
+        color: #603D25;
+        margin: 0 2vw 0.5vw 0;
+        padding: 0;
+        direction: rtl;
+        text-align: right;
+        font-style: normal;
+        opacity: 0.85;
     }
 
 
@@ -1613,6 +1698,64 @@ It documents how a familiar list—learned through culture and memory—appears 
         .filter-checkbox-arabic input[type="checkbox"] {
             width: 3vw;
             height: 3vw;
+        }
+
+        .filter-description {
+            font-size: 2vw;
+            margin: 0 0 1vw 3vw;
+        }
+
+        .filter-description-arabic {
+            font-size: 2vw;
+            margin: 0 3vw 1vw 0;
+        }
+
+        .lang-full {
+            display: none;
+        }
+
+        .lang-short {
+            display: inline;
+        }
+
+        .sources-columns,
+        .sources-columns-ar {
+            flex-direction: column;
+        }
+
+        /* Mobile language buttons */
+        .language-buttons2 {
+            top: 2vw;
+            right: 3vw;
+            gap: 1.5vw;
+        }
+
+        .language-buttons2 button {
+            padding: 1.5vw 2.5vw;
+            font-size: 4vw;
+            border-radius: 1vw;
+        }
+
+        /* Mobile player */
+        .player-sticky-container {
+            padding: 1.5rem 2rem;
+            min-height: 100px;
+        }
+
+        .player-wrapper {
+            max-width: 60vw;
+        }
+
+        .name-rank {
+            font-size: 5vw;
+        }
+
+        .current-name-sticky-arabic {
+            font-size: 4vw;
+        }
+
+        .current-name-sticky-english {
+            font-size: 5vw;
         }
 
       }
