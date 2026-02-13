@@ -4,7 +4,9 @@
       "Bash(cd:*)",
       "Bash(python3 -c:*)",
       "Bash(python3:*)",
-      "Bash(node update_hadith_references.js:*)"
+      "Bash(node update_hadith_references.js:*)",
+      "WebFetch(domain:en.wikipedia.org)",
+      "WebFetch(domain:fr.wikipedia.org)"
     ],
     "deny": [],
     "ask": []

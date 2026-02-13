@@ -7,6 +7,7 @@ import Player from './Components/player.svelte';
 import { style } from 'svelte-body';
 import {language,nameId, filterQuran, filterDerived, filterHadith, showDisputed, audioPlaying, audioCurrentTime } from './Stores/misc.js';
 import  names  from './Components/names.js';
+import  people  from './Components/people.js';
 import Back from './Components/background.svelte'
 import quranData from './Assests/quran.json';
 import quranDataEN from './Assests/QuranEN.json';
@@ -18,6 +19,7 @@ import video from '../../assets/Projects/Names/video.mp4'
 
     // Reactive statement: automatically updates when $nameId changes
     $: currentName = $nameId && names[$nameId] ? names[$nameId] : null;
+    $: currentPerson = $nameId && people[$nameId] ? people[$nameId] : null;
 
     // Carousel state for Quranic verses
     let currentVerseIndex = 0;
@@ -714,6 +716,122 @@ It documents how a familiar list—learned through culture and memory—appears 
 </div> -->
 
 <body>
+    <div class="carried-names-section">
+        {#if $language === 'Arabic'}
+            <h2 class="section-title-ar">الأسماء التي حملناها قبل أن نعرفها</h2>
+            <p class="ArabicText">
+                لكن الأغنية لم تكن في الحقيقة أول لقاء لنا بهذه الأسماء. فقبل أن نحفظها بصوت لطفي بوشناق بوقت طويل، كنا محاطين بها بالفعل — منسوجة في نسيج حياتنا اليومية من خلال أسماء الناس من حولنا.
+                <br><br>
+                في تونس، كما في جميع أنحاء العالم العربي والإسلامي، تعيش كثير من هذه الأسماء في الناس الذين نعرفهم. النمط بسيط: عبد، بمعنى "خادم" أو "عبد"، يليه أحد أسماء الله الحسنى. هكذا نحصل على أسماء مثل:
+            </p>
+
+            {#if currentPerson && currentPerson.personAr}
+                <div class="name-breakdown">
+                    <div class="name-formula" style="direction: rtl;">
+                        <span class="abd-fixed-ar">عبد</span>
+                        <span class="plus-sign">+</span>
+                        <span class="name-variable-ar">{currentPerson.arabicName}</span>
+                    </div>
+                    {#if currentPerson.link}
+                        <a href={currentPerson.link} target="_blank" rel="noopener noreferrer" class="person-name-ar">{currentPerson.personAr}</a>
+                    {:else}
+                        <div class="person-name-ar">{currentPerson.personAr}</div>
+                    {/if}
+                    <div class="person-desc-ar">{currentPerson.descAr}</div>
+                </div>
+            {/if}
+
+            <p class="ArabicText">
+                هذه ليست مجرد أسماء — إنها إعلانات عبودية وتواضع، تذكير بأننا ننتمي لشيء أعظم. في كل مرة تنادي شخصاً باسمه، فإنك تستحضر إحدى صفات الله.
+                <br><br>
+                لكن هنا يصبح الأمر مثيراً للاهتمام: ليس كل اسم يبدأ بـ"عبد" في تونس يقابل أحد الأسماء الحسنى التسعة والتسعين المتفق عليها.
+                <br><br>
+                خذ مثلاً عبد الستار، وهو اسم تونسي شائع. الستار (المُستتِر) يُستخدم على نطاق واسع، لكنه في الواقع ليس ضمن القائمة المتفق عليها للأسماء التسعة والتسعين. إنه مشتق من صفة الله في ستر الذنوب، الموجودة في الأحاديث والتراث الإسلامي، لكنه لم يدخل في التعداد القانوني. ومع ذلك، ظل التونسيون يسمون أبناءهم عبد الستار لأجيال، ويتعاملون معه كما لو كان كذلك.
+                <br><br>
+                هذا يكشف شيئاً عميقاً: الأسماء الحسنى ليست مجرد قائمة ثابتة — إنها تقليد حي، شكّلته الثقافة والعلم والممارسة الشعبية. ما يتناقشه العلماء، حسمته العائلات بالفعل. ما يظهر في قائمة أحد التقاليد قد يغيب عن قائمة أخرى — لكن الاسم يعيش في جد أحدهم أو عمه أو جاره.
+                <br><br>
+                بعض الأسماء، من ناحية أخرى، تظهر في قائمة التسعة والتسعين لكنها نادراً ما تُستخدم كأسماء شخصية — أسماء مثل القهار أو المميت. لن تجد كثيراً من الأطفال التونسيين يحملون اسم عبد القهار أو عبد المميت. هناك مصفاة ثقافية ضمنية: بعض الصفات تبدو ثقيلة جداً، شديدة جداً، لتُوضع على طفل.
+                <br><br>
+                وهناك أيضاً الأسماء المستقلة — أسماء الله التي أصبحت أسماء شخصية دون بادئة "عبد":
+                <br><br>
+                رحمان (رغم أنه أقل شيوعاً من عبد الرحمن)
+                <br>
+                كريم (الكريم) — يُستخدم على نطاق واسع كاسم مستقل
+                <br>
+                عزيز (العزيز)
+                <br>
+                حكيم (الحكيم)
+                <br><br>
+                هذه تحمل نفس الثقل، نفس الصدى المقدس، حتى بدون الإعلان الصريح عن العبودية.
+                <br><br>
+                إذن قبل الأغنية، قبل القائمة الرسمية، قبل أن أفكر يوماً في إحصاء عدد مرات ظهور كل اسم في القرآن — كنت أعرفها بالفعل. عرفتها في وجوه الجيران وزملاء الدراسة والأقارب. عرفتها في نداء الحضور في المدرسة، في بطاقات الأعراس، في الأسماء المنقوشة على شواهد القبور.
+                <br><br>
+                الأسماء لم تكن مجردة. كانت أشخاصاً.
+                <br><br>
+                وربما هذا هو الجزء الأجمل: هذه الأسماء لا تصف الله فحسب — بل تعيش بيننا، في الهويات التي نحملها، في الأشخاص الذين نصبحهم. في كل مرة يقدم أحدهم نفسه باسم عبد الرحمن، فهو يذكّرك — ويذكّر نفسه — بالرحمة الإلهية. كل عبد العزيز هو استحضار حي للعزة. كل كريم يجسّد الكرم، سواء ارتقى إليه أم لا.
+                <br><br>
+                الأسماء الحسنى ليست مجرد قائمة للحفظ. إنها خريطة لكيف نرى الإلهي — وكيف نسمّي أنفسنا في علاقتنا به.
+            </p>
+        {:else}
+            <h2 class="section-title-en">The Names We Carried Before We Knew Them</h2>
+            <p class="EnglishText">
+                But the song wasn't actually our first encounter with these Names. Long before we memorized them through Lotfi Bouchnak's voice, we were already surrounded by them—woven into the fabric of our daily lives through the names of people around us.
+                <br><br>
+                In Tunisia, as across the Arab and Muslim world, many of these Names live on in the people we know. The pattern is simple: Abd (عبد) or Abdul (عبد ال), meaning "servant of" or "slave of," followed by one of Allah's Names. This is how we get names like:
+            </p>
+
+            {#if currentPerson && currentPerson.personEn}
+                <div class="name-breakdown">
+                    <div class="name-formula">
+                        <span class="abd-fixed">Abdul</span>
+                        <span class="plus-sign">+</span>
+                        <span class="name-variable">{currentName.englishName}</span>
+                    </div>
+                    {#if currentPerson.link}
+                        <a href={currentPerson.link} target="_blank" rel="noopener noreferrer" class="person-name-en">{currentPerson.personEn}</a>
+                    {:else}
+                        <div class="person-name-en">{currentPerson.personEn}</div>
+                    {/if}
+                    <div class="person-desc-en">{currentPerson.descEn}</div>
+                </div>
+            {/if}
+
+            <p class="EnglishText">
+                These aren't just names—they're declarations of servitude and humility, reminders that we belong to something greater. Every time you call someone by their name, you're invoking one of Allah's attributes.
+                <br><br>
+                But here's where it gets interesting: not every "Abd" name in Tunisia corresponds to one of the canonical 99 Names.
+                <br><br>
+                Take Abdessattar (عبد الستار), a common Tunisian name. As-Sattar (الستار—the Concealer) is widely used, but it's actually not on the agreed-upon list of 99 Names. It's derived from Allah's attribute of concealing sins, found in hadith and Islamic tradition, but it didn't make the canonical enumeration. Yet Tunisians have been naming their sons Abdessattar for generations, treating it as if it were.
+                <br><br>
+                This reveals something profound: the 99 Names aren't just a fixed list—they're a living tradition, shaped by culture, scholarship, and popular practice. What scholars debate, families have already decided. What appears in one tradition's list may be absent from another's—but the name lives on in someone's grandfather, uncle, or neighbor.
+                <br><br>
+                Some Names, on the other hand, appear in the list of 99 but are rarely used as given names—names like Al-Qahhar (القهار—the Subduer) or Al-Mumit (المميت—the Bringer of Death). You won't find many Tunisian children named Abdelqahhar or Abdelmumit. There's an implicit cultural filter: some attributes feel too overwhelming, too severe, to place on a child.
+                <br><br>
+                And then there are the standalone names—Names of Allah that have become first names without the "Abd" prefix:
+                <br><br>
+                Rahman (though less common than Abderrahman)
+                <br>
+                Karim (the Generous)—used widely as a standalone name
+                <br>
+                Aziz (the Mighty)
+                <br>
+                Hakim (the Wise)
+                <br><br>
+                These carry the same weight, the same sacred resonance, even without the explicit declaration of servitude.
+                <br><br>
+                So before the song, before the formalized list, before I ever thought to count how many times each Name appeared in the Qur'an—I already knew them. I knew them in the faces of neighbors, classmates, relatives. I knew them in the roll call at school, in wedding invitations, in the names etched on gravestones.
+                <br><br>
+                The Names weren't abstract. They were people.
+                <br><br>
+                And maybe that's the most beautiful part: these Names don't just describe Allah—they live among us, in the identities we carry, the people we become. Every time someone introduces themselves as Abderrahman, they're reminding you—and themselves—of divine mercy. Every Abdelaziz is a walking invocation of might. Every Karim embodies generosity, whether they live up to it or not.
+                <br><br>
+                The 99 Names aren't just a list to memorize. They're a map of how we see the divine—and how we name ourselves in relation to it.
+            </p>
+        {/if}
+    </div>
+</body>
+
+<body>
     <div class="conclusion-section">
         {#if $language === 'Arabic'}
             <h2 class="section-title-ar">الخَاتِمَةُ وَالْمَرَاجِع</h2>
@@ -1128,6 +1246,95 @@ It documents how a familiar list—learned through culture and memory—appears 
         /* margin-top: 8%; */
         margin-bottom: 15%;
         padding: 3vw 0; /* 3rem 0 */
+    }
+
+    .carried-names-section {
+        margin-bottom: 5%;
+        padding: 3vw 0;
+    }
+
+    .name-breakdown {
+        text-align: center;
+        padding: 3vw 0;
+        margin: 2vw 0;
+    }
+
+    .name-formula {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5vw;
+        margin-bottom: 1.5vw;
+    }
+
+    .abd-fixed,
+    .name-variable {
+        font-family: 'JawiKufi', sans-serif;
+        font-size: 5vw;
+        font-weight: 700;
+        color: #266F8C;
+    }
+
+    .abd-fixed-ar,
+    .name-variable-ar {
+        font-family: 'NotoKufiArabic', sans-serif;
+        font-size: 6vw;
+        font-weight: 700;
+        color: #266F8C;
+        direction: rtl;
+    }
+
+    .plus-sign {
+        font-family: 'JawiKufi', sans-serif;
+        font-size: 3.5vw;
+        font-weight: 400;
+        color: #266F8C;
+    }
+
+    .person-name-ar {
+        font-family: 'NotoKufiArabic', sans-serif;
+        font-size: 1.8vw;
+        font-weight: 700;
+        color: #266F8C;
+        direction: rtl;
+        margin-bottom: 0.5vw;
+        display: block;
+        text-decoration: none;
+    }
+
+    a.person-name-ar:hover {
+        text-decoration: underline;
+    }
+
+    .person-desc-ar {
+        font-family: 'NotoKufiArabic', sans-serif;
+        font-size: 1.5vw;
+        font-weight: 500;
+        color: #AC8B7E;
+        direction: rtl;
+    }
+
+    .person-name-en {
+        font-family: 'JawiKufi', sans-serif;
+        font-size: 2.5vw;
+        font-weight: 700;
+        color: #266F8C;
+        direction: ltr;
+        margin-bottom: 0.5vw;
+        display: block;
+        text-decoration: none;
+    }
+
+    a.person-name-en:hover {
+        text-decoration: underline;
+    }
+
+    .person-desc-en {
+        font-family: "Quicksand", sans-serif;
+        font-size: 1.5vw;
+        font-weight: 700;
+        color: #AC8B7E;
+        direction: ltr;
     }
 
     .section-title-ar {
