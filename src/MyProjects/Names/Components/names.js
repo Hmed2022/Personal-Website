@@ -3347,7 +3347,7 @@ export default {
     id: 20,
     rank: 56,
     englishName: "Al-Waliyy",
-    englishMean: "The Protecting Friend",
+    englishMean: "The Protector",
     arabicName: "ٱلْوَلِيُّ",
     frequency: 2,
     timestamp1: 99,
