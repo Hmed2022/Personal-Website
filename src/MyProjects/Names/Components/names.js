@@ -2214,7 +2214,7 @@ export default {
     descEn: "The Giver of honor and strength to obedient and loving servants",
     pronounciation: "al-mu-IZZ",
     quran_hadith: "Derived",
-    disputed: "Yes",
+    disputed: "No",
     reference: [
       { surah: 3, ayah: 26 },
       { surah: 35, ayah: 10 },
@@ -2232,7 +2232,7 @@ export default {
     descEn: "The Humiliator who abases the arrogant",
     pronounciation: "al-mu-DHILL",
     quran_hadith: "Derived",
-    disputed: "Yes",
+    disputed: "No",
     reference: [
       { surah: 3, ayah: 26 },
       { surah: 39, ayah: 26 },
@@ -2326,7 +2326,7 @@ export default {
       "The Just who rectifies matters in equitable manner, giving each what they deserve",
     pronounciation: "al-ADL",
     quran_hadith: "Derived",
-    disputed: "Yes",
+    disputed: "No",
     reference: [
       { surah: 4, ayah: 40 },
       { surah: 16, ayah: 90 },
@@ -3553,7 +3553,7 @@ export default {
     descEn: "The Finder; the Rich One who is never poor",
     pronounciation: "al-WA-jid",
     quran_hadith: "Derived",
-    disputed: "Yes",
+    disputed: "No",
     reference: [
       { surah: 93, ayah: 7 },
       { surah: 93, ayah: 8 },

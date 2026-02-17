@@ -669,7 +669,11 @@ It documents how a familiar list—learned through culture and memory—appears 
         </p>
 
         <p class="ArabicText">
-            بعض الأسماء محلّ خلاف بين العلماء. في الواقع، من أصل ٩٩ اسمًا، هناك فقط ٨١ اسمًا متفق عليها، والباقي محلّ نقاش.
+            {#if currentName && currentName.disputed === 'Yes'}
+                لدى العلماء المختلفين معايير مختلفة لما يُعدّ اسمًا من أسماء الله الحسنى. من أصل الأسماء التسعة والتسعين، هناك ٨١ اسمًا مذكورة صراحةً في القرآن الكريم. لذلك، لا توجد قائمة واحدة متفق عليها للأسماء الثمانية عشر المتبقية. <span class="highlighted-name">{currentName.arabicName}</span> هو أحد تلك الأسماء التي استبعدها بعض العلماء، منهم ابن عثيمين وابن حزم وابن حجر وغيرهم.
+            {:else}
+                بعض الأسماء محلّ خلاف بين العلماء. في الواقع، من أصل ٩٩ اسمًا، هناك فقط ٨١ اسمًا متفق عليها، والباقي محلّ نقاش.
+            {/if}
             <span class="disputed-toggle" on:click={() => $showDisputed = !$showDisputed} on:keydown={(e) => e.key === 'Enter' && ($showDisputed = !$showDisputed)} role="button" tabindex="0">
                 اضغط هنا {$showDisputed ? 'لإخفاء' : 'لتمييز'} الأسماء المتنازع عليها
             </span>
@@ -704,7 +708,11 @@ It documents how a familiar list—learned through culture and memory—appears 
         </p>
 
         <p class="EnglishText">
-            Some names are disputed among scholars. In fact, out of the 99, only 81 are agreed upon and the others are open for discussion.
+            {#if currentName && currentName.disputed === 'Yes'}
+                Different scholars have different criteria for what qualifies as a name of Allah swt. Of the 99 names, 81 are explicitly mentioned in the Qur'an. Therefore, there is not one agreed-upon list for the remaining 18 names. <span class="highlighted-name">{currentName.englishName}</span> is one of those names which has been excluded by some scholars. This includes Ibn Uthaymeen, Ibn Hazm, and Ibn Hajar, among others.
+            {:else}
+                Some names are disputed among scholars. In fact, out of the 99, only 81 are agreed upon and the others are open for discussion.
+            {/if}
             <span class="disputed-toggle" on:click={() => $showDisputed = !$showDisputed} on:keydown={(e) => e.key === 'Enter' && ($showDisputed = !$showDisputed)} role="button" tabindex="0">
                 Click here to {$showDisputed ? 'hide' : 'highlight'} the disputed names
             </span>
@@ -970,6 +978,7 @@ It documents how a familiar list—learned through culture and memory—appears 
     @import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Quicksand:wght@300..700&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
 
     @font-face {
     font-family: 'NotoKufiArabic';
@@ -981,11 +990,6 @@ It documents how a familiar list—learned through culture and memory—appears 
     font-family: 'NotoKufiArabic';
     src: url('../Assests/NotoKufiArabic-Bold.ttf') format('truetype');
     font-weight: 700;
-  }
-    @font-face {
-    font-family: 'Mokhtar Font';
-    src: url('../Assests/Mokhtar.ttf') format('truetype');
-    font-weight: 400;
   }
     @font-face {
     font-family: 'JawiKufi';
@@ -1373,7 +1377,7 @@ It documents how a familiar list—learned through culture and memory—appears 
 
     .abd-fixed-ar,
     .name-variable-ar {
-        font-family: 'Mokhtar Font', sans-serif;
+        font-family: 'Lalezar', sans-serif;
         font-size: 3vw;
         font-weight: 700;
         color: #266F8C;
@@ -1388,7 +1392,7 @@ It documents how a familiar list—learned through culture and memory—appears 
     }
 
     .person-name-ar {
-        font-family: 'Mokhtar Font', sans-serif;
+        font-family: 'Lalezar', sans-serif;
         font-size: 1.5vw;
         font-weight: 700;
         color: #266F8C;
@@ -1823,6 +1827,14 @@ It documents how a familiar list—learned through culture and memory—appears 
 
     .filter-checkbox span {
         color: #603D25;
+    }
+
+    .highlighted-name {
+        background-color: #EDDCC8;
+        color: #603D25;
+        padding: 0.1em 0.4em;
+        border-radius: 0.3em;
+        font-weight: 700;
     }
 
     /* Disputed Toggle Styles */

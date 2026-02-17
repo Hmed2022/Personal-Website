@@ -33,3 +33,30 @@
   src: url("./assets/Fonts/Quicksand-SemiBold.ttf") format("truetype");
   font-weight: 600;
 }
+
+/* Names project fonts — served from public/fonts/ for dev + production compatibility */
+@font-face {
+  font-family: 'NotoKufiArabic';
+  src: url('/fonts/NotoKufiArabic-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'NotoKufiArabic';
+  src: url('/fonts/NotoKufiArabic-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
+
+@font-face {
+  font-family: 'JawiKufi';
+  src: url('/fonts/JawiKufi-nOR1.ttf') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'KFGQPCUthmanicScriptHAFS';
+  src: url('/fonts/KFGQPC%20Uthmanic%20Script%20HAFS%20Regular.otf') format('opentype');
+  font-weight: normal;
+}
