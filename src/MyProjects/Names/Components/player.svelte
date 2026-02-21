@@ -1,15 +1,52 @@
 <script>
-    import audioSrc from '../../../assets/Projects/Names/Names1.mp3';
+    import audioSrc1 from '../../../assets/Projects/Names/Names1.mp3';
+    import audioSrc2 from '../../../assets/Projects/Names/Names2.mp3';
 
     let audio;
     let isPlaying = false;
     let currentTime = 0;
     let duration = 0;
-    let selectedSong = audioSrc;
     let isDragging = false;
     let progressBar;
-    import {language, nameId, audioPlaying, audioCurrentTime, seekToTime } from '../Stores/misc';
+    import {language, nameId, audioPlaying, audioCurrentTime, seekToTime, togglePlayRequest, selectedSongId } from '../Stores/misc';
     import namesData from './names.js';
+
+    const songSources = { 1: audioSrc1, 2: audioSrc2 };
+    $: selectedSong = songSources[$selectedSongId] || audioSrc1;
+
+    // When song changes, reset playback state
+    let prevSongId = $selectedSongId;
+    $: if ($selectedSongId !== prevSongId) {
+        prevSongId = $selectedSongId;
+        if (audio) {
+            const wasPlaying = isPlaying;
+            audio.pause();
+            isPlaying = false;
+            audioPlaying.set(false);
+            currentTime = 0;
+            audioCurrentTime.set(0);
+            // Need to reload audio after source changes
+            setTimeout(() => {
+                if (audio) {
+                    audio.load();
+                    if (wasPlaying) {
+                        audio.play();
+                        isPlaying = true;
+                        audioPlaying.set(true);
+                    }
+                }
+            }, 50);
+        }
+    }
+
+    // Subscribe to togglePlayRequest for keyboard shortcut (Space key)
+    let lastToggleRequest = 0;
+    $: if ($togglePlayRequest !== lastToggleRequest) {
+        lastToggleRequest = $togglePlayRequest;
+        if (audio && $togglePlayRequest > 0) {
+            togglePlay();
+        }
+    }
 
     // Subscribe to seekToTime to jump to a specific timestamp when a name is clicked
     $: if ($seekToTime !== null && audio) {
@@ -42,12 +79,13 @@
         // Find the most recent name based on current time
         let closestId = null;
         let closestTime = -1;
+        const tsKey = $selectedSongId === 2 ? 'timestamp2' : 'timestamp1';
 
         for (const [id, nameData] of Object.entries(namesData)) {
-            if (nameData.timestamp1 !== null &&
-                nameData.timestamp1 <= currentTime &&
-                nameData.timestamp1 > closestTime) {
-                closestTime = nameData.timestamp1;
+            if (nameData[tsKey] !== null &&
+                nameData[tsKey] <= currentTime &&
+                nameData[tsKey] > closestTime) {
+                closestTime = nameData[tsKey];
                 closestId = parseInt(id);
             }
         }
@@ -109,12 +147,17 @@
     $: progress = duration > 0 ? (currentTime / duration) * 100 : 0;
     $: currentTimeFormatted = formatTime(currentTime);
     $: durationFormatted = formatTime(duration);
+
+    function handleContainerClick(event) {
+        if (event.target.closest('.progress-bar')) return;
+        togglePlay();
+    }
 </script>
 
 <svelte:window on:mousemove={handleMouseMove} on:mouseup={handleMouseUp} />
 
-<div class="player-container">
-    <button class="play-button" on:click={togglePlay}>
+<div class="player-container" on:click={handleContainerClick}>
+    <button class="play-button" on:click|stopPropagation={togglePlay}>
         {#if isPlaying}
             <!-- Pause Icon -->
             <svg viewBox="0 0 24 24" fill="currentColor">
@@ -187,6 +230,7 @@
         background-color: none;
         max-width: 100%;
         width: 100%;
+        cursor: pointer;
     }
 
     .play-button {

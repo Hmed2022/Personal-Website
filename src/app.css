@@ -60,3 +60,10 @@
   src: url('/fonts/KFGQPC%20Uthmanic%20Script%20HAFS%20Regular.otf') format('opentype');
   font-weight: normal;
 }
+
+@font-face {
+  font-family: 'Mokhtar';
+  src: url('/fonts/Mokhtar.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}

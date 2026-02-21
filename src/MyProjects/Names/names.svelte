@@ -5,7 +5,7 @@ import AllNames from './Components/allnames.svelte'
 import Title from './Components/title.svelte'
 import Player from './Components/player.svelte';
 import { style } from 'svelte-body';
-import {language,nameId, filterQuran, filterDerived, filterHadith, showDisputed, audioPlaying, audioCurrentTime } from './Stores/misc.js';
+import {language,nameId, filterQuran, filterDerived, filterHadith, showDisputed, audioPlaying, audioCurrentTime, seekToTime, togglePlayRequest, selectedSongId } from './Stores/misc.js';
 import  names  from './Components/names.js';
 import  people  from './Components/people.js';
 import Back from './Components/background.svelte'
@@ -14,7 +14,9 @@ import quranDataEN from './Assests/QuranEN.json';
 import surahsData from './Assests/surahs.json';
 import sunnahData from './Assests/sunnah.json';
 import Frequency from './Components/frequency.svelte';
-import video from '../../assets/Projects/Names/video.mp4'
+import video1 from '../../assets/Projects/Names/video.mp4'
+import video2 from '../../assets/Projects/Names/video2.mp4'
+import songsData from './Assests/songs.js'
 
 
     // Reactive statement: automatically updates when $nameId changes
@@ -100,6 +102,33 @@ import video from '../../assets/Projects/Names/video.mp4'
     }
 
     // Function to highlight the Arabic name in the verse text
+    // Words that should NEVER be highlighted for a given name (normalized, no diacritics)
+    // Key = the arabicName from namesData, Value = array of normalized words to exclude
+    const highlightExcludeList = {
+        'الله': ['وَلَهُمۡ', 'ولهم','مَثَلُهُمۡ', 'حَوۡلَهُۥ','لَهُم','مِّثۡلِهِۦ','بَقۡلِهَا','وَبَصَلِهَاۖ','ٱلذِّلَّةُ','فَضۡلِهِۦ','وَرُسُلِهِ','لَهُۥ','مِثۡلِهَآۗ','لَهُۥ','نَزَّلَهُۥ','قَبۡلِهِم','قَوۡلِهِمۡۘ','ٱلۡهُدَىٰۗ','ٱلۡقِبۡلَةَ',
+            'قِبۡلَةٗ','وَٱلۡهُدَىٰ','أَعۡمَٰلَهُمۡ','بَدَّلَهُۥ','لَيۡلَةَ','لَّهُنَّۗ','لَعَلَّهُمۡ','ٱلۡأَهِلَّةِۖ','مَحِلَّهُۥۚ','كَامِلَةٞۗ','أَهۡلُهُۥ','قَوۡلُهُۥ','وَلَهُنَّ','أَجَلَهُنَّ',
+            'أَجَلَهُۥۚ','قَلِيلَةٍ','إِلَٰهَ','أَمۡوَٰلَهُمۡ','سُنۢبُلَةٖ','أُكُلَهَا','وَلَهُۥ'
+        ],
+        'الخالق':['خَلَقَ','يَخۡلُقَ'],
+        'الوهاب':['وَهَبۡ'],
+        'الفتاح':['يَفۡتَحُ'],
+        'الولي':['أَوۡلِيَآءَۖ'],
+        'الحي':['يُحِيطُونَ'],
+        'الاول':['وَٱلۡأٓخِرُ','وَٱلظَّـٰهِرُ','وَٱلۡبَاطِنُۖ'],
+        'التواب':['فَتُوبُوٓاْ','أَتُوبُ','ٱلتَّوۡبَةَ','لِيَتُوبُوٓاْۚ'],
+    
+
+    };
+
+    // Words that should ALWAYS be highlighted for a given name (normalized, no diacritics)
+    // Key = the arabicName from namesData, Value = array of normalized words to include
+    const highlightIncludeList = {
+        'الله': ['الله', 'لله', 'بالله', 'والله', 'فالله', 'تالله'],
+        'المتعالي':['ٱلۡمُتَعَالِ'],
+        'مالك الملك':[' مَٰلِكَ ٱلۡمُلۡكِ','مَٰلِكَ','مَٰلِكَ ٱلۡمُلۡكِ'],
+        'ذو الجلال والاكرام':['ذُو','ٱلۡجَلَٰلِ','وَٱلۡإِكۡرَامِ','ذِي']
+    };
+
     function highlightName(text, arabicName) {
         if (!text || !arabicName) return text;
 
@@ -135,12 +164,26 @@ import video from '../../assets/Projects/Names/video.mp4'
 
         if (rootName.length === 0) return text;
 
+        // Get exclude/include lists for this name (try normalized key first, then raw)
+        const excludes = highlightExcludeList[strippedName] || highlightExcludeList[arabicName] || [];
+        const includes = highlightIncludeList[strippedName] || highlightIncludeList[arabicName] || [];
+
         // Split text into words and check each word
         const words = text.split(/\s+/);
         const highlightedWords = words.map(word => {
             const strippedWord = normalizeArabic(word);
             const strippedWordNoAlif = strippedWord.replace(/ا/g, '');
             const strippedWordNoFinalYa = strippedWord.replace(/ي$/, '');
+
+            // Check include list first — always highlight these
+            if (includes.some(inc => strippedWord === normalizeArabic(inc))) {
+                return `<span class="highlighted-name">${word}</span>`;
+            }
+
+            // Check exclude list — never highlight these
+            if (excludes.some(exc => strippedWord === normalizeArabic(exc))) {
+                return word;
+            }
 
             // Check if the word matches the name (with or without ال, with flexible alif, and with flexible final ya)
             if (strippedWord === strippedName || strippedWord === rootName ||
@@ -167,6 +210,34 @@ import video from '../../assets/Projects/Names/video.mp4'
     let allNamesVisible = false;
     let bottomNameVisible = false;
     let videoElement;
+    let showBackToNames = false;
+    let songDropdownOpen = false;
+
+    const videoSources = { 1: video1, 2: video2 };
+    $: currentVideo = videoSources[$selectedSongId] || video1;
+
+    // Get current song info for display
+    $: currentSongInfo = $selectedSongId === 1 ? songsData.song1 : songsData.song2;
+
+    function selectSong(id) {
+        selectedSongId.set(id);
+        songDropdownOpen = false;
+    }
+
+    function handleScroll() {
+        if (allNamesElement) {
+            const rect = allNamesElement.getBoundingClientRect();
+            showBackToNames = rect.bottom < 0;
+        }
+    }
+
+    function scrollToNames() {
+        if (allNamesElement) {
+            const offset = window.innerWidth * 0.05; // 5vw above
+            const top = allNamesElement.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top, behavior: 'smooth' });
+        }
+    }
 
     // Reactive statement to control showPlayer based on both elements
     // $: showPlayer = allNamesVisible && !bottomNameVisible;
@@ -234,7 +305,46 @@ import video from '../../assets/Projects/Names/video.mp4'
         };
     });
 
+    // Build sorted array of name IDs by rank for keyboard navigation
+    const sortedNameIds = Object.values(names)
+        .filter(n => n.rank !== undefined)
+        .sort((a, b) => a.rank - b.rank)
+        .map(n => n.id);
+
+    function handleGlobalKey(event) {
+        // Don't intercept when user is typing in an input/textarea
+        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') return;
+
+        if (event.key === ' ') {
+            event.preventDefault();
+            togglePlayRequest.update(n => n + 1);
+        } else if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            navigateName(1);
+        } else if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            navigateName(-1);
+        }
+    }
+
+    function navigateName(direction) {
+        const currentIdx = sortedNameIds.indexOf($nameId);
+        if (currentIdx === -1) return;
+        const newIdx = currentIdx + direction;
+        if (newIdx >= 0 && newIdx < sortedNameIds.length) {
+            const newId = sortedNameIds[newIdx];
+            nameId.set(newId);
+            const name = names[newId];
+            const tsKey = $selectedSongId === 2 ? 'timestamp2' : 'timestamp1';
+            if (name && name[tsKey] !== undefined && name[tsKey] !== null) {
+                seekToTime.set(name[tsKey]);
+            }
+        }
+    }
+
 </script>
+
+<svelte:window on:scroll={handleScroll} on:keydown={handleGlobalKey} />
 
 <svelte:head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -309,16 +419,66 @@ It's a song everyone knows—not because we chose to learn it, but because we he
     {/if}
 </p>
 
+<div class="song-selector-wrapper">
+    <div class="song-selector">
+        <button class="song-selector-btn" on:click={() => songDropdownOpen = !songDropdownOpen}>
+            {#if $language === 'Arabic'}
+                <span class="song-selector-label">{currentSongInfo.singerAr} — {currentSongInfo.titleAr}</span>
+            {:else}
+                <span class="song-selector-label">{currentSongInfo.singerEn} — {currentSongInfo.titleEn}</span>
+            {/if}
+            <svg class="song-selector-arrow" class:open={songDropdownOpen} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+        {#if songDropdownOpen}
+            <div class="song-dropdown">
+                <button
+                    class="song-option"
+                    class:active={$selectedSongId === 1}
+                    on:click={() => selectSong(1)}
+                >
+                    {#if $language === 'Arabic'}
+                        <span class="song-option-singer">{songsData.song1.singerAr}</span>
+                        <span class="song-option-title">{songsData.song1.titleAr}</span>
+                    {:else}
+                        <span class="song-option-singer">{songsData.song1.singerEn}</span>
+                        <span class="song-option-title">{songsData.song1.titleEn}</span>
+                    {/if}
+                </button>
+                <button
+                    class="song-option"
+                    class:active={$selectedSongId === 2}
+                    on:click={() => selectSong(2)}
+                >
+                    {#if $language === 'Arabic'}
+                        <span class="song-option-singer">{songsData.song2.singerAr}</span>
+                        <span class="song-option-title">{songsData.song2.titleAr}</span>
+                    {:else}
+                        <span class="song-option-singer">{songsData.song2.singerEn}</span>
+                        <span class="song-option-title">{songsData.song2.titleEn}</span>
+                    {/if}
+                </button>
+            </div>
+        {/if}
+    </div>
+</div>
+
 <div class="video-container">
-    <video
-        class="names-video"
-        bind:this={videoElement}
-        muted
-        playsinline
-    >
-        <source src={video} type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    <div class="video-wrapper">
+        {#key $selectedSongId}
+        <video
+            class="names-video"
+            bind:this={videoElement}
+            muted
+            playsinline
+            on:click={() => togglePlayRequest.update(n => n + 1)}
+        >
+            <source src={currentVideo} type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        {/key}
+    </div>
 </div>
 
     <p class="ArabicText">
@@ -348,9 +508,30 @@ It documents how a familiar list—learned through culture and memory—appears 
     </div>
 
 
+<div class="guide-text">
+    {#if $language === 'Arabic'}
+        <p class="guide-text-arabic">مرّر فوق أي اسم لمعرفة معناه. انقر على أي اسم للانتقال إليه في الأغنية ورؤية تفاصيله. استخدم مفاتيح الأسهم للتنقل بين الأسماء، أو اضغط على مسافة للتشغيل والإيقاف.</p>
+    {:else}
+        <p class="guide-text-english">Hover over a name to see its meaning. Click any name to jump to it in the song and see its details. Use the left and right arrow keys to navigate between names, or press Space to play and pause.</p>
+    {/if}
+</div>
+
 <div bind:this={allNamesElement}>
     <AllNames/>
 </div>
+
+{#if showBackToNames}
+    <button class="back-to-names-btn" on:click={scrollToNames}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+        {#if $language === 'Arabic'}
+            العودة<br>للأسماء
+        {:else}
+            Back<br>to Names
+        {/if}
+    </button>
+{/if}
 
 
 
@@ -428,7 +609,7 @@ It documents how a familiar list—learned through culture and memory—appears 
                 {/if}
 
                 <div class={currentName.quran_hadith === "Hadith" ? "verse-container-hadith" : currentName.quran_hadith === "Derived" ? "verse-container-derived" : "verse-container"}>
-                  <p class="quran-text">{@html highlightName(quranVerses[currentVerseIndex].text, currentName.arabicName)}</p>
+                  <p class="quran-text-ar">{@html highlightName(quranVerses[currentVerseIndex].text, currentName.arabicName)}</p>
                   <p class="verse-reference">
                    <b> سورة {quranVerses[currentVerseIndex].surahName} - آية {quranVerses[currentVerseIndex].ayahNumber} <b/>
                   </p>
@@ -458,7 +639,7 @@ It documents how a familiar list—learned through culture and memory—appears 
             <div class="quran-carousel">
               <div class="carousel-content">
                 <div class="verse-container-hadith">
-                  <p class="quran-text">{@html highlightName(hadithData[0].textArabic, currentName.arabicName)}</p>
+                  <p class="quran-text-ar">{@html highlightName(hadithData[0].textArabic, currentName.arabicName)}</p>
                   <p class="verse-reference">
                    <b>{hadithData[0].collection} - {hadithData[0].bookTitleArabic} - حديث رقم {hadithData[0].hadithNumber}<b/>
                   </p>
@@ -485,7 +666,7 @@ It documents how a familiar list—learned through culture and memory—appears 
                 {/if}
 
                 <div class="verse-container-derived">
-                  <p class="quran-text">{@html highlightName(quranVerses[currentVerseIndex].text, currentName.arabicName)}</p>
+                  <p class="quran-text-ar">{@html highlightName(quranVerses[currentVerseIndex].text, currentName.arabicName)}</p>
                   <p class="verse-reference">
                    <b> سورة {quranVerses[currentVerseIndex].surahName} - آية {quranVerses[currentVerseIndex].ayahNumber} <b/>
                   </p>
@@ -555,7 +736,7 @@ It documents how a familiar list—learned through culture and memory—appears 
                 {/if}
 
                 <div class={currentName.quran_hadith === "Hadith" ? "verse-container-hadith" : currentName.quran_hadith === "Derived" ? "verse-container-derived" : "verse-container"}>
-                  <p class="quran-text">{quranVersesEN[currentVerseIndex].text}</p>
+                  <p class="quran-text-en">{quranVersesEN[currentVerseIndex].text}</p>
                   <p class="verse-reference">
                    <b> Surah {quranVersesEN[currentVerseIndex].surahName} <i class="translation-text">({quranVersesEN[currentVerseIndex].surahTranslation})</i> - Verse {quranVersesEN[currentVerseIndex].ayahNumber} <b/>
                   </p>
@@ -585,7 +766,7 @@ It documents how a familiar list—learned through culture and memory—appears 
             <div class="quran-carousel">
               <div class="carousel-content">
                 <div class="verse-container-hadith">
-                  <p class="quran-text">{hadithData[0].textEnglish}</p>
+                  <p class="quran-text-en">{hadithData[0].textEnglish}</p>
                   <p class="verse-reference">
                    <b>{hadithData[0].collection} - {hadithData[0].englishReference} - Hadith #{hadithData[0].hadithNumber}<b/>
                   </p>
@@ -612,7 +793,7 @@ It documents how a familiar list—learned through culture and memory—appears 
                 {/if}
 
                 <div class="verse-container-derived">
-                  <p class="quran-text">{quranVersesEN[currentVerseIndex].text}</p>
+                  <p class="quran-text-en">{quranVersesEN[currentVerseIndex].text}</p>
                   <p class="verse-reference">
                    <b> Surah {quranVersesEN[currentVerseIndex].surahName} <i class="translation-text">({quranVersesEN[currentVerseIndex].surahTranslation})</i> - Verse {quranVersesEN[currentVerseIndex].ayahNumber} <b/>
                   </p>
@@ -668,6 +849,16 @@ It documents how a familiar list—learned through culture and memory—appears 
             إنَّ ما هو ثابت عبر التقاليد العلمية ليس التكوين الدقيق للقائمة، بل عددها: تسعة وتسعون اسمًا، كما ورد في حديث مشهور عن النبي محمد ﷺ.
         </p>
 
+        <div class="intro-hadith-box">
+            <p class="intro-hadith-text-ar">
+                ‏عَنْ أَبِي هُرَيْرَةَ رضي الله عنه، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ:
+            </p>
+            <p class="intro-hadith-main-ar">
+                «&nbsp;إِنَّ لِلَّهِ تِسْعَةً وَتِسْعِينَ اسْمًا، مِائَةً إِلَّا وَاحِدًا، مَنْ أَحْصَاهَا دَخَلَ الْجَنَّةَ&nbsp;»
+            </p>
+            <p class="intro-hadith-ref">صحيح البخاري ٧٣٩٢</p>
+        </div>
+
         <p class="ArabicText">
             {#if currentName && currentName.disputed === 'Yes'}
                 لدى العلماء المختلفين معايير مختلفة لما يُعدّ اسمًا من أسماء الله الحسنى. من أصل الأسماء التسعة والتسعين، هناك ٨١ اسمًا مذكورة صراحةً في القرآن الكريم. لذلك، لا توجد قائمة واحدة متفق عليها للأسماء الثمانية عشر المتبقية. <span class="highlighted-name">{currentName.arabicName}</span> هو أحد تلك الأسماء التي استبعدها بعض العلماء، منهم ابن عثيمين وابن حزم وابن حجر وغيرهم.
@@ -706,6 +897,19 @@ It documents how a familiar list—learned through culture and memory—appears 
         <p class="EnglishText">
             What is consistent across scholarly traditions is not the exact composition of the list, but its number: ninety-nine Names, as referenced in a well-known hadith of the Prophet Muhammad ﷺ.
         </p>
+
+        <div class="intro-hadith-box">
+            <p class="intro-hadith-narrator-en">
+                Narrated Abu Huraira (may Allah be pleased with him):
+            </p>
+            <p class="intro-hadith-text-ar intro-hadith-text-ar-in-en">
+                «&nbsp;إِنَّ لِلَّهِ تِسْعَةً وَتِسْعِينَ اسْمًا، مِائَةً إِلَّا وَاحِدًا، مَنْ أَحْصَاهَا دَخَلَ الْجَنَّةَ&nbsp;»
+            </p>
+            <p class="intro-hadith-main-en">
+                "Allah has ninety-nine Names, one-hundred less one; and he who memorized them all by heart will enter Paradise."
+            </p>
+            <p class="intro-hadith-ref">Sahih al-Bukhari 7392</p>
+        </div>
 
         <p class="EnglishText">
             {#if currentName && currentName.disputed === 'Yes'}
@@ -765,12 +969,12 @@ It documents how a familiar list—learned through culture and memory—appears 
             </p>
 
             <div class="hadith-box-ar">
-                <p class="ArabicText" style="color: #FDEDDB; margin: 0;">
+                <p class="ArabicText" style="color: #FFFBF6; margin: 0;">
                     لكن هنا يصبح الأمر مثيراً للاهتمام: ليس كل اسم يبدأ بـ"عبد" في تونس يقابل أحد الأسماء الحسنى التسعة والتسعين المتفق عليها.
                     <br><br>
-                    خذ مثلاً عبد الستار، وهو اسم تونسي شائع. الستار (المُستتِر) يُستخدم على نطاق واسع، لكنه في الواقع ليس ضمن القائمة المتفق عليها للأسماء التسعة والتسعين. إنه مشتق من صفة الله في ستر الذنوب، الموجودة في الأحاديث والتراث الإسلامي، لكنه لم يدخل في التعداد القانوني. ومع ذلك، ظل التونسيون يسمون أبناءهم عبد الستار لأجيال، ويتعاملون معه كما لو كان كذلك.
+                    خذ مثلاً <span class="highlight-name">عبد الستار</span>، وهو اسم تونسي شائع. <span class="highlight-name">الستار</span> (المُستتِر) يُستخدم على نطاق واسع، لكنه في الواقع ليس ضمن القائمة المتفق عليها للأسماء التسعة والتسعين. إنه مشتق من صفة الله في ستر الذنوب، الموجودة في الأحاديث والتراث الإسلامي، لكنه لم يدخل في التعداد القانوني. ومع ذلك، ظل التونسيون يسمون أبناءهم <span class="highlight-name">عبد الستار</span> لأجيال، ويتعاملون معه كما لو كان كذلك.
                     <br><br>
-                    والأمر نفسه ينطبق على عبد المنان — فالمنان (المُنعم بالعطاء) يرد في الأحاديث والدعاء، لكنه ليس ضمن التسعة والتسعين المتفق عليها. وكذلك عبد المنعم — فالمنعم (المتفضّل بالنعم) نردده في سورة الفاتحة كل يوم، ومع ذلك يبقى خارج القائمة القانونية. هذه الأسماء تعيش في العائلات والمجتمعات، يتوارثها الناس بالتقليد لا بالتعداد.
+                    والأمر نفسه ينطبق على <span class="highlight-name">عبد المنان</span> — ف<span class="highlight-name">المنان</span> (المُنعم بالعطاء) يرد في الأحاديث والدعاء، لكنه ليس ضمن التسعة والتسعين المتفق عليها. وكذلك <span class="highlight-name">عبد المنعم</span> — ف<span class="highlight-name">المنعم</span> (المتفضّل بالنعم) نردده في سورة الفاتحة كل يوم، ومع ذلك يبقى خارج القائمة القانونية. هذه الأسماء تعيش في العائلات والمجتمعات، يتوارثها الناس بالتقليد لا بالتعداد.
                 </p>
             </div>
 
@@ -841,12 +1045,12 @@ It documents how a familiar list—learned through culture and memory—appears 
             </p>
 
             <div class="hadith-box-en">
-                <p class="EnglishText" style="color: #FDEDDB; margin: 0;">
+                <p class="EnglishText" style="color: #FFFBF6; margin: 0;">
                     But here's where it gets interesting: not every "Abd" name in Tunisia corresponds to one of the canonical 99 Names.
                     <br><br>
-                    Take Abdessattar (عبد الستار), a common Tunisian name. As-Sattar (الستار—the Concealer) is widely used, but it's actually not on the agreed-upon list of 99 Names. It's derived from Allah's attribute of concealing sins, found in hadith and Islamic tradition, but it didn't make the canonical enumeration. Yet Tunisians have been naming their sons Abdessattar for generations, treating it as if it were.
+                    Take <span class="highlight-name">Abdessattar</span> (<span class="highlight-name">عبد الستار</span>), a common Tunisian name. <span class="highlight-name">As-Sattar</span> (<span class="highlight-name">الستار</span>—the Concealer) is widely used, but it's actually not on the agreed-upon list of 99 Names. It's derived from Allah's attribute of concealing sins, found in hadith and Islamic tradition, but it didn't make the canonical enumeration. Yet Tunisians have been naming their sons <span class="highlight-name">Abdessattar</span> for generations, treating it as if it were.
                     <br><br>
-                    The same goes for Abdel Mannan (عبد المنان)—Al-Mannan (المنان, the Bestower of Favors) appears in hadith and du'a, but not in the standard 99. And Abdel Mon'em (عبد المنعم)—Al-Mun'im (المنعم, the Gracious Bestower) is recited in Al-Fatiha every day, yet it too sits outside the canonical list. These names live in families and communities, carried forward by tradition rather than by enumeration.
+                    The same goes for <span class="highlight-name">Abdel Mannan</span> (<span class="highlight-name">عبد المنان</span>)—<span class="highlight-name">Al-Mannan</span> (<span class="highlight-name">المنان</span>, the Bestower of Favors) appears in hadith and du'a, but not in the standard 99. And <span class="highlight-name">Abdel Mon'em</span> (<span class="highlight-name">عبد المنعم</span>)—<span class="highlight-name">Al-Mun'im</span> (<span class="highlight-name">المنعم</span>, the Gracious Bestower) is recited in Al-Fatiha every day, yet it too sits outside the canonical list. These names live in families and communities, carried forward by tradition rather than by enumeration.
                 </p>
             </div>
 
@@ -1310,17 +1514,85 @@ It documents how a familiar list—learned through culture and memory—appears 
     }
 
     .hadith-box-en {
-        background-color: #e96449;
+        background-color: #ECCCBA;
+        border: 0.2vw solid #E98F7D;
         border-radius: 1vw;
         padding: 2.5vw 3vw;
         margin: 2vw 0;
     }
 
     .hadith-box-ar {
-        background-color: #e96449;
+        background-color: #ECCCBA;
+        border: 0.2vw solid #E98F7D;
         border-radius: 1vw;
         padding: 2.5vw 3vw;
         margin: 2vw 0;
+    }
+
+    .hadith-box-en .highlight-name,
+    .hadith-box-ar .highlight-name {
+        color: #E86349;
+        font-weight: 700;
+    }
+
+    .intro-hadith-box {
+        padding: 1.5vw 0;
+        margin: 1vw 0;
+        text-align: center;
+    }
+
+    .intro-hadith-text-ar {
+        font-family: 'NotoKufiArabic', sans-serif;
+        font-weight: 400;
+        font-size: 1.1vw;
+        color: #AB8A7E;
+        direction: rtl;
+        line-height: 2;
+        margin: 0 0 0.5vw 0;
+    }
+
+    .intro-hadith-main-ar {
+        font-family: 'KFGQPCUthmanicScriptHAFS', 'Amiri Quran', serif;
+        font-weight: 400;
+        font-size: 1.8vw;
+        color: #266F8C;
+        direction: rtl;
+        line-height: 2.5;
+        margin: 0.5vw 0;
+    }
+
+    .intro-hadith-narrator-en {
+        font-family: 'Quicksand', sans-serif;
+        font-weight: 500;
+        font-size: 0.95vw;
+        color: #AB8A7E;
+        direction: ltr;
+        margin: 0 0 0.5vw 0;
+        font-style: italic;
+    }
+
+    .intro-hadith-text-ar-in-en {
+        margin: 0 0 0.5vw 0;
+    }
+
+    .intro-hadith-main-en {
+        font-family: 'Quicksand', sans-serif;
+        font-weight: 500;
+        font-size: 1.2vw;
+        color: #266F8C;
+        direction: ltr;
+        line-height: 2;
+        margin: 0.5vw 0;
+        font-style: italic;
+    }
+
+    .intro-hadith-ref {
+        font-family: 'Quicksand', sans-serif;
+        font-weight: 300;
+        font-size: 0.8vw;
+        color: #AB8A7E;
+        margin: 0.5vw 0 0 0;
+        letter-spacing: 0.05vw;
     }
 
     .name-examples-en {
@@ -1545,13 +1817,21 @@ It documents how a familiar list—learned through culture and memory—appears 
         padding: 0;
     }
 
-    .names-video {
-        width: 100%;
+    .video-wrapper {
         max-width: 50vw; /* 800px */
-        height: auto;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
         border: 0.5vw solid #266F8C; /* 8px */
         border-radius: 0.5vw; /* 8px */
         box-shadow: 0 0.25vw 0.75vw rgba(38, 111, 140, 0.3); /* 0 4px 12px */
+    }
+
+    .names-video {
+        display: block;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
 
@@ -1713,7 +1993,7 @@ It documents how a familiar list—learned through culture and memory—appears 
         border: 0.125vw solid #4C8C4C; /* 2px */
     }
 
-    .quran-text {
+    .quran-text-ar {
         font-family: 'KFGQPCUthmanicScriptHAFS', 'Amiri Quran', serif !important;
         font-weight: 400;
         font-size: 1.8vw;
@@ -1724,7 +2004,19 @@ It documents how a familiar list—learned through culture and memory—appears 
         margin: 0 0 1.5vw 0; /* 0 0 1.5rem 0 */
     }
 
-    .quran-text :global(.highlighted-name) {
+    .quran-text-en {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-weight: 400;
+        font-size: 1.4vw;
+        direction: ltr;
+        text-align: center;
+        color: #603D25;
+        line-height: 2;
+        margin: 0 0 1.5vw 0; /* 0 0 1.5rem 0 */
+        font-style: italic;
+    }
+
+    .quran-text-ar :global(.highlighted-name) {
         font-weight: 700;
         color: #266F8C;
         background-color: rgba(171, 138, 126, 0.2);
@@ -1976,8 +2268,12 @@ It documents how a familiar list—learned through culture and memory—appears 
         }
 
         /* Carousel / Quran verse */
-        .quran-text {
+        .quran-text-ar {
             font-size: 3vw; /* was 1.8vw */
+        }
+
+        .quran-text-en {
+            font-size: 2.5vw;
         }
 
         .verse-reference {
@@ -1986,6 +2282,32 @@ It documents how a familiar list—learned through culture and memory—appears 
 
         .verse-counter {
             font-size: 2.5vw; /* was 1.2vw */
+        }
+
+        /* Intro hadith box */
+        .intro-hadith-box {
+            padding: 3vw 0;
+            margin: 2vw 0;
+        }
+
+        .intro-hadith-text-ar {
+            font-size: 2.5vw;
+        }
+
+        .intro-hadith-main-ar {
+            font-size: 3.2vw;
+        }
+
+        .intro-hadith-narrator-en {
+            font-size: 2.2vw;
+        }
+
+        .intro-hadith-main-en {
+            font-size: 2.8vw;
+        }
+
+        .intro-hadith-ref {
+            font-size: 1.8vw;
         }
 
         .carousel-arrow {
@@ -2074,4 +2396,380 @@ It documents how a familiar list—learned through culture and memory—appears 
         }
 
       }
+
+    .back-to-names-btn {
+        position: fixed;
+        top: 1vw;
+        left: 1vw;
+        display: flex;
+        align-items: center;
+        gap: 0.25vw;
+        padding: 0.3vw 0.6vw;
+        background-color: #266F8C;
+        color: #FDEDDB;
+        border: none;
+        border-radius: 0.4vw;
+        cursor: pointer;
+        font-family: 'NotoKufiArabic', 'Quicksand', sans-serif;
+        font-size: 0.75vw;
+        line-height: 1.2;
+        font-weight: 600;
+        z-index: 1000;
+        transition: opacity 0.3s ease, transform 0.2s ease, background-color 0.3s ease;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        opacity: 0.5;
+    }
+
+    .back-to-names-btn:hover {
+        opacity: 1;
+        transform: scale(1.05);
+        background-color: #1e5a72;
+    }
+
+    .back-to-names-btn svg {
+        width: 0.9vw;
+        height: 0.9vw;
+    }
+
+    @media (max-width: 768px) {
+        .back-to-names-btn {
+            top: 2vw;
+            left: 2vw;
+            padding: 1vw 2vw;
+            font-size: 2vw;
+            border-radius: 1vw;
+            gap: 0.5vw;
+        }
+
+        .back-to-names-btn svg {
+            width: 2.5vw;
+            height: 2.5vw;
+        }
+    }
+
+    /* Guide text */
+    .guide-text {
+        max-width: 50vw;
+        margin: 1vw auto 2vw auto;
+        text-align: center;
+        padding: 0 2vw;
+    }
+
+    .guide-text-english {
+        font-family: 'Quicksand', sans-serif;
+        font-size: 1vw;
+        font-style: italic;
+        font-weight: 300;
+        color: #7A6A5E;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .guide-text-arabic {
+        font-family: 'NotoKufiArabic', sans-serif;
+        font-size: 1vw;
+        font-style: italic;
+        font-weight: 400;
+        color: #7A6A5E;
+        direction: rtl;
+        line-height: 1.8;
+        margin: 0;
+    }
+
+    /* Info card below grid */
+    .name-info-card {
+        max-width: 50vw;
+        margin: 2vw auto;
+        background: #FDEDDB;
+        border-left: 3px solid #266F8C;
+        border-radius: 8px;
+        padding: 1.2vw 1.8vw;
+        animation: cardFadeIn 0.3s ease;
+    }
+
+    @keyframes cardFadeIn {
+        from { opacity: 0; transform: translateY(-8px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .info-card-rank {
+        font-family: 'Quicksand', sans-serif;
+        font-weight: bold;
+        font-size: 0.9vw;
+        color: #266F8C;
+        margin-bottom: 0.3vw;
+    }
+
+    .info-card-names {
+        display: flex;
+        align-items: center;
+        gap: 0.8vw;
+        margin-bottom: 0.3vw;
+    }
+
+    .info-card-arabic {
+        font-family: 'NotoKufiArabic', sans-serif;
+        font-weight: 700;
+        font-size: 1.6vw;
+        color: #603D25;
+    }
+
+    .info-card-separator {
+        font-size: 1.6vw;
+        color: #603D25;
+    }
+
+    .info-card-english {
+        font-family: 'JawiKufi', sans-serif;
+        font-size: 1.4vw;
+        color: #603D25;
+    }
+
+    .info-card-meaning {
+        font-family: 'Quicksand', sans-serif;
+        font-size: 1vw;
+        color: #7A6A5E;
+        font-style: italic;
+        margin-bottom: 0.5vw;
+    }
+
+    .info-card-desc-ar {
+        font-family: 'NotoKufiArabic', sans-serif;
+        font-size: 0.9vw;
+        color: #603D25;
+        direction: rtl;
+        line-height: 1.7;
+        margin: 0.3vw 0;
+    }
+
+    .info-card-desc-en {
+        font-family: 'Quicksand', sans-serif;
+        font-size: 0.9vw;
+        color: #603D25;
+        line-height: 1.5;
+        margin: 0.3vw 0;
+    }
+
+    .info-card-source {
+        font-family: 'Quicksand', sans-serif;
+        font-size: 0.8vw;
+        display: flex;
+        align-items: center;
+        gap: 0.3vw;
+        color: #7A6A5E;
+        margin-top: 0.4vw;
+    }
+
+    .info-source-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .info-source-dot.quran {
+        background-color: #3E8BA9;
+    }
+
+    .info-source-dot.derived {
+        background-color: #047857;
+    }
+
+    .info-source-dot.hadith {
+        background-color: #C2452D;
+    }
+
+    .info-card-hint {
+        font-family: 'Quicksand', sans-serif;
+        font-size: 0.7vw;
+        color: #AB8A7E;
+        font-style: italic;
+        margin: 0.4vw 0 0 0;
+    }
+
+    @media (max-width: 768px) {
+        .guide-text {
+            max-width: 90vw;
+        }
+
+        .guide-text-english,
+        .guide-text-arabic {
+            font-size: 2.8vw;
+        }
+
+        .name-info-card {
+            max-width: 90vw;
+            padding: 3vw 4vw;
+        }
+
+        .info-card-rank {
+            font-size: 2.5vw;
+        }
+
+        .info-card-arabic {
+            font-size: 4.5vw;
+        }
+
+        .info-card-separator {
+            font-size: 4.5vw;
+        }
+
+        .info-card-english {
+            font-size: 3.5vw;
+        }
+
+        .info-card-meaning {
+            font-size: 2.8vw;
+        }
+
+        .info-card-desc-ar,
+        .info-card-desc-en {
+            font-size: 2.5vw;
+        }
+
+        .info-card-source {
+            font-size: 2.2vw;
+        }
+
+        .info-card-hint {
+            font-size: 2vw;
+        }
+
+        .song-selector-wrapper {
+            padding: 0 5vw;
+        }
+
+        .song-selector-btn {
+            padding: 2.5vw 4vw;
+            font-size: 3vw;
+        }
+
+        .song-selector-arrow {
+            width: 4vw;
+            height: 4vw;
+        }
+
+        .song-option {
+            padding: 3vw 4vw;
+        }
+
+        .song-option-singer {
+            font-size: 3vw;
+        }
+
+        .song-option-title {
+            font-size: 2.5vw;
+        }
+    }
+
+    /* Song selector dropdown */
+    .song-selector-wrapper {
+        display: flex;
+        justify-content: center;
+        margin: 2vw 0 0 0;
+    }
+
+    .song-selector {
+        position: relative;
+        display: inline-block;
+    }
+
+    .song-selector-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.6vw;
+        background: #FDEDDB;
+        border: 2px solid #AC8B7E;
+        border-radius: 8px;
+        padding: 0.6vw 1.2vw;
+        cursor: pointer;
+        transition: background 0.2s;
+        font-family: 'Quicksand', sans-serif;
+        font-size: 1vw;
+        color: #AC8B7E;
+        font-weight: 600;
+    }
+
+    .song-selector-btn:hover {
+        background: #f0dcc8;
+    }
+
+    .song-selector-label {
+        white-space: nowrap;
+    }
+
+    .song-selector-arrow {
+        width: 1.2vw;
+        height: 1.2vw;
+        transition: transform 0.2s;
+        flex-shrink: 0;
+    }
+
+    .song-selector-arrow.open {
+        transform: rotate(180deg);
+    }
+
+    .song-dropdown {
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 50%;
+        transform: translateX(-50%);
+        background: #FDEDDB;
+        border: 2px solid #AC8B7E;
+        border-radius: 8px;
+        overflow: hidden;
+        z-index: 100;
+        min-width: 100%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .song-option {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2vw;
+        width: 100%;
+        padding: 0.7vw 1.2vw;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.15s;
+        font-family: 'Quicksand', sans-serif;
+    }
+
+    .song-option:hover {
+        background: #f0dcc8;
+    }
+
+    .song-option.active {
+        background: #AC8B7E;
+        color: #FFFBF6;
+    }
+
+    .song-option.active .song-option-singer,
+    .song-option.active .song-option-title {
+        color: #FFFBF6;
+    }
+
+    .song-option-singer {
+        font-weight: 600;
+        font-size: 0.95vw;
+        color: #AC8B7E;
+        white-space: nowrap;
+    }
+
+    .song-option-title {
+        font-size: 0.8vw;
+        color: #7A6A5E;
+        white-space: nowrap;
+    }
+
+    .song-option + .song-option {
+        border-top: 1px solid #d4c4b5;
+    }
+
+    .song-option.active + .song-option,
+    .song-option + .song-option.active {
+        border-top-color: #AC8B7E;
+    }
 </style>

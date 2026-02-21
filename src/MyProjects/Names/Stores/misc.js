@@ -9,3 +9,5 @@ export const showDisputed = writable(false);
 export const audioPlaying = writable(false);
 export const audioCurrentTime = writable(0);
 export const seekToTime = writable(null);
+export const togglePlayRequest = writable(0);
+export const selectedSongId = writable(1);

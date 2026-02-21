@@ -1,5 +1,6 @@
 <script>
-    import { nameId, filterQuran, filterDerived, filterHadith, showDisputed, seekToTime } from '../Stores/misc';
+    import { tick } from 'svelte';
+    import { nameId, filterQuran, filterDerived, filterHadith, showDisputed, seekToTime, selectedSongId } from '../Stores/misc';
     import  names  from './names.js';
 
     const BASE   = '#266F8C';
@@ -18,6 +19,16 @@
     
     $: activeGroup = $nameId;
     let hoverGroup = null;
+
+    // Tooltip state
+    let tooltipX = 0;
+    let tooltipY = 0;
+    $: hoveredName = hoverGroup && names[hoverGroup] ? names[hoverGroup] : null;
+
+    function handleSvgMouseMove(event) {
+        tooltipX = event.clientX + 15;
+        tooltipY = event.clientY - 10;
+    }
 
     // Initialize all fills and strokes
     let fills = Array(107).fill(BASE);
@@ -91,8 +102,9 @@
 
         // 2. Seek to the name's timestamp in the audio player
         const name = names[id];
-        if (name && name.timestamp1 !== undefined && name.timestamp1 !== null) {
-            seekToTime.set(name.timestamp1);
+        const tsKey = $selectedSongId === 2 ? 'timestamp2' : 'timestamp1';
+        if (name && name[tsKey] !== undefined && name[tsKey] !== null) {
+            seekToTime.set(name[tsKey]);
         }
 
         // 3. The name display will automatically update through the reactive statement
@@ -118,6 +130,30 @@
 
 
     
+    // Pulse animation tracking
+    let prevActiveGroup = null;
+
+    $: {
+        if (activeGroup !== prevActiveGroup && activeGroup !== null) {
+            prevActiveGroup = activeGroup;
+            const targetId = activeGroup;
+            tick().then(() => {
+                const svg = document.getElementById('Layer_1');
+                if (!svg) return;
+                const groups = svg.querySelectorAll(':scope > g');
+                const idx = targetId - 1;
+                if (groups[idx]) {
+                    groups[idx].classList.remove('name-pulse');
+                    void groups[idx].offsetWidth; // force reflow to restart animation
+                    groups[idx].classList.add('name-pulse');
+                    setTimeout(() => {
+                        groups[idx].classList.remove('name-pulse');
+                    }, 600);
+                }
+            });
+        }
+    }
+
     // Reactive statement: automatically updates when $nameId changes
     $: currentName = $nameId && names[$nameId] ? names[$nameId] : null;
 </script>
@@ -125,12 +161,13 @@
 
 
     
+<div class="svg-wrapper">
     <svg
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       viewBox="0 0 740.2 1200"
-    
+      on:mousemove={handleSvgMouseMove}
     >
     
          <g
@@ -1671,8 +1708,26 @@
     
     </svg>
 
-
-
+    {#if hoveredName}
+        <div
+            class="name-tooltip"
+            style="left: {tooltipX}px; top: {tooltipY}px;"
+        >
+            <div class="tooltip-arabic">{hoveredName.arabicName}</div>
+            <div class="tooltip-english">{hoveredName.englishName}</div>
+            <div class="tooltip-meaning">{hoveredName.englishMean}</div>
+            <div class="tooltip-source">
+                <span
+                    class="source-dot"
+                    class:quran={hoveredName.quran_hadith === 'Quran'}
+                    class:derived={hoveredName.quran_hadith === 'Derived'}
+                    class:hadith={hoveredName.quran_hadith === 'Hadith'}
+                ></span>
+                {hoveredName.quran_hadith}
+            </div>
+        </div>
+    {/if}
+</div>
 
 <style>
   @font-face {
@@ -1730,8 +1785,94 @@
   g[tabindex]:focus {
     outline: none;
   }
-  
+
   g[tabindex]:focus-visible {
     outline: none;
+  }
+
+  .svg-wrapper {
+    position: relative;
+  }
+
+  .name-tooltip {
+    position: fixed;
+    background: #266F8C;
+    color: #FFFBF6;
+    padding: 0.6rem 0.9rem;
+    border-radius: 8px;
+    pointer-events: none;
+    z-index: 200;
+    min-width: 120px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.15s ease;
+  }
+
+  .tooltip-arabic {
+    font-family: 'NotoKufiArabic', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    direction: rtl;
+    text-align: right;
+    margin-bottom: 0.2rem;
+  }
+
+  .tooltip-english {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .tooltip-meaning {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.75rem;
+    opacity: 0.85;
+    margin-bottom: 0.3rem;
+  }
+
+  .tooltip-source {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    opacity: 0.9;
+  }
+
+  .source-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .source-dot.quran {
+    background-color: #5AADBF;
+  }
+
+  .source-dot.derived {
+    background-color: #4FB397;
+  }
+
+  .source-dot.hadith {
+    background-color: #D4796A;
+  }
+
+  /* Hide tooltip on touch devices */
+  @media (hover: none) {
+    .name-tooltip {
+      display: none;
+    }
+  }
+
+  /* Pulse animation on active name */
+  :global(#Layer_1 > g.name-pulse) {
+    animation: -global-namePulse 0.6s ease-out;
+  }
+
+  @keyframes -global-namePulse {
+    0% { filter: drop-shadow(0 0 0px transparent); }
+    50% { filter: drop-shadow(0 0 8px #AC8B7E); }
+    100% { filter: drop-shadow(0 0 0px transparent); }
   }
 </style>
