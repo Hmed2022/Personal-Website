@@ -631,7 +631,7 @@ It documents how a familiar list—learned through culture and memory—appears 
         {:else if currentName.quran_hadith === 'Hadith'}
           <!-- Hadith Source -->
           <div class="source-hadith">
-            <p class="source-label">ذكر في الحديث الصحيح</p>
+            <p class="source-label" style="color: #E86349;">ذكر في الحديث الصحيح</p>
           </div>
 
           <!-- Hadith reference -->
@@ -650,7 +650,7 @@ It documents how a familiar list—learned through culture and memory—appears 
         {:else if currentName.quran_hadith === 'Derived'}
           <!-- Derived Source -->
           <div class="source-hadith">
-            <p class="source-label">مشتق من القرآن الكريم</p>
+            <p class="source-label" style="color: #047857;">مشتق من القرآن الكريم</p>
           </div>
 
           <!-- Verse reference for Derived -->
@@ -758,7 +758,7 @@ It documents how a familiar list—learned through culture and memory—appears 
         {:else if currentName.quran_hadith === 'Hadith'}
           <!-- Hadith Source -->
           <div class="source-hadith">
-            <p class="source-label-english">Mentioned in Hadith Sahih</p>
+            <p class="source-label-english" style="color: #E86349;">Mentioned in Hadith Sahih</p>
           </div>
 
           <!-- Hadith reference -->
@@ -777,7 +777,7 @@ It documents how a familiar list—learned through culture and memory—appears 
         {:else if currentName.quran_hadith === 'Derived'}
           <!-- Derived Source -->
           <div class="source-hadith">
-            <p class="source-label-english">Derived From The Holy Quran</p>
+            <p class="source-label-english" style="color: #047857;">Derived From The Holy Quran</p>
           </div>
 
           <!-- Verse reference for Derived -->
@@ -969,12 +969,12 @@ It documents how a familiar list—learned through culture and memory—appears 
             </p>
 
             <div class="hadith-box-ar">
-                <p class="ArabicText" style="color: #FFFBF6; margin: 0;">
+                <p class="ArabicText" style="margin: 0;">
                     لكن هنا يصبح الأمر مثيراً للاهتمام: ليس كل اسم يبدأ بـ"عبد" في تونس يقابل أحد الأسماء الحسنى التسعة والتسعين المتفق عليها.
                     <br><br>
-                    خذ مثلاً <span class="highlight-name">عبد الستار</span>، وهو اسم تونسي شائع. <span class="highlight-name">الستار</span> (المُستتِر) يُستخدم على نطاق واسع، لكنه في الواقع ليس ضمن القائمة المتفق عليها للأسماء التسعة والتسعين. إنه مشتق من صفة الله في ستر الذنوب، الموجودة في الأحاديث والتراث الإسلامي، لكنه لم يدخل في التعداد القانوني. ومع ذلك، ظل التونسيون يسمون أبناءهم <span class="highlight-name">عبد الستار</span> لأجيال، ويتعاملون معه كما لو كان كذلك.
+                    خذ مثلاً <span class="highlight-name">عبد الستار</span>، وهو اسم تونسي شائع. <span class="highlight-name">الستار</span> (المُستتِر) يُستخدم على نطاق واسع، لكنه في الواقع ليس ضمن القائمة المتفق عليها للأسماء التسعة والتسعين. إنه <span class="source-derived-text">مشتق</span> من صفة الله في ستر الذنوب، الموجودة في <span class="source-hadith-text">الأحاديث</span> والتراث الإسلامي، لكنه لم يدخل في التعداد القانوني. ومع ذلك، ظل التونسيون يسمون أبناءهم <span class="highlight-name">عبد الستار</span> لأجيال، ويتعاملون معه كما لو كان كذلك.
                     <br><br>
-                    والأمر نفسه ينطبق على <span class="highlight-name">عبد المنان</span> — ف<span class="highlight-name">المنان</span> (المُنعم بالعطاء) يرد في الأحاديث والدعاء، لكنه ليس ضمن التسعة والتسعين المتفق عليها. وكذلك <span class="highlight-name">عبد المنعم</span> — ف<span class="highlight-name">المنعم</span> (المتفضّل بالنعم) نردده في سورة الفاتحة كل يوم، ومع ذلك يبقى خارج القائمة القانونية. هذه الأسماء تعيش في العائلات والمجتمعات، يتوارثها الناس بالتقليد لا بالتعداد.
+                    والأمر نفسه ينطبق على <span class="highlight-name">عبد المنان</span> — ف<span class="highlight-name">المنان</span> (المُنعم بالعطاء) يرد في <span class="source-hadith-text">الأحاديث</span> والدعاء، لكنه ليس ضمن التسعة والتسعين المتفق عليها. وكذلك <span class="highlight-name">عبد المنعم</span> — ف<span class="highlight-name">المنعم</span> (المتفضّل بالنعم) نردده في <span class="source-quran-text">سورة الفاتحة</span> كل يوم، ومع ذلك يبقى خارج القائمة القانونية. هذه الأسماء تعيش في العائلات والمجتمعات، يتوارثها الناس بالتقليد لا بالتعداد.
                 </p>
             </div>
 
@@ -1045,12 +1045,12 @@ It documents how a familiar list—learned through culture and memory—appears 
             </p>
 
             <div class="hadith-box-en">
-                <p class="EnglishText" style="color: #FFFBF6; margin: 0;">
+                <p class="EnglishText" style="margin: 0;">
                     But here's where it gets interesting: not every "Abd" name in Tunisia corresponds to one of the canonical 99 Names.
                     <br><br>
-                    Take <span class="highlight-name">Abdessattar</span> (<span class="highlight-name">عبد الستار</span>), a common Tunisian name. <span class="highlight-name">As-Sattar</span> (<span class="highlight-name">الستار</span>—the Concealer) is widely used, but it's actually not on the agreed-upon list of 99 Names. It's derived from Allah's attribute of concealing sins, found in hadith and Islamic tradition, but it didn't make the canonical enumeration. Yet Tunisians have been naming their sons <span class="highlight-name">Abdessattar</span> for generations, treating it as if it were.
+                    Take <span class="highlight-name">Abdessattar</span> (<span class="highlight-name">عبد الستار</span>), a common Tunisian name. <span class="highlight-name">As-Sattar</span> (<span class="highlight-name">الستار</span>—the Concealer) is widely used, but it's actually not on the agreed-upon list of 99 Names. It's <span class="source-derived-text">derived</span> from Allah's attribute of concealing sins, found in <span class="source-hadith-text">hadith</span> and Islamic tradition, but it didn't make the canonical enumeration. Yet Tunisians have been naming their sons <span class="highlight-name">Abdessattar</span> for generations, treating it as if it were.
                     <br><br>
-                    The same goes for <span class="highlight-name">Abdel Mannan</span> (<span class="highlight-name">عبد المنان</span>)—<span class="highlight-name">Al-Mannan</span> (<span class="highlight-name">المنان</span>, the Bestower of Favors) appears in hadith and du'a, but not in the standard 99. And <span class="highlight-name">Abdel Mon'em</span> (<span class="highlight-name">عبد المنعم</span>)—<span class="highlight-name">Al-Mun'im</span> (<span class="highlight-name">المنعم</span>, the Gracious Bestower) is recited in Al-Fatiha every day, yet it too sits outside the canonical list. These names live in families and communities, carried forward by tradition rather than by enumeration.
+                    The same goes for <span class="highlight-name">Abdel Mannan</span> (<span class="highlight-name">عبد المنان</span>)—<span class="highlight-name">Al-Mannan</span> (<span class="highlight-name">المنان</span>, the Bestower of Favors) appears in <span class="source-hadith-text">hadith</span> and du'a, but not in the standard 99. And <span class="highlight-name">Abdel Mon'em</span> (<span class="highlight-name">عبد المنعم</span>)—<span class="highlight-name">Al-Mun'im</span> (<span class="highlight-name">المنعم</span>, the Gracious Bestower) is recited in <span class="source-quran-text">Al-Fatiha</span> every day, yet it too sits outside the canonical list. These names live in families and communities, carried forward by tradition rather than by enumeration.
                 </p>
             </div>
 
@@ -1514,23 +1514,41 @@ It documents how a familiar list—learned through culture and memory—appears 
     }
 
     .hadith-box-en {
-        background-color: #ECCCBA;
-        border: 0.2vw solid #E98F7D;
-        border-radius: 1vw;
+        background-color: #F5E6D8;
+        border-left: 0.4vw solid #266F8C;
+        border-radius: 0.6vw;
         padding: 2.5vw 3vw;
         margin: 2vw 0;
     }
 
     .hadith-box-ar {
-        background-color: #ECCCBA;
-        border: 0.2vw solid #E98F7D;
-        border-radius: 1vw;
+        background-color: #F5E6D8;
+        border-right: 0.4vw solid #266F8C;
+        border-radius: 0.6vw;
         padding: 2.5vw 3vw;
         margin: 2vw 0;
     }
 
     .hadith-box-en .highlight-name,
     .hadith-box-ar .highlight-name {
+        color: #E86349;
+        font-weight: 700;
+    }
+
+    .hadith-box-en .source-quran-text,
+    .hadith-box-ar .source-quran-text {
+        color: #266F8C;
+        font-weight: 700;
+    }
+
+    .hadith-box-en .source-derived-text,
+    .hadith-box-ar .source-derived-text {
+        color: #047857;
+        font-weight: 700;
+    }
+
+    .hadith-box-en .source-hadith-text,
+    .hadith-box-ar .source-hadith-text {
         color: #E86349;
         font-weight: 700;
     }
@@ -2640,8 +2658,8 @@ It documents how a familiar list—learned through culture and memory—appears 
         }
 
         .song-selector-btn {
-            padding: 2.5vw 4vw;
-            font-size: 3vw;
+            padding: 3vw 5vw;
+            font-size: 3.5vw;
         }
 
         .song-selector-arrow {
@@ -2677,21 +2695,21 @@ It documents how a familiar list—learned through culture and memory—appears 
     .song-selector-btn {
         display: flex;
         align-items: center;
-        gap: 0.6vw;
-        background: #FDEDDB;
-        border: 2px solid #AC8B7E;
-        border-radius: 8px;
-        padding: 0.6vw 1.2vw;
+        gap: 0.8vw;
+        background: #266F8C;
+        border: 2px solid #266F8C;
+        border-radius: 10px;
+        padding: 1vw 2vw;
         cursor: pointer;
         transition: background 0.2s;
         font-family: 'Quicksand', sans-serif;
-        font-size: 1vw;
-        color: #AC8B7E;
+        font-size: 1.3vw;
+        color: #FDEDDB;
         font-weight: 600;
     }
 
     .song-selector-btn:hover {
-        background: #f0dcc8;
+        background: #1e5a72;
     }
 
     .song-selector-label {
