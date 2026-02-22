@@ -5,7 +5,7 @@ import AllNames from './Components/allnames.svelte'
 import Title from './Components/title.svelte'
 import Player from './Components/player.svelte';
 import { style } from 'svelte-body';
-import {language,nameId, filterQuran, filterDerived, filterHadith, showDisputed, audioPlaying, audioCurrentTime, seekToTime, togglePlayRequest, selectedSongId } from './Stores/misc.js';
+import {language,nameId, filterQuran, filterDerived, filterHadith, showDisputed, audioPlaying, audioCurrentTime, seekToTime, togglePlayRequest, selectedSongId, scrollToDetail } from './Stores/misc.js';
 import  names  from './Components/names.js';
 import  people  from './Components/people.js';
 import Back from './Components/background.svelte'
@@ -87,6 +87,26 @@ import songsData from './Assests/songs.js'
     // Reset carousel when name changes
     $: if (currentName) {
         currentVerseIndex = 0;
+    }
+
+    // Scroll to video when audio starts playing
+    let wasPlaying = false;
+    $: if ($audioPlaying && !wasPlaying && videoContainerElement) {
+        const offset = window.innerWidth * 0.1;
+        const top = videoContainerElement.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+        wasPlaying = true;
+    } else if (!$audioPlaying) {
+        wasPlaying = false;
+    }
+
+    // Scroll to name detail when triggered from SVG click
+    let lastScrollToDetail = 0;
+    $: if ($scrollToDetail !== lastScrollToDetail) {
+        lastScrollToDetail = $scrollToDetail;
+        if ($scrollToDetail > 0 && bottomNameElement) {
+            bottomNameElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     }
 
     function nextVerse() {
@@ -207,6 +227,7 @@ import songsData from './Assests/songs.js'
     let showPlayer = false;
     let allNamesElement;
     let bottomNameElement;
+    let videoContainerElement;
     let allNamesVisible = false;
     let bottomNameVisible = false;
     let videoElement;
@@ -405,10 +426,10 @@ import songsData from './Assests/songs.js'
         <!-- Test paragraph -->
 <p class="ArabicText">
     {#if $language === 'Arabic'}إنه اليوم الأول من رمضان في تونس. <br><br>
-صمنا طوال النهار، والآن نضع اللمسات الأخيرة على مائدة الإفطار. على شاشة التلفاز، يُتلى القرآن بصوت <a href="https://qurancentral.com/audio/ali-barrak" target="_blank" rel="noopener noreferrer" class="source-link">علي البرّاق</a>، إشارة مألوفة بأن الإفطار لم يبقَ عليه سوى دقائق. تغرب الشمس. يرتفع الأذان — نداء من المسجد القريب، وآخر من بعيد، وثالث من التلفاز، تتداخل جميعها.
+صمنا طوال النهار، والآن نضع اللمسات الأخيرة على مائدة الإفطار. على شاشة التلفاز، يُتلى القرآن بصوت <a href="https://qurancentral.com/audio/ali-barrak" target="_blank" rel="noopener noreferrer" class="source-link">علي البرّاق</a>، إشارة مألوفة بأن الإفطار لم يبقَ عليه سوى دقائق. تغرب الشمس. يرتفع الأذان, نداء من المسجد القريب، وآخر من بعيد، وثالث من التلفاز، تتداخل جميعها.
 نُفطر على التمر والماء. بعد يوم طويل من الصيام، تلك الرشفة الأولى مُرضية للغاية. <br><br>
 ثم تبدأ أغنية مألوفة في <span class="play-text-link" on:click={() => togglePlayRequest.update(n => n + 1)}>الخلفية</span>. <br><br>
-إنها أغنية يعرفها الجميع — ليس لأننا اخترنا تعلّمها، بل لأننا نسمعها كل يوم لثلاثين يومًا، سنة بعد سنة. يملأ صوت <a href="https://ar.wikipedia.org/wiki/%D9%84%D8%B7%D9%81%D9%8A_%D8%A8%D9%88%D8%B4%D9%86%D8%A7%D9%82" target="_blank" rel="noopener noreferrer" class="source-link">لطفي بوشناق</a> — أحب مطربي تونس — الغرفة، حاملًا ترنيمة إيقاعية لأسماء الله الحُسنى. بالنسبة للتونسيين، هذه الأغنية مألوفة كالنشيد الوطني — فهي تُعلن لحظة الإفطار كل يوم طوال شهر كامل. أتذكر أنني كنت أُردد معها وأنا أقطع الليمون والخبز الفرنسي.
+إنها أغنية يعرفها الجميع, ليس لأننا اخترنا تعلّمها، بل لأننا نسمعها كل يوم لثلاثين يومًا، سنة بعد سنة. يملأ صوت <a href="https://ar.wikipedia.org/wiki/%D9%84%D8%B7%D9%81%D9%8A_%D8%A8%D9%88%D8%B4%D9%86%D8%A7%D9%82" target="_blank" rel="noopener noreferrer" class="source-link">لطفي بوشناق</a>  ,أحب مطربي تونس, الغرفة، حاملًا ترنيمة إيقاعية لأسماء الله الحُسنى. بالنسبة للتونسيين، هذه الأغنية مألوفة كالنشيد الوطني, فهي تُعلن لحظة الإفطار كل يوم طوال شهر كامل. أتذكر أنني كنت أُردد معها وأنا أقطع الليمون والخبز.
     {:else}
         <p class=EnglishText>It's the first day of Ramadan in Tunisia. <br><br>
 We've been fasting all day, and now we're making the final touches to the dining table. On TV, the Holy Qur'an is being recited by <a href="https://qurancentral.com/audio/ali-barrak" target="_blank" rel="noopener noreferrer" class="source-link">Ali Al-Barrak</a>, a familiar signal that iftar is only minutes away. The sun sets. The adhan rises: one call from the nearby mosque, another from farther away, and a third from the television, all overlapping.
@@ -479,7 +500,7 @@ It's a song everyone knows—not because we chose to learn it, but because we he
     </div>
 </div>
 
-<div class="video-container">
+<div class="video-container" bind:this={videoContainerElement}>
     <div class="video-wrapper">
         {#key $selectedSongId}
         <video
@@ -835,6 +856,7 @@ It's a song everyone knows—not because we chose to learn it, but because we he
         <p class="ArabicText">
             لفترةٍ طويلة، افترضتُ أنَّ جميع هذه الأسماء مذكورة صراحةً في القرآن الكريم. لكن عند الدراسة الدقيقة، تظهر صورة أكثر تفصيلاً.
         </p>
+        <p class="guide-text-arabic" style="text-align: center; margin-bottom: 1vw;">اختر فئة لتمييز تلك الأسماء في القائمة أعلاه.</p>
 
         <div class="filter-section-arabic">
             <label class="filter-checkbox-arabic quran-filter">
@@ -867,7 +889,7 @@ It's a song everyone knows—not because we chose to learn it, but because we he
             <p class="intro-hadith-main-ar">
                 «&nbsp;إِنَّ لِلَّهِ تِسْعَةً وَتِسْعِينَ اسْمًا، مِائَةً إِلَّا وَاحِدًا، مَنْ أَحْصَاهَا دَخَلَ الْجَنَّةَ&nbsp;»
             </p>
-            <p class="intro-hadith-ref">صحيح البخاري ٧٣٩٢</p>
+            <p class="intro-hadith-ref"><a href="https://sunnah.com/bukhari:7392" target="_blank" rel="noopener noreferrer" class="source-link">صحيح البخاري ٧٣٩٢</a></p>
         </div>
 
         <p class="ArabicText">
@@ -884,6 +906,7 @@ It's a song everyone knows—not because we chose to learn it, but because we he
         <p class=EnglishText>
             For a long time, I assumed that all of these Names were explicitly mentioned in the Holy Qur'an. When examined closely, however, a more nuanced picture emerges.
         </p>
+        <p class="guide-text-english" style="text-align: center; margin-bottom: 1vw; direction: ltr;">Check a category to highlight those names in the list above.</p>
 
         <div class="filter-section">
             <label class="filter-checkbox quran-filter">
@@ -919,7 +942,7 @@ It's a song everyone knows—not because we chose to learn it, but because we he
             <p class="intro-hadith-main-en">
                 "Allah has ninety-nine Names, one-hundred less one; and he who memorized them all by heart will enter Paradise."
             </p>
-            <p class="intro-hadith-ref">Sahih al-Bukhari 7392</p>
+            <p class="intro-hadith-ref"><a href="https://sunnah.com/bukhari:7392" target="_blank" rel="noopener noreferrer" class="source-link">Sahih al-Bukhari 7392</a></p>
         </div>
 
         <p class="EnglishText">
@@ -947,7 +970,7 @@ It's a song everyone knows—not because we chose to learn it, but because we he
         {#if $language === 'Arabic'}
             <h2 class="section-title-ar">الأَسْمَاءُ الَّتِي حَمَلْنَاهَا قَبْلَ أَنْ نَعْرِفَهَا</h2>
             <p class="ArabicText">
-                لكن الأغنية لم تكن أول لقاء لنا بهذه الأسماء. قبل <a href="https://en.wikipedia.org/wiki/Lotfi_Bouchnak" target="_blank" rel="noopener noreferrer" class="source-link">لطفي بوشناق</a> بوقت طويل، عرفناها من خلال أشخاص — جيران وأقارب وزملاء حملت أسماؤهم صفات الله.
+                لكن الأغنية لم تكن أول لقاء لنا بهذه الأسماء. قبل <a href="https://en.wikipedia.org/wiki/Lotfi_Bouchnak" target="_blank" rel="noopener noreferrer" class="source-link">لطفي بوشناق</a> بوقت طويل، عرفناها من خلال أشخاص, جيران وأقارب وزملاء حملت أسماؤهم صفات الله.
                 <br><br>
                 في تونس، كما في جميع أنحاء العالم العربي والإسلامي، تعيش كثير من هذه الأسماء في الناس الذين نعرفهم. النمط بسيط: عبد، بمعنى "خادم" أو "عبد"، يليه أحد أسماء الله الحسنى. هكذا نحصل على أسماء مثل:
             </p>
@@ -1022,7 +1045,7 @@ It's a song everyone knows—not because we chose to learn it, but because we he
                     <p class="intro-hadith-main-ar">
                         «&nbsp;أَحَبُّ الأسْمَاءِ إِلَى اللهِ عَزَّ وَجَلَّ: عَبْدُ اللهِ، وَعَبْدُ الرَّحْمَنِ&nbsp;»
                     </p>
-                    <p class="intro-hadith-ref">الأدب المفرد ٨١٤</p>
+                    <p class="intro-hadith-ref"><a href="https://sunnah.com/adab:814" target="_blank" rel="noopener noreferrer" class="source-link">الأدب المفرد ٨١٤</a></p>
                 </div>
                 <p class="ArabicText">
                     العبودية والرحمة — صفات تبدو قريبة، بمقياس إنساني.
@@ -1115,7 +1138,7 @@ It's a song everyone knows—not because we chose to learn it, but because we he
                     <p class="intro-hadith-main-en">
                         "The most beloved names to Allah are Abdullah and Abdurrahman."
                     </p>
-                    <p class="intro-hadith-ref">Al-Adab Al-Mufrad 814</p>
+                    <p class="intro-hadith-ref"><a href="https://sunnah.com/adab:814" target="_blank" rel="noopener noreferrer" class="source-link">Al-Adab Al-Mufrad 814</a></p>
                 </div>
                 <p class="EnglishText">
                     Servitude and mercy: qualities that feel approachable, human-scale.

@@ -328,13 +328,13 @@
         }
 
         .play-button {
-            width: 4vw;
-            height: 4vw;
+            width: 6vw;
+            height: 6vw;
         }
 
         .play-button svg {
-            width: 4vw;
-            height: 4vw;
+            width: 6vw;
+            height: 6vw;
         }
 
         .time-display {

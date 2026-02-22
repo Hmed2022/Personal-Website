@@ -40,13 +40,13 @@ export const imageData = [
   {
     url: namesUrl,
     rank: 3,
-    title: "Rediscovery of the Names of Allah",
-    desc: "Story | Data Visualization",
+    title: "The Names We Memorized Before We Understood",
+    desc: "Story | Data Visualization ",
     description:
-      "An interactive exploration and visualization of the 99 names of Allah, their meanings, and spiritual significance.",
+      "Many Muslims know the 99 Names by heart. But where do they actually come from?",
     href: "/#/names",
     show: true,
-    tags: "all,dataviz,story",
+    tags: "all,dataviz,story,tunisia,svelte",
   },
   // {
   //   url: "https://via.placeholder.com/350x350/1",

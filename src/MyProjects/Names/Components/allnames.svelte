@@ -1,6 +1,6 @@
 <script>
     import { tick } from 'svelte';
-    import { nameId, filterQuran, filterDerived, filterHadith, showDisputed, seekToTime, selectedSongId } from '../Stores/misc';
+    import { nameId, filterQuran, filterDerived, filterHadith, showDisputed, seekToTime, selectedSongId, audioPlaying, togglePlayRequest, scrollToDetail } from '../Stores/misc';
     import  names  from './names.js';
 
     const BASE   = '#266F8C';
@@ -107,7 +107,15 @@
             seekToTime.set(name[tsKey]);
         }
 
-        // 3. The name display will automatically update through the reactive statement
+        // 3. Pause audio if playing
+        if ($audioPlaying) {
+            togglePlayRequest.update(n => n + 1);
+        }
+
+        // 4. Scroll to detail section
+        scrollToDetail.update(n => n + 1);
+
+        // 5. The name display will automatically update through the reactive statement
         updateFills();
     }
 
