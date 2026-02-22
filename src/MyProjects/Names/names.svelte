@@ -405,19 +405,34 @@ import songsData from './Assests/songs.js'
         <!-- Test paragraph -->
 <p class="ArabicText">
     {#if $language === 'Arabic'}إنه اليوم الأول من رمضان في تونس. <br><br>
-صمنا طوال النهار، والآن نضع اللمسات الأخيرة على مائدة الإفطار. على شاشة التلفاز، يُتلى القرآن بصوت علي البرّاك، إشارة مألوفة بأن الإفطار لم يبقَ عليه سوى دقائق. تغرب الشمس. يرتفع الأذان — نداء من المسجد القريب، وآخر من بعيد، وثالث من التلفاز، تتداخل جميعها.
+صمنا طوال النهار، والآن نضع اللمسات الأخيرة على مائدة الإفطار. على شاشة التلفاز، يُتلى القرآن بصوت <a href="https://qurancentral.com/audio/ali-barrak" target="_blank" rel="noopener noreferrer" class="source-link">علي البرّاق</a>، إشارة مألوفة بأن الإفطار لم يبقَ عليه سوى دقائق. تغرب الشمس. يرتفع الأذان — نداء من المسجد القريب، وآخر من بعيد، وثالث من التلفاز، تتداخل جميعها.
 نُفطر على التمر والماء. بعد يوم طويل من الصيام، تلك الرشفة الأولى مُرضية للغاية. <br><br>
-ثم تبدأ أغنية مألوفة في الخلفية. <br><br>
-إنها أغنية يعرفها الجميع — ليس لأننا اخترنا تعلّمها، بل لأننا نسمعها كل يوم لثلاثين يومًا، سنة بعد سنة. يملأ صوت لطفي بوشناق — أحب مطربي تونس — الغرفة، حاملًا ترنيمة إيقاعية لأسماء الله الحُسنى. بالنسبة للتونسيين، هذه الأغنية مألوفة كالنشيد الوطني — فهي تُعلن لحظة الإفطار كل يوم طوال شهر كامل. أتذكر أنني كنت أُردد معها وأنا أقطع الليمون والخبز الفرنسي.
+ثم تبدأ أغنية مألوفة في <span class="play-text-link" on:click={() => togglePlayRequest.update(n => n + 1)}>الخلفية</span>. <br><br>
+إنها أغنية يعرفها الجميع — ليس لأننا اخترنا تعلّمها، بل لأننا نسمعها كل يوم لثلاثين يومًا، سنة بعد سنة. يملأ صوت <a href="https://ar.wikipedia.org/wiki/%D9%84%D8%B7%D9%81%D9%8A_%D8%A8%D9%88%D8%B4%D9%86%D8%A7%D9%82" target="_blank" rel="noopener noreferrer" class="source-link">لطفي بوشناق</a> — أحب مطربي تونس — الغرفة، حاملًا ترنيمة إيقاعية لأسماء الله الحُسنى. بالنسبة للتونسيين، هذه الأغنية مألوفة كالنشيد الوطني — فهي تُعلن لحظة الإفطار كل يوم طوال شهر كامل. أتذكر أنني كنت أُردد معها وأنا أقطع الليمون والخبز الفرنسي.
     {:else}
         <p class=EnglishText>It's the first day of Ramadan in Tunisia. <br><br>
-We've been fasting all day, and now we're making the final touches to the dining table. On TV, the Holy Qur'an is being recited by Ali Al-Barrak, a familiar signal that iftar is only minutes away. The sun sets. The adhan rises—one call from the nearby mosque, another from farther away, and a third from the television, all overlapping.
-We break our fast with dates and water. After a long day of fasting, that first sip is deeply satisfying. <br><br>
-Then a familiar song begins to play in the background. <br><br>
-It's a song everyone knows—not because we chose to learn it, but because we hear it every day for thirty days, year after year. The unmistakable voice of Lotfi Bouchnak—Tunisia's most beloved singer—fills the room, carrying a rhythmic chant of the Names of Allah. For Tunisians, this song is as familiar as a national anthem—it marks the moment of breaking fast every single day for a month. I remember singing along while cutting lemons and baguettes.
- </p>
+We've been fasting all day, and now we're making the final touches to the dining table. On TV, the Holy Qur'an is being recited by <a href="https://qurancentral.com/audio/ali-barrak" target="_blank" rel="noopener noreferrer" class="source-link">Ali Al-Barrak</a>, a familiar signal that iftar is only minutes away. The sun sets. The adhan rises: one call from the nearby mosque, another from farther away, and a third from the television, all overlapping.
+We break our fast with dates and water. That first sip, after hours of waiting, hits different. <br><br>
+Then a familiar song begins to <span class="play-text-link" on:click={() => togglePlayRequest.update(n => n + 1)}>play</span> in the background. <br><br>
+It's a song everyone knows—not because we chose to learn it, but because we hear it every day for thirty days, year after year. The unmistakable voice of <a href="https://en.wikipedia.org/wiki/Lotfi_Bouchnak" target="_blank" rel="noopener noreferrer" class="source-link">Lotfi Bouchnak</a>,a Tunisian cultural icon, fills the room, carrying a rhythmic chant of the Names of Allah. For Tunisians, this song is as familiar as a national anthem, it marks the moment of breaking fast every single day for a month. I remember singing along without thinking, my hands busy slicing baguettes and cutting lemons for the table.
     {/if}
 </p>
+
+{#if $language === 'Arabic'}
+    <p class="ArabicText">
+        في السنوات الأخيرة، استبدل التلفزيون التونسي نسخة <a href="https://en.wikipedia.org/wiki/Lotfi_Bouchnak" target="_blank" rel="noopener noreferrer" class="source-link">لطفي بوشناق</a> بأداء جديد لـ<a href="https://ar.wikipedia.org/wiki/%D8%AD%D8%B3%D8%A7%D9%86_%D8%A7%D9%84%D8%AF%D9%88%D8%B3" target="_blank" rel="noopener noreferrer" class="source-link">حسان الدوس</a>. كان رد الفعل فوريًا. شعر التونسيون أن شيئًا مقدسًا قد تغيّر. لكن ربما هذا هو بيت القصيد: الأسماء ليست مجرد كلمات على ورق. إنها كيف نتذكرها، من غنّاها لنا، ومتى سمعناها لأول مرة.
+    </p>
+    <div class="guide-text">
+        <p class="guide-text-arabic">أدرجتُ كلتا الأغنيتين أدناه. واحدة تحمل عقودًا من الذاكرة. والأخرى تبني ذاكرتها الخاصة. يمكنك النقر على الفيديو أو المشغّل لتشغيل الأغنية.</p>
+    </div>
+{:else}
+    <p class="EnglishText">
+        This year, Tunisia's national broadcaster replaced <a href="https://en.wikipedia.org/wiki/Lotfi_Bouchnak" target="_blank" rel="noopener noreferrer" class="source-link">Lotfi Bouchnak</a>'s version with a new rendition by <a href="https://fr.wikipedia.org/wiki/Hassen_Doss" target="_blank" rel="noopener noreferrer" class="source-link">Hassen Doss</a>. The backlash was immediate. Tunisians felt something sacred had been altered. But maybe that's the point: the Names aren't just words on a page. They're how we remember them, who sang them to us, when we first learned them.
+    </p>
+    <div class="guide-text">
+        <p class="guide-text-english">I've included both songs below. One carries decades of memory. The other is building its own. You can either click on the video or the player to play the song.</p>
+    </div>
+{/if}
 
 <div class="song-selector-wrapper">
     <div class="song-selector">
@@ -486,22 +501,18 @@ It's a song everyone knows—not because we chose to learn it, but because we he
 الأغنية تبعث على الحنين. تُشير إلى العائلة، والاجتماع، واللحظة التي نأكل فيها أخيرًا معًا. لكن بعد سنوات، وأنا أستمع إليها مجددًا، أدركت شيئًا: لقد تعلّمنا هذه الأسماء قبل أن نفهمها بوقت طويل.<br><br>
 يبدأ هذا المشروع من هناك — بالعودة إلى الأسماء التي حفظناها بالصوت، وإلقاء نظرة أعمق عليها من خلال النص نفسه.
 <br><br>
-<i style='font-weight:300'>ملاحظة: لا يسعى هذا المشروع إلى تحديد أسماء الله الحُسنى "الصحيحة" التسعة والتسعين، ولا إلى تصحيح الممارسة الدينية أو تقديم تفسير عقدي.
-إنه يوثّق كيف تبدو قائمة مألوفة — تعلّمناها من الثقافة والذاكرة — عند فحصها مقابل النص القرآني، باستخدام منهج بسيط وشفاف.</i>
+<i style='font-weight:300'>ملاحظة حول المنهج: يوثّق هذا المشروع كيف تبدو قائمة ثقافية مألوفة عند فحصها مقابل النص القرآني — استكشاف للذاكرة والمعنى، لا بيان عقدي.</i>
 <br><br>
-فيما يلي القائمة التفاعلية للأسماء التسعة والتسعين. عند تشغيل الأغنية، سيتم تمييز كل اسم في الوقت الفعلي عندما يُنشده لطفي بوشناق. يمكنك أيضاً التصفية حسب الفئة لمعرفة الأسماء المذكورة مباشرة في القرآن، والمشتقة من صفات قرآنية، والتي تظهر فقط في أدب الحديث.
+فيما يلي القائمة التفاعلية للأسماء التسعة والتسعين. عند تشغيل الأغنية، سيتم تمييز كل اسم في الوقت الفعلي عندما يُنشده <a href="https://en.wikipedia.org/wiki/Lotfi_Bouchnak" target="_blank" rel="noopener noreferrer" class="source-link">لطفي بوشناق</a>. يمكنك أيضاً التصفية حسب الفئة لمعرفة الأسماء المذكورة مباشرة في القرآن، والمشتقة من صفات قرآنية، والتي تظهر فقط في أدب الحديث.
     {:else}
         <p class=EnglishText>
 
-            The song is nostalgic. It signals family, gathering, and the moment we finally eat together. But years later, listening to it again, I realized something: we learned these names long before we understood them.<br><br> The beauty is that all Tunisians share the same song, The same childhood memory But rarely stop to ask how it was assembled.
-This project begins there—by returning to the names we memorized by sound, and taking a closer look at them through the text itself.
+            The song is nostalgic—it means family, gathering, breaking fast together. But years later, I realized: we memorized these names before understanding them. Every Tunisian shares this song, this memory. But how was it assembled?
 <br><br>
-<i style='font-weight:300'>Please Note: This project does not attempt to define the "correct" 99 Names of Allah, nor to correct religious practice or offer theological interpretation.
-It documents how a familiar list—learned through culture and memory—appears when examined against the Holy Qur'anic text, using a simple and transparent method.
-       </i>
+<i style='font-weight:300'>A note on approach: This project documents how a familiar cultural list appears when examined against the Qur'anic text—an exploration of memory and meaning, not a theological statement.</i>
 
     <br> <br>
-    Below is the interactive list of the 99 Names. As you play the song, each name will highlight in real-time when Lotfi Bouchnak sings it. You can also filter by category to see which names come directly from the Holy Qur'an, which are derived from Holy Qur'anic attributes, and which appear only in hadith literature.</p>
+    Below is the interactive list of the 99 Names. As you play the song, each name will highlight in real-time. You can also filter by category to see which names come directly from the Holy Qur'an, which are derived from Holy Qur'anic attributes, and which appear only in hadith literature.</p>
     {/if}
 </p>
        
@@ -936,7 +947,7 @@ It documents how a familiar list—learned through culture and memory—appears 
         {#if $language === 'Arabic'}
             <h2 class="section-title-ar">الأَسْمَاءُ الَّتِي حَمَلْنَاهَا قَبْلَ أَنْ نَعْرِفَهَا</h2>
             <p class="ArabicText">
-                لكن الأغنية لم تكن في الحقيقة أول لقاء لنا بهذه الأسماء. فقبل أن نحفظها بصوت لطفي بوشناق بوقت طويل، كنا محاطين بها بالفعل — منسوجة في نسيج حياتنا اليومية من خلال أسماء الناس من حولنا.
+                لكن الأغنية لم تكن في الحقيقة أول لقاء لنا بهذه الأسماء. فقبل أن نحفظها بصوت <a href="https://en.wikipedia.org/wiki/Lotfi_Bouchnak" target="_blank" rel="noopener noreferrer" class="source-link">لطفي بوشناق</a> بوقت طويل، كنا محاطين بها بالفعل — منسوجة في نسيج حياتنا اليومية من خلال أسماء الناس من حولنا.
                 <br><br>
                 في تونس، كما في جميع أنحاء العالم العربي والإسلامي، تعيش كثير من هذه الأسماء في الناس الذين نعرفهم. النمط بسيط: عبد، بمعنى "خادم" أو "عبد"، يليه أحد أسماء الله الحسنى. هكذا نحصل على أسماء مثل:
             </p>
@@ -948,6 +959,7 @@ It documents how a familiar list—learned through culture and memory—appears 
                         <span class="plus-sign">+</span>
                         <span class="name-variable-ar">{currentPerson.arabicName}</span>
                     </div>
+                    <!-- <div class="person-desc-ar">خادم {currentName.englishMean}</div> -->
                     {#if currentPerson.linkAr}
                         <a href={currentPerson.linkAr} target="_blank" rel="noopener noreferrer" class="person-name-ar">{currentPerson.personAr}</a>
                     {:else}
@@ -956,12 +968,15 @@ It documents how a familiar list—learned through culture and memory—appears 
                     <div class="person-desc-ar">{currentPerson.descAr}</div>
                 </div>
             {:else}
-                <ul class="name-examples-ar">
+             <p class="name-examples-ar">
+                    عبد الرحمان - عبد الله - عبد العزيز
+             </p>
+                <!-- <ul class="name-examples-ar">
                     <li>عبد الرحمن — خادم أرحم الراحمين</li>
                     <li>عبد العزيز — خادم العزيز</li>
                     <li>عبد الجبار — خادم الجبار</li>
                     <li>عبد الكريم — خادم الكريم</li>
-                </ul>
+                </ul> -->
             {/if}
 
             <p class="ArabicText">
@@ -996,7 +1011,7 @@ It documents how a familiar list—learned through culture and memory—appears 
                         <span class="plus-sign">+</span>
                         <span class="name-variable-ar">{currentPerson.arabicName}</span>
                     </div>
-                    <div class="person-desc-ar">عبد {currentName.arabicName}</div>
+                    <!-- <div class="person-desc-ar">خادم {currentName.englishMean}</div> -->
                 </div>
             {/if}
 
@@ -1012,7 +1027,7 @@ It documents how a familiar list—learned through culture and memory—appears 
         {:else}
             <h2 class="section-title-en">The Names We Carried Before We Knew Them</h2>
             <p class="EnglishText">
-                But the song wasn't actually our first encounter with these Names. Long before we memorized them through Lotfi Bouchnak's voice, we were already surrounded by them—woven into the fabric of our daily lives through the names of people around us.
+                But the song wasn't our first encounter with these Names. Long before <a href="https://en.wikipedia.org/wiki/Lotfi_Bouchnak" target="_blank" rel="noopener noreferrer" class="source-link">Lotfi Bouchnak</a>, we knew them through people, neighbors, relatives, classmates whose names carried Allah's attributes.
                 <br><br>
                 In Tunisia, as across the Arab and Muslim world, many of these Names live on in the people we know. The pattern is simple: Abd (عبد) or Abdul (عبد ال), meaning "servant of" or "slave of," followed by one of Allah's Names. This is how we get names like:
             </p>
@@ -1024,6 +1039,7 @@ It documents how a familiar list—learned through culture and memory—appears 
                         <span class="plus-sign">+</span>
                         <span class="name-variable">{currentName.englishName}</span>
                     </div>
+                    <div class="person-desc-en">Servant of {currentName.englishMean}</div>
                     {#if currentPerson.linkEn}
                         <a href={currentPerson.linkEn} target="_blank" rel="noopener noreferrer" class="person-name-en">{currentPerson.personEn}</a>
                     {:else}
@@ -1514,16 +1530,16 @@ It documents how a familiar list—learned through culture and memory—appears 
     }
 
     .hadith-box-en {
-        background-color: #F5E6D8;
-        border-left: 0.4vw solid #266F8C;
+        background-color: #F8E0DA;
+        border-left: 0.4vw solid #E86349;
         border-radius: 0.6vw;
         padding: 2.5vw 3vw;
         margin: 2vw 0;
     }
 
     .hadith-box-ar {
-        background-color: #F5E6D8;
-        border-right: 0.4vw solid #266F8C;
+        background-color: #F8E0DA;
+        border-right: 0.4vw solid #E86349;
         border-radius: 0.6vw;
         padding: 2.5vw 3vw;
         margin: 2vw 0;
@@ -1654,7 +1670,7 @@ It documents how a familiar list—learned through culture and memory—appears 
         align-items: center;
         justify-content: center;
         gap: 1.5vw;
-        margin-bottom: 1.5vw;
+        /* margin-bottom: 1.5vw; */
     }
 
     .abd-fixed,
@@ -1725,6 +1741,7 @@ It documents how a familiar list—learned through culture and memory—appears 
         font-weight: 700;
         color: #AC8B7E;
         direction: ltr;
+        margin-bottom: 1vw;
     }
 
     .section-title-ar {
@@ -1792,10 +1809,25 @@ It documents how a familiar list—learned through culture and memory—appears 
     .source-link {
         color: #266F8C;
         text-decoration: underline;
-        transition: color 0.2s;
+        background-color: #ECDBC8;
+        padding: 0.1vw 0.3vw;
+        border-radius: 0.2vw;
+        transition: color 0.2s, background-color 0.2s;
     }
 
     .source-link:hover {
+        color: #AC8B7E;
+        background-color: #e0cdba;
+    }
+
+    .play-text-link {
+        color: #266F8C;
+        text-decoration: underline;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+    .play-text-link:hover {
         color: #AC8B7E;
     }
 
@@ -1837,19 +1869,17 @@ It documents how a familiar list—learned through culture and memory—appears 
 
     .video-wrapper {
         max-width: 50vw; /* 800px */
-        aspect-ratio: 16 / 9;
         overflow: hidden;
         border: 0.5vw solid #266F8C; /* 8px */
         border-radius: 0.5vw; /* 8px */
         box-shadow: 0 0.25vw 0.75vw rgba(38, 111, 140, 0.3); /* 0 4px 12px */
+        line-height: 0;
     }
 
     .names-video {
         display: block;
         cursor: pointer;
         width: 100%;
-        height: 100%;
-        object-fit: cover;
     }
 
 
@@ -1996,10 +2026,10 @@ It documents how a familiar list—learned through culture and memory—appears 
     .verse-container-hadith {
         flex: 1;
         max-width: 50vw; /* 800px */
-        background-color: rgba(128, 90, 168, 0.05);
+        background-color: rgba(232, 99, 73, 0.08);
         padding: 2vw; /* 2rem */
         border-radius: 0.75vw; /* 12px */
-        border: 0.125vw solid #805AA8; /* 2px */
+        border: 0.125vw solid #E86349; /* 2px */
     }
 
     .verse-container-derived {
@@ -2042,6 +2072,16 @@ It documents how a familiar list—learned through culture and memory—appears 
         border-radius: 0.25vw; /* 4px */
     }
 
+    .verse-container-hadith .quran-text-ar :global(.highlighted-name) {
+        color: #E86349;
+        background-color: rgba(232, 99, 73, 0.15);
+    }
+
+    .verse-container-derived .quran-text-ar :global(.highlighted-name) {
+        color: #047857;
+        background-color: rgba(4, 120, 87, 0.15);
+    }
+
     .verse-reference {
         font-family: 'NotoKufiArabic', sans-serif;
         font-size: 1.4vw;
@@ -2049,6 +2089,14 @@ It documents how a familiar list—learned through culture and memory—appears 
         text-align: center;
         color: #266F8C;
         margin: 0.5vw 0; /* 0.5rem 0 */
+    }
+
+    .verse-container-hadith .verse-reference {
+        color: #E86349;
+    }
+
+    .verse-container-derived .verse-reference {
+        color: #047857;
     }
 
     .translation-text {
@@ -2393,24 +2441,38 @@ It documents how a familiar list—learned through culture and memory—appears 
 
         /* Mobile player */
         .player-sticky-container {
-            padding: 1.5rem 2rem;
-            min-height: 100px;
+            padding: 0.8rem 1rem;
+            min-height: auto;
+            gap: 0.5rem;
+        }
+
+        .rank-display-sticky {
+            flex: 0 0 auto;
+            min-width: unset;
         }
 
         .player-wrapper {
-            max-width: 60vw;
+            flex: 1;
+            max-width: none;
+            min-width: 0;
+        }
+
+        .name-display-sticky {
+            min-width: unset;
+            flex: 0 0 auto;
+            max-width: 25vw;
         }
 
         .name-rank {
-            font-size: 5vw;
-        }
-
-        .current-name-sticky-arabic {
             font-size: 4vw;
         }
 
+        .current-name-sticky-arabic {
+            font-size: 3.5vw;
+        }
+
         .current-name-sticky-english {
-            font-size: 5vw;
+            font-size: 3.5vw;
         }
 
       }
@@ -2696,8 +2758,8 @@ It documents how a familiar list—learned through culture and memory—appears 
         display: flex;
         align-items: center;
         gap: 0.8vw;
-        background: #266F8C;
-        border: 2px solid #266F8C;
+        background: #AC8B7E;
+        border: 2px solid #ECDBC8;
         border-radius: 10px;
         padding: 1vw 2vw;
         cursor: pointer;
@@ -2709,7 +2771,7 @@ It documents how a familiar list—learned through culture and memory—appears 
     }
 
     .song-selector-btn:hover {
-        background: #1e5a72;
+        background: #786259;
     }
 
     .song-selector-label {

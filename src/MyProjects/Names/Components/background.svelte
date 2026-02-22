@@ -49,4 +49,10 @@
     height: 100%;
     width: auto;
   }
+
+  @media (max-width: 768px) {
+    .tree-background {
+      display: none;
+    }
+  }
 </style>

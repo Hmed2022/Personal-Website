@@ -323,27 +323,27 @@
     /* Mobile responsive styles */
     @media (max-width: 768px) {
         .player-container {
-            gap: 4vw;
-            padding: 2vw;
+            gap: 2vw;
+            padding: 1vw 0;
         }
 
         .play-button {
-            width: 5vw;
-            height: 5vw;
+            width: 8vw;
+            height: 8vw;
         }
 
         .play-button svg {
-            width: 5vw;
-            height: 5vw;
+            width: 4vw;
+            height: 4vw;
         }
 
         .time-display {
-            font-size: 5vw;
-            min-width: 4vw;
+            font-size: 3vw;
+            min-width: 8vw;
         }
 
         .progress-container {
-            gap: 2vw;
+            gap: 1.5vw;
         }
 
         .progress-bar {
@@ -356,8 +356,8 @@
         }
 
         .progress-handle {
-            width: 4vw;
-            height: 4vw;
+            width: 3.5vw;
+            height: 3.5vw;
         }
     }
 </style>
