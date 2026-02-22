@@ -21,7 +21,7 @@ export default {
     personAr: "عبد الرحمن بن خلدون",
     personEn: "Abderrahman Ibn Khaldun",
     descAr: "مؤرخ عربي وأب علم الاجتماع",
-    descEn: "Arab historian and father of sociology",
+    descEn: "Tunisian historian and father of sociology",
     linkAr:
       "https://ar.wikipedia.org/wiki/%D8%A7%D8%A8%D9%86_%D8%AE%D9%84%D8%AF%D9%88%D9%86",
     linkEn: "https://en.wikipedia.org/wiki/Ibn_Khaldun",

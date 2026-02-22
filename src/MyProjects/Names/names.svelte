@@ -499,15 +499,15 @@ It's a song everyone knows—not because we chose to learn it, but because we he
     <p class="ArabicText">
     {#if $language === 'Arabic'}
 الأغنية تبعث على الحنين. تُشير إلى العائلة، والاجتماع، واللحظة التي نأكل فيها أخيرًا معًا. لكن بعد سنوات، وأنا أستمع إليها مجددًا، أدركت شيئًا: لقد تعلّمنا هذه الأسماء قبل أن نفهمها بوقت طويل.<br><br>
-يبدأ هذا المشروع من هناك — بالعودة إلى الأسماء التي حفظناها بالصوت، وإلقاء نظرة أعمق عليها من خلال النص نفسه.
+يتشارك كل تونسي هذه الأغنية وهذه الذكرى. فكيف تشكّلت إذن؟
 <br><br>
 <i style='font-weight:300'>ملاحظة حول المنهج: يوثّق هذا المشروع كيف تبدو قائمة ثقافية مألوفة عند فحصها مقابل النص القرآني — استكشاف للذاكرة والمعنى، لا بيان عقدي.</i>
 <br><br>
-فيما يلي القائمة التفاعلية للأسماء التسعة والتسعين. عند تشغيل الأغنية، سيتم تمييز كل اسم في الوقت الفعلي عندما يُنشده <a href="https://en.wikipedia.org/wiki/Lotfi_Bouchnak" target="_blank" rel="noopener noreferrer" class="source-link">لطفي بوشناق</a>. يمكنك أيضاً التصفية حسب الفئة لمعرفة الأسماء المذكورة مباشرة في القرآن، والمشتقة من صفات قرآنية، والتي تظهر فقط في أدب الحديث.
+فيما يلي القائمة التفاعلية للأسماء التسعة والتسعين. عند تشغيل الأغنية، سيتم تمييز كل اسم في الوقت الفعلي. يمكنك أيضاً التصفية حسب الفئة لمعرفة الأسماء المذكورة مباشرة في القرآن، والمشتقة من صفات قرآنية، والتي تظهر فقط في أدب الحديث.
     {:else}
         <p class=EnglishText>
 
-            The song is nostalgic—it means family, gathering, breaking fast together. But years later, I realized: we memorized these names before understanding them. Every Tunisian shares this song, this memory. But how was it assembled?
+            The song is nostalgic, it means family, gathering, breaking fast together. But years later, I realized: we memorized these names before understanding them. Every Tunisian shares this song, this memory. But how was it assembled?
 <br><br>
 <i style='font-weight:300'>A note on approach: This project documents how a familiar cultural list appears when examined against the Qur'anic text—an exploration of memory and meaning, not a theological statement.</i>
 
@@ -947,7 +947,7 @@ It's a song everyone knows—not because we chose to learn it, but because we he
         {#if $language === 'Arabic'}
             <h2 class="section-title-ar">الأَسْمَاءُ الَّتِي حَمَلْنَاهَا قَبْلَ أَنْ نَعْرِفَهَا</h2>
             <p class="ArabicText">
-                لكن الأغنية لم تكن في الحقيقة أول لقاء لنا بهذه الأسماء. فقبل أن نحفظها بصوت <a href="https://en.wikipedia.org/wiki/Lotfi_Bouchnak" target="_blank" rel="noopener noreferrer" class="source-link">لطفي بوشناق</a> بوقت طويل، كنا محاطين بها بالفعل — منسوجة في نسيج حياتنا اليومية من خلال أسماء الناس من حولنا.
+                لكن الأغنية لم تكن أول لقاء لنا بهذه الأسماء. قبل <a href="https://en.wikipedia.org/wiki/Lotfi_Bouchnak" target="_blank" rel="noopener noreferrer" class="source-link">لطفي بوشناق</a> بوقت طويل، عرفناها من خلال أشخاص — جيران وأقارب وزملاء حملت أسماؤهم صفات الله.
                 <br><br>
                 في تونس، كما في جميع أنحاء العالم العربي والإسلامي، تعيش كثير من هذه الأسماء في الناس الذين نعرفهم. النمط بسيط: عبد، بمعنى "خادم" أو "عبد"، يليه أحد أسماء الله الحسنى. هكذا نحصل على أسماء مثل:
             </p>
@@ -997,32 +997,44 @@ It's a song everyone knows—not because we chose to learn it, but because we he
                 هذا يكشف شيئاً عميقاً: الأسماء الحسنى ليست مجرد قائمة ثابتة — إنها تقليد حي، شكّلته الثقافة والعلم والممارسة الشعبية. ما يتناقشه العلماء، حسمته العائلات بالفعل. ما يظهر في قائمة أحد التقاليد قد يغيب عن قائمة أخرى — لكن الاسم يعيش في جد أحدهم أو عمه أو جاره.
             </p>
 
-            {#if currentPerson && currentPerson.common === 'Yes'}
+            {#if currentPerson}
                 <p class="ArabicText">
-                    بعض الأسماء، من ناحية أخرى، تظهر في قائمة التسعة والتسعين لكنها نادراً ما تُستخدم كأسماء شخصية — أسماء مثل القهار أو المميت. لن تجد كثيراً من الأطفال التونسيين يحملون اسم عبد القهار أو عبد المميت. هناك مصفاة ثقافية ضمنية: بعض الصفات تبدو ثقيلة جداً، شديدة جداً، لتُوضع على طفل.
+                    بعض الأسماء تظهر في قائمة التسعة والتسعين لكنها نادراً ما تُستخدم كأسماء شخصية — كالقهار (الغالب بقهره) أو المميت (مُفني الأحياء). لن تجد كثيراً من الأطفال يحملون اسم عبد القهار أو عبد المميت.
+                    <br><br>
+                    لماذا؟ بعض الصفات تبدو ثقيلة جداً لتُوضع على طفل.{#if currentPerson.common !== 'Yes'} أسماء مثل:{/if}
                 </p>
-            {:else if currentPerson}
-                <p class="ArabicText">
-                    بعض الأسماء، من ناحية أخرى، تظهر في قائمة التسعة والتسعين لكنها نادراً ما تُستخدم كأسماء شخصية. هناك مصفاة ثقافية ضمنية: بعض الصفات تبدو ثقيلة جداً، شديدة جداً، لتُوضع على طفل. أسماء مثل:
-                </p>
-                <div class="name-breakdown">
-                    <div class="name-formula" style="direction: rtl;">
-                        <span class="abd-fixed-ar">عبد</span>
-                        <span class="plus-sign">+</span>
-                        <span class="name-variable-ar">{currentPerson.arabicName}</span>
+                {#if currentPerson.common !== 'Yes'}
+                    <div class="name-breakdown">
+                        <div class="name-formula" style="direction: rtl;">
+                            <span class="abd-fixed-ar">عبد</span>
+                            <span class="plus-sign">+</span>
+                            <span class="name-variable-ar">{currentPerson.arabicName}</span>
+                        </div>
                     </div>
-                    <!-- <div class="person-desc-ar">خادم {currentName.englishMean}</div> -->
+                {/if}
+                <p class="ArabicText">
+                    لكن الأمر أيضاً عادة — الناس يتمسكون بالأسماء المألوفة. النبي محمد ﷺ أبرز أسماءً بعينها:
+                </p>
+                <div class="intro-hadith-box">
+                    <p class="intro-hadith-text-ar">
+                        عن أبي وهب رضي الله عنه:
+                    </p>
+                    <p class="intro-hadith-main-ar">
+                        «&nbsp;أَحَبُّ الأسْمَاءِ إِلَى اللهِ عَزَّ وَجَلَّ: عَبْدُ اللهِ، وَعَبْدُ الرَّحْمَنِ&nbsp;»
+                    </p>
+                    <p class="intro-hadith-ref">الأدب المفرد ٨١٤</p>
                 </div>
+                <p class="ArabicText">
+                    العبودية والرحمة — صفات تبدو قريبة، بمقياس إنساني.
+                </p>
             {/if}
 
             <p class="ArabicText">
-                إذن قبل الأغنية، قبل القائمة الرسمية، قبل أن أفكر يوماً في إحصاء عدد مرات ظهور كل اسم في القرآن — كنت أعرفها بالفعل. عرفتها في وجوه الجيران وزملاء الدراسة والأقارب. عرفتها في نداء الحضور في المدرسة، في بطاقات الأعراس، في الأسماء المنقوشة على شواهد القبور.
+                هذه الأسماء تصنع شيئاً استثنائياً: تحوّل اللاهوت إلى هوية.
                 <br><br>
-                الأسماء لم تكن مجردة. كانت أشخاصاً.
+                حين تسمّي طفلاً عبد الله، فأنت لا تختار مجرد صوت يروق لك — بل تُعرّفه بوصفه عبداً لله طوال حياته. كل تعريف يصبح دعاءً. كل نداء في الحضور، تذكيراً. الاسم يشكّل كيف يراه الآخرون، وكيف يرى نفسه.
                 <br><br>
-                وربما هذا هو الجزء الأجمل: هذه الأسماء لا تصف الله فحسب — بل تعيش بيننا، في الهويات التي نحملها، في الأشخاص الذين نصبحهم. في كل مرة يقدم أحدهم نفسه باسم عبد الرحمن، فهو يذكّرك — ويذكّر نفسه — بالرحمة الإلهية. كل عبد العزيز هو استحضار حي للعزة. كل كريم يجسّد الكرم، سواء ارتقى إليه أم لا.
-                <br><br>
-                الأسماء الحسنى ليست مجرد قائمة للحفظ. إنها خريطة لكيف نرى الإلهي — وكيف نسمّي أنفسنا في علاقتنا به.
+                هذا ما يجعل هذه القائمة بالغة القوة. ليست ٩٩ صفة للدراسة فحسب — بل ٩٩ طريقة اختار بها الناس تعريف أنفسهم في علاقتهم بالإله.
             </p>
         {:else}
             <h2 class="section-title-en">The Names We Carried Before We Knew Them</h2>
@@ -1057,7 +1069,7 @@ It's a song everyone knows—not because we chose to learn it, but because we he
             {/if}
 
             <p class="EnglishText">
-                These aren't just names—they're declarations of servitude and humility, reminders that we belong to something greater. Every time you call someone by their name, you're invoking one of Allah's attributes.
+                These aren't just names, they're declarations of servitude and humility, reminders that we belong to something greater. Every time you call someone by their name, you're invoking one of Allah's attributes.
             </p>
 
             <div class="hadith-box-en">
@@ -1071,35 +1083,51 @@ It's a song everyone knows—not because we chose to learn it, but because we he
             </div>
 
             <p class="EnglishText">
-                This reveals something profound: the 99 Names aren't just a fixed list—they're a living tradition, shaped by culture, scholarship, and popular practice. What scholars debate, families have already decided. What appears in one tradition's list may be absent from another's—but the name lives on in someone's grandfather, uncle, or neighbor.
+                This reveals something profound: the 99 Names aren't just a list, they're a living tradition, shaped by culture and popular practice. What scholars debate, families have already decided. The names live on in someone's grandfather, uncle, or neighbor.
             </p>
 
-            {#if currentPerson && currentPerson.common === 'Yes'}
+            {#if currentPerson}
                 <p class="EnglishText">
-                    Some Names, on the other hand, appear in the list of 99 but are rarely used as given names—names like Al-Qahhar (القهار—the Subduer) or Al-Mumit (المميت—the Bringer of Death). You won't find many Tunisian children named Abdelqahhar or Abdelmumit. There's an implicit cultural filter: some attributes feel too overwhelming, too severe, to place on a child.
+                    Some Names appear in the list of 99 but are rarely used as given names—like Al-Qahhar (القهار—the Subduer) or Al-Mumit (المميت—the Bringer of Death). You won't find many children named Abdelqahhar or Abdelmumit.
+                    <br><br>
+                    Why? Some attributes feel too overwhelming to place on a child or just uncommon.<br> {#if currentPerson.common !== 'Yes'}  Names like:{/if}
                 </p>
-            {:else if currentPerson}
-                <p class="EnglishText">
-                    Some Names, on the other hand, appear in the list of 99 but are rarely used as given names. There's an implicit cultural filter: some attributes feel too overwhelming, too severe, to place on a child. Names like:
-                </p>
-                <div class="name-breakdown">
-                    <div class="name-formula">
-                        <span class="abd-fixed">Abdul</span>
-                        <span class="plus-sign">+</span>
-                        <span class="name-variable">{currentName.englishName}</span>
+                {#if currentPerson.common !== 'Yes'}
+                    <div class="name-breakdown">
+                        <div class="name-formula">
+                            <span class="abd-fixed">Abdul</span>
+                            <span class="plus-sign">+</span>
+                            <span class="name-variable">{currentName.englishName}</span>
+                        </div>
+                        <div class="person-desc-en">Servant of {currentName.englishMean}</div>
                     </div>
-                    <div class="person-desc-en">The Servant of {currentName.englishMean}</div>
+                {/if}
+                <p class="EnglishText">
+                    But it's also habit, people stick to familiar names. The Prophet Muhammad ﷺ highlighted certain names:
+                </p>
+                <div class="intro-hadith-box">
+                    <p class="intro-hadith-narrator-en">
+                        Narrated Abu Wahb (may Allah be pleased with him):
+                    </p>
+                    <p class="intro-hadith-text-ar intro-hadith-text-ar-in-en">
+                        «&nbsp;أَحَبُّ الأسْمَاءِ إِلَى اللهِ عَزَّ وَجَلَّ: عَبْدُ اللهِ، وَعَبْدُ الرَّحْمَنِ&nbsp;»
+                    </p>
+                    <p class="intro-hadith-main-en">
+                        "The most beloved names to Allah are Abdullah and Abdurrahman."
+                    </p>
+                    <p class="intro-hadith-ref">Al-Adab Al-Mufrad 814</p>
                 </div>
+                <p class="EnglishText">
+                    Servitude and mercy: qualities that feel approachable, human-scale.
+                </p>
             {/if}
 
             <p class="EnglishText">
-                So before the song, before the formalized list, before I ever thought to count how many times each Name appeared in the Qur'an—I already knew them. I knew them in the faces of neighbors, classmates, relatives. I knew them in the roll call at school, in wedding invitations, in the names etched on gravestones.
+                So these Names do something remarkable: they turn theology into identity.
                 <br><br>
-                The Names weren't abstract. They were people.
+                When you name a child Abdullah, you're not just picking a sound you like, you're marking them as a servant of God for life. Every introduction becomes an invocation. Every roll call, a reminder. The name shapes how others see them, how they see themselves.
                 <br><br>
-                And maybe that's the most beautiful part: these Names don't just describe Allah—they live among us, in the identities we carry, the people we become. Every time someone introduces themselves as Abderrahman, they're reminding you—and themselves—of divine mercy. Every Abdelaziz is a walking invocation of might. Every Karim embodies generosity, whether they live up to it or not.
-                <br><br>
-                The 99 Names aren't just a list to memorize. They're a map of how we see the divine—and how we name ourselves in relation to it.
+                This is what makes the list so powerful. It's not just 99 attributes to study, it's 99 ways people have chosen to define themselves in relation to the divine.
             </p>
         {/if}
     </div>
@@ -1114,13 +1142,9 @@ It's a song everyone knows—not because we chose to learn it, but because we he
                 <br><br>
                 ما فاجأني أكثر هو اكتشاف أن ليس كل اسم في القائمة يظهر مباشرة في القرآن — وأنه لا يوجد حديث صحيح واحد يسرد جميع الأسماء التسعة والتسعين. الأحاديث التي تعددها مصنفة كضعيفة من قبل علماء الحديث. هذا لا يقلل من الأهمية الروحية للأسماء، لكنه يكشف شيئاً مهماً: القائمة التي نحفظها عن ظهر قلب هي نتيجة قرون من التفسير العلمي، تجمع الأسماء من القرآن وأدب الحديث والصفات الإلهية المذكورة في سياقات مختلفة.
                 <br><br>
-                فهم هذا التمييز لا يقلل من جمال القائمة — بل يعمقه، مذكراً إيانا بأن التقليد الإسلامي مبني على الوحي والجهد العلمي عبر الأجيال.
-                <br><br>
                 أشارك هذا خلال رمضان — نفس الشهر الذي أصبحت فيه هذه الأسماء جزءاً من ذاكرتي، تُغنى في الخلفية بينما نحضر الإفطار. يبدو أنه الوقت المناسب لإعادة زيارتها بعيون جديدة وفضول أعمق.
                 <br><br>
-                في النهاية، هذا ليس عن تصحيح فهم أي شخص. إنه عن التوقف للسؤال من أين يأتي شيء عرفناه دائماً، وإيجاد طرق جديدة لتقديره.
-                <br><br>
-                هذا مشروع تعليمي، وأرحب بأفكاركم. إذا لاحظتم شيئاً يمكن توضيحه، أو لديكم رؤى علمية للمشاركة، أو ببساطة تريدون التأمل في تجربتكم الخاصة مع هذه الأسماء، يسعدني أن أسمع منكم.
+                هذا مشروع تعليمي، وأرحب بأفكاركم. إذا لاحظتم شيئاً يمكن توضيحه، أو لديكم رؤى علمية للمشاركة، أو ببساطة تريدون التأمل في تجربتكم الخاصة مع هذه الأسماء، يسعدني أن أسمع منكم — <a href="mailto:ahmedben@umich.edu" class="source-link">ahmedben@umich.edu</a>.
             </p>
 
             <div class="sources-columns-ar">
@@ -1149,17 +1173,13 @@ It's a song everyone knows—not because we chose to learn it, but because we he
         {:else}
             <h2 class="section-title-en">Conclusion & References</h2>
             <p class="EnglishText">
-                This project began as a personal journey—a chance to reconnect with the Names I memorized as a child and to understand them more deeply, both spiritually and technically. It was also an opportunity to experiment with SVGs and data visualization as tools for exploring meaning.
+                This project began as a personal journey, a chance to reconnect with the Names I memorized as a child and to understand them more deeply, both spiritually and technically. It was also an opportunity to experiment with SVGs and data visualization as tools for exploring meaning.
                 <br><br>
-                What surprised me most was learning that not every name on the list appears directly in the Qur'an—and that there is no single authentic hadith that lists all 99 names. The hadiths that do enumerate them are classified as da'if (weak) by hadith scholars. This doesn't diminish the spiritual significance of the Names, but it does reveal something important: the list we know by heart is the result of centuries of scholarly interpretation, compiling names from across the Qur'an, hadith literature, and divine attributes mentioned in various contexts.
+                What surprised me most was learning that not every name on the list appears directly in the Qur'an and that there is no single authentic hadith that lists all 99 names. The hadiths that do enumerate them are classified as da'if (weak) by hadith scholars. This doesn't diminish the spiritual significance of the Names, but it does reveal something important: the list we know by heart is the result of centuries of scholarly interpretation, compiling names from across the Qur'an, hadith literature, and divine attributes mentioned in various contexts.
                 <br><br>
-                Understanding this distinction doesn't diminish the beauty of the list—it deepens it, reminding us that Islamic tradition is built on both revelation and scholarly effort across generations.
+                I'm sharing this during Ramadan. The same month when these Names first became part of my memory. It feels like the right time to revisit them with fresh eyes and a deeper curiosity.
                 <br><br>
-                I'm sharing this during Ramadan—the same month when these Names first became part of my memory, sung in the background while we prepared iftar. It feels like the right time to revisit them with fresh eyes and a deeper curiosity.
-                <br><br>
-                Ultimately, this isn't about correcting anyone's understanding. It's about pausing to ask where something we've always known actually comes from, and finding new ways to appreciate it.
-                <br><br>
-                This is a learning project, and I welcome your thoughts. If you notice something that could be clarified, have scholarly insights to share, or simply want to reflect on your own experience with these Names, I'd love to hear from you.
+                This is a learning project, and I welcome your thoughts. If you notice something that could be clarified, have scholarly insights to share, I'd love to hear from you: <a href="mailto:ahmedben@umich.edu" class="source-link">ahmedben@umich.edu</a>.
             </p>
 
             <div class="sources-columns">
@@ -2220,6 +2240,117 @@ It's a song everyone knows—not because we chose to learn it, but because we he
         direction: rtl;
     }
 
+    /* Song selector dropdown */
+    .song-selector-wrapper {
+        display: flex;
+        justify-content: center;
+        margin: 2vw 0 0 0;
+    }
+
+    .song-selector {
+        position: relative;
+        display: inline-block;
+    }
+
+    .song-selector-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.8vw;
+        background: #AC8B7E;
+        border: 2px solid #ECDBC8;
+        border-radius: 10px;
+        padding: 1vw 2vw;
+        cursor: pointer;
+        transition: background 0.2s;
+        font-family: 'Quicksand', sans-serif;
+        font-size: 1.3vw;
+        color: #FDEDDB;
+        font-weight: 600;
+    }
+
+    .song-selector-btn:hover {
+        background: #786259;
+    }
+
+    .song-selector-label {
+        white-space: nowrap;
+    }
+
+    .song-selector-arrow {
+        width: 1.2vw;
+        height: 1.2vw;
+        transition: transform 0.2s;
+        flex-shrink: 0;
+    }
+
+    .song-selector-arrow.open {
+        transform: rotate(180deg);
+    }
+
+    .song-dropdown {
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 50%;
+        transform: translateX(-50%);
+        background: #FDEDDB;
+        border: 2px solid #AC8B7E;
+        border-radius: 8px;
+        overflow: hidden;
+        z-index: 100;
+        min-width: 100%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .song-option {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2vw;
+        width: 100%;
+        padding: 0.7vw 1.2vw;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.15s;
+        font-family: 'Quicksand', sans-serif;
+    }
+
+    .song-option:hover {
+        background: #f0dcc8;
+    }
+
+    .song-option.active {
+        background: #AC8B7E;
+        color: #FFFBF6;
+    }
+
+    .song-option.active .song-option-singer,
+    .song-option.active .song-option-title {
+        color: #FFFBF6;
+    }
+
+    .song-option-singer {
+        font-weight: 600;
+        font-size: 0.95vw;
+        color: #AC8B7E;
+        white-space: nowrap;
+    }
+
+    .song-option-title {
+        font-size: 0.8vw;
+        color: #7A6A5E;
+        white-space: nowrap;
+    }
+
+    .song-option + .song-option {
+        border-top: 1px solid #d4c4b5;
+    }
+
+    .song-option.active + .song-option,
+    .song-option + .song-option.active {
+        border-top-color: #AC8B7E;
+    }
+
     .filter-checkbox-arabic {
         display: flex;
         align-items: center;
@@ -2314,6 +2445,14 @@ It's a song everyone knows—not because we chose to learn it, but because we he
 
         .description-english {
             font-size: 2.5vw; /* was 1.4vw */
+        }
+
+        .ENTitle{
+            font-size: 6vw;
+        }
+
+        .ArTitle{
+            font-size: 3.5vw;
         }
 
         /* Source labels */
@@ -2443,7 +2582,7 @@ It's a song everyone knows—not because we chose to learn it, but because we he
         .player-sticky-container {
             padding: 0.8rem 1rem;
             min-height: auto;
-            gap: 0.5rem;
+            /* gap: 0.5rem; */
         }
 
         .rank-display-sticky {
@@ -2469,10 +2608,74 @@ It's a song everyone knows—not because we chose to learn it, but because we he
 
         .current-name-sticky-arabic {
             font-size: 3.5vw;
+            margin-right: 0.3vw;
         }
 
         .current-name-sticky-english {
+            font-size: 5vw;
+            margin-right: 0.3vw;
+        }
+
+        /* Section & subsection titles */
+        .section-title-en {
+            font-size: 6vw;
+        }
+
+        .section-title-ar {
             font-size: 3.5vw;
+        }
+
+        .subsection-title-en,
+        .subsection-title-ar {
+            font-size: 2.5vw;
+            padding: 1vw 2.5vw;
+        }
+
+        .name-examples-ar{
+            font-size: 2.5vw;
+        }
+
+         .name-examples-en{
+            font-size: 2.5vw;
+        }
+
+        /* Byline */
+        .Reference {
+            font-size: 2.5vw;
+            padding: 1vw 2.5vw;
+        }
+
+        /* Name breakdown formula */
+        .abd-fixed,
+        .name-variable {
+            font-size: 8vw;
+        }
+
+        .abd-fixed-ar,
+        .name-variable-ar {
+            font-size: 6vw;
+        }
+
+        .plus-sign {
+            font-size: 6vw;
+        }
+
+        .person-name-en {
+            font-size: 5.5vw;
+        }
+
+        .person-name-ar {
+            font-size: 4.5vw;
+        }
+
+        .person-desc-en,
+        .person-desc-ar {
+            font-size: 3vw;
+        }
+
+        /* Video */
+        .video-wrapper {
+            max-width: 90vw;
         }
 
       }
@@ -2720,8 +2923,8 @@ It's a song everyone knows—not because we chose to learn it, but because we he
         }
 
         .song-selector-btn {
-            padding: 3vw 5vw;
-            font-size: 3.5vw;
+            padding: 1vw 3vw;
+            font-size: 3vw;
         }
 
         .song-selector-arrow {
@@ -2742,114 +2945,5 @@ It's a song everyone knows—not because we chose to learn it, but because we he
         }
     }
 
-    /* Song selector dropdown */
-    .song-selector-wrapper {
-        display: flex;
-        justify-content: center;
-        margin: 2vw 0 0 0;
-    }
-
-    .song-selector {
-        position: relative;
-        display: inline-block;
-    }
-
-    .song-selector-btn {
-        display: flex;
-        align-items: center;
-        gap: 0.8vw;
-        background: #AC8B7E;
-        border: 2px solid #ECDBC8;
-        border-radius: 10px;
-        padding: 1vw 2vw;
-        cursor: pointer;
-        transition: background 0.2s;
-        font-family: 'Quicksand', sans-serif;
-        font-size: 1.3vw;
-        color: #FDEDDB;
-        font-weight: 600;
-    }
-
-    .song-selector-btn:hover {
-        background: #786259;
-    }
-
-    .song-selector-label {
-        white-space: nowrap;
-    }
-
-    .song-selector-arrow {
-        width: 1.2vw;
-        height: 1.2vw;
-        transition: transform 0.2s;
-        flex-shrink: 0;
-    }
-
-    .song-selector-arrow.open {
-        transform: rotate(180deg);
-    }
-
-    .song-dropdown {
-        position: absolute;
-        top: calc(100% + 4px);
-        left: 50%;
-        transform: translateX(-50%);
-        background: #FDEDDB;
-        border: 2px solid #AC8B7E;
-        border-radius: 8px;
-        overflow: hidden;
-        z-index: 100;
-        min-width: 100%;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    .song-option {
-        display: flex;
-        flex-direction: column;
-        gap: 0.2vw;
-        width: 100%;
-        padding: 0.7vw 1.2vw;
-        border: none;
-        background: transparent;
-        cursor: pointer;
-        text-align: left;
-        transition: background 0.15s;
-        font-family: 'Quicksand', sans-serif;
-    }
-
-    .song-option:hover {
-        background: #f0dcc8;
-    }
-
-    .song-option.active {
-        background: #AC8B7E;
-        color: #FFFBF6;
-    }
-
-    .song-option.active .song-option-singer,
-    .song-option.active .song-option-title {
-        color: #FFFBF6;
-    }
-
-    .song-option-singer {
-        font-weight: 600;
-        font-size: 0.95vw;
-        color: #AC8B7E;
-        white-space: nowrap;
-    }
-
-    .song-option-title {
-        font-size: 0.8vw;
-        color: #7A6A5E;
-        white-space: nowrap;
-    }
-
-    .song-option + .song-option {
-        border-top: 1px solid #d4c4b5;
-    }
-
-    .song-option.active + .song-option,
-    .song-option + .song-option.active {
-        border-top-color: #AC8B7E;
-    }
+    
 </style>

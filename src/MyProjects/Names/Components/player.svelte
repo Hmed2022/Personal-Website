@@ -328,8 +328,8 @@
         }
 
         .play-button {
-            width: 8vw;
-            height: 8vw;
+            width: 4vw;
+            height: 4vw;
         }
 
         .play-button svg {
@@ -338,12 +338,12 @@
         }
 
         .time-display {
-            font-size: 3vw;
+            font-size: 5vw;
             min-width: 8vw;
         }
 
         .progress-container {
-            gap: 1.5vw;
+            gap: 4vw;
         }
 
         .progress-bar {
