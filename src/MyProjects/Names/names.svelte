@@ -1024,7 +1024,7 @@ It's a song everyone knows—not because we chose to learn it, but because we he
                 <p class="ArabicText">
                     بعض الأسماء تظهر في قائمة التسعة والتسعين لكنها نادراً ما تُستخدم كأسماء شخصية — كالقهار (الغالب بقهره) أو المميت (مُفني الأحياء). لن تجد كثيراً من الأطفال يحملون اسم عبد القهار أو عبد المميت.
                     <br><br>
-                    لماذا؟ بعض الصفات تبدو ثقيلة جداً لتُوضع على طفل.{#if currentPerson.common !== 'Yes'} أسماء مثل:{/if}
+                    السبب؟ بعض الصفات تبدو ثقيلة لتسمى على طفل أو بكل بساطة غير مشهورة أو طويلة.{#if currentPerson.common !== 'Yes'} أسماء مثل:{/if}
                 </p>
                 {#if currentPerson.common !== 'Yes'}
                     <div class="name-breakdown">
