@@ -89,15 +89,14 @@ import songsData from './Assests/songs.js'
         currentVerseIndex = 0;
     }
 
-    // Scroll to video when audio starts playing
-    let wasPlaying = false;
-    $: if ($audioPlaying && !wasPlaying && videoContainerElement) {
-        const offset = window.innerWidth * 0.1;
-        const top = videoContainerElement.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top, behavior: 'smooth' });
-        wasPlaying = true;
-    } else if (!$audioPlaying) {
-        wasPlaying = false;
+    // Scroll to video — called only from the "play" / "الخلفية" text links
+    function scrollToVideo() {
+        togglePlayRequest.update(n => n + 1);
+        if (videoContainerElement) {
+            const offset = window.innerWidth * 0.1;
+            const top = videoContainerElement.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top, behavior: 'smooth' });
+        }
     }
 
     // Scroll to name detail when triggered from SVG click
@@ -428,13 +427,13 @@ import songsData from './Assests/songs.js'
     {#if $language === 'Arabic'}إنه اليوم الأول من رمضان في تونس. <br><br>
 صمنا طوال النهار، والآن نضع اللمسات الأخيرة على مائدة الإفطار. على شاشة التلفاز، يُتلى القرآن بصوت <a href="https://qurancentral.com/audio/ali-barrak" target="_blank" rel="noopener noreferrer" class="source-link">علي البرّاق</a>، إشارة مألوفة بأن الإفطار لم يبقَ عليه سوى دقائق. تغرب الشمس. يرتفع الأذان, نداء من المسجد القريب، وآخر من بعيد، وثالث من التلفاز، تتداخل جميعها.
 نُفطر على التمر والماء. بعد يوم طويل من الصيام، تلك الرشفة الأولى مُرضية للغاية. <br><br>
-ثم تبدأ أغنية مألوفة في <span class="play-text-link" on:click={() => togglePlayRequest.update(n => n + 1)}>الخلفية</span>. <br><br>
+ثم تبدأ أغنية مألوفة في <span class="play-text-link" on:click={scrollToVideo}>الخلفية</span>. <br><br>
 إنها أغنية يعرفها الجميع, ليس لأننا اخترنا تعلّمها، بل لأننا نسمعها كل يوم لثلاثين يومًا، سنة بعد سنة. يملأ صوت <a href="https://ar.wikipedia.org/wiki/%D9%84%D8%B7%D9%81%D9%8A_%D8%A8%D9%88%D8%B4%D9%86%D8%A7%D9%82" target="_blank" rel="noopener noreferrer" class="source-link">لطفي بوشناق</a>  ,أحب مطربي تونس, الغرفة، حاملًا ترنيمة إيقاعية لأسماء الله الحُسنى. بالنسبة للتونسيين، هذه الأغنية مألوفة كالنشيد الوطني, فهي تُعلن لحظة الإفطار كل يوم طوال شهر كامل. أتذكر أنني كنت أُردد معها وأنا أقطع الليمون والخبز.
     {:else}
         <p class=EnglishText>It's the first day of Ramadan in Tunisia. <br><br>
 We've been fasting all day, and now we're making the final touches to the dining table. On TV, the Holy Qur'an is being recited by <a href="https://qurancentral.com/audio/ali-barrak" target="_blank" rel="noopener noreferrer" class="source-link">Ali Al-Barrak</a>, a familiar signal that iftar is only minutes away. The sun sets. The adhan rises: one call from the nearby mosque, another from farther away, and a third from the television, all overlapping.
 We break our fast with dates and water. That first sip, after hours of waiting, hits different. <br><br>
-Then a familiar song begins to <span class="play-text-link" on:click={() => togglePlayRequest.update(n => n + 1)}>play</span> in the background. <br><br>
+Then a familiar song begins to <span class="play-text-link" on:click={scrollToVideo}>play</span> in the background. <br><br>
 It's a song everyone knows—not because we chose to learn it, but because we hear it every day for thirty days, year after year. The unmistakable voice of <a href="https://en.wikipedia.org/wiki/Lotfi_Bouchnak" target="_blank" rel="noopener noreferrer" class="source-link">Lotfi Bouchnak</a>,a Tunisian cultural icon, fills the room, carrying a rhythmic chant of the Names of Allah. For Tunisians, this song is as familiar as a national anthem, it marks the moment of breaking fast every single day for a month. I remember singing along without thinking, my hands busy slicing baguettes and cutting lemons for the table.
     {/if}
 </p>
@@ -550,6 +549,14 @@ It's a song everyone knows—not because we chose to learn it, but because we he
 
 <div bind:this={allNamesElement}>
     <AllNames/>
+</div>
+
+<div class="guide-text" style="margin-top: 2vw;">
+    {#if $language === 'Arabic'}
+        <p class="guide-text-arabic">اضغط <b>مسافة</b> للتشغيل والإيقاف · استخدم <b>←</b> و <b>→</b> للتنقل بين الأسماء</p>
+    {:else}
+        <p class="guide-text-english" style="direction: ltr;">Press <b>Space</b> to play/pause · Use <b>←</b> <b>→</b> arrow keys to navigate between names</p>
+    {/if}
 </div>
 
 {#if showBackToNames}
