@@ -1,0 +1,169 @@
+<script>
+  import { createEventDispatcher, onMount } from 'svelte';
+  import ArrowIcon from './ArrowIcon.svelte';
+
+  export let enableKeyboard = true;
+  export let directions = ['up', 'down', 'left', 'right'];
+  export let disable = [];
+  export let sticky = true;
+  export let title = "Press the ‘Down key’ to see the Math!";
+  export let blinkDelay = 1500; // change to 15000 for 15s in production
+
+  const dispatch = createEventDispatcher();
+
+  let activeKey = '';
+  let timer;            // for pressed-key visual
+  let blinkRight = false;
+  let blinkTimerId;     // <--- the blinking countdown timer
+
+  function fire(dir) {
+    if (!directions.includes(dir)) return;
+    if (disable.includes(dir)) return;
+    dispatch('tap', dir);
+  }
+
+  function setActive(dir) {
+    activeKey = dir;
+    clearTimeout(timer);
+    timer = setTimeout(() => (activeKey = ''), 150);
+  }
+
+  // Restart the post-interaction countdown and stop blinking immediately
+  function resetBlinkTimer() {
+    clearTimeout(blinkTimerId);
+    blinkRight = false;                        // stop any current blinking
+    blinkTimerId = setTimeout(() => {
+      blinkRight = true;                       // resume blinking after delay
+    }, blinkDelay);
+  }
+
+  function tap(dir) {
+    setActive(dir);
+    fire(dir);
+    if (dir === 'right') resetBlinkTimer();    // <--- reset timer on right click/tap
+  }
+
+  function handleKeydown(e) {
+    if (!enableKeyboard) return;
+    const map = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right' };
+    const dir = map[e.key];
+    if (!dir) return;
+    e.preventDefault();
+    setActive(dir);
+    fire(dir);
+    if (dir === 'right') resetBlinkTimer();    // <--- reset timer on Right Arrow
+  }
+
+  onMount(() => {
+    resetBlinkTimer();                         // start initial countdown
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(blinkTimerId);
+    };
+  });
+</script>
+
+<svelte:window on:keydown={handleKeydown} on:keyup={() => (activeKey = '')} />
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+
+  .position { position:absolute; bottom:0; left:0; margin-bottom:2%; margin-left:4%; z-index:1000; opacity:.3; transition:opacity .2s; }
+  .position:hover { opacity:1; }
+  .container { width:21vw; max-width:140px; display:flex; flex-direction:column; justify-content:center; align-items:center; user-select:none; }
+  .keyboard { display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(2,1fr); gap:2%; width:100%; aspect-ratio:3/2; }
+  .key { display:flex; justify-content:center; align-items:center; border:none; border-radius:20%; background:#7c6fab; color:#BFAFF7; cursor:pointer; opacity:.5; transition:background-color .2s, opacity .2s, transform .08s; }
+  .key.down { opacity:1; }
+  .key.active, .key:active { background:#3F3075; transform: translateY(1px) scale(.98); }
+  .key:disabled { opacity:.25; cursor:not-allowed; }
+  .center { visibility:hidden; }
+  .instruction { margin-top:10px; font-size:.8rem; color:#3F3075; text-align:center; font-family:'Kumbh Sans', sans-serif; font-weight:900; }
+  .icon { width:clamp(13px,1.8vw,20px); height:clamp(13px,1.8vw,20px); }
+
+  /* --- Blinking burgundy "stroke" for the RIGHT key --- */
+  @keyframes pulseStroke {
+    0%, 100% {
+      outline: 0 solid transparent;
+      box-shadow: none;
+    }
+    50% {
+      outline: 3px solid #5B4E88;               /* burgundy */
+      outline-offset: 0;
+      box-shadow: 0 0 0 4px rgba(91, 78, 136, 0.85);
+    }
+  }
+  .blink-right {
+    animation: pulseStroke 0.9s infinite;
+    border-radius: 20%;
+  }
+</style>
+
+<div class={sticky ? 'position' : ''} aria-label={title}>
+  <div class="container">
+    <div class="keyboard">
+      <!-- row 1 -->
+      <div class="center"></div>
+
+      {#if directions.includes('up')}
+        <button
+          class="key {activeKey === 'up' ? 'active' : ''}"
+          on:mousedown={() => tap('up')}
+          on:touchstart|preventDefault={() => tap('up')}
+          aria-label="Up"
+          disabled={disable.includes('up')}
+        >
+          <ArrowIcon dir="up" class="icon" />
+        </button>
+      {:else}
+        <div class="center"></div>
+      {/if}
+
+      <div class="center"></div>
+
+      <!-- row 2 -->
+      {#if directions.includes('left')}
+        <button
+          class="key {activeKey === 'left' ? 'active' : ''}"
+          on:mousedown={() => tap('left')}
+          on:touchstart|preventDefault={() => tap('left')}
+          aria-label="Left"
+          disabled={disable.includes('left')}
+        >
+          <ArrowIcon dir="left" class="icon" />
+        </button>
+      {:else}
+        <div class="center"></div>
+      {/if}
+
+      {#if directions.includes('down')}
+        <button
+          class="key down {activeKey === 'down' ? 'active' : ''}"
+          on:mousedown={() => tap('down')}
+          on:touchstart|preventDefault={() => tap('down')}
+          aria-label="Down"
+          disabled={disable.includes('down')}
+        >
+          <ArrowIcon dir="down" class="icon" />
+        </button>
+      {:else}
+        <div class="center"></div>
+      {/if}
+
+      {#if directions.includes('right')}
+        <button
+          class="key {activeKey === 'right' ? 'active' : ''} {blinkRight ? 'blink-right' : ''}"
+          on:mousedown={() => tap('right')}
+          on:touchstart|preventDefault={() => tap('right')}
+          aria-label="Right"
+          disabled={disable.includes('right')}
+        >
+          <ArrowIcon dir="right" class="icon" />
+        </button>
+      {:else}
+        <div class="center"></div>
+      {/if}
+    </div>
+
+    <div class="instruction">{title}</div>
+  </div>
+</div>

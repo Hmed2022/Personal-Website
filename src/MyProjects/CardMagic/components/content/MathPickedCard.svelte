@@ -1,0 +1,141 @@
+<script>
+  import { createEventDispatcher } from 'svelte';
+  import { lockedCard, statuscard } from '../../stores/misc.js';
+	import KeyboardDown from '../items/KeyboardDown.svelte';
+  import KeyboardUp from '../items/KeyboardUp.svelte';
+  import Up from '../items/JustUpArrow.svelte'
+  import mathBack from '../../svg/mathBack.svg?raw';
+
+  const dispatch = createEventDispatcher();
+  function jumpToCards() {
+    dispatch('goto', { y: 0, x: 0 });
+  }
+
+  function DisplayValue(selectedValue) {
+    if (selectedValue === 11) return 'Jack';
+    if (selectedValue === 12) return 'Queen';
+    if (selectedValue === 13) return 'King';
+    if (selectedValue === 1) return 'Ace';
+    return selectedValue;
+  }
+
+  function getCardSrc(card) {
+    if (!card) return '';
+    const fileSuit = { Clubs: 'club', Diamonds: 'diam', Hearts: 'heart', Spades: 'spade' };
+    return `/assets/CardMagic/Cards2PNG/${fileSuit[card.suit]}-${card.value < 10 ? '0' : ''}${card.value}.png`;
+  }
+</script>
+
+<main class="container">
+  <!-- <KeyboardUp/> -->
+  <div class="content">
+    <div class="left">
+      <p>
+        In this section we really don’t care about which card you chose, our only concern is to change the position of the card.
+        To track it, we will shade it a
+        <mark class="highlight">darker color</mark>.
+      </p>
+    </div>
+    {#if $statuscard}
+      <div class="right">
+        <img class="card-front" src={getCardSrc($lockedCard)} alt={`Card ${$lockedCard.value} of ${$lockedCard.suit}`} />
+        <div class="picked-text">
+          <p>Your card is the</p>
+          <b class="card-label">{DisplayValue($lockedCard?.value)} of {$lockedCard?.suit}</b>
+        </div>
+      </div>
+    {:else}
+      <div class="right">
+        <div class="card-front">{@html mathBack}</div>
+        <div class="picked-text">
+          <p >You still haven't picked a card yet, please go back and select a card!</p>
+          <div class="up-wrap"> <p class="picked-text"></p><Up enableKeyboard={false} on:tap={jumpToCards}/></div>
+          <!-- <b class="picked-text">and select a card!</b> -->
+        </div>
+      </div>
+    {/if}
+  </div>
+</main>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #FDD4D4;
+  }
+
+
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    max-width: 1200px;
+  }
+
+  .left {
+    flex: 1;
+    text-align: center;
+    font-size: 1.7em;
+    color: #A34C48;
+    margin-right: 30px;
+    font-weight: 300;
+    font-family: 'Kumbh Sans', sans-serif;
+  }
+
+  .highlight {
+    background-color: #A34C48;
+    color: #F09D99;
+    padding: 0 4px;
+  }
+
+  .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-front {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); */
+  }
+
+  :global(.card-front svg) {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .up-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 12px 0;
+  }
+
+  .picked-text {
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 1.5em;
+    color: #A34C48;
+    text-align: center;
+  }
+
+  .card-label {
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 2em;
+    background-color: #BA6E6B;
+    color: #F09D99;
+    padding: 6px 10px;
+    /* border-radius: 5px; */
+  }
+</style>
+

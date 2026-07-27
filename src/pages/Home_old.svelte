@@ -13,7 +13,7 @@
 	import pdfUrl2 from "../assets/CV Detailed- Ahmed Bendaly .pdf"
 	import CurrentImg from "../assets/Current.png"
 	import AboutMe from "../assets/1.png"
-	import PhotoMe from "../PhotoMe.svg"
+	import PhotoMe from "../assets/PhotoMe.svg"
 	import ProjectsAnimated from '../components/ProjectsAnimated.svelte';
 
 	import projectPhoto from '../projects.png'

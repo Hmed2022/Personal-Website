@@ -10,6 +10,7 @@
 	import Klay from './MyProjects/Klay/klay.svelte'
 	import Anniversary from './MyProjects/Anniversary/Aniv.svelte'
   import Names from './MyProjects/Names/names.svelte'
+  import CardMagic from './MyProjects/CardMagic/CardMagic.svelte'
 
 
 	const routes = {
@@ -21,7 +22,8 @@
     '/tuninfointro': TunInfoIntro,
     '/klay': Klay,
     // '/Anniv': Anniversary,
-    '/Names': Names
+    '/Names': Names,
+    '/cardmagic': CardMagic
   };
 
   // Normalize current path from the router (works for hash or history)
@@ -36,7 +38,9 @@
     normalizedPath === '/anniv' ||
     normalizedPath === '/names' ||
     normalizedPath === '/allstar' ||
-    normalizedPath === '/tuninfo';
+    normalizedPath === '/tuninfo' ||
+    normalizedPath === '/klay' ||
+    normalizedPath === '/cardmagic';
 
 </script>
 

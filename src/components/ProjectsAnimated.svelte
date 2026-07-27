@@ -63,18 +63,25 @@
 <section>
     {#each sortedImageData as image, i}
     {#if image.show && image.tags.includes(buttontag)}
-    <a href={image.href} class="card__link">
-        <div class="card__wrapper" transition:fade={{delay: i * 50}}>
+    <div class="card__wrapper" transition:fade={{delay: i * 50}}>
+        <a href={image.href} class="card__link">
             <div class="card__image-container">
                 <img class="image" src='{image.url}' alt={image.title} />
             </div>
-            <div class="card__content">
-                <h3 class="card__category">{image.desc}</h3>
+        </a>
+        <div class="card__content">
+            <a href={image.href} class="card__link">
+                <div class="card__category-row">
+                    <h3 class="card__category">{image.desc}</h3>
+                    {#if image.lang}
+                    <span class="card__lang">{image.lang}</span>
+                    {/if}
+                </div>
                 <h2 class="card__title">{image.title}</h2>
-                <p class="card__desc">{image.description}</p>
-            </div>
+            </a>
+            <p class="card__desc">{@html image.description}</p>
         </div>
-    </a>
+    </div>
     {/if}
     {/each}
 </section>
@@ -139,8 +146,17 @@
     }
 
     .card__content {
+        position: relative;
         padding: 2rem 2.5rem;
         background: white;
+    }
+
+    .card__category-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        margin: 0 0 0.5rem 0;
     }
 
     .card__category {
@@ -148,7 +164,7 @@
         font-family: 'Jost', sans-serif;
         font-size: 0.85rem;
         font-weight: 400;
-        margin: 0 0 0.5rem 0;
+        margin: 0;
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
@@ -169,6 +185,25 @@
         font-weight: 400;
         margin: 0;
         line-height: 1.6;
+    }
+
+    .card__desc :global(a) {
+        color: #707171;
+        text-decoration: underline;
+    }
+
+    .card__desc :global(a:hover) {
+        color: #333;
+    }
+
+    .card__lang {
+        color: #707171;
+        font-family: 'Jost', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
     }
 
     .buttons {
