@@ -1,6 +1,8 @@
 <script>
+    import { onMount } from "svelte";
+    import { get } from "svelte/store";
     import { crossfade, scale } from "svelte/transition";
-    import { cycle3array, reveal } from "../../stores/misc.js";
+    import { cycle3array, reveal, resetKey } from "../../stores/misc.js";
     import cardback from '../../svg/Cards_png/back.png'
     // If you need to force-bundle assets, keep this import:
   
@@ -55,7 +57,23 @@
       midPile = [];
       lastCard = null;
       revealFlipped = false;
+      $reveal = false;
     }
+
+    // Reset this pile's local state whenever the app-wide reset fires (e.g.
+    // picking a new card from the End screen), so stale drawn piles / a
+    // stale revealed card don't linger when this slide is revisited.
+    let lastSeenReset = -1;
+    onMount(() => {
+      lastSeenReset = get(resetKey);
+      const unsub = resetKey.subscribe((v) => {
+        if (v !== lastSeenReset) {
+          lastSeenReset = v;
+          reset();
+        }
+      });
+      return unsub;
+    });
 
     import facedown from "../../svg/Cards_png/back.png"; // back image
   let flipEl;  
@@ -94,7 +112,12 @@
 
 <audio src="/assets/CardMagic/flipcard.wav" bind:this={flipEl} preload="auto" />
 <audio src="/assets/CardMagic/deal.ogg"      bind:this={dealEl} preload="auto" />
-  
+
+  <div class="reveal-text" class:visible={revealFlipped}>
+    <p class="question">Is this <span class="first">your card</span>?</p>
+    <p class="joke">Of course it is. Nothing was left to chance...</p>
+  </div>
+
   <main class="stage">
     <!-- Left: Pile 1 (full deck at start) -->
     <section class="pile">
@@ -155,17 +178,27 @@
     <button on:click={dealToFifteen} disabled={count >= 14 || dealing}> Reveal The Card!</button>
     <!-- <button on:click={reset}>Reset</button> -->
   </div>
-  
+
   <style>
     .stage {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       align-items: end;
+      justify-items: center;
       gap: 3rem;
-      padding: 3rem 2rem 2rem;
-      min-height: 75vh;
+      width: 100%;
+      max-width: 1100px;
+      padding: 2rem;
+      box-sizing: border-box;
       font-family: "Kumbh Sans", system-ui, sans-serif;
       color: #5B4E88;
+    }
+
+    @media (max-width: 900px) {
+      .stage {
+        grid-template-columns: 1fr;
+        justify-items: center;
+      }
     }
   
     .pile {
@@ -288,6 +321,41 @@
       color: #fff;
     }
     .controls button[disabled] { opacity: .5; cursor: not-allowed; }
+
+    .reveal-text {
+      text-align: center;
+      max-width: 30rem;
+      margin: 0 auto 2rem;
+      padding: 0 1rem;
+      font-family: "Kumbh Sans", system-ui, sans-serif;
+      color: #5B4E88;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .reveal-text.visible {
+      visibility: visible;
+      opacity: 1;
+    }
+    .question {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem;
+    }
+    .question .first {
+      background-color: #5B4D88;
+      color: #E5DEFE;
+      padding: 0.1em 0.5em;
+      border-radius: 0.3em;
+      font-weight: 900;
+    }
+    .joke {
+      font-size: 1.05rem;
+      font-weight: 400;
+      font-style: italic;
+      opacity: 0.85;
+      margin: 0;
+    }
 
     .stack.with-perspective { perspective: 1000px; }
 

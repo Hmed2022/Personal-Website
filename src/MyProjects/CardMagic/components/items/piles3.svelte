@@ -1,8 +1,10 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, createEventDispatcher } from 'svelte';
   import { quintOut } from 'svelte/easing';
   import { crossfade } from 'svelte/transition';
   import { flip } from 'svelte/animate';
+
+  const dispatch = createEventDispatcher();
 
   // your code
   import { allCards } from './cards.js';
@@ -104,6 +106,12 @@
 
   // Handle pile button clicks
   function onPick(pileNumber, e) {
+    // already solved — this click means "go reveal the card"
+    if (success && pileNumber === successPile) {
+      dispatch('goto', { y: 0, x: 4 });
+      return;
+    }
+
     const selectedPile = getSelectedCycle2PileNumber();
     if (selectedPile == null) return;
 
@@ -183,11 +191,12 @@
             <button
               id={"pile-btn-" + pileI}
               data-pile={pileI}
+              class:reveal-btn={success && pileI === successPile}
               on:click={(e) => onPick(pileI, e)}
               disabled={success && pileI !== successPile}
             >
               {#if success && pileI === successPile}
-                <p style='font-size: 0.7em'>Great, now let's reveal the Card!</p>
+                Great, now let's reveal the Card! →
               {:else}
                 Pile {pileI}
               {/if}
@@ -312,6 +321,30 @@
     color: #5B4E88;
     font-family: 'Kumbh Sans', sans-serif;
     font-weight: 900;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+
+  button[disabled] {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .reveal-btn {
+    background: #5B4D88;
+    color: #E5DEFE;
+    font-size: 1.05em;
+    padding: 1.1em 1.4em;
+    border-radius: 999px;
+    box-shadow: 0 6px 20px rgba(91, 77, 136, 0.5);
+    animation: reveal-pulse 1.8s ease-in-out infinite;
+  }
+  .reveal-btn:hover {
+    transform: scale(1.06);
+  }
+
+  @keyframes reveal-pulse {
+    0%, 100% { box-shadow: 0 6px 20px rgba(91, 77, 136, 0.5); }
+    50%      { box-shadow: 0 8px 30px rgba(91, 77, 136, 0.85); }
   }
 
   /* Shake animation */

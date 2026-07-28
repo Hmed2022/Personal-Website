@@ -3,7 +3,6 @@
   const browser = typeof window !== "undefined";               // SSR guard
   import { get } from "svelte/store";
   import Arrow from "../items/Arrow.svelte";
-  import Annotations from "../items/Annotations.svelte";
   import CurlyBraceCoords from "../items/Brace.svelte";
   import { statuscard, cycle3array, annotations, positions } from "../../stores/misc.js";
   import Up from "../items/JustUpArrow.svelte";
@@ -11,6 +10,20 @@
   const dispatch = createEventDispatcher();
   function jumpToCards() {
     dispatch('goto', { y: 1, x: 0 });
+  }
+
+  // -------- three-way toggle: annotations -> positions -> details -------
+  let mode = "annotations"; // "annotations" | "positions" | "details"
+  $: annotations.set(mode === "annotations");
+  $: positions.set(mode === "positions");
+  $: modeBtnLabel =
+    mode === "annotations" ? "More Details!"  :
+    mode === "details"     ? "Show Positions" : "Show Annotations";
+
+  function cycleMode() {
+    mode = mode === "annotations" ? "details" : mode === "details" ? "positions" : "annotations";
+    // force a fresh layout re-measure once the DOM/crossfade has settled
+    setTimeout(invalidate, 350);
   }
 
   // ------- helpers -------
@@ -156,6 +169,39 @@
     return "";
   }
 
+  // -------- "More Details" mode: the 2 cards eliminated in cycle 3 (matched
+  // cycle-1 & cycle-2 but not cycle-3) plus the selected card itself --------
+  function computeEliminatedEls() {
+    const arr = get(cycle3array);
+    return arr
+      .filter((c) => comboClass(c) === "m12")
+      .map((c) => elMap.get(getId(c)))
+      .filter(Boolean);
+  }
+  let eliminatedEls = [];
+  $: layoutVersion, get(cycle3array), eliminatedEls = computeEliminatedEls();
+
+  function cardCenterY(el) {
+    if (!board || !el) return null;
+    const b = board.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    return (r.top + r.bottom) / 2 - b.top;
+  }
+
+  // .container is centered inside a wider, responsive .stage, so the detail
+  // captions need its *actual* measured edges (relative to .stage) rather
+  // than a guessed fixed pixel offset
+  function containerBounds() {
+    if (!board || !containerEl) return null;
+    const b = board.getBoundingClientRect();
+    const c = containerEl.getBoundingClientRect();
+    return { left: c.left - b.left, right: c.right - b.left };
+  }
+  let cBounds = null;
+  $: layoutVersion, cBounds = containerBounds();
+
+  let detailNote1, detailNote2, detailNote3;
+
   // -------- observers & mount timing (fonts-ready + ticks + RAF, SSR-guarded) --------
   let ro;
   function onWinResize() { invalidate(); }
@@ -222,7 +268,10 @@
             </text>
           {/each}
         </svg>
+      {/if}
 
+      <!-- Pile braces: "positions" mode (Pile 1 & 2 on the right) -->
+      {#if $positions}
         <div class="brace-layer" aria-hidden="true">
           {#if p1}
             {#key layoutVersion}
@@ -233,6 +282,30 @@
           {#if p2}
             {#key layoutVersion}
               <CurlyBraceCoords side="left" x={p2.rightX} y1={p2.y1} y2={p2.y2}
+                                stroke="#b25555" strokeWidth={4} w={26} q={0.6} label="Pile 2"/>
+            {/key}
+          {/if}
+          {#if p3}
+            {#key layoutVersion}
+              <CurlyBraceCoords side="left" x={p3.rightX} y1={p3.y1} y2={p3.y2}
+                                stroke="#b25555" strokeWidth={4} w={26} q={0.6} label="Pile 3"/>
+            {/key}
+          {/if}
+        </div>
+      {/if}
+
+      <!-- Pile braces: "details" mode (Pile 1 & 2 on the left) -->
+      {#if mode === "details"}
+        <div class="brace-layer" aria-hidden="true">
+          {#if p1}
+            {#key layoutVersion}
+              <CurlyBraceCoords side="right"  x={p1.leftX}  y1={p1.y1} y2={p1.y2}
+                                stroke="#b25555" strokeWidth={4} w={26} q={0.6} label="Pile 1"/>
+            {/key}
+          {/if}
+          {#if p2}
+            {#key layoutVersion}
+              <CurlyBraceCoords side="right" x={p2.leftX} y1={p2.y1} y2={p2.y2}
                                 stroke="#b25555" strokeWidth={4} w={26} q={0.6} label="Pile 2"/>
             {/key}
           {/if}
@@ -287,6 +360,92 @@
           />
         {/if}
       {/if}
+
+      <!-- More Details mode: the two cards eliminated in cycle 3, plus the selected card -->
+      {#if mode === "details" && cBounds}
+        {#if eliminatedEls[0]}
+          <div
+            class="detail-note detail-note-right"
+            bind:this={detailNote1}
+            style="top:{cardCenterY(eliminatedEls[0])}px; left:{cBounds.right + 30}px;"
+          >
+            This card was in the middle pile in the first two cycles, but in the third one it got eliminated.
+          </div>
+        {/if}
+        {#if selectedEl}
+          <div
+            class="detail-note detail-note-left"
+            bind:this={detailNote2}
+            style="top:{cardCenterY(selectedEl)}px; left:{cBounds.left - 30}px;"
+          >
+            The Selected card is the only card that's been in the middle pile for the three cycles.
+          </div>
+        {/if}
+        {#if eliminatedEls[1]}
+          <div
+            class="detail-note detail-note-right"
+            bind:this={detailNote3}
+            style="top:{cardCenterY(eliminatedEls[1])}px; left:{cBounds.right + 30}px;"
+          >
+            This card was also in the middle pile in the first two cycles, but in the third one it got eliminated.
+          </div>
+        {/if}
+
+        {#if detailNote1 && eliminatedEls[0]}
+          {#key layoutVersion}
+            <Arrow
+              mode="container"
+              container={board}
+              fromEl={detailNote1}
+              toEl={eliminatedEls[0]}
+              fromAnchor="left"
+              toAnchor="right"
+              headAt="end"
+              curvature={0.5}
+              bulge={0.1}
+              bulgeDir="auto"
+              width={4}
+              color="#D288CA"
+            />
+          {/key}
+        {/if}
+        {#if detailNote2 && selectedEl}
+          {#key layoutVersion}
+            <Arrow
+              mode="container"
+              container={board}
+              fromEl={detailNote2}
+              toEl={selectedEl}
+              fromAnchor="right"
+              toAnchor="left"
+              headAt="end"
+              curvature={0.5}
+              bulge={0.1}
+              bulgeDir="auto"
+              width={3}
+              color="#D288CA"
+            />
+          {/key}
+        {/if}
+        {#if detailNote3 && eliminatedEls[1]}
+          {#key layoutVersion}
+            <Arrow
+              mode="container"
+              container={board}
+              fromEl={detailNote3}
+              toEl={eliminatedEls[1]}
+              fromAnchor="left"
+              toAnchor="right"
+              headAt="end"
+              curvature={0.5}
+              bulge={0.1}
+              bulgeDir="auto"
+              width={4}
+              color="#D288CA"
+            />
+          {/key}
+        {/if}
+      {/if}
     </div>
 
     {#if $positions}
@@ -305,7 +464,10 @@
       </div>
     {/if}
 
-    <Annotations/>
+    <div class="details-cont">
+      <button class="details-btn" on:click={cycleMode}>{modeBtnLabel}</button>
+      <div class="details-hint">click me!</div>
+    </div>
     <div class="footer"><p>Assembly III</p></div>
   {:else}
     <div class="else">
@@ -407,7 +569,7 @@
   .pos-label-svg{
     font-family:"Nanum Pen Script", cursive;
     font-size:2rem;
-    fill:#558ABB;
+    fill:#D288CA;
     dominant-baseline:middle;
     text-anchor:end;
   }
@@ -422,6 +584,44 @@
     font-size:2rem;
     font-family: "Nanum Pen Script", cursive;
   }
+
+  .details-cont{
+    position:absolute;
+    top:0; right:0;
+    margin-top:2%; margin-right:4%;
+    z-index:1000;
+    text-align:center;
+  }
+
+  .details-btn{
+    font-family:'Kumbh Sans', sans-serif;
+    font-size:1.3rem;
+    background-color:#F09D99;
+    color:#874C47;
+    border:none;
+    padding:0.4rem;
+    cursor:pointer;
+  }
+
+  .details-hint{
+    font-family:"Nanum Pen Script", cursive;
+    color:#558ABB;
+    font-size:1.6rem;
+    text-align:center;
+  }
+
+  .detail-note{
+    position:absolute;
+    max-width:14rem;
+    color:#D288CA;
+    font-weight:900;
+    font-size:1.8rem;
+    line-height:0.7;
+    font-family:"Nanum Pen Script", cursive;
+    text-align:center;
+  }
+  .detail-note-right{ transform:translateY(-50%); }
+  .detail-note-left{ transform:translate(-100%, -50%); }
 
   .descPos1{
     font-family: "Nanum Pen Script", cursive;

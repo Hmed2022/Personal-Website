@@ -253,7 +253,7 @@
 		  <Slide index={0}><Slide1/></Slide>
 		  <Slide index={1}><Slide2 on:goto={handleGoto} /></Slide>
 		  <Slide index={2}><Slide2_2 on:goto={handleGoto} /></Slide>
-		  <Slide index={3}><Slide2_3/></Slide>
+		  <Slide index={3}><Slide2_3 on:goto={handleGoto} /></Slide>
 		  <Slide index={4}><Slide2_4/></Slide>
 		  <Slide index={5}><Slide10 on:goto={handleGoto} /></Slide>
 		</Slider>

@@ -1,13 +1,25 @@
 <script>
+  import { onMount, onDestroy, tick } from 'svelte';
+  const browser = typeof window !== 'undefined';
   import { arrayCards, statuscard, cycle2array } from '../../stores/misc.js';
   import Arrow from '../items/Arrow.svelte';
   import Up from '../items/JustUpArrow.svelte';
   import { createEventDispatcher } from 'svelte';
+  import { fade } from 'svelte/transition';
 
   const dispatch = createEventDispatcher();
   function jumpToCards() {
     dispatch('goto', { y: 1, x: 0 });
   }
+
+  let showDetails = false;
+  function toggleDetails() {
+    showDetails = !showDetails;
+    // force a fresh layout re-measure once the DOM/crossfade has settled
+    setTimeout(invalidate, 350);
+  }
+
+  let detailNote;
 
   let rows = [];
 
@@ -54,7 +66,8 @@
 
   // arrow wiring
   let selectedEl = null;
-  let note, board;
+  let note;
+  let board;
   const elMap = new Map();
   let layoutVersion = 0;
   const invalidate = () => { layoutVersion += 1; };
@@ -62,7 +75,7 @@
   function collect(node, card) {
     elMap.set(card.index, node);
     if (card.selected) selectedEl = node;
-    invalidate();
+    queueMicrotask(invalidate);
     return {
       update(newCard) {
         if (newCard.index !== card.index) {
@@ -71,22 +84,77 @@
         }
         if (newCard.selected) selectedEl = node;
         else if (!newCard.selected && selectedEl === node) selectedEl = null;
-        invalidate();
+        queueMicrotask(invalidate);
       },
       destroy() {
         elMap.delete(card.index);
         if (selectedEl === node) selectedEl = null;
-        invalidate();
+        queueMicrotask(invalidate);
       }
     };
   }
+
+  // the three cards matching both cycle-1 and cycle-2 piles, for the details arrows
+  let bothEls = [];
+  $: {
+    layoutVersion;
+    bothEls = rows.flat()
+      .filter((c) => inCycle1(c) && inCycle2(c))
+      .map((c) => elMap.get(c.index))
+      .filter(Boolean);
+  }
+
+  // -------- settle timing: re-measure once fonts/layout are done --------
+  let ro;
+  function onWinResize() { invalidate(); }
+
+  onMount(async () => {
+    if (!browser) return;
+    if (typeof ResizeObserver !== 'undefined') {
+      ro = new ResizeObserver(() => invalidate());
+      [document.documentElement, board].forEach((el) => el && ro.observe(el));
+    }
+    window.addEventListener('resize', onWinResize);
+
+    await tick();
+    if (document.fonts?.ready) {
+      try { await document.fonts.ready; } catch {}
+    }
+    await tick();
+    requestAnimationFrame(() => invalidate());
+  });
+
+  onDestroy(() => {
+    if (!browser) return;
+    ro && ro.disconnect();
+    window.removeEventListener('resize', onWinResize);
+  });
 </script>
 
 <main class="body">
   {#if $statuscard}
+    <div class="details-cont">
+      <button class="details-btn" on:click={toggleDetails}>
+        {showDetails ? 'Less Details!' : 'More Details!'}
+      </button>
+      <div class="details-hint">click me!</div>
+    </div>
+
     <header class="header">
       <h1><u>The Third Cycle</u></h1>
-      <p>Let's have a look at the cards inside the piles. <br />Here's where your card went.</p>
+      <div class="header-text">
+        {#if !showDetails}
+          <p in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
+            Let's have a look at the cards inside the piles. <br />Here's where your card went.
+          </p>
+        {:else}
+          <p class="detail-text" bind:this={detailNote} in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
+            Since these cards were in consecutive positions right in the middle
+            of the whole deck, dividing it into three piles means we can be
+            confident that each one is now the middle card of its own pile.
+          </p>
+        {/if}
+      </div>
     </header>
 
     <div class="container" bind:this={board}>
@@ -107,7 +175,7 @@
         </div>
       {/each}
 
-      {#if selectedEl && note}
+      {#if !showDetails && selectedEl && note}
         <Arrow
           mode="container"
           container={board}
@@ -124,9 +192,32 @@
           version={layoutVersion}
         />
       {/if}
+
+      {#if showDetails && detailNote}
+        {#each bothEls as el, i (i)}
+          {#if el}
+            {#key layoutVersion}
+              <Arrow
+                mode="container"
+                container={board}
+                fromEl={detailNote}
+                toEl={el}
+                fromAnchor="bottom"
+                toAnchor="top"
+                headAt="end"
+                curvature={0.15}
+                bulge={0.12}
+                bulgeDir="down"
+                width={4}
+                color="#55993D"
+              />
+            {/key}
+          {/if}
+        {/each}
+      {/if}
     </div>
 
-    <div class="note" bind:this={note}>The Selected card</div>
+    <div class="note" class:note-hidden={showDetails} bind:this={note}>The Selected card</div>
 
     <div class="footer"></div>
     <div class="footer2"><p>Division III</p></div>
@@ -154,9 +245,47 @@
     font-family:'Kumbh Sans',sans-serif; color:#A34C48;
   }
 
-  .header{ text-align:center; margin-top:4rem; }
+  .details-cont{
+    position:absolute;
+    top:0; right:0;
+    margin-top:2%; margin-right:4%;
+    z-index:1000;
+    text-align:center;
+  }
+
+  .details-btn{
+    font-family:'Kumbh Sans', sans-serif;
+    font-size:1.3rem;
+    background-color:#F09D99;
+    color:#874C47;
+    border:none;
+    padding:0.4rem;
+    cursor:pointer;
+  }
+
+  .details-hint{
+    font-family:"Nanum Pen Script", cursive;
+    color:#558ABB;
+    font-size:1.6rem;
+    text-align:center;
+  }
+
+  .header{ text-align:center; margin-top:4rem; height:9rem; width:100%; }
   .header h1{ position:absolute; margin-top:3rem; margin-left:5rem; font-size:2rem; font-weight:bold; left:0; top:0; }
-  .header p{ margin-top:1rem; margin-bottom:0; font-size:2rem; font-weight:300; }
+  .header-text{ position:relative; height:100%; }
+  .header p{
+    position:absolute; top:1rem; left:0; right:0;
+    margin:0; font-size:2rem; font-weight:300;
+  }
+  .header p.detail-text{
+    font-family:"Nanum Pen Script", cursive;
+    font-size:1.9rem;
+    font-weight:700;
+    color:#55993D;
+    max-width:56rem;
+    top:1.4rem;
+    margin-left:auto; margin-right:auto;
+  }
 
   .container{
     position:relative;                       /* needed for Arrow mode="container" */
@@ -168,7 +297,9 @@
 
   .note{
     color:#5a80c0; font-weight:900; font-size:2rem; font-family:"Nanum Pen Script", cursive;
+    opacity:1; transition:opacity .2s;
   }
+  .note.note-hidden{ opacity:0; }
 
   .rectangle{
     position:relative;                        /* for the right caps (::before/::after) */

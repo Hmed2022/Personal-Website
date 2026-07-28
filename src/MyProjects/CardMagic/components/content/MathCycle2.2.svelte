@@ -454,7 +454,7 @@
   .pos-label-svg{
     font-family:"Nanum Pen Script", cursive;
     font-size:2rem;
-    fill:#558ABB;
+    fill:#56993D;
     dominant-baseline:middle;
     text-anchor:end;
   }

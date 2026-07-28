@@ -31,6 +31,10 @@
         .container{
             height: 100%;
             background-color: #BFAFF7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
   
   

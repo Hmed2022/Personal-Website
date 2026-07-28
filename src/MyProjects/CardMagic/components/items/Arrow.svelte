@@ -16,6 +16,7 @@
 
     let d = "";
     let ro, mounted = false;
+    const markerId = `openV-${Math.random().toString(36).slice(2)}`;
 
     const anchorPoint = (el) => {
       const c = container.getBoundingClientRect();
@@ -63,13 +64,13 @@
     onDestroy(unwire);
     $: if(mounted) update();
   
-    $: markerStart=(headAt==="start"||headAt==="both")?"url(#openV)":undefined;
-    $: markerEnd  =(headAt==="end"  ||headAt==="both")?"url(#openV)":undefined;
+    $: markerStart=(headAt==="start"||headAt==="both")?`url(#${markerId})`:undefined;
+    $: markerEnd  =(headAt==="end"  ||headAt==="both")?`url(#${markerId})`:undefined;
   </script>
-  
+
   <svg class="layer" aria-hidden="true">
     <defs>
-      <marker id="openV" viewBox="0 0 12 12" refX="10" refY="6"
+      <marker id={markerId} viewBox="0 0 12 12" refX="10" refY="6"
               markerUnits="strokeWidth" markerWidth="6" markerHeight="6"
               orient="auto-start-reverse">
         <path d="M0 0 L10 6 L0 12" fill="none" stroke={color} stroke-width="2"

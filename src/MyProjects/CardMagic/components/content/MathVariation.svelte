@@ -13,9 +13,9 @@
     </p>
   
     <div class="defs">
-      <p>With Number of Cards: <b>N</b></p>
-      <p>Number of Piles: <b>P</b></p>
-      <p>Number of Iterations: <b>I</b></p>
+      <p class="highlight">With Number of Cards: <b>N</b></p>
+      <p class="highlight">Number of Piles: <b>P</b></p>
+      <p class="highlight">Number of Iterations: <b>I</b></p>
     </div>
   
     <ol class="rules">
@@ -64,9 +64,24 @@
     }
   
     .defs {
-      line-height: 1.9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .7rem;
       font-size: clamp(1rem, 1.3vw, 1.15rem);
       margin: 1.8rem 0 1rem;
+    }
+    .defs .highlight {
+      display: inline-block;
+      background: var(--titleBg);
+      color: #fff;
+      font-weight: 600;
+      padding: .5em 1.2em;
+      border-radius: .5em;
+      margin: 0;
+    }
+    .defs .highlight b {
+      font-weight: 900;
     }
   
     .rules {

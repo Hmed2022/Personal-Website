@@ -11,7 +11,7 @@
     <Dacard/>
     {/if}
     <!-- {#if $assembly2} -->
-    <Piles/>
+    <Piles on:goto/>
     <!-- {:else}
     <p> Still unknown, you can to go through the 2nd cycle.</p> -->
     <!-- {/if} -->

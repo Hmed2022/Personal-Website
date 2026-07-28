@@ -1,7 +1,8 @@
 <script>
-    import { createEventDispatcher } from "svelte";
+    import { createEventDispatcher, onMount } from "svelte";
+    import { get } from "svelte/store";
     import { crossfade, scale } from "svelte/transition";
-    import { cycle3array, statuscard } from "../../stores/misc.js";
+    import { cycle3array, statuscard, resetKey } from "../../stores/misc.js";
     import Up from '../items/JustUpArrow.svelte'
 
     const dispatch = createEventDispatcher();
@@ -71,64 +72,98 @@
       midPile = [];
       lastCard = null;
     }
+
+    // Reset this pile's local state whenever the app-wide reset fires (e.g.
+    // picking a new card from the End screen), so a stale drawn pile / a
+    // stale revealed card don't linger when this slide is revisited.
+    let lastSeenReset = -1;
+    onMount(() => {
+      lastSeenReset = get(resetKey);
+      const unsub = resetKey.subscribe((v) => {
+        if (v !== lastSeenReset) {
+          lastSeenReset = v;
+          reset();
+        }
+      });
+      return unsub;
+    });
   </script>
 
 <audio src="/assets/CardMagic/deal.ogg"      bind:this={dealEl} preload="auto" />
 {#if $statuscard}
   <main class="stage">
 
-    <!-- Left: Pile 1 (full deck at start) -->
-    <section class="pile">
-      <div class="title">Pile 1</div>
-      <div class="stack">
-        {#each leftPile as card, i (card.cycle3pos)}
-          <div
-            class="cardwrap"
-            style="--i:{i}; --z:{1000 - i};"
-            out:send={{ key: card.cycle3pos }}>
-            <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
-          </div>
-        {/each}
-      </div>
-    </section>
-  
-    <!-- Middle: Drawn pile + count -->
-    <section class="pile">
-      <div class="title">Count: {count}</div>
-      <div class="stack">
-        {#each midPile as card, i (card.cycle3pos)}
-          <div
-            class="cardwrap2"
-            style="--i:{i}; --z:{1000 + i};"
-            in:receive={{ key: card.cycle3pos }}>
-            <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
-          </div>
-        {/each}
-      </div>
-    </section>
-  
-    <!-- Right: Last card drawn -->
-    <section class="reveal">
-      <div class="badge">Your Card is :</div>
-      <div class="bigcard-wrap">
-        {#if lastCard}
-          <img
-            class="bigcard-front"
-            src={getCardSrc(lastCard)}
-            alt={`Card ${lastCard.value} of ${lastCard.suit}`}
-            in:receive={{ key: lastCard.cycle3pos }} />
-        {:else}
-          <div class="bigcard placeholder"></div>
-        {/if}
-      </div>
-    </section>
+    <header class="header">
+      <h1><u>Revealing Your Card</u></h1>
+      <p>
+        There's no trickery here — your choice was completely random, and no card
+        was ever forced. The real secret: each round, slide the pile holding your
+        card between the other two, subtly enough that no one notices. Do that
+        three times, and your card lands exactly in the middle of the deck.
+      </p>
+    </header>
 
-    <div class="controls">
-      <button on:click={drawOne} disabled={count >= 14 || !leftPile.length}>Draw one</button>
-      <button on:click={dealToFifteen} disabled={count >= 14 || dealing}>Deal to 15</button>
-      <button on:click={reset}>Reset</button>
+    <div class="row">
+      <!-- Left: Pile 1 (full deck at start) -->
+      <section class="pile">
+        <div class="title">All Cards</div>
+        <div class="stack">
+          {#each leftPile as card, i (card.cycle3pos)}
+            <div
+              class="cardwrap"
+              style="--i:{i}; --z:{1000 - i};"
+              out:send={{ key: card.cycle3pos }}>
+              <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
+            </div>
+          {/each}
+        </div>
+      </section>
+
+      <!-- Middle: Drawn pile + count -->
+      <section class="pile">
+        <div class="title">Count: {count}</div>
+        <div class="stack">
+          {#each midPile as card, i (card.cycle3pos)}
+            <div
+              class="cardwrap2"
+              style="--i:{i}; --z:{1000 + i};"
+              in:receive={{ key: card.cycle3pos }}>
+              <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
+            </div>
+          {/each}
+        </div>
+      </section>
+
+      <!-- Right: Last card drawn -->
+      <section class="reveal">
+        <div class="badge">Your Card is :</div>
+        <div class="bigcard-wrap">
+          {#if lastCard}
+            <img
+              class="bigcard-front"
+              src={getCardSrc(lastCard)}
+              alt={`Card ${lastCard.value} of ${lastCard.suit}`}
+              in:receive={{ key: lastCard.cycle3pos }} />
+          {:else}
+            <div class="bigcard placeholder"></div>
+          {/if}
+        </div>
+      </section>
     </div>
-   
+
+    <div class="bottom-row">
+      <div class="controls">
+        <button on:click={drawOne} disabled={count >= 14 || !leftPile.length}>Draw one</button>
+        <button on:click={dealToFifteen} disabled={count >= 14 || dealing}>Deal to 14</button>
+        <button on:click={reset}>Reset</button>
+      </div>
+
+      <div class="explain-box">
+        Doesn’t matter if you deal from the top or the bottom — you always end up
+        holding the middle card. In a 27-card pile, that’s always position 14.
+      </div>
+    </div>
+
   </main>
   {:else}
   <div class='else'> <p>
@@ -153,14 +188,81 @@
 }
 
     .stage {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(1rem, 4vh, 2.5rem);
+      width: 100%;
+      max-width: 1100px;
+      padding: clamp(1rem, 4vh, 2rem) 2rem;
+      font-family: "Kumbh Sans", system-ui, sans-serif;
+      color: #A34C49;
+      box-sizing: border-box;
+    }
+
+    .header {
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0 0 0.75rem;
+      font-size: clamp(1.3rem, 4vh, 2rem);
+      font-weight: bold;
+    }
+    .header p {
+      margin: 0 auto;
+      max-width: 42rem;
+      font-size: clamp(0.9rem, 2.6vh, 1.3rem);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    .row {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       align-items: end;
-      gap: 3rem;
-      padding: 3rem 2rem 2rem;
-      min-height: 75vh;
-      font-family: "Kumbh Sans", system-ui, sans-serif;
-      color: #A34C49;
+      justify-items: center;
+      gap: clamp(1rem, 4vh, 3rem);
+    }
+
+    .bottom-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: start;
+      gap: clamp(1rem, 4vh, 3rem);
+    }
+    .controls {
+      grid-column: 1 / span 2;
+      justify-self: center;
+    }
+    .explain-box {
+      grid-column: 3;
+      justify-self: center;
+    }
+
+    @media (max-width: 900px) {
+      .row {
+        grid-template-columns: 1fr;
+        justify-items: center;
+      }
+      .bottom-row {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 1.5rem;
+      }
+      .controls,
+      .explain-box {
+        grid-column: 1;
+      }
+    }
+
+    .explain-box {
+      max-width: 16rem;
+      background: #874c47;
+      color: #FDD4D4;
+      font-size: clamp(0.85rem, 2.2vh, 1rem);
+      line-height: 1.35;
+      padding: clamp(0.6rem, 2.2vh, 1rem);
+      border-radius: 10px;
+      text-align: center;
     }
   
     .pile {
@@ -170,17 +272,17 @@
       justify-content: end;
     }
     .title {
-      font-size: 1.8rem;
+      font-size: clamp(1.1rem, 3.2vh, 1.8rem);
       font-weight: 700;
       margin-bottom: 1rem;
 
     }
-  
+
     /* Pile stack area — controls card height; images follow width 130px */
     .stack {
       position: relative;
-      width: 170px;                          /* room for fanned overlap */
-      height: 320px;                         /* controls .card-front height (100%) */
+      width: clamp(110px, 15vw, 170px);      /* room for fanned overlap */
+      height: clamp(180px, 34vh, 320px);     /* controls .card-front height (100%) */
     }
   
     /* wrapper that moves with crossfade */
@@ -205,7 +307,8 @@
     /* Your card component sizing */
     .card-front {
       height: 100%;
-      width: 130px;                          /* your requirement */
+      width: 100%;
+      max-width: 130px;
       object-fit: contain;
       /* filter: drop-shadow(0 10px 14px rgba(0,0,0,.18)); */
     }
@@ -216,19 +319,19 @@
       grid-template-rows: auto 1fr;
       align-items: center;
       justify-items: center;
-      /* gap: 1rem; */
+      gap: 0.5rem;
     }
     .badge {
       background: #A34C49;
       color: #fff;
       font-weight: 800;
-      font-size: 1.2rem;
+      font-size: clamp(0.95rem, 2.6vh, 1.2rem);
       padding: .6rem 1rem;
       border-radius: 10px;
     }
     .bigcard-wrap {
-      height: clamp(220px, 34vw, 380px);
-      width: clamp(160px, 26vw, 280px);
+      height: clamp(150px, 32vh, 300px);
+      width: clamp(110px, 17vw, 210px);
       display: grid;
       place-items: center;
     }
@@ -247,8 +350,6 @@
     .controls {
       display: flex;
       gap: .75rem;
-      justify-content: center;
-      padding: 1.25rem 0 2rem;
     }
     .controls button {
       padding: .6rem 1rem;

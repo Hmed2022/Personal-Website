@@ -25,12 +25,12 @@
     .locked-card {
       position: absolute;
       top: 0;
-      right: 100;
+      left: 0;
       height: 20%;
       width: auto;
       margin-top: 2%;
       margin-left: 2%;
-      z-index: 1000; 
+      z-index: 1000;
       transition: transform 0.3s ease-in-out;
     }
   
