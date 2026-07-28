@@ -48,12 +48,16 @@
       dealing = false;
     }
   
+    // Hard-clear only — never re-seed leftPile from $cycle3array here. This
+    // runs off the shared resetKey, whose subscriber order relative to
+    // cards.svelte's own hardReset() isn't guaranteed, so $cycle3array may
+    // still hold the *previous* pick's data at this exact instant. Clearing
+    // both leftPile and midPile to empty lets the dedicated reactive block
+    // above (`$cycle3array?.length && leftPile.length === 0 && ...`) do the
+    // seeding once a genuinely new $cycle3array arrives — that guarantees
+    // fresh data instead of racing to read the store early.
     function reset() {
-      if ($cycle3array?.length) {
-        leftPile = $cycle3array.slice(0, 27).map((c, i) => ({ ...c, cycle3pos: i }));
-      } else {
-        leftPile = [];
-      }
+      leftPile = [];
       midPile = [];
       lastCard = null;
       revealFlipped = false;

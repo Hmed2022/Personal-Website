@@ -23,8 +23,9 @@
     let leftPile = [];
     let midPile = [];
     let lastCard = null;
+    let showExplain = false;
 
-    let dealEl;   
+    let dealEl;
 
     function playDeal() {
     if (!dealEl) return;
@@ -56,6 +57,7 @@
     async function dealToFifteen() {
       if (dealing) return;
       dealing = true;
+      showExplain = true;
       while (midPile.length < 14 && leftPile.length) {
         drawOne();
         await new Promise(r => setTimeout(r, 250));
@@ -63,6 +65,10 @@
       dealing = false;
     }
   
+    // Manual "Reset" button: re-shuffle back to the full 27-card deal for
+    // the *current* pick, so the user can redo Draw/Deal without picking a
+    // new card. Safe to read $cycle3array here — nothing else is mutating
+    // it concurrently when this is a deliberate in-place click.
     function reset() {
       if ($cycle3array?.length) {
         leftPile = $cycle3array.slice(0, 27).map((c, i) => ({ ...c, cycle3pos: i }));
@@ -71,6 +77,21 @@
       }
       midPile = [];
       lastCard = null;
+      showExplain = false;
+    }
+
+    // Hard-clear only — never re-seed leftPile from $cycle3array here. This
+    // runs off the shared resetKey, whose subscriber order relative to
+    // cards.svelte's own hardReset() isn't guaranteed, so $cycle3array may
+    // still hold the *previous* pick's data at this exact instant. Clearing
+    // both leftPile and midPile to empty lets the dedicated reactive block
+    // above (`$cycle3array?.length && leftPile.length === 0 && ...`) do the
+    // seeding once a genuinely new $cycle3array arrives.
+    function hardClear() {
+      leftPile = [];
+      midPile = [];
+      lastCard = null;
+      showExplain = false;
     }
 
     // Reset this pile's local state whenever the app-wide reset fires (e.g.
@@ -82,7 +103,7 @@
       const unsub = resetKey.subscribe((v) => {
         if (v !== lastSeenReset) {
           lastSeenReset = v;
-          reset();
+          hardClear();
         }
       });
       return unsub;
@@ -158,7 +179,7 @@
         <button on:click={reset}>Reset</button>
       </div>
 
-      <div class="explain-box">
+      <div class="explain-box" class:visible={showExplain} aria-hidden={!showExplain}>
         Doesn’t matter if you deal from the top or the bottom — you always end up
         holding the middle card. In a 27-card pile, that’s always position 14.
       </div>
@@ -263,6 +284,11 @@
       padding: clamp(0.6rem, 2.2vh, 1rem);
       border-radius: 10px;
       text-align: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .explain-box.visible {
+      opacity: 1;
     }
   
     .pile {

@@ -299,13 +299,13 @@
         <div class="brace-layer" aria-hidden="true">
           {#if p1}
             {#key layoutVersion}
-              <CurlyBraceCoords side="right"  x={p1.leftX}  y1={p1.y1} y2={p1.y2}
+              <CurlyBraceCoords side="left"  x={p1.rightX}  y1={p1.y1} y2={p1.y2}
                                 stroke="#b25555" strokeWidth={4} w={26} q={0.6} label="Pile 1"/>
             {/key}
           {/if}
           {#if p2}
             {#key layoutVersion}
-              <CurlyBraceCoords side="right" x={p2.leftX} y1={p2.y1} y2={p2.y2}
+              <CurlyBraceCoords side="left" x={p2.rightX} y1={p2.y1} y2={p2.y2}
                                 stroke="#b25555" strokeWidth={4} w={26} q={0.6} label="Pile 2"/>
             {/key}
           {/if}
@@ -365,9 +365,9 @@
       {#if mode === "details" && cBounds}
         {#if eliminatedEls[0]}
           <div
-            class="detail-note detail-note-right"
+            class="detail-note detail-note-left"
             bind:this={detailNote1}
-            style="top:{cardCenterY(eliminatedEls[0])}px; left:{cBounds.right + 30}px;"
+            style="top:{cardCenterY(eliminatedEls[0])}px; left:{cBounds.left - 30}px;"
           >
             This card was in the middle pile in the first two cycles, but in the third one it got eliminated.
           </div>
@@ -383,9 +383,9 @@
         {/if}
         {#if eliminatedEls[1]}
           <div
-            class="detail-note detail-note-right"
+            class="detail-note detail-note-left"
             bind:this={detailNote3}
-            style="top:{cardCenterY(eliminatedEls[1])}px; left:{cBounds.right + 30}px;"
+            style="top:{cardCenterY(eliminatedEls[1])}px; left:{cBounds.left - 30}px;"
           >
             This card was also in the middle pile in the first two cycles, but in the third one it got eliminated.
           </div>
@@ -398,8 +398,8 @@
               container={board}
               fromEl={detailNote1}
               toEl={eliminatedEls[0]}
-              fromAnchor="left"
-              toAnchor="right"
+              fromAnchor="right"
+              toAnchor="left"
               headAt="end"
               curvature={0.5}
               bulge={0.1}
@@ -434,8 +434,8 @@
               container={board}
               fromEl={detailNote3}
               toEl={eliminatedEls[1]}
-              fromAnchor="left"
-              toAnchor="right"
+              fromAnchor="right"
+              toAnchor="left"
               headAt="end"
               curvature={0.5}
               bulge={0.1}

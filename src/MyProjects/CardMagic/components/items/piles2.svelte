@@ -5,8 +5,9 @@
   import { flip } from 'svelte/animate';
 
   // your code
+  import { get } from 'svelte/store';
   import { allCards } from './cards.js';
-  import { arrayCards, currentCard , cycle1array, assembly2} from '../../stores/misc.js';
+  import { arrayCards, currentCard , cycle1array, assembly2, resetKey } from '../../stores/misc.js';
 
   const dispatch = createEventDispatcher();
 
@@ -104,6 +105,24 @@
       console.log('Try again');
     }
   }
+
+  // Reset this cycle's local state whenever the app-wide reset fires (e.g.
+  // picking a new card from the End screen), so a stale dealt pile / stuck
+  // success state don't linger when this slide is revisited.
+  let lastSeenReset = -1;
+  onMount(() => {
+    lastSeenReset = get(resetKey);
+    const unsub = resetKey.subscribe((v) => {
+      if (v !== lastSeenReset) {
+        lastSeenReset = v;
+        animationStarted = false;
+        showButtons = false;
+        success = false;
+        successPile = null;
+      }
+    });
+    return unsub;
+  });
 </script>
 
 <audio src="/assets/CardMagic/deal2.ogg" bind:this={audioEl} />
