@@ -2,12 +2,20 @@
     import { createEventDispatcher, onMount } from "svelte";
     import { get } from "svelte/store";
     import { crossfade, scale } from "svelte/transition";
-    import { cycle3array, statuscard, resetKey } from "../../stores/misc.js";
+    import { cycle3array, statuscard, lockedCard, resetKey } from "../../stores/misc.js";
     import Up from '../items/JustUpArrow.svelte'
 
     const dispatch = createEventDispatcher();
+
+    // 27 -> 9 -> 3 -> 1 summary; each step links to the math slide that shows it
+    const funnelSteps = [
+      { count: 27, where: 'anywhere',        x: 0, slide: 'Pick a card' },
+      { count: 9,  where: 'positions 10–18', x: 3, slide: 'Gathering I' },
+      { count: 3,  where: 'positions 13–15', x: 5, slide: 'Gathering II' },
+      { count: 1,  where: 'position 14',     x: 7, slide: 'Gathering III' },
+    ];
     function jumpToCards() {
-      dispatch('goto', { y: 1, x: 0 });
+      dispatch('goto', { y: 0, x: 0 }); // the magic "Pick a card" slide
     }
     // If you need to force-bundle assets, keep this import:
   
@@ -122,40 +130,63 @@
         card between the other two, subtly enough that no one notices. Do that
         three times, and your card lands exactly in the middle of the deck.
       </p>
+
+      <!-- The whole trick at a glance: how the possible positions shrink each deal -->
+      <div class="funnel" aria-label="How the possible positions of your card shrink">
+        {#each funnelSteps as step, i}
+          {#if i > 0}<span class="arrow" aria-hidden="true">→</span>{/if}
+          <button type="button" class="step" class:last={i === funnelSteps.length - 1}
+                  title={`Go to ${step.slide}`}
+                  on:click={() => dispatch('goto', { y: 1, x: step.x })}>
+            <b>{step.count}</b> {step.count === 1 ? 'card' : 'cards'}<small>{step.where}</small>
+          </button>
+        {/each}
+      </div>
     </header>
 
-    <div class="row">
-      <!-- Left: Pile 1 (full deck at start) -->
-      <section class="pile">
-        <div class="title">All Cards</div>
-        <div class="stack">
-          {#each leftPile as card, i (card.cycle3pos)}
-            <div
-              class="cardwrap"
-              style="--i:{i}; --z:{1000 - i};"
-              out:send={{ key: card.cycle3pos }}>
-              <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
+    <!-- Left column: the two piles + controls. Right column: the reveal, stacked. -->
+    <div class="board">
+      <div class="left">
+        <div class="piles">
+          <!-- Pile 1 (full deck at start) -->
+          <section class="pile">
+            <div class="title">All Cards</div>
+            <div class="stack">
+              {#each leftPile as card, i (card.cycle3pos)}
+                <div
+                  class="cardwrap"
+                  style="--i:{i}; --z:{1000 - i};"
+                  out:send={{ key: card.cycle3pos }}>
+                  <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
+                </div>
+              {/each}
             </div>
-          {/each}
-        </div>
-      </section>
+          </section>
 
-      <!-- Middle: Drawn pile + count -->
-      <section class="pile">
-        <div class="title">Count: {count}</div>
-        <div class="stack">
-          {#each midPile as card, i (card.cycle3pos)}
-            <div
-              class="cardwrap2"
-              style="--i:{i}; --z:{1000 + i};"
-              in:receive={{ key: card.cycle3pos }}>
-              <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
+          <!-- Drawn pile + count -->
+          <section class="pile">
+            <div class="title">Count: {count}</div>
+            <div class="stack">
+              {#each midPile as card, i (card.cycle3pos)}
+                <div
+                  class="cardwrap2"
+                  style="--i:{i}; --z:{1000 + i};"
+                  in:receive={{ key: card.cycle3pos }}>
+                  <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
+                </div>
+              {/each}
             </div>
-          {/each}
+          </section>
         </div>
-      </section>
 
-      <!-- Right: Last card drawn -->
+        <div class="controls">
+          <button on:click={drawOne} disabled={count >= 14 || !leftPile.length}>Draw one</button>
+          <button on:click={dealToFifteen} disabled={count >= 14 || dealing}>Deal to 14</button>
+          <button on:click={reset}>Reset</button>
+        </div>
+      </div>
+
+      <!-- Last card drawn + explanation -->
       <section class="reveal">
         <div class="badge">Your Card is :</div>
         <div class="bigcard-wrap">
@@ -169,20 +200,12 @@
             <div class="bigcard placeholder"></div>
           {/if}
         </div>
+
+        <div class="explain-box" class:visible={showExplain} aria-hidden={!showExplain}>
+          Doesn’t matter if you deal from the top or the bottom — you always end up
+          holding the middle card. In a 27-card pile, that’s always position 14.
+        </div>
       </section>
-    </div>
-
-    <div class="bottom-row">
-      <div class="controls">
-        <button on:click={drawOne} disabled={count >= 14 || !leftPile.length}>Draw one</button>
-        <button on:click={dealToFifteen} disabled={count >= 14 || dealing}>Deal to 14</button>
-        <button on:click={reset}>Reset</button>
-      </div>
-
-      <div class="explain-box" class:visible={showExplain} aria-hidden={!showExplain}>
-        Doesn’t matter if you deal from the top or the bottom — you always end up
-        holding the middle card. In a 27-card pile, that’s always position 14.
-      </div>
     </div>
 
   </main>
@@ -191,7 +214,7 @@
     Click the <b>Top Arrow or press</b>
     <Up enableKeyboard={false} on:tap={jumpToCards}/>
     <b>to jump</b> to the <b>Deck</b>,<br />
-    And Reveal your card!
+    {$lockedCard ? 'press “Lock it in!” on the card you clicked,' : 'pick a card,'} then reveal it!
   </p> </div>
 {/if}
  
@@ -211,10 +234,13 @@
     .stage {
       display: flex;
       flex-direction: column;
-      gap: clamp(1rem, 4vh, 2.5rem);
+      /* one fluid base size; everything below is in em so the whole slide
+         grows on big screens instead of floating small in the middle */
+      font-size: clamp(14px, calc(0.55cqw + 0.85cqh), 26px);
+      gap: 1.1em;
       width: 100%;
-      max-width: 1100px;
-      padding: clamp(1rem, 4vh, 2rem) 2rem;
+      max-width: 62em;
+      padding: 1.2em 2em;
       font-family: "Kumbh Sans", system-ui, sans-serif;
       color: #A34C49;
       box-sizing: border-box;
@@ -224,64 +250,83 @@
       text-align: center;
     }
     .header h1 {
-      margin: 0 0 0.75rem;
-      font-size: clamp(1.3rem, 4vh, 2rem);
+      margin: 0 0 0.5em;
+      font-size: 1.6em;
       font-weight: bold;
     }
     .header p {
       margin: 0 auto;
-      max-width: 42rem;
-      font-size: clamp(0.9rem, 2.6vh, 1.3rem);
+      max-width: 40em;
+      font-size: 1em;
       font-weight: 300;
       line-height: 1.5;
     }
 
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      align-items: end;
-      justify-items: center;
-      gap: clamp(1rem, 4vh, 3rem);
+    .funnel {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: .4em;
+      margin: .8em 0 0;
+      padding: 0;
     }
+    .funnel .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #F9BEBA;
+      border-radius: .6rem;
+      padding: .3em .8em;
+      font-size: .85em;
+      line-height: 1.2;
+    }
+    .funnel .step {
+      border: none;
+      font-family: inherit;
+      color: inherit;
+      cursor: pointer;
+      transition: transform .15s, filter .15s;
+    }
+    .funnel .step:hover, .funnel .step:focus-visible {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+    .funnel .step b { font-size: 1.3em; }
+    .funnel .step small { font-size: .78em; opacity: .85; }
+    .funnel .arrow { font-weight: 700; font-size: 1.2em; }
+    .funnel .step.last { background: #A34C49; color: #FDD4D4; }
 
-    .bottom-row {
+    .board {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 2fr 1fr;
       align-items: start;
-      gap: clamp(1rem, 4vh, 3rem);
+      gap: 2.5em;
     }
-    .controls {
-      grid-column: 1 / span 2;
-      justify-self: center;
+    .left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5em;
     }
-    .explain-box {
-      grid-column: 3;
-      justify-self: center;
-    }
-
-    @media (max-width: 900px) {
-      .row {
-        grid-template-columns: 1fr;
-        justify-items: center;
-      }
-      .bottom-row {
-        grid-template-columns: 1fr;
-        justify-items: center;
-        gap: 1.5rem;
-      }
-      .controls,
-      .explain-box {
-        grid-column: 1;
-      }
+    .piles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-items: center;
+      align-items: end;
+      width: 100%;
     }
 
+    /* stage narrower than 900px (see cq-* classes in Demo.Slider) */
+    :global(.cq-900) .board { grid-template-columns: 1fr; justify-items: center; }
+
     .explain-box {
-      max-width: 16rem;
+      max-width: 17em;
       background: #874c47;
       color: #FDD4D4;
-      font-size: clamp(0.85rem, 2.2vh, 1rem);
+      font-size: .9em;
       line-height: 1.35;
-      padding: clamp(0.6rem, 2.2vh, 1rem);
+      padding: .9em;
       border-radius: 10px;
       text-align: center;
       opacity: 0;
@@ -298,24 +343,24 @@
       justify-content: end;
     }
     .title {
-      font-size: clamp(1.1rem, 3.2vh, 1.8rem);
+      font-size: 1.35em;
       font-weight: 700;
-      margin-bottom: 1rem;
+      margin-bottom: .8em;
 
     }
 
     /* Pile stack area — controls card height; images follow width 130px */
     .stack {
       position: relative;
-      width: clamp(110px, 15vw, 170px);      /* room for fanned overlap */
-      height: clamp(180px, 34vh, 320px);     /* controls .card-front height (100%) */
+      width: 9em;      /* room for fanned overlap */
+      height: 15em;    /* controls .card-front height (100%) */
     }
   
     /* wrapper that moves with crossfade */
     .cardwrap {
       position: absolute;
       inset: 0;
-      transform: translateX(calc(var(--i) *8px)); /* slight horizontal fan */
+      transform: translateX(calc(var(--i) * .45em)); /* slight horizontal fan */
       z-index: var(--z, 1);
       display: grid;
       place-items: center;
@@ -324,7 +369,7 @@
     .cardwrap2 {
       position: absolute;
       inset: 0;
-      transform: translateX(calc(var(--i) * 8px)); /* slight horizontal fan */
+      transform: translateX(calc(var(--i) * .45em)); /* slight horizontal fan */
       z-index: var(--z, 1);
       display: grid;
       place-items: center;
@@ -334,36 +379,35 @@
     .card-front {
       height: 100%;
       width: 100%;
-      max-width: 130px;
+      max-width: 7.5em;
       object-fit: contain;
       /* filter: drop-shadow(0 10px 14px rgba(0,0,0,.18)); */
     }
   
-    /* Right-side reveal */
+    /* Right column: badge, card, explanation stacked (never overlapping) */
     .reveal {
-      display: grid;
-      grid-template-rows: auto 1fr;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-items: center;
-      gap: 0.5rem;
+      gap: .75em;
     }
     .badge {
       background: #A34C49;
       color: #fff;
       font-weight: 800;
-      font-size: clamp(0.95rem, 2.6vh, 1.2rem);
-      padding: .6rem 1rem;
+      font-size: 1em;
+      padding: .4em .8em;
       border-radius: 10px;
     }
     .bigcard-wrap {
-      height: clamp(150px, 32vh, 300px);
-      width: clamp(110px, 17vw, 210px);
+      height: 14em;
+      aspect-ratio: 2 / 3;
       display: grid;
       place-items: center;
     }
     .bigcard-front {
       height: 100%;
-      width: 80%;  
+      width: 100%;
       object-fit: contain;                         /* bigger reveal */
       /* filter: drop-shadow(0 12px 16px rgba(0,0,0,.22)); */
     }
@@ -375,10 +419,11 @@
     }
     .controls {
       display: flex;
-      gap: .75rem;
+      gap: .75em;
     }
     .controls button {
-      padding: .6rem 1rem;
+      font-size: .9em;
+      padding: .6em 1.1em;
       border: 0;
       border-radius: 10px;
       font-weight: 700;

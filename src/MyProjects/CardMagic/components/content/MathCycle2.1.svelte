@@ -1,7 +1,9 @@
 <script>
+  import { rect } from '../../stores/layout.js';
     import { onMount, onDestroy, tick } from 'svelte';
     const browser = typeof window !== 'undefined';
-    import { arrayCards, statuscard, cycle1array } from '../../stores/misc.js';
+    import { arrayCards, statuscard, lockedCard, cycle1array, positionsHint, slideChange } from '../../stores/misc.js';
+  import ButtonHint from '../items/ButtonHint.svelte';
     import Arrow from '../items/Arrow.svelte';
     import CurlyBraceCoords from '../items/Brace.svelte';
     import Up from '../items/JustUpArrow.svelte'
@@ -10,12 +12,19 @@
 
     const dispatch = createEventDispatcher();
     function jumpToCards() {
-      dispatch('goto', { y: 1, x: 0 });
+      dispatch('goto', { y: 0, x: 0 }); // the magic "Pick a card" slide
     }
 
+    // the pile (1-3) that held the selected card in cycle 1
+    $: selectedPile = $cycle1array.find((c) => c.selected)?.cycle1pile;
+
     let showDetails = false;
+  // back to the basic view whenever the slide changes
+  $: $slideChange, hideDetails();
+  function hideDetails() { showDetails = false; }
     function toggleDetails() {
       showDetails = !showDetails;
+    positionsHint.set(false);
       // force a fresh layout re-measure once the DOM/crossfade has settled,
       // so the details arrow doesn't lock in a stale position from mid-toggle
       setTimeout(invalidate, 350);
@@ -91,7 +100,7 @@
     // bounding box of the whole "in selected pile" block, for the details brace
     function inPileBounds() {
       if (!board) return null;
-      const b = board.getBoundingClientRect();
+      const b = rect(board);
       let y1 = Infinity, y2 = -Infinity, xLeft = Infinity;
       let any = false;
       for (const row of rows) {
@@ -99,7 +108,7 @@
           if (!isInSelectedPile(card)) continue;
           const el = elMap.get(card.index);
           if (!el) continue;
-          const r = el.getBoundingClientRect();
+          const r = rect(el);
           y1 = Math.min(y1, r.top - b.top);
           y2 = Math.max(y2, r.bottom - b.top);
           xLeft = Math.min(xLeft, r.left - b.left);
@@ -154,6 +163,9 @@
           {showDetails ? 'Less Details!' : 'More Details!'}
         </button>
         <div class="details-hint">click me!</div>
+      {#if $positionsHint}
+        <ButtonHint text={showDetails ? "Click here to hide the details" : "Click here for more details on each card"} />
+      {/if}
       </div>
 
       <header class="header">
@@ -165,9 +177,9 @@
             </p>
           {:else}
             <p class="detail-text" bind:this={detailNote} in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
-              The Pile 2 (We'll call it S) that was in the middle <br/>of the deck is now divided into 3 small piles.
+              Your card's pile from the first cycle (Pile {selectedPile}, we'll call it S) went <br/>in the middle of the deck. Dealing again splits S across the 3 new piles.
               <br />
-              Each pile contain 3 cards from S and those cards are in the middle of each pile.
+              Each pile now contains 3 cards from S, and they sit in the middle of each pile.
             </p>
           {/if}
         </div>
@@ -251,14 +263,14 @@
       <div class="note" class:note-hidden={showDetails} bind:this={note}>The Selected card</div>
 
       <div class="footer"></div>
-      <div class="footer2"><p>Division II</p></div>
+      <div class="footer2"><p>Dealing II</p></div>
       {:else}
       <div class='else'>
         <p>
           Click the <b>Top Arrow or press</b>
           <Up enableKeyboard={false} on:tap={jumpToCards}/>
           <b>to jump</b> to the <b>Cards</b>
-          and pick one!
+          {$lockedCard ? 'and press “Lock it in!” on the card you clicked!' : 'and pick one!'}
         </p> </div>
     {/if}
   </main>
@@ -287,7 +299,7 @@
       position:absolute;
       top:0; right:0;
       margin-top:2%; margin-right:4%;
-      z-index:1000;
+      z-index:1200; /* above the overlays so the spotlight can dim them */
       text-align:center;
     }
 

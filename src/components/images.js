@@ -59,9 +59,9 @@ export const imageData = [
     title: "The Math Behind the Magic",
     desc: "Explainer | Interactive",
     description:
-      'An interactive visualization built as part of a fellowship with <a href="https://pudding.cool" target="_blank" rel="noopener noreferrer">The Pudding</a>, unraveling the elegant math behind a classic card magic trick.',
+      'An interactive piece I made during my fellowship with <a href="https://pudding.cool" target="_blank" rel="noopener noreferrer">The Pudding</a>, explaining the math behind a classic card trick.',
     href: "/#/CardMagic",
-    show: false,
+    show: true,
     lang: "EN",
     tags: "all,interactive,sql",
   },

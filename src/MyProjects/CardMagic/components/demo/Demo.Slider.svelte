@@ -1,5 +1,9 @@
 <script>
-	import { tick } from "svelte";
+	import { tick, onDestroy } from "svelte";
+	import { fade } from "svelte/transition";
+	import { currentCard, statuscard, positionsHint, drawn, annotations, positions, slideChange } from "../../stores/misc.js";
+	import { logEvent } from "../../stores/db.js";
+	import { stageScale } from "../../stores/layout.js";
 	import Slider from "../helpers/Slider.svelte";
 	import Slide  from "../helpers/Slider.Slide.svelte";
 	import rotateIcon from "../../svg/rotate.svg?raw";
@@ -44,10 +48,31 @@
 	  try { await task(); } finally { busy = false; }
 	}
 
+	// --- Fade "curtain" for long jumps ---
+	// Jumping more than one slide (e.g. End -> Pick a card, or wrapping around)
+	// fades out, snaps there instantly, and fades back in, instead of visibly
+	// sliding past every slide in between.
+	const FADE_MS = 250;
+	let curtain = false;
+
+	async function fadeJump(row, target) {
+	  curtain = true;
+	  await sleep(FADE_MS);
+	  await sliderX[row]?.jumpInstant?.(target);
+	  x[row] = target;
+	  curtain = false;
+	  await sleep(FADE_MS);
+	}
+
 	// --- Move horizontal to an exact index directly (single continuous slide) ---
 	async function moveHTo(row, target) {
 	  const max = ROW_LEN[row] - 1;
 	  target = Math.max(0, Math.min(max, target));
+
+	  if (Math.abs(target - x[row]) > 1) {
+		await fadeJump(row, target);
+		return;
+	  }
 
 	  sliderX[row]?.jump?.(target);
 	  x[row] = target;
@@ -101,7 +126,11 @@
   
 	// --- Unified keyboard/tap handler ---
 	const onTap = ({ detail }) => run(async () => {
-	  if (detail === "right") { await moveHTo(y, wrapRight(y)); return; }
+	  if (detail === "right") {
+		if (rightLocked) return; // magic cycle not drawn yet (also blocks swipes)
+		await moveHTo(y, wrapRight(y));
+		return;
+	  }
 	  if (detail === "left")  { await moveHTo(y, wrapLeft(y));  return; }
   
 	  if (detail === "down") {
@@ -114,7 +143,9 @@
 
 	  if (detail === "up") {
 		if (y !== 1) return; // already top row
-		const targetX = upMapFromY1(x[1]);
+		// no card locked in yet: the math slides say "press ↑ to jump to the Cards",
+		// so go straight to the pick slide instead of the matching magic slide
+		const targetX = $statuscard ? upMapFromY1(x[1]) : 0;
 		await goToCell(0, targetX);
 		return;
 	  }
@@ -126,9 +157,67 @@
 	  run(() => goToCell(targetY, targetX));
 	}
   
+	// --- Keyboard hint spotlight ---
+	// After HINT_DELAY_MS on a slide without moving on, dim the screen and
+	// spotlight the keyboard so they know to press the arrows.
+	// - Magic row: only on the pick slide, once a card is locked in
+	// - Math row: on every slide except the reveal and the last one (Right wraps to the start there)
+	const HINT_DELAY_MS = 4000;
+	const MATH_REVEAL_SLIDE = 8; // "Revealing Your Card": busy enough without the keyboard hint
+	let hintTimer;
+	let showHint = false;
+
+	$: hintActive = y === 0
+	  ? $currentCard && x[0] === 0
+	  : $statuscard && x[1] < ROW_LEN[1] - 1 && x[1] !== MATH_REVEAL_SLIDE; // no card yet: the slides say "press ↑", don't point at →
+	// y and x are passed so the timer restarts on every slide change,
+	// even when hintActive stays true (math slide -> next math slide)
+	$: armHint(hintActive, y, x);
+
+	// Math Division II/III + Assembly slides (MathCycle2.1, 3.1, 1.2, 2.2, 3.2) spotlight their
+	// Show Positions / More Details button instead of the keyboard.
+	// Without a picked card those slides show no button, so keep the keyboard hint.
+	const BUTTON_HINT_SLIDES = [3, 4, 5, 6, 7];
+	$: onButtonSlide = y === 1 && BUTTON_HINT_SLIDES.includes(x[1]) && $statuscard;
+	$: keyboardHint = showHint && !onButtonSlide;
+	// Clicking the button sets the store back to false; it stays off until the next slide change
+	$: positionsHint.set(showHint && onButtonSlide);
+
+	function armHint(active) {
+	  clearTimeout(hintTimer);
+	  showHint = false;
+	  if (active) hintTimer = setTimeout(() => (showHint = true), HINT_DELAY_MS);
+	}
+
+	onDestroy(() => clearTimeout(hintTimer));
+
+	// Every slide starts in annotations mode: the annotations/positions stores are
+	// shared by all math slides, so reset them (and each slide's local toggle state,
+	// via slideChange) whenever the current slide changes.
+	$: resetViews(y, x);
+
+	// Record (once per play) that the visitor went to see the math
+	$: if (y === 1) logEvent('opened_math', null, { once: true });
+	function resetViews() {
+	  annotations.set(true);
+	  positions.set(false);
+	  slideChange.update((n) => n + 1);
+	}
+
 	// --- Reactive UI guards for keyboard widgets ---
 	// Which directions are visually disabled?
-	$: disabledDirs = (y === 0 ? ["up"] : ["down"]);    // block off-grid vertical moves
+	// Right stays locked on the magic row until:
+	// - pick slide (0): a card has been locked in
+	// - cycle slides 1-3: that cycle's cards are dealt (only once a card is picked;
+	//   otherwise those slides have nothing to draw)
+	$: rightLocked = y === 0 && (
+	  (x[0] === 0 && !$statuscard) ||
+	  ([1, 2, 3].includes(x[0]) && $statuscard && !$drawn[x[0]])
+	);
+	$: disabledDirs = [
+	  ...(y === 0 ? ["up"] : ["down"]),    // block off-grid vertical moves
+	  ...(rightLocked ? ["right"] : [])
+	];
 
 	// Real-time window size, used only to decide whether the rotate prompt
 	// should be listening for keyboard shortcuts (see rotatePromptActive).
@@ -193,7 +282,15 @@
 	const COMPACT_MAX_HEIGHT = 550;
 	$: compact = deckHeight > 0 && deckHeight < COMPACT_MAX_HEIGHT;
 	$: scale = compact ? deckHeight / STAGE_HEIGHT : 1;
+	$: stageScale.set(scale); // lets slides convert on-screen measurements back to stage pixels
 	$: stageWidth = compact ? deckWidth / scale : null;
+
+	// Width-based breakpoints for the slides, measured on the stage canvas
+	// (Svelte 3 can't parse @container, so slides use :global(.cq-900) .x {…})
+	$: canvasWidth = compact ? stageWidth : deckWidth;
+	const CQ_BREAKPOINTS = [1100, 900, 800, 600, 520];
+	$: cqClasses = CQ_BREAKPOINTS.filter((bp) => canvasWidth > 0 && canvasWidth <= bp)
+	  .map((bp) => `cq-${bp}`).join(" ");
 
 	// Row 0 ("Magic") is purple, row 1 ("Math") is pink. Painting this
 	// directly on .deck means any gap around the stage during/after an
@@ -207,6 +304,10 @@
 	// swiping drives the same onTap handler the buttons and physical arrow
 	// keys use, so all three input methods stay in sync.
 	const SWIPE_THRESHOLD = 50; // px
+
+	// Phones have no on-screen keyboard, so the hint there is a "swipe" pill,
+	// shown (when the keyboard hint would be) until the visitor has swiped once.
+	let hasSwiped = false;
 	let touchStartX = 0;
 	let touchStartY = 0;
 
@@ -221,6 +322,7 @@
 	  const dx = t.clientX - touchStartX;
 	  const dy = t.clientY - touchStartY;
 	  if (Math.max(Math.abs(dx), Math.abs(dy)) < SWIPE_THRESHOLD) return; // treat as a tap, not a swipe
+	  hasSwiped = true;
 
 	  if (Math.abs(dx) > Math.abs(dy)) {
 		onTap({ detail: dx < 0 ? "right" : "left" });
@@ -239,7 +341,7 @@
 
   <div class="deck" style="background-color: {deckBg};" bind:this={deckEl} bind:clientWidth={deckWidth} bind:clientHeight={deckHeight}>
   <div
-	class="stage"
+	class="stage {cqClasses}"
 	class:compact
 	style={compact ? `width:${stageWidth}px; height:${STAGE_HEIGHT}px; transform: scale(${scale});` : ""}
 	on:touchstart={handleTouchStart}
@@ -277,14 +379,28 @@
 	</Slider>
   </article>
 
+  {#if keyboardHint}
+	<div class="hint-overlay" class:math={y === 1} transition:fade={{ duration: 250 }}></div>
+  {/if}
+
+  {#if keyboardHint && !hasSwiped}
+	<div class="swipe-hint" class:math={y === 1} transition:fade={{ duration: 250 }} aria-hidden="true">
+	  <span class="swipe-arrow">←</span> Swipe to continue
+	</div>
+  {/if}
+
+  <div class="curtain" class:visible={curtain} style="background-color: {deckBg};" aria-hidden="true"></div>
+
   <!-- Keyboard UI: hidden on phone-width screens via CSS (swipe + physical
 	   arrow keys take over there), always shown above that width. -->
-  <div class="keyboard-ui">
+  <!-- Hidden (not removed) on the End slide, so arrow keys still work there -->
+  <div class="keyboard-ui" class:hidden-ui={y === 0 && x[0] === ROW_LEN[0] - 1}>
   {#if y === 0}
 	<Keyboard
 	  directions={["up","down","left","right"]}
 	  disable={disabledDirs}
 	  enableKeyboard={!rotatePromptActive}
+	  highlight={keyboardHint}
 	  on:tap={onTap}
 	/>
   {:else}
@@ -292,6 +408,7 @@
 	  directions={["up","down","left","right"]}
 	  disable={disabledDirs}
 	  enableKeyboard={!rotatePromptActive}
+	  highlight={keyboardHint}
 	  on:tap={onTap}
 	/>
   {/if}
@@ -322,6 +439,10 @@
 	  height: 100%;
 	  flex-shrink: 0;
 	  transform-origin: center center;
+	  /* Slides size themselves with cqw/cqh units (and the cq-* breakpoint
+	     classes below), so on the scaled-down compact stage (phones in landscape)
+	     they lay out against the stage canvas instead of the real, smaller screen. */
+	  container-type: size;
 	}
 
 	.rotate-prompt {
@@ -386,6 +507,56 @@
 	   keys remain available instead. */
 	@media (max-width: 899px) {
 	  .keyboard-ui { display: none; }
+	  .hint-overlay { display: none; } /* nothing to spotlight without the keyboard */
 	}
+
+	/* Dims everything except the keyboard (which sits above at z-index 1000) */
+	.hint-overlay {
+	  position: absolute;
+	  inset: 0;
+	  background: rgba(35, 25, 70, 0.45);
+	  pointer-events: none;
+	  z-index: 999;
+	}
+	.hidden-ui { visibility: hidden; }
+
+	/* Phone-only swipe hint (the keyboard hint covers wider screens) */
+	.swipe-hint {
+	  display: none;
+	  position: absolute;
+	  left: 50%;
+	  bottom: 6%;
+	  transform: translateX(-50%);
+	  z-index: 1500;
+	  padding: .6rem 1.2rem;
+	  border-radius: 999px;
+	  background: #E5DEFF;
+	  color: #3F3075;
+	  font-family: "Kumbh Sans", sans-serif;
+	  font-weight: 700;
+	  font-size: 1.1rem;
+	  box-shadow: 0 6px 18px rgba(35, 25, 70, .3);
+	  pointer-events: none;
+	  white-space: nowrap;
+	}
+	.swipe-hint.math { background: #FFEAEA; color: #A34C48; }
+	.swipe-arrow { display: inline-block; animation: swipeNudge 1s ease-in-out infinite; }
+	@keyframes swipeNudge { 0%,100% { transform: translateX(0); } 50% { transform: translateX(-8px); } }
+	@media (max-width: 899px) {
+	  .swipe-hint { display: block; }
+	}
+
+	/* Covers the stage during long jumps (see fadeJump) */
+	.curtain {
+	  position: absolute;
+	  inset: 0;
+	  z-index: 2000;
+	  opacity: 0;
+	  pointer-events: none;
+	  transition: opacity 250ms ease;
+	}
+	.curtain.visible { opacity: 1; pointer-events: auto; }
+
+	.hint-overlay.math { background: rgba(80, 25, 30, 0.4); } /* warmer dim for the pink row */
   </style>
   

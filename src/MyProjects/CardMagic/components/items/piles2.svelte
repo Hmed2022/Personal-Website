@@ -7,7 +7,12 @@
   // your code
   import { get } from 'svelte/store';
   import { allCards } from './cards.js';
-  import { arrayCards, currentCard , cycle1array, assembly2, resetKey } from '../../stores/misc.js';
+  import { arrayCards, currentCard , cycle1array, assembly2, resetKey, drawn } from '../../stores/misc.js';
+  import { logEvent } from '../../stores/db.js';
+
+  // Short message after picking the wrong pile
+  let wrongPick = false;
+  let wrongTimer;
 
   const dispatch = createEventDispatcher();
 
@@ -70,6 +75,7 @@
       await new Promise((r) => setTimeout(r, animationDelay));
     }
     showButtons = true;
+    drawn.update((d) => ({ ...d, 2: true }));
   }
 
   function getCardSrc(card) {
@@ -103,6 +109,10 @@
         errorAudio.play();
       }
       console.log('Try again');
+      wrongPick = true;
+      clearTimeout(wrongTimer);
+      wrongTimer = setTimeout(() => (wrongPick = false), 1800);
+      logEvent('wrong_pile', 2);
     }
   }
 
@@ -115,6 +125,7 @@
     const unsub = resetKey.subscribe((v) => {
       if (v !== lastSeenReset) {
         lastSeenReset = v;
+        wrongPick = false;
         animationStarted = false;
         showButtons = false;
         success = false;
@@ -134,7 +145,7 @@
   <div class="deck-container">
     <div class="divtext">
       {#if showButtons}
-        <p class="picktext">Pick the pile containing your card</p>
+        <p class="picktext">{wrongPick ? "Not that one, look again 👀" : "Pick the pile containing your card"}</p>
       {/if}
     </div>
 
@@ -186,7 +197,7 @@
               disabled={success && pileI !== successPile}
             >
               {#if success && pileI === successPile}
-                <p style='font-size: 0.7em'>Alright, one last time!</p>
+                <span class="success-label">Alright, one last time!</span>
               {:else}
                 Pile {pileI}
               {/if}
@@ -298,7 +309,15 @@
   .containerButton {
     justify-items: center;
     text-align: center;
-    margin-top: 6vh;
+    margin-top: 6cqh;
+  }
+
+  /* smaller text inside the picked pile's button, without <p> margins,
+     so it stays the same height as the other Pile buttons */
+  .success-label {
+    display: block;
+    font-size: 0.7em;
+    line-height: 1.2;
   }
 
   button {

@@ -15,7 +15,7 @@ import KeyboardUp from "../items/KeyboardUp.svelte";
     
 <div class='text'>
     <p>Try to replicate this using your card. Your choice is completely random, and no card is being forced. We're just using a deck of <b>27 cards</b> instead of the <b>full 52 cards</b>.</p>
-    <p style = 'font-size:1.1em'> <b>PS:</b> The cards displayed in way that flipped, so the last card from Magic would be the last card here too and last card to be dealt!</p>
+    <p style = 'font-size:1.1em'> <b>PS:</b> The cards are shown in reverse order, so the last card in the magic section is the last one here too, and the last one to be dealt!</p>
 </div>
    
 </section>

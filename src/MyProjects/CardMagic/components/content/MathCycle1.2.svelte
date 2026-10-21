@@ -1,17 +1,20 @@
 <script>
+  import { rect } from '../../stores/layout.js';
   import { onMount, onDestroy, tick } from "svelte";
   const browser = typeof window !== "undefined";
   import { get } from "svelte/store";
   import Arrow from "../items/Arrow.svelte";
   import Annotations from "../items/Annotations.svelte";
   import CurlyBraceCoords from "../items/Brace.svelte";
-  import { statuscard, cycle1array, annotations, positions } from "../../stores/misc.js";
+  import { statuscard, lockedCard, cycle1array, annotations, positions } from "../../stores/misc.js";
+  // the pile (1-3) that held the selected card in cycle 1
+  $: selectedPile = $cycle1array.find((c) => c.selected)?.cycle1pile;
   import Up from '../items/JustUpArrow.svelte'
   import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
   function jumpToCards() {
-    dispatch('goto', { y: 1, x: 0 });
+    dispatch('goto', { y: 0, x: 0 }); // the magic "Pick a card" slide
   }
 
   // ------- helpers -------
@@ -68,7 +71,7 @@
 
   function pileBounds(pileNo){
     if (!browser || !board) return null;
-    const b = board.getBoundingClientRect();
+    const b = rect(board);
     let y1 = Infinity, y2 = -Infinity;
     let xLeft = Infinity, xRight = -Infinity;
     let any = false;
@@ -78,7 +81,7 @@
       if (card.cycle1pile !== pileNo) continue;
       const el = elMap.get(card.index);
       if (!el) continue;
-      const r = el.getBoundingClientRect();
+      const r = rect(el);
       y1 = Math.min(y1, r.top - b.top);
       y2 = Math.max(y2, r.bottom - b.top);
       xLeft  = Math.min(xLeft,  r.left  - b.left);
@@ -109,8 +112,8 @@
 
   function computePosMarks(){
     if (!browser || !board || !containerEl) return [];
-    const b = board.getBoundingClientRect();
-    const c = containerEl.getBoundingClientRect();
+    const b = rect(board);
+    const c = rect(containerEl);
     const x = c.left - b.left - 28;     // column left of the stack
     posX = x;
 
@@ -122,7 +125,7 @@
       if (!card) continue;
       const el = elMap.get(card.index);
       if (!el) continue;
-      const r = el.getBoundingClientRect();
+      const r = rect(el);
       const y = (r.top + r.bottom) / 2 - b.top; // card center
       marks.push({ x, y, text: ord(p + 1) });
     }
@@ -265,8 +268,8 @@
     {#if $positions}
     <div class='descPos1'>
       <p>
-          After completing this cycle, we can be confident that the selected card 
-          is within a range of 9 cards (The entire pile 2).
+          After this cycle, we know the selected card is one of 9 cards:
+          the middle pile (Pile {selectedPile}), now sitting in positions 10 to 18.
       </p>
     </div>
     {/if}
@@ -284,14 +287,14 @@
   
 
     <Annotations/>
-    <div class="footer"><p>Assembly I</p></div>
+    <div class="footer"><p>Gathering I</p></div>
     {:else}
       <div class='else'>
         <p>
           Click the <b>Top Arrow or press</b>
           <Up enableKeyboard={false} on:tap={jumpToCards}/>
           <b>to jump</b> to the <b>Cards</b>
-          and pick one!
+          {$lockedCard ? 'and press “Lock it in!” on the card you clicked!' : 'and pick one!'}
         </p> </div>
   {/if}
 </main>
@@ -314,7 +317,7 @@
     font-family:'Kumbh Sans',sans-serif; color:#A34C48;
   }
 
-  .stage{ position:relative; width:min(780px, 92vw); height:90vh; margin:2rem auto; }
+  .stage{ position:relative; width:min(780px, 92cqw); height:90cqh; margin:2rem auto; }
 
   .container{
     position:relative; width:280px; height:100%; margin:0 auto;
@@ -366,7 +369,7 @@
       text-align: center;
       color:#548ABB;
       position: absolute;
-      left: clamp(12px, 6vw, 120px);
+      left: clamp(12px, 6cqw, 120px);
       top: 48%;
       transform: translateY(-40%);
   }
@@ -379,7 +382,7 @@
       text-align: center;
       color:#548ABB;
       position: absolute;
-      right: clamp(50px, 20vw, 80px);
+      right: clamp(50px, 20cqw, 80px);
       top: 48%;
       transform: translateY(-40%);
   }
@@ -416,6 +419,9 @@
   .desc{ background:#874c47; color:#FDD4D4; font-size:1.1rem;
         padding:1rem; max-width:18rem; margin:1rem auto; text-align:center; }
   .descPos{ position:absolute; top:0; left:0; margin-top:3rem; margin-left:3rem; }
+  /* stage narrower than 1100px (tablets): keep the box clear of the pile labels */
+  :global(.cq-1100) .descPos{ margin-left:1rem; margin-top:1.5rem; }
+  :global(.cq-1100) .desc{ max-width:10rem; font-size:.85rem; padding:.7rem; }
 
   .footer{ position:absolute; right:0; bottom:0; margin:4rem; color:#4973B0; font-weight:bold; font-size:1.5rem; }
 </style>

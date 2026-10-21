@@ -9,14 +9,21 @@
   // your code
   import { get } from 'svelte/store';
   import { allCards } from './cards.js';
-  import { arrayCards, currentCard , cycle2array, assembly3, resetKey } from '../../stores/misc.js';
+  import { arrayCards, currentCard , cycle2array, assembly3, resetKey, drawn } from '../../stores/misc.js';
+  import { logEvent } from '../../stores/db.js';
+
+  // Short message after picking the wrong pile
+  let wrongPick = false;
+  let wrongTimer;
 
   const [send, receive] = crossfade({
+    // 1.5x faster than the default flight (Math.sqrt(d) * 30) for this last cycle
+    duration: (d) => Math.sqrt(d) * 20,
     fallback(node) {
       const style = getComputedStyle(node);
       const transform = style.transform === 'none' ? '' : style.transform;
       return {
-        duration: 600,
+        duration: 400,
         easing: quintOut,
         css: (t) => `transform: ${transform} scale(${t});`
       };
@@ -43,7 +50,7 @@
     return map;
   })();
 
-  let animationDelay = 400;
+  let animationDelay = 267; // 1.5x faster dealing than cycles 1 & 2 (400)
   let showButtons = false;
   let animationStarted = false;
 
@@ -76,7 +83,11 @@
     // Work from a fresh snapshot to avoid mutating in place
     for (let i = 0; i < cards.length; i++) {
       if (audioEl) {
-        try { await audioEl.play(); } catch {}
+        // restart the sound for every card and play it 1.5x faster to match the
+        // faster deal; not awaited, so the sound never holds up the animation
+        audioEl.currentTime = 0;
+        audioEl.playbackRate = 1.5;
+        audioEl.play().catch(() => {});
       }
 
       // immutably update the store so reactivity/flip stays correct
@@ -97,6 +108,7 @@
     }
 
     showButtons = true;
+    drawn.update((d) => ({ ...d, 3: true }));
   }
 
   function getCardSrc(card) {
@@ -133,6 +145,10 @@
         } catch {}
       }
       console.log('Try again');
+      wrongPick = true;
+      clearTimeout(wrongTimer);
+      wrongTimer = setTimeout(() => (wrongPick = false), 1800);
+      logEvent('wrong_pile', 3);
     }
   }
 
@@ -145,6 +161,7 @@
     const unsub = resetKey.subscribe((v) => {
       if (v !== lastSeenReset) {
         lastSeenReset = v;
+        wrongPick = false;
         animationStarted = false;
         showButtons = false;
         success = false;
@@ -164,7 +181,7 @@
   <div class="deck-container">
     <div class="divtext">
       {#if showButtons}
-        <p class="picktext">Pick the pile containing your card</p>
+        <p class="picktext">{wrongPick ? "Not that one, look again 👀" : "Pick the pile containing your card"}</p>
       {/if}
     </div>
 
@@ -327,7 +344,7 @@
   .containerButton {
     justify-items: center;
     text-align: center;
-    margin-top: 6vh;
+    margin-top: 6cqh;
   }
 
   button {

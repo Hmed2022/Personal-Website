@@ -1,4 +1,5 @@
 <script>
+  import { rect } from '../../stores/layout.js';
     import { onMount, onDestroy } from "svelte";
   
     export let container;   // positioned ancestor (board)
@@ -19,8 +20,8 @@
     const markerId = `openV-${Math.random().toString(36).slice(2)}`;
 
     const anchorPoint = (el) => {
-      const c = container.getBoundingClientRect();
-      const r = el.getBoundingClientRect();
+      const c = rect(container);
+      const r = rect(el);
       return {
         left:{x:r.left-c.left, y:r.top+r.height/2-c.top},
         right:{x:r.right-c.left, y:r.top+r.height/2-c.top},

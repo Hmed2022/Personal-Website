@@ -8,14 +8,16 @@
 
 <section class='body'>
 
+  <div class="center">
     <div class="text">
         <h1> Pick A card</h1>
-        <h3>Trust me, I won’t look!</h3>
+        <h3>Grab 27 cards from a real deck and follow along!</h3>
     </div>
     
     <div class= 'container'>
         <Cards/>
     </div>
+  </div>
 
 </section>
 
@@ -24,7 +26,7 @@
 <style>
 
     .text {
-        margin-top: 5%;
+        margin-bottom: 1em;
     }
 
     /* html{
@@ -33,11 +35,24 @@
         height: 100%;
     } */
 
+    /* One fluid base size (cards and text are in em) + content centered
+       vertically, so big screens aren't mostly empty. */
     .body {
         height: 100%;
+        box-sizing: border-box;
         margin-top: 0;
         background-color: #BFAFF7;
-        padding-top: 2em;
+        /* ~20px on a normal laptop (cards ≈ 130px, the original size), up to 28px
+           on big screens; the 2.6cqh cap keeps it from overflowing short windows */
+        font-size: clamp(16px, min(calc(0.8cqw + 1.1cqh), 2.6cqh), 28px);
+        padding: 2em 1.5em;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .center {
+        margin: auto 0;   /* vertical centering; still scrolls if too short */
+        width: 100%;
     }
 
     h1, h3 {

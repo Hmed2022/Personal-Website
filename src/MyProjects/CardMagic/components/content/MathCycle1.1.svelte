@@ -1,12 +1,12 @@
 <script>
     import { createEventDispatcher } from 'svelte';
-    import { arrayCards, statuscard } from '../../stores/misc.js';
+    import { arrayCards, statuscard, lockedCard } from '../../stores/misc.js';
     import Arrow from '../items/Arrow.svelte';
     import Up from '../items/JustUpArrow.svelte'
 
     const dispatch = createEventDispatcher();
     function jumpToCards() {
-      dispatch('goto', { y: 1, x: 0 });
+      dispatch('goto', { y: 0, x: 0 }); // the magic "Pick a card" slide
     }
   
     $: rows = Array.from({ length: 9 }, (_, i) => $arrayCards.slice(i * 3, i * 3 + 3));
@@ -70,8 +70,6 @@
         <p>Let's have a look at the cards inside the piles. <br> Here's where your card went.</p>
       </header>
   
-      <div class="note" bind:this={note}>The Selected card</div>
-  
       <div class="container" bind:this={board}>
         {#if selectedEl && note}
           <!-- if Arrow expects container-relative layout, use mode="container" -->
@@ -80,8 +78,8 @@
             container={board}
             fromEl={selectedEl}
             toEl={note}
-            fromAnchor="left"
-            toAnchor="bottom"
+            fromAnchor="right"
+            toAnchor="top"
             headAt="start"
             curvature={0.22}
             bulge={0.16}
@@ -102,13 +100,16 @@
           </div>
         {/each}
       </div>
-      <div class="footer2"><p>Division I</p></div>
+      <div class="note" bind:this={note}>The Selected card</div>
+
+      <div class="footer"></div>
+      <div class="footer2"><p>Dealing I</p></div>
       {:else}
       <div class='else'> <p>
         Click the <b>Top Arrow or press</b>
         <Up enableKeyboard={false} on:tap={jumpToCards}/>
         <b>to jump</b> to the <b>Cards</b>
-        and pick one!
+        {$lockedCard ? 'and press “Lock it in!” on the card you clicked!' : 'and pick one!'}
       </p>  </div>
     {/if}
   </main>
@@ -132,13 +133,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      /* justify-content: space-between; */
+      justify-content: space-between;  /* header top, cards middle, note bottom (like Dealing II) */
       font-family: 'Kumbh Sans', sans-serif;
       color: #A34C48;
     }
   
     .header { text-align: center;
-         margin-top: 4rem; }
+         margin-top: 4rem; height: 9rem; width: 100%; }
 
     .header h1 { position: absolute;
          margin-top: 3rem;
@@ -185,8 +186,8 @@
       font-weight: 900;
       font-size: 2rem;
       font-family: "Nanum Pen Script", cursive;
-      margin: 1% 0 1% 0;
     }
+    .footer{ margin-bottom:4rem; }
     .footer2{ position:absolute; margin-right:4rem; margin-bottom:4rem; color:#4973B0; font-weight:bold; font-size:1.5rem; right:0; bottom:0; }
  
   </style>

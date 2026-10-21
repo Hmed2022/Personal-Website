@@ -93,8 +93,8 @@
       cursor: pointer;
       opacity: 1;
       transition: background-color .2s, opacity .2s, transform .08s;
-      width: clamp(40px, 6vw, 64px);
-      height: clamp(40px, 6vw, 64px);
+      width: clamp(40px, 6cqw, 64px);
+      height: clamp(40px, 6cqw, 64px);
     }
     .key.active, .key:active { background:#D47D79; transform: translateY(1px) scale(.98); }
     .key:disabled { opacity:.25; cursor:not-allowed; }
@@ -109,8 +109,8 @@
     }
   
     .icon {
-      width: clamp(18px, 2.6vw, 28px);
-      height: clamp(18px, 2.6vw, 28px);
+      width: clamp(18px, 2.6cqw, 28px);
+      height: clamp(18px, 2.6cqw, 28px);
     }
   
     /* Reuse the burgundy “thumping” blink, now for UP */

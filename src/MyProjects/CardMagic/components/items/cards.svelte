@@ -14,6 +14,7 @@
     resetKey
   } from '../../stores/misc.js'
   import { get } from 'svelte/store';
+  import { savePick } from '../../stores/db.js';
   
   let audioEl;
   let takeCardEl;
@@ -53,6 +54,7 @@
   function hardReset() {
     // clear local UI/state
     selectedCard = null;
+    changedMind = 0;
     showConfirmation = false;
     showSelectedCard = false;
     showPickedText = false;
@@ -117,8 +119,10 @@
   let showPickedText = false;
 
   let flipped = false;
+  let changedMind = 0; // times the user switched to a different card before locking in
 
   function handleCardClick(card) {
+    if (selectedCard && selectedCard !== card) changedMind++;
     selectedCard = card;
     $lockedCard = card;
     showConfirmation = true;
@@ -202,6 +206,9 @@
     assignCycleInverted($arrayCards, 'cycle2pos', 'cycle3pile', 'cycle3pos');
     $cycle3array = $arrayCards.slice().sort((a, b) => a.cycle3pos - b.cycle3pos);
 
+    // Store the pick (fire-and-forget, never blocks the animation)
+    savePick($arrayCards.find(c => c.selected), changedMind);
+
     // Log updated array for debugging
     console.log("New card array", $arrayCards);
     console.log("status card is", $statuscard);
@@ -229,8 +236,13 @@
     console.log(currentCard)
   }
 
+  // Enter / Space on a focused card picks it, like a click
   function handleKeyDown(event, card) {
-    console.log('Key down:', event.key, 'Card:', card);
+    if (showSelectedCard) return; // already locked in
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleCardClick(card);
+    }
   }
 
   function handleKeyUp(event, card) {
@@ -267,6 +279,8 @@
         class="card {spread ? 'spread' : 'pile'} {flipped && card === selectedCard ? 'flipped' : ''} {showCenterTransition && card === selectedCard ? 'card-center' : ''}"
         class:selected={card === selectedCard}
         style="--index: {i};"
+        role="button"
+        aria-label={`Face-down card ${i + 1} of ${cards.length}`}
         tabindex="0"
         on:click={() => handleCardClick(card)}
         on:mouseenter={playTakeCardSound}
@@ -283,6 +297,8 @@
   {/each}
 </div>
 
+<!-- fixed-height area so the centered slide doesn't jump as these appear -->
+<div class="below">
 {#if showConfirmation}
   <div class="confirmation" in:fade={{ duration: 300 }} out:fade={{ duration: 500 }}>
     <p>Sure about this card?</p>
@@ -296,6 +312,7 @@
     <p> Let's see if I can find your card!</p>
   </div>
 {/if}
+</div>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
@@ -306,36 +323,36 @@ p {
   font-family: 'Kumbh Sans', sans-serif;
 }
 
+/* sizes in em so the spread scales with the slide's fluid base size */
 .card-container {
-  height: 300px;
+  height: 15em;
   position: relative;
-  max-width: 850px;
+  max-width: 42.5em;
   margin: auto;
 }
 
+.below { min-height: 13em; display: flow-root; } /* flow-root: keeps the messages' margins inside, so nothing shifts */
+
 .card {
-  width: 130px;
-  height: 200px;
+  width: 6.5em;
+  height: 10em;
   position: absolute;
   transition: transform 0.5s, left 0.8s;
   cursor: pointer;
   outline: none;
   backface-visibility: hidden;
   transform-style: preserve-3d;
-  left: calc(((var(--index)) / 26) * (100% - 130px));
-  top: 50%;
+  left: calc(((var(--index)) / 26) * (100% - 6.5em));
+  top: 3.5em; /* leaves room for the hover lift and keeps the card inside the container */
 }
 
 .card:hover,
 .selected {
-  transform: translateY(-50px);
+  transform: translateY(-2.5em);
 }
 
 .confirmation {
-  position: absolute;
-  bottom: 170px;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: 1em;
   text-align: center;
 }
 
@@ -371,7 +388,7 @@ p {
 }
 
 .picked-text {
-  margin-top: 50px;
+  margin-top: 1.4em;
   font-size: 1.8em;
   color: #5B4E88;
   text-align: center;
@@ -385,15 +402,14 @@ button {
   font-weight: 500;
   font-family: 'Kumbh Sans', sans-serif;
   border: none;
-  border-radius: 15px;
-  padding: 15px;
+  border-radius: .5em;
+  padding: .5em .7em;
 }
 
-@media (max-width: 600px) {
-  .card {
-    width: 100px;
-    height: 138px;
-    left: calc(((var(--index)) / 26) * (100% - 100px));
+/* stage narrower than 600px (see cq-* classes in Demo.Slider) */
+    :global(.cq-600) .card {
+    width: 5em;
+    height: 6.9em;
+    left: calc(((var(--index)) / 26) * (100% - 5em));
   }
-}
 </style>

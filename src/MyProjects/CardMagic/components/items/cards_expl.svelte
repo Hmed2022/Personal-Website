@@ -72,13 +72,12 @@
       backface-visibility: hidden;
     }
   
-    @media (max-width: 600px) {
-      .card {
+    /* stage narrower than 600px (see cq-* classes in Demo.Slider) */
+    :global(.cq-600) .card {
         width: 100px;
         height: 138px;
         left: calc(((var(--index)) / 26) * (100% - 100px));
       }
-    }
   </style>
   
   

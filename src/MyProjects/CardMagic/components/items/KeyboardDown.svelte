@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher, onMount } from 'svelte';
+  import { fade } from 'svelte/transition';
   import ArrowIcon from './ArrowIcon.svelte';
 
   export let enableKeyboard = true;
@@ -8,6 +9,7 @@
   export let sticky = true;
   export let title = "Press the ‘Down key’ to see the Math!";
   export let blinkDelay = 1500; // change to 15000 for 15s in production
+  export let highlight = false; // spotlight mode: fully opaque inside a light circle
 
   const dispatch = createEventDispatcher();
 
@@ -70,7 +72,45 @@
 
   .position { position:absolute; bottom:0; left:0; margin-bottom:2%; margin-left:4%; z-index:1000; opacity:.3; transition:opacity .2s; }
   .position:hover { opacity:1; }
-  .container { width:21vw; max-width:140px; display:flex; flex-direction:column; justify-content:center; align-items:center; user-select:none; }
+
+  /* --- Spotlight: keyboard fully visible inside a light circle --- */
+  .position.highlight { opacity:1; }
+  .position.highlight::before {
+    content:''; position:absolute; top:50%; left:50%;
+    width:150%; aspect-ratio:1; border-radius:50%;
+    background:#BFAFF7; box-shadow:0 0 0 6px rgba(191,175,247,.4), 0 0 40px 10px rgba(191,175,247,.6);
+    transform:translate(-50%,-50%); z-index:-1;
+    animation:spotPulse 2s ease-in-out infinite;
+  }
+  @keyframes spotPulse { 0%,100% { transform:translate(-50%,-50%) scale(1); } 50% { transform:translate(-50%,-50%) scale(1.05); } }
+
+  /* While spotlighted, the RIGHT key is the one that matters: make it solid */
+  .highlight .key.right { opacity:1; }
+
+  /* --- Callout pointing at the RIGHT key --- */
+  .callout {
+    position:absolute; left:100%; top:22px;
+    display:flex; align-items:flex-start;
+    pointer-events:none;
+  }
+  .callout-arrow {
+    width:70px; height:44px; flex-shrink:0;
+    color:#E5DEFF;
+    animation:nudge 1s ease-in-out infinite;
+  }
+  .callout-text {
+    margin-top:-14px; width:220px;
+    padding:10px 14px; border-radius:14px;
+    background:#E5DEFF; color:#3F3075;
+    font-family:'Kumbh Sans', sans-serif; font-size:.95rem; line-height:1.35;
+    box-shadow:0 6px 18px rgba(35,25,70,.35);
+  }
+  .callout-text kbd {
+    display:inline-block; padding:0 6px; border-radius:6px;
+    background:#7c6fab; color:#fff; font-family:inherit; font-weight:700;
+  }
+  @keyframes nudge { 0%,100% { transform:translate(0,0); } 50% { transform:translate(-5px,4px); } }
+  .container { width:21cqw; max-width:140px; display:flex; flex-direction:column; justify-content:center; align-items:center; user-select:none; }
   .keyboard { display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(2,1fr); gap:2%; width:100%; aspect-ratio:3/2; }
   .key { display:flex; justify-content:center; align-items:center; border:none; border-radius:20%; background:#7c6fab; color:#BFAFF7; cursor:pointer; opacity:.5; transition:background-color .2s, opacity .2s, transform .08s; }
   .key.down { opacity:1; }
@@ -78,7 +118,7 @@
   .key:disabled { opacity:.25; cursor:not-allowed; }
   .center { visibility:hidden; }
   .instruction { margin-top:10px; font-size:.8rem; color:#3F3075; text-align:center; font-family:'Kumbh Sans', sans-serif; font-weight:900; }
-  .icon { width:clamp(13px,1.8vw,20px); height:clamp(13px,1.8vw,20px); }
+  .icon { width:clamp(13px,1.8cqw,20px); height:clamp(13px,1.8cqw,20px); }
 
   /* --- Blinking burgundy "stroke" for the RIGHT key --- */
   @keyframes pulseStroke {
@@ -98,7 +138,7 @@
   }
 </style>
 
-<div class={sticky ? 'position' : ''} aria-label={title}>
+<div class={sticky ? 'position' : ''} class:highlight aria-label={title}>
   <div class="container">
     <div class="keyboard">
       <!-- row 1 -->
@@ -151,7 +191,7 @@
 
       {#if directions.includes('right')}
         <button
-          class="key {activeKey === 'right' ? 'active' : ''} {blinkRight ? 'blink-right' : ''}"
+          class="key right {activeKey === 'right' ? 'active' : ''} {(blinkRight || highlight) && !disable.includes('right') ? 'blink-right' : ''}"
           on:mousedown={() => tap('right')}
           on:touchstart|preventDefault={() => tap('right')}
           aria-label="Right"
@@ -166,4 +206,17 @@
 
     <div class="instruction">{title}</div>
   </div>
+
+  {#if highlight && directions.includes('right')}
+    <div class="callout" transition:fade={{ duration: 250 }}>
+      <svg class="callout-arrow" viewBox="0 0 80 50" fill="none" stroke="currentColor"
+           stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M75 10 C 45 5, 20 15, 8 40" />
+        <path d="M6 28 L8 40 L18 34" />
+      </svg>
+      <div class="callout-text">
+        Press here (or <kbd>→</kbd> on your keyboard) to go to the next cycle
+      </div>
+    </div>
+  {/if}
 </div>

@@ -6,7 +6,11 @@
       "Bash(python3:*)",
       "Bash(node update_hadith_references.js:*)",
       "WebFetch(domain:en.wikipedia.org)",
-      "WebFetch(domain:fr.wikipedia.org)"
+      "WebFetch(domain:fr.wikipedia.org)",
+      "Bash(npm run *)",
+      "Bash(grep -v 'assembly[123]\\\\b\\\\|$assembly\\\\|import')",
+      "Bash(python3 -)",
+      "Bash(awk '/<\\\\/script>/{m=1;next} /<style/{m=0} m' piles4Expl.svelte)"
     ],
     "deny": [],
     "ask": []

@@ -1,7 +1,8 @@
 <script>
   import { onMount, onDestroy, tick } from 'svelte';
   const browser = typeof window !== 'undefined';
-  import { arrayCards, statuscard, cycle2array } from '../../stores/misc.js';
+  import { arrayCards, statuscard, lockedCard, cycle2array, positionsHint, slideChange } from '../../stores/misc.js';
+  import ButtonHint from '../items/ButtonHint.svelte';
   import Arrow from '../items/Arrow.svelte';
   import Up from '../items/JustUpArrow.svelte';
   import { createEventDispatcher } from 'svelte';
@@ -9,12 +10,16 @@
 
   const dispatch = createEventDispatcher();
   function jumpToCards() {
-    dispatch('goto', { y: 1, x: 0 });
+    dispatch('goto', { y: 0, x: 0 }); // the magic "Pick a card" slide
   }
 
   let showDetails = false;
+  // back to the basic view whenever the slide changes
+  $: $slideChange, hideDetails();
+  function hideDetails() { showDetails = false; }
   function toggleDetails() {
     showDetails = !showDetails;
+    positionsHint.set(false);
     // force a fresh layout re-measure once the DOM/crossfade has settled
     setTimeout(invalidate, 350);
   }
@@ -138,6 +143,9 @@
         {showDetails ? 'Less Details!' : 'More Details!'}
       </button>
       <div class="details-hint">click me!</div>
+      {#if $positionsHint}
+        <ButtonHint text={showDetails ? "Click here to hide the details" : "Click here for more details on each card"} />
+      {/if}
     </div>
 
     <header class="header">
@@ -220,14 +228,14 @@
     <div class="note" class:note-hidden={showDetails} bind:this={note}>The Selected card</div>
 
     <div class="footer"></div>
-    <div class="footer2"><p>Division III</p></div>
+    <div class="footer2"><p>Dealing III</p></div>
   {:else}
     <div class='else'>
       <p>
         Click the <b>Top Arrow or press</b>
         <Up enableKeyboard={false} on:tap={jumpToCards}/>
         <b>to jump</b> to the <b>Cards</b>
-        and pick one!
+        {$lockedCard ? 'and press “Lock it in!” on the card you clicked!' : 'and pick one!'}
       </p>
     </div>
   {/if}
@@ -249,7 +257,7 @@
     position:absolute;
     top:0; right:0;
     margin-top:2%; margin-right:4%;
-    z-index:1000;
+    z-index:1200; /* above the overlays so the spotlight can dim them */
     text-align:center;
   }
 

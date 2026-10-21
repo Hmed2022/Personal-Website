@@ -1,17 +1,19 @@
 <script>
-    import { annotations, positions } from "../../stores/misc";
+    import { annotations, positions, positionsHint } from "../../stores/misc";
     import Arrow from './Arrow.svelte'
+    import ButtonHint from './ButtonHint.svelte'
   
-    let isAnnotations = true; 
+    // follow the shared store, so the label is right after a slide-change reset
+    $: isAnnotations = $annotations;
        let note;
        let selectedEl = null;
 
     let board;   
   
     function toggle() {
-      isAnnotations = !isAnnotations;
-      annotations.set(isAnnotations);
-      positions.set(!isAnnotations);
+      annotations.set(!isAnnotations);
+      positions.set(isAnnotations);
+      positionsHint.set(false);
     }
   
   </script>
@@ -22,6 +24,9 @@
       {isAnnotations ? "Show Positions" : "Show Annotations"}
     </button>
     <div class="note" bind:this={note}>Click me!</div>
+    {#if $positionsHint}
+      <ButtonHint text={isAnnotations ? "Click here to see each card's position in the pile" : "Click here to go back to the annotations"} />
+    {/if}
     </div>
   </div>
 
@@ -50,7 +55,7 @@
       right:0;
       margin-top:2%;
       margin-right:4%;
-      z-index:1000; }
+      z-index:1200; } /* above the brace layer (1100) so the spotlight can dim it */
   
   button {
       font-family: 'Kumbh Sans';

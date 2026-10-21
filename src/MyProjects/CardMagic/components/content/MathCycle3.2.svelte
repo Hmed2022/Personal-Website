@@ -1,19 +1,24 @@
 <script>
+  import { rect } from '../../stores/layout.js';
   import { onMount, onDestroy, tick, createEventDispatcher } from "svelte";
   const browser = typeof window !== "undefined";               // SSR guard
   import { get } from "svelte/store";
   import Arrow from "../items/Arrow.svelte";
   import CurlyBraceCoords from "../items/Brace.svelte";
-  import { statuscard, cycle3array, annotations, positions } from "../../stores/misc.js";
+  import { statuscard, lockedCard, cycle3array, annotations, positions, positionsHint, slideChange } from "../../stores/misc.js";
   import Up from "../items/JustUpArrow.svelte";
+  import ButtonHint from "../items/ButtonHint.svelte";
 
   const dispatch = createEventDispatcher();
   function jumpToCards() {
-    dispatch('goto', { y: 1, x: 0 });
+    dispatch('goto', { y: 0, x: 0 }); // the magic "Pick a card" slide
   }
 
   // -------- three-way toggle: annotations -> positions -> details -------
   let mode = "annotations"; // "annotations" | "positions" | "details"
+  // back to annotations whenever the slide changes
+  $: $slideChange, resetMode();
+  function resetMode() { mode = "annotations"; }
   $: annotations.set(mode === "annotations");
   $: positions.set(mode === "positions");
   $: modeBtnLabel =
@@ -22,6 +27,7 @@
 
   function cycleMode() {
     mode = mode === "annotations" ? "details" : mode === "details" ? "positions" : "annotations";
+    positionsHint.set(false);
     // force a fresh layout re-measure once the DOM/crossfade has settled
     setTimeout(invalidate, 350);
   }
@@ -84,7 +90,7 @@
   // If your piles are 0-based, switch calls below to (0,1,2)
   function pileBounds(pileNo){
     if (!browser || !board) return null;
-    const b = board.getBoundingClientRect();
+    const b = rect(board);
     let y1 = Infinity, y2 = -Infinity;
     let xLeft = Infinity, xRight = -Infinity;
     let any = false;
@@ -94,7 +100,7 @@
       if (card.cycle3pile !== pileNo) continue;
       const el = elMap.get(getId(card));
       if (!el) continue;
-      const r = el.getBoundingClientRect();
+      const r = rect(el);
       y1 = Math.min(y1, r.top - b.top);
       y2 = Math.max(y2, r.bottom - b.top);
       xLeft  = Math.min(xLeft,  r.left  - b.left);
@@ -125,8 +131,8 @@
 
   function computePosMarks(){
     if (!browser || !board || !containerEl) return [];
-    const b = board.getBoundingClientRect();
-    const c = containerEl.getBoundingClientRect();
+    const b = rect(board);
+    const c = rect(containerEl);
     const x = c.left - b.left - 28;     // column left of the stack
     posX = x;
 
@@ -137,7 +143,7 @@
       if (!card) continue;
       const el = elMap.get(getId(card));
       if (!el) continue;
-      const r = el.getBoundingClientRect();
+      const r = rect(el);
       const y = (r.top + r.bottom) / 2 - b.top; // card center
       marks.push({ x, y, text: ord(p + 1) });
     }
@@ -183,8 +189,8 @@
 
   function cardCenterY(el) {
     if (!board || !el) return null;
-    const b = board.getBoundingClientRect();
-    const r = el.getBoundingClientRect();
+    const b = rect(board);
+    const r = rect(el);
     return (r.top + r.bottom) / 2 - b.top;
   }
 
@@ -193,8 +199,8 @@
   // than a guessed fixed pixel offset
   function containerBounds() {
     if (!board || !containerEl) return null;
-    const b = board.getBoundingClientRect();
-    const c = containerEl.getBoundingClientRect();
+    const b = rect(board);
+    const c = rect(containerEl);
     return { left: c.left - b.left, right: c.right - b.left };
   }
   let cBounds = null;
@@ -467,15 +473,21 @@
     <div class="details-cont">
       <button class="details-btn" on:click={cycleMode}>{modeBtnLabel}</button>
       <div class="details-hint">click me!</div>
+      {#if $positionsHint}
+        <ButtonHint text={
+          mode === "annotations" ? "Click here for more details on each card" :
+          mode === "details"     ? "Click here to see each card's position in the pile" :
+                                   "Click here to go back to the annotations"} />
+      {/if}
     </div>
-    <div class="footer"><p>Assembly III</p></div>
+    <div class="footer"><p>Gathering III</p></div>
   {:else}
     <div class="else">
       <p>
         Click the <b>Top Arrow or press</b>
         <Up enableKeyboard={false} on:tap={jumpToCards}/>
         <b>to jump</b> to the <b>Cards</b>
-        and pick one!
+        {$lockedCard ? 'and press “Lock it in!” on the card you clicked!' : 'and pick one!'}
       </p>
     </div>
   {/if}
@@ -499,7 +511,7 @@
     font-family:'Kumbh Sans',sans-serif; color:#A34C48;
   }
 
-  .stage{ position:relative; width:min(780px, 92vw); height:90vh; margin:2rem auto; }
+  .stage{ position:relative; width:min(780px, 92cqw); height:90cqh; margin:2rem auto; }
 
   .container{
     position:relative; width:280px; height:100%; margin:0 auto;
@@ -589,7 +601,7 @@
     position:absolute;
     top:0; right:0;
     margin-top:2%; margin-right:4%;
-    z-index:1000;
+    z-index:1200; /* above the brace layer (1100) so the spotlight can dim it */
     text-align:center;
   }
 
@@ -631,7 +643,7 @@
     text-align: center;
     color:#548ABB;
     position: absolute;
-    left: clamp(12px, 6vw, 120px);
+    left: clamp(12px, 6cqw, 120px);
     top: 48%;
     transform: translateY(-40%);
   }
@@ -644,7 +656,7 @@
     text-align: center;
     color:#548ABB;
     position: absolute;
-    right: clamp(50px, 20vw, 80px);
+    right: clamp(50px, 20cqw, 80px);
     top: 48%;
     transform: translateY(-40%);
   }
@@ -652,6 +664,9 @@
   .desc{ background:#874c47; color:#FDD4D4; font-size:1.1rem;
          padding:1rem; max-width:18rem; margin:1rem auto; text-align:center; }
   .descPos{ position:absolute; top:0; left:0; margin-top:3rem; margin-left:3rem; }
+  /* stage narrower than 1100px (tablets): keep the box clear of the pile labels */
+  :global(.cq-1100) .descPos{ margin-left:1rem; margin-top:1.5rem; }
+  :global(.cq-1100) .desc{ max-width:10rem; font-size:.85rem; padding:.7rem; }
 
   .footer{ position:absolute; right:0; bottom:0; margin:4rem; color:#4973B0; font-weight:bold; font-size:1.5rem; }
 </style>

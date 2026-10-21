@@ -3,6 +3,7 @@
     import { get } from "svelte/store";
     import { crossfade, scale } from "svelte/transition";
     import { cycle3array, reveal, resetKey } from "../../stores/misc.js";
+    import { logEvent } from "../../stores/db.js";
     import cardback from '../../svg/Cards_png/back.png'
     // If you need to force-bundle assets, keep this import:
   
@@ -89,6 +90,7 @@
   $: if (count === 14 && lastCard && !revealFlipped) {
     setTimeout(() => {
       revealFlipped = true;
+      logEvent('finished', null, { once: true });
 
       if (flipEl) {
         try {
@@ -198,12 +200,11 @@
       color: #5B4E88;
     }
 
-    @media (max-width: 900px) {
-      .stage {
+    /* stage narrower than 900px (see cq-* classes in Demo.Slider) */
+    :global(.cq-900) .stage {
         grid-template-columns: 1fr;
         justify-items: center;
       }
-    }
   
     .pile {
       display: flex;
@@ -263,8 +264,8 @@
       border-radius: 10px;
     }
     .bigcard-wrap {
-      height: clamp(220px, 34vw, 380px);
-      width: clamp(160px, 26vw, 280px);
+      height: clamp(220px, 34cqw, 380px);
+      width: clamp(160px, 26cqw, 280px);
       display: grid;
       place-items: center;
     }

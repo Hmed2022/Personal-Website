@@ -31,7 +31,7 @@
   <div class="content">
     <div class="left">
       <p>
-        In this section we really don’t care about which card you chose, our only concern is to change the position of the card.
+        In this section we don’t care <b>which</b> card you chose, only <b>where</b> it is in the deck.
         To track it, we will shade it a
         <mark class="highlight">darker color</mark>.
       </p>

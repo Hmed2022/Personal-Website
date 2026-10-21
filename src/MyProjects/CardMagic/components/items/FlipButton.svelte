@@ -5,10 +5,11 @@
     export let frontSrc = "";
     export let backSrc = "";
     export let alt = "";
-    export let width = 260;  // px
+    export let width = 260;  // px number, or any CSS length string (e.g. "12em")
     export let borderRadius = 16; // px
     export let label = "";   // for a11y
-  
+    export let forceFlip = false; // flip from outside (e.g. hovering a matching word)
+
     const dispatch = createEventDispatcher();
     let flipped = false;
     let audioEl;
@@ -21,8 +22,14 @@
     }
 
     function setFlipped(value) {
-      if (flipped === value) return;
       flipped = value;
+    }
+
+    // Card shows its back when hovered OR forced; play the sound on every visible flip
+    $: shown = flipped || forceFlip;
+    let lastShown = false;
+    $: if (shown !== lastShown) {
+      lastShown = shown;
       playFlipSound();
     }
 
@@ -52,16 +59,16 @@
   <button
     type="button"
     class="flip-btn"
-    style="--w:{width}px; --r:{borderRadius}px;"
+    style="--w:{typeof width === 'number' ? `${width}px` : width}; --r:{borderRadius}px;"
     aria-label={label || alt}
-    aria-pressed={flipped}
+    aria-pressed={shown}
     on:keydown={onKeydown}
     on:click={() => dispatch("select")}
     on:mouseenter={() => setFlipped(true)}
     on:mouseleave={() => setFlipped(false)}
     on:pointerdown={handlePointerDown}
   >
-    <div class="card" class:is-flipped={flipped}>
+    <div class="card" class:is-flipped={shown}>
       <img class="face front" src={frontSrc} alt={alt} draggable="false" />
       <img class="face back"  src={backSrc}  alt={alt} draggable="false" />
     </div>
@@ -75,6 +82,7 @@
       background: none;
       border: none;
       padding: 0;
+      font-size: inherit;   /* so an em-based width follows the page, not the button default */
       cursor: pointer;
   
       width: var(--w);

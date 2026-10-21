@@ -26,14 +26,14 @@
   @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
 
   .position { position:absolute; bottom:0; left:0; margin-bottom:2%; margin-left:4%; z-index:1000; }
-  .container { width:30vw; aspect-ratio:3/2; max-width:200px; max-height:200px; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+  .container { width:30cqw; aspect-ratio:3/2; max-width:200px; max-height:200px; display:flex; flex-direction:column; justify-content:center; align-items:center; }
   .keyboard { display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(2,1fr); gap:2%; width:100%; height:100%; }
   .key { display:flex; justify-content:center; align-items:center; border:none; border-radius:20%; background:#D47D79; color:#FCD4D4; cursor:pointer; opacity:.5; transition:background-color .2s, opacity .2s, transform .08s; }
   .key.up { opacity:1; }                /* keep the “down” key fully opaque */
   .key.active, .key:active { background:#A34C48; transform: translateY(1px) scale(.98); }
   .center { visibility:hidden; }
   .instruction { margin-top:10px; font-size:.8rem; color:#A34C48; text-align:center; font-family:'Kumbh Sans', sans-serif; font-weight:900; }
-  .icon { width:clamp(18px,2.6vw,28px); height:clamp(18px,2.6vw,28px); }
+  .icon { width:clamp(18px,2.6cqw,28px); height:clamp(18px,2.6cqw,28px); }
 </style>
 
 <div class='position'>

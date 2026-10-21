@@ -30,6 +30,9 @@
 		position: relative;
 		width: 100%;
 		height: 100%;
+		/* keep each slide's content (e.g. the hint spotlight's dimming shadow)
+		   from bleeding into neighbouring slides */
+		overflow: hidden;
 		/* background: #BFAFF7; */
 	}
 </style>
