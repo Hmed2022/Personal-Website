@@ -17,6 +17,28 @@ function getBrowser() {
 	return 'Other';
 }
 
+// "phone" | "tablet" | "desktop": touch screens are split by their shorter side
+function getDevice() {
+	try {
+		const touch = window.matchMedia?.('(hover: none) and (pointer: coarse)').matches;
+		if (!touch) return 'desktop';
+		return Math.min(screen.width, screen.height) < 600 ? 'phone' : 'tablet';
+	} catch {
+		return null;
+	}
+}
+
+// crypto.randomUUID() only exists on secure pages (https:// or localhost). A phone
+// opening the dev server at http://<laptop-ip>:5173 isn't one, so fall back.
+function newId() {
+	if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+	const h = [...crypto.getRandomValues(new Uint8Array(16))].map((b) => b.toString(16).padStart(2, '0'));
+	h[6] = '4' + h[6][1];                                   // version 4
+	h[8] = ((parseInt(h[8], 16) & 0x3f) | 0x80).toString(16); // variant
+	const x = h.join('');
+	return `${x.slice(0, 8)}-${x.slice(8, 12)}-${x.slice(12, 16)}-${x.slice(16, 20)}-${x.slice(20)}`;
+}
+
 // Time zone as a privacy-friendly region, e.g. "America/Toronto"
 function getRegion() {
 	try {
@@ -40,7 +62,7 @@ export async function savePick(card, changedMind) {
 		return;
 	}
 
-	sessionId = crypto.randomUUID();
+	sessionId = newId();
 
 	const { error } = await supabase.from('card_picks').insert({
 		session_id: sessionId,
@@ -50,11 +72,10 @@ export async function savePick(card, changedMind) {
 		changed_mind: changedMind,
 		region: getRegion(),
 		browser: getBrowser(),
+		device: getDevice(),
 		cycle1_pile: card.cycle1pile, cycle1_pos: card.cycle1pos,
 		cycle2_pile: card.cycle2pile, cycle2_pos: card.cycle2pos,
-		cycle3_pile: card.cycle3pile, cycle3_pos: card.cycle3pos,
-		// the reveal flips the 14th card (position 13) after cycle 3
-		found: card.cycle3pos === 13
+		cycle3_pile: card.cycle3pile, cycle3_pos: card.cycle3pos
 	});
 
 	if (error) console.error('savePick failed', error);
