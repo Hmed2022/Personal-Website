@@ -1,9 +1,9 @@
 <script>
-	import { tick, onDestroy } from "svelte";
+	import { tick, onMount, onDestroy } from "svelte";
 	import { fade } from "svelte/transition";
 	import { currentCard, statuscard, positionsHint, buttonClicked, drawn, annotations, positions, slideChange } from "../../stores/misc.js";
 	import { logEvent } from "../../stores/db.js";
-	import { stageScale } from "../../stores/layout.js";
+	import { stageScale, isTouchDevice } from "../../stores/layout.js";
 	import Slider from "../helpers/Slider.svelte";
 	import Slide  from "../helpers/Slider.Slide.svelte";
 	import rotateIcon from "../../svg/rotate.svg?raw";
@@ -339,6 +339,31 @@
 	  [document.documentElement.style.backgroundColor, document.body.style.backgroundColor] = prevBg;
 	});
 
+	// Phones, only while the trick is open:
+	// - viewport-fit=cover lets .deck paint behind the notch / home-indicator areas
+	//   (otherwise Safari shows the page colour there: purple strips on the math row);
+	//   .deck pads its content back inside the safe area.
+	// - overscroll-behavior: none + blocking touchmove stops iOS pull-to-refresh, which
+	//   otherwise reloads the page when you swipe down to go back up to the magic row.
+	onMount(() => {
+	  const meta = document.querySelector('meta[name="viewport"]');
+	  const prevViewport = meta?.getAttribute("content");
+	  if (meta && !/viewport-fit/.test(prevViewport)) meta.setAttribute("content", `${prevViewport}, viewport-fit=cover`);
+
+	  const els = [document.documentElement, document.body];
+	  const prevOverscroll = els.map((el) => el.style.overscrollBehavior);
+	  els.forEach((el) => (el.style.overscrollBehavior = "none"));
+
+	  const blockPull = (e) => { if (e.touches.length === 1) e.preventDefault(); };
+	  deckEl?.addEventListener("touchmove", blockPull, { passive: false });
+
+	  return () => {
+	    if (meta && prevViewport != null) meta.setAttribute("content", prevViewport);
+	    els.forEach((el, i) => (el.style.overscrollBehavior = prevOverscroll[i]));
+	    deckEl?.removeEventListener("touchmove", blockPull);
+	  };
+	});
+
 	// --- Touch/swipe navigation ---
 	// Phones lose the on-screen keyboard buttons (hidden below 900px wide);
 	// swiping drives the same onTap handler the buttons and physical arrow
@@ -380,7 +405,8 @@
 	<p class="rotate-tip">For the best experience, use a bigger screen like a tablet or a computer.</p>
   </div>
 
-  <div class="deck" style="background-color: {deckBg};" bind:this={deckEl} bind:clientWidth={deckWidth} bind:clientHeight={deckHeight}>
+  <div class="deck" style="background-color: {deckBg};">
+  <div class="deck-safe" bind:this={deckEl} bind:clientWidth={deckWidth} bind:clientHeight={deckHeight}>
   <div
 	class="stage {cqClasses}"
 	class:compact
@@ -420,12 +446,12 @@
 	</Slider>
   </article>
 
-  {#if keyboardHint}
+  {#if keyboardHint && !isTouchDevice}
 	<div class="hint-overlay" class:math={y === 1} transition:fade={{ duration: 250 }}></div>
   {/if}
 
   {#if keyboardHint && !hasSwiped}
-	<div class="swipe-hint" class:math={y === 1} transition:fade={{ duration: 250 }} aria-hidden="true">
+	<div class="swipe-hint" class:math={y === 1} class:touch={isTouchDevice} transition:fade={{ duration: 250 }} aria-hidden="true">
 	  <span class="swipe-arrow">←</span> Swipe to continue
 	</div>
   {/if}
@@ -435,7 +461,7 @@
   <!-- Keyboard UI: hidden on phone-width screens via CSS (swipe + physical
 	   arrow keys take over there), always shown above that width. -->
   <!-- Hidden (not removed) on the End slide, so arrow keys still work there -->
-  <div class="keyboard-ui" class:hidden-ui={y === 0 && x[0] === ROW_LEN[0] - 1}>
+  <div class="keyboard-ui" class:hidden-ui={y === 0 && x[0] === ROW_LEN[0] - 1} class:touch-hidden={isTouchDevice}>
   {#if y === 0}
 	<Keyboard
 	  directions={["up","down","left","right"]}
@@ -455,6 +481,19 @@
   {/if}
   </div>
   </div>
+
+  <!-- Touch screens: a real button to switch rows (swiping down on iOS = pull-to-refresh) -->
+  {#if isTouchDevice}
+	<button
+	  type="button"
+	  class="row-nav"
+	  class:math={y === 1}
+	  on:click={() => onTap({ detail: y === 0 ? "down" : "up" })}
+	>
+	  {y === 0 ? "↓ See the math" : "↑ Back to the trick"}
+	</button>
+  {/if}
+  </div>
   </div>
 
   <style>
@@ -466,10 +505,41 @@
 	  position: fixed;
 	  inset: 0;
 	  overflow: hidden;
+	  box-sizing: border-box;
+	  /* colour fills the whole screen (viewport-fit=cover); content stays in the safe area */
+	  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+	           env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+	}
+	.deck-safe {
+	  position: relative;
+	  width: 100%;
+	  height: 100%;
+	  overflow: hidden;
 	  display: flex;
 	  align-items: center;
 	  justify-content: center;
 	}
+
+	.touch-hidden { display: none; }
+
+	/* Touch screens: switch between the magic and math rows */
+	.row-nav {
+	  position: absolute;
+	  left: 12px;
+	  bottom: 12px;
+	  z-index: 1600;
+	  padding: .55rem 1rem;
+	  border: none;
+	  border-radius: 999px;
+	  background: #5B4E88;
+	  color: #fff;
+	  font-family: "Kumbh Sans", sans-serif;
+	  font-weight: 700;
+	  font-size: .95rem;
+	  box-shadow: 0 4px 12px rgba(35, 25, 70, .25);
+	  opacity: .92;
+	}
+	.row-nav.math { background: #A34C48; }
 
 	/* Fills .deck naturally (1:1, same as the original unscaled layout) until
 	   JS confirms the viewport is actually shorter than STAGE_HEIGHT, at
@@ -592,6 +662,7 @@
 	@media (max-width: 899px) {
 	  .swipe-hint { display: block; }
 	}
+	.swipe-hint.touch { display: block; }
 
 	/* Covers the stage during long jumps (see fadeJump) */
 	.curtain {
