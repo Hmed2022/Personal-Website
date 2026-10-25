@@ -21,3 +21,9 @@ export function rect(el) {
 		height: r.height / s
 	};
 }
+
+// Phones/tablets (no hover, coarse pointer). Used to skip things that work badly
+// there: rapid-fire deal sounds lag on iOS, and the two-copy crossfade of a dealt
+// card leaves a visible ghost.
+export const isTouchDevice =
+	typeof window !== 'undefined' && !!window.matchMedia?.('(hover: none) and (pointer: coarse)').matches;

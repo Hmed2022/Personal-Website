@@ -11,6 +11,7 @@
   import { allCards } from './cards.js';
   import { arrayCards, currentCard , cycle2array, assembly3, resetKey, drawn } from '../../stores/misc.js';
   import { logEvent } from '../../stores/db.js';
+  import { isTouchDevice } from '../../stores/layout.js';
 
   // Short message after picking the wrong pile
   let wrongPick = false;
@@ -82,7 +83,7 @@
 
     // Work from a fresh snapshot to avoid mutating in place
     for (let i = 0; i < cards.length; i++) {
-      if (audioEl) {
+      if (audioEl && !isTouchDevice) { // iOS lags rapid sounds: skip on phones
         // restart the sound for every card and play it 1.5x faster to match the
         // faster deal; not awaited, so the sound never holds up the animation
         audioEl.currentTime = 0;
@@ -192,7 +193,7 @@
         style="--spread: {i * spreadFactor - (spreadFactor * 27) / 2}px; --index: {i}; z-index: {27 - i};"
         animate:flip
         in:receive={{ key: card.value + '_' + card.suit }}
-        out:send={{ key: card.value + '_' + card.suit }}
+        out:send={{ key: card.value + '_' + card.suit, ...(isTouchDevice ? { duration: 0 } : {}) }}
       >
         <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
       </div>
@@ -216,7 +217,7 @@
             style="--spread: {i * spreadFactor - (spreadFactor * 9) / 2}px; --index: {i}; z-index: {card.zIndex + 100};"
             animate:flip
             in:receive={{ key: card.value + '_' + card.suit }}
-            out:send={{ key: card.value + '_' + card.suit }}
+            out:send={{ key: card.value + '_' + card.suit, ...(isTouchDevice ? { duration: 0 } : {}) }}
           >
             <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
           </div>

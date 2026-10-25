@@ -9,6 +9,7 @@
   import { allCards } from './cards.js';
   import { arrayCards, currentCard , cycle1array, assembly2, resetKey, drawn } from '../../stores/misc.js';
   import { logEvent } from '../../stores/db.js';
+  import { isTouchDevice } from '../../stores/layout.js';
 
   // Short message after picking the wrong pile
   let wrongPick = false;
@@ -65,7 +66,7 @@
     $assembly2 =true;
     animationStarted = true;
     for (let i = 0; i < cards.length; i++) {
-      if (audioEl) audioEl.play();
+      if (audioEl && !isTouchDevice) audioEl.play(); // iOS lags rapid sounds: skip on phones
 
       // mark dealt + assign pile in round-robin
       cards[i].dealt2 = true;
@@ -156,7 +157,7 @@
         style="--spread: {i * spreadFactor - (spreadFactor * 27) / 2}px; --index: {i}; z-index: {27 - i};"
         animate:flip
         in:receive={{ key: `${card.value}_${card.suit}` }}
-        out:send={{ key: `${card.value}_${card.suit}` }}
+        out:send={{ key: `${card.value}_${card.suit}`, ...(isTouchDevice ? { duration: 0 } : {}) }}
       >
         <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
       </div>
@@ -182,7 +183,7 @@
             style="--spread: {i * spreadFactor - (spreadFactor * 9) / 2}px; --index: {i}; z-index: {card.zIndex + 100};"
             animate:flip
             in:receive={{ key: `${card.value}_${card.suit}` }}
-            out:send={{ key: `${card.value}_${card.suit}` }}
+            out:send={{ key: `${card.value}_${card.suit}`, ...(isTouchDevice ? { duration: 0 } : {}) }}
           >
             <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
           </div>

@@ -323,6 +323,22 @@
 	const ROW_BG = ['#BFAFF7', '#FDD4D4'];
 	$: deckBg = ROW_BG[y];
 
+	// On notched iPhones in landscape, Safari paints the safe areas beside the
+	// notch with the page background, so keep <html>/<body> in the current row's
+	// colour (otherwise the math row shows purple edges). Restored on leave.
+	const hasDoc = typeof document !== "undefined";
+	const prevBg = hasDoc
+	  ? [document.documentElement.style.backgroundColor, document.body.style.backgroundColor]
+	  : null;
+	$: if (hasDoc) {
+	  document.documentElement.style.backgroundColor = deckBg;
+	  document.body.style.backgroundColor = deckBg;
+	}
+	onDestroy(() => {
+	  if (!hasDoc) return;
+	  [document.documentElement.style.backgroundColor, document.body.style.backgroundColor] = prevBg;
+	});
+
 	// --- Touch/swipe navigation ---
 	// Phones lose the on-screen keyboard buttons (hidden below 900px wide);
 	// swiping drives the same onTap handler the buttons and physical arrow
@@ -360,7 +376,8 @@
 
   <div class="rotate-prompt">
 	<div class="rotate-icon">{@html rotateIcon}</div>
-	<p>Please <span class="highlight">rotate</span> your phone for a better experience</p>
+	<p>Please <span class="highlight">rotate</span> your phone to see the trick</p>
+	<p class="rotate-tip">For the best experience, use a bigger screen like a tablet or a computer.</p>
   </div>
 
   <div class="deck" style="background-color: {deckBg};" bind:this={deckEl} bind:clientWidth={deckWidth} bind:clientHeight={deckHeight}>
@@ -502,6 +519,12 @@
 	  max-width: 20ch;
 	  line-height: 1.5;
 	  color: #4a3f78;
+	  margin: 0;
+	}
+	.rotate-prompt .rotate-tip {
+	  font-size: .95rem;
+	  max-width: 26ch;
+	  opacity: .8;
 	}
 
 	.highlight {

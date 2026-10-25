@@ -19,10 +19,10 @@
       return v;
     }
     function DisplaySuit(suit) {
-      if (suit === 'Hearts') return '♥';
-      if (suit === 'Diamonds') return '♦';
-      if (suit === 'Clubs') return '♣';
-      if (suit === 'Spades') return '♠';
+      if (suit === 'Hearts') return '♥\uFE0E';
+      if (suit === 'Diamonds') return '♦\uFE0E';
+      if (suit === 'Clubs') return '♣\uFE0E';
+      if (suit === 'Spades') return '♠\uFE0E';
       return suit;
     }
   

@@ -7,6 +7,7 @@
     import { crossfade, scale } from "svelte/transition";
     import { cycle3array, reveal, resetKey } from "../../stores/misc.js";
     import { logEvent } from "../../stores/db.js";
+    import { isTouchDevice } from "../../stores/layout.js";
     import cardback from '../../svg/Cards_png/back.png'
     // If you need to force-bundle assets, keep this import:
   
@@ -122,6 +123,7 @@
   $: lastIndex = midPile.length - 1;
 
   function playDeal() {
+      if (isTouchDevice) return; // iOS lags rapid sounds: skip on phones
     if (!dealEl) return;
     try {
       dealEl.pause();                 // make re-triggers snappy
@@ -139,9 +141,9 @@
   <div class="reveal-text" class:visible={revealFlipped}>
     <p class="question">Is this <span class="first">your card</span>?</p>
     <p class="joke">Of course it is. Nothing was left to chance...</p>
-    {#if revealFlipped}
-      <button class="yes-btn" on:click={goToEnd}>Yes!</button>
-    {/if}
+    <!-- always in the layout (hidden with the rest of .reveal-text until the flip),
+         so the cards below don't drop down when it appears -->
+    <button class="yes-btn" on:click={goToEnd} tabindex={revealFlipped ? 0 : -1}>Yes!</button>
   </div>
 
   <main class="stage">
@@ -153,7 +155,7 @@
           <div
             class="cardwrap"
             style="--i:{i}; --z:{1000 - i};"
-            out:send={{ key: card.cycle3pos }}>
+            out:send={{ key: card.cycle3pos, ...(isTouchDevice ? { duration: 0 } : {}) }}>
             <img class="card-front" src={cardback} alt={`Card ${card.value} of ${card.suit}`} />
           </div>
         {/each}
@@ -389,9 +391,9 @@
       background: #D47D79;
       color: #FCD4D4;
       cursor: pointer;
-      animation: yesPop .4s ease-out;
       transition: transform .15s;
     }
+    .reveal-text.visible .yes-btn { animation: yesPop .4s ease-out; }
     .yes-btn:hover, .yes-btn:focus-visible { transform: scale(1.06); }
     @keyframes yesPop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 

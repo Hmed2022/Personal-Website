@@ -3,6 +3,7 @@
     import { get } from "svelte/store";
     import { crossfade, scale } from "svelte/transition";
     import { cycle3array, statuscard, lockedCard, resetKey } from "../../stores/misc.js";
+    import { isTouchDevice } from "../../stores/layout.js";
     import Up from '../items/JustUpArrow.svelte'
 
     const dispatch = createEventDispatcher();
@@ -36,6 +37,7 @@
     let dealEl;
 
     function playDeal() {
+      if (isTouchDevice) return; // iOS lags rapid sounds: skip on phones
     if (!dealEl) return;
     try {
       dealEl.pause();                 // make re-triggers snappy
@@ -156,7 +158,7 @@
                 <div
                   class="cardwrap"
                   style="--i:{i}; --z:{1000 - i};"
-                  out:send={{ key: card.cycle3pos }}>
+                  out:send={{ key: card.cycle3pos, ...(isTouchDevice ? { duration: 0 } : {}) }}>
                   <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
                 </div>
               {/each}

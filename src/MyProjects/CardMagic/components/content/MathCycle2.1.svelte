@@ -61,10 +61,10 @@
       return v;
     }
     function DisplaySuit(s) {
-      if (s === 'Hearts') return '♥';
-      if (s === 'Diamonds') return '♦';
-      if (s === 'Clubs') return '♣';
-      if (s === 'Spades') return '♠';
+      if (s === 'Hearts') return '♥\uFE0E';
+      if (s === 'Diamonds') return '♦\uFE0E';
+      if (s === 'Clubs') return '♣\uFE0E';
+      if (s === 'Spades') return '♠\uFE0E';
       return s;
     }
   

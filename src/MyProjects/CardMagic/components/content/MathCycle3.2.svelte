@@ -35,10 +35,10 @@
 
   // ------- helpers -------
   const DisplaySuit = (suit) =>
-    suit === "Hearts" ? "♥" :
-    suit === "Diamonds" ? "♦" :
-    suit === "Clubs" ? "♣" :
-    suit === "Spades" ? "♠" : suit;
+    suit === "Hearts" ? "♥\uFE0E" :
+    suit === "Diamonds" ? "♦\uFE0E" :
+    suit === "Clubs" ? "♣\uFE0E" :
+    suit === "Spades" ? "♠\uFE0E" : suit;
 
   const DisplayValue = (v) =>
     v === 11 ? "Jack" :
