@@ -14,13 +14,14 @@ export const assembly3 = writable(false); // is true after drawing in pile3
 
 export const reveal = writable(false); // is true after reveal
 
-// Per magic cycle: true once all cards have been dealt into the piles
+// Per magic cycle: true once the visitor has picked the right pile
 // (the Right arrow stays locked on that cycle's slide until then)
 export const drawn = writable({ 1: false, 2: false, 3: false });
 
 export const annotations = writable(true); //annotaions
 export const positions = writable(false); //positions
 export const positionsHint = writable(false); // spotlight the Show Positions / More Details button
+export const buttonClicked = writable(0); // bumps when a math slide's details/positions button is used
 export const slideChange = writable(0); // bumps on every slide change; math slides reset to annotations on it
 
 // NEW: global reset key (increments to broadcast a reset pulse)

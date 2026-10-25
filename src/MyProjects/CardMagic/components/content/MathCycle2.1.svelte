@@ -2,7 +2,7 @@
   import { rect } from '../../stores/layout.js';
     import { onMount, onDestroy, tick } from 'svelte';
     const browser = typeof window !== 'undefined';
-    import { arrayCards, statuscard, lockedCard, cycle1array, positionsHint, slideChange } from '../../stores/misc.js';
+    import { arrayCards, statuscard, lockedCard, cycle1array, positionsHint, buttonClicked, slideChange } from '../../stores/misc.js';
   import ButtonHint from '../items/ButtonHint.svelte';
     import Arrow from '../items/Arrow.svelte';
     import CurlyBraceCoords from '../items/Brace.svelte';
@@ -25,6 +25,7 @@
     function toggleDetails() {
       showDetails = !showDetails;
     positionsHint.set(false);
+      buttonClicked.update((n) => n + 1); // don't spotlight this button again
       // force a fresh layout re-measure once the DOM/crossfade has settled,
       // so the details arrow doesn't lock in a stale position from mid-toggle
       setTimeout(invalidate, 350);
@@ -169,17 +170,17 @@
       </div>
 
       <header class="header">
-        <h1><u>The Second Cycle</u></h1>
+        <h1><u>The Second Deal</u></h1>
         <div class="header-text">
           {#if !showDetails}
             <p in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
-              Let's have a look at the cards inside the piles. <br />Here's where your card went.
+              We deal again the same way: 1, 2, 3, 1, 2, 3… <br />Here's where your card went.
             </p>
           {:else}
             <p class="detail-text" bind:this={detailNote} in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
-              Your card's pile from the first cycle (Pile {selectedPile}, we'll call it S) went <br/>in the middle of the deck. Dealing again splits S across the 3 new piles.
+              Your pile from the first deal (Pile {selectedPile}) went in the middle of the deck. <br/>Dealing again splits its 9 cards across the 3 new piles.
               <br />
-              Each pile now contains 3 cards from S, and they sit in the middle of each pile.
+              Each new pile gets 3 of them, and they sit in the middle of each pile.
             </p>
           {/if}
         </div>
@@ -260,7 +261,7 @@
         {/if}
       </div>
 
-      <div class="note" class:note-hidden={showDetails} bind:this={note}>The Selected card</div>
+      <div class="note" class:note-hidden={showDetails} bind:this={note}>Your card</div>
 
       <div class="footer"></div>
       <div class="footer2"><p>Dealing II</p></div>

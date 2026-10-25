@@ -108,7 +108,6 @@
     }
 
     showButtons = true;
-    drawn.update((d) => ({ ...d, 3: true }));
   }
 
   function getCardSrc(card) {
@@ -131,6 +130,7 @@
     if (pileNumber === selectedPile) {
       success = true;
       successPile = pileNumber;
+      drawn.update((d) => ({ ...d, 3: true })); // unlock → for this cycle
       console.log("You're right");
     } else {
       // Shake only the clicked button and play error sound

@@ -11,7 +11,7 @@
     <Dacard/>
     {/if}
     <!-- {#if $assembly2} -->
-    <Piles/>
+    <Piles on:goto/>
 
   </div>
   

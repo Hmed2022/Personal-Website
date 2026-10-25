@@ -126,7 +126,7 @@
       <h1><u>Revealing Your Card</u></h1>
       <p>
         There's no trickery here — your choice was completely random, and no card
-        was ever forced. The real secret: each round, slide the pile holding your
+        was ever forced. The real secret: after each deal, slide the pile holding your
         card between the other two, subtly enough that no one notices. Do that
         three times, and your card lands exactly in the middle of the deck.
       </p>
@@ -248,6 +248,7 @@
 
     .header {
       text-align: center;
+      margin-bottom: 1.5em;   /* more room between the explanation and the cards */
     }
     .header h1 {
       margin: 0 0 0.5em;
@@ -256,8 +257,8 @@
     }
     .header p {
       margin: 0 auto;
-      max-width: 40em;
-      font-size: 1em;
+      max-width: 34em;
+      font-size: 1.3em;
       font-weight: 300;
       line-height: 1.5;
     }
@@ -267,8 +268,8 @@
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      gap: .4em;
-      margin: .8em 0 0;
+      gap: .5em;
+      margin: 1em 0 0;
       padding: 0;
     }
     .funnel .step {
@@ -277,8 +278,8 @@
       align-items: center;
       background: #F9BEBA;
       border-radius: .6rem;
-      padding: .3em .8em;
-      font-size: .85em;
+      padding: .35em .95em;
+      font-size: 1.02em;   /* a bit bigger so the summary is easy to read */
       line-height: 1.2;
     }
     .funnel .step {
@@ -293,7 +294,7 @@
       filter: brightness(1.05);
     }
     .funnel .step b { font-size: 1.3em; }
-    .funnel .step small { font-size: .78em; opacity: .85; }
+    .funnel .step small { font-size: .82em; opacity: .9; }
     .funnel .arrow { font-weight: 700; font-size: 1.2em; }
     .funnel .step.last { background: #A34C49; color: #FDD4D4; }
 

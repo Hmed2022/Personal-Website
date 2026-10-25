@@ -172,7 +172,7 @@
       {#if $annotations}
       <div class="descPos">
           <div class="desc">
-          For each cycle, notice that we'll always place the selected pile in the middle. This detail isn't shown in the trick, but it's absolutely crucial. It's like the secret sauce that guarantees the selected card stays put while the others are eliminated.
+          When gathering, the pile with your card always goes in the middle. That's the secret, and it isn't shown in the trick: whichever pile it was in, your card is now somewhere in positions 10–18.
           </div>
       </div>
       {/if}
@@ -192,7 +192,7 @@
 
       <!-- Brace and arrow overlays -->
       {#if $annotations}
-        <div class="note" bind:this={note}>The Selected card</div>
+        <div class="note" bind:this={note}>Your card</div>
 
         <div class="brace-layer" aria-hidden="true">
           {#if p1}
@@ -268,20 +268,15 @@
     {#if $positions}
     <div class='descPos1'>
       <p>
-          After this cycle, we know the selected card is one of 9 cards:
-          the middle pile (Pile {selectedPile}), now sitting in positions 10 to 18.
+          After the first deal, your card is one of 9 cards:
+          your pile (Pile {selectedPile}), now sitting in positions <span class="pos-hl">10</span> to <span class="pos-hl">18</span>.
       </p>
     </div>
     {/if}
 
     {#if $annotations}
     <div class="note-cycle">
-      we will highlight<br/>
-      the middle pile in<br/>
-      blue to track the<br/>
-      cards from that<br/>
-      pile during each<br/>
-      cycle.
+      we mark the cards of your pile with a blue "I" to follow them through the next deals.
     </div>
     {/if}
   
@@ -361,11 +356,19 @@
       /* position: absolute; */
   }
 
+  /* position numbers in the positions note: highlighted like the 14th on Gathering III */
+  .pos-hl{
+    background:#548ABB;
+    color:#FCD5D4;
+    padding:0 .2em;
+    border-radius:.2em;
+  }
+
   .descPos1{
       font-family: "Nanum Pen Script", cursive; 
-      font-size:2rem;
-      line-height: 1rem;
-      max-width: 12rem;
+      font-size:1.8rem;
+      line-height: 0.7;   /* same spacing as the Gathering III note */
+      max-width: 14rem;
       text-align: center;
       color:#548ABB;
       position: absolute;
@@ -376,9 +379,9 @@
 
   .note-cycle{
       font-family: "Nanum Pen Script", cursive; 
-      font-size:2rem;
-      line-height: 1rem;
-      max-width: 12rem;
+      font-size:1.8rem;
+      line-height: 0.7;   /* same spacing as the positions notes */
+      max-width: 13rem;
       text-align: center;
       color:#548ABB;
       position: absolute;

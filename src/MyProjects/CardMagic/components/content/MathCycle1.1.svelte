@@ -66,8 +66,8 @@
   <main class="body">
     {#if $statuscard}
       <header class="header">
-        <h1><u>The First Cycle</u></h1>
-        <p>Let's have a look at the cards inside the piles. <br> Here's where your card went.</p>
+        <h1><u>The First Deal</u></h1>
+        <p>We deal one card at a time into piles 1, 2, 3, 1, 2, 3… <br> so each pile gets every 3rd card. Here's where your card went.</p>
       </header>
   
       <div class="container" bind:this={board}>
@@ -100,7 +100,7 @@
           </div>
         {/each}
       </div>
-      <div class="note" bind:this={note}>The Selected card</div>
+      <div class="note" bind:this={note}>Your card</div>
 
       <div class="footer"></div>
       <div class="footer2"><p>Dealing I</p></div>

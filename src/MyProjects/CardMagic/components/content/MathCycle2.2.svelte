@@ -214,7 +214,7 @@
     {#if $annotations}
       <div class="descPos" in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
         <div class="desc">
-          For each cycle, we place the selected pile in the middle. The green “II” marks cards sharing the selected card’s Cycle-2 pile; blue “I” marks cards sharing its Cycle-1 pile. If a card matches both, you’ll see both bands.
+          Your pile goes in the middle again. Blue “I” = cards that were in your pile in deal 1. Green “II” = cards in your pile in deal 2. A card with both could still be yours, and there are only 3 of them now.
         </div>
       </div>
     {/if}
@@ -275,7 +275,7 @@
       <!-- Braces + arrow (annotation mode) -->
       {#if $annotations}
         <div class="overlay-fade" in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
-          <div class="note" bind:this={note}>The Selected card</div>
+          <div class="note" bind:this={note}>Your card</div>
 
           <div class="brace-layer" aria-hidden="true">
             {#if p1}
@@ -321,23 +321,17 @@
     {#if $positions}
       <div class="descPos1" in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
         <p>
-          After cycle 2 we reduced the potential selected cards from 9 to 3.
-          These potential matches are now in the middle deck positioned between
-          the 13th and 15th positions. Since these cards are consecutive, after
-          another cycle, each card will be the middle card in one of the three
-          divided piles.
+          After the second deal, only 3 cards could still be yours. They are
+          now at positions <span class="pos-hl">13th</span>, <span class="pos-hl">14th</span> and <span class="pos-hl">15th</span>,
+          the middle of the deck. Since they are next to each other, the next
+          deal puts each one in the middle of its own pile.
         </p>
       </div>
     {/if}
 
     {#if $annotations}
       <div class="note-cycle" in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
-        we will highlight<br/>
-        the middle pile in<br/>
-        blue (I) to track<br/>
-        Cycle-1 and in<br/>
-        green (II) for<br/>
-        Cycle-2.
+        blue "I" = your pile in deal 1, green "II" = your pile in deal 2.
       </div>
     {/if}
 
@@ -471,10 +465,18 @@
     font-family: "Nanum Pen Script", cursive;
   }
 
+  /* position numbers in the positions note: highlighted like the 14th on Gathering III */
+  .pos-hl{
+    background:#56993D;
+    color:#FCD5D4;
+    padding:0 .2em;
+    border-radius:.2em;
+  }
+
   .descPos1{
     font-family: "Nanum Pen Script", cursive;
-    font-size:2rem;
-    line-height: 1rem;
+    font-size:1.8rem;
+    line-height: 0.7;   /* same spacing as the Gathering III note */
     max-width: 16rem;
     text-align: center;
     color:#56993D;
@@ -486,9 +488,9 @@
 
   .note-cycle{
     font-family: "Nanum Pen Script", cursive;
-    font-size:2rem;
-    line-height: 1rem;
-    max-width: 12rem;
+    font-size:1.8rem;
+    line-height: 0.7;   /* same spacing as the positions notes */
+    max-width: 13rem;
     text-align: center;
     color:#548ABB;
     position: absolute;

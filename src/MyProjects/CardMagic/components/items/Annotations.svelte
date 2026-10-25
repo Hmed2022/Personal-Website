@@ -1,5 +1,5 @@
 <script>
-    import { annotations, positions, positionsHint } from "../../stores/misc";
+    import { annotations, positions, positionsHint, buttonClicked } from "../../stores/misc";
     import Arrow from './Arrow.svelte'
     import ButtonHint from './ButtonHint.svelte'
   
@@ -14,6 +14,7 @@
       annotations.set(!isAnnotations);
       positions.set(isAnnotations);
       positionsHint.set(false);
+      buttonClicked.update((n) => n + 1); // don't spotlight this button again
     }
   
   </script>

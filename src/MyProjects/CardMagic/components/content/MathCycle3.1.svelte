@@ -1,7 +1,7 @@
 <script>
   import { onMount, onDestroy, tick } from 'svelte';
   const browser = typeof window !== 'undefined';
-  import { arrayCards, statuscard, lockedCard, cycle2array, positionsHint, slideChange } from '../../stores/misc.js';
+  import { arrayCards, statuscard, lockedCard, cycle2array, positionsHint, buttonClicked, slideChange } from '../../stores/misc.js';
   import ButtonHint from '../items/ButtonHint.svelte';
   import Arrow from '../items/Arrow.svelte';
   import Up from '../items/JustUpArrow.svelte';
@@ -20,6 +20,7 @@
   function toggleDetails() {
     showDetails = !showDetails;
     positionsHint.set(false);
+      buttonClicked.update((n) => n + 1); // don't spotlight this button again
     // force a fresh layout re-measure once the DOM/crossfade has settled
     setTimeout(invalidate, 350);
   }
@@ -149,17 +150,17 @@
     </div>
 
     <header class="header">
-      <h1><u>The Third Cycle</u></h1>
+      <h1><u>The Third Deal</u></h1>
       <div class="header-text">
         {#if !showDetails}
           <p in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
-            Let's have a look at the cards inside the piles. <br />Here's where your card went.
+            One last deal, the same way: 1, 2, 3, 1, 2, 3… <br />Here's where your card went.
           </p>
         {:else}
           <p class="detail-text" bind:this={detailNote} in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
-            Since these cards were in consecutive positions right in the middle
-            of the whole deck, dividing it into three piles means we can be
-            confident that each one is now the middle card of its own pile.
+            The 3 cards that could still be yours were at positions 13, 14 and 15,
+            right next to each other. Dealing sends one to each pile, and each
+            lands 5th of 9: the exact middle of its pile.
           </p>
         {/if}
       </div>
@@ -225,7 +226,7 @@
       {/if}
     </div>
 
-    <div class="note" class:note-hidden={showDetails} bind:this={note}>The Selected card</div>
+    <div class="note" class:note-hidden={showDetails} bind:this={note}>Your card</div>
 
     <div class="footer"></div>
     <div class="footer2"><p>Dealing III</p></div>

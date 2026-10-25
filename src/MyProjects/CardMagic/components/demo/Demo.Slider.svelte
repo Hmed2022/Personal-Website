@@ -1,7 +1,7 @@
 <script>
 	import { tick, onDestroy } from "svelte";
 	import { fade } from "svelte/transition";
-	import { currentCard, statuscard, positionsHint, drawn, annotations, positions, slideChange } from "../../stores/misc.js";
+	import { currentCard, statuscard, positionsHint, buttonClicked, drawn, annotations, positions, slideChange } from "../../stores/misc.js";
 	import { logEvent } from "../../stores/db.js";
 	import { stageScale } from "../../stores/layout.js";
 	import Slider from "../helpers/Slider.svelte";
@@ -127,7 +127,7 @@
 	// --- Unified keyboard/tap handler ---
 	const onTap = ({ detail }) => run(async () => {
 	  if (detail === "right") {
-		if (rightLocked) return; // magic cycle not drawn yet (also blocks swipes)
+		if (rightLocked) return; // magic cycle's pile not picked yet (also blocks swipes)
 		await moveHTo(y, wrapRight(y));
 		return;
 	  }
@@ -163,13 +163,15 @@
 	// - Magic row: only on the pick slide, once a card is locked in
 	// - Math row: on every slide except the reveal and the last one (Right wraps to the start there)
 	const HINT_DELAY_MS = 4000;
-	const MATH_REVEAL_SLIDE = 8; // "Revealing Your Card": busy enough without the keyboard hint
+	// Math slides that never get the keyboard hint:
+	// 2 = Dealing I, 8 = "Revealing Your Card" (busy enough without it)
+	const NO_KEYBOARD_HINT_MATH = [2, 8];
 	let hintTimer;
 	let showHint = false;
 
 	$: hintActive = y === 0
 	  ? $currentCard && x[0] === 0
-	  : $statuscard && x[1] < ROW_LEN[1] - 1 && x[1] !== MATH_REVEAL_SLIDE; // no card yet: the slides say "press ↑", don't point at →
+	  : $statuscard && x[1] < ROW_LEN[1] - 1 && !NO_KEYBOARD_HINT_MATH.includes(x[1]); // no card yet: the slides say "press ↑", don't point at →
 	// y and x are passed so the timer restarts on every slide change,
 	// even when hintActive stays true (math slide -> next math slide)
 	$: armHint(hintActive, y, x);
@@ -179,9 +181,31 @@
 	// Without a picked card those slides show no button, so keep the keyboard hint.
 	const BUTTON_HINT_SLIDES = [3, 4, 5, 6, 7];
 	$: onButtonSlide = y === 1 && BUTTON_HINT_SLIDES.includes(x[1]) && $statuscard;
+
+	// Math slides whose button the visitor already used: no spotlight there anymore
+	// (and no keyboard hint either, since they clearly know how to interact)
+	let usedButtonSlides = new Set();
+	$: $buttonClicked, markButtonUsed();
+	function markButtonUsed() {
+	  if ($buttonClicked > 0 && y === 1) usedButtonSlides = new Set(usedButtonSlides).add(x[1]);
+	}
+	$: buttonAlreadyUsed = onButtonSlide && usedButtonSlides.has(x[1]);
+
 	$: keyboardHint = showHint && !onButtonSlide;
 	// Clicking the button sets the store back to false; it stays off until the next slide change
-	$: positionsHint.set(showHint && onButtonSlide);
+	$: positionsHint.set(showHint && onButtonSlide && !buttonAlreadyUsed);
+
+	// Any click/tap anywhere dismisses the button spotlight (until the next slide change),
+	// but only after it has been visible for HINT_MIN_VISIBLE_MS, so a click that happens
+	// right as it appears doesn't hide it before anyone can read it.
+	const HINT_MIN_VISIBLE_MS = 3000;
+	let hintShownAt = 0;
+	$: if ($positionsHint) hintShownAt = Date.now();
+	function dismissButtonHint() {
+	  if (!$positionsHint) return;
+	  if (Date.now() - hintShownAt < HINT_MIN_VISIBLE_MS) return;
+	  positionsHint.set(false);
+	}
 
 	function armHint(active) {
 	  clearTimeout(hintTimer);
@@ -208,7 +232,7 @@
 	// Which directions are visually disabled?
 	// Right stays locked on the magic row until:
 	// - pick slide (0): a card has been locked in
-	// - cycle slides 1-3: that cycle's cards are dealt (only once a card is picked;
+	// - cycle slides 1-3: the right pile has been picked (only once a card is picked;
 	//   otherwise those slides have nothing to draw)
 	$: rightLocked = y === 0 && (
 	  (x[0] === 0 && !$statuscard) ||
@@ -332,7 +356,7 @@
 	}
   </script>
 
-  <svelte:window bind:innerWidth bind:innerHeight on:orientationchange={handleOrientationChange} on:resize={handleOrientationChange} />
+  <svelte:window bind:innerWidth bind:innerHeight on:orientationchange={handleOrientationChange} on:resize={handleOrientationChange} on:pointerdown={dismissButtonHint} />
 
   <div class="rotate-prompt">
 	<div class="rotate-icon">{@html rotateIcon}</div>
@@ -356,7 +380,7 @@
 		  <Slide index={1}><Slide2 on:goto={handleGoto} /></Slide>
 		  <Slide index={2}><Slide2_2 on:goto={handleGoto} /></Slide>
 		  <Slide index={3}><Slide2_3 on:goto={handleGoto} /></Slide>
-		  <Slide index={4}><Slide2_4/></Slide>
+		  <Slide index={4}><Slide2_4 on:goto={handleGoto} /></Slide>
 		  <Slide index={5}><Slide10 on:goto={handleGoto} /></Slide>
 		</Slider>
 	  </Slide>

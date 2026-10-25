@@ -1,5 +1,8 @@
 <script>
-    import { onMount } from "svelte";
+    import { onMount, tick, createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
+    // "Yes!" under "Is this your card?" -> the end slide ("That's the trick!")
+    const goToEnd = () => dispatch("goto", { y: 0, x: 5 });
     import { get } from "svelte/store";
     import { crossfade, scale } from "svelte/transition";
     import { cycle3array, reveal, resetKey } from "../../stores/misc.js";
@@ -49,6 +52,20 @@
       dealing = false;
     }
   
+    // Replay the reveal: put every card back in the deck and deal to 14 again.
+    // (Safe to re-seed here: it only runs from the button, with the current
+    // pick's $cycle3array — unlike reset() below, which races resetKey.)
+    async function revealAgain() {
+      if (dealing) return;
+      leftPile = [];
+      midPile = [];
+      lastCard = null;
+      revealFlipped = false;
+      await tick();                                  // reactive block re-seeds leftPile
+      await new Promise((r) => setTimeout(r, 450));  // let the big card flip back first
+      dealToFifteen();
+    }
+
     // Hard-clear only — never re-seed leftPile from $cycle3array here. This
     // runs off the shared resetKey, whose subscriber order relative to
     // cards.svelte's own hardReset() isn't guaranteed, so $cycle3array may
@@ -122,6 +139,9 @@
   <div class="reveal-text" class:visible={revealFlipped}>
     <p class="question">Is this <span class="first">your card</span>?</p>
     <p class="joke">Of course it is. Nothing was left to chance...</p>
+    {#if revealFlipped}
+      <button class="yes-btn" on:click={goToEnd}>Yes!</button>
+    {/if}
   </div>
 
   <main class="stage">
@@ -181,7 +201,11 @@
   
   <div class="controls">
     <!-- <button on:click={drawOne} disabled={count >= 15 || !leftPile.length}>Draw one</button> -->
-    <button on:click={dealToFifteen} disabled={count >= 14 || dealing}> Reveal The Card!</button>
+    {#if revealFlipped}
+      <button on:click={revealAgain}>Reveal it again ↺</button>
+    {:else}
+      <button on:click={dealToFifteen} disabled={count >= 14 || dealing}> Reveal The Card!</button>
+    {/if}
     <!-- <button on:click={reset}>Reset</button> -->
   </div>
 
@@ -354,6 +378,23 @@
       border-radius: 0.3em;
       font-weight: 900;
     }
+    .yes-btn {
+      margin-top: .8rem;
+      font-family: inherit;
+      font-size: 1.2rem;
+      font-weight: 800;
+      padding: .45em 1.4em;
+      border: none;
+      border-radius: 10px;
+      background: #D47D79;
+      color: #FCD4D4;
+      cursor: pointer;
+      animation: yesPop .4s ease-out;
+      transition: transform .15s;
+    }
+    .yes-btn:hover, .yes-btn:focus-visible { transform: scale(1.06); }
+    @keyframes yesPop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
     .joke {
       font-size: 1.05rem;
       font-weight: 400;

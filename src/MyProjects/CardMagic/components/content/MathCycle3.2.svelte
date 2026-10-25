@@ -5,7 +5,7 @@
   import { get } from "svelte/store";
   import Arrow from "../items/Arrow.svelte";
   import CurlyBraceCoords from "../items/Brace.svelte";
-  import { statuscard, lockedCard, cycle3array, annotations, positions, positionsHint, slideChange } from "../../stores/misc.js";
+  import { statuscard, lockedCard, cycle3array, annotations, positions, positionsHint, buttonClicked, slideChange } from "../../stores/misc.js";
   import Up from "../items/JustUpArrow.svelte";
   import ButtonHint from "../items/ButtonHint.svelte";
 
@@ -28,6 +28,7 @@
   function cycleMode() {
     mode = mode === "annotations" ? "details" : mode === "details" ? "positions" : "annotations";
     positionsHint.set(false);
+      buttonClicked.update((n) => n + 1); // don't spotlight this button again
     // force a fresh layout re-measure once the DOM/crossfade has settled
     setTimeout(invalidate, 350);
   }
@@ -241,8 +242,9 @@
     {#if $annotations}
       <div class="descPos">
         <div class="desc">
-          For Cycle 3, we add a purple “III” band. Bands stack from the right:
-          if three cycles match you’ll see “I” (blue), then “II” (green), then “III” (purple).
+          Deal 3 adds a purple “III” band (bands stack from the right: I, II, III).
+          Your card is the only one with all three bands. Gathering one last time
+          with its pile in the middle puts it at position 14.
         </div>
       </div>
     {/if}
@@ -269,7 +271,11 @@
       {#if $positions}
         <svg class="positions-layer" aria-hidden="true">
           {#each posMarks as m (m.text)}
-            <text x={m.x} y={m.y} class="pos-label-svg">
+            {#if m.text === '14th'}
+              <!-- purple highlight behind "14th" (label is ~47×32px, right-aligned at m.x) -->
+              <rect x={m.x - 54} y={m.y - 17} width="60" height="31" rx="5" class="pos14-bg" />
+            {/if}
+            <text x={m.x} y={m.y} class="pos-label-svg" class:pos14-svg={m.text === '14th'}>
               {m.text === '1st' ? `Card Position : ${m.text}` : m.text}
             </text>
           {/each}
@@ -326,7 +332,7 @@
 
       <!-- Braces + arrow (annotation mode) -->
       {#if $annotations}
-        <div class="note" bind:this={note}>The Selected card</div>
+        <div class="note" bind:this={note}>Your card</div>
 
         <div class="brace-layer" aria-hidden="true">
           {#if p1}
@@ -375,7 +381,7 @@
             bind:this={detailNote1}
             style="top:{cardCenterY(eliminatedEls[0])}px; left:{cBounds.left - 30}px;"
           >
-            This card was in the middle pile in the first two cycles, but in the third one it got eliminated.
+            This card was in your pile in the first two deals, but not in the third one, so it's out.
           </div>
         {/if}
         {#if selectedEl}
@@ -384,7 +390,7 @@
             bind:this={detailNote2}
             style="top:{cardCenterY(selectedEl)}px; left:{cBounds.left - 30}px;"
           >
-            The Selected card is the only card that's been in the middle pile for the three cycles.
+            Your card is the only card that's been in your pile in all three deals.
           </div>
         {/if}
         {#if eliminatedEls[1]}
@@ -393,7 +399,7 @@
             bind:this={detailNote3}
             style="top:{cardCenterY(eliminatedEls[1])}px; left:{cBounds.left - 30}px;"
           >
-            This card was also in the middle pile in the first two cycles, but in the third one it got eliminated.
+            This card was also in your pile in the first two deals, but not in the third one, so it's out.
           </div>
         {/if}
 
@@ -456,17 +462,17 @@
 
     {#if $positions}
       <div class="descPos1">
-        <p>After this cycle, the selected card must be in the middle pile’s banded set.</p>
+        <p>
+          After the third deal, only one card has been in your pile all three
+          times (I, II and III): your card. It now sits exactly in the middle
+          of the deck, at the <span class="pos14">14th</span> position.
+        </p>
       </div>
     {/if}
 
     {#if $annotations}
       <div class="note-cycle">
-        we will highlight<br/>
-        the middle pile in<br/>
-        purple (III) to track<br/>
-        Cycle-3 alongside<br/>
-        green (II) and blue (I).
+        purple "III" = your pile in deal 3, with green "II" and blue "I" from before.
       </div>
     {/if}
 
@@ -635,13 +641,25 @@
   .detail-note-right{ transform:translateY(-50%); }
   .detail-note-left{ transform:translate(-100%, -50%); }
 
+  /* "14th" position label in the SVG column: same highlight */
+  .pos14-bg{ fill:#D288CA; }
+  .pos-label-svg.pos14-svg{ fill:#FCD5D4; }
+
+  /* "14th" in the positions note: purple highlight, pink text */
+  .pos14{
+    background:#D288CA;
+    color:#FCD5D4;
+    padding:0 .2em;
+    border-radius:.2em;
+  }
+
   .descPos1{
     font-family: "Nanum Pen Script", cursive;
-    font-size:2rem;
-    line-height: 1rem;
-    max-width: 12rem;
+    font-size:1.8rem;
+    line-height: 0.7;   /* same spacing as the "More Details" notes */
+    max-width: 14rem;
     text-align: center;
-    color:#548ABB;
+    color:#D288CA;   /* same purple as the position labels and the III band */
     position: absolute;
     left: clamp(12px, 6cqw, 120px);
     top: 48%;
@@ -650,9 +668,9 @@
 
   .note-cycle{
     font-family: "Nanum Pen Script", cursive;
-    font-size:2rem;
-    line-height: 1rem;
-    max-width: 12rem;
+    font-size:1.8rem;
+    line-height: 0.7;   /* same spacing as the positions notes */
+    max-width: 13rem;
     text-align: center;
     color:#548ABB;
     position: absolute;
