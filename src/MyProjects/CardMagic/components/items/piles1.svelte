@@ -146,7 +146,7 @@
   <div class="deck-container">
     <div class="divtext">
       {#if showButtons}
-        <p class="picktext">{wrongPick ? "Not that one, look again 👀" : "Pick the pile containing your card"}</p>
+        <p class="picktext">{wrongPick ? "Not that one, look again!" : "Pick the pile containing your card"}</p>
       {/if}
     </div>
 

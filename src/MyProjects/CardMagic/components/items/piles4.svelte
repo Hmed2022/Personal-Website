@@ -281,13 +281,12 @@
   
     /* Right-side reveal */
  
+    /* plain label (not button-like), with room between it and the big card */
     .badge {
-      background: #5B4E88;
-      color: #fff;
+      color: #5B4E88;
       font-weight: 800;
-      font-size: 1.2rem;
-      padding: .6rem 1rem;
-      border-radius: 10px;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
     }
     .bigcard-wrap {
       height: clamp(220px, 34cqw, 380px);
@@ -393,7 +392,16 @@
       cursor: pointer;
       transition: transform .15s;
     }
-    .reveal-text.visible .yes-btn { animation: yesPop .4s ease-out; }
+    .reveal-text.visible .yes-btn {
+      animation: yesPop .4s ease-out, heartbeat 1.3s ease-in-out .6s infinite;
+    }
+    .yes-btn:hover, .yes-btn:focus-visible { animation-play-state: paused; }
+    @keyframes heartbeat {
+      0%, 40%, 100% { transform: scale(1); }
+      10%           { transform: scale(1.14); }
+      20%           { transform: scale(1); }
+      30%           { transform: scale(1.1); }
+    }
     .yes-btn:hover, .yes-btn:focus-visible { transform: scale(1.06); }
     @keyframes yesPop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
@@ -436,5 +444,19 @@
 }
 .face.front { transform: rotateY(180deg); }
 
-  </style>
+  
+    /* Short screens (e.g. 695px-tall laptops): everything follows the stage height
+       so the whole reveal fits ("Is this your card?" was cut off at the top).
+       Each clamp's max is the original size, reached on ~900px+ tall screens. */
+    .stage { gap: clamp(1rem, 4.5cqh, 3rem); padding: clamp(.5rem, 3cqh, 2rem) 2rem; }
+    .title { font-size: clamp(1.2rem, 2.7cqh, 1.8rem); margin-bottom: clamp(.4rem, 1.5cqh, 1rem); }
+    .stack { height: clamp(170px, 36cqh, 320px); }
+    .badge { font-size: clamp(1.15rem, 2.5cqh, 1.5rem); margin-bottom: clamp(.5rem, 1.8cqh, 1rem); }
+    .bigcard-wrap { height: clamp(190px, min(32cqw, 39cqh), 350px); }  /* a little smaller than before */
+    .reveal-text { margin-bottom: clamp(.4rem, 2.5cqh, 2rem); }
+    .question { font-size: clamp(1.2rem, 2.9cqh, 1.6rem); }
+    .joke { font-size: clamp(.85rem, 1.9cqh, 1.05rem); }
+    .yes-btn { font-size: clamp(1rem, 2.2cqh, 1.2rem); margin-top: clamp(.35rem, 1.2cqh, .8rem); }
+    .controls { padding: clamp(.5rem, 1.6cqh, 1.25rem) 0 clamp(.5rem, 2.6cqh, 2rem); }
+</style>
   

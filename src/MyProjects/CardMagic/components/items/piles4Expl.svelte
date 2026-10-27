@@ -127,7 +127,7 @@
     <header class="header">
       <h1><u>Revealing Your Card</u></h1>
       <p>
-        There's no trickery here — your choice was completely random, and no card
+        There's no trickery here! Your choice was completely random, and no card
         was ever forced. The real secret: after each deal, slide the pile holding your
         card between the other two, subtly enough that no one notices. Do that
         three times, and your card lands exactly in the middle of the deck.

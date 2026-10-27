@@ -34,7 +34,7 @@
       </div>
       <p>Your card</p>
       <button type="button" class="peek" on:click={peek} disabled={peeking}>
-        {peeking ? 'Peeking…' : 'Peek 👀'}
+        {peeking ? 'Peeking…' : 'Peek'}
       </button>
     </div>
   {/if}

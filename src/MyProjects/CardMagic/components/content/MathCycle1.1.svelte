@@ -190,5 +190,15 @@
     .footer{ margin-bottom:4rem; }
     .footer2{ position:absolute; margin-right:4rem; margin-bottom:4rem; color:#4973B0; font-weight:bold; font-size:1.5rem; right:0; bottom:0; }
  
-  </style>
+  
+  /* Short screens (e.g. 695px-tall laptops): sizes follow the stage height so the
+     text never runs into the piles. Each clamp's max is the original size, reached
+     at ~1000px tall, so big screens look the same as before. */
+  .header{ margin-top: clamp(1rem, 6.4cqh, 4rem); height: clamp(5.5rem, 14.5cqh, 9rem); }
+  .header h1{ font-size: clamp(1.4rem, 3.2cqh, 2rem); margin-top: clamp(1rem, 4.8cqh, 3rem); }
+  .header p{ font-size: clamp(1.15rem, 3.2cqh, 2rem); }
+  .container{ width: min(75%, 125cqh); }
+  .note{ font-size: clamp(1.3rem, 3.2cqh, 2rem); }
+  .footer{ margin-bottom: clamp(1rem, 6.4cqh, 4rem); }
+</style>
   
