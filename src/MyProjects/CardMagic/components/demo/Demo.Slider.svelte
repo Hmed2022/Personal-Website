@@ -402,6 +402,11 @@
   <div class="rotate-prompt">
 	<div class="rotate-icon">{@html rotateIcon}</div>
 	<p>Please <span class="highlight">rotate</span> your phone to see the trick</p>
+	<p class="rotate-lock">
+	  Screen not turning? <b>Unlock rotation</b> first:<br />
+	  iPhone: swipe down from the top-right corner and tap the lock icon.<br />
+	  Android: open Quick Settings and turn on Auto-rotate.
+	</p>
 	<p class="rotate-tip">For the best experience, use a bigger screen like a tablet or a computer.</p>
   </div>
 
@@ -590,6 +595,14 @@
 	  line-height: 1.5;
 	  color: #4a3f78;
 	  margin: 0;
+	}
+	.rotate-prompt .rotate-lock {
+	  font-size: .9rem;
+	  max-width: 30ch;
+	  line-height: 1.45;
+	  padding: .7rem .9rem;
+	  border-radius: .7rem;
+	  background: rgba(74, 63, 120, .1);
 	}
 	.rotate-prompt .rotate-tip {
 	  font-size: .95rem;
