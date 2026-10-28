@@ -267,6 +267,19 @@
 	  innerWidth < 900 &&
 	  innerHeight > innerWidth;
 
+	// Rotation-lock tip: only after the rotate screen has been up for a while
+	// without the phone being turned (likely because rotation is locked).
+	const LOCK_TIP_DELAY_MS = 5000;
+	let showLockTip = false;
+	let lockTipTimer;
+	$: armLockTip(rotatePromptActive);
+	function armLockTip(active) {
+	  clearTimeout(lockTipTimer);
+	  showLockTip = false;
+	  if (active) lockTipTimer = setTimeout(() => (showLockTip = true), LOCK_TIP_DELAY_MS);
+	}
+	onDestroy(() => clearTimeout(lockTipTimer));
+
 	// --- Scale-to-fit stage ---
 	// Every slide is authored assuming a roomy ~900px-tall canvas. On short
 	// viewports (phone landscape, small windows) that overflows and text
@@ -402,11 +415,13 @@
   <div class="rotate-prompt">
 	<div class="rotate-icon">{@html rotateIcon}</div>
 	<p>Please <span class="highlight">rotate</span> your phone to see the trick</p>
-	<p class="rotate-lock">
-	  Screen not turning? <b>Unlock rotation</b> first:<br />
-	  iPhone: swipe down from the top-right corner and tap the lock icon.<br />
-	  Android: open Quick Settings and turn on Auto-rotate.
-	</p>
+	{#if showLockTip}
+	  <p class="rotate-lock" in:fade={{ duration: 400 }}>
+		Screen not turning? <b>Unlock rotation</b> first:<br />
+		iPhone: swipe down from the top-right corner and tap the lock icon.<br />
+		Android: open Quick Settings and turn on Auto-rotate.
+	  </p>
+	{/if}
 	<p class="rotate-tip">For the best experience, use a bigger screen like a tablet or a computer.</p>
   </div>
 
