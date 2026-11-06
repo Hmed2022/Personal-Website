@@ -1,10 +1,15 @@
-import { createClient } from '@supabase/supabase-js';
-
 const url = import.meta.env.VITE_SUPABASE_URL;
 const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-// Only connect when both keys are set, so the trick still works without a database
-const supabase = url && key ? createClient(url, key) : null;
+// The Supabase library (~350 KB) is only downloaded when the first save happens,
+// not as part of the card trick's own code. Without keys it's never loaded at all,
+// so the trick still works without a database.
+let clientPromise = null;
+function getClient() {
+	if (!url || !key) return Promise.resolve(null);
+	clientPromise ??= import('@supabase/supabase-js').then(({ createClient }) => createClient(url, key));
+	return clientPromise;
+}
 
 // Simple browser name from the user agent (order matters: Edge/Opera also say "Chrome")
 function getBrowser() {
@@ -48,28 +53,39 @@ function getRegion() {
 	}
 }
 
-// One id per play (new on every locked-in card), shared by the pick row and its events
+// One id per play, shared by the card_picks row and its card_events rows.
+// A new one starts at the beginning of every play ("I've got it!" / "Lock it in!"),
+// so events can never be attached to a previous play.
 let sessionId = null;
+export function startSession() {
+	sessionId = newId();
+	return sessionId;
+}
 
 /**
- * Save one locked-in card. Never throws: a failed save must not break the trick.
- * @param {object} card - the selected card, after the three cycles were assigned
- * @param {number} changedMind - times the user switched cards before locking in
+ * Save one play's card. Never throws: a failed save must not break the trick.
+ * @param {object} card - the visitor's card, with all three cycles assigned
+ * @param {number|null} changedMind - pick mode: times they switched cards before locking in
+ * @param {'pick'|'mind'} mode - pick: chosen on screen; mind: thought of, found after 3 answers
  */
-export async function savePick(card, changedMind) {
+export async function savePick(card, changedMind, mode) {
+	const supabase = await getClient().catch(() => null);
 	if (!supabase) {
-		console.warn('Supabase keys missing in .env, pick not saved');
+		console.warn('Supabase keys missing in .env (or library failed to load), pick not saved');
 		return;
 	}
 
-	sessionId = newId();
+	if (!sessionId) startSession();
 
 	const { error } = await supabase.from('card_picks').insert({
 		session_id: sessionId,
+		mode,
 		card_index: card.index,
 		value: card.value,
 		suit: card.suit,
-		changed_mind: changedMind,
+		// changed_mind only means something in pick mode; the column is NOT NULL
+		// default 0, so mind-mode rows simply leave it out (filter by mode)
+		...(mode === 'pick' ? { changed_mind: changedMind } : {}),
 		region: getRegion(),
 		browser: getBrowser(),
 		device: getDevice(),
@@ -92,6 +108,7 @@ const loggedOnce = new Set();
  * @param {{ once?: boolean }} [opts] - once: log at most once per session
  */
 export async function logEvent(event, cycle = null, { once = false } = {}) {
+	const supabase = await getClient().catch(() => null);
 	if (!supabase) return;
 	if (once) {
 		const key = `${sessionId}:${event}`;

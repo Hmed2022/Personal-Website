@@ -1,8 +1,8 @@
 <script>
     import FlipPhotoButton from "../items/FlipButton.svelte";
-    import BackMagic from "../../svg/back1.svg"
+    import BackMagic from "../../svg/back1.webp"
     import FrontMagic from "../../svg/font1.svg"
-    import BackMath from "../../svg/back2.svg"
+    import BackMath from "../../svg/back2.webp"
     import FrontMath from "../../svg/font2.svg"
     import { triggerReset } from "../../stores/misc.js";
 

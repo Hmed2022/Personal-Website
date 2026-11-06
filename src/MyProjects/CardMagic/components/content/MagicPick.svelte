@@ -1,5 +1,7 @@
 <script>
   import Cards from "../items/cards.svelte";
+  import MindPick from "../items/MindPick.svelte";
+  import { mode } from '../../stores/misc.js';
   import {lockedCard} from '../../stores/misc.js'
   import KeyboardDown from "../items/KeyboardDown.svelte";
 
@@ -10,12 +12,21 @@
 
   <div class="center">
     <div class="text">
+      {#if $mode === 'mind'}
+        <h1>Think of a card</h1>
+        <h3>Pick one of <b>these 27 cards</b> in your mind, and don't tell me.<br />I'll find it in <b>3 questions</b>.</h3>
+      {:else}
         <h1> Pick A card</h1>
         <h3>Grab 27 cards from a real deck and follow along!</h3>
+      {/if}
     </div>
     
     <div class= 'container'>
+      {#if $mode === 'mind'}
+        <MindPick on:goto />
+      {:else}
         <Cards/>
+      {/if}
     </div>
   </div>
 

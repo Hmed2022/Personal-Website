@@ -227,7 +227,7 @@
             use:collect={card}
             style="top: calc({card.cycle2pos} * 3.5%); margin-bottom: {card.cycle2pos === 8 || card.cycle2pos === 17 ? '10%' : '0'};"
           >
-            {DisplayValue(card.value)} of {DisplaySuit(card.suit)}
+            {DisplayValue(card.value)} of <span class="suit" class:red={card.suit === 'Hearts' || card.suit === 'Diamonds'}>{DisplaySuit(card.suit)}</span>
           </div>
         {/each}
       </div>

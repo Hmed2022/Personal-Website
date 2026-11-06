@@ -1,7 +1,7 @@
 <script>
     import { onDestroy } from 'svelte';
     import { lockedCard } from '../../stores/misc.js';
-    import facedown from '../../svg/Cards_png/back.png';
+    import facedown from '../../svg/Cards_png/back.webp';
 
     $: card = $lockedCard;
 

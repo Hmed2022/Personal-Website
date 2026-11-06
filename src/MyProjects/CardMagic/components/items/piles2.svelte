@@ -7,7 +7,9 @@
   // your code
   import { get } from 'svelte/store';
   import { allCards } from './cards.js';
-  import { arrayCards, currentCard , cycle1array, assembly2, resetKey, drawn } from '../../stores/misc.js';
+  import { arrayCards, currentCard , cycle1array, assembly2, resetKey, drawn, mode } from '../../stores/misc.js';
+  import { answerPile } from '../../stores/mindCycles.js';
+  import PilePeek from './PilePeek.svelte';
   import { logEvent } from '../../stores/db.js';
   import { isTouchDevice } from '../../stores/layout.js';
 
@@ -66,7 +68,7 @@
     $assembly2 =true;
     animationStarted = true;
     for (let i = 0; i < cards.length; i++) {
-      if (audioEl && !isTouchDevice) audioEl.play(); // iOS lags rapid sounds: skip on phones
+      if (audioEl && !isTouchDevice) audioEl.play().catch(() => {}); // iOS lags rapid sounds: skip on phones
 
       // mark dealt + assign pile in round-robin
       cards[i].dealt2 = true;
@@ -85,11 +87,24 @@
   }
 
   // Handle pile button clicks
+  // Mind mode: the visitor's answer is always accepted; the next order is computed from it
+  let peekOpen = false;
+  $: peekPiles = [1, 2, 3].map((p) => cards.filter((d) => d.dealt2 && d.pile === p));
+  function answerMind(pileNumber) {
+    peekOpen = false;
+    success = true;
+    successPile = pileNumber;
+    answerPile(2, pileNumber);
+    drawn.update((d) => ({ ...d, 2: true })); // unlock → for this cycle
+  }
+
   function onPick(pileNumber, e) {
     if (success && pileNumber === successPile) {
       dispatch('goto', { y: 0, x: 3 }); // move to the next cycle
       return;
     }
+
+    if ($mode === 'mind') { answerMind(pileNumber); return; }
 
     const selectedPile = getSelectedCycle2PileNumber();
     if (selectedPile == null) return;
@@ -126,6 +141,7 @@
     const unsub = resetKey.subscribe((v) => {
       if (v !== lastSeenReset) {
         lastSeenReset = v;
+        peekOpen = false;
         wrongPick = false;
         animationStarted = false;
         showButtons = false;
@@ -146,7 +162,16 @@
   <div class="deck-container">
     <div class="divtext">
       {#if showButtons}
+{#if $mode === 'mind'}
+          <div class="question">
+            <p class="q-step">Question 2 of 3
+              <span class="dots" aria-hidden="true">{#each [1, 2, 3] as d}<span class:on={d <= 2}></span>{/each}</span>
+            </p>
+            <p class="q-text">Which pile is your card in?</p>
+          </div>
+        {:else}
         <p class="picktext">{wrongPick ? "Not that one, look again!" : "Pick the pile containing your card"}</p>
+        {/if}
       {/if}
     </div>
 
@@ -198,7 +223,7 @@
               disabled={success && pileI !== successPile}
             >
               {#if success && pileI === successPile}
-                <span class="success-label">Alright, one last time!</span>
+                {#if $mode === 'mind'}<span class="success-label">Next question →</span>{:else}<span class="success-label">Alright, one last time!</span>{/if}
               {:else}
                 Pile {pileI}
               {/if}
@@ -208,7 +233,14 @@
       </div>
     {/each}
   </div>
+  {#if $mode === 'mind' && showButtons && !success}
+    <button type="button" class="forgot" on:click={() => (peekOpen = true)}>Forgot? Look inside the piles</button>
+  {/if}
 </div>
+
+{#if peekOpen}
+  <PilePeek piles={peekPiles} on:choose={(e) => answerMind(e.detail)} on:close={() => (peekOpen = false)} />
+{/if}
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
@@ -346,5 +378,26 @@
     20%, 80% { transform: translate3d(2px, 0, 0); }
     30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
     40%, 60% { transform: translate3d(4px, 0, 0); }
+  }
+
+  /* mind mode: the pile question */
+  .question { text-align: center; font-family: 'Kumbh Sans', sans-serif; color: #3F3075; }
+  .q-step {
+    margin: 0; font-size: 1.05em; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; color: #5B4E88;
+    display: inline-flex; align-items: center; gap: .6em;
+  }
+  .dots { display: inline-flex; gap: .3em; }
+  .dots span { width: .55em; height: .55em; border-radius: 50%; background: #E5DEFF; border: 2px solid #5B4E88; }
+  .dots span.on { background: #5B4E88; }
+  .q-text { margin: .15em 0 0; font-size: 2.3em; font-weight: 800; }
+  /* out of the layout (the wrapper is vertically centred), so the piles don't
+     shift up when the link appears, or back down when it disappears */
+  .forgot {
+    position: absolute; left: 50%; top: calc(100% + 1.2rem);
+    transform: translateX(-50%); white-space: nowrap; margin: 0;
+    background: none; border: none; padding: 0;
+    font-size: 1.05rem; font-weight: 700; color: #5B4E88;
+    text-decoration: underline; cursor: pointer;
   }
 </style>

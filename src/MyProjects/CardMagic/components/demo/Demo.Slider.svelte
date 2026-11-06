@@ -1,7 +1,7 @@
 <script>
 	import { tick, onMount, onDestroy } from "svelte";
 	import { fade } from "svelte/transition";
-	import { currentCard, statuscard, positionsHint, buttonClicked, drawn, annotations, positions, slideChange } from "../../stores/misc.js";
+	import { currentCard, statuscard, positionsHint, buttonClicked, drawn, annotations, positions, slideChange, mode, mindReady, reveal } from "../../stores/misc.js";
 	import { logEvent } from "../../stores/db.js";
 	import { stageScale, isTouchDevice } from "../../stores/layout.js";
 	import Slider from "../helpers/Slider.svelte";
@@ -135,6 +135,7 @@
   
 	  if (detail === "down") {
 		if (y !== 0) return; // already bottom row
+		if (mathLocked) return; // mind mode before the reveal (also blocks swipes)
 		const targetX = downMapFromY0[x[0]];
 		if (targetX == null) return; // from v0-h0 down is blocked
 		await goToCell(1, targetX);
@@ -235,11 +236,15 @@
 	// - cycle slides 1-3: the right pile has been picked (only once a card is picked;
 	//   otherwise those slides have nothing to draw)
 	$: rightLocked = y === 0 && (
-	  (x[0] === 0 && !$statuscard) ||
-	  ([1, 2, 3].includes(x[0]) && $statuscard && !$drawn[x[0]])
+	  (x[0] === 0 && ($mode === 'mind' ? !$mindReady : !$statuscard)) ||
+	  ([1, 2, 3].includes(x[0]) && ($mode === 'mind' ? $mindReady : $statuscard) && !$drawn[x[0]])
 	);
+	// Mind mode: the math needs the card, which we only know after the reveal
+	$: mathLocked = $mode === 'mind' && !$reveal;
+
 	$: disabledDirs = [
 	  ...(y === 0 ? ["up"] : ["down"]),    // block off-grid vertical moves
+	  ...(y === 0 && mathLocked ? ["down"] : []),
 	  ...(rightLocked ? ["right"] : [])
 	];
 
@@ -439,7 +444,7 @@
 	  <!-- Row 0 -->
 	  <Slide index={0}>
 		<Slider direction="horizontal" bind:this={sliderX[0]}>
-		  <Slide index={0}><Slide1/></Slide>
+		  <Slide index={0}><Slide1 on:goto={handleGoto} /></Slide>
 		  <Slide index={1}><Slide2 on:goto={handleGoto} /></Slide>
 		  <Slide index={2}><Slide2_2 on:goto={handleGoto} /></Slide>
 		  <Slide index={3}><Slide2_3 on:goto={handleGoto} /></Slide>
@@ -485,6 +490,7 @@
   {#if y === 0}
 	<Keyboard
 	  directions={["up","down","left","right"]}
+	  title={mathLocked ? "" : "Press the ‘Down key’ to see the Math!"}
 	  disable={disabledDirs}
 	  enableKeyboard={!rotatePromptActive}
 	  highlight={keyboardHint}
@@ -503,7 +509,7 @@
   </div>
 
   <!-- Touch screens: a real button to switch rows (swiping down on iOS = pull-to-refresh) -->
-  {#if isTouchDevice}
+  {#if isTouchDevice && !(y === 0 && mathLocked)}
 	<button
 	  type="button"
 	  class="row-nav"
@@ -664,6 +670,28 @@
 	  z-index: 999;
 	}
 	.hidden-ui { visibility: hidden; }
+
+	/* Suit symbol: same colour as the label text; labels are flex, so keep the space after "of" */
+	:global(.deck .suit) { margin-left: .25em; }
+
+	/* Visually hidden, still read by screen readers */
+	:global(.deck .sr-only) {
+	  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+	  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+	}
+
+	/* Respect "reduce motion": slides, flips, deals, the magnifier and the heartbeat
+	   all become instant (Svelte's transitions are CSS animations, so this covers them). */
+	@media (prefers-reduced-motion: reduce) {
+	  :global(.deck *), :global(.deck *::before), :global(.deck *::after) {
+	    animation-duration: .01ms !important;
+	    animation-delay: 0s !important;
+	    animation-iteration-count: 1 !important;
+	    transition-duration: .01ms !important;
+	    transition-delay: 0s !important;
+	    scroll-behavior: auto !important;
+	  }
+	}
 
 	/* Phone-only swipe hint (the keyboard hint covers wider screens) */
 	.swipe-hint {

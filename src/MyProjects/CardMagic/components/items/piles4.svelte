@@ -7,8 +7,10 @@
     import { crossfade, scale } from "svelte/transition";
     import { cycle3array, reveal, resetKey } from "../../stores/misc.js";
     import { logEvent } from "../../stores/db.js";
+    import { playSound, preloadSound, FLIP_SOUND } from "../../stores/sound.js";
+    preloadSound(FLIP_SOUND);
     import { isTouchDevice } from "../../stores/layout.js";
-    import cardback from '../../svg/Cards_png/back.png'
+    import cardback from '../../svg/Cards_png/back.webp'
     // If you need to force-bundle assets, keep this import:
   
     // Your helper
@@ -24,12 +26,21 @@
     let leftPile = [];
     let midPile = [];
     let lastCard = null;
+    const SR_NAMES = { 1: 'Ace', 11: 'Jack', 12: 'Queen', 13: 'King' };
+    const srName = (c) => (c ? `${SR_NAMES[c.value] ?? c.value} of ${c.suit}` : '');
   
     $: count = midPile.length;
   
     // Initialize from your store (first 27 cards; ensure index 0..26)
-    $: if ($cycle3array?.length && leftPile.length === 0 && midPile.length === 0) {
+    // Reload whenever a NEW final order arrives (a new play), not only when empty:
+    // otherwise a replay could keep dealing the previous play's cards.
+    let seededFrom = null;
+    $: if ($cycle3array?.length && $cycle3array !== seededFrom) {
+      seededFrom = $cycle3array;
       leftPile = $cycle3array.slice(0, 27).map((c, i) => ({ ...c, cycle3pos: i }));
+      midPile = [];
+      lastCard = null;
+      revealFlipped = false;
     }
   
     async function drawOne() {
@@ -98,8 +109,7 @@
       return unsub;
     });
 
-    import facedown from "../../svg/Cards_png/back.png"; // back image
-  let flipEl;  
+    import facedown from "../../svg/Cards_png/back.webp"; // back image
   let dealEl;                   
   let revealFlipped = false;       // controls the flip of the right card
 
@@ -110,14 +120,7 @@
       revealFlipped = true;
       logEvent('finished', null, { once: true });
 
-      if (flipEl) {
-        try {
-          flipEl.pause?.();           // ok to use ?. on a call
-          flipEl.currentTime = 0;     // guarded assignment ✅
-          const p = flipEl.play();
-          p?.catch(() => {});          // avoid unhandled promise error
-        } catch {}
-      }
+      playSound(FLIP_SOUND);
     }, 250);
   }
   $: lastIndex = midPile.length - 1;
@@ -135,7 +138,6 @@
   </script>
 
 
-<audio src="/assets/CardMagic/flipcard.wav" bind:this={flipEl} preload="auto" />
 <audio src="/assets/CardMagic/deal.ogg"      bind:this={dealEl} preload="auto" />
 
   <div class="reveal-text" class:visible={revealFlipped}>
@@ -184,6 +186,8 @@
     <!-- Right: Last card drawn -->
     <section class="reveal">
         <div class="badge">Your Card is :</div>
+        <!-- read out by screen readers once the card flips -->
+        <p class="sr-only" aria-live="polite">{revealFlipped && lastCard ? `Your card is the ${srName(lastCard)}` : ''}</p>
         <div class="bigcard-wrap">
           <div class="reveal-card {revealFlipped ? 'is-flipped' : ''}">
             <!-- back (visible first) -->

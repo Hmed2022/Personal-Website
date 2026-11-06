@@ -1,5 +1,7 @@
 <script>
     import { createEventDispatcher, onMount } from "svelte";
+    import { playSound, preloadSound, FLIP_SOUND } from "../../stores/sound.js";
+    preloadSound(FLIP_SOUND);
   
     // Props
     export let frontSrc = "";
@@ -12,13 +14,9 @@
 
     const dispatch = createEventDispatcher();
     let flipped = false;
-    let audioEl;
 
     function playFlipSound() {
-      if (audioEl) {
-        audioEl.currentTime = 0;
-        audioEl.play();
-      }
+      playSound(FLIP_SOUND);
     }
 
     function setFlipped(value) {
@@ -73,7 +71,6 @@
       <img class="face back"  src={backSrc}  alt={alt} draggable="false" />
     </div>
   </button>
-  <audio src="/assets/CardMagic/flipcard.wav" bind:this={audioEl} />
 
   <style>
     .flip-btn {

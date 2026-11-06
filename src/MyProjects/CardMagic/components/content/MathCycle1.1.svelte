@@ -94,7 +94,7 @@
           <div class="row">
             {#each row as card}
               <div class="rectangle {card.selected ? 'selected' : ''}" use:collect={card}>
-                {DisplayValue(card.value)} of {DisplaySuit(card.suit)}
+                {DisplayValue(card.value)} of <span class="suit" class:red={card.suit === 'Hearts' || card.suit === 'Diamonds'}>{DisplaySuit(card.suit)}</span>
               </div>
             {/each}
           </div>

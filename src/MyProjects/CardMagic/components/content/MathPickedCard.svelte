@@ -4,7 +4,7 @@
 	import KeyboardDown from '../items/KeyboardDown.svelte';
   import KeyboardUp from '../items/KeyboardUp.svelte';
   import Up from '../items/JustUpArrow.svelte'
-  import mathBack from '../../svg/mathBack.svg?raw';
+  import mathBack from '../../svg/mathBack.webp';  // ~60 KB image (was a 600 KB SVG), only loads when shown
 
   const dispatch = createEventDispatcher();
   function jumpToCards() {
@@ -46,7 +46,7 @@
       </div>
     {:else}
       <div class="right">
-        <div class="card-front">{@html mathBack}</div>
+        <img class="card-front" src={mathBack} alt="Card back" />
         <div class="picked-text">
           <p >You still haven't picked a card yet, please go back and select a card!</p>
           <div class="up-wrap"> <p class="picked-text"></p><Up enableKeyboard={false} on:tap={jumpToCards}/></div>

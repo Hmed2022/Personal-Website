@@ -262,7 +262,7 @@
             <span class="band band-ii"  aria-hidden="true">II</span>
             <span class="band band-iii" aria-hidden="true">III</span>
 
-            {DisplayValue(card.value)} of {DisplaySuit(card.suit)}
+            {DisplayValue(card.value)} of <span class="suit" class:red={card.suit === 'Hearts' || card.suit === 'Diamonds'}>{DisplaySuit(card.suit)}</span>
           </div>
         {/each}
       </div>

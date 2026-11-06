@@ -14,6 +14,12 @@ export const assembly3 = writable(false); // is true after drawing in pile3
 
 export const reveal = writable(false); // is true after reveal
 
+// Magic mode: 'mind' (default: think of a card, we find it in 3 questions)
+// or 'pick' (choose a face-down card on screen; offered on the end slide)
+export const mode = writable('mind');
+// mind mode: true once the visitor pressed "I've got it!" (unlocks → on the first slide)
+export const mindReady = writable(false);
+
 // Per magic cycle: true once the visitor has picked the right pile
 // (the Right arrow stays locked on that cycle's slide until then)
 export const drawn = writable({ 1: false, 2: false, 3: false });
@@ -28,5 +34,11 @@ export const slideChange = writable(0); // bumps on every slide change; math sli
 export const resetKey = writable(0);
 export function triggerReset() {
 	drawn.set({ 1: false, 2: false, 3: false });
+	mindReady.set(false);
+	cycle1array.set([]);
+	cycle2array.set([]);
+	cycle3array.set([]);
+	statuscard.set(false);
+	reveal.set(false);
 	resetKey.update((n) => n + 1);
 }

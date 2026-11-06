@@ -14,9 +14,11 @@
     resetKey
   } from '../../stores/misc.js'
   import { get } from 'svelte/store';
-  import { savePick } from '../../stores/db.js';
+  import { savePick, startSession } from '../../stores/db.js';
+  import { newDeck } from '../../stores/deck.js';
+  import { playSound, preloadSound, FLIP_SOUND } from '../../stores/sound.js';
+  preloadSound(FLIP_SOUND);
   
-  let audioEl;
   let takeCardEl;
 
   function playTakeCardSound() {
@@ -26,7 +28,7 @@
     }
   }
 
-  import facedown from '../../svg/Cards_png/back.png'
+  import facedown from '../../svg/Cards_png/back.webp'
 
   const suits = ["Spades", "Diamonds", "Hearts", "Clubs"];
   const values = Array.from({ length: 13 }, (_, i) => i + 1);
@@ -41,14 +43,9 @@
     return deck;
   }
 
-  function getUniqueCards(deck) {
-    return deck.sort(() => Math.random() - 0.5)
-      .slice(0, 27)
-      .map((card, index) => ({
-        ...card, 
-        index, 
-        selected: false,
-      }));
+  // fair shuffle (Fisher–Yates), shared with mind mode
+  function getUniqueCards() {
+    return newDeck();
   }
 
   function hardReset() {
@@ -207,7 +204,8 @@
     $cycle3array = $arrayCards.slice().sort((a, b) => a.cycle3pos - b.cycle3pos);
 
     // Store the pick (fire-and-forget, never blocks the animation)
-    savePick($arrayCards.find(c => c.selected), changedMind);
+    startSession();
+    savePick($arrayCards.find(c => c.selected), changedMind, 'pick');
 
     // Log updated array for debugging
     console.log("New card array", $arrayCards);
@@ -218,11 +216,7 @@
     flipped = true;
     $currentCard = true;
 
-    if (audioEl) {
-      setTimeout(() => {
-        audioEl.play();
-      }, 300);
-    }
+    setTimeout(() => playSound(FLIP_SOUND), 300);
 
     setTimeout(() => {
       showPickedText = true;
@@ -269,7 +263,6 @@
 
 </script>
 
-<audio src="/assets/CardMagic/flipcard.wav" bind:this={audioEl} />
 <audio src="/assets/CardMagic/takingcard.mp3" bind:this={takeCardEl} preload="auto" />
 
 <div class="card-container">
