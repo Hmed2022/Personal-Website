@@ -49,7 +49,7 @@ export const imageData = [
     description:
       "An infographic journey through the history and design evolution of Tunisian currency and banknotes.",
     href: "/#/tuninfo",
-    show: true,
+    show: false,
     lang: "EN",
     tags: "all,dataviz,info,tunisia",
   },
