@@ -34,9 +34,10 @@ const CYCLE_FIELDS = ['cycle1pile', 'cycle1pos', 'cycle2pile', 'cycle2pos', 'cyc
  * Record the visitor's answer for one deal and compute the next order.
  * @param {1|2|3} cycle
  * @param {1|2|3} pile - the pile they said their card is in
+ * @param {{ mode?: 'mind'|'pick', changedMind?: number|null }} [opts] - what to save (phone pick mode uses 'pick')
  * @returns the visitor's card after cycle 3 (null before that)
  */
-export function answerPile(cycle, pile) {
+export function answerPile(cycle, pile, { mode = 'mind', changedMind = null } = {}) {
 	if (cycle === 1) {
 		const arr = get(arrayCards).map((c) => ({ ...c }));
 		assignCycle(arr, 'index', 'cycle1pile', 'cycle1pos', pile);
@@ -71,6 +72,6 @@ export function answerPile(cycle, pile) {
 	arrayCards.set(merge(get(arrayCards)));
 	lockedCard.set({ ...card, selected: true });
 	statuscard.set(true);
-	savePick({ ...card, ...Object.fromEntries(CYCLE_FIELDS.map((k) => [k, card[k]])) }, null, 'mind');
+	savePick({ ...card, ...Object.fromEntries(CYCLE_FIELDS.map((k) => [k, card[k]])) }, changedMind, mode);
 	return card;
 }

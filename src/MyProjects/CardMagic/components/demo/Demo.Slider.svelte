@@ -3,10 +3,16 @@
 	import { fade } from "svelte/transition";
 	import { currentCard, statuscard, positionsHint, buttonClicked, drawn, annotations, positions, slideChange, mode, mindReady, reveal } from "../../stores/misc.js";
 	import { logEvent } from "../../stores/db.js";
+	import { newDeck } from "../../stores/deck.js";
+	import { arrayCards } from "../../stores/misc.js";
+	// Create the deck before any slide renders (the first slide now starts with the
+	// optional "about you" step, so the pick component isn't there to make it yet).
+	if (!$arrayCards?.length) $arrayCards = newDeck();
 	import { stageScale, isTouchDevice } from "../../stores/layout.js";
 	import Slider from "../helpers/Slider.svelte";
 	import Slide  from "../helpers/Slider.Slide.svelte";
 	import rotateIcon from "../../svg/rotate.svg?raw";
+	import PhoneMagic from "../phone/PhoneMagic.svelte";
 
 	import Keyboard  from "../items/KeyboardDown.svelte";
 	import Keyboard2 from "../items/KeyboardUp.svelte";
@@ -417,17 +423,10 @@
 
   <svelte:window bind:innerWidth bind:innerHeight on:orientationchange={handleOrientationChange} on:resize={handleOrientationChange} on:pointerdown={dismissButtonHint} />
 
-  <div class="rotate-prompt">
-	<div class="rotate-icon">{@html rotateIcon}</div>
-	<p>Please <span class="highlight">rotate</span> your phone to see the trick</p>
-	{#if showLockTip}
-	  <p class="rotate-lock" in:fade={{ duration: 400 }}>
-		Screen not turning? <b>Unlock rotation</b> first:<br />
-		iPhone: swipe down from the top-right corner and tap the lock icon.<br />
-		Android: open Quick Settings and turn on Auto-rotate.
-	  </p>
-	{/if}
-	<p class="rotate-tip">For the best experience, use a bigger screen like a tablet or a computer.</p>
+  <!-- Phones in portrait get their own version of the trick (phone/PhoneMagic);
+       everything else (desktop, laptop, landscape) keeps the slide deck below. -->
+  <div class="phone-portrait">
+	{#if rotatePromptActive}<PhoneMagic />{/if}
   </div>
 
   <div class="deck" style="background-color: {deckBg};">
@@ -648,8 +647,15 @@
 	/* Small screens (phones/small tablets) in portrait: show the rotate
 	   prompt instead of the deck. Handled in pure CSS so the correct state
 	   is painted immediately -- no dependency on JS/hydration timing. */
+	.phone-portrait { display: none; }
+
 	@media (max-width: 899px) and (orientation: portrait) {
-	  .rotate-prompt { display: flex; }
+	  .phone-portrait {
+		display: block;
+		position: fixed;
+		inset: 0;
+		background: #BFAFF7;
+	  }
 	  .deck { display: none; }
 	}
 

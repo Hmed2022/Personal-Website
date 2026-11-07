@@ -1,7 +1,8 @@
 <script>
   import Cards from "../items/cards.svelte";
   import MindPick from "../items/MindPick.svelte";
-  import { mode } from '../../stores/misc.js';
+  import { mode, about } from '../../stores/misc.js';
+  import AboutYou from "../items/AboutYou.svelte";
   import {lockedCard} from '../../stores/misc.js'
   import KeyboardDown from "../items/KeyboardDown.svelte";
 
@@ -11,6 +12,10 @@
 <section class='body'>
 
   <div class="center">
+  {#if !$about.done}
+    <!-- optional "before I read your mind" question, once per visit -->
+    <div class="about-fit"><AboutYou /></div>
+  {:else}
     <div class="text">
       {#if $mode === 'mind'}
         <h1>Think of a card</h1>
@@ -28,6 +33,7 @@
         <Cards/>
       {/if}
     </div>
+  {/if}
   </div>
 
 </section>
@@ -35,6 +41,10 @@
 <svelte:body use:style={"background-color: #BFAFF7;"} />
 
 <style>
+
+    /* the welcome sizes itself by the screen height so it never needs scrolling
+       (~40em tall, so 2.2% of the height per em fits with room to spare) */
+    .about-fit { font-size: clamp(12px, 2.2cqh, 22px); }
 
     .text {
         margin-bottom: 1em;

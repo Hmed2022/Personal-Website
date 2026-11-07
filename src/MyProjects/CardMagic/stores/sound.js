@@ -6,9 +6,31 @@ let ctx = null;
 function context() {
 	if (!ctx && typeof window !== 'undefined') {
 		const AC = window.AudioContext || window.webkitAudioContext;
-		if (AC) ctx = new AC();
+		if (AC) {
+			ctx = new AC();
+			armUnlock();
+		}
 	}
 	return ctx;
+}
+
+// iOS keeps Web Audio muted until it is resumed *inside* a user gesture. Sounds here
+// often start from timers (dealing, counting), so resume on the first taps/clicks
+// and play a silent buffer, which is what actually unlocks iOS Safari.
+function armUnlock() {
+	const events = ['touchend', 'pointerdown', 'keydown', 'click'];
+	const unlock = () => {
+		if (!ctx) return;
+		ctx.resume().catch(() => {});
+		try {
+			const src = ctx.createBufferSource();
+			src.buffer = ctx.createBuffer(1, 1, 22050);
+			src.connect(ctx.destination);
+			src.start(0);
+		} catch {}
+		if (ctx.state === 'running') events.forEach((e) => window.removeEventListener(e, unlock, true));
+	};
+	events.forEach((e) => window.addEventListener(e, unlock, true));
 }
 
 function load(url) {

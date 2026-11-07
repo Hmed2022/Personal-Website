@@ -24,7 +24,7 @@
   <audio src="/assets/CardMagic/takingcard.mp3" bind:this={takeCardEl} preload="auto" />
 
   <div class="card-container">
-    {#each $arrayCards as card, i}
+    {#each $arrayCards || [] as card, i}
       <div
         class="card"
         style="--index:{i}; z-index:{26 - i};"

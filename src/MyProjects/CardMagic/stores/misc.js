@@ -20,6 +20,10 @@ export const mode = writable('mind');
 // mind mode: true once the visitor pressed "I've got it!" (unlocks → on the first slide)
 export const mindReady = writable(false);
 
+// Optional "about you" answers, asked once per visit before the first page
+// (kept across "play again"); saved with every card_picks row for correlations.
+export const about = writable({ ageRange: null, gender: null, done: false });
+
 // Per magic cycle: true once the visitor has picked the right pile
 // (the Right arrow stays locked on that cycle's slide until then)
 export const drawn = writable({ 1: false, 2: false, 3: false });

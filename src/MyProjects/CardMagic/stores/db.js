@@ -1,3 +1,6 @@
+import { get } from 'svelte/store';
+import { about } from './misc.js';
+
 const url = import.meta.env.VITE_SUPABASE_URL;
 const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
@@ -77,7 +80,14 @@ export async function savePick(card, changedMind, mode) {
 
 	if (!sessionId) startSession();
 
-	const { error } = await supabase.from('card_picks').insert({
+	// optional "about you" answers (only sent when given)
+	const { ageRange, gender } = get(about);
+	const aboutFields = {
+		...(ageRange ? { age_range: ageRange } : {}),
+		...(gender ? { gender } : {})
+	};
+
+	const row = {
 		session_id: sessionId,
 		mode,
 		card_index: card.index,
@@ -92,7 +102,13 @@ export async function savePick(card, changedMind, mode) {
 		cycle1_pile: card.cycle1pile, cycle1_pos: card.cycle1pos,
 		cycle2_pile: card.cycle2pile, cycle2_pos: card.cycle2pos,
 		cycle3_pile: card.cycle3pile, cycle3_pos: card.cycle3pos
-	});
+	};
+
+	let { error } = await supabase.from('card_picks').insert({ ...row, ...aboutFields });
+	// If the age_range / gender columns don't exist yet, still save the pick without them
+	if (error && Object.keys(aboutFields).length && /age_range|gender|column/i.test(error.message || '')) {
+		({ error } = await supabase.from('card_picks').insert(row));
+	}
 
 	if (error) console.error('savePick failed', error);
 }

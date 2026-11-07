@@ -131,10 +131,23 @@
     drawn.update((d) => ({ ...d, 3: true })); // unlock → for this cycle
   }
 
+  // Gather: the three piles slide together into one deck (the order isn't shown,
+  // so the "your pile goes in the middle" secret stays hidden), then move on.
+  let gathering = false;
+  let gatherTimer;
+  function gatherThen(next) {
+    if (gathering) return;
+    gathering = true;
+    gatherTimer = setTimeout(() => {
+      next();
+      setTimeout(() => (gathering = false), 700);   // reset after the slide has moved away
+    }, 1500);
+  }
+
   function onPick(pileNumber, e) {
     // already solved — this click means "go reveal the card"
     if (success && pileNumber === successPile) {
-      dispatch('goto', { y: 0, x: 4 });
+      gatherThen(() => dispatch('goto', { y: 0, x: 4 }));   // short gather, then the next step
       return;
     }
 
@@ -177,6 +190,8 @@
     const unsub = resetKey.subscribe((v) => {
       if (v !== lastSeenReset) {
         lastSeenReset = v;
+        gathering = false;
+        clearTimeout(gatherTimer);
         peekOpen = false;
         wrongPick = false;
         animationStarted = false;
@@ -232,7 +247,10 @@
     {/if}
   </div>
 
-  <div class="piles-container">
+  {#if gathering}
+    <p class="gather-msg"><b>Gathering…</b></p>
+  {/if}
+  <div class="piles-container" class:gathering>
     {#each [1, 2, 3] as pileI}
       <div class={`pile-${pileI}`}>
         {#each piles[pileI] as card, i (card.value + '_' + card.suit)}
@@ -439,7 +457,7 @@
     display: inline-flex; align-items: center; gap: .6em;
   }
   .dots { display: inline-flex; gap: .3em; }
-  .dots span { width: .55em; height: .55em; border-radius: 50%; background: #E5DEFF; border: 2px solid #5B4E88; }
+  .dots span { width: .7em; height: .7em; border-radius: 50%; background: rgba(91, 78, 136, .3); }   /* no outline */
   .dots span.on { background: #5B4E88; }
   .q-text { margin: .15em 0 0; font-size: 2.3em; font-weight: 800; }
   /* out of the layout (the wrapper is vertically centred), so the piles don't
@@ -451,4 +469,17 @@
     font-size: 1.05rem; font-weight: 700; color: #5B4E88;
     text-decoration: underline; cursor: pointer;
   }
+
+  /* gather: piles 1 and 3 slide onto pile 2 into a single deck, buttons fade out */
+  .piles-container.gathering .pile-1,
+  .piles-container.gathering .pile-3 { transition: transform .55s cubic-bezier(.5, 0, .2, 1); }
+  .piles-container.gathering .pile-1 { transform: translateX(100%); }
+  .piles-container.gathering .pile-3 { transform: translateX(-100%); }
+  .piles-container.gathering .buttons { opacity: 0; transition: opacity .2s; pointer-events: none; }
+  .gather-msg {
+    position: absolute; left: 0; right: 0; top: calc(100% + 1.4rem); margin: 0;
+    text-align: center; font-family: 'Kumbh Sans', sans-serif; font-size: 1.4rem; color: #3F3075;
+    animation: gatherIn .3s ease-out;
+  }
+  @keyframes gatherIn { from { opacity: 0; transform: translateY(.4rem); } to { opacity: 1; transform: none; } }
 </style>

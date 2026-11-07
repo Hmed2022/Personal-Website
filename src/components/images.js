@@ -56,7 +56,7 @@ export const imageData = [
   {
     url: CardMagicUrl,
     rank: 3,
-    title: "The Math Behind the Magic",
+    title: "The Math Behind the Magic: The Three Pile Trick",
     desc: "Explainer | Interactive",
     description:
       'An interactive piece I made during my fellowship with <a href="https://pudding.cool" target="_blank" rel="noopener noreferrer">The Pudding</a>, explaining the math behind a classic card trick.',
