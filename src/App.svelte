@@ -3,6 +3,7 @@
 	import { wrap } from 'svelte-spa-router/wrap';
 	import Header from './components/Header.svelte';
 	import RouteLoading from './components/RouteLoading.svelte';
+	import TunLoading from './MyProjects/TunInfo/Components/TunLoading.svelte';   // flag-emblem loader for the banknotes piece
 	import Home from './pages/Home_old.svelte';   // the landing page stays in the main bundle
 
 	// Every other page is its own chunk, downloaded only when visited
@@ -14,7 +15,7 @@
     '/projects': lazy(() => import('./pages/Projects.svelte')),
     '/allstarintro': lazy(() => import('./MyProjects/All-Star/AllStarIntro.svelte')),
     '/allstar': lazy(() => import('./MyProjects/All-Star/NBA.svelte')),
-    '/tuninfo': lazy(() => import('./MyProjects/TunInfo/TunInfo.svelte')),
+    '/tuninfo': wrap({ asyncComponent: () => import('./MyProjects/TunInfo/TunInfo.svelte'), loadingComponent: TunLoading }),
     '/tuninfointro': lazy(() => import('./MyProjects/TunInfo/TunInfoIntro.svelte')),
     '/klay': lazy(() => import('./MyProjects/Klay/klay.svelte')),
     // '/Anniv': lazy(() => import('./MyProjects/Anniversary/Aniv.svelte')),

@@ -1,0 +1,103 @@
+// Arabic names for the landmarks, cities and categories (English names in landmarksMap.js / images.js).
+export const LANDMARK_AR = {
+	'Temple of Jupiter in the ruins of Dougga': 'معبد جوبيتر في آثار دقة',
+	'Romanesque ruins of the Capitol': 'أطلال الكابيتول الرومانية',
+	'Ksar of Ouled Soltane': 'قصر أولاد سلطان',
+	'El Aroussia dam': 'سد العروسية',
+	'Ben Mitir dam': 'سد بني مطير',
+	'Bridge located on the Mellègue river': 'جسر على وادي ملاق',
+	'Oil refinery': 'مصفاة النفط',
+	'Bridge at Radès/La Goulette': 'جسر رادس – حلق الوادي',
+	'Oasis': 'الواحة',
+	'Ashtart’s offshore oil platforms': 'منصّات عشترت النفطية البحرية',
+	'Ariel View of the city': 'منظر جوي للمدينة',
+	'Phosphoric acid plant': 'مصنع الحامض الفسفوري',
+	'Central bank': 'البنك المركزي',
+	'Roman ruins of the Temple of Water Roman aqueducts': 'أطلال معبد المياه والحنايا الرومانية',
+	'Roman aqueducts': 'الحنايا الرومانية',
+	'Bourguiba Mosque': 'جامع بورقيبة',
+	'Ancient mosaic from the Monastir Museum': 'فسيفساء قديمة من متحف المنستير',
+	'Fort in Monastir': 'رباط المنستير',
+	'Port of Monastir': 'ميناء المنستير',
+	'Roman amphitheater': 'المسرح الروماني',
+	'Roman amphitheater - 20 Tnd (1980)': 'المسرح الروماني',
+	'Roman amphitheater (Side View)': 'المسرح الروماني (منظر جانبي)',
+	'Roman amphitheater (Aerial View)': 'المسرح الروماني (منظر جوي)',
+	'Medina of Sousse': 'مدينة سوسة العتيقة',
+	'El Kantaoui Resort hotel': 'نزل منتجع القنطاوي',
+	'Terminal at Zine el Abidine Ben Ali airport': 'مبنى مطار النفيضة (زين العابدين بن علي سابقًا)',
+	'Great Mosque of Kairouan': 'جامع القيروان الكبير',
+	'Arches of the interior of the great mosque of Kairouan': 'أقواس داخل جامع القيروان الكبير',
+	'Nebhana Dam': 'سد نبهانة',
+	'Triumphal arch of Diocletian': 'قوس النصر لديوقلديانوس',
+	'Harbor of Goulette': 'ميناء حلق الوادي',
+	'Entrance to the Chamber of Deputies': 'مدخل مجلس النواب',
+	'National Stadium': 'الملعب الوطني',
+	'Roman theater': 'المسرح الروماني',
+	'Sidi Bou Saïd Marina': 'مرسى سيدي بوسعيد',
+	'Punic port': 'الميناء البوني',
+	'El Abidine mosque': 'جامع العابدين',
+	'Ancient city of Carthage': 'مدينة قرطاج الأثرية',
+	'Carthagian Ships': 'السفن القرطاجية',
+	'Sadiki College': 'المدرسة الصادقية',
+	'Panaroamic view of Tunis': 'منظر بانورامي لتونس',
+	'Minaret of the Medina': 'صومعة المدينة العتيقة',
+	'Ezzitouna Mosque': 'جامع الزيتونة',
+	'Sidi Mehrez mosque': 'جامع سيدي محرز',
+	'Medersa El Bachia': 'المدرسة الباشية',
+	'The bay of Tunis - 1/2 Tnd (1973)': 'خليج تونس',
+	'Tunis Science City': 'مدينة العلوم بتونس',
+	'City of Culture building': 'مدينة الثقافة',
+	'Tunis Currency Museum': 'متحف العملة بتونس',
+	'Government Square': 'ساحة الحكومة',
+	'Central Bank Headquarters': 'مقر البنك المركزي',
+	'House of Ibn Khaldoun': 'منزل ابن خلدون',
+	'Harbor of La Goulette': 'ميناء حلق الوادي',
+};
+
+export const CITY_AR = {
+	Teboursouk: 'تبرسق', Tataouine: 'تطاوين', 'El Fahs': 'الفحص', Fernena: 'فرنانة', Jendouba: 'جندوبة', Bizerte: 'بنزرت',
+	Rades: 'رادس', Gabes: 'قابس', Korbous: 'قربص', Sfax: 'صفاقس', Zaghouan: 'زغوان', Monastir: 'المنستير', 'El Djem': 'الجم',
+	'Sousse Medina': 'سوسة العتيقة', Enfidha: 'النفيضة', Kairouan: 'القيروان', Sebikha: 'السبيخة', 'Sbeïtla': 'سبيطلة',
+	'La Goulette': 'حلق الوادي', Bardo: 'باردو', Menzeh: 'المنزه', Carthage: 'قرطاج', Medina: 'المدينة العتيقة', Tunis: 'تونس',
+};
+
+export const CATEGORIES_AR = {
+	infra: 'البنية التحتية الحديثة',
+	roman: 'مواقع رومانية وبونية',
+	islam: 'مواقع إسلامية ودينية',
+	urban: 'مواقع معمارية وعمرانية',
+	cult: 'مؤسسات ثقافية وتعليمية',
+	indus: 'مواقع صناعية وطاقية',
+	gov: 'مبانٍ حكومية وتاريخية',
+	nat: 'مناظر وظواهر طبيعية',
+};
+
+export const PROPOSED_AR = {
+	Ariana: ['منتزه النحلي', 'الجسر الأندلسي'], Gafsa: ['الأحواض الرومانية'], Kebili: ['شط الجريد'],
+	'El Kef': ['قصبة الكاف'], Medenine: ['قصر الحلوف', 'كنيس الغريبة'],
+	'Sidi Bouzid': ['ساحة الشهيد محمد البوعزيزي'], Siliana: ['آثار مكثر'], Tozeur: ['واحة تمغزة الجبلية'],
+};
+
+export const WHY_AR = {
+	Tunis: 'العاصمة ومركز السلطة. ففيها المدينة العتيقة (المدرجة على قائمة التراث العالمي لليونسكو)، وقرطاج الأثرية، ومجلس النواب بباردو، والمدرسة الصادقية، والبنك المركزي؛ ولذلك تظهر تونس أكثر من كل الولايات الأخرى مجتمعة.',
+	Kairouan: 'موطن جامع القيروان الكبير الذي أُسّس سنة 670، وهو من أقدم المساجد في شمال إفريقيا. والمدينة مدرجة على قائمة التراث العالمي لليونسكو، وكثيرًا ما تُوصف برابعة المدن المقدسة في الإسلام. أما سد نبهانة فيرمز إلى مشاريع المياه في الدولة الفتية.',
+	Mahdia: 'مسرح الجم الروماني، من أكبر المسارح التي شُيّدت على الإطلاق، وهو مدرج على قائمة التراث العالمي لليونسكو. وقد عاد إلى الأوراق النقدية مرارًا، من 1972 إلى 2017.',
+	Sousse: 'أبرزت مدينتها العتيقة المسوّرة (المدرجة على قائمة التراث العالمي لليونسكو) ومنتجع القنطاوي السياحةَ التونسية، وكان مبنى مطار النفيضة من المشاريع الكبرى في العقد الأول من الألفية.',
+	Monastir: 'مسقط رأس الحبيب بورقيبة. وقد طُبع جامعه والرباط والميناء على الأوراق النقدية خلال رئاسته.',
+	Bizerte: 'مصفاة النفط ببنزرت، رمز التصنيع بعد الاستقلال.',
+	Gabes: 'تشتهر بواحتها البحرية، وبمنصّات عشترت النفطية في خليج قابس.',
+	Sfax: 'ثاني مدن تونس ومركز صناعي، ظهرت عبر مصنع الحامض الفسفوري ومبنى للبنك المركزي.',
+	Jendouba: 'سدود الجمهورية الفتية وجسورها: سد بني مطير وجسر على وادي ملاق.',
+	Beja: 'دقة، من أفضل المدن الرومانية حفظًا في شمال إفريقيا، والمدرجة على قائمة التراث العالمي لليونسكو.',
+	Zaghouan: 'معبد المياه والحنايا الرومانية التي كانت تنقل الماء من زغوان إلى قرطاج.',
+	Kasserine: 'قوس النصر في سبيطلة، المدينة الرومانية القديمة سوفيتولا.',
+	Tataouine: 'قصر أولاد سلطان، من مخازن الحبوب المحصّنة في الجنوب.',
+	Manouba: 'سد العروسية، جزء من الشبكة المائية للبلاد.',
+	'Ben Arous': 'جسر رادس – حلق الوادي، الذي افتُتح سنة 2009.',
+	Nabeul: 'منظر جوي لقربص، مدينة الينابيع الحارة في الوطن القبلي.',
+};
+export const NEVER_AR = 'إحدى الولايات الثماني التي لم تظهر قط على ورقة نقدية تونسية منذ الاستقلال.';
+
+export const lmAr = (name) => LANDMARK_AR[(name || '').trim()] || name;
+export const cityAr = (c) => CITY_AR[(c || '').trim()] || c;

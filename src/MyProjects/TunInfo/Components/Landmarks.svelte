@@ -37,6 +37,12 @@
 	let threshold = 0.5;
 	let bottom = 0.7;
 
+	import LandmarksMap from '../Data Viz/Landmarks/LandmarksMap.svelte';
+	import { t, isAr } from '../i18n.js';
+	import { PROPOSED_AR, CATEGORIES_AR } from '../Data Viz/Landmarks/landmarksAr.js';
+	import { TAG_ICON, TAG_COLOR } from '../Data Viz/Landmarks/landmarkMeta.js';
+	const GOV_AR = { Ariana: 'أريانة', Gafsa: 'قفصة', Kebili: 'قبلي', Kef: 'الكاف', Medenine: 'مدنين', 'Sidi Bouzid': 'سيدي بوزيد', Siliana: 'سليانة', Tozeur: 'توزر' };
+	const CAT_KEYS = ['infra', 'roman', 'islam', 'urban', 'cult', 'indus', 'gov', 'nat'];
 	import Map1 from '../Assets/Maps/map1.png'
 	import Map2 from '../Assets/Maps/map2.png'
 	import Map3 from '../Assets/Maps/map3.png'
@@ -58,6 +64,9 @@
 		bind:progress
 	>
 	<div slot="background">
+		<!-- interactive map (the five static maps below are kept for reference) -->
+		<LandmarksMap step={index ?? 0} />
+		<!--
     {#if index == 0}
         <img src={Map1} alt="map" >
     {:else if index == 1}
@@ -69,58 +78,44 @@
     {:else if index == 4}
         <img src={Map5} alt="map" >
     {/if}
-</div>
+		-->
+	</div>
 
 
-		<div slot="foreground" style="padding: 0 0 0 50%;">
+		<div slot="foreground" class="fg"><!-- was style="padding: 0 0 0 50%;" (moved to CSS so phones can override it) -->
 			<section>
-				<h1>
-					Tunisian Landmarks
-				</h1>
-				<h4>
-					Diverse Landmarks
-				</h4>
-				<p>
-				Tunisian banknotes celebrate the country's heritage, featuring landmarks from 16 out of 24 governorates. This representation highlights two-thirds of Tunisia's regions, showcasing a tapestry of cultural and historical landmarks across the nation.
-				</p>
+				<!-- <h1>{$t('lmTitle')}</h1> removed: the section heading above already names it -->
+				<h4>{$t('lmDiverse')}</h4>
+				<p>{$t('lmP1')}</p>
 			</section>
 			<section>
-				<h3>
-					Representation Imbalance
-				</h3>
-				<p>
-					While Tunisian banknotes exhibit a degree of inclusivity, there's a notable imbalance. Tunis, the capital, dominates with 26 representations, far outpacing other regions, the next of which appears only four times. This reflects a disparity in the portrayal of Tunisia's diverse governorates.
-				</p>
+				<h3>{$t('lmH2')}</h3>
+				<p>{$t('lmP2')}</p>
 			</section>
 			<section>
-				<h3>
-					Coastal vs. Inland Governorate Representation
-				</h3>
-				<p>
-					Tunisian banknotes predominantly feature coastal governorates, showcasing all but two (Ariana and Medenine). This contrast starkly with the representation of inland regions, where only three out of nine landlocked governorates are depicted. This trend not only highlights a visual neglect of inland areas but also mirrors their often overlooked economic struggles. In contrast, the more prosperous eastern coastal regions receive greater representation, reflecting their economic prominence in Tunisia's landscape.
-				</p>
+				<h3>{$t('lmH3')}</h3>
+				<p>{$t('lmP3')}</p>
 			</section>
 			<section>
-				 <p>
-            Eight governorates remain unhighlighted on the currency since independence and the current administrative division. It's time to explore and propose monuments and landmarks that could best symbolize the essence of these underrepresented regions:
-                  </p>
+				 <p>{$t('lmP4')}</p>
           
-              <ul style="text-align: left;">
+              <ul style="text-align: start;">
                 {#each monuments as monument}
-                  <strong>{monument.region}:</strong> {monument.landmarks.join(', ')} <br>
+                  {@const govKey = monument.region === 'Kef' ? 'El Kef' : monument.region}
+                  <strong>{$isAr ? GOV_AR[monument.region] : monument.region}:</strong> {$isAr ? (PROPOSED_AR[govKey] || []).join('، ') : monument.landmarks.join(', ')} <br>
                 {/each}
               </ul>
 			</section>
 
 			<section>
 				<div>
-					<p>
-						We can categories these lanamarks into 8 categories as such:
-					 </p>
-				{#each categories as category}
+					<p>{$t('lmP5')}</p>
+				{#each categories as category, ci}
+					{@const title = $isAr ? `${CATEGORIES_AR[CAT_KEYS[ci]]} (${category.title.match(/\((\d+)\)/)[1]})` : category.title}
 					<div class="category">
-					<img src={category.imageUrl} alt={category.title} />
-					<span class="category-title">{category.title}</span>
+					<!-- <img src={category.imageUrl} alt={title} /> previous icon images (ibb) -->
+					<span class="cat-ico" style="background:{TAG_COLOR[CAT_KEYS[ci]]}"><img src={TAG_ICON[CAT_KEYS[ci]]} alt="" /></span>
+					<span class="category-title">{title}</span>
 					</div>
   				{/each}
 </div>
@@ -130,15 +125,16 @@
 
 </div>
 
-<svelte:body use:style={"background-color: #FDF6F5;"} />
+<!-- page background is set once in TunInfo.svelte -->
+<!-- <svelte:body use:style={"background-color: #FDF6F5;"} /> -->
 <style>
 	.demo {
-		padding: 0 100px 0 0;
+		padding: 0 100px 3rem 0;   /* bottom room so the sticky map doesn't run into the next heading */
 	}
 	
 	[slot="background"] {
 		font-size: 1.4em;
-		overflow: hidden;
+		overflow: visible;   /* was hidden: lets the map's faded sea / land reach past the map box */
 		padding: 0.5em;
 	}
 
@@ -151,6 +147,25 @@
 	
 		pointer-events: none;
 	}
+	.fg { padding: 0 0 0 50%; }
+
+	/* phones: map on top, centred; the text scrolls over it as cards */
+	@media (max-width: 760px) {
+		.demo { padding: 0 0 3rem; }
+		.fg { padding: 0 1rem; }
+		[slot="background"] { text-align: center; padding: .5em 0; }
+		[slot="foreground"] section {
+			height: auto; margin: 0 0 75vh 0; padding: 1.2em;
+			background: rgba(250, 243, 232, .95); border-radius: 12px;
+			box-shadow: 0 4px 18px rgba(77, 100, 115, .18);
+		}
+		[slot="foreground"] section:first-child { margin-top: 55vh; }
+	}
+
+	/* let the mouse reach the interactive map under the text layer */
+	.demo :global(svelte-scroller-foreground) {
+		pointer-events: none;
+	}
 	
 	[slot="foreground"] section {
 
@@ -159,7 +174,7 @@
 	
 	section {
 		height: 400px;
-		background-color: #FDF6F5;
+		background-color: transparent;   /* was #FDF6F5; the page background shows through */
 		color: #557C81;
 		padding: 2em;
 		margin: 0 0 8em 0;
@@ -176,9 +191,11 @@
     margin-bottom: 10px;
   }
 
+  .cat-ico { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 7px; margin-inline-end: 10px; flex: 0 0 auto; }
+  .cat-ico img { width: 20px !important; height: 20px; margin: 0 !important; }
   .category img {
     width: 30px; /* Adjust the size of the image as needed */
-    margin-right: 10px;
+    margin-inline-end: 10px;
   }
 
   .category-title {

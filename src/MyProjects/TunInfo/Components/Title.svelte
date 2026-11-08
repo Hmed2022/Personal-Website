@@ -1,8 +1,14 @@
 <script>
   import Fade from './fade.svelte';
+
+  // The portraits are laid out on a fixed 1000x900 canvas (the original % positions).
+  // The whole composition is scaled to the available width so it fits every screen.
+  const COMP_W = 1180, COMP_H = 680, COMP_CX = 673;
+  let stageW = COMP_W;
+  $: s = Math.min(1, stageW / COMP_W);
  </script>
 
- <div class="body">
+ <div class="body" bind:clientWidth={stageW}>
   <div class="title">
     <h1>
       The Chronicales <br> of Tunisian Baknotes
@@ -13,7 +19,8 @@
 <!-- 
     <p class="Reference">By Ahmed Bendaly | Decemeber 2023</p> -->
   </div>
-  <div class="portrait">
+  <div class="stage" style="height:{COMP_H * s}px">
+  <div class="portrait" style="transform: scale({s}) translateX(-{COMP_CX}px)">
     <!-- Hannibaal New -->
     <div class="fade-wrapper fade-wrapper-11">
       <Fade img1="https://i.ibb.co/jkBBjDG/svg1.png" img2="https://i.ibb.co/8YVDTM6/real1.png" height=250/>
@@ -89,6 +96,7 @@
   
  </div>
  </div>
+ </div>
  
  <style>
 
@@ -120,30 +128,73 @@
     margin-top: -1%;
   }
 
-  .title {
+  /* original layout, kept for reference
+.title {
     position: absolute;
     top: 35%;
     left: 0;
     width: 100%;
     text-align: center;
-    z-index: 1; /* Lower z-index to place it behind portraits */
+    z-index: 1; /* Lower z-index to place it behind portraits *-/
     color: #205363;
     font-family: 'Noto Sans', sans-serif;
-    opacity: 0.8; /* Optional: Adjust for desired visibility */
+    opacity: 0.8; /* Optional: Adjust for desired visibility *-/
   }
 
 /* .body {
 margin-left:20%;
-} */
+} *-/
 
 .portrait {
   position: relative;
-  width: 100vw;  /* 100% of viewport width */
-  height: 100vh; /* 100% of viewport height */
-  max-width: 1000px;  /* maximum width */
+  width: 100vw;  /* 100% of viewport width *-/
+  height: 100vh; /* 100% of viewport height *-/
+  max-width: 1000px;  /* maximum width *-/
   max-height: 1000px; 
   display: block;
   text-align: center;
+}
+
+*/
+
+.body {
+  position: relative;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.title {
+  position: absolute;
+  top: 34%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 1; /* behind the portraits, like the original */
+  color: #205363;
+  opacity: 0.8;
+  pointer-events: none;
+}
+h1 { font-size: clamp(1.4rem, 3.2vw, 2.2rem); }
+h4 { font-size: clamp(.85rem, 1.4vw, 1.05rem); }
+
+.stage { position: relative; width: 100%; }
+
+/* fixed design canvas, scaled from its top-left corner by the inline transform */
+.portrait {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1000px;
+  height: 900px;
+  transform-origin: 0 0;
+}
+
+/* phones: title sits above the portraits instead of behind them */
+@media (max-width: 640px) {
+  .body { padding-top: .5rem; }
+  .title { position: relative; top: 0; opacity: 1; margin-bottom: .5rem; }
 }
 
 .fade-wrapper {

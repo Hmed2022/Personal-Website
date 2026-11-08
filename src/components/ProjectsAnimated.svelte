@@ -267,8 +267,10 @@
             margin-top: 5%;
         }
 
+        /* one card per row: let each picture keep its own shape (a fixed height
+           left a white gap under wide GIFs like the card trick) */
         .card__image-container {
-            height: 300px;
+            height: auto;
         }
 
         .card__content {
@@ -309,7 +311,7 @@
         }
 
         .card__image-container {
-            height: 250px;
+            height: auto;
         }
 
         .card__category {
