@@ -4,7 +4,8 @@
 	import Header from './components/Header.svelte';
 	import RouteLoading from './components/RouteLoading.svelte';
 	import TunLoading from './MyProjects/TunInfo/Components/TunLoading.svelte';   // flag-emblem loader for the banknotes piece
-	import Home from './pages/Home_old.svelte';   // the landing page stays in the main bundle
+	// import Home from './pages/Home_old.svelte';   // previous landing page (kept)
+	import Home from './pages/HomeNew.svelte';      // the landing page stays in the main bundle
 
 	// Every other page is its own chunk, downloaded only when visited
 	// (e.g. #/cardmagic no longer downloads the Names / TunInfo / All-Star code and data).
@@ -32,6 +33,8 @@
 
 
  $: hideHeader =
+    normalizedPath === '' ||        // home: the new hero introduces Ahmed instead of the big name header
+    normalizedPath === '/' ||
     normalizedPath === '/anniv' ||
     normalizedPath === '/names' ||
     normalizedPath === '/allstar' ||

@@ -9,32 +9,31 @@
         show=true
     })
 
-    let buttontag="all";
-    function SetButton(buttonName) {
-        buttontag="";
+    // Filters by topic and format first, then tools. A filter only appears when at least one
+    // visible project has its tag. (Removed: Machine Learning, Data Science, SQL: no visible project.)
+    const FILTERS = [
+        { tag: 'all', label: 'All' },
+        { tag: 'interactive', label: 'Interactive' },
+        { tag: 'dataviz', label: 'Data Visualization' },
+        { tag: 'story', label: 'Story' },
+        { tag: 'info', label: 'Infographic' },
+        { tag: 'tunisia', label: 'Tunisia' },
+        { tag: 'culture', label: 'Culture' },
+        { tag: 'sports', label: 'Sports' },
+        { tag: 'math', label: 'Math' },
+        { tag: 'arabic', label: 'In Arabic' },
+        { tag: 'svelte', label: 'Svelte' },
+        { tag: 'd3', label: 'D3' },
+        { tag: 'sql', label: 'SQL' },
+        { tag: 'ml', label: 'Machine Learning' },
+        { tag: 'ds', label: 'Data Science' },
+    ];
+    const tagsOf = (p) => (p.tags || '').split(',').map((t) => t.trim());
+    const countOf = (tag) => imageData.filter((p) => p.show && tagsOf(p).includes(tag)).length;
+    const filters = FILTERS.map((f) => ({ ...f, n: countOf(f.tag) })).filter((f) => f.n > 0);
 
-        if (buttonName === "All") {
-          buttontag = 'all';
-        } else if (buttonName === "Svelte") {
-          buttontag = 'svelte';
-        } else if (buttonName === "Data Visualization") {
-          buttontag = 'dataviz';
-        } else if (buttonName === "Infographic") {
-          buttontag = 'info';
-        } else if (buttonName === "Tunisia") {
-          buttontag = 'tunisia';
-        } else if (buttonName === "Machine Learning") {
-          buttontag = 'ml';
-        } else if (buttonName === "Story") {
-          buttontag = 'story';
-        } else if (buttonName === "Data Science") {
-          buttontag = 'ds';
-        } else if (buttonName === "D3") {
-          buttontag = 'd3';
-        } else if (buttonName === "SQL") {
-          buttontag = 'sql';
-        }
-    }
+    let buttontag = 'all';
+    function SetButton(tag) { buttontag = tag; }
 
     // Sort projects by rank (highest rank number first)
     $: sortedImageData = imageData
@@ -46,23 +45,18 @@
         });
 </script>
 
-<div class="buttons">
-  <button on:click={() => SetButton("All")} class="all">All</button>
-  <button on:click={() => SetButton("Svelte")} class="svelte">Svelte</button>
-  <button on:click={() => SetButton("Data Visualization")} class="Viz">Data Visualization</button>
-  <button on:click={() => SetButton("Infographic")} class="info">Infographic</button>
-  <button on:click={() => SetButton("Tunisia")} class="tunisia">Tunisia</button>
-  <button on:click={() => SetButton("Machine Learning")} class="ml">Machine Learning</button>
-  <button on:click={() => SetButton("Story")} class="story">Story</button>
-  <button on:click={() => SetButton("Data Science")} class="ds">Data Science</button>
-  <button on:click={() => SetButton("D3")} class="d3">D3</button>
-  <button on:click={() => SetButton("SQL")} class="sql">SQL</button>
+<div class="buttons" role="group" aria-label="Filter projects">
+  {#each filters as f}
+    <button type="button" class:active={buttontag === f.tag} aria-pressed={buttontag === f.tag} on:click={() => SetButton(f.tag)}>
+      {f.label}{#if f.tag !== 'all'}<span class="n">{f.n}</span>{/if}
+    </button>
+  {/each}
 </div>
 
 {#if show}
 <section>
     {#each sortedImageData as image, i}
-    {#if image.show && image.tags.includes(buttontag)}
+    {#if image.show && tagsOf(image).includes(buttontag)}
     <div class="card__wrapper" transition:fade={{delay: i * 50}}>
         <a href={image.href} class="card__link">
             <div class="card__image-container">
@@ -119,12 +113,14 @@
         border-radius: 12px;
         overflow: hidden;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        outline: 2px solid transparent;
+        outline-offset: 0;
+        transition: outline-color 0.2s ease;
     }
 
-    .card__wrapper:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    /* hover: a blue outline only (no lift, no zoom, no bigger shadow) */
+    .card__wrapper:hover, .card__wrapper:focus-within {
+        outline-color: #1E5B8C;
     }
 
     .card__image-container {
@@ -141,9 +137,7 @@
         transition: transform 0.3s ease;
     }
 
-    .card__wrapper:hover .image {
-        transform: scale(1.05);
-    }
+    /* .card__wrapper:hover .image { transform: scale(1.05); }  (zoom removed) */
 
     .card__content {
         position: relative;
@@ -226,13 +220,23 @@
         color: #707171;
         border: none;
         padding: 8px 16px;
-        border-radius: 5px;
+        border-radius: 999px;
         cursor: pointer;
+        margin: 4px;
     }
 
     button:hover {
-        background-color: #a0a0a0;
+        background-color: rgba(30, 91, 140, .1);
+        color: #1E5B8C;
+    }
+    button.active {
+        background-color: #1E5B8C;
         color: white;
+    }
+    button .n {
+        margin-left: .35em;
+        font-size: .75em;
+        opacity: .6;
     }
 
     /* Tablet and Mobile Styles */

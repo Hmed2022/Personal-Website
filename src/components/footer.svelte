@@ -1,139 +1,86 @@
+<!-- Site footer (previous version kept in footer_old.svelte).
+     Icons are inline SVGs with a fixed size: the old ones were sized as "100% of a box with no
+     width", which Safari renders differently (icons vanished or grew), and percentage margins
+     squeezed the layout. -->
 <script>
-    import IoLogoLinkedin from 'svelte-icons/io/IoLogoLinkedin.svelte';
-      import IoIosMail from 'svelte-icons/io/IoIosMail.svelte';
-      import IoLogoGithub from 'svelte-icons/io/IoLogoGithub.svelte'
-  </script>
-  
-  <style>
+  import PhotoMe from '../assets/PhotoMe.svg';
+  const year = new Date().getFullYear();
+  const LINKS = [
+    { label: 'Home', href: '/#/' },
+    { label: 'Projects', href: '/#/projects' },
+  ];
+  const SOCIAL = [
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ahmed-bendaly/',
+      d: 'M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.5h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4z' },
+    { label: 'Email', href: 'mailto:ahmedben@umich.edu',
+      d: 'M3 5.5h18a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1zm.8 2.1v.3l8.2 5.4 8.2-5.4v-.3zM20.2 9.9 12.55 15a1 1 0 0 1-1.1 0L3.8 9.9v6.6h16.4z' },
+  ];
+</script>
 
-  @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;500&display=swap');
-
-    .center-line {
-		/* margin-right:20%;
-		margin-left: 20%; */
-		align-content:center;
-    height: 2px;
-    background-color: #ccc; /* Grey color */
-		opacity: 30%
-
-  }
-
-    .footer2 {
-      /* background-color: #f2f2f2; */
-      padding: 20px;
-      /* width: 100%; */
-      text-align: center;
-      margin-top: 7%;
-      margin-left: 20%;
-      margin-right: 20%;
-    }
-
-    @media (max-width: 768px) {
-      .footer2 {
-      /* background-color: #f2f2f2; */
-      padding: 20px;
-      /* width: 100%; */
-      text-align: center;
-      margin-top: 7%;
-      margin-left: 0;
-      margin-right: 0;
-    }
-}
-  
-    .icons {
-          display: inline-flex;
-      height: 40px;
-      width: auto;
-      
-    }
-  
-      .icons a {
-      margin-right: 10px;
-          color: #8E8E8E;
-        
-  }
-   a {
-    text-decoration-color:#8E8E8E
-   }
-    #linkedin:hover,#email:hover,#github:hover {
-      transform: scale(1.2); /* Increase size on hover */
-      transition: transform 0.2s ease-in-out;
-    }
-  .copy{
-      color: #8E8E8E;
-      font-family: 'Jost', sans-serif;
-      font-weight: 300;
-  }
-      h2{
-        color: #8E8E8E;
-        font-family: 'Jost', sans-serif;
-          font-weight: 500;
-      }
-  
-      .footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-  }
-
-  .icon{
-    max-height: 40px;
-    margin: 0;
-  }
-  
-  .container1 {
-      margin-right: 20%;
-          text-align: left;
-          /* margin-left:20%; */
-  }
-  
-  .container2 {
-      /* margin-right: 20%; */
-      flex-wrap: wrap;
-  }
-  
-  
-  
-  
-  </style>
-  
-  <div class="footer2">
-    <div class="center-line"></div>
-      <div class="footer">
-      <div class="container1">
-        <a href="/">
-            <h2 > Home</h2>
-        </a>
-        <a href="/#/projects">
-      <h2> Projects</h2>
-    </a>
+<footer class="site-footer">
+  <div class="inner">
+    <div class="brand">
+      <img class="me" src={PhotoMe} alt="" width="48" height="64" />
+      <div>
+        <p class="name">Ahmed Bendaly</p>
+        <p class="tag">Data stories about Tunisia, culture and sport.</p>
       </div>
-  
-      
-      <div class="container2">
-          <h2> Contact me</h2>
-    
-          <div class="icons">
-              <div class="icon" id="linkedin">
-                        <a href="https://www.linkedin.com/in/ahmed-bendaly/">
-                      <IoLogoLinkedin/>  </a>
-              </div>
-              <div class="icon" id="email">
-                       <a href="mailto:ahmedben@umich.edu">
-                           <IoIosMail/> </a>
-              </div>
-              <div class="icon" id="github">
-                       <a href="https://github.com/Hmed2022">
-                           <IoLogoGithub/> </a>
-              </div>
-          </div>
-  
+    </div>
+
+    <nav class="links" aria-label="Footer">
+      {#each LINKS as l}<a href={l.href}>{l.label}</a>{/each}
+    </nav>
+
+    <div class="social">
+      <p class="label">Contact me</p>
+      <div class="icons">
+        {#each SOCIAL as s}
+          <a href={s.href} aria-label={s.label} title={s.label}
+             target={s.href.startsWith('http') ? '_blank' : null} rel={s.href.startsWith('http') ? 'noopener noreferrer' : null}>
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d={s.d} /></svg>
+          </a>
+        {/each}
       </div>
-      
-      </div>
-      <p class="copy"> © 2023 Ahmed Bendaly</p>
+    </div>
   </div>
-  
-  
-  
-  
+  <p class="copy">© {year} Ahmed Bendaly</p>
+</footer>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap');
+  .site-footer {
+    margin-top: 5rem; padding: 2.2rem 1.5rem 1.4rem;
+    border-top: 1px solid rgba(46, 58, 64, .12);
+    font-family: 'Jost', -apple-system, BlinkMacSystemFont, sans-serif; color: #5E6B70;
+    -webkit-text-size-adjust: 100%;
+  }
+  .inner {
+    display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 1.6rem 2.5rem;
+    max-width: 1000px; margin: 0 auto;
+  }
+  .brand { flex: 1 1 240px; min-width: 0; display: flex; align-items: center; gap: .9rem; }
+  .me { flex: 0 0 auto; display: block; width: 48px; height: 64px; object-fit: contain; }
+  .name { margin: 0; font-weight: 500; font-size: 1.1rem; color: #2E3A40; }
+  .tag { margin: .25rem 0 0; font-weight: 300; font-size: .95rem; }
+  .links { display: flex; flex-direction: column; gap: .4rem; flex: 0 0 auto; }
+  .links a { color: #2E3A40; text-decoration: none; font-weight: 400; font-size: 1rem; }
+  .links a:hover { color: #B5523B; }
+  .social { flex: 0 0 auto; }
+  .label { margin: 0 0 .5rem; font-weight: 500; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
+  .icons { display: flex; gap: .6rem; }
+  .icons a {
+    display: flex; align-items: center; justify-content: center; flex: 0 0 auto;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(30, 91, 140, .08); color: #1E5B8C;
+    -webkit-transition: background .15s, color .15s, -webkit-transform .15s; transition: background .15s, color .15s, transform .15s;
+  }
+  .icons a:hover { background: #1E5B8C; color: #FFFFFF; -webkit-transform: translateY(-2px); transform: translateY(-2px); }
+  .icons svg { display: block; width: 22px; height: 22px; flex: 0 0 auto; fill: currentColor; }
+  .copy { margin: 1.8rem 0 0; text-align: center; font-weight: 300; font-size: .85rem; }
+  @media (max-width: 600px) {
+    .inner { flex-direction: column; align-items: center; text-align: center; }
+    .brand { flex: none; flex-direction: column; gap: .5rem; }
+    .links { flex-direction: row; gap: 1.4rem; }
+    .icons { justify-content: center; }
+  }
+</style>

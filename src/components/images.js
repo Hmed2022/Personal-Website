@@ -15,7 +15,7 @@ export const imageData = [
     href: "/#/allstar",
     show: true,
     lang: "EN",
-    tags: "all,svelte,d3,dataviz,story,sql",
+    tags: "all,svelte,d3,dataviz,story,sports,sql",
   },
   {
     url: namesUrl,
@@ -27,7 +27,7 @@ export const imageData = [
     href: "/#/names",
     show: true,
     lang: "AR | EN",
-    tags: "all,dataviz,story,tunisia,svelte",
+    tags: "all,dataviz,story,tunisia,svelte,arabic,culture",
   },
   {
     url: klayUrl,
@@ -39,7 +39,7 @@ export const imageData = [
     href: "/#/klay",
     show: false,
     lang: "AR",
-    tags: "all,svelte,d3,dataviz,story,sql,tunisia",
+    tags: "all,svelte,d3,dataviz,story,sql,tunisia,arabic,culture",
   },
   {
     url: tunUrl,
@@ -51,7 +51,7 @@ export const imageData = [
     href: "/#/tuninfo",
     show: false,
     lang: "EN",
-    tags: "all,dataviz,info,tunisia",
+    tags: "all,dataviz,info,tunisia,svelte,d3,interactive,arabic,culture",
   },
   {
     url: CardMagicUrl,
@@ -63,7 +63,7 @@ export const imageData = [
     href: "/#/CardMagic",
     show: true,
     lang: "EN",
-    tags: "all,interactive,sql",
+    tags: "all,interactive,svelte,math",
   },
   // {
   //   url: "https://via.placeholder.com/350x350/1",
