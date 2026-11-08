@@ -173,11 +173,11 @@
         <h1><u>The Second Deal</u></h1>
         <div class="header-text">
           {#if !showDetails}
-            <p in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
+            <p in:fade|local={{ duration: 300 }} out:fade|local={{ duration: 200 }}>
               We deal again the same way: 1, 2, 3, 1, 2, 3… <br />Here's where your card went.
             </p>
           {:else}
-            <p class="detail-text" bind:this={detailNote} in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
+            <p class="detail-text" bind:this={detailNote} in:fade|local={{ duration: 300 }} out:fade|local={{ duration: 200 }}>
               Your pile from the first deal (Pile {selectedPile}) went in the middle of the deck. <br/>Dealing again splits its 9 cards across the 3 new piles.
               <br />
               Each new pile gets 3 of them, and they sit in the middle of each pile.

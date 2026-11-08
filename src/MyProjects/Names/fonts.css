@@ -1,0 +1,36 @@
+/* Arabic fonts for the Names story, declared once (they used to be repeated in app.css and several
+   components, some with broken paths). Imported by names.svelte, so only this story loads them.
+   Files are served from public/fonts/.
+   font-display: swap shows the text immediately in a fallback font and switches when the font
+   arrives, instead of keeping the opening invisible while ~150 KB of fonts download. */
+
+@font-face {
+  font-family: 'NotoKufiArabic';
+  src: url('/fonts/NotoKufiArabic-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NotoKufiArabic';
+  src: url('/fonts/NotoKufiArabic-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JawiKufi';
+  src: url('/fonts/JawiKufi-nOR1.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* Qur'an script (~240 KB): only used in the verse cards, so the browser fetches it when a name's
+   verses are shown, not on the opening. */
+@font-face {
+  font-family: 'KFGQPCUthmanicScriptHAFS';
+  src: url('/fonts/KFGQPC%20Uthmanic%20Script%20HAFS%20Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

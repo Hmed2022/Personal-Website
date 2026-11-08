@@ -10,9 +10,9 @@
   export let text = 'Click here';
 </script>
 
-<div class="spot" in:fade={{ duration: 250 }} aria-hidden="true"></div>
+<div class="spot" in:fade|local={{ duration: 250 }} aria-hidden="true"></div>
 
-<div class="callout" in:fade={{ duration: 250 }}>
+<div class="callout" in:fade|local={{ duration: 250 }}>
   <div class="callout-text">{text}</div>
   <svg class="callout-arrow" viewBox="0 0 80 50" fill="none" stroke="currentColor"
        stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

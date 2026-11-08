@@ -196,8 +196,8 @@
         class="card {showButtons ? 'hover-enabled' : ''}"
         style="--spread: {i * spreadFactor - (spreadFactor * 27) / 2}px; --index: {i}; z-index: {27 - i};"
         animate:flip
-        in:receive={{ key: `${card.value}_${card.suit}` }}
-        out:send={{ key: `${card.value}_${card.suit}`, ...(isTouchDevice ? { duration: 0 } : {}) }}
+        in:receive|local={{ key: `${card.value}_${card.suit}` }}
+        out:send|local={{ key: `${card.value}_${card.suit}`, ...(isTouchDevice ? { duration: 0 } : {}) }}
       >
         <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
       </div>
@@ -225,8 +225,8 @@
             class="card {showButtons ? 'hover-enabled' : ''}"
             style="--spread: {i * spreadFactor - (spreadFactor * 9) / 2}px; --index: {i}; z-index: {card.zIndex + 100};"
             animate:flip
-            in:receive={{ key: `${card.value}_${card.suit}` }}
-            out:send={{ key: `${card.value}_${card.suit}`, ...(isTouchDevice ? { duration: 0 } : {}) }}
+            in:receive|local={{ key: `${card.value}_${card.suit}` }}
+            out:send|local={{ key: `${card.value}_${card.suit}`, ...(isTouchDevice ? { duration: 0 } : {}) }}
           >
             <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
           </div>

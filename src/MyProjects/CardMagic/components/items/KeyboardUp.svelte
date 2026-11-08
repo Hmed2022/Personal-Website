@@ -211,7 +211,7 @@
   </div>
 
   {#if highlight && directions.includes('right')}
-    <div class="callout" transition:fade={{ duration: 250 }}>
+    <div class="callout" transition:fade|local={{ duration: 250 }}>
       <svg class="callout-arrow" viewBox="0 0 80 50" fill="none" stroke="currentColor"
            stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M75 10 C 45 5, 20 15, 8 40" />

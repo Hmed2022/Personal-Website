@@ -177,7 +177,7 @@
     <!-- Funnel and dealing share one grid cell, so cross-fading them doesn't jump -->
     <div class="swap">
     {#if view === 'funnel'}
-      <section class="secret" in:fade={{ duration: 350, delay: 250 }} out:fade={{ duration: 250 }}>
+      <section class="secret" in:fade|local={{ duration: 350, delay: 250 }} out:fade|local={{ duration: 250 }}>
         <p class="secret-title">Every answer cuts the suspects by 3</p>
 
         <div class="steps" aria-label="How the possible positions of your card shrink">
@@ -218,7 +218,7 @@
         <button type="button" class="see" on:click={() => (view = 'deal')}>See it with your cards →</button>
       </section>
     {:else}
-      <div class="dealview" in:fade={{ duration: 350, delay: 250 }} out:fade={{ duration: 250 }}>
+      <div class="dealview" in:fade|local={{ duration: 350, delay: 250 }} out:fade|local={{ duration: 250 }}>
         <button type="button" class="back-link" on:click={() => (view = 'funnel')}>← Back to the explanation</button>
         <!-- Left column: the two piles + controls. Right column: the reveal, stacked. -->
         <div class="board">
@@ -232,7 +232,7 @@
                     <div
                       class="cardwrap"
                       style="--i:{i}; --z:{1000 - i};"
-                      out:send={{ key: card.cycle3pos, ...(isTouchDevice ? { duration: 0 } : {}) }}>
+                      out:send|local={{ key: card.cycle3pos, ...(isTouchDevice ? { duration: 0 } : {}) }}>
                       <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
                     </div>
                   {/each}
@@ -247,7 +247,7 @@
                     <div
                       class="cardwrap2"
                       style="--i:{i}; --z:{1000 + i};"
-                      in:receive={{ key: card.cycle3pos }}>
+                      in:receive|local={{ key: card.cycle3pos }}>
                       <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`} />
                     </div>
                   {/each}
@@ -272,7 +272,7 @@
                   class="bigcard-front"
                   src={getCardSrc(lastCard)}
                   alt={`Card ${lastCard.value} of ${lastCard.suit}`}
-                  in:receive={{ key: lastCard.cycle3pos }} />
+                  in:receive|local={{ key: lastCard.cycle3pos }} />
               {:else}
                 <div class="bigcard placeholder"></div>
               {/if}

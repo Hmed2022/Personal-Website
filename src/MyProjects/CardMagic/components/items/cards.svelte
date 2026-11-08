@@ -280,8 +280,8 @@
         on:keydown={(event) => handleKeyDown(event, card)}
         on:keyup={(event) => handleKeyUp(event, card)}
         on:keypress={(event) => handleKeyPress(event, card)}
-        in:fade={{ duration: 300 }}
-        out:fade={{ duration: 400 }}
+        in:fade|local={{ duration: 300 }}
+        out:fade|local={{ duration: 400 }}
       >
         <img class="card-back" src={facedown} alt={`Card ${card.value} of ${card.suit}`}>
         <img class="card-front" src={getCardSrc(card)} alt={`Card ${card.value} of ${card.suit}`}>
@@ -293,14 +293,14 @@
 <!-- fixed-height area so the centered slide doesn't jump as these appear -->
 <div class="below">
 {#if showConfirmation}
-  <div class="confirmation" in:fade={{ duration: 300 }} out:fade={{ duration: 500 }}>
+  <div class="confirmation" in:fade|local={{ duration: 300 }} out:fade|local={{ duration: 500 }}>
     <p>Sure about this card?</p>
     <button on:click={lockInCard}><b>Lock it in!</b></button>
   </div>
 {/if}
 
 {#if showPickedText}
-  <div class="picked-text" in:fade={{ duration: 500 }}>
+  <div class="picked-text" in:fade|local={{ duration: 500 }}>
     <p>Your card is the <br> <b style="font-size: 1.7em; background-color:#E5DEFF; padding: 4px;">{DisplayValue(selectedCard?.value)} of {selectedCard?.suit}</b></p>
     <p> Let's see if I can find your card!</p>
   </div>

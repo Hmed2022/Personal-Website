@@ -15,6 +15,7 @@
     import { style } from 'svelte-body';
 
     import Footer from "../../components/footer.svelte";
+    import SiteLogo from "../../components/SiteLogo.svelte";
 
     
 
@@ -37,6 +38,7 @@
 
 </script>
 
+<SiteLogo ink="#9D9485" />
 <body class="bodycolor">
     <section id="intro">
         <div class="prose">
@@ -82,7 +84,7 @@
 
 
 </body>
-<Footer/>
+<Footer theme={{ logoBg: 'transparent', logoFill: 'transparent', logoInk: '#9D9485' }} />
 <svelte:body use:style={"background-color: #f4f1ed;"} />
 
 <style>

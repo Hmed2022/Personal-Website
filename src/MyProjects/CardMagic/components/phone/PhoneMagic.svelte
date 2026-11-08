@@ -221,13 +221,13 @@
 
   <!-- =============== ABOUT YOU (optional, once per visit) =============== -->
   {#if screen === 'about'}
-    <section class="screen center about-wrap" in:fade={{ duration: 250 }}>
+    <section class="screen center about-wrap" in:fade|local={{ duration: 250 }}>
       <AboutYou />
     </section>
 
   <!-- =============== PICK =============== -->
   {:else if screen === 'pick'}
-    <section class="screen" in:fade={{ duration: 250 }}>
+    <section class="screen" in:fade|local={{ duration: 250 }}>
       {#if $mode === 'mind'}
         <h1>Think of a card</h1>
         <p class="sub">Pick one of <b>these 27 cards</b> in your mind, and don't tell me. I'll find it in <b>3 questions</b>.</p>
@@ -263,7 +263,7 @@
 
   <!-- =============== DEAL + QUESTION =============== -->
   {:else if screen === 'deal'}
-    <section class="screen" in:fade={{ duration: 200 }}>
+    <section class="screen" in:fade|local={{ duration: 200 }}>
       {#if dealing}
         <p class="step-label">Deal {cycle} of 3</p>
         <h1 class="q">{DEAL_TEXT[cycle][0]}</h1>
@@ -281,7 +281,7 @@
                   on:click={() => tapPile(p)} aria-label={`Pile ${p}`}>
             <div class="stack">
               {#each columns[p - 1] as d (key(d.card))}
-                <div class="s-card" style="--r:{d.row}; z-index:{d.row + 1}" in:fromDeck>
+                <div class="s-card" style="--r:{d.row}; z-index:{d.row + 1}" in:fromDeck|local>
                   <img src={getCardSrc(d.card)} alt={name(d.card)} draggable="false" />
                   <span class="suit-tag" class:light={d.card.suit === 'Hearts' || d.card.suit === 'Diamonds'}>{SUIT[d.card.suit]}</span>
                 </div>
@@ -315,7 +315,7 @@
 
   <!-- =============== GATHER =============== -->
   {:else if screen === 'gather'}
-    <section class="screen center" in:fade={{ duration: 200 }}>
+    <section class="screen center" in:fade|local={{ duration: 200 }}>
       <div class="gather" class:merged>
         {#each [1, 2, 3] as p}
           <div class="g-pile">
@@ -328,7 +328,7 @@
 
   <!-- =============== COUNT + REVEAL =============== -->
   {:else if screen === 'count'}
-    <section class="screen" in:fade={{ duration: 250 }}>
+    <section class="screen" in:fade|local={{ duration: 250 }}>
       <div class="counter">
         {#if counted >= 14}
           <!-- no position shown: keeps the secret (the 14th card) hidden -->
@@ -349,14 +349,14 @@
         <span class="count-arrow">→</span>
         <div class="mini-stack counted">
           {#each Array(Math.min(counted, 13)) as _, k (k)}
-            <img src={cardBack} alt="" style="--k:{Math.min(k, 5)}" draggable="false" in:fromDeck={{ el: countDeckEl, duration: 200 }} />
+            <img src={cardBack} alt="" style="--k:{Math.min(k, 5)}" draggable="false" in:fromDeck|local={{ el: countDeckEl, duration: 200 }} />
           {/each}
         </div>
       </div>
 
       <div class="reveal-wrap">
         {#if counted >= 14}
-          <div class="big-card" class:flipped in:fromDeck={{ el: countDeckEl, duration: 550 }}>
+          <div class="big-card" class:flipped in:fromDeck|local={{ el: countDeckEl, duration: 550 }}>
             <img class="face back" src={cardBack} alt="" draggable="false" />
             {#if revealed}<img class="face front" src={getCardSrc(revealed)} alt={name(revealed)} draggable="false" />{/if}
           </div>
@@ -384,13 +384,13 @@
 
   <!-- =============== END =============== -->
   {:else}
-    <section class="screen center" in:fade={{ duration: 250 }}>
+    <section class="screen center" in:fade|local={{ duration: 250 }}>
       <h1><span class="pill big-pill">That's the trick!</span></h1>
       <p class="sub">{$mode === 'mind' ? 'You never told me your card, and I still found it.' : 'Three questions were all it took.'}</p>
       <div class="end-actions">
         <button type="button" class="primary" on:click={() => (showHow = !showHow)}>How does it work?</button>
         {#if showHow}
-          <p class="how" transition:fade={{ duration: 200 }}>
+          <p class="how" transition:fade|local={{ duration: 200 }}>
             Turn your phone sideways, then tap <b>“↓ See the math”</b> to walk through it step by step with your own cards.
           </p>
         {/if}

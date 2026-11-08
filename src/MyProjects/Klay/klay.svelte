@@ -1,5 +1,6 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
+  import SiteLogo from '../../components/SiteLogo.svelte';
 
   import mutamaredImg from './Assets/Mutamared.svg';
   import klayHeadImg from './Assets/klayHead.svg';
@@ -50,6 +51,8 @@
 </script>
 
 <div class="klay-page">
+  <!-- smaller and tucked in the corner: the bigger default would sit under the fez character -->
+  <SiteLogo ink="#0D0D0D" size={88} top={14} left={18} />
   <div class="hero">
     <img class="klay-halo" src={klayHaloImg} alt="" />
     <img class="mutamared" src={mutamaredImg} alt="متمرد" />

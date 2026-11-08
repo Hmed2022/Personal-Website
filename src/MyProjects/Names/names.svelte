@@ -9,10 +9,17 @@ import {language,nameId, filterQuran, filterDerived, filterHadith, showDisputed,
 import  names  from './Components/names.js';
 import  people  from './Components/people.js';
 import Back from './Components/background.svelte'
-import quranData from './Assests/quran.json';
-import quranDataEN from './Assests/QuranEN.json';
-import surahsData from './Assests/surahs.json';
-import sunnahData from './Assests/sunnah.json';
+import NameSearch from './Components/NameSearch.svelte';
+import SiteLogo from '../../components/SiteLogo.svelte';
+import Footer from '../../components/footer.svelte';
+import './fonts.css';
+// Qur'an + hadith text (~3 MB raw / ~650 KB compressed) is only needed for a name's details,
+// so it's fetched right after the opening is on screen (see loadReferenceData) instead of being
+// part of this story's first download. Until it arrives, the verse/hadith lists are just empty.
+let quranData = {};
+let quranDataEN = {};
+let surahsData = [];
+let sunnahData = { hadiths: [] };
 import Frequency from './Components/frequency.svelte';
 import video1 from '../../assets/Projects/Names/video.mp4'
 import video2 from '../../assets/Projects/Names/video2.mp4'
@@ -281,9 +288,30 @@ import songsData from './Assests/songs.js'
         }
     }
 
+    function loadReferenceData() {
+        Promise.all([
+            import('./Assests/quran.json'),
+            import('./Assests/QuranEN.json'),
+            import('./Assests/surahs.json'),
+            import('./Assests/sunnah.json')
+        ]).then(([q, qEn, s, h]) => {
+            quranData = q.default;
+            quranDataEN = qEn.default;
+            surahsData = s.default;
+            sunnahData = h.default;
+        }).catch((err) => console.error('Could not load Qur\'an / hadith data', err));
+    }
+
     onMount(() => {
         // Scroll to top when component mounts
         window.scrollTo(0, 0);
+
+        // Start fetching the reference data once the opening has painted (two frames later),
+        // using idle time when the browser offers it.
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+            if ('requestIdleCallback' in window) requestIdleCallback(loadReferenceData, { timeout: 1500 });
+            else setTimeout(loadReferenceData, 200);
+        }));
 
         const allNamesObserver = new IntersectionObserver(
             (entries) => {
@@ -369,7 +397,8 @@ import songsData from './Assests/songs.js'
 <svelte:head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Funnel+Display:wght@300..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Lalezar&family=Amiri+Quran&display=swap" rel="stylesheet">
 </svelte:head>
 
 <!-- Language Buttons -->
@@ -398,6 +427,7 @@ import songsData from './Assests/songs.js'
     </div>
 </div>
 
+<SiteLogo ink="#266F8C" />
 <body>
 
     <Back/>
@@ -538,6 +568,8 @@ It's a song everyone knows—not because we chose to learn it, but because we he
        
     </div>
 
+<!-- Search the names by spelling, meaning, Arabic or number -->
+<NameSearch/>
 
 <div class="guide-text">
     {#if $language === 'Arabic'}
@@ -1241,39 +1273,12 @@ It's a song everyone knows—not because we chose to learn it, but because we he
 
 <svelte:body use:style={"background-color: #FDEEDB;"} />
 
+<!-- extra space at the bottom so the fixed audio player bar doesn't cover the footer -->
+<div class="names-footer"><Footer theme={{ ink: '#603D25', muted: '#8A6656', accent: '#266F8C', hover: '#E86349', border: 'rgba(96, 61, 37, .18)', logoBg: 'transparent', logoFill: 'transparent', logoInk: '#266F8C' }} /></div>
+
 
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Quicksand:wght@300..700&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
-
-    @font-face {
-    font-family: 'NotoKufiArabic';
-    src: url('../Assests/NotoKufiArabic-Regular.ttf') format('truetype');
-    font-weight: 400;
-  }
-
-  @font-face {
-    font-family: 'NotoKufiArabic';
-    src: url('../Assests/NotoKufiArabic-Bold.ttf') format('truetype');
-    font-weight: 700;
-  }
-    @font-face {
-    font-family: 'JawiKufi';
-    src: url('../Assests/JawiKufi-nOR1.ttf') format('truetype');
-    font-weight: 400;
-  }
-
-
-    @font-face {
-    font-family: 'KFGQPCUthmanicScriptHAFS';
-    src: url('../Assests/KFGQPC%20Uthmanic%20Script%20HAFS%20Regular.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-  }
 
         .Reference{
         color: #FEEEDB;
@@ -2976,4 +2981,5 @@ It's a song everyone knows—not because we chose to learn it, but because we he
     }
 
     
+    .names-footer { padding-bottom: 96px; }
 </style>

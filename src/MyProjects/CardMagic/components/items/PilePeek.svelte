@@ -10,7 +10,7 @@
   const dispatch = createEventDispatcher();
 </script>
 
-<div class="backdrop" transition:fade={{ duration: 180 }} on:click|self={() => dispatch('close')}>
+<div class="backdrop" transition:fade|local={{ duration: 180 }} on:click|self={() => dispatch('close')}>
   <div class="panel" role="dialog" aria-label="The three piles">
     <button type="button" class="close" on:click={() => dispatch('close')} aria-label="Close">×</button>
     <p class="title">Find your card, then tap its pile</p>

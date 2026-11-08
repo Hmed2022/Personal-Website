@@ -1,7 +1,7 @@
 <script>
     import {fade} from 'svelte/transition'
     import {onMount} from 'svelte'
-    import { imageData } from './images.js';
+    import { imageData, showFilters } from './images.js';
 
     let show = false
 
@@ -9,28 +9,19 @@
         show=true
     })
 
-    // Filters by topic and format first, then tools. A filter only appears when at least one
-    // visible project has its tag. (Removed: Machine Learning, Data Science, SQL: no visible project.)
+    // A few topic filters only (tools like Svelte / D3 / SQL now sit on each card instead).
+    // A filter appears only when at least one visible project matches. Revisit once there are 8+ projects.
     const FILTERS = [
-        { tag: 'all', label: 'All' },
-        { tag: 'interactive', label: 'Interactive' },
-        { tag: 'dataviz', label: 'Data Visualization' },
-        { tag: 'story', label: 'Story' },
-        { tag: 'info', label: 'Infographic' },
-        { tag: 'tunisia', label: 'Tunisia' },
-        { tag: 'culture', label: 'Culture' },
-        { tag: 'sports', label: 'Sports' },
-        { tag: 'math', label: 'Math' },
-        { tag: 'arabic', label: 'In Arabic' },
-        { tag: 'svelte', label: 'Svelte' },
-        { tag: 'd3', label: 'D3' },
-        { tag: 'sql', label: 'SQL' },
-        { tag: 'ml', label: 'Machine Learning' },
-        { tag: 'ds', label: 'Data Science' },
+        { tag: 'all', label: 'All', match: ['all'] },
+        { tag: 'sports', label: 'Sport', match: ['sports'] },
+        { tag: 'tunisia', label: 'Tunisia & culture', match: ['tunisia', 'culture'] },
+        { tag: 'math', label: 'Math', match: ['math'] },
     ];
     const tagsOf = (p) => (p.tags || '').split(',').map((t) => t.trim());
-    const countOf = (tag) => imageData.filter((p) => p.show && tagsOf(p).includes(tag)).length;
-    const filters = FILTERS.map((f) => ({ ...f, n: countOf(f.tag) })).filter((f) => f.n > 0);
+    const matches = (p, f) => f.match.some((t) => tagsOf(p).includes(t));
+    const countOf = (f) => imageData.filter((p) => p.show && matches(p, f)).length;
+    const filters = FILTERS.map((f) => ({ ...f, n: countOf(f) })).filter((f) => f.n > 0);
+    $: activeFilter = filters.find((f) => f.tag === buttontag) || filters[0];
 
     let buttontag = 'all';
     function SetButton(tag) { buttontag = tag; }
@@ -45,6 +36,7 @@
         });
 </script>
 
+{#if showFilters}
 <div class="buttons" role="group" aria-label="Filter projects">
   {#each filters as f}
     <button type="button" class:active={buttontag === f.tag} aria-pressed={buttontag === f.tag} on:click={() => SetButton(f.tag)}>
@@ -52,30 +44,34 @@
     </button>
   {/each}
 </div>
+{/if}
 
 {#if show}
 <section>
     {#each sortedImageData as image, i}
-    {#if image.show && tagsOf(image).includes(buttontag)}
-    <div class="card__wrapper" transition:fade={{delay: i * 50}}>
-        <a href={image.href} class="card__link">
-            <div class="card__image-container">
-                <img class="image" src='{image.url}' alt={image.title} />
-            </div>
-        </a>
-        <div class="card__content">
-            <a href={image.href} class="card__link">
-                <div class="card__category-row">
-                    <h3 class="card__category">{image.desc}</h3>
-                    {#if image.lang}
-                    <span class="card__lang">{image.lang}</span>
-                    {/if}
-                </div>
-                <h2 class="card__title">{image.title}</h2>
-            </a>
-            <p class="card__desc">{@html image.description}</p>
+    {#if image.show && matches(image, activeFilter)}
+    <!-- The title is the card's one link; it stretches over the whole card, so links inside the
+         description (e.g. The Pudding) stay real, separate links instead of links-inside-a-link. -->
+    <article class="card__wrapper" transition:fade|local={{delay: i * 50}}>
+        <div class="card__image-container">
+            <img class="image" src={image.url} alt={image.alt || `Preview of ${image.title}`} />
         </div>
-    </div>
+        <div class="card__content">
+            <div class="card__category-row">
+                <p class="card__category">{image.desc}</p>
+                {#if image.lang}
+                <span class="card__lang">{image.lang}</span>
+                {/if}
+            </div>
+            <h3 class="card__title"><a href={image.href} class="card__link">{image.title}</a></h3>
+            <p class="card__desc">{@html image.description}</p>
+            {#if image.tools?.length}
+            <ul class="card__tools" aria-label="Built with">
+                {#each image.tools as t}<li>{t}</li>{/each}
+            </ul>
+            {/if}
+        </div>
+    </article>
     {/if}
     {/each}
 </section>
@@ -102,7 +98,35 @@
     .card__link {
         text-decoration: none;
         color: inherit;
-        display: block;
+    }
+    /* stretch the title link over the whole card */
+    .card__link::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+    .card__link:focus-visible { outline: none; }
+    /* links inside the description sit above the stretched title link */
+    .card__desc :global(a) { position: relative; z-index: 2; }
+
+    .card__tools {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .4rem;
+        list-style: none;
+        margin: 1.1rem 0 0;
+        padding: 0;
+    }
+    .card__tools li {
+        font-family: 'Jost', sans-serif;
+        font-size: .78rem;
+        font-weight: 500;
+        letter-spacing: .03em;
+        color: #1E5B8C;
+        background: rgba(30, 91, 140, .08);
+        padding: .2rem .65rem;
+        border-radius: 999px;
     }
 
     .card__wrapper {
@@ -119,6 +143,7 @@
     }
 
     /* hover: a blue outline only (no lift, no zoom, no bigger shadow) */
+    .card__wrapper { cursor: pointer; }
     .card__wrapper:hover, .card__wrapper:focus-within {
         outline-color: #1E5B8C;
     }
@@ -140,8 +165,7 @@
     /* .card__wrapper:hover .image { transform: scale(1.05); }  (zoom removed) */
 
     .card__content {
-        position: relative;
-        padding: 2rem 2.5rem;
+                padding: 2rem 2.5rem;
         background: white;
     }
 

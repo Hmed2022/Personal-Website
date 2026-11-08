@@ -305,17 +305,7 @@
 </div>
 
 <style>
-  @font-face {
-    font-family: 'NotoKufiArabic';
-    src: url('../../Assests/NotoKufiArabic-Regular.ttf') format('truetype');
-    font-weight: 400;
-  }
 
-  @font-face {
-    font-family: 'NotoKufiArabic';
-    src: url('../../Assests/NotoKufiArabic-Bold.ttf') format('truetype');
-    font-weight: 700;
-  }
 
   .wrapper {
     display: flex;

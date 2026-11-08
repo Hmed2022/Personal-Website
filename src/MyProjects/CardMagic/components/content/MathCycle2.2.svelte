@@ -212,7 +212,7 @@
 <main class="body">
   {#if $statuscard}
     {#if $annotations}
-      <div class="descPos" in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
+      <div class="descPos" in:fade|local={{ duration: 300 }} out:fade|local={{ duration: 200 }}>
         <div class="desc">
           Your pile goes in the middle again. Blue “I” = cards that were in your pile in deal 1. Green “II” = cards in your pile in deal 2. A card with both could still be yours, and there are only 3 of them now.
         </div>
@@ -234,7 +234,7 @@
 
       <!-- Positions overlay -->
       {#if $positions}
-        <div class="overlay-fade" in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
+        <div class="overlay-fade" in:fade|local={{ duration: 300 }} out:fade|local={{ duration: 200 }}>
           <svg class="positions-layer" aria-hidden="true">
             {#each posMarks as m (m.text)}
               <text x={m.x} y={m.y} class="pos-label-svg">
@@ -274,7 +274,7 @@
 
       <!-- Braces + arrow (annotation mode) -->
       {#if $annotations}
-        <div class="overlay-fade" in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
+        <div class="overlay-fade" in:fade|local={{ duration: 300 }} out:fade|local={{ duration: 200 }}>
           <div class="note" bind:this={note}>Your card</div>
 
           <div class="brace-layer" aria-hidden="true">
@@ -319,7 +319,7 @@
     </div>
 
     {#if $positions}
-      <div class="descPos1" in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
+      <div class="descPos1" in:fade|local={{ duration: 300 }} out:fade|local={{ duration: 200 }}>
         <p>
           After the second deal, only 3 cards could still be yours. They are
           now at positions <span class="pos-hl">13th</span>, <span class="pos-hl">14th</span> and <span class="pos-hl">15th</span>,
@@ -330,7 +330,7 @@
     {/if}
 
     {#if $annotations}
-      <div class="note-cycle" in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
+      <div class="note-cycle" in:fade|local={{ duration: 300 }} out:fade|local={{ duration: 200 }}>
         blue "I" = your pile in deal 1, green "II" = your pile in deal 2.
       </div>
     {/if}

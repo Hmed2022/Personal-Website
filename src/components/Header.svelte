@@ -14,6 +14,7 @@
   <nav aria-label="Main">
     <a href="/#/" class:on={path === '/' || path === ''}>Home</a>
     <a href="/#/projects" class:on={path.startsWith('/projects')}>Projects</a>
+    <a href="/#/about" class:on={path.startsWith('/about')}>About me</a>
     <a class="contact" href="mailto:ahmedben@umich.edu">Contact</a>
   </nav>
 </div>
@@ -48,5 +49,11 @@
     .brand img { width: 26px; height: 36px; }
     nav { gap: .1rem; }
     nav a { padding: .35rem .55rem; font-size: .92rem; }
+  }
+  /* small phones: four links + the name don't fit, so keep just the drawing as the home link */
+  @media (max-width: 440px) {
+    .txt { display: none; }
+    nav a { padding: .35rem .45rem; font-size: .88rem; white-space: nowrap; }
+    nav a.contact { margin-left: .15rem; }
   }
 </style>

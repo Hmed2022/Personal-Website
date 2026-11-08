@@ -1,7 +1,7 @@
 <script>
 	import { tick, onMount, onDestroy } from "svelte";
 	import { fade } from "svelte/transition";
-	import { currentCard, statuscard, positionsHint, buttonClicked, drawn, annotations, positions, slideChange, mode, mindReady, reveal } from "../../stores/misc.js";
+	import { resetKey, currentCard, statuscard, positionsHint, buttonClicked, drawn, annotations, positions, slideChange, mode, mindReady, reveal } from "../../stores/misc.js";
 	import { logEvent } from "../../stores/db.js";
 	import { newDeck } from "../../stores/deck.js";
 	import { arrayCards } from "../../stores/misc.js";
@@ -13,6 +13,7 @@
 	import Slide  from "../helpers/Slider.Slide.svelte";
 	import rotateIcon from "../../svg/rotate.svg?raw";
 	import PhoneMagic from "../phone/PhoneMagic.svelte";
+	import SiteLogo from "../../../../components/SiteLogo.svelte";
 
 	import Keyboard  from "../items/KeyboardDown.svelte";
 	import Keyboard2 from "../items/KeyboardUp.svelte";
@@ -125,7 +126,7 @@
 	  const max = ROW_LEN[row] - 1;
 	  return (x[row] === max) ? 0 : x[row] + 1;
 	}
-	function wrapLeft(row) {
+	function wrapLeft(row, _x = x) {
 	  const max = ROW_LEN[row] - 1;
 	  return (x[row] === 0) ? max : x[row] - 1;
 	}
@@ -137,7 +138,11 @@
 		await moveHTo(y, wrapRight(y));
 		return;
 	  }
-	  if (detail === "left")  { await moveHTo(y, wrapLeft(y));  return; }
+	  if (detail === "left") {
+		if (leftLocked) return; // magic row: only back to slides already seen (also blocks swipes)
+		await moveHTo(y, wrapLeft(y));
+		return;
+	  }
   
 	  if (detail === "down") {
 		if (y !== 0) return; // already bottom row
@@ -245,13 +250,24 @@
 	  (x[0] === 0 && ($mode === 'mind' ? !$mindReady : !$statuscard)) ||
 	  ([1, 2, 3].includes(x[0]) && ($mode === 'mind' ? $mindReady : $statuscard) && !$drawn[x[0]])
 	);
+	// Left on the magic row only goes back to a slide the visitor has already seen
+	// (so you can't peek ahead by wrapping left from the pick slide to the End).
+	// Starts over whenever the trick is reset for a new card.
+	// ("Play again" resets while still on the End slide, so the slide you're leaving isn't counted.)
+	let seenMagic = { 0: true };
+	let lastSeenX = null;
+	onDestroy(resetKey.subscribe(() => { seenMagic = { 0: true }; lastSeenX = x[0]; }));
+	$: if (y === 0 && x[0] !== lastSeenX) { lastSeenX = x[0]; seenMagic = { ...seenMagic, [x[0]]: true }; }
+	$: leftLocked = y === 0 && !seenMagic[wrapLeft(0, x)];
+
 	// Mind mode: the math needs the card, which we only know after the reveal
 	$: mathLocked = $mode === 'mind' && !$reveal;
 
 	$: disabledDirs = [
 	  ...(y === 0 ? ["up"] : ["down"]),    // block off-grid vertical moves
 	  ...(y === 0 && mathLocked ? ["down"] : []),
-	  ...(rightLocked ? ["right"] : [])
+	  ...(rightLocked ? ["right"] : []),
+	  ...(leftLocked ? ["left"] : [])
 	];
 
 	// Real-time window size, used only to decide whether the rotate prompt
@@ -426,10 +442,12 @@
   <!-- Phones in portrait get their own version of the trick (phone/PhoneMagic);
        everything else (desktop, laptop, landscape) keeps the slide deck below. -->
   <div class="phone-portrait">
-	{#if rotatePromptActive}<PhoneMagic />{/if}
+	{#if rotatePromptActive}<SiteLogo ink="#8F83B8" /><PhoneMagic />{/if}
   </div>
 
   <div class="deck" style="background-color: {deckBg};">
+  <!-- Ahmed's logo on the Magic row only (not the Math row) -->
+  {#if y === 0}<div class="logo-wrap" transition:fade|local={{ duration: 200 }}><SiteLogo ink="#8F83B8" /></div>{/if}
   <div class="deck-safe" bind:this={deckEl} bind:clientWidth={deckWidth} bind:clientHeight={deckHeight}>
   <div
 	class="stage {cqClasses}"
@@ -471,11 +489,11 @@
   </article>
 
   {#if keyboardHint && !isTouchDevice}
-	<div class="hint-overlay" class:math={y === 1} transition:fade={{ duration: 250 }}></div>
+	<div class="hint-overlay" class:math={y === 1} transition:fade|local={{ duration: 250 }}></div>
   {/if}
 
   {#if keyboardHint && !hasSwiped}
-	<div class="swipe-hint" class:math={y === 1} class:touch={isTouchDevice} transition:fade={{ duration: 250 }} aria-hidden="true">
+	<div class="swipe-hint" class:math={y === 1} class:touch={isTouchDevice} transition:fade|local={{ duration: 250 }} aria-hidden="true">
 	  <span class="swipe-arrow">←</span> Swipe to continue
 	</div>
   {/if}
@@ -648,6 +666,8 @@
 	   prompt instead of the deck. Handled in pure CSS so the correct state
 	   is painted immediately -- no dependency on JS/hydration timing. */
 	.phone-portrait { display: none; }
+	/* keep the logo inside the notch-safe area, above the slides */
+	.logo-wrap { position: absolute; top: env(safe-area-inset-top, 0px); left: env(safe-area-inset-left, 0px); z-index: 20; }
 
 	@media (max-width: 899px) and (orientation: portrait) {
 	  .phone-portrait {

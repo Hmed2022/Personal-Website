@@ -1738,23 +1738,8 @@
 </div>
 
 <style>
-  @font-face {
-    font-family: 'NotoKufiArabic';
-    src: url('../Assests/NotoKufiArabic-Regular.ttf') format('truetype');
-    font-weight: 400;
-  }
 
-  @font-face {
-    font-family: 'NotoKufiArabic';
-    src: url('../Assests/NotoKufiArabic-Bold.ttf') format('truetype');
-    font-weight: 700;
-  }
 
-  @font-face {
-    font-family: 'JawiKufi';
-    src: url('../Assests/JawiKufi-nOR1.ttf') format('truetype');
-    font-weight: 400;
-  }
 
   .name-display {
     display: flex;

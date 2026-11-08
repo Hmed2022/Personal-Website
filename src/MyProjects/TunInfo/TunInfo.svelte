@@ -3,6 +3,7 @@
     // @ts-ignore
     import Map from "./Data Viz/Map/Map.svelte"
     import Footer from "../../components/footer.svelte";
+    import SiteLogo from "../../components/SiteLogo.svelte";
     // import Title from "./Assets/Tunisian Banknotes.svg"
     import Timeline from "./Data Viz/Timeline/Timeline.svelte";            // original timeline (kept)
     import TimelineVintage from "./Data Viz/Timeline/TimelineVintage.svelte";
@@ -70,6 +71,7 @@
 </div> -->
 
 
+<SiteLogo ink="#1E3F5C" top={92} />
 <LangSwitch/>
 <ChapterNav inline={false}/>
 <div class="tn-page" class:tn-ar={$lang === 'ar'} lang={$lang} dir={$dir}>
@@ -260,7 +262,7 @@
 </div><!-- /tn-page -->
 <svelte:body use:style={pageStyle} />
 <svelte:window on:contextmenu={blockMenu} on:dragstart={blockDrag} />
-<Footer/>
+<Footer theme={{ logoBg: 'transparent', logoFill: 'transparent', logoInk: '#1E3F5C' }} />
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');

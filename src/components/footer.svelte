@@ -3,11 +3,23 @@
      width", which Safari renders differently (icons vanished or grew), and percentage margins
      squeezed the layout. -->
 <script>
-  import PhotoMe from '../assets/PhotoMe.svg';
+  import SiteLogo from './SiteLogo.svelte';
+
+  // Optional palette so a project can blend the footer into its own colours, e.g.
+  // <Footer theme={{ ink: '#603D25', accent: '#266F8C', hover: '#E86349', logoBg: '#266F8C' }} />
+  // Anything left out keeps the site's default.
+  export let theme = {};
+  const DEFAULT = {
+    ink: '#2E3A40', muted: '#5E6B70', accent: '#1E5B8C', hover: '#B5523B', border: 'rgba(46, 58, 64, .12)', bg: 'transparent',
+    logoBg: '#008ec6', logoFill: '#FFFFFF', logoInk: '#000000'
+  };
+  $: t = { ...DEFAULT, ...theme };
+  $: vars = `--f-ink:${t.ink}; --f-muted:${t.muted}; --f-accent:${t.accent}; --f-hover:${t.hover}; --f-border:${t.border}; --f-bg:${t.bg};`;
   const year = new Date().getFullYear();
   const LINKS = [
     { label: 'Home', href: '/#/' },
     { label: 'Projects', href: '/#/projects' },
+    { label: 'About me', href: '/#/about' },
   ];
   const SOCIAL = [
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ahmed-bendaly/',
@@ -17,10 +29,10 @@
   ];
 </script>
 
-<footer class="site-footer">
+<footer class="site-footer" style={vars}>
   <div class="inner">
     <div class="brand">
-      <img class="me" src={PhotoMe} alt="" width="48" height="64" />
+      <span class="me"><SiteLogo inline size={64} bg={t.logoBg} fill={t.logoFill} ink={t.logoInk} /></span>
       <div>
         <p class="name">Ahmed Bendaly</p>
         <p class="tag">Data stories about Tunisia, culture and sport.</p>
@@ -50,8 +62,8 @@
   @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap');
   .site-footer {
     margin-top: 5rem; padding: 2.2rem 1.5rem 1.4rem;
-    border-top: 1px solid rgba(46, 58, 64, .12);
-    font-family: 'Jost', -apple-system, BlinkMacSystemFont, sans-serif; color: #5E6B70;
+    border-top: 1px solid var(--f-border); background: var(--f-bg);
+    font-family: 'Jost', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--f-muted);
     -webkit-text-size-adjust: 100%;
   }
   .inner {
@@ -59,22 +71,22 @@
     max-width: 1000px; margin: 0 auto;
   }
   .brand { flex: 1 1 240px; min-width: 0; display: flex; align-items: center; gap: .9rem; }
-  .me { flex: 0 0 auto; display: block; width: 48px; height: 64px; object-fit: contain; }
-  .name { margin: 0; font-weight: 500; font-size: 1.1rem; color: #2E3A40; }
+  .me { flex: 0 0 auto; display: block; line-height: 0; }
+  .name { margin: 0; font-weight: 500; font-size: 1.1rem; color: var(--f-ink); }
   .tag { margin: .25rem 0 0; font-weight: 300; font-size: .95rem; }
   .links { display: flex; flex-direction: column; gap: .4rem; flex: 0 0 auto; }
-  .links a { color: #2E3A40; text-decoration: none; font-weight: 400; font-size: 1rem; }
-  .links a:hover { color: #B5523B; }
+  .links a { color: var(--f-ink); text-decoration: none; font-weight: 400; font-size: 1rem; }
+  .links a:hover { color: var(--f-hover); }
   .social { flex: 0 0 auto; }
   .label { margin: 0 0 .5rem; font-weight: 500; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
   .icons { display: flex; gap: .6rem; }
   .icons a {
     display: flex; align-items: center; justify-content: center; flex: 0 0 auto;
     width: 40px; height: 40px; border-radius: 50%;
-    background: rgba(30, 91, 140, .08); color: #1E5B8C;
+    background: color-mix(in srgb, var(--f-accent) 10%, transparent); color: var(--f-accent);
     -webkit-transition: background .15s, color .15s, -webkit-transform .15s; transition: background .15s, color .15s, transform .15s;
   }
-  .icons a:hover { background: #1E5B8C; color: #FFFFFF; -webkit-transform: translateY(-2px); transform: translateY(-2px); }
+  .icons a:hover { background: var(--f-accent); color: #FFFFFF; -webkit-transform: translateY(-2px); transform: translateY(-2px); }
   .icons svg { display: block; width: 22px; height: 22px; flex: 0 0 auto; fill: currentColor; }
   .copy { margin: 1.8rem 0 0; text-align: center; font-weight: 300; font-size: .85rem; }
   @media (max-width: 600px) {

@@ -157,7 +157,7 @@
           <div
             class="cardwrap"
             style="--i:{i}; --z:{1000 - i};"
-            out:send={{ key: card.cycle3pos, ...(isTouchDevice ? { duration: 0 } : {}) }}>
+            out:send|local={{ key: card.cycle3pos, ...(isTouchDevice ? { duration: 0 } : {}) }}>
             <img class="card-front" src={cardback} alt={`Card ${card.value} of ${card.suit}`} />
           </div>
         {/each}
@@ -172,7 +172,7 @@
             <div
               class="cardwrap2"
               style="--i:{i}; --z:{1000 + i};"
-              in:receive={{ key: card.cycle3pos }}>
+              in:receive|local={{ key: card.cycle3pos }}>
               <!-- back shows first; front after flip when it's the last card -->
               <div class="flip3d" class:is-flipped={revealFlipped && i === lastIndex}>
                 <img class="face back"  src={cardback}           alt="Card back" />

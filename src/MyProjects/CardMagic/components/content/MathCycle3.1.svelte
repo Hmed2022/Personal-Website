@@ -153,11 +153,11 @@
       <h1><u>The Third Deal</u></h1>
       <div class="header-text">
         {#if !showDetails}
-          <p in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
+          <p in:fade|local={{ duration: 300 }} out:fade|local={{ duration: 200 }}>
             One last deal, the same way: 1, 2, 3, 1, 2, 3… <br />Here's where your card went.
           </p>
         {:else}
-          <p class="detail-text" bind:this={detailNote} in:fade={{ duration: 300 }} out:fade={{ duration: 200 }}>
+          <p class="detail-text" bind:this={detailNote} in:fade|local={{ duration: 300 }} out:fade|local={{ duration: 200 }}>
             The 3 cards that could still be yours were at positions 13, 14 and 15,
             right next to each other. Dealing sends one to each pile, and each
             lands 5th of 9: the exact middle of its pile.
