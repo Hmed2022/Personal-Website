@@ -99,13 +99,13 @@ export const arenas = [
   t('Houston Rockets', 'Toyota Center', 'West', 'Rockets', 'hou'),
   t('LA Clippers', 'Intuit Dome', 'West', 'Clip'),
   t('Los Angeles Lakers', 'Crypto.com Arena', 'West', 'Lakers'),
-  t('Memphis Grizzlies', 'FedExForum', 'West', 'Memphis'),
+  t('Memphis Grizzlies', 'FedExForum', 'West', 'Memphis', 'grizz'),
   t('Minnesota Timberwolves', 'Target Center', 'West', 'Timber', 'wolves'),
   t('New Orleans Pelicans', 'Smoothie King Center', 'West', 'Pelicans', 'peli'),
   t('Oklahoma City Thunder', 'Paycom Center', 'West', 'Thunder', 'okc'),
   t('Phoenix Suns', 'Footprint Center', 'West', 'Suns'),
   t('Portland Trail Blazers', 'Moda Center', 'West', 'Portland'),
   t('Sacramento Kings', 'Golden 1 Center', 'West', 'Kings'),
-  t('San Antonio Spurs', 'Frost Bank Center', 'West', 'Spurs'),
+  t('San Antonio Spurs', 'Frost Bank Center', 'West', 'Spurs', 'spur'),
   t('Utah Jazz', 'Delta Center', 'West', 'Jazz')
 ];

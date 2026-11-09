@@ -52,9 +52,19 @@
       <p class="hi">Away from the keyboard</p>
       <h1>A <span class="mark">stranger</span>, until I'm not.</h1>
       <p class="lede">
-        When I'm not making data stories, I'm usually outside: walking somewhere new, chasing a view or
-        a game. The best part of all of it is the people I meet on the way. Volunteering is how I give
-        some of that back, and a good excuse to make friends from all over the world.
+        Certified nerd: manga
+        (<a class="op" href="https://www.viz.com/one-piece" target="_blank" rel="noopener noreferrer">One Piece<svg class="straw-hat" viewBox="0 0 40 22" aria-hidden="true"><ellipse cx="20" cy="17" rx="19" ry="4.2" fill="#F2C94C" stroke="#8A5A1E" stroke-width="1.2"/><path d="M9 16.5C9 7 13 3 20 3s11 4 11 13.5Z" fill="#F2C94C" stroke="#8A5A1E" stroke-width="1.2"/><path d="M9.3 13.2h21.4v3.3H9.3Z" fill="#D7263D"/><path d="M13 7.5c2-1 4-1.4 7-1.4M14 10.5c3-.8 8-.8 12 0" stroke="#C9A23A" stroke-width=".8" fill="none"/></svg></a>,
+        <a href="https://www.viz.com/hunter-x-hunter" target="_blank" rel="noopener noreferrer">HxH</a>), non-fiction
+        books, and an arguably unhealthy number of
+        <a href="https://www.catan.com/" target="_blank" rel="noopener noreferrer">Catan</a> games. I play soccer and
+        basketball (knees weak, arms are heavy, <span class="d313">313!</span>) and hit the gym, but walking is my
+        favorite hobby. It clears my head, and more than a few of my projects started somewhere around mile two.
+      </p>
+      <p class="lede">
+        I'm drawn to new things: a city I've never explored, a subject I know nothing about, or a room full
+        of strangers at a volunteering gig. I'm usually starting from scratch, and that's exactly what I
+        enjoy about it. There's something exciting about being a stranger, figuring things out, and seeing
+        where curiosity takes you.
       </p>
       <!-- "On this page" buttons (Volunteering · NBA bucket list) removed for now -->
     </section>
@@ -119,7 +129,8 @@
     <section class="arenas" id="arenas">
       <h2 class="brush red"><span>NBA bucket list</span></h2>
       <p class="arena-intro">
-        One of my life goals is to watch a game in every NBA arena. Here's how far I've got.
+        I've been an NBA fan for as long as I can remember, so one of my life goals is to watch a game in
+        every NBA arena. Here's how far I've got.
       </p>
 
       <div class="progress" role="img" aria-label="{visitedCount} of {arenas.length} arenas visited">
@@ -146,8 +157,10 @@
               on:click={() => { gallery = [{ photo: a.photo, title: a.name, sub: a.arena }]; gi = 0; }}
             >
               <img src={a.logo} alt="" loading="lazy" />
-              <span class="tname">{a.name}</span>
-              <span class="tag">{a.visited ? '✓ Visited' : 'Not yet'}</span>
+              <span class="label">
+                <span class="tname">{a.name}</span>
+                <span class="tag">{a.visited ? '✓ Visited' : 'Not yet'}</span>
+              </span>
             </button>
           </li>
         {/each}
@@ -192,6 +205,22 @@
   h1 { margin: 0; font-weight: 500; font-size: clamp(1.8rem, 3.4vw, 2.6rem); line-height: 1.2; }
   .mark { position: relative; white-space: nowrap; color: var(--blue); }
   .mark::after { content: ''; position: absolute; left: -.1em; right: -.1em; bottom: .05em; height: .32em; z-index: -1; background: var(--gold); opacity: .45; border-radius: 3px; transform: skewX(-8deg); }
+  /* "313" (Detroit) badge in Pistons red and royal blue; swaps every 3 s like "Go Blue!" on the home page */
+  .d313 {
+    --pred: #C8102E; --pblue: #1D42BA;
+    display: inline-block; margin: 0 .2rem 0 .25rem; padding: 0 .45em .05em; border-radius: 6px;
+    font-weight: 700; font-size: .92em; color: #FFFFFF; letter-spacing: .03em;
+    background: var(--pred); box-shadow: 2px 2px 0 var(--pblue); transform: rotate(-3deg);
+    animation: d313 6s ease-in-out infinite;
+  }
+  @keyframes d313 {
+    0%, 45%  { background: var(--pred);  box-shadow: 2px 2px 0 var(--pblue); }
+    50%, 95% { background: var(--pblue); box-shadow: 2px 2px 0 var(--pred); }
+    100%     { background: var(--pred);  box-shadow: 2px 2px 0 var(--pblue); }
+  }
+  /* little straw hat after "One Piece"; tips its brim on hover */
+  .straw-hat { display: inline-block; width: 1.25em; height: .7em; margin-left: .2em; vertical-align: .05em; transform: rotate(-12deg); transform-origin: 30% 80%; transition: transform .25s; }
+  .op:hover .straw-hat, .op:focus-visible .straw-hat { transform: rotate(8deg) translateY(-2px); }
   .lede { margin: 1.2rem auto 0; font-size: 1.12rem; font-weight: 300; line-height: 1.7; color: var(--muted); }
 
   /* headings */
@@ -254,14 +283,15 @@
   .tabs button { font: 500 1rem 'Jost', sans-serif; padding: .4rem 1.2rem; border: 0; border-radius: 999px; background: none; color: var(--ink); cursor: pointer; }
   .tabs button.active { background: var(--terra); color: #FFFFFF; }
   .conf-count { margin: .7rem 0 0; color: var(--muted); }
-  .grid { list-style: none; padding: 0; margin: 1.8rem 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .9rem; }
+  .grid { list-style: none; padding: 0; margin: 1.8rem 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: .9rem; }
   .team {
-    width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; gap: .35rem;
+    position: relative; overflow: hidden;
+    width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .35rem;
     padding: .8rem .6rem 1rem; border: 2px solid transparent; border-radius: 14px; background: #F3F1EE;
     font: inherit; color: var(--muted); cursor: default; transition: transform .15s, box-shadow .15s;
   }
   /* the logo PNGs have white (not transparent) backgrounds: multiply drops the white on any card colour */
-  .team img { width: 104px; height: 104px; object-fit: contain; mix-blend-mode: multiply; filter: grayscale(1); opacity: .45; }
+  .team img { width: 150px; height: 150px; object-fit: contain; mix-blend-mode: multiply; filter: grayscale(1); opacity: .45; }
   .team.visited { background: #FFFFFF; border-color: rgba(181, 82, 59, .25); color: var(--ink); box-shadow: 0 4px 14px rgba(46, 58, 64, .08); }
   .team.visited img { filter: none; opacity: 1; }
   .team:not(:disabled) { cursor: zoom-in; }
@@ -269,6 +299,17 @@
   .tname { font-size: .92rem; font-weight: 500; line-height: 1.25; }
   .tag { font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
   .team.visited .tag { color: var(--terra); }
+  .label { display: flex; flex-direction: column; align-items: center; gap: .15rem; }
+  /* with a mouse: just the logos; the team name slides up over the card on hover / keyboard focus.
+     (Touch screens can't hover, so they keep the names visible under each logo.) */
+  @media (hover: hover) {
+    .label {
+      position: absolute; left: 6px; right: 6px; bottom: 6px; padding: .4rem .4rem .45rem;
+      border-radius: 10px; background: rgba(255, 255, 255, .95); box-shadow: 0 2px 10px rgba(46, 58, 64, .12);
+      opacity: 0; transform: translateY(6px); transition: opacity .15s, transform .15s; pointer-events: none;
+    }
+    .team:hover .label, .team:focus-visible .label { opacity: 1; transform: none; }
+  }
   .hint { margin: 1.2rem 0 0; font-size: .95rem; color: var(--muted); }
 
   .contact { margin: 1rem auto 3rem; padding: 0 1.5rem; text-align: center; font-size: 1.1rem; }
@@ -288,9 +329,9 @@
   @media (max-width: 600px) {
     .feat-body { padding: 1.3rem; }
     .mosaic { min-height: 240px; }
-    .grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
-    .team img { width: 80px; height: 80px; }
+    .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    .team img { width: 110px; height: 110px; }
     h2.brush span { font-size: 1.8rem; }
   }
-  @media (prefers-reduced-motion: reduce) { .tile img, .team, .vol-card { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .tile img, .team, .vol-card, .label { transition: none; } .d313 { animation: none; } .straw-hat { transition: none; } }
 </style>

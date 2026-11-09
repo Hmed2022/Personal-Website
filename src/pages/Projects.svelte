@@ -9,9 +9,9 @@
 <!-- <Header /> -->
 <!-- page intro (the grid and its filters come from ProjectsAnimated) -->
 <section class="intro">
-	<p class="hi">The work</p>
-	<h1>Data, turned into <span class="mark">stories</span>.</h1>
-	<p class="lede">Interactive stories and data visualizations about Tunisia, culture and sport.{#if showFilters} Use the filters to browse by topic.{/if}</p>
+	<p class="hi">Each project, I'm Leghreeb again</p>
+	<h1>It usually begins with a <span class="mark">question</span>.</h1>
+	<p class="lede">Most of these start with a question I couldn't let go of, so I went looking for the answer in the data. Sometimes I have a take I want to share, but usually I'm just curious. Often I start as a complete <a href="/#/leghreeb">stranger</a> to the subject and come out the other side an expert.{#if showFilters} Use the filters to browse by topic.{/if}</p>
 </section>
 <Projects/>
 
@@ -28,5 +28,7 @@
 	h1 { margin: 0; font-weight: 500; font-size: clamp(1.8rem, 3.4vw, 2.6rem); line-height: 1.2; }
 	.mark { position: relative; white-space: nowrap; color: #1E5B8C; }
 	.mark::after { content: ''; position: absolute; left: -.1em; right: -.1em; bottom: .05em; height: .32em; z-index: -1; background: #D9A441; opacity: .45; border-radius: 3px; transform: skewX(-8deg); }
+	.lede a { color: #1E5B8C; text-decoration-color: #D9A441; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+	.lede a:hover { color: #B5523B; }
 	.lede { margin: 1.2rem auto 0; font-size: 1.12rem; font-weight: 300; line-height: 1.7; color: #5E6B70; }
 </style>
