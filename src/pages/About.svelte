@@ -114,7 +114,7 @@
       </figure>
       <div class="intro-text">
       <p class="lede">
-        Certified nerd: manga
+        I like manga
         (<a class="op" href="https://www.viz.com/one-piece" target="_blank" rel="noopener noreferrer">One Piece</a>,
         <a href="https://www.viz.com/hunter-x-hunter" target="_blank" rel="noopener noreferrer">HxH</a>), non-fiction
         books, and an arguably unhealthy number of
@@ -339,6 +339,13 @@
     .intro-body { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; text-align: center; }
     .jerseys { justify-self: center; }
     .captain { width: 150px; height: 233px; }
+    .jerseys { width: 100%; max-width: 260px; }
+    .jerseys figcaption { height: 5.6rem; }
+    .why { height: auto; max-height: 5.4rem; }
+    /* the hat lifts straight up on phones so he stays centred */
+    .captain:hover :global(.hat), .captain.peek :global(.hat) { transform: translate(0, -55%) rotate(-6deg); }
+    .captain:is([data-outfit="jebba"], [data-outfit="dingri"], [data-outfit="kef"]):hover :global(.hat),
+    .captain.peek:is([data-outfit="jebba"], [data-outfit="dingri"], [data-outfit="kef"]) :global(.hat) { transform: translate(0, -200px) rotate(-6deg); }
   }
 
   /* headings */

@@ -39,7 +39,8 @@
   .corner:focus-visible { outline: 2px solid var(--logo-ink); outline-offset: 4px; border-radius: 4px; }
 
   @media (max-width: 600px) {
-    .corner { top: calc(var(--logo-top) * .7); left: calc(var(--logo-left) * .67); height: calc(var(--logo-h) * 0.75); width: calc(var(--logo-h) * 0.75 * 0.482); }
+    /* phones: no corner logo on the project pages (it covered their titles) */
+    .corner { display: none; }
   }
   @media (prefers-reduced-motion: reduce) { .corner { transition: none; } }
 </style>

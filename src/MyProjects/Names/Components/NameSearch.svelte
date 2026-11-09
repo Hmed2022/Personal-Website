@@ -204,11 +204,12 @@
 
   @media (max-width: 600px) {
     .name-search { margin-top: 1rem; }
-    li { grid-template-columns: 2rem 1fr auto; gap: .5rem; }
-    .arabic { grid-column: 2; grid-row: 1; font-size: 1.05rem; text-align: start; }
-    .en { grid-column: 2; grid-row: 2; }
-    .rank { grid-column: 1; grid-row: span 2; }
-    .cat { grid-column: 3; grid-row: span 2; }
+    /* phones: English name + meaning on the left, Arabic name + badge on the right (same line) */
+    li { grid-template-columns: 2rem minmax(0, 1fr) auto; column-gap: .6rem; row-gap: .15rem; }
+    .rank { grid-column: 1; grid-row: 1 / span 2; }
+    .en { grid-column: 2; grid-row: 1 / span 2; }
+    .arabic { grid-column: 3; grid-row: 1; font-size: 1.05rem; justify-self: end; }
+    .cat { grid-column: 3; grid-row: 2; justify-self: end; }
     .keys { display: none; }
   }
 </style>

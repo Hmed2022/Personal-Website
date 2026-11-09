@@ -47,10 +47,10 @@ import starUrl from "../../../assets/Projects/AllStar/star.png"
       display: block;
     }
 
+    /* phones: keep the NBA logo, smaller, beside the title */
     @media (max-width: 768px) {
-    .container2 {
-        display: none; /* Hide .container2 on smaller screens */
-    }
+    .container2 { display: block; flex: 0 0 auto; }
+    .container2 :global(.nba) { height: 130px; margin: 0 0 0 .5rem; }
 }
 
     .of{
@@ -78,6 +78,11 @@ import starUrl from "../../../assets/Projects/AllStar/star.png"
     h1 {
         font-size: 5.5em; 
     }
+}
+/* phones: a bit smaller so the title and the NBA logo both fit */
+@media (max-width: 480px) {
+    h1 { font-size: 4.6em; }
+    .star { height: 44px; }
 }
     .title {
         margin-top: 15%;

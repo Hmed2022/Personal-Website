@@ -1,4 +1,5 @@
 <script>
+    import Thumb from './Thumb.svelte';
     import {fade} from 'svelte/transition'
     import {onMount} from 'svelte'
     import { imageData, showFilters } from './images.js';
@@ -54,7 +55,7 @@
          description (e.g. The Pudding) stay real, separate links instead of links-inside-a-link. -->
     <article class="card__wrapper" transition:fade|local={{delay: i * 50}}>
         <div class="card__image-container">
-            <img class="image" src={image.url} alt={image.alt || `Preview of ${image.title}`} />
+            <Thumb class="image" src={image.url} video={image.video} alt={image.alt || `Preview of ${image.title}`} />
         </div>
         <div class="card__content">
             <div class="card__category-row">
@@ -155,7 +156,7 @@
         background-color: white;
     }
 
-    .image {
+    .card__image-container :global(.image) {
         width: 100%;
         height: auto;
         display: block;

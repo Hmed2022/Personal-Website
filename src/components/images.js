@@ -1,6 +1,7 @@
 import nbaUrl from "../assets/Thumbnails/NBAArticle.gif";
 import klayUrl from "../assets/Thumbnails/klay.png";
 import CardMagicUrl from "../assets/Thumbnails/magic.gif";
+// import CardMagicVideo from "../assets/Thumbnails/magic.mp4";   // TODO: re-export without black bars, ~10 s, then add `video: CardMagicVideo` below (and use magic.png as `url`)
 import tunUrl from "../assets/Thumbnails/Title-Tuninfo.gif";
 import namesUrl from "../assets/Thumbnails/names.gif";
 

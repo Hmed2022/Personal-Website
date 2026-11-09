@@ -5,6 +5,7 @@
   import ProjectsAnimated from '../components/ProjectsAnimated.svelte';
   import Footer from '../components/footer.svelte';
   import SiteLogo from '../components/SiteLogo.svelte';
+  import Thumb from '../components/Thumb.svelte';
   import { imageData } from '../components/images.js';
 
   // featured = a project marked `featured: true` in images.js, otherwise the top-ranked visible one
@@ -54,7 +55,7 @@
         <!-- the title is the one link and stretches over the card, so the description's own links
              (e.g. The Pudding) aren't nested inside another link -->
         <article class="feat-card">
-          <span class="feat-img"><img src={featured.url} alt={featured.alt || `Preview of ${featured.title}`} /></span>
+          <span class="feat-img"><Thumb src={featured.url} video={featured.video} alt={featured.alt || `Preview of ${featured.title}`} /></span>
           <div class="feat-body">
             <span class="feat-tags">{#each tags(featured) as t}<span>{t}</span>{/each}{#if featured.lang}<span class="lang">{featured.lang}</span>{/if}</span>
             <h3 class="feat-title" id="feat-title"><a class="feat-link" href={featured.href}>{featured.title}</a></h3>
@@ -158,7 +159,7 @@
   }
   .feat-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(46, 58, 64, .18); }
   .feat-img { display: block; background: #EEE; }
-  .feat-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .feat-img :global(img), .feat-img :global(video) { display: block; width: 100%; height: 100%; object-fit: cover; }
   .feat-body { display: flex; flex-direction: column; gap: .7rem; padding: 1.8rem; }
   .feat-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
   .feat-tags span { font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--terra); background: rgba(181, 82, 59, .1); padding: .2rem .55rem; border-radius: 999px; }

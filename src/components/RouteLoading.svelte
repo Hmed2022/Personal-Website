@@ -6,11 +6,20 @@
 </script>
 
 <div class="loading" role="status" aria-live="polite">
+  <!-- roughens the drops' edges so they wobble like the hand-drawn lines -->
+  <svg class="defs" aria-hidden="true" focusable="false"><filter id="drop-sketch" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="0.35" numOctaves="2" seed="5" /><feDisplacementMap in="SourceGraphic" scale="1.6" xChannelSelector="R" yChannelSelector="G" /></filter></svg>
   <div class="worker" aria-hidden="true">
     {#each ['left', 'right'] as side}
       <span class="sweat {side}">
         {#each DROPS as i}
-          <svg class="drop d{i}" viewBox="0 0 10 14"><path d="M5 0C5 0 0 6.2 0 9a5 5 0 0 0 10 0C10 6.2 5 0 5 0Z" /></svg>
+          <!-- sketched like the drawing: colour laid slightly off a wobbly ink outline, plus a little shine -->
+          <svg class="drop d{i}" viewBox="-2 -2 24 32">
+            <g filter="url(#drop-sketch)" stroke-linecap="round" stroke-linejoin="round">
+              <path transform="translate(1.2 1)" d="M10,1 C9,4 2,11.5 2,18.5 a8,8 0 0 0 16,0 C18,11.5 11,4 10,1Z" fill="#9ED8F5" />
+              <path d="M10,1 C9,4 2,11.5 2,18.5 a8,8 0 0 0 16,0 C18,11.5 11,4 10,1Z" fill="none" stroke="#2E3A40" stroke-width="2.4" />
+              <path d="M6.4,18 C6.2,15.2 7.4,12.8 9,10.8" fill="none" stroke="#FFFFFF" stroke-width="1.8" />
+            </g>
+          </svg>
         {/each}
       </span>
     {/each}
@@ -36,8 +45,7 @@
   .sweat.left { left: 22px; }
   .sweat.right { right: 22px; transform: scaleX(-1); }  /* mirror of the left side */
   .drop {
-    position: absolute; right: 0; width: 9px; height: 13px; opacity: 0;
-    fill: #8FD3F4; stroke: #1E5B8C; stroke-width: 1.2;
+    position: absolute; right: 0; width: 12px; height: 16px; opacity: 0; overflow: visible;
     animation: fly 1.2s ease-out infinite;
   }
   .d0 { top: 2px;  --dx: -18px; --dy: 4px;  --r: -35deg; animation-delay: 0s; }
@@ -50,6 +58,7 @@
   }
 
   .caption { margin: 0; font-family: 'dkzonnig', 'Jost', sans-serif; font-size: 1.3rem; color: #5E6B70; }
+  .defs { position: absolute; width: 0; height: 0; overflow: hidden; }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
   @media (prefers-reduced-motion: reduce) {
