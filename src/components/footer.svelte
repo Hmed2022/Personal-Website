@@ -11,7 +11,7 @@
   export let theme = {};
   const DEFAULT = {
     ink: '#2E3A40', muted: '#5E6B70', accent: '#1E5B8C', hover: '#B5523B', border: 'rgba(46, 58, 64, .12)', bg: 'transparent',
-    logoBg: '#008ec6', logoFill: '#FFFFFF', logoInk: '#000000'
+    logoBg: '#008ec6', logoFill: 'var(--me-fill, #FFFFFF)', logoInk: 'var(--me-ink, #000000)'
   };
   $: t = { ...DEFAULT, ...theme };
   $: vars = `--f-ink:${t.ink}; --f-muted:${t.muted}; --f-accent:${t.accent}; --f-hover:${t.hover}; --f-border:${t.border}; --f-bg:${t.bg};`;
@@ -29,7 +29,7 @@
   ];
 </script>
 
-<footer class="site-footer" style={vars}>
+<footer class="site-footer" class:default={!Object.keys(theme).length} style={vars}>
   <div class="inner">
     <div class="brand">
       <span class="me"><SiteLogo inline size={64} bg={t.logoBg} fill={t.logoFill} ink={t.logoInk} /></span>
@@ -89,6 +89,12 @@
   .icons a:hover { background: var(--f-accent); color: #FFFFFF; -webkit-transform: translateY(-2px); transform: translateY(-2px); }
   .icons svg { display: block; width: 22px; height: 22px; flex: 0 0 auto; fill: currentColor; }
   .copy { margin: 1.8rem 0 0; text-align: center; font-weight: 300; font-size: .85rem; }
+  /* night mode: only the site's default footer (a project's own footer theme is left alone) */
+  :global(html[data-theme="dark"]) .site-footer.default {
+    --f-ink: #E9E4DA !important; --f-muted: #A7B3BB !important; --f-accent: #8CBDE6 !important;
+    --f-hover: #E8967A !important; --f-border: rgba(233, 228, 218, .12) !important;
+  }
+  :global(html[data-theme="dark"]) .site-footer.default .icons a:hover { color: #14202A; }
   @media (max-width: 600px) {
     .inner { flex-direction: column; align-items: center; text-align: center; }
     .brand { flex: none; flex-direction: column; gap: .5rem; }

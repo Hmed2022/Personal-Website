@@ -4,7 +4,7 @@
   import PageTransitions from '../components/PageTransitions.svelte';
   import ProjectsAnimated from '../components/ProjectsAnimated.svelte';
   import Footer from '../components/footer.svelte';
-  import PhotoMe from '../assets/PhotoMe.svg';
+  import SiteLogo from '../components/SiteLogo.svelte';
   import { imageData } from '../components/images.js';
 
   // featured = a project marked `featured: true` in images.js, otherwise the top-ranked visible one
@@ -33,7 +33,7 @@
       <div class="portrait-wrap">
         <a class="portrait" href="/#/leghreeb" aria-label="About Leghreeb, Ahmed's drawing">
           <span class="sun" aria-hidden="true"></span>
-          <img src={PhotoMe} alt="Leghreeb: a hand-drawn portrait of Ahmed in a chechia" />
+          <span class="me" role="img" aria-label="Leghreeb: a hand-drawn portrait of Ahmed in a chechia"><SiteLogo inline size={300} bg="#008ec6" fill="var(--me-fill, #FFFFFF)" ink="var(--me-ink, #000000)" /></span>
         </a>
         <!-- "this is Leghreeb" note + drawn arrow; always shown, and leads to the About Leghreeb page -->
         <a class="intro-note" href="/#/leghreeb">
@@ -115,8 +115,8 @@
 
   .portrait { position: relative; display: grid; place-items: center; justify-self: center; width: min(320px, 100%); height: min(320px, 80vw); }
   .sun { position: absolute; inset: 6%; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #F6E2B3, #EFCF8C); }
-  .portrait img { position: relative; display: block; height: 300px; width: 220px; max-width: 100%; object-fit: contain; animation: rock 3s ease-in-out infinite; transform-origin: 50% 85%; }
-  .portrait:hover img { animation-play-state: paused; }
+  .portrait .me { position: relative; display: block; line-height: 0; animation: rock 3s ease-in-out infinite; transform-origin: 50% 85%; }
+  .portrait:hover .me { animation-play-state: paused; }
   @keyframes rock { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-5deg); } 75% { transform: rotate(5deg); } }
 
   /* ---------- "this is Leghreeb" note ---------- */
@@ -212,12 +212,28 @@
     .intro-text .ar { display: block; margin: .1rem 0 0; }
     .intro-text .ar { font-size: 1.1rem; }
     .intro-arrow { width: 84px; height: 72px; margin-top: 0; margin-inline-end: 0; margin-inline-start: -.2rem; transform: scaleX(-1); }
-    .portrait img { height: 180px; width: 135px; }
+    .portrait .me :global(.logo) { height: 180px; width: 87px; }
     .role { margin-inline: auto; }
     .cta { justify-content: center; }
     .feat-card { grid-template-columns: minmax(0, 1fr); }
     .feat-body { padding: 1.3rem; }
     h2.brush span { font-size: 1.8rem; }
   }
-  @media (prefers-reduced-motion: reduce) { .btn, .feat-card { transition: none; } .portrait img { animation: none; } .intro-arrow .stroke { animation: none; stroke-dashoffset: 0; } .go-blue { animation: none; } }
+  /* ---------- night mode (toggle in the header) ---------- */
+  :global(html[data-theme="dark"]) .home { --blue: #8CBDE6; --terra: #E8967A; --gold: #E2B657; --ink: #E9E4DA; --muted: #A7B3BB; --paper: #1A2A36; }
+  :global(html[data-theme="dark"]) .btn.primary { color: #14202A; }
+  :global(html[data-theme="dark"]) .btn.primary:hover { background: #B0D2EE; color: #14202A; }
+  :global(html[data-theme="dark"]) h2.brush span { color: #14202A; }
+  /* the sun behind the portrait becomes a moon */
+  :global(html[data-theme="dark"]) .sun { background: radial-gradient(circle at 40% 35%, #F1EEE4, #C9CED2); box-shadow: 0 0 60px rgba(241, 238, 228, .18); }
+  :global(html[data-theme="dark"]) .feat-card { background: #1F303D; box-shadow: 0 10px 30px rgba(0, 0, 0, .35); }
+  :global(html[data-theme="dark"]) .feat-img { background: #26394A; }
+  :global(html[data-theme="dark"]) .feat-tags span { background: rgba(232, 150, 122, .14); }
+  :global(html[data-theme="dark"]) .feat-tags .lang { background: rgba(140, 189, 230, .14); }
+  :global(html[data-theme="dark"]) .wolverine { color: #FFCB05; }
+  :global(html[data-theme="dark"]) .wolverine::after { background: #2C5A8C; }
+  :global(html[data-theme="dark"]) .umich a { color: #FFCB05; }
+  :global(html[data-theme="dark"]) .umich a:hover { color: var(--blue); }
+
+  @media (prefers-reduced-motion: reduce) { .btn, .feat-card { transition: none; } .portrait .me { animation: none; } .intro-arrow .stroke { animation: none; stroke-dashoffset: 0; } .go-blue { animation: none; } }
 </style>

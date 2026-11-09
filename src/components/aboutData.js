@@ -67,11 +67,12 @@ export const volunteering = [
 // ---------- NBA arena bucket list ----------
 // To tick off an arena: set `visited: true` (and drop a photo into src/assets/NBALogo/web/ and
 // set `photo` to its file name if you have one).
-const logos = import.meta.glob('../assets/NBALogo/*.png', { eager: true, import: 'default' });
+// transparent-background copies of the logos (made from the originals in NBALogo/), so night mode can outline them
+const logos = import.meta.glob('../assets/NBALogo/clear/*.png', { eager: true, import: 'default' });
 const pics = import.meta.glob('../assets/NBALogo/web/*.jpg', { eager: true, import: 'default' });
 const t = (name, arena, conf, logo, photo = null, visited = !!photo) => ({
   name, arena, conf, visited,
-  logo: logos[`../assets/NBALogo/${logo}.png`],
+  logo: logos[`../assets/NBALogo/clear/${logo}.png`],
   photo: photo ? pics[`../assets/NBALogo/web/${photo}.jpg`] : null
 });
 

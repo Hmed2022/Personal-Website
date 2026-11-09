@@ -8,6 +8,7 @@
 	import Home from './pages/HomeNew.svelte';      // the landing page stays in the main bundle
 
 	import { onMount } from 'svelte';
+	import { theme, PERSONAL_PAGES } from './components/theme.js';
 
 	// ---- Scroll position between pages ----
 	// The browser keeps the scroll offset when only the #hash changes, so opening a project from
@@ -108,6 +109,9 @@
     normalizedPath === '/klay' ||
     normalizedPath === '/cardmagic';
 
+
+  // night mode applies to the personal pages only; project stories always keep their own colours
+  $: document.documentElement.setAttribute('data-theme', PERSONAL_PAGES.includes(normalizedPath) && $theme === 'dark' ? 'dark' : 'light');
 </script>
 
 {#if !hideHeader}

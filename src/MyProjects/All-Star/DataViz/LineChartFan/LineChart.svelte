@@ -104,35 +104,40 @@ const setShow = function () {
   }
   
   /* Scrollytelling CSS */
+  /* Cards sit on the right, narrow, over the chart's empty upper-right area (the lines are low after
+     ~2005), so they don't cover the curves. Phones: full width, as there's no room beside the chart. */
   .step {
     height: 80vh;
     display: flex;
-    place-items: center;
-    justify-content: center;
+    align-items: center;
+    justify-content: flex-end;
   }
 
   .step-content {
-    background: whitesmoke;
-    color: #ccc;
+    max-width: 340px;
+    background: rgba(249, 249, 249, .94);
+    color: #6F6A64;   /* inactive cards: muted but readable (was #ccc) */
     border-radius: 5px;
     padding: 0.5rem 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-		margin: 10%;
+		margin: 0 6% 0 0;
     transition: background 500ms ease;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
     z-index: 10;
 		
   }
 
-	.step-content:hover{
-		opacity: 0.2;
-	}
 
   .step.active .step-content {
     background: #f9f9f9;
     color: #403F3E;
+  }
+
+  @media (max-width: 768px) {
+    .step { justify-content: center; }
+    .step-content { max-width: none; margin: 0 5%; }
   }
 </style>
 

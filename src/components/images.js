@@ -13,7 +13,7 @@ export const imageData = [
     url: nbaUrl,
     rank: 1,
     title: "The Decline of the All-Star game",
-    desc: "Data Analysis | Data Vizualisation",
+    desc: "Data Analysis | Data Visualization",
     description:
       "An interactive data visualization exploring the declining viewership and engagement in NBA All-Star games over the years.",
     href: "/#/allstar",
@@ -41,7 +41,7 @@ export const imageData = [
     url: klayUrl,
     rank: 4,
     title: "Klay BBJ: A Mirror of Tunisian Society",
-    desc: "Data Analysis | Data Vizualisation",
+    desc: "Data Analysis | Data Visualization",
     description:
       "A case study on one of Tunisia's most iconic artists, and how his music mirrors the duality of Tunisian society.",
     href: "/#/klay",

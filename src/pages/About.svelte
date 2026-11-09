@@ -1,10 +1,35 @@
 <script>
   // "More about me": life outside the projects. Volunteering + the NBA arena bucket list.
   // All content lives in src/components/aboutData.js. Same palette as HomeNew.svelte.
+  import { onMount } from 'svelte';
   import { fade, scale } from 'svelte/transition';
   import PageTransitions from '../components/PageTransitions.svelte';
   import Footer from '../components/footer.svelte';
+  import meSvg from '../assets/PhotoMeThemed.svg?raw';
   import { volunteering, arenas } from '../components/aboutData.js';
+  import { buildCaptain, JERSEYS } from '../components/leghreebArt.js';
+  import { lookFor } from '../components/leghreebLooks.js';
+  import { theme, toggleTheme } from '../components/theme.js';
+
+  // Leghreeb's drawing + outfits live in leghreebArt.js; what he wears when is decided in leghreebLooks.js
+  const captain = buildCaptain(meSvg);
+
+  // current look (re-checked every minute)
+  let now = new Date();
+  $: look = lookFor(now);
+  $: dark = $theme === 'dark';
+
+  // rotate the jersey every 4 s (no auto-rotation with reduced motion).
+  let jIdx = 0;
+  let peek = false; // tap to tip the hat on touch screens
+  let timer;
+  const reduceMotion = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const startTimer = () => { clearInterval(timer); if (!reduceMotion) timer = setInterval(() => (jIdx = (jIdx + 1) % JERSEYS.length), 4000); };
+  onMount(() => {
+    startTimer();
+    const clock = setInterval(() => (now = new Date()), 60000);
+    return () => { clearInterval(timer); clearInterval(clock); };
+  });
 
   const visitedCount = arenas.filter((a) => a.visited).length;
   let conf = 'All';
@@ -51,21 +76,59 @@
     <section class="intro">
       <p class="hi">Away from the keyboard</p>
       <h1>A <span class="mark">stranger</span>, until I'm not.</h1>
+      <div class="intro-body">
+      <figure class="jerseys">
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <span class="captain" class:peek data-j={jIdx} data-outfit={look.outfit} data-face={look.face} aria-hidden="true" on:click={() => (peek = !peek)}>{@html captain}</span>
+        <figcaption>
+          {#if look.face === 'tired'}
+            <p class="why"><strong>I need to sleep…</strong>
+              {#if dark}Thanks for the night mode.{:else}<button type="button" class="link-btn inline" on:click={toggleTheme}>Turn on night mode</button>{/if}</p>
+          {:else if look.outfit === 'pajama'}
+            <p class="why"><strong>{look.title}</strong> {look.why}
+              {#if dark}Thanks for keeping the lights low.{:else}<button type="button" class="link-btn inline" on:click={toggleTheme}>Turn on night mode</button> so you don't wake him.{/if}</p>
+          {:else if look.outfit === 'jerseys'}
+            {#key jIdx}
+              <p class="why" in:fade={{ duration: 300 }}><strong>{JERSEYS[jIdx].title}</strong> {JERSEYS[jIdx].why}</p>
+            {/key}
+          {:else}
+            <p class="why"><strong>{look.title}</strong> {look.why}
+              {#if look.outfit === 'kef'}
+                <!-- sketched like the drawing: wavy edges, colour laid slightly off the ink lines -->
+                <svg class="ps-flag" viewBox="-6 -6 132 74" role="img" aria-label="Palestinian flag">
+                  <defs><filter id="ps-sketch" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="3.5" xChannelSelector="R" yChannelSelector="G"/></filter></defs>
+                  <g filter="url(#ps-sketch)" stroke-linejoin="round" stroke-linecap="round">
+                    <g transform="translate(2 1.5)">
+                      <path d="M0,2 C30,-3 60,6 120,0 L120,20 C60,26 30,17 0,22Z" fill="#1A1A1A"/>
+                      <path d="M0,22 C30,17 60,26 120,20 L120,40 C60,46 30,37 0,42Z" fill="#FBFAF6"/>
+                      <path d="M0,42 C30,37 60,46 120,40 L120,60 C60,66 30,57 0,62Z" fill="#14843F"/>
+                      <path d="M0,2 L46,32 L0,62Z" fill="#CE1126"/>
+                    </g>
+                    <path d="M0,2 C30,-3 60,6 120,0 L120,60 C60,66 30,57 0,62Z" fill="none" stroke="var(--ink)" stroke-width="3"/>
+                    <path d="M31,21 C46,20 64,25 120,20M31,43 C46,43 64,46 120,40M0,2 L46,32 L0,62" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+                  </g>
+                </svg>
+              {/if}</p>
+          {/if}
+        </figcaption>
+      </figure>
+      <div class="intro-text">
       <p class="lede">
         Certified nerd: manga
-        (<a class="op" href="https://www.viz.com/one-piece" target="_blank" rel="noopener noreferrer">One Piece<svg class="straw-hat" viewBox="0 0 40 22" aria-hidden="true"><ellipse cx="20" cy="17" rx="19" ry="4.2" fill="#F2C94C" stroke="#8A5A1E" stroke-width="1.2"/><path d="M9 16.5C9 7 13 3 20 3s11 4 11 13.5Z" fill="#F2C94C" stroke="#8A5A1E" stroke-width="1.2"/><path d="M9.3 13.2h21.4v3.3H9.3Z" fill="#D7263D"/><path d="M13 7.5c2-1 4-1.4 7-1.4M14 10.5c3-.8 8-.8 12 0" stroke="#C9A23A" stroke-width=".8" fill="none"/></svg></a>,
+        (<a class="op" href="https://www.viz.com/one-piece" target="_blank" rel="noopener noreferrer">One Piece</a>,
         <a href="https://www.viz.com/hunter-x-hunter" target="_blank" rel="noopener noreferrer">HxH</a>), non-fiction
         books, and an arguably unhealthy number of
-        <a href="https://www.catan.com/" target="_blank" rel="noopener noreferrer">Catan</a> games. I play soccer and
-        basketball (knees weak, arms are heavy, <span class="d313">313!</span>) and hit the gym, but walking is my
+        <a href="https://www.catan.com/" target="_blank" rel="noopener noreferrer">Catan</a> games. I'm a huge NBA fan{look.outfit === 'jerseys' ? ' (hence the jerseys)' : ''}. I play soccer and basketball (knees weak, arms are heavy, <span class="d313">313!</span>) and hit the gym, but walking is my
         favorite hobby. It clears my head, and more than a few of my projects started somewhere around mile two.
       </p>
       <p class="lede">
         I'm drawn to new things: a city I've never explored, a subject I know nothing about, or a room full
         of strangers at a volunteering gig. I'm usually starting from scratch, and that's exactly what I
-        enjoy about it. There's something exciting about being a stranger, figuring things out, and seeing
+        enjoy about it. There's something exciting about being a <span class="mark">stranger</span>, figuring things out, and seeing
         where curiosity takes you.
       </p>
+      </div>
+      </div>
       <!-- "On this page" buttons (Volunteering · NBA bucket list) removed for now -->
     </section>
 
@@ -200,7 +263,7 @@
   a:hover { color: var(--terra); }
 
   /* intro */
-  .intro { max-width: 46rem; margin: 0 auto; padding: 2.5rem 1.5rem 3rem; text-align: center; }
+  .intro { max-width: 58rem; margin: 0 auto; padding: 2.5rem 1.5rem 1rem; text-align: center; }
   .hi { margin: 0 0 .4rem; font-family: 'dkzonnig', 'Jost', sans-serif; font-size: 1.7rem; color: var(--terra); }
   h1 { margin: 0; font-weight: 500; font-size: clamp(1.8rem, 3.4vw, 2.6rem); line-height: 1.2; }
   .mark { position: relative; white-space: nowrap; color: var(--blue); }
@@ -218,10 +281,65 @@
     50%, 95% { background: var(--pblue); box-shadow: 2px 2px 0 var(--pred); }
     100%     { background: var(--pred);  box-shadow: 2px 2px 0 var(--pblue); }
   }
-  /* little straw hat after "One Piece"; tips its brim on hover */
-  .straw-hat { display: inline-block; width: 1.25em; height: .7em; margin-left: .2em; vertical-align: .05em; transform: rotate(-12deg); transform-origin: 30% 80%; transition: transform .25s; }
-  .op:hover .straw-hat, .op:focus-visible .straw-hat { transform: rotate(8deg) translateY(-2px); }
   .lede { margin: 1.2rem auto 0; font-size: 1.12rem; font-weight: 300; line-height: 1.7; color: var(--muted); }
+  /* Leghreeb (straw hat + 313 jersey) on the left, the two paragraphs on the right */
+  .intro-body { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 2.5rem; margin-top: 1.8rem; text-align: left; }
+  .intro-text .lede:first-child { margin-top: 0; }
+  .jerseys { margin: 0; width: 190px; overflow: visible; background: none; border-radius: 0; max-width: none; display: flex; flex-direction: column; align-items: center; gap: .5rem; }
+  /* fixed height so changing captions / bubbles never move the paragraphs beside it */
+  .jerseys figcaption { text-align: center; height: 8.6rem; box-sizing: border-box; padding: .3rem .2rem 0; }
+  /* fixed height (fits the longest caption) so the paragraphs beside it never move */
+  .why { margin: 0; height: 6.8em; overflow: hidden; font-size: .9rem; line-height: 1.4; color: var(--muted); }
+  .why strong { display: block; font-family: 'dkzonnig', 'Jost', sans-serif; font-weight: 400; font-size: 1.15rem; color: var(--ink); }
+  /* which outfit / face is showing (data-outfit, data-face on .captain; see leghreebLooks.js) */
+  .captain :global(.o-umich), .captain :global(.o-jebba), .captain :global(.o-dingri), .captain :global(.o-pajama), .captain :global(.o-kef),
+  .captain :global(.f-tired), .captain :global(.f-asleep), .captain :global(.chechia) { display: none; }
+  .captain[data-outfit="umich"] :global(.o-umich), .captain[data-outfit="jebba"] :global(.o-jebba),
+  .captain[data-outfit="dingri"] :global(.o-dingri), .captain[data-outfit="pajama"] :global(.o-pajama), .captain[data-outfit="kef"] :global(.o-kef),
+  .captain[data-face="tired"] :global(.f-tired), .captain[data-face="asleep"] :global(.f-asleep) { display: inline; }
+  .captain:not([data-outfit="jerseys"]) :global(.o-jerseys) { display: none; }
+  .captain:is([data-outfit="jebba"], [data-outfit="dingri"], [data-outfit="pajama"], [data-outfit="kef"]) :global(.o-arms) { display: none; }
+  /* the Michigan look raises the right arm to hold the foam finger */
+  .captain[data-outfit="umich"] :global(.arm-r) { display: none; }
+  /* chechia instead of the straw hat; no hat (and no brain peek) under the hood */
+  .captain:is([data-outfit="jebba"], [data-outfit="dingri"], [data-outfit="kef"]) :global(.straw) { display: none; }
+  .captain:is([data-outfit="jebba"], [data-outfit="dingri"], [data-outfit="kef"]) :global(.chechia) { display: inline; }
+  .captain[data-outfit="pajama"] :global(.hat), .captain[data-outfit="pajama"] :global(.brain) { display: none; }
+  .captain[data-outfit="pajama"] { cursor: default; }
+
+  .link-btn.inline { padding: 0; border: 0; background: none; font: inherit; color: var(--blue); text-decoration: underline; cursor: pointer; }
+
+  /* the foam finger sways from the wrist (slow, no flashing) */
+  .captain :global(.foam) { transform-box: fill-box; transform-origin: 50% 100%; animation: foam-wave 1.6s ease-in-out infinite alternate; }
+  @keyframes foam-wave { from { transform: rotate(-12deg); } to { transform: rotate(12deg); } }
+
+  .ps-flag { display: block; width: 66px; height: 37px; margin: .4rem auto 0; overflow: visible; }
+
+
+  .captain :global(.jersey) { opacity: 0; transition: opacity .6s; }
+  .captain[data-j="0"] :global(.j0), .captain[data-j="1"] :global(.j1), .captain[data-j="2"] :global(.j2), .captain[data-j="3"] :global(.j3) { opacity: 1; }
+  .captain { display: block; width: 175px; height: 272px; cursor: pointer; --face: #FFFFFF; --skin: #FFFFFF; --logo-bg: transparent; --logo-fill: #FFFFFF; --logo-ink: #2E3A40; }
+  .captain :global(svg) { display: block; width: 100%; height: 100%; overflow: visible; }
+  .captain :global(.hat) { transform-box: fill-box; transform-origin: 50% 85%; transition: transform .45s cubic-bezier(.3, 1.4, .5, 1); }
+  .captain:hover :global(.hat), .captain.peek :global(.hat) { transform: translate(-30%, -50%) rotate(-22deg); }
+  .captain:is([data-outfit="jebba"], [data-outfit="dingri"], [data-outfit="kef"]) :global(.hat) { transform-box: view-box; transform-origin: 260px 220px; }
+  .captain:is([data-outfit="jebba"], [data-outfit="dingri"], [data-outfit="kef"]):hover :global(.hat),
+  .captain.peek:is([data-outfit="jebba"], [data-outfit="dingri"], [data-outfit="kef"]) :global(.hat) { transform: translate(-150px, -190px) rotate(-22deg); }
+  /* the brain only shows once the hat lifts (otherwise a sliver peeks out beside the crown) */
+  .captain :global(.brain) { opacity: 0; transition: opacity .2s; }
+  .captain:hover :global(.brain), .captain.peek :global(.brain) { opacity: 1; }
+  .captain :global(.bolt) { opacity: 0; transition: opacity .35s; }
+  .captain:hover :global(.bolt), .captain.peek :global(.bolt) { opacity: 1; }
+  /* "I need to sleep" hours: a tired brain, no spark */
+  .captain[data-face="tired"] :global(.bolt) { display: none; }
+  .captain:hover :global(.b1), .captain.peek :global(.b1) { transition-delay: .2s; }
+  .captain:hover :global(.b2), .captain.peek :global(.b2) { transition-delay: .3s; }
+  .captain:hover :global(.b3), .captain.peek :global(.b3) { transition-delay: .4s; }
+  @media (max-width: 700px) {
+    .intro-body { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; text-align: center; }
+    .jerseys { justify-self: center; }
+    .captain { width: 150px; height: 233px; }
+  }
 
   /* headings */
   h2.brush { margin: 0 0 1.6rem; text-align: center; }
@@ -272,7 +390,7 @@
   .ext { margin-top: auto; padding-top: 1rem; font-size: .95rem; font-weight: 500; text-decoration: none; }
 
   /* arenas */
-  .arenas { max-width: 1000px; margin: 0 auto; padding: 3.5rem 1.5rem 2rem; text-align: center; scroll-margin-top: 1rem; }
+  .arenas { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem 2rem; text-align: center; scroll-margin-top: 1rem; }
   .arena-intro { margin: 0 auto 1.5rem; max-width: 36rem; font-size: 1.1rem; font-weight: 300; line-height: 1.6; color: var(--muted); }
   .progress { display: flex; align-items: center; justify-content: center; gap: 1rem; max-width: 30rem; margin: 0 auto 1.5rem; }
   .bar { flex: 1; height: 12px; border-radius: 999px; background: rgba(181, 82, 59, .15); overflow: hidden; }
@@ -333,5 +451,27 @@
     .team img { width: 110px; height: 110px; }
     h2.brush span { font-size: 1.8rem; }
   }
-  @media (prefers-reduced-motion: reduce) { .tile img, .team, .vol-card, .label { transition: none; } .d313 { animation: none; } .straw-hat { transition: none; } }
+  /* ---------- night mode (toggle in the header) ---------- */
+  :global(html[data-theme="dark"]) .about-page { --blue: #8CBDE6; --terra: #E8967A; --gold: #E2B657; --ink: #E9E4DA; --muted: #A7B3BB; --paper: #1A2A36; }
+  /* Leghreeb drawn in cream lines, like on the Leghreeb page */
+  /* night mode: Leghreeb keeps his black lines and white face */
+  :global(html[data-theme="dark"]) .captain { --face: #FFFFFF; }
+  :global(html[data-theme="dark"]) h2.brush span, :global(html[data-theme="dark"]) .tabs button.active { color: #14202A; }
+  :global(html[data-theme="dark"]) .bar { background: rgba(232, 150, 122, .18); }
+  :global(html[data-theme="dark"]) .chip { background: rgba(233, 228, 218, .08); }
+  :global(html[data-theme="dark"]) .feat-vol, :global(html[data-theme="dark"]) .vol-card { background: #1F303D; box-shadow: 0 6px 20px rgba(0, 0, 0, .35); }
+  /* dark team cards */
+  :global(html[data-theme="dark"]) .team { background: #192833; }
+  :global(html[data-theme="dark"]) .team.visited { background: #1F303D; border-color: rgba(232, 150, 122, .3); box-shadow: 0 4px 14px rgba(0, 0, 0, .35); }
+  /* a thin beige outline traced around each logo's own shape (the logos have transparent backgrounds) */
+  :global(html[data-theme="dark"]) .team img {
+    mix-blend-mode: normal;
+    filter: grayscale(1) drop-shadow(1.5px 0 0 #EFE4CF) drop-shadow(-1.5px 0 0 #EFE4CF) drop-shadow(0 1.5px 0 #EFE4CF) drop-shadow(0 -1.5px 0 #EFE4CF);
+  }
+  :global(html[data-theme="dark"]) .team.visited img {
+    filter: drop-shadow(1.5px 0 0 #EFE4CF) drop-shadow(-1.5px 0 0 #EFE4CF) drop-shadow(0 1.5px 0 #EFE4CF) drop-shadow(0 -1.5px 0 #EFE4CF);
+  }
+  :global(html[data-theme="dark"]) .label { background: rgba(31, 48, 61, .96); box-shadow: 0 2px 10px rgba(0, 0, 0, .4); }
+
+  @media (prefers-reduced-motion: reduce) { .tile img, .team, .vol-card, .label { transition: none; } .d313 { animation: none; } .captain :global(.hat), .captain :global(.jersey), .captain :global(.bolt), .captain :global(.brain) { transition: none; } .captain :global(.foam) { animation: none; } }
 </style>

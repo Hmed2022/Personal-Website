@@ -5,6 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="./src/assets/icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ahmed Bendaly · Data stories</title>
+    <!-- night mode: apply the saved choice before first paint (personal pages only; see src/components/theme.js) -->
+    <script>
+      try {
+        var p = (location.hash || '#/').slice(1).toLowerCase().split('?')[0].replace(/\/+$/, '');
+        if (localStorage.getItem('theme') === 'dark' && ['', '/', '/projects', '/about', '/leghreeb'].indexOf(p) > -1)
+          document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) {}
+    </script>
 
     <!-- Link previews (WhatsApp, iMessage, Slack, LinkedIn, X…). Chat apps read only this file, not
          what JavaScript sets later, and treat every #/ address as the same page, so these describe

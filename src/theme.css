@@ -1,0 +1,5 @@
+/* Night mode page colours (only active on Home / Projects / About me: see components/theme.js) */
+html[data-theme="dark"] { color-scheme: dark; background: #14202A;
+  /* Leghreeb's drawing (SiteLogo with these vars): cream lines on a navy body */
+  --me-ink: #F1EEE4; --me-fill: #14202A; }
+html[data-theme="dark"] body { background: #14202A; color: #E9E4DA; }

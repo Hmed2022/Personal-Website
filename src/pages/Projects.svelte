@@ -31,4 +31,10 @@
 	.lede a { color: #1E5B8C; text-decoration-color: #D9A441; text-decoration-thickness: 2px; text-underline-offset: 3px; }
 	.lede a:hover { color: #B5523B; }
 	.lede { margin: 1.2rem auto 0; font-size: 1.12rem; font-weight: 300; line-height: 1.7; color: #5E6B70; }
+	/* night mode (toggle in the header) */
+	:global(html[data-theme="dark"]) .intro { color: #E9E4DA; }
+	:global(html[data-theme="dark"]) .hi { color: #E8967A; }
+	:global(html[data-theme="dark"]) .mark, :global(html[data-theme="dark"]) .lede a { color: #8CBDE6; }
+	:global(html[data-theme="dark"]) .lede a:hover { color: #E8967A; }
+	:global(html[data-theme="dark"]) .lede { color: #A7B3BB; }
 </style>

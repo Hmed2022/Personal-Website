@@ -108,7 +108,7 @@
       type="search"
       autocomplete="off"
       spellcheck="false"
-      placeholder={ar ? 'بالعربية، بالإنجليزية، بالمعنى أو بالرقم… مثلاً: رحمن، Rahman، 12' : 'Type a name, a meaning or a number… e.g. Rahman, merciful, 12'}
+      placeholder={ar ? 'اسم أو معنى أو رقم… مثلاً: رحمن، 12' : 'Name, meaning or number… e.g. Rahman, 12'}
       role="combobox"
       aria-expanded={open}
       aria-controls="name-search-list"
@@ -170,7 +170,7 @@
   .icon { position: absolute; top: 50%; inset-inline-start: .9rem; width: 1.15rem; height: 1.15rem; transform: translateY(-50%); fill: none; stroke: var(--teal); stroke-width: 2.4; stroke-linecap: round; pointer-events: none; }
   input {
     width: 100%; box-sizing: border-box; padding: .8rem 2.6rem; border: 2px solid var(--teal); border-radius: 999px;
-    background: #FFFDF9; color: var(--brown); font: 600 1rem 'Quicksand', sans-serif;
+    background: var(--cream); color: var(--brown); font: 600 1rem 'Quicksand', sans-serif;
     box-shadow: 0 4px 14px rgba(38, 111, 140, .12); -webkit-appearance: none; appearance: none;
   }
   .ar input { font-family: 'NotoKufiArabic', 'Quicksand', sans-serif; font-weight: 400; font-size: .95rem; }
@@ -181,7 +181,7 @@
 
   .panel {
     position: absolute; top: calc(100% + .5rem); left: 0; right: 0;
-    background: #FFFDF9; border: 1px solid rgba(96, 61, 37, .15); border-radius: 16px;
+    background: var(--cream); border: 1px solid rgba(38, 111, 140, .35); border-radius: 16px;
     box-shadow: 0 16px 40px rgba(96, 61, 37, .2); overflow: hidden;
   }
   .count { margin: 0; padding: .6rem 1rem .4rem; font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--sand); }

@@ -269,8 +269,8 @@ mouseX = translatedXRem * parseFloat(getComputedStyle(document.documentElement).
 </svg>
 
 	<div class="tooltip">
-		<p><span class="views-underline">#Views (Mill)</span></p>
-		<p ><span class="rating-underline">RTG</span></p>
+		<p><span class="views-underline">Viewers (millions)</span></p>
+		<p ><span class="rating-underline">TV rating</span></p>
 		
 		
 	</div>
@@ -279,8 +279,8 @@ mouseX = translatedXRem * parseFloat(getComputedStyle(document.documentElement).
 															top: 40px;
 															left: 500px">
 		<p><span>Year:</span><br> {YearValue}</p>	
-		<p><span class="views-underline">#Views:</span> <br> <br> {ViewsValue} {ViewsValue <=1 ? "Million" : "Millions"}</p>
-		<p ><span class="rating-underline">RTG:</span> <br><br>{rtgValue}</p>
+		<p><span class="views-underline">Viewers:</span> <br> <br> {ViewsValue} {ViewsValue <=1 ? "Million" : "Millions"}</p>
+		<p ><span class="rating-underline">TV rating:</span> <br><br>{rtgValue}</p>
 		
 		
 	</div> -->

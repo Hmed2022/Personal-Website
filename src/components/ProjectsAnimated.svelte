@@ -359,4 +359,18 @@
             padding: 6px 10px;
         }
     }
+
+    /* ---- night mode (only ever on Home / Projects) ---- */
+    :global(html[data-theme="dark"]) .card__wrapper, :global(html[data-theme="dark"]) .card__image-container,
+    :global(html[data-theme="dark"]) .card__content { background: #1F303D; }
+    :global(html[data-theme="dark"]) .card__wrapper { box-shadow: 0 4px 14px rgba(0, 0, 0, .35); }
+    :global(html[data-theme="dark"]) .card__wrapper:hover, :global(html[data-theme="dark"]) .card__wrapper:focus-within { outline-color: #8CBDE6; }
+    :global(html[data-theme="dark"]) .card__title, :global(html[data-theme="dark"]) .card__desc :global(a:hover) { color: #E9E4DA; }
+    :global(html[data-theme="dark"]) .card__desc, :global(html[data-theme="dark"]) .card__desc :global(a),
+    :global(html[data-theme="dark"]) .card__lang { color: #A7B3BB; }
+    :global(html[data-theme="dark"]) .card__category { color: #8796A0; }
+    :global(html[data-theme="dark"]) .card__tools li { color: #8CBDE6; background: rgba(140, 189, 230, .12); }
+    :global(html[data-theme="dark"]) button { background-color: #1F303D; color: #A7B3BB; }
+    :global(html[data-theme="dark"]) button:hover { background-color: rgba(140, 189, 230, .14); color: #8CBDE6; }
+    :global(html[data-theme="dark"]) button.active { background-color: #8CBDE6; color: #14202A; }
 </style>
