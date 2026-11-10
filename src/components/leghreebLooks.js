@@ -12,7 +12,7 @@
 //        Ramadan, other Islamic days    jebba + chechia
 //        Friday (Jumu'ah)               jebba + chechia
 //        any other day                  straw hat + the rotating NBA jerseys
-//   4. 0:00–1:59 a.m.            tired face (red eyes, bags) on top of that day's outfit
+//   4. 10:30 p.m.–1:59 a.m.      tired face (red eyes, bags) on top of that day's outfit
 
 // Michigan football + basketball games, as 'YYYY-MM-DD' (local date) → what to show in the caption.
 // Add each season's schedule here.
@@ -87,6 +87,8 @@ export function lookFor(now = new Date()) {
   else if (t.weekday === 'Fri') look = { outfit: 'jebba', title: "Jumu'ah Mubarak", why: `${JC} for Friday prayer.` };
   else look = { outfit: 'jerseys' };
 
-  look.face = t.hour < 2 ? 'tired' : 'normal';
+  // tired from 10:30 p.m. until he falls asleep at 2 a.m.
+  const mins = t.hour * 60 + +t.minute;
+  look.face = t.hour < 2 || mins >= 22 * 60 + 30 ? 'tired' : 'normal';
   return look;
 }
