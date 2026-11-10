@@ -17,7 +17,20 @@
 // Michigan football + basketball games, as 'YYYY-MM-DD' (local date) → what to show in the caption.
 // Add each season's schedule here.
 export const UMICH_GAMES = {
-  // '2026-11-28': 'Football vs Ohio State',
+  // 2026 football regular season (source: Michigan Athletics schedule announced 27 Jan 2026)
+  '2026-09-05': 'Football vs Western Michigan',
+  '2026-09-12': 'Football vs Oklahoma',
+  '2026-09-19': 'Football vs UTEP',
+  '2026-09-26': 'Football vs Iowa',
+  '2026-10-03': 'Football at Minnesota',
+  '2026-10-17': 'Football vs Penn State (Homecoming)',
+  '2026-10-24': 'Football vs Indiana',
+  '2026-10-31': 'Football at Rutgers',
+  '2026-11-07': 'Football vs Michigan State',
+  '2026-11-14': 'Football at Oregon',
+  '2026-11-21': 'Football vs UCLA',
+  '2026-11-28': 'Football at Ohio State',
+  // add the Big Ten Championship (Dec. 5), bowl or playoff games here once they are set
 };
 
 // Tunisian days, 'MM-DD' → name (fixed dates; edit freely)
