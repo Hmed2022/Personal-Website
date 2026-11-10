@@ -34,25 +34,29 @@
   ];
   const eraOf = (y) => ERAS.find((e) => y >= e.from && y < e.to) || ERAS[2];
 
-  function person(name, year) {
+  function person(name, year, value) {
     const n = name.toLowerCase();
-    if (n.includes('bourguiba')) return { key: year < 1980 ? 'bourguiba-young' : 'bourguiba-old', name: 'Habib Bourguiba', ar: 'الحبيب بورقيبة' };
+    // each Bourguiba face is cropped from the illustration of its own note (bourguiba-<value>-<year>-d.webp)
+    const own = `bourguiba-${value}-${year}`;
+    if (n.includes('bourguiba')) return { key: face(own) ? own : year < 1980 ? 'bourguiba-young' : 'bourguiba-old', name: 'Habib Bourguiba', ar: 'الحبيب بورقيبة' };
     if (n.includes('amami')) return { key: 'amami', name: 'Slaheddine El Amami', ar: 'صلاح الدين العمامي' };
     if (n.includes('hached')) return { key: 'hached', name: 'Farhat Hached', ar: 'فرحات حشاد' };
     if (n.includes('chebbi')) return { key: year < 2000 ? 'chebbi30' : 'chebbi10', name: 'Abou El Kacem Chebbi', ar: 'أبو القاسم الشابي' };
     if (n.includes('khaldoun') || n.includes('khaidoun')) return { key: 'khaldoun', name: 'Ibn Khaldoun', ar: 'ابن خلدون' };
     if (n.includes('hannibal')) return { key: year < 2000 ? 'hannibal-old' : 'hannibal-new', name: 'Hannibal', ar: 'حنبعل' };
-    if (n.includes('kheireddine')) return { key: 'kheireddine', name: 'Kheireddine Pacha', ar: 'خير الدين باشا' };
+    if (n.includes('kheireddine')) return { key: year < 2011 ? 'kheireddine1992' : 'kheireddine', name: 'Kheireddine Pacha', ar: 'خير الدين باشا' };
     if (n.includes('elissa')) return { key: 'elissa', name: 'Elissa (Dido)', ar: 'عليسة (ديدون)' };
-    if (n.includes('rachiq')) return { key: 'rachiq', name: 'Ibn Rachiq', ar: 'ابن رشيق' };
+    if (n.includes('rachiq')) return { key: year < 2011 ? 'rachiq2008' : 'rachiq', name: 'Ibn Rachiq', ar: 'ابن رشيق' };
     if (n.includes('tawhida')) return { key: 'tawhida', name: 'Tawhida Ben Cheikh', ar: 'توحيدة بن الشيخ' };
     if (n.includes('nouira')) return { key: 'nouira', name: 'Hedi Nouira', ar: 'الهادي نويرة' };
     return { key: null, name: name.replace(/'/g, '').trim() };
   }
 
+  let khaldouns = 0;   // two 10 dinars of 1994 share the same data: the first is the blue note, the second the brown one
   const notes = raw.map((d, id) => {
     const year = +String(d.issued).slice(0, 4);
-    const p = person(d.name, year);
+    const p = person(d.name, year, d.value);
+    if (p.key === 'khaldoun' && khaldouns++ > 0) p.key = 'khaldoun-brown';
     let gap = d['honor-years'] != null ? +d['honor-years'] : NaN;
     if (Number.isNaN(gap) && p.name === 'Habib Bourguiba') gap = year - 2000;   // he died in 2000
     return { id, year, value: d.value, occ: d.occupation, gender: d.gender, gap, era: eraOf(year), ...p };
@@ -138,6 +142,12 @@
   $: recentTop = topOf((d) => d.year >= 2013);
   $: idx = (name, year) => notes.findIndex((d) => d.name === name && (!year || d.year === year));
 
+  // ---------- legend hover: highlight the matching faces ----------
+  let legendHot = null;   // occupation key, 'female' / 'male', or an era name, depending on the view
+  $: view, (legendHot = null);
+  const matches = (d, v, k) => v === 0 ? d.occ === k : v === 1 ? (k === 'female') === (d.gender === 'female') : d.era.name === k;
+  const hl = (k) => ({ enter: () => (legendHot = k), leave: () => (legendHot = null) });
+
   // ---------- tooltip ----------
   let tip = null;
   function show(e, d) {
@@ -157,12 +167,12 @@
     <!-- legend for the current view -->
     <div class="legend">
       {#if view === 0}
-        {#each occCounts as o}<span><i style="border-color:{o.color}"></i>{$t(o.label)} <b>{o.n}</b></span>{/each}
+        {#each occCounts as o}<span class="lg" class:on={legendHot === o.k} tabindex="0" role="button" on:pointerenter={hl(o.k).enter} on:pointerleave={hl(o.k).leave} on:focus={hl(o.k).enter} on:blur={hl(o.k).leave}><i style="border-color:{o.color}"></i>{$t(o.label)} <b>{o.n}</b></span>{/each}
       {:else if view === 1}
-        <span><i style="border-color:#D9669B"></i>{$t('psWomen')} <b>{women.length}</b></span>
-        <span><i style="border-color:#B7C9CC"></i>{$t('psMen')} <b>{total - women.length}</b></span>
+        <span class="lg" class:on={legendHot === 'female'} tabindex="0" role="button" on:pointerenter={hl('female').enter} on:pointerleave={hl('female').leave} on:focus={hl('female').enter} on:blur={hl('female').leave}><i style="border-color:#D9669B"></i>{$t('psWomen')} <b>{women.length}</b></span>
+        <span class="lg" class:on={legendHot === 'male'} tabindex="0" role="button" on:pointerenter={hl('male').enter} on:pointerleave={hl('male').leave} on:focus={hl('male').enter} on:blur={hl('male').leave}><i style="border-color:#B7C9CC"></i>{$t('psMen')} <b>{total - women.length}</b></span>
       {:else}
-        {#each ERAS as e}<span><i style="border-color:{e.ink}"></i>{$t(e.name)}</span>{/each}
+        {#each ERAS as e}<span class="lg" class:on={legendHot === e.name} tabindex="0" role="button" on:pointerenter={hl(e.name).enter} on:pointerleave={hl(e.name).leave} on:focus={hl(e.name).enter} on:blur={hl(e.name).leave}><i style="border-color:{e.ink}"></i>{$t(e.name)}</span>{/each}
       {/if}
     </div>
     {#if view === 2}
@@ -214,7 +224,7 @@
         <!-- faces -->
         {#each notes as d, i (d.id)}
           {@const p = pos[i] || { x: 0, y: 0 }}
-          {@const dim = view === 1 && d.gender !== 'female'}
+          {@const dim = legendHot != null ? !matches(d, view, legendHot) : view === 1 && d.gender !== 'female'}
           <g class="face" class:dim class:hot={tip?.d === d}
              style="transform: translate({p.x}px, {p.y}px)"
              on:pointerenter={(e) => show(e, d)} on:pointermove={(e) => show(e, d)} on:pointerleave={() => (tip = null)}
@@ -307,6 +317,8 @@
   .legend { display: flex; flex-wrap: wrap; justify-content: center; gap: .3rem .85rem; margin: .7rem 0 .2rem; min-height: 2.6rem; font-size: .76rem; font-weight: 600; color: #4D6473; }
   .legend i { display: inline-block; width: .7rem; height: .7rem; border-radius: 50%; border: 3px solid; background: #FFF; margin-inline-end: .3rem; vertical-align: -.15rem; }
   .legend b { color: #3D2A22; }
+  .lg { cursor: default; padding: .1rem .45rem; border-radius: 999px; transition: background .2s, color .2s; outline: none; }
+  .lg:hover, .lg.on, .lg:focus-visible { background: rgba(30, 63, 92, .1); color: #1E3F5C; }
 
   .chart { position: relative; flex: 1; min-height: 300px; min-width: 0; }
   svg { display: block; overflow: visible; }

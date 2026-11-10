@@ -3,7 +3,6 @@
     // @ts-ignore
     import Map from "./Data Viz/Map/Map.svelte"
     import Footer from "../../components/footer.svelte";
-    import SiteLogo from "../../components/SiteLogo.svelte";
     // import Title from "./Assets/Tunisian Banknotes.svg"
     import Timeline from "./Data Viz/Timeline/Timeline.svelte";            // original timeline (kept)
     import TimelineVintage from "./Data Viz/Timeline/TimelineVintage.svelte";
@@ -24,6 +23,7 @@
     // @ts-ignore
     import Propaganda from "./Components/Propaganda.svelte"              // previous version (kept)
     import ErasChanges from "./Components/ErasChanges.svelte"
+    import NumeralsWipe from "./Components/NumeralsWipe.svelte"
     import LangSwitch from "./Components/LangSwitch.svelte"
     import CountryByEra from "./Data Viz/Landmarks/CountryByEra.svelte"
     import DinarValue from "./Data Viz/Timeline/DinarValue.svelte"
@@ -71,7 +71,6 @@
 </div> -->
 
 
-<SiteLogo ink="#1E3F5C" top={92} />
 <LangSwitch/>
 <ChapterNav inline={false}/>
 <div class="tn-page" class:tn-ar={$lang === 'ar'} lang={$lang} dir={$dir}>
@@ -106,17 +105,28 @@
     </div>
 <Insight k="insTimeline"/>
 
+<!-- "How long does a note last?" is now the second view of the timeline (TimelineVintage), kept for reference:
 <div class="prose">
     <h2><span>{$t('hLife')}</span></h2>
     <p>{$t('pLife')}</p>
 </div>
 <div class="wide"><NoteLifespans/></div>
 <Insight k="insLife"/>
+-->
 
     <div class="prose">
         <h1 id="ch-eras" class="chapter" style="--n:'02'">
             <span>{$t('hEras')}</span>
         </h1>
+
+        <p>{@html $t('pErasSame')}</p>
+
+        <p>{@html $t('pEras0')}</p>
+    </div>
+    <div class="wide">
+        <NumeralsWipe/>
+    </div>
+    <div class="prose">
 
         <p>{@html $t('pEras1')}</p>
 

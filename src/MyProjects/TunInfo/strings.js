@@ -30,6 +30,14 @@ export default {
 		ar: 'اكتشف تاريخ الأوراق النقدية التونسية منذ 1956 عبر خطنا الزمني التفاعلي. مرّر المؤشر فوق ورقة لمعاينتها، أو انقر عليها لمعرفة قصتها كاملة، أو تنقّل عبر السنوات لترى ما كان في محفظة التونسيين.',
 	},
 	hEras: { en: 'Changes Between Eras', ar: 'التحولات بين العهود' },
+	pErasSame: {
+		en: 'Before looking at what changed, one thing never did. From the first notes of 1958 to those of the 2020s, every Tunisian banknote has spoken two languages: the <b>front is in Arabic</b>, headed <b>البنك المركزي التونسي</b>, and the <b>back is in French</b>, headed <b>Banque Centrale de Tunisie</b>, with the value spelled out as <i>Cinq Dinars</i> or <i>Vingt Dinars</i>. The language of the state on one side, the language of the former protectorate, still used in business and administration, on the other. The balance has only shifted at the edges: Ben Ali-era backs added Arabic slogans for the 7 November, and since 2011 the value also appears in small Arabic script on the back.',
+		ar: 'قبل النظر في ما تغيّر، ثمة أمر لم يتغيّر قط. فمن أولى أوراق 1958 إلى أوراق العشرينيات من القرن الحالي، تحدّثت كل ورقة نقدية تونسية بلغتين: <b>الوجه بالعربية</b>، يتصدّره <b>البنك المركزي التونسي</b>، و<b>الظهر بالفرنسية</b>، يتصدّره <b>Banque Centrale de Tunisie</b>، مع كتابة الفئة بالحروف مثل <i>Cinq Dinars</i> أو <i>Vingt Dinars</i>. لغة الدولة على جهة، ولغة الحماية السابقة، التي لا تزال مستعملة في الأعمال والإدارة، على الجهة الأخرى. ولم يتغيّر هذا التوازن إلا في التفاصيل: فقد أضافت أوراق عهد بن علي شعارات عربية للسابع من نوفمبر على الظهر، ومنذ 2011 تظهر الفئة أيضًا بخط عربي صغير على الظهر.',
+	},
+	pEras0: {
+		en: 'The first change came quickly, and it was about numbers. The very first dinar notes, issued in 1958 by the newly founded Central Bank of Tunisia, wrote their values in <b>Eastern Arabic numerals</b> (often called "Indian" digits): <b>١/٢</b>, <b>١</b> and <b>٥</b>. Within two years they were gone. The 5 dinars was reprinted with a new date, 1 November 1960, and an ordinary <b>5</b> in place of the <b>٥</b>, and every note since has used the <b>Western Arabic numerals</b> (0, 1, 2, 3…) that Tunisians read every day. No official explanation for the switch seems to have been published. The likeliest reason is that the Maghreb has used Western numerals for centuries, while the Eastern forms belong to the Arab East (the Mashriq). Tunisia\'s schools, shops and offices already counted 1, 2, 3, so the new state\'s currency simply fell in line with how its people wrote numbers, in keeping with Bourguiba\'s drive to modernise.',
+		ar: 'جاء أول تغيير سريعًا، وكان في الأرقام. فقد كُتبت فئات أولى الأوراق بالدينار، التي أصدرها البنك المركزي التونسي حديث النشأة سنة 1958، <b>بالأرقام العربية المشرقية</b> (التي تُسمّى غالبًا «الأرقام الهندية»): <b>١/٢</b> و<b>١</b> و<b>٥</b>. وفي غضون عامين اختفت. فقد أُعيد طبع ورقة الخمسة دنانير بتاريخ جديد، 1 نوفمبر 1960، وحلّ فيها الرقم <b>5</b> محلّ <b>٥</b>، ومنذ ذلك الحين تستعمل كل الأوراق <b>الأرقام العربية المغاربية</b> (0، 1، 2، 3…) التي يقرؤها التونسيون كل يوم. ولا يبدو أن تفسيرًا رسميًا لهذا التحوّل قد نُشر. والأرجح أن المغرب العربي يستعمل الأرقام المغاربية منذ قرون، بينما تنتمي الأشكال المشرقية إلى المشرق العربي. وكانت المدارس والمتاجر والإدارات في تونس تعدّ أصلًا 1، 2، 3، فجاءت عملة الدولة الجديدة منسجمة مع طريقة شعبها في كتابة الأرقام، في سياق سعي بورقيبة إلى التحديث.',
+	},
 	pEras1: {
 		en: 'The dominant political party throughout the Ben Ali era in Tunisia was the Democratic Constitutional Rally (DCR). The DCR, renowned for adopting <mark class="purple">purple</mark> as its signature color, had such a profound influence that the color became a ubiquitous symbol of the party. This association was so strong that even everyday items, including the national currency, were perceived as extensions of the DCR\'s presence and power. In the wake of the revolution, one of the earliest and most symbolic changes was the replacement of these everyday items, signifying a break from the past and a step towards a new future.',
 		ar: 'كان التجمّع الدستوري الديمقراطي الحزبَ المهيمن طوال عهد بن علي في تونس. وقد اشتهر هذا الحزب باعتماد اللون <mark class="purple">البنفسجي</mark> لونًا مميّزًا له، وبلغ تأثيره حدًّا جعل هذا اللون رمزًا حاضرًا في كل مكان. وكان هذا الارتباط قويًا إلى درجة أن الأشياء اليومية، ومنها العملة الوطنية، باتت تُرى امتدادًا لحضور الحزب وسلطته. وفي أعقاب الثورة، كان من أوائل التغييرات وأكثرها رمزية استبدالُ هذه الأشياء اليومية، في إشارة إلى القطيعة مع الماضي والخطو نحو مستقبل جديد.',
@@ -82,11 +90,20 @@ export default {
 
 	// ---------- timeline ----------
 	tlKicker: { en: 'Tunisian banknotes · 1958 – today', ar: 'الأوراق النقدية التونسية · 1958 – اليوم' },
-	tlTitle: { en: 'Every note, every era', ar: 'كل ورقة، كل عهد' },
+	tlTitle: { en: 'Every Tunisian banknote since independence', ar: 'كل الأوراق النقدية التونسية منذ الاستقلال' },
+	tlEras: {
+		en: 'While building this timeline, we noticed that Tunisian banknotes changed course three times, and each turn came with a new man in the presidential palace. So we divided the story into three eras: the <b>Bourguiba era</b> (1958 – 1987), the <b>Ben Ali era</b> (1987 – 2011) and the years <b>after the revolution</b> (2011 – today). Each has its own faces, colours and symbols.',
+		ar: 'أثناء إعداد هذا الخط الزمني، لاحظنا أن الأوراق النقدية التونسية غيّرت وجهتها ثلاث مرات، وأن كل تحوّل منها تزامن مع تغيّر ساكن قصر قرطاج. لذلك قسّمنا الحكاية إلى ثلاثة عهود: <b>عهد بورقيبة</b> (1958 – 1987)، و<b>عهد بن علي</b> (1987 – 2011)، و<b>ما بعد الثورة</b> (2011 – اليوم). ولكل عهد وجوهه وألوانه ورموزه.',
+	},
 	tlLede: {
 		en: 'Each bar is a banknote, from the year it was issued to the year it was withdrawn. Drag the year to see what was in a Tunisian wallet, or press play.',
 		ar: 'كل شريط ورقةٌ نقدية، من سنة إصدارها إلى سنة سحبها. اسحب السنة لترى ما كان في محفظة التونسيين، أو اضغط على زر التشغيل.',
 	},
+	tlNumEast: { en: 'Value in Eastern Arabic numerals: ٥', ar: 'الفئة بالأرقام المشرقية: ٥' },
+	tlNumWest: { en: 'Reprint with Western Arabic numerals: 5', ar: 'إعادة طبع بالأرقام المغاربية: 5' },
+	tlViews: { en: 'Choose a view', ar: 'اختر طريقة العرض' },
+	tlViewTime: { en: 'Through the years', ar: 'عبر السنوات' },
+	tlViewLife: { en: 'How long each note lasted', ar: 'كم عاشت كل ورقة' },
 	tlPlay: { en: 'Play through the years', ar: 'تشغيل عبر السنوات' },
 	tlPause: { en: 'Pause', ar: 'إيقاف' },
 	tlYear: { en: 'Year', ar: 'السنة' },
@@ -133,6 +150,9 @@ export default {
 	},
 
 	// ---------- changes between eras ----------
+	nwCap: { en: 'Habib Bourguiba', ar: 'الحبيب بورقيبة' },
+	nwHint: { en: 'Drag the handle: the same note, with ٥ in 1958 and 5 in 1960.', ar: 'اسحب المقبض: الورقة نفسها، بالرقم ٥ سنة 1958 وبالرقم 5 سنة 1960.' },
+	nwCredit: { en: 'Photos: Numista', ar: 'الصور: Numista' },
 	ecIllus: { en: 'Illustrations', ar: 'رسوم توضيحية' },
 	ecReal: { en: 'Real notes', ar: 'الأوراق الحقيقية' },
 	ecShow: { en: 'Show', ar: 'عرض' },
@@ -406,13 +426,16 @@ export default {
 	srcData2: { en: 'Landmarks on the notes, their cities and governorates: identified by the author from the notes themselves.', ar: 'المعالم الظاهرة على الأوراق ومدنها وولاياتها: حدّدها الكاتب من الأوراق نفسها.' },
 	srcData3: { en: 'Governorate boundaries and populations: open administrative data for Tunisia; populations are approximate.', ar: 'حدود الولايات وعدد سكانها: بيانات إدارية مفتوحة عن تونس؛ وأعداد السكان تقريبية.' },
 	srcImages: { en: 'Images', ar: 'الصور' },
-	srcImg1: { en: 'Photos of the real notes: numizon.com and cgb.fr.', ar: 'صور الأوراق الحقيقية: numizon.com وcgb.fr.' },
-	srcImg2: { en: 'Illustrations of the notes and portrait drawings: Ahmed Bendaly.', ar: 'الرسوم التوضيحية للأوراق ورسوم الوجوه: أحمد بن دالي.' },
+	srcImg1: { en: 'Photos of the real notes (front and back): <a href="https://en.numista.com/catalogue/index.php?e=tunisie&cat=y&st=148" target="_blank" rel="noopener">Numista</a>, the collaborative coin and banknote catalogue. Each photo belongs to the Numista member who took it and is credited on its catalogue page. Some are scans by the numismatic dealer <a href="https://www.cgb.fr" target="_blank" rel="noopener">cgb.fr</a> and keep its © www.cgb.fr watermark.', ar: 'صور الأوراق الحقيقية (الوجه والظهر): <a href="https://en.numista.com/catalogue/index.php?e=tunisie&cat=y&st=148" target="_blank" rel="noopener">Numista</a>، الفهرس التشاركي للعملات والأوراق النقدية. تعود كل صورة إلى عضو Numista الذي التقطها، ويُذكر اسمه في صفحتها من الفهرس. وبعضها صور ممسوحة من تاجر العملات <a href="https://www.cgb.fr" target="_blank" rel="noopener">cgb.fr</a> وتحمل علامته المائية © www.cgb.fr.' },
+	srcImg3: { en: 'Older photos still in use: <a href="https://numizon.com" target="_blank" rel="noopener">numizon.com</a> (including scans watermarked <a href="https://www.cgb.fr" target="_blank" rel="noopener">cgb.fr</a>) and the International Bank Note Society, <a href="https://www.theibns.org" target="_blank" rel="noopener">theibns.org</a>.', ar: 'صور قديمة لا تزال مستخدمة: <a href="https://numizon.com" target="_blank" rel="noopener">numizon.com</a> (ومنها صور تحمل العلامة المائية لموقع <a href="https://www.cgb.fr" target="_blank" rel="noopener">cgb.fr</a>) والجمعية الدولية للأوراق النقدية، <a href="https://www.theibns.org" target="_blank" rel="noopener">theibns.org</a>.' },
+	srcImg2: { en: 'All illustrations of the notes, portrait drawings and the title artwork: made by Ahmed Bendaly.', ar: 'جميع الرسوم التوضيحية للأوراق ورسوم الوجوه ورسم العنوان: من إنجاز أحمد بن دالي.' },
 	srcMethod: { en: 'Method', ar: 'المنهجية' },
 	srcM1: { en: 'One dinar in US dollars = the note\'s recorded dollar value divided by its face value. Dollars of the time, not adjusted for US inflation. One record (a 10 dinars note withdrawn in 2012) looked like a data error and was left out.', ar: 'الدينار الواحد بالدولار = قيمة الورقة المسجّلة بالدولار مقسومةً على فئتها. بالدولار في حينه، دون احتساب التضخم الأمريكي. استُبعد سجلّ واحد (ورقة 10 دنانير سُحبت سنة 2012) بدا خطأً في البيانات.' },
 	srcM2: { en: '“Years until honoured” = year of issue minus the person\'s year of death. Negative values mean the person was alive.', ar: '«سنوات قبل التكريم» = سنة الإصدار ناقص سنة وفاة الشخصية. والقيم السالبة تعني أن الشخصية كانت على قيد الحياة.' },
 	srcM3: { en: 'Landmark categories were assigned by the author. In the size chart, two notes listed with the wrong value (the 30 dinars of 1997 and the 50 dinars of 2011) were corrected.', ar: 'صنّف الكاتب المعالم إلى فئات. وفي مخطط الأحجام، صُحّحت ورقتان سُجّلتا بفئة خاطئة (30 دينارًا لسنة 1997 و50 دينارًا لسنة 2011).' },
 	srcM4: { en: 'Era colours and colour strips are based on the dominant colours of each note. The governorate stories and fun facts were written for this piece from general sources.', ar: 'تستند ألوان العهود وأشرطة الألوان إلى الألوان الغالبة على كل ورقة. وقد كُتبت قصص الولايات ومعلومات «هل تعلم؟» لهذا العمل اعتمادًا على مصادر عامة.' },
+	srcM6: { en: 'Front in Arabic, back in French: checked on the photos of 36 of the 38 notes (the two 2022 notes could not be checked). The 1960 illustration of the 5 dinars is the 1958 illustration with its digits replaced.', ar: 'الوجه بالعربية والظهر بالفرنسية: تحقّقنا من ذلك في صور 36 ورقة من أصل 38 (تعذّر التحقّق من ورقتَي 2022). ورسم ورقة الخمسة دنانير لسنة 1960 هو رسم 1958 بعد استبدال أرقامه.' },
+	srcM5: { en: 'The 1958 – 1960 switch from Eastern to Western Arabic numerals is documented on the notes themselves; the reason given for it is our interpretation, as we found no official explanation.', ar: 'التحوّل من الأرقام المشرقية إلى المغاربية بين 1958 و1960 موثّق على الأوراق نفسها؛ أما سببه فهو تفسيرنا، إذ لم نعثر على تفسير رسمي.' },
 	srcUpdated: { en: 'Last updated: January 2027', ar: 'آخر تحديث: جانفي 2027' },
 
 	// ---------- insights: reading the notes like a collector ----------

@@ -60,6 +60,8 @@
     hoverYear = yr >= 1958 && yr <= NOW ? yr : null;
   }
   $: readYear = hoverYear ?? NOW;
+  // clicking the chart sets the calculator's year (the slider stops one year before today)
+  function pickYear(e) { move(e); if (hoverYear != null) year = Math.min(hoverYear, NOW - 1); }
   $: readVal = valueAt(readYear);
 
   // ---------- calculator ----------
@@ -72,8 +74,7 @@
   const usd = (v) => v.toFixed(2);
 
   // real notes to show under the calculator (local images, same as the timeline)
-  const LOCAL = import.meta.glob('./BanknotesSmall/*.webp', { eager: true, as: 'url' });
-  const imgOf = (n) => { const mm = /baknote-(\d+)\.png/i.exec(n.Preview || ''); return (mm && LOCAL[`./BanknotesSmall/Banknote-${mm[1].padStart(2, '0')}.webp`]) || n.Preview; };
+  import { noteImage as imgOf } from './noteImage.js';
   const inUse = (n, yr) => n.Issued <= yr && (n.Active === 'Yes' || yr < n.EndofCirculation);
   $: noteThen = data.filter((n) => n.Value === amount && inUse(n, year)).sort((a, b) => b.Issued - a.Issued)[0];
   $: noteNow = data.filter((n) => n.Value === amount && n.Active === 'Yes').sort((a, b) => b.Issued - a.Issued)[0];
@@ -88,7 +89,7 @@
       <p class="read">{@html $t('dvRead', { y: readYear, v: usd(readVal) })}</p>
     </div>
     <div class="chart" dir="ltr" bind:clientWidth={w}>
-      <svg width={w} height={h} on:pointermove={move} on:pointerleave={() => (hoverYear = null)} role="img" aria-label={$t('dvTitle')}>
+      <svg width={w} height={h} on:pointermove={move} on:pointerleave={() => (hoverYear = null)} on:click={pickYear} style="cursor:pointer" role="img" aria-label={$t('dvTitle')}>
         {#each ERAS as e}
           <rect x={x(e.from)} y={m.top} width={x(e.to) - x(e.from)} height={h - m.top - m.bottom} fill={e.tint} />
           <text class="era" x={x(e.from) + 6} y={m.top - 6} style="fill:{e.ink}">{$t(e.key)}</text>

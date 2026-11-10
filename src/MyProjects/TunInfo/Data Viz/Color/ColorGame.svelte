@@ -6,11 +6,8 @@
   import { t, money, lang } from '../../i18n.js';
   import notes from '../Timeline/Data/data.js';
 
-  const LOCAL = import.meta.glob('../Timeline/BanknotesSmall/*.webp', { eager: true, as: 'url' });
-  function imageOf(n) {
-    const m = /baknote-(\d+)\.png/i.exec(n?.Preview || '');
-    return (m && LOCAL[`../Timeline/BanknotesSmall/Banknote-${m[1].padStart(2, '0')}.webp`]) || n?.Preview;
-  }
+  import { noteImage } from '../Timeline/noteImage.js';
+  const imageOf = (n) => noteImage(n);
   const label = (v) => (v === 0.5 || v === '0.5' ? '½' : String(v));
 
   const ROUNDS = {

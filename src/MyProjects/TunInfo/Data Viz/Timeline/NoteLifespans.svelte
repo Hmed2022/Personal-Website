@@ -2,6 +2,7 @@
   // "How long does a note last?": every note as a bar from issue to withdrawal, ranked by length.
   import { flip } from 'svelte/animate';
   import data from './Data/data.js';
+  import NoteModal from './Components/NoteModal.svelte';   // same details window as the timeline
   import { t, pick, money } from '../../i18n.js';
 
   const NOW = 2023;
@@ -12,8 +13,7 @@
     { key: 'eraRevolution', from: 2011, to: 9999, ink: '#BF5630' },
   ];
   const eraOf = (y) => ERAS.find((e) => y >= e.from && y < e.to);
-  const LOCAL = import.meta.glob('./BanknotesSmall/*.webp', { eager: true, as: 'url' });
-  const imgOf = (n) => { const m = /baknote-(\d+)\.png/i.exec(n.Preview || ''); return (m && LOCAL[`./BanknotesSmall/Banknote-${m[1].padStart(2, '0')}.webp`]) || n.Preview; };
+  import { noteImage as imgOf } from './noteImage.js';
 
   const notes = data.map((n, id) => {
     const active = n.Active === 'Yes';
@@ -29,6 +29,13 @@
   $: list = notes.slice().sort((a, b) => (sort === 'len' ? b.years - a.years || a.start - b.start : a.start - b.start || a.n.Value - b.n.Value));
   const MAX = 36;   // a little headroom so the longest bar's label fits
   let hot = null;
+
+  // notes in the shape the details window expects (same as in TimelineVintage)
+  const modalNotes = data.map((n, id) => ({ ...n, id, img: imgOf(n) }));
+  let showModal = false;
+  let selected = modalNotes[0];
+  function openNote(x) { selected = modalNotes[x.id]; showModal = true; }
+  const onKey = (e, x) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openNote(x); } };
 </script>
 
 <div class="lf">
@@ -46,7 +53,9 @@
   <div class="layout">
     <ol class="bars" on:pointerleave={() => (hot = null)}>
       {#each list as x (x.id)}
-        <li animate:flip={{ duration: 450 }} class:dim={hot && hot !== x} on:pointerenter={() => (hot = x)}>
+        <li animate:flip={{ duration: 450 }} class:dim={hot && hot !== x} on:pointerenter={() => (hot = x)}
+            role="button" tabindex="0" aria-label={`${$money(x.n.Value)}, ${x.start}: ${$t('tlClick')}`}
+            on:click={() => openNote(x)} on:keydown={(e) => onKey(e, x)} on:focus={() => (hot = x)}>
           <span class="lbl">
             <b style="color:{COLORS[x.n.Value]}">{x.n.Value === 0.5 ? '½' : x.n.Value} {$t('dt')}</b>
             <span class="who">{$pick(x.n.ObserveInEnglish, x.n.ObserveInArabic)}</span>
@@ -81,6 +90,8 @@
   </div>
 </div>
 
+<NoteModal bind:open={showModal} bind:note={selected} notes={modalNotes} colors={COLORS} eras={ERAS} lastYear={NOW} />
+
 <style>
   .lf { font-family: Quicksand, sans-serif; color: #3D2A22; }
   .top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .6rem; margin-bottom: .8rem; }
@@ -93,7 +104,8 @@
 
   .layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 1.2rem; align-items: start; }
   .bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; }
-  .bars li { display: grid; grid-template-columns: 15rem 1fr; align-items: center; gap: .6rem; transition: opacity .2s; }
+  .bars li { display: grid; grid-template-columns: 15rem 1fr; align-items: center; gap: .6rem; transition: opacity .2s; cursor: pointer; border-radius: 4px; }
+  .bars li:focus-visible { outline: 2px solid #1E5B8C; outline-offset: 2px; }
   .bars li.dim { opacity: .35; }
   .lbl { display: flex; align-items: baseline; gap: .4rem; font-size: .78rem; white-space: nowrap; overflow: hidden; }
   .lbl b { flex: 0 0 3.4rem; font-weight: 800; }

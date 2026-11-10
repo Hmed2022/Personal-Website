@@ -17,13 +17,19 @@
   export let top = 36;           // px from the top of the page (corner badge only)
   export let left = 40;          // px from the left edge (corner badge only)
 
+  // corner badge on project pages: just the head (chechia to beard), cut off at the neck
+  const head = svg
+    .replace(/viewBox="[^"]*"/, 'viewBox="18 28 482 612"')
+    .replace(/(<svg[^>]*>)/, '$1<defs><clipPath id="logo-head"><path d="M-80,-80 L600,-80 L600,500 L414,500 L398,535 L372,596 L344,628 L228,628 L220,612 L205,590 L178,560 L152,548 L-80,548Z"/></clipPath></defs><g clip-path="url(#logo-head)">')
+    .replace('</svg>', '</g></svg>');
+
   $: vars = `--logo-bg:${bg}; --logo-fill:${fill}; --logo-ink:${ink}; --logo-h:${size}px; --logo-top:${top}px; --logo-left:${left}px;`;
 </script>
 
 {#if inline}
   <span class="logo" style={vars}>{@html svg}</span>
 {:else}
-  <a class="logo corner" style={vars} {href} aria-label={label} title="Ahmed Bendaly">{@html svg}</a>
+  <a class="logo corner" style={vars} {href} aria-label={label} title="Ahmed Bendaly">{@html head}</a>
 {/if}
 
 <style>
@@ -31,7 +37,9 @@
   .logo :global(svg) { display: block; width: 100%; height: 100%; }
 
   /* top-left of the page; scrolls away with the content instead of covering it */
+  /* the head is ~60% of the full drawing's height, so the face stays the same size as before */
   .corner {
+    height: calc(var(--logo-h) * .6); width: calc(var(--logo-h) * .6 * 0.788);
     position: absolute; top: var(--logo-top); left: var(--logo-left); z-index: 950;
     transition: transform .2s;
   }

@@ -3,8 +3,8 @@
   import { t } from '../i18n.js';
   const GROUPS = [
     { h: 'srcData', items: ['srcData1', 'srcData2', 'srcData3'] },
-    { h: 'srcImages', items: ['srcImg1', 'srcImg2'] },
-    { h: 'srcMethod', items: ['srcM1', 'srcM2', 'srcM3', 'srcM4'] },
+    { h: 'srcImages', items: ['srcImg2', 'srcImg1', 'srcImg3'] },
+    { h: 'srcMethod', items: ['srcM1', 'srcM2', 'srcM3', 'srcM4', 'srcM5', 'srcM6'] },
   ];
 </script>
 
@@ -12,7 +12,7 @@
   {#each GROUPS as g}
     <section>
       <h4>{$t(g.h)}</h4>
-      <ul>{#each g.items as k}<li>{$t(k)}</li>{/each}</ul>
+      <ul>{#each g.items as k}<li>{@html $t(k)}</li>{/each}</ul>
     </section>
   {/each}
   <p class="upd">{$t('srcUpdated')}</p>
@@ -23,6 +23,7 @@
   h4 { margin: 0 0 .4rem; font-size: .75rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #1E3F5C; }
   ul { margin: 0; padding-inline-start: 1.1rem; display: grid; gap: .35rem; }
   li { font-size: .82rem; line-height: 1.5; }
+  li :global(a) { color: #1E5B8C; font-weight: 700; }
   .upd { grid-column: 1 / -1; margin: 0; font-size: .78rem; font-weight: 700; color: #8A7A6B; }
   @media (max-width: 820px) { .src { grid-template-columns: minmax(0, 1fr); } }
 </style>

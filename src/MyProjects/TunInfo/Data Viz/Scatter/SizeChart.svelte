@@ -5,11 +5,8 @@
   import raw from './Data/data.js';
   import { t, money, pick } from '../../i18n.js';
 
-  const LOCAL = import.meta.glob('../Timeline/BanknotesSmall/*.webp', { eager: true, as: 'url' });
-  function imageOf(n) {
-    const m = /baknote-(\d+)\.png/i.exec(n.Preview || '');
-    return (m && LOCAL[`../Timeline/BanknotesSmall/Banknote-${m[1].padStart(2, '0')}.webp`]) || null;
-  }
+  import { noteImage } from '../Timeline/noteImage.js';
+  const imageOf = (n) => noteImage(n, null);
   const COLOR = { 0.5: '#0388A6', 1: '#025E73', 5: '#005C53', 10: '#BF5630', 20: '#8C4D3F', 30: '#AB7E56', 50: '#C9A46F' };
   const label = (v) => (v === 0.5 ? '½' : String(v));
 

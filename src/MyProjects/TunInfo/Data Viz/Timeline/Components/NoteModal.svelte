@@ -3,6 +3,7 @@
   // Front/back flip, key facts, what the note was worth in dollars, and the other notes of the same value.
   import { fade, fly } from 'svelte/transition';
   import { t, money, lang } from '../../../i18n.js';
+  import { realPhoto } from '../noteImage.js';
 
   export let open = false;
   export let note;            // the selected note (from TimelineVintage)
@@ -29,8 +30,8 @@
   $: maxUsd = Math.max(usd0, usd1, 0.01);
   $: siblings = note ? notes.filter((n) => n.Value === note.Value).sort((a, b) => a.Issued - b.Issued) : [];
   $: idx = siblings.indexOf(note);
-  $: front = note?.PathF || note?.img;
-  $: back = note?.PathB;
+  $: front = realPhoto(note, 'front') || note?.img;   // RealNotes/ photo if saved, else the old link
+  $: back = realPhoto(note, 'back');
 
   function flip() {
     if (!back) return;
@@ -171,7 +172,8 @@
   .card.back { transform: rotateY(180deg); }
   .face { position: absolute; inset: 0; display: grid; place-items: center; backface-visibility: hidden; border-radius: 10px; overflow: hidden; background: #F1E8DC; box-shadow: 0 10px 26px rgba(61, 42, 34, .25); }
   .face.b { transform: rotateY(180deg); }
-  .face img { width: 100%; height: 100%; object-fit: contain; }
+  /* absolutely placed so taller notes (the 1958 – 1973 series is about 1.75 : 1) shrink to fit instead of being cut off */
+  .face img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
   .nav { flex: 0 0 auto; width: 2.4rem; height: 2.4rem; border: none; border-radius: 50%; background: #FFFFFF; box-shadow: 0 2px 8px rgba(0, 0, 0, .15); font-size: 1.5rem; line-height: 1; cursor: pointer; color: #1E3F5C; }
   .sides { display: flex; align-items: center; gap: .4rem; padding: .7rem 1.2rem 0; }
   .sides button { font: 700 .8rem Quicksand, sans-serif; color: #4D6473; background: #FFFFFF; border: 1.5px solid #D9CFC2; border-radius: 999px; padding: .25rem .75rem; cursor: pointer; }

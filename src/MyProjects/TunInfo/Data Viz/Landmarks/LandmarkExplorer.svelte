@@ -30,9 +30,15 @@
     .map((f) => {
       const name = f.properties.gouv_fr;
       const list = byGov[name] || [];
-      return { name, ar: f.properties.gouv_ar, count: f.properties.landmarks, list, cities: [...new Set(list.map((l) => l.city))].sort(), d: path(f) };
+      // the capital's governorate is written تونس العاصمة, so it is not confused with the country
+      return { name, ar: name === 'Tunis' ? 'تونس العاصمة' : f.properties.gouv_ar, count: f.properties.landmarks, list, cities: [...new Set(list.map((l) => l.city))].sort(), d: path(f) };
     })
     .sort((a, b) => a.name.localeCompare(b.name));
+
+  // "Tunisia": every landmark of every governorate, first in the dropdown
+  const ALL = { name: 'Tunisia', ar: 'تونس', all: true, count: items.length, list: items, cities: [...new Set(items.map((l) => l.city))].sort() };
+  const choices = [ALL, ...govs];
+  const govAr = (name) => govs.find((g) => g.name === name)?.ar || name;
 
   // warm ramp by number of landmarks (0 = paper white)
   function fillOf(n) {
@@ -50,6 +56,9 @@
   function pick(g) { selected = g; city = 'All'; cat = 'All'; }
 
   $: catsHere = [...new Set(selected.list.map((l) => l.tag))];
+  // a filter that would leave nothing (given the other filter) is greyed out
+  $: cityHas = (c) => selected.list.some((l) => (c === 'All' || l.city === c) && (cat === 'All' || l.tag === cat));
+  $: catHas = (tk) => selected.list.some((l) => (city === 'All' || l.city === city) && (tk === 'All' || l.tag === tk));
   $: shown = selected.list.filter((l) => (city === 'All' || l.city === city) && (cat === 'All' || l.tag === cat));
   $: years = selected.list.map((l) => +l.year).filter(Boolean);
   $: span = years.length ? (Math.min(...years) === Math.max(...years) ? `${years[0]}` : `${Math.min(...years)} – ${Math.max(...years)}`) : '';
@@ -92,8 +101,8 @@
     <!-- phones: a list instead of tapping tiny governorates -->
     <label class="gov-select">
       <span>{$t('lxGov')}</span>
-      <select value={selected.name} on:change={(e) => pick(govs.find((g) => g.name === e.target.value))}>
-        {#each govs as g}<option value={g.name}>{$pickLang(g.name, g.ar)} ({g.count})</option>{/each}
+      <select value={selected.name} on:change={(e) => pick(choices.find((g) => g.name === e.target.value))}>
+        {#each choices as g}<option value={g.name}>{$pickLang(g.name, g.ar)} ({g.count})</option>{/each}
       </select>
     </label>
   </aside>
@@ -107,8 +116,8 @@
             <label class="name-pick" title={$t('lxOther')}>
               <span class="name-text" lang="en">{selected.name}</span>
               <svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" /></svg>
-              <select aria-label={$t('lxGov')} value={selected.name} on:change={(e) => pick(govs.find((g) => g.name === e.target.value))}>
-                {#each govs as g}<option value={g.name}>{$pickLang(g.name, g.ar)} ({g.count})</option>{/each}
+              <select aria-label={$t('lxGov')} value={selected.name} on:change={(e) => pick(choices.find((g) => g.name === e.target.value))}>
+                {#each choices as g}<option value={g.name}>{$pickLang(g.name, g.ar)} ({g.count})</option>{/each}
               </select>
             </label>
             <span class="ar" lang="ar" dir="rtl">{selected.ar}</span>
@@ -126,10 +135,10 @@
 
     {#if selected.list.length}
       <div class="filters">
-        {#if selected.cities.length > 1}
+        {#if selected.cities.length > 1 && !selected.all}
           <div class="chips" role="group" aria-label={$t('lxCityLbl')}>
             {#each ['All', ...selected.cities] as c}
-              <button type="button" class="chip" class:on={city === c} on:click={() => (city = c)}>{c === 'All' ? $t('lxAllCities') : cityName(c)}</button>
+              <button type="button" class="chip" class:on={city === c} disabled={!cityHas(c)} on:click={() => (city = c)}>{c === 'All' ? $t('lxAllCities') : cityName(c)}</button>
             {/each}
           </div>
         {/if}
@@ -137,7 +146,7 @@
           <div class="chips" role="group" aria-label={$t('lxCatLbl')}>
             <button type="button" class="chip" class:on={cat === 'All'} on:click={() => (cat = 'All')}>{$t('lxAllTypes')}</button>
             {#each catsHere as tk}
-              <button type="button" class="chip cat" class:on={cat === tk} style="--tc:{TAG_COLOR[tk]}" on:click={() => (cat = tk)}>
+              <button type="button" class="chip cat" class:on={cat === tk} disabled={!catHas(tk)} style="--tc:{TAG_COLOR[tk]}" on:click={() => (cat = tk)}>
                 <img src={icon(tk)} alt="" style="background:{TAG_COLOR[tk]}" />{catName(tk)}
               </button>
             {/each}
@@ -153,7 +162,7 @@
             <span class="bill">{l.value} <small>{$t('dt')}</small> · {l.year}</span>
             <span class="body">
               <span class="name">{lmName(l.landmark)}</span>
-              <span class="where">{cityName(l.city)}</span>
+              <span class="where">{cityName(l.city)}{#if selected.all}{$isAr ? '، ' : ', '}{$isAr ? govAr(l.gov) : l.gov}{/if}</span>
               {#if l.tag}<span class="tag" style="--tc:{TAG_COLOR[l.tag]}"><img src={icon(l.tag)} alt="" />{catName(l.tag)}</span>{/if}
             </span>
           </button>
@@ -185,7 +194,7 @@
       <figcaption>
         <div>
           <h4>{lmName(current.landmark)}</h4>
-          <p>{cityName(current.city)}{$isAr ? '،' : ','} {$isAr ? (govs.find((g) => g.name === current.gov)?.ar || current.gov) : current.gov} · <b>{$money(current.value === '½' ? 0.5 : +current.value)}, {current.year}</b></p>
+          <p>{cityName(current.city)}{$isAr ? '،' : ','} {$isAr ? govAr(current.gov) : current.gov} · <b>{$money(current.value === '½' ? 0.5 : +current.value)}, {current.year}</b></p>
           {#if current.tag}<span class="tag" style="--tc:{TAG_COLOR[current.tag]}"><img src={icon(current.tag)} alt="" />{catName(current.tag)}</span>{/if}
         </div>
         {#if current.url}<a href={current.url} target="_blank" rel="noopener noreferrer">{$t('lxReadMore')}</a>{/if}
@@ -224,6 +233,7 @@
   .stats { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin: .35rem 0 0; font-size: .9rem; color: #4D6473; }
   .stats b { font-size: 1.15rem; color: #B5523B; }
 
+  .chip:disabled { opacity: .38; filter: grayscale(1); cursor: not-allowed; }
   /* ---- filters ---- */
   .filters { display: grid; gap: .5rem; margin: 1rem 0 1.1rem; }
   .chips { display: flex; flex-wrap: wrap; gap: .4rem; }
@@ -268,7 +278,8 @@
   /* ---- lightbox ---- */
   .lb { position: fixed; inset: 0; z-index: 2000; background: rgba(20, 28, 36, .78); display: grid; place-items: center; padding: 1rem; }
   .lb figure { position: relative; margin: 0; width: min(860px, 100%); background: #FFFBF4; border-radius: 14px; overflow: hidden; box-shadow: 0 20px 50px rgba(0, 0, 0, .4); }
-  .lb figure > img { display: block; width: 100%; max-height: 70vh; object-fit: contain; background: #1B1B1B; }
+  /* fills its frame (same 4:3 as the cards) and crops what doesn't fit, instead of black bars */
+  .lb figure > img { display: block; width: 100%; aspect-ratio: 4 / 3; max-height: 70vh; object-fit: cover; object-position: center; background: #EEE4D6; }
   .lb figcaption { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; padding: .9rem 1.1rem 1rem; font-family: Quicksand, sans-serif; }
   .lb h4 { margin: 0; font-family: 'Playfair Display', Georgia, serif; font-size: 1.35rem; color: #1E3F5C; }
   .lb p { margin: .2rem 0 .3rem; font-size: .88rem; color: #4D6473; }

@@ -127,8 +127,8 @@
             on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && openCard(g)} tabindex="0" role="button" aria-label={`${$pick(g.name, g.ar)}: ${$t('lmLandmarks', { n: g.count })}`} />
     {/each}
 
-    <!-- step 1: counts -->
-    {#if step === 1}
+    <!-- steps 1 and 2: counts (kept on the coastal vs inland map) -->
+    {#if step === 1 || step === 2}
       <g transition:fade={{ duration: 250 }} class="labels">
         {#each govs.filter((g) => g.count > 0) as g}
           {@const nd = NUDGE[g.name] || [0, 0]}

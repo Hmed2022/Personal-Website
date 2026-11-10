@@ -2,10 +2,9 @@
   // New animated title (Title.svelte is kept). Same portrait composition, but:
   //  - hovering a face (only the face itself, not its empty corners) reveals the real
   //    engraved portrait from the banknote, lifts it to the front and names it
-  //  - while nobody is hovering, a random face reveals itself now and then
   //  - on touch screens, tap a face
   //  - images are local, compressed copies (were 2-3 MB each from ibb)
-  import { onMount, onDestroy } from 'svelte';
+  import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
   import { zellige, frieze, star } from './tunisianPatterns.js';
   import { t, pick } from '../i18n.js';
@@ -29,8 +28,8 @@
     { k: 'bourguiba-old', name: 'Habib Bourguiba, older', note: 'notes of the 1970s and 80s', nameAr: 'الحبيب بورقيبة في سنّ متقدّمة', noteAr: 'أوراق السبعينيات والثمانينيات', top: 30, left: 87, h: 280 },
     { k: 'elissa', name: 'Elissa (Dido)', note: '10 dinars · 2005', nameAr: 'عليسة (ديدون)', noteAr: '10 دنانير · 2005', top: 50, left: 70, h: 220 },
     { k: 'hached', name: 'Farhat Hached', note: '20 dinars · 2017', nameAr: 'فرحات حشاد', noteAr: '20 دينارًا · 2017', top: 46, left: 40, h: 250 },
-    { k: 'kheireddine', name: 'Kheireddine Pacha', note: '20 dinars · 1992', nameAr: 'خير الدين باشا', noteAr: '20 دينارًا · 1992', top: 40, left: 15, h: 300 },
-    { k: 'rachiq', name: 'Ibn Rachiq', note: '50 dinars · 2008', nameAr: 'ابن رشيق', noteAr: '50 دينارًا · 2008', top: 45, left: 90, h: 250 },
+    { k: 'kheireddine', name: 'Kheireddine Pacha', note: '20 dinars · 2011', nameAr: 'خير الدين باشا', noteAr: '20 دينارًا · 2011', top: 40, left: 15, h: 300 },
+    { k: 'rachiq', name: 'Ibn Rachiq', note: '50 dinars · 2011', nameAr: 'ابن رشيق', noteAr: '50 دينارًا · 2011', top: 45, left: 90, h: 250 },
   ];
   const FACES = FACES_RAW.map((f) => ({ ...f, left: CX + (f.left - CX) * TIGHT_X, top: f.top * TIGHT_Y }));
 
@@ -43,9 +42,8 @@
   $: fitH = Math.max(260, vh - topOffset - headH - capH - CHROME);
   $: s = stageW > 640 ? Math.min(1, stageW / COMP_W, fitH / COMP_H) : Math.min(1, stageW / COMP_W);
 
-  let hovered = null;   // index under the pointer / focused
-  let auto = null;      // index revealed by the idle animation
-  $: shown = hovered ?? auto;
+  let hovered = null;   // index under the pointer / focused (faces only reveal on hover, tap or focus)
+  $: shown = hovered;
 
   // ---- pixel-accurate hit testing: is the pointer over an opaque part of a face? ----
   const masks = [];     // { w, h, a: Uint8ClampedArray } per face (small alpha maps)
@@ -65,22 +63,17 @@
     return null;
   }
 
-  let lastUser = 0;
   function onMove(e) {
     if (e.pointerType !== 'mouse') return;
-    lastUser = Date.now();
     hovered = faceAt(e.clientX, e.clientY);
-    auto = null;
   }
   function onTap(e) {
     if (e.pointerType === 'mouse') return;
-    lastUser = Date.now();
     const i = faceAt(e.clientX, e.clientY);
     hovered = i === hovered ? null : i;
-    auto = null;
   }
 
-  let timer, clearTimer, tpEl;
+  let tpEl;
   onMount(() => {
     // space above the title when the page first opens (site menu, page margin), at most 140px
     topOffset = Math.min(140, Math.max(0, tpEl.getBoundingClientRect().top + window.scrollY));
@@ -99,19 +92,7 @@
       new Image().src = src(f.k + '-r');          // preload the real faces so the reveal is instant
     });
 
-    // idle reveals, unless the visitor prefers less motion
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      let last = -1;
-      timer = setInterval(() => {
-        if (hovered != null || Date.now() - lastUser < 4000 || document.hidden) return;
-        let i; do { i = Math.floor(Math.random() * FACES.length); } while (i === last);
-        last = i; auto = i;
-        clearTimeout(clearTimer);
-        clearTimer = setTimeout(() => { if (auto === i) auto = null; }, 2000);
-      }, 2800);
-    }
   });
-  onDestroy(() => { clearInterval(timer); clearTimeout(clearTimer); });
 </script>
 
 <svelte:window bind:innerHeight={vh} />

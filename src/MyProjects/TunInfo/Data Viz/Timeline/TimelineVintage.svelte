@@ -9,6 +9,11 @@
   import data from './Data/data.js';
   import ModalContent from './Components/ModalContent.svelte';   // previous details window (kept)
   import NoteModal from './Components/NoteModal.svelte';
+  import { noteImage } from './noteImage.js';
+  import NoteLifespans from './NoteLifespans.svelte';   // second view of the same notes: how long each one lasted
+  import illus60 from './BanknotesSmall/Banknote-41.webp';            // 1958 illustration with Western 5s
+  import real58 from '../../Components/eras/real-5-1958.webp';
+  import real60 from '../../Components/eras/real-5-1960.webp';
   import { zellige, frieze, star } from '../../Components/tunisianPatterns.js';
   import { t, pick, money, lang } from '../../i18n.js';
   import eraYoung from './Assets/era-young.webp';
@@ -59,16 +64,22 @@
   ];
   const MAX_COUNT = 7;
 
-  // local copies of the note images (Banknote-NN.png); fall back to the online link
-  const LOCAL = import.meta.glob('./BanknotesSmall/*.webp', { eager: true, as: 'url' });
-  function imageOf(n) {
-    const m = /baknote-(\d+)\.png/i.exec(n.Preview || '');
-    const local = m && LOCAL[`./BanknotesSmall/Banknote-${m[1].padStart(2, '0')}.webp`];
-    return local || n.Preview;
-  }
+  // local illustration of each note, with the mismatched files corrected (see noteImage.js)
+  const imageOf = (n) => noteImage(n);
 
   const endOf = (n) => (n.Active === 'Yes' ? END : n.EndofCirculation);
   const notes = data.map((n, id) => ({ ...n, id, img: imageOf(n), end: endOf(n) }));
+
+  // The first 5 dinars (1958) was reprinted on 1 November 1960 with a Western "5" in place of the Eastern "٥".
+  // On the timeline it is shown as two bars, 1958 – 1960 and 1960 – 1962; the note counts elsewhere stay the same.
+  {
+    const i = notes.findIndex((n) => n.Value === 5 && n.Issued === 1958);
+    if (i > -1) {
+      const n = notes[i];
+      notes[i] = { ...n, EndofCirculation: 1960, end: 1960, PathF: real58, numerals: 'tlNumEast' };
+      notes.push({ ...n, id: notes.length, Issued: 1960, img: illus60, PathF: real60, numerals: 'tlNumWest' });
+    }
+  }
 
   // pack each denomination's notes into tracks so overlapping notes don't collide
   const lanes = VALUES.map((v) => {
@@ -84,6 +95,7 @@
   });
 
   // ---------- year / wallet ----------
+  let view = 'time';   // 'time' = the timeline, 'life' = how long each note lasted
   let year = 1995;
   const inCirculation = (n, y) => n.Issued <= y && (n.Active === 'Yes' ? true : y < n.EndofCirculation);
   $: wallet = notes.filter((n) => inCirculation(n, year)).sort((a, b) => a.Value - b.Value || a.Issued - b.Issued);
@@ -202,9 +214,23 @@
   <header class="v-head">
     <p class="kicker">{$t('tlKicker')}</p>
     <h2>{$t('tlTitle')}</h2>
-    <p class="lede">{$t('tlLede')}</p>
+    <p class="lede">{@html $t('tlEras')}</p>
+    <p class="lede how">{view === 'time' ? $t('tlLede') : $t('pLife')}</p>
   </header>
 
+  <!-- the same notes, two ways -->
+  <div class="views" role="tablist" aria-label={$t('tlViews')}>
+    <button type="button" role="tab" aria-selected={view === 'time'} class:on={view === 'time'} on:click={() => (view = 'time')}>{$t('tlViewTime')}</button>
+    <button type="button" role="tab" aria-selected={view === 'life'} class:on={view === 'life'} on:click={() => { view = 'life'; stopPlay(); tip = null; }}>{$t('tlViewLife')}</button>
+  </div>
+
+  {#if view === 'life'}
+  <div class="life" in:fade={{ duration: 300 }}>
+    <NoteLifespans />
+    <p class="life-take">{$t('insLife')}</p>
+  </div>
+  {:else}
+  <div class="time-view" in:fade={{ duration: 300 }}>
   <!-- era chips + year control -->
   <div class="controls">
     <div class="eras">
@@ -336,6 +362,8 @@
       {/each}
     </div>
   </div>
+  </div>
+  {/if}
 
   <!-- tooltip (mouse only; touch opens the details directly) -->
   {#if tip}
@@ -353,6 +381,7 @@
           {#if n.ObserveInArabic}<span lang="ar" dir="rtl">{n.ObserveInArabic}</span>{/if}
         </div>
         <span class="tip-era" style="--ec:{f.era.ink}">{$t(f.era.key)}</span>
+        {#if n.numerals}<span class="tip-num">{$t(n.numerals)}</span>{/if}
 
         <div class="tip-span">
           <div class="tip-row"><span>{n.Issued} – {f.active ? $t('today') : n.EndofCirculation}</span><b>{f.years} {f.years === 1 ? $t('year') : $t('years')}</b></div>
@@ -442,11 +471,12 @@
     padding: 1.1rem 1.3rem; border-radius: 8px;
     background: rgba(255, 251, 241, .78); border: 1px solid rgba(140, 77, 63, .3); border-inline-start: 5px solid var(--ec);
     box-shadow: 0 2px 8px rgba(74, 46, 37, .1);
-    opacity: 0; visibility: hidden; transform: translateY(6px);
-    transition: opacity .22s ease, transform .22s ease, visibility 0s .22s;
-    will-change: opacity, transform; contain: layout paint;
+    /* crossfade: the old era fades out while the new one fades in on top of it */
+    opacity: 0; visibility: hidden;
+    transition: opacity .35s ease, visibility 0s .35s;
+    will-change: opacity; contain: layout paint;
   }
-  .story.on { opacity: 1; visibility: visible; transform: none; transition: opacity .22s ease, transform .22s ease, visibility 0s; }
+  .story.on { opacity: 1; visibility: visible; transition: opacity .5s ease .1s, visibility 0s; }
   .story-years { margin: 0; font-size: .72rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--ec); }
   .story h3 { margin: .1rem 0 .5rem; font-family: 'Playfair Display', Georgia, serif; font-size: 1.45rem; font-weight: 800; color: #3D2A22; }
   .story-text p:last-child { margin: 0; font-size: .95rem; line-height: 1.6; }
@@ -473,9 +503,18 @@
   .figures figure.wide img { width: 5.5rem; flex: 0 0 auto; }
 
   .v-head { text-align: center; max-width: 40rem; margin: 0 auto 1.2rem; }
+  .views { position: relative; z-index: 1; display: flex; width: fit-content; gap: .25rem; margin: 0 auto 1.2rem; padding: .25rem; border-radius: 999px; background: rgba(140, 77, 63, .1); }
+  .views button { font: 700 .88rem Quicksand, sans-serif; color: #6B4A3E; background: none; border: none; border-radius: 999px; padding: .45rem 1.1rem; cursor: pointer; transition: background .2s, color .2s; }
+  .views button.on { background: #8C4D3F; color: #FFFBF1; box-shadow: 0 1px 4px rgba(74, 46, 37, .25); }
+  .life { position: relative; z-index: 1; }
+  .life-take { margin: 1.2rem 0 0; padding: .8rem 1rem; border-inline-start: 4px solid #8C4D3F; border-radius: 6px; background: rgba(255, 251, 241, .7); font-size: .92rem; line-height: 1.55; }
+  .time-view { position: relative; z-index: 1; }
   .kicker { margin: 0; font-size: .75rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #8C4D3F; }
   h2 { margin: .2rem 0 .4rem; font-family: 'Playfair Display', Georgia, serif; font-weight: 800; font-size: 2.1rem; color: #4A2E25; }
   .lede { margin: 0; font-size: .95rem; line-height: 1.5; }
+  .lede + .lede { margin-top: .6rem; }
+  .lede.how { font-size: .85rem; opacity: .75; }
+  .lede :global(b) { font-weight: 700; }
 
   /* ---------- controls ---------- */
   .controls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .8rem; margin-bottom: 1rem; }
@@ -575,6 +614,7 @@
   .tip-name b { font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem; color: #3D2A22; }
   .tip-name span { font-size: .9rem; color: #8C4D3F; }
   .tip-era { justify-self: start; margin-top: -.25rem; font-size: .66rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--ec); }
+  .tip-num { display: block; margin-top: .2rem; font-size: .72rem; font-weight: 700; color: #8C4D3F; }
   .tip-row { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; font-size: .8rem; }
   .tip-row b { font-size: .82rem; }
   .tip-row small { font-size: .68rem; color: #7A6A5C; }
