@@ -16,10 +16,10 @@
 	<div class="prose">
 		<div style='text-align:center'>
 			<h1>
-				Chronicles of Tunisian Banknotes
+				What Can Tunisia's Banknotes Tell You?
 			</h1>
             <h3>
-                Portraits and Landmarks
+                Know Tunisia's history through its banknotes
             </h3>
 		</div>
 		<!-- <div class="center-line1"></div>

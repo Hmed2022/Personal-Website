@@ -44,11 +44,12 @@
   const byGov = {};
   for (const l of landmarks) (byGov[l.gov] = byGov[l.gov] || []).push(l);
 
+  // counts come from the landmark list, like the explorer (the map file's own counts were out of date)
   const govs = Tun.features.map((f) => {
     const name = f.properties.gouv_fr;
     const items = byGov[name] || [];
     const [cx, cy] = path.centroid(f);
-    return { name, ar: f.properties.gouv_ar, count: f.properties.landmarks, items, d: path(f), cx, cy, coastal: COASTAL.has(name), f };
+    return { name, ar: f.properties.gouv_ar, count: items.length, items, d: path(f), cx, cy, coastal: COASTAL.has(name), f };
   });
   // small governorates around Tunis: nudge their labels so the numbers don't overlap
   const NUDGE = { Tunis: [22, -22], Ariana: [4, -12], 'Ben Arous': [14, 10], Manouba: [-1, 7], Monastir: [12, 2], Sousse: [-4, -4], Mahdia: [4, 4] };

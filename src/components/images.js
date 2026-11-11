@@ -55,13 +55,13 @@ export const imageData = [
   {
     url: tunUrl,
     rank: 5,
-    title: "Chronicales of Tunisian banknotes",
+    title: "What Can Tunisia's Banknotes Tell You?",
     desc: "Infographic | Data Visualization",
     description:
       "An infographic journey through the history and design evolution of Tunisian currency and banknotes.",
     href: "/#/tuninfo",
     tools: ["Svelte", "D3"],
-    alt: "Animated title of The Chronicles of Tunisian Banknotes, with portraits from the notes",
+    alt: "Animated title of What Can Tunisia's Banknotes Tell You?, with portraits from the notes",
     show: false,
     lang: "EN",
     tags: "all,dataviz,info,tunisia,svelte,d3,interactive,arabic,culture",

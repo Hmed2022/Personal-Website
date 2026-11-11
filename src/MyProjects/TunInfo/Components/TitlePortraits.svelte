@@ -26,12 +26,18 @@
     { k: 'chebbi10', name: 'Abou El Kacem Chebbi', note: '10 dinars · 2013', nameAr: 'أبو القاسم الشابي', noteAr: '10 دنانير · 2013', top: 20, left: 60, h: 240 },
     { k: 'khaldoun', name: 'Ibn Khaldoun', note: '10 dinars · 1994', nameAr: 'ابن خلدون', noteAr: '10 دنانير · 1994', top: 40, left: 55, h: 240 },
     { k: 'bourguiba-old', name: 'Habib Bourguiba, older', note: 'notes of the 1970s and 80s', nameAr: 'الحبيب بورقيبة في سنّ متقدّمة', noteAr: 'أوراق السبعينيات والثمانينيات', top: 30, left: 87, h: 280 },
-    { k: 'elissa', name: 'Elissa (Dido)', note: '10 dinars · 2005', nameAr: 'عليسة (ديدون)', noteAr: '10 دنانير · 2005', top: 50, left: 70, h: 220 },
-    { k: 'hached', name: 'Farhat Hached', note: '20 dinars · 2017', nameAr: 'فرحات حشاد', noteAr: '20 دينارًا · 2017', top: 46, left: 40, h: 250 },
-    { k: 'kheireddine', name: 'Kheireddine Pacha', note: '20 dinars · 2011', nameAr: 'خير الدين باشا', noteAr: '20 دينارًا · 2011', top: 40, left: 15, h: 300 },
-    { k: 'rachiq', name: 'Ibn Rachiq', note: '50 dinars · 2011', nameAr: 'ابن رشيق', noteAr: '50 دينارًا · 2011', top: 45, left: 90, h: 250 },
+    { k: 'elissa', name: 'Elissa (Dido)', note: '10 dinars · 2005', nameAr: 'عليسة (ديدون)', noteAr: '10 دنانير · 2005', top: 50, left: 70, h: 220, base: 0 },
+    { k: 'hached', name: 'Farhat Hached', note: '20 dinars · 2017', nameAr: 'فرحات حشاد', noteAr: '20 دينارًا · 2017', top: 46, left: 40, h: 250, base: 2.5 },
+    { k: 'kheireddine', name: 'Kheireddine Pacha', note: '20 dinars · 2011', nameAr: 'خير الدين باشا', noteAr: '20 دينارًا · 2011', top: 40, left: 15, h: 300, base: 0 },
+    { k: 'rachiq', name: 'Ibn Rachiq', note: '50 dinars · 2011', nameAr: 'ابن رشيق', noteAr: '50 دينارًا · 2011', top: 45, left: 90, h: 250, base: 0 },
   ];
-  const FACES = FACES_RAW.map((f) => ({ ...f, left: CX + (f.left - CX) * TIGHT_X, top: f.top * TIGHT_Y }));
+  // The front row (faces with `base`) sits on one flat baseline; `base` is the transparent strip under the drawing, in px.
+  const BASELINE = 588, CANVAS_H = 900;
+  const FACES = FACES_RAW.map((f) => ({
+    ...f,
+    left: CX + (f.left - CX) * TIGHT_X,
+    top: f.base != null ? ((BASELINE - f.h + f.base) / CANVAS_H) * 100 : f.top * TIGHT_Y,
+  }));
 
   // composition bounds on the canvas, used to scale it to the screen width
   const COMP_W = 960, COMP_H = 600, COMP_CX = 699;
@@ -97,14 +103,15 @@
 
 <svelte:window bind:innerHeight={vh} />
 
-<header class="tp" bind:this={tpEl} style="--zellige:{zellige}; --frieze:{frieze}; --star:{star}">
+<header class="tp" bind:this={tpEl} style="--zellige:{zellige}; --frieze:{frieze}; --star:{star};">
   <div class="band top" aria-hidden="true"></div>
 
   <div class="heading" bind:clientHeight={headH}>
     <span class="rosette" aria-hidden="true"></span>
     <p class="kicker">{$t('tpKicker')}</p>
-    <h1 lang="en" dir="ltr">The Chronicles of <span>Tunisian Banknotes</span></h1>
-    <p class="ar" lang="ar" dir="rtl">حكايات الأوراق النقدية التونسية</p>
+    <h1 lang="en" dir="ltr">What Can Tunisia's Banknotes <span>Tell You?</span></h1>
+    <p class="sub">{$pick("Know Tunisia's history through its banknotes", 'اعرف تاريخ تونس من خلال أوراقها النقدية')}</p>
+    <p class="byline">{$t('byline')}</p>
   </div>
 
   <div class="stage" bind:clientWidth={stageW} style="height:{COMP_H * s}px" style:cursor={hovered != null ? "pointer" : "default"}
@@ -149,7 +156,7 @@
     width: 100%;
     max-width: 1240px;
     margin: 0 auto;
-    padding: 0 0 1.4rem;
+    padding: 0;           /* the bottom band is the title's last edge: no tiles below it */
     overflow: hidden;
     text-align: center;
     font-family: Quicksand, sans-serif;
@@ -159,12 +166,12 @@
   /* faint zellige wall behind everything, fading out towards the centre */
   .tp::before {
     content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-    background-image: var(--zellige); background-size: 64px 64px; opacity: .13;
+    background-image: var(--zellige); background-size: 128px 128px; opacity: .13;
     -webkit-mask: radial-gradient(ellipse 70% 65% at 50% 55%, transparent 35%, #000 85%);
             mask: radial-gradient(ellipse 70% 65% at 50% 55%, transparent 35%, #000 85%);
   }
   .band { position: relative; z-index: 1; height: 18px; background-image: var(--frieze); background-size: 36px 18px; background-repeat: repeat-x; }
-  .band.top { margin-bottom: 1.6rem; }
+  .band.top { margin-bottom: 1rem; }
   .band.bottom { margin-top: .6rem; }
 
   .heading { position: relative; z-index: 2; padding: 0 1rem; }
@@ -180,7 +187,8 @@
     font-size: clamp(1.8rem, 4.4vw, 3.3rem); line-height: 1.08; color: #1E3F5C;
   }
   h1 span { color: #1E5B8C; font-style: italic; font-weight: 600; }
-  .ar { margin: .45rem 0 0; font-family: 'HacenSaudi', 'Noto Kufi Arabic', sans-serif; font-size: clamp(1rem, 2vw, 1.35rem); color: #B5523B; }
+  .byline { margin: .35rem 0 0; font-size: .85rem; font-weight: 600; color: rgba(61, 90, 115, .75); }
+  .sub { margin: .35rem 0 0; font-size: clamp(.92rem, 1.6vw, 1.08rem); font-weight: 700; color: #3D5A73; letter-spacing: .02em; }
 
   /* ---- portraits ---- */
   .stage { position: relative; z-index: 1; width: 100%; max-width: 960px; margin: .6rem auto 0; touch-action: manipulation; }
@@ -197,7 +205,7 @@
   .face.on { transform: translateY(-10px) scale(1.06); filter: drop-shadow(0 10px 14px rgba(30, 63, 92, .35)); }
   .face.on .r { opacity: 1; }
   .face.on .d { opacity: 0; }
-  .face.dim { filter: saturate(.55) brightness(1.04); opacity: .72; }
+  .face.dim { filter: saturate(.55) brightness(1.04); }   /* others stay fully opaque */
 
   .caption { position: relative; z-index: 2; min-height: 2.4rem; display: grid; place-items: center; padding: 0 1rem; }
   .caption p { grid-area: 1 / 1; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: .2rem .6rem; }

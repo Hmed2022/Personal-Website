@@ -32,6 +32,8 @@
     import ChapterNav from "./Components/ChapterNav.svelte"
     import Sources from "./Components/Sources.svelte"
     import Insight from "./Components/Insight.svelte"
+    import { strayNote } from "./Data Viz/Timeline/strayStore.js"   // the $20 / €20 joke from the binder
+    import daliFull from "./Components/dali-full.svg"
     import { t, lang, dir } from "./i18n.js";
 
     let selectedLanguage = "english"; // Default to English
@@ -56,7 +58,7 @@
     function blockMenu(e) { if (isImage(e.target)) e.preventDefault(); }
     function blockDrag(e) { if (isImage(e.target)) e.preventDefault(); }
 
-    const pageStyle = `background-color:${PAPER}; background-image:${zelligeFaint}; background-size:90px 90px; background-attachment:fixed; --tn-paper:${PAPER}; --tn-divider:${divider};`;
+    const pageStyle = `background-color:${PAPER}; background-image:${zelligeFaint}; background-size:180px 180px; background-attachment:fixed; --tn-paper:${PAPER}; --tn-divider:${divider};`;
 </script>
 <!-- 
 <p style="text-align:center"> Choose Language:</p> -->
@@ -84,10 +86,14 @@
     <!-- <img src="{Title}" alt="title" /> -->
     <!-- <h1> My name is Ahmed Bendaly</h1> -->
  
-    <p class="introText">{$t('intro')}</p>
-    <p class="Reference">{$t('byline')}</p>
-    <Insight k="insHow" label="insHowLabel" tone="blue"/>
-    <ChapterNav/>
+    <p class="introText">{@html $t('intro')}</p>
+    <p class="introText second">{@html $t('intro2')}</p>
+    <!-- meet Dali: Leghreeb (About page) in his dingri and chechia, beside how the piece works -->
+    <div class="meet-dali">
+        <img class="dali-full" src={daliFull} alt={$t('daliAlt')} draggable="false" />
+        <Insight k="insHow" label="insHowLabel" tone="blue"/>
+    </div>
+    <!-- <ChapterNav/> row of chapter links under the intro: removed (the floating menu stays) -->
 </div>
 
 <div class="prose centered">
@@ -103,7 +109,7 @@
     <!-- <Timeline/> original timeline, kept for reference -->
     <TimelineVintage/>
     </div>
-<Insight k="insTimeline"/>
+<!-- the timeline's note + Dali's answer now live in the Bourguiba era story (TimelineVintage) -->
 
 <!-- "How long does a note last?" is now the second view of the timeline (TimelineVintage), kept for reference:
 <div class="prose">
@@ -111,7 +117,7 @@
     <p>{$t('pLife')}</p>
 </div>
 <div class="wide"><NoteLifespans/></div>
-<Insight k="insLife"/>
+<Insight k="insLife" note="insLifeNote" lens={['eco', 'pol']}/>
 -->
 
     <div class="prose">
@@ -119,24 +125,18 @@
             <span>{$t('hEras')}</span>
         </h1>
 
-        <p>{@html $t('pErasSame')}</p>
-
-        <p>{@html $t('pEras0')}</p>
     </div>
+    <!-- if you kept the foreign note instead of giving it to Dali, he brings it up here -->
+    <Insight k={$strayNote.choice === 'kept' ? ($strayNote.tag === '$20' ? 'pErasSameKeptUsd' : 'pErasSameKeptEur') : 'pErasSame'} note="pErasSameNote"/>
+    <Insight k="pEras0" note="pEras0Note"/>
     <div class="wide">
         <NumeralsWipe/>
     </div>
-    <div class="prose">
-
-        <p>{@html $t('pEras1')}</p>
-
-
-        <p>{@html $t('pEras2')}</p>
-    </div>
+    <Insight k="pEras1" note="pEras1Note" lens={['pol']}/>
     <div class="wide">
         <ErasChanges/>
     </div>
-    <Insight k="insEras"/>
+    <Insight k="insEras" note="insErasNote" lens={['pol']}/>
     <div class="prose">
         <!-- previous version, kept:
         <div class="images">
@@ -172,13 +172,17 @@
     <h1 id="ch-vivid" class="chapter" style="--n:'03'">
         <span>{$t('hVivid')}</span>  
     </h1>
-    <p>{$t('pVivid')}</p>
-    
+    </div>
+    <Insight k="pVivid" note="pVividNote"/>
+    <div class="prose">
     <h2>
         <span>{$t('hGuess')}</span>
     </h2>
-    <p>{$t('pGuess1')}</p>
-    <p>{$t('pGuess2')}</p>
+    </div>
+    <!-- Dali sets up his game: two rounds, then the game itself -->
+    <Insight k="pGuess1"/>
+    <Insight k="pGuess2"/>
+    <div class="prose">
     <div class="wide">
         <!-- <div class="color"><Color/></div> previous version, kept -->
         <ColorGame/>
@@ -193,7 +197,7 @@
         <!-- <div class="color"><Scatter/></div> previous version, kept -->
         <SizeChart/>
     </div>
-    <Insight k="insVivid"/>
+    <Insight k="insVivid" note="insVividNote" lens={['eco', 'geo']}/>
 
     <h1 id="ch-faces" class="chapter" style="--n:'04'">
         <span>{$t('hFigures')}</span>  
@@ -208,7 +212,7 @@
     <!-- <Beeswarm/> previous version, kept -->
     <PortraitStory/>
     </div>
-<Insight k="insFaces"/>
+<Insight k="insFaces" note="insFacesNote" lens={['pol', 'cul']}/>
 
     <div class="prose">
         <h2 id="ch-landmarks" class="chapter" style="--n:'05'; margin-top:5%">
@@ -221,7 +225,11 @@
     <div class="landmark">
 <Landmarks/>
 </div>
-<Insight k="insMap"/>
+<div class="prose">
+    <p>{@html $t('lmRegions')}</p>
+    <p>{@html $t('lmAbsent')}</p>
+</div>
+<Insight k="insMap" note="insMapNote" lens={['geo', 'pol']}/>
 
 <div class="prose">
     <h3>
@@ -238,7 +246,7 @@
     <p>{$t('pCountry')}</p>
 </div>
 <div class="wide"><CountryByEra/></div>
-<Insight k="insCountry"/>
+<Insight k="insCountry" note="insCountryNote" lens={['eco', 'pol']}/>
 
 <!-- what is your banknote worth? -->
 <div class="prose">
@@ -247,7 +255,7 @@
     <p>{@html $t('pWorth2')}</p>
 </div>
 <div class="wide"><DinarValue/></div>
-<Insight k="insWorth"/>
+<Insight k="insWorth" note="insWorthNote" lens={['eco']}/>
 
 <!-- conclusion -->
 <div class="prose centered">
@@ -353,7 +361,15 @@
         max-width: 70rem;
         margin-left: auto;
         margin-right: auto;
+        margin-top: 1.8rem;   /* space under the title's bottom band */
         padding: 0 1rem;
+    }
+    .introText.second { margin-top: .9rem; }
+    /* key phrases for readers who scan: a highlighter stroke, like the collector's own notes */
+    .introText :global(b) {
+        font-weight: 700; color: #1E3F5C;
+        background: linear-gradient(transparent 55%, rgba(227, 167, 42, .38) 55%, rgba(227, 167, 42, .38) 92%, transparent 92%);
+        -webkit-box-decoration-break: clone; box-decoration-break: clone; padding: 0 .1em;
     }
    .timeline{
     display: flex;
@@ -405,7 +421,7 @@
 
     /* chapter titles: framed like a banknote, with a red serial number */
     .chapter{ margin-top: 0; }
-    .chapter::before{   /* the Tunisian star divider */
+    .chapter::before{   /* door studs leading to a small arched door */
         content: "";
         display: block;
         height: 24px;
@@ -482,6 +498,13 @@
 
     .tn-page .prose > p { line-height: 1.7; }
 
+    .meet-dali { display: flex; align-items: center; justify-content: center; gap: 1.2rem; max-width: 56rem; margin: 1.6rem auto 0; padding: 0 1rem; box-sizing: border-box; }
+    .meet-dali :global(.ins) { margin: 0; flex: 1 1 auto; }
+    .dali-full { flex: 0 0 auto; width: 128px; height: auto; filter: drop-shadow(0 6px 10px rgba(74, 46, 37, .18)); }
+    @media (max-width: 640px) {
+        .meet-dali { flex-direction: column; gap: .6rem; padding: 0; }
+        .dali-full { width: 104px; }
+    }
      .Reference{
         color: rgb(139, 139, 139);
         font-weight: 500;

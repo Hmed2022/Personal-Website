@@ -49,8 +49,8 @@
 		'/leghreeb': `About Leghreeb · ${SITE}`,
 		'/allstarintro': `The Decline of the All-Star Game · ${SITE}`,
 		'/allstar': `The Decline of the All-Star Game · ${SITE}`,
-		'/tuninfointro': `The Chronicles of Tunisian Banknotes · ${SITE}`,
-		'/tuninfo': `The Chronicles of Tunisian Banknotes · ${SITE}`,
+		'/tuninfointro': `What Can Tunisia's Banknotes Tell You? · ${SITE}`,
+		'/tuninfo': `What Can Tunisia's Banknotes Tell You? · ${SITE}`,
 		'/klay': `Klay BBJ: A Mirror of Tunisian Society · ${SITE}`,
 		'/names': `The Names We Memorized Before We Understood · ${SITE}`,
 		'/cardmagic': `The Math Behind the Magic · ${SITE}`

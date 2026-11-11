@@ -6,34 +6,61 @@ export const TN = {
 	ochre: '#D9A441',
 	green: '#2E6B4F',
 	cream: '#F6EBD3',
+	// Qallaline tiles
+	cobalt: '#24409A',
+	sky: '#6BB6E3',
+	tileGreen: '#1E7B4F',
+	leaf: '#7DBF7A',
+	yellow: '#E3A72A',
+	glaze: '#FFFDF7',
+	grout: '#E9DFCB',
 };
 
 const url = (svg) => `url("data:image/svg+xml,${encodeURIComponent(svg.replace(/\s+/g, ' ').trim())}")`;
 
-// Zellige tile: an eight-pointed star (khatam) with a lattice joining it to its neighbours,
-// like the ceramic walls of Tunisian houses and mosques.
+// eight-pointed star (khatam) made of two squares; s = half the side
+const khatam = (s, fill) =>
+	`<rect x='${-s}' y='${-s}' width='${2 * s}' height='${2 * s}' fill='${fill}'/><rect x='${-s}' y='${-s}' width='${2 * s}' height='${2 * s}' fill='${fill}' transform='rotate(45)'/>`;
+
+// a star tile: navy corners, a big light star, a white star, a small dark star
+const starTile = (x, y, light, dark) => `
+  <g transform='translate(${x} ${y})'>
+    <rect width='80' height='80' fill='${TN.glaze}'/>
+    <path d='M0 0H20L0 20Z M80 0H60L80 20Z M0 80H20L0 60Z M80 80H60L80 60Z' fill='${dark}'/>
+    <g transform='translate(40 40)'>${khatam(25, light)}${khatam(16, TN.glaze)}${khatam(9, dark)}<circle r='2.6' fill='${TN.glaze}'/></g>
+  </g>`;
+
+// a lattice tile: diamonds on the corners and edges, small stars in between
+const diamondTile = (x, y, c) => {
+	const d = (cx, cy) => `<path d='M${cx} ${cy - 12}L${cx + 12} ${cy}L${cx} ${cy + 12}L${cx - 12} ${cy}Z' fill='${c}'/>`;
+	const st = (cx, cy) => `<g transform='translate(${cx} ${cy})'>${khatam(5, c)}</g>`;
+	return `
+  <g transform='translate(${x} ${y})'>
+    <rect width='80' height='80' fill='${TN.glaze}'/>
+    ${d(0, 0)}${d(40, 0)}${d(80, 0)}${d(0, 40)}${d(40, 40)}${d(80, 40)}${d(0, 80)}${d(40, 80)}${d(80, 80)}
+    ${st(20, 20)}${st(60, 20)}${st(20, 60)}${st(60, 60)}
+  </g>`;
+};
+
+// Tile wall: a 2 x 2 block of Qallaline tiles (blue star, yellow lattice, green lattice, green star)
+// with cream grout lines, repeated across the background.
 export const zellige = url(`
-<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'>
-  <path d='M40 0V17.4M40 62.6V80M0 40H17.4M62.6 40H80M0 0L24 24M80 0L56 24M0 80L24 56M80 80L56 56'
-        stroke='${TN.terracotta}' stroke-width='1.4' fill='none'/>
-  <g transform='translate(40 40)'>
-    <rect x='-16' y='-16' width='32' height='32' fill='${TN.blue}'/>
-    <rect x='-16' y='-16' width='32' height='32' fill='${TN.blue}' transform='rotate(45)'/>
-    <rect x='-8.5' y='-8.5' width='17' height='17' fill='${TN.ochre}'/>
-    <rect x='-8.5' y='-8.5' width='17' height='17' fill='${TN.ochre}' transform='rotate(45)'/>
-    <circle r='3.6' fill='${TN.terracotta}'/>
-  </g>
-  <g fill='${TN.green}'>
-    <path d='M0 -9L9 0L0 9L-9 0Z'/><path d='M80 -9L89 0L80 9L71 0Z'/>
-    <path d='M0 71L9 80L0 89L-9 80Z'/><path d='M80 71L89 80L80 89L71 80Z'/>
+<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'>
+  <defs><clipPath id='c'><rect width='160' height='160'/></clipPath></defs>
+  <g clip-path='url(#c)'>
+    ${starTile(0, 0, TN.sky, TN.cobalt)}
+    ${diamondTile(80, 0, TN.yellow)}
+    ${diamondTile(0, 80, TN.tileGreen)}
+    ${starTile(80, 80, TN.leaf, TN.cobalt)}
+    <path d='M0 0H160M0 80H160M0 160H160M0 0V160M80 0V160M160 0V160' stroke='${TN.grout}' stroke-width='3'/>
   </g>
 </svg>`);
 
-// Very faint zellige for the whole page background (same tile, drawn at low opacity).
+// Very faint tile wall for the whole page background (same tiles, drawn at low opacity).
 export const zelligeFaint = zellige.replace(
-	encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'>"),
-	encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g opacity='.035'>")
-).replace(encodeURIComponent('</svg>'), encodeURIComponent('</g></svg>'));
+	encodeURIComponent("<g clip-path='url(#c)'>"),
+	encodeURIComponent("<g clip-path='url(#c)' opacity='.05'>")
+);
 
 // A centred star between two thin lines, used above every chapter heading.
 export const divider = url(`

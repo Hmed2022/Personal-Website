@@ -23,7 +23,7 @@ const FLAG = `<g transform="translate(350 714) rotate(-4)"><rect x="-4" y="-4" w
   <circle cx="28" cy="19" r="12" fill="#FFFFFF"/><circle cx="29" cy="19" r="8.5" fill="#D8232F"/><circle cx="32" cy="19" r="7" fill="#FFFFFF"/>
   <path d="M33 15.5l1.1 2.4 2.6.2-2 1.7.7 2.5-2.4-1.4-2.2 1.4.6-2.5-1.9-1.7 2.6-.2Z" fill="#D8232F"/></g>`;
 // colour is laid slightly off the ink lines, like a sketch coloured in by hand
-const jersey = (j, i) => `<g class="jersey j${i}" stroke-linejoin="round" stroke-linecap="round">
+const jersey = (j, i) => `<g class="jersey j${i}" filter="url(#sketch)" stroke-linejoin="round" stroke-linecap="round">
   <path transform="translate(8 6)" d="M124,668 L180,668 Q270,752 360,668 L414,668 Q402,744 430,794 L436,996 L100,996 L108,794 Q136,744 124,668Z" fill="${j.body}"/>
   <path transform="translate(6 5)" d="M180,670 Q270,754 360,670" fill="none" stroke="${j.trim}" stroke-width="18"/>
   <path transform="translate(6 5)" d="M126,672 Q138,744 110,790M412,672 Q400,744 428,790" fill="none" stroke="${j.trim}" stroke-width="15"/>
@@ -209,13 +209,15 @@ export function buildCaptain(meSvg) {
   const inkOnly = body.replace(/<path[^>]*var\(--logo-(bg|fill)[^>]*\/>/g, '');
   const neck = ARMS.split('\n')[1];  // the two neck lines
   const armsOnly = ARMS.replace(neck + '\n', '');
-  const clothes = `<g filter="url(#sketch)" transform="translate(0 -30)">
-    <path d="M236,640 L245,730 L315,730 L324,640Z" fill="var(--skin, #FFFFFF)"/>
-    <g fill="none" stroke="${INK}" stroke-linecap="round">${neck}</g>
-    <g class="o-arms"><path d="M122,664 C88,668 64,722 60,800 C56,880 54,950 56,1004 L94,1004 L104,792 Q134,742 120,662Z" fill="var(--skin, #FFFFFF)"/><path class="arm-r" d="M418,664 C452,668 476,722 480,800 C484,880 486,950 484,1004 L442,1004 L434,792 Q404,742 418,662Z" fill="var(--skin, #FFFFFF)"/>${armsOnly}</g>
+  // The wobble filter sits on each piece separately (not on the whole outfit), so when the jerseys
+  // crossfade only the fading jersey is redrawn; the neck and arms stay still and sharp.
+  const clothes = `<g transform="translate(0 -30)">
+    <g filter="url(#sketch)"><path d="M236,640 L245,730 L315,730 L324,640Z" fill="var(--skin, #FFFFFF)"/>
+    <g fill="none" stroke="${INK}" stroke-linecap="round">${neck}</g></g>
+    <g class="o-arms" filter="url(#sketch)"><path d="M122,664 C88,668 64,722 60,800 C56,880 54,950 56,1004 L94,1004 L104,792 Q134,742 120,662Z" fill="var(--skin, #FFFFFF)"/><path class="arm-r" d="M418,664 C452,668 476,722 480,800 C484,880 486,950 484,1004 L442,1004 L434,792 Q404,742 418,662Z" fill="var(--skin, #FFFFFF)"/>${armsOnly}</g>
     <g class="o-jerseys">${JERSEYS.map(jersey).join('')}</g>
-    <g class="o-umich">${jersey(UMICH, 'u').replace('class="jersey ju"', 'class="umich-shirt"')}</g>
-    ${JEBBA}${DINGRI}${KEFFIYEH}${PJ_BODY}
+    <g class="o-umich" filter="url(#sketch)">${jersey(UMICH, 'u').replace('class="jersey ju" filter="url(#sketch)"', 'class="umich-shirt"')}</g>
+    <g filter="url(#sketch)">${JEBBA}${DINGRI}${KEFFIYEH}${PJ_BODY}</g>
   </g>`;
   const hat = HAT.replace('<g class="hat"><g filter="url(#sketch)">', '<g class="hat"><g class="straw" filter="url(#sketch)">')
                  .replace(/<\/g><\/g><\/g>$/, `</g></g>${chechia(inkOnly)}</g>`);
