@@ -59,7 +59,7 @@ export const imageData = [
     desc: "Infographic | Data Visualization",
     description:
       "An infographic journey through the history and design evolution of Tunisian currency and banknotes.",
-    href: "/#/tuninfo",
+    href: "/#/tnNotes",
     tools: ["Svelte", "D3"],
     alt: "Animated title of What Can Tunisia's Banknotes Tell You?, with portraits from the notes",
     show: false,

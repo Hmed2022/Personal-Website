@@ -7,7 +7,9 @@
   import { t, pick, money } from '../../i18n.js';
   import { star, frieze } from '../../Components/tunisianPatterns.js';
   import { INTRUDERS, dinarRate } from './intruders.js';
-  import { strayNote } from './strayStore.js';
+  import { strayNote, sortRequest } from './strayStore.js';
+  import { get } from 'svelte/store';
+  import { noteSrc } from './noteImage.js';
   import daliImg from '../../Components/dali.svg';
 
   export let notes = [];
@@ -28,10 +30,21 @@
     return a.map((n) => ({ ...n, tilt: (rnd() - 0.5) * 5 }));
   }
   const order = shuffled(notes, 1956);
-  // The joke: one foreign note hides among the Tunisian ones (a $20 or a €20, a different pick and pocket on
-  // each visit, always on pages 1–2 so people find it). Clicking it asks: toss it out, or keep it for the
+  // The joke: one foreign note hides among the Tunisian ones (a €20 in euro-area time zones, a $20 elsewhere,
+  // in a different pocket on each visit, always on pages 1–2 so people find it). Clicking it asks: toss it out, or keep it for the
   // next trip (it stays in its pocket).
-  const stray = INTRUDERS[Math.floor(Math.random() * INTRUDERS.length)];
+  // euro for readers in a euro-area time zone, dollar for everyone else
+  const EURO_ZONES = ['Amsterdam', 'Andorra', 'Athens', 'Berlin', 'Bratislava', 'Brussels', 'Busingen', 'Dublin', 'Helsinki',
+    'Lisbon', 'Ljubljana', 'Luxembourg', 'Madrid', 'Malta', 'Monaco', 'Paris', 'Riga', 'Rome', 'San_Marino', 'Sofia',
+    'Tallinn', 'Vatican', 'Vienna', 'Vilnius', 'Zagreb', 'Mariehamn', 'Podgorica', 'Nicosia', 'Famagusta'];
+  function inEuroZone() {
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      const [area, city] = tz.split('/');
+      return (area === 'Europe' && EURO_ZONES.includes(city)) || ['Atlantic/Madeira', 'Atlantic/Azores', 'Atlantic/Canary', 'Africa/Ceuta', 'Asia/Nicosia', 'Asia/Famagusta'].includes(tz);
+    } catch (e) { return false; }
+  }
+  const stray = INTRUDERS.find((n) => n.key === (inEuroZone() ? 'eur' : 'usd'));
   order.splice(Math.floor(Math.random() * 12), 0, { ...stray, id: 'stray', intruder: true, tilt: (Math.random() - 0.5) * 9 });
   let flying = false;   // the stray note is being thrown out
   let tossed = false;   // gone for good: its pocket stays empty
@@ -64,6 +77,9 @@
   // "Sort the notes": hand over where each visible note sits on the page (document coordinates, unrotated
   // size) so the timeline can lift them out of the binder and fly them onto their bars
   let wrapEl;
+  // Dali's button further down the page can ask for the sort too
+  let handledSort = get(sortRequest);
+  $: if ($sortRequest > handledSort) { handledSort = $sortRequest; if (!leaving) sortOut(); }
   function sortOut() {
     toast = false;
     const rects = {};
@@ -215,12 +231,12 @@
             </div>
           {:else if opened || opening}
             {#if pages[leftIdx]}
-              <div class="pockets" in:fade={{ duration: 300, delay: opening ? 450 : 0 }}>
+              <div class="pockets" in:fade={{ duration: opening ? 300 : 0, delay: opening ? 450 : 0 }}>
                 {#each pages[leftIdx] as n (n.id)}
                   {#if gone(n)}<span class="pocket empty" aria-hidden="true"></span>{:else}
                   <button type="button" class="pocket" class:flying={n.intruder && flying} data-id={n.intruder ? null : n.id} style="--c:{colorOf(n)}" on:click={() => pickNote(n)}
                           aria-label={n.intruder ? $t(n.name) : `${$money(n.Value)}, ${$pick(n.ObserveInEnglish, n.ObserveInArabic)}`}>
-                    <img src={n.img} alt="" style="transform: rotate({n.tilt}deg)" draggable="false" loading="lazy" />
+                    <img src={$noteSrc(n, n.img)} alt="" style="transform: rotate({n.tilt}deg)" draggable="false" loading="lazy" />
                     <span class="tag">{n.intruder ? n.tag : `${label(n.Value)} ${$t('dt')}`}</span>
                   </button>{/if}
                 {/each}
@@ -239,7 +255,7 @@
                   <button type="button" class="pocket" class:flying={n.intruder && flying} data-id={n.intruder ? null : n.id} style="--c:{colorOf(n)}" on:click={() => pickNote(n)}
                       tabindex={opened ? 0 : -1}
                       aria-label={n.intruder ? $t(n.name) : `${$money(n.Value)}, ${$pick(n.ObserveInEnglish, n.ObserveInArabic)}`}>
-                <img src={n.img} alt="" style="transform: rotate({n.tilt}deg)" draggable="false" loading="lazy" />
+                <img src={$noteSrc(n, n.img)} alt="" style="transform: rotate({n.tilt}deg)" draggable="false" loading="lazy" />
                 <span class="tag">{n.intruder ? n.tag : `${label(n.Value)} ${$t('dt')}`}</span>
               </button>{/if}
             {/each}
@@ -259,7 +275,7 @@
             {#if pages[leafFront]}
               <div class="pockets">
                 {#each pages[leafFront] as n (n.id)}
-                  {#if gone(n)}<span class="pocket empty"></span>{:else}<span class="pocket" style="--c:{colorOf(n)}"><img src={n.img} alt="" style="transform: rotate({n.tilt}deg)" /><span class="tag">{n.intruder ? n.tag : `${label(n.Value)} ${$t('dt')}`}</span></span>{/if}
+                  {#if gone(n)}<span class="pocket empty"></span>{:else}<span class="pocket" style="--c:{colorOf(n)}"><img src={$noteSrc(n, n.img)} alt="" style="transform: rotate({n.tilt}deg)" /><span class="tag">{n.intruder ? n.tag : `${label(n.Value)} ${$t('dt')}`}</span></span>{/if}
                 {/each}
               </div>
             {/if}
@@ -268,7 +284,7 @@
             {#if pages[leafBack]}
               <div class="pockets">
                 {#each pages[leafBack] as n (n.id)}
-                  {#if gone(n)}<span class="pocket empty"></span>{:else}<span class="pocket" style="--c:{colorOf(n)}"><img src={n.img} alt="" style="transform: rotate({n.tilt}deg)" /><span class="tag">{n.intruder ? n.tag : `${label(n.Value)} ${$t('dt')}`}</span></span>{/if}
+                  {#if gone(n)}<span class="pocket empty"></span>{:else}<span class="pocket" style="--c:{colorOf(n)}"><img src={$noteSrc(n, n.img)} alt="" style="transform: rotate({n.tilt}deg)" /><span class="tag">{n.intruder ? n.tag : `${label(n.Value)} ${$t('dt')}`}</span></span>{/if}
                 {/each}
               </div>
             {/if}
@@ -303,7 +319,7 @@
             <!-- closing from the middle: the left page you were on folds over with the cover -->
             <span class="pockets">
               {#each pages[at] as n (n.id)}
-                {#if gone(n)}<span class="pocket empty"></span>{:else}<span class="pocket" style="--c:{colorOf(n)}"><img src={n.img} alt="" style="transform: rotate({n.tilt}deg)" /><span class="tag">{n.intruder ? n.tag : `${label(n.Value)} ${$t('dt')}`}</span></span>{/if}
+                {#if gone(n)}<span class="pocket empty"></span>{:else}<span class="pocket" style="--c:{colorOf(n)}"><img src={$noteSrc(n, n.img)} alt="" style="transform: rotate({n.tilt}deg)" /><span class="tag">{n.intruder ? n.tag : `${label(n.Value)} ${$t('dt')}`}</span></span>{/if}
               {/each}
               {#each Array(PER_PAGE - pages[at].length) as _}<span class="pocket empty"></span>{/each}
             </span>

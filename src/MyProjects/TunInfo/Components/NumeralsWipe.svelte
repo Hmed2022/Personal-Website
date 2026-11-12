@@ -7,14 +7,15 @@
   import real58 from './eras/real-5-1958.webp';
   import real60 from './eras/real-5-1960.webp';
 
-  let real = false;
+  import { realNotes, realPhoto } from '../Data Viz/Timeline/noteImage.js';
+  $: real = $realNotes;   // same switch as the rest of the piece
   let split = 50;
 </script>
 
 <figure class="nw">
   <div class="view" role="tablist" aria-label={$t('ecShow')}>
-    <button type="button" role="tab" aria-selected={!real} class:on={!real} on:click={() => (real = false)}>{$t('ecIllus')}</button>
-    <button type="button" role="tab" aria-selected={real} class:on={real} on:click={() => (real = true)}>{$t('ecReal')}</button>
+    <button type="button" role="tab" aria-selected={!real} class:on={!real} on:click={() => realNotes.set(false)}>{$t('ecIllus')}</button>
+    <button type="button" role="tab" aria-selected={real} class:on={real} on:click={() => realNotes.set(true)}>{$t('ecReal')}</button>
   </div>
   <div class="wipe" dir="ltr" style="--split:{split}%">
     <img class="after" src={real ? real60 : illus60} alt={`${$money(5)}, 1960`} draggable="false" />

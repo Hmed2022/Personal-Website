@@ -1,5 +1,5 @@
 <script>
-	import Router, {location, link} from 'svelte-spa-router';
+	import Router, {location, link, replace} from 'svelte-spa-router';
 	import { wrap } from 'svelte-spa-router/wrap';
 	import Header from './components/Header.svelte';
 	import RouteLoading from './components/RouteLoading.svelte';
@@ -49,7 +49,9 @@
 		'/leghreeb': `About Leghreeb · ${SITE}`,
 		'/allstarintro': `The Decline of the All-Star Game · ${SITE}`,
 		'/allstar': `The Decline of the All-Star Game · ${SITE}`,
-		'/tuninfointro': `What Can Tunisia's Banknotes Tell You? · ${SITE}`,
+		'/tnnotesintro': `What Can Tunisia's Banknotes Tell You? · ${SITE}`,   // keys are lowercase (see onRouteLoaded): /#/tnNotesIntro
+		'/tnnotes': `What Can Tunisia's Banknotes Tell You? · ${SITE}`,   // /#/tnNotes
+		'/tuninfointro': `What Can Tunisia's Banknotes Tell You? · ${SITE}`,   // old address, still works
 		'/tuninfo': `What Can Tunisia's Banknotes Tell You? · ${SITE}`,
 		'/klay': `Klay BBJ: A Mirror of Tunisian Society · ${SITE}`,
 		'/names': `The Names We Memorized Before We Understood · ${SITE}`,
@@ -83,6 +85,9 @@
     '/leghreeb': lazy(() => import('./pages/Leghreeb.svelte')),
     '/allstarintro': lazy(() => import('./MyProjects/All-Star/AllStarIntro.svelte')),
     '/allstar': lazy(() => import('./MyProjects/All-Star/NBA.svelte')),
+    '/tnNotes': wrap({ asyncComponent: () => import('./MyProjects/TunInfo/TunInfo.svelte'), loadingComponent: TunLoading }),
+    '/tnNotesIntro': lazy(() => import('./MyProjects/TunInfo/TunInfoIntro.svelte')),
+    // old addresses (TunInfo), kept so links already shared keep working
     '/tuninfo': wrap({ asyncComponent: () => import('./MyProjects/TunInfo/TunInfo.svelte'), loadingComponent: TunLoading }),
     '/tuninfointro': lazy(() => import('./MyProjects/TunInfo/TunInfoIntro.svelte')),
     '/klay': lazy(() => import('./MyProjects/Klay/klay.svelte')),
@@ -94,6 +99,13 @@
   };
 
   // Normalize current path from the router (works for hash or history)
+  // old addresses of the banknotes piece (TunInfo, lowercase tnnotes) jump to the new one, so the address bar shows /#/tnNotes
+  const OLD = { '/tuninfo': '/tnNotes', '/tnnotes': '/tnNotes', '/tuninfointro': '/tnNotesIntro', '/tnnotesintro': '/tnNotesIntro' };
+  $: {
+    const p = ($location || '').split('?')[0].replace(/\/+$/, '');
+    const to = OLD[p.toLowerCase()];
+    if (to && p !== to) replace(to);
+  }
   $: normalizedPath =
     ($location || '')
       .toLowerCase()
@@ -105,6 +117,7 @@
     normalizedPath === '/anniv' ||
     normalizedPath === '/names' ||
     normalizedPath === '/allstar' ||
+    normalizedPath === '/tnnotes' ||   // (lowercased: matches /tnNotes)
     normalizedPath === '/tuninfo' ||
     normalizedPath === '/klay' ||
     normalizedPath === '/cardmagic';

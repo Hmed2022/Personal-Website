@@ -25,14 +25,51 @@
     import ErasChanges from "./Components/ErasChanges.svelte"
     import NumeralsWipe from "./Components/NumeralsWipe.svelte"
     import LangSwitch from "./Components/LangSwitch.svelte"
+    import NoteViewSwitch from "./Components/NoteViewSwitch.svelte"
     import CountryByEra from "./Data Viz/Landmarks/CountryByEra.svelte"
     import DinarValue from "./Data Viz/Timeline/DinarValue.svelte"
     import Conclusion from "./Components/Conclusion.svelte"
     import NoteLifespans from "./Data Viz/Timeline/NoteLifespans.svelte"
-    import ChapterNav from "./Components/ChapterNav.svelte"
+    import ChapterNav from "./Components/ChapterNav.svelte"   // (floating chapter menu: removed, the notebook navigates now)
+    import Notebook from "./Components/Notebook.svelte"
+    import TopicEnd from "./Components/TopicEnd.svelte"
+    import BackToBinder from "./Components/BackToBinder.svelte"
+    import { tick } from "svelte"
+    // the notebook's questions, in the order they're listed (each opens one part of the story)
+    const TOPICS = [
+        { id: 'eras', q: 'pErasSameNote', short: 'nbT_eras' },
+        { id: 'vivid', q: 'pVividNote', short: 'nbT_vivid' },
+        { id: 'sizes', q: 'pSizeNote', short: 'nbT_sizes' },
+        { id: 'faces', q: 'pFacesNote', short: 'nbT_faces' },
+        { id: 'land', q: 'lmQuestion', short: 'nbT_land' },
+        { id: 'country', q: 'insCountryNote', short: 'nbT_country' },
+        { id: 'worth', q: 'pWorthNote', short: 'nbT_worth' },
+        { id: 'end', q: 'nbBye', short: '' },
+    ];
+    let open = null, read = {}, topicEl, hubEl;
+    // the goodbye ("Thanks, Dali!") only shows up once every question has been asked
+    $: allRead = TOPICS.every((x) => x.id === 'end' || read[x.id]);
+    async function pick(id) {
+        if (!id) return;
+        open = id; read = { ...read, [id]: true };
+        await tick();
+        topicEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    // next unread question in list order (the goodbye last); null when there's nothing left
+    const nextOf = (cur) => (TOPICS.find((x) => x.id !== cur && x.id !== 'end' && !read[x.id]) || (cur !== 'end' ? TOPICS[TOPICS.length - 1] : null))?.id;
+    function backToNotebook() { hubEl?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     import Sources from "./Components/Sources.svelte"
     import Insight from "./Components/Insight.svelte"
-    import { strayNote } from "./Data Viz/Timeline/strayStore.js"   // the $20 / €20 joke from the binder
+    import { strayNote, sortedOnce, sortRequest } from "./Data Viz/Timeline/strayStore.js"
+    // never sorted? Dali nudges you (with his own sort button); keep scrolling past him and the notebook shows up anyway
+    let skipped = false, nudgeEl;
+    function checkSkip() {
+        if (!skipped && !$sortedOnce && nudgeEl && nudgeEl.getBoundingClientRect().bottom < innerHeight * 0.3) skipped = true;
+    }
+    function sortFromNudge() {
+        document.querySelector('.timeline')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => sortRequest.update((n) => n + 1), 750);
+    }   // the $20 / €20 joke from the binder
     import daliFull from "./Components/dali-full.svg"
     import { t, lang, dir } from "./i18n.js";
 
@@ -73,8 +110,9 @@
 </div> -->
 
 
+<NoteViewSwitch/>
 <LangSwitch/>
-<ChapterNav inline={false}/>
+<BackToBinder/>
 <div class="tn-page" class:tn-ar={$lang === 'ar'} lang={$lang} dir={$dir}>
 <div class="Title">
     <div class="svg">
@@ -91,7 +129,7 @@
     <!-- meet Dali: Leghreeb (About page) in his dingri and chechia, beside how the piece works -->
     <div class="meet-dali">
         <img class="dali-full" src={daliFull} alt={$t('daliAlt')} draggable="false" />
-        <Insight k="insHow" label="insHowLabel" tone="blue"/>
+        <Insight k="insHow" label="insHowLabel" noicon/>
     </div>
     <!-- <ChapterNav/> row of chapter links under the intro: removed (the floating menu stays) -->
 </div>
@@ -100,7 +138,7 @@
     <h1 id="ch-timeline" class="chapter" style="--n:'01'">
         <span>{$t('hTimeline')}</span>  
     </h1>
-    <p>{$t('pTimeline')}</p>
+    <!-- the binder introduces itself; the old timeline intro paragraph (pTimeline) is no longer shown -->
 </div>
 
 
@@ -120,6 +158,18 @@
 <Insight k="insLife" note="insLifeNote" lens={['eco', 'pol']}/>
 -->
 
+{#if !$sortedOnce && !skipped}
+<div class="sort-nudge" bind:this={nudgeEl}>
+    <Insight k="nbSortNudge"/>
+    <p class="sn"><button type="button" on:click={sortFromNudge}>{$t('bdSort')}</button></p>
+</div>
+{/if}
+{#if $sortedOnce || skipped}
+<!-- ===== your notebook: pick a question, Dali answers and that part opens (one at a time, any order) ===== -->
+<div bind:this={hubEl}><Insight k={$sortedOnce ? 'nbNudge' : 'nbSkip'}/><Notebook items={allRead ? TOPICS : TOPICS.filter((x) => x.id !== 'end')} {read} {open} on:pick={(e) => pick(e.detail)}/></div>
+
+{#if open === 'eras'}
+<section class="topic" bind:this={topicEl}>
     <div class="prose">
         <h1 id="ch-eras" class="chapter" style="--n:'02'">
             <span>{$t('hEras')}</span>
@@ -127,7 +177,7 @@
 
     </div>
     <!-- if you kept the foreign note instead of giving it to Dali, he brings it up here -->
-    <Insight k={$strayNote.choice === 'kept' ? ($strayNote.tag === '$20' ? 'pErasSameKeptUsd' : 'pErasSameKeptEur') : 'pErasSame'} note="pErasSameNote"/>
+    <Insight k={$strayNote.choice === 'kept' ? ($strayNote.tag === '$20' ? 'pErasSameKeptUsd' : 'pErasSameKeptEur') : 'pErasSame'} />
     <Insight k="pEras0" note="pEras0Note"/>
     <div class="wide">
         <NumeralsWipe/>
@@ -166,107 +216,117 @@
 
         <Propaganda/>
         -->
+    </div>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+</section>
+{/if}
 
-    
-
+{#if open === 'vivid'}
+<section class="topic" bind:this={topicEl}>
+    <div class="prose">
     <h1 id="ch-vivid" class="chapter" style="--n:'03'">
         <span>{$t('hVivid')}</span>  
     </h1>
     </div>
-    <Insight k="pVivid" note="pVividNote"/>
-    <div class="prose">
-    <h2>
-        <span>{$t('hGuess')}</span>
-    </h2>
-    </div>
-    <!-- Dali sets up his game: two rounds, then the game itself -->
-    <Insight k="pGuess1"/>
-    <Insight k="pGuess2"/>
+    <Insight k="pVivid"/>
+    <!-- (the game's title and Dali's two round explanations were removed: the game explains itself) -->
     <div class="prose">
     <div class="wide">
         <!-- <div class="color"><Color/></div> previous version, kept -->
         <ColorGame/>
     </div>
 
-    <h2>
-        <span>{$t('hSize')}</span>
-    </h2>
-    <p>{$t('pSize1')}</p>
-    <p>{$t('pSize2')}</p>
+    </div>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+</section>
+{/if}
+
+{#if open === 'sizes'}
+<section class="topic" bind:this={topicEl}>
+    <Insight k="pSizeDali" lens={['cul']}/>
     <div class="wide">
         <!-- <div class="color"><Scatter/></div> previous version, kept -->
         <SizeChart/>
     </div>
     <Insight k="insVivid" note="insVividNote" lens={['eco', 'geo']}/>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+</section>
+{/if}
 
+{#if open === 'faces'}
+<section class="topic" bind:this={topicEl}>
+    <div class="prose">
     <h1 id="ch-faces" class="chapter" style="--n:'04'">
         <span>{$t('hFigures')}</span>  
     </h1>
-    <h2>
-        <span>{$t('hFaces')}</span>
-    </h2>
-<p style="margin-bottom:5%">{@html $t('pFaces')}</p>
 </div>
+<Insight k="pFaces" lens={['pol', 'cul']}/>
 <div class="timeline">
     
     <!-- <Beeswarm/> previous version, kept -->
     <PortraitStory/>
     </div>
 <Insight k="insFaces" note="insFacesNote" lens={['pol', 'cul']}/>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+</section>
+{/if}
 
+{#if open === 'land'}
+<section class="topic" bind:this={topicEl}>
     <div class="prose">
         <h2 id="ch-landmarks" class="chapter" style="--n:'05'; margin-top:5%">
             <span>{$t('hDiverse')}</span>
         </h2>
-        <h3>
-            <span>{$t('hDistribution')}</span>
-        </h3>
     </div>
     <div class="landmark">
 <Landmarks/>
 </div>
-<div class="prose">
-    <p>{@html $t('lmRegions')}</p>
-    <p>{@html $t('lmAbsent')}</p>
-</div>
-<Insight k="insMap" note="insMapNote" lens={['geo', 'pol']}/>
+<Insight k="lmRegions" note="lmRegionsNote" lens={['geo', 'pol']}/>
+<!-- (Dali's map exchange moved above the map) -->
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+</section>
+{/if}
 
-<div class="prose">
-    <h3>
-        <span>{$t('hLandmarks')}</span>
-    </h3>
-    <p>{$t('pLandmarks')}</p>
-</div>
+{#if open === 'country'}
+<section class="topic" bind:this={topicEl}>
+<!-- what kind of country do the notes show? -->
+<Insight k="insCountry" lens={['eco', 'pol']}/>
+<div class="wide"><CountryByEra/></div>
+
+<Insight k="pLandmarks"/>
 <!-- <Landmark/> previous explorer, kept -->
 <LandmarkExplorer/>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+</section>
+{/if}
 
-<!-- what kind of country do the notes show? -->
-<div class="prose">
-    <h3><span>{$t('hCountry')}</span></h3>
-    <p>{$t('pCountry')}</p>
-</div>
-<div class="wide"><CountryByEra/></div>
-<Insight k="insCountry" note="insCountryNote" lens={['eco', 'pol']}/>
-
+{#if open === 'worth'}
+<section class="topic" bind:this={topicEl}>
 <!-- what is your banknote worth? -->
 <div class="prose">
     <h1 id="ch-worth" class="chapter" style="--n:'06'"><span>{$t('hWorth')}</span></h1>
-    <p>{@html $t('pWorth1')}</p>
-    <p>{@html $t('pWorth2')}</p>
 </div>
+<Insight k="pWorthDali" lens={['eco']}/>
 <div class="wide"><DinarValue/></div>
 <Insight k="insWorth" note="insWorthNote" lens={['eco']}/>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+</section>
+{/if}
 
-<!-- conclusion -->
-<div class="prose centered">
-    <h1 id="ch-end" class="chapter" style="--n:'07'"><span>{$t('hEnd')}</span></h1>
-</div>
-<div class="wide end-wrap"><Conclusion/></div>
+{#if open === 'end'}
+<section class="topic" bind:this={topicEl}>
+<div class="wide end-wrap"><Conclusion missed={TOPICS.filter((x) => x.id !== 'end' && !read[x.id]).map((x) => x.short)}/></div>
+<TopicEnd hasNext={false} on:back={backToNotebook}/>
+</section>
+{/if}
+{/if}
 
+<!-- sources: always at the end of the page -->
 <div class="prose">
-    <h3 id="ch-sources" class="chapter" style="--n:'08'"><span>{$t('hSources')}</span></h3>
+    <h3 id="ch-sources"><span>{$t('hSources')}</span></h3>
 </div>
 <div class="wide sources-wrap"><Sources/></div>
+
 
 
 <!-- <Map/> -->
@@ -279,7 +339,7 @@
 <!-- <svelte:body use:style={"background-color: #FDF6F5;"} /> previous flat background -->
 </div><!-- /tn-page -->
 <svelte:body use:style={pageStyle} />
-<svelte:window on:contextmenu={blockMenu} on:dragstart={blockDrag} />
+<svelte:window on:contextmenu={blockMenu} on:dragstart={blockDrag} on:scroll|passive={checkSkip} />
 <Footer theme={{ logoBg: 'transparent', logoFill: 'transparent', logoInk: '#1E3F5C' }} />
 
 <style>
@@ -364,6 +424,11 @@
         margin-top: 1.8rem;   /* space under the title's bottom band */
         padding: 0 1rem;
     }
+    .sort-nudge { margin: 2.5rem 0 4rem; }
+    .sn { text-align: center; margin: -1.2rem 0 0; }
+    .sn button { padding: .65rem 1.5rem; border: 0; border-radius: 999px; background: #8C4D3F; color: #FFFBF1; cursor: pointer;
+        font: 800 .95rem Quicksand, sans-serif; box-shadow: 0 3px 10px rgba(74, 46, 37, .3); transition: transform .2s, background .2s; }
+    .sn button:hover { background: #6E3A2F; transform: translateY(-2px); }
     .introText.second { margin-top: .9rem; }
     /* key phrases for readers who scan: a highlighter stroke, like the collector's own notes */
     .introText :global(b) {
@@ -421,6 +486,10 @@
 
     /* chapter titles: framed like a banknote, with a red serial number */
     .chapter{ margin-top: 0; }
+    /* Chapter plates removed from view: the reading flows straight on, the bottom-right menu does the navigating.
+       The headings stay in the page (for that menu, screen readers and search), just visually hidden, with some breathing room. */
+    .tn-page .chapter{ position: relative; height: 1px; margin: 3.5rem 0 0 !important; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+    .tn-page .chapter::before, .tn-page .chapter::after{ display: none; }
     .chapter::before{   /* door studs leading to a small arched door */
         content: "";
         display: block;

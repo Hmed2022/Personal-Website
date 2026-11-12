@@ -18,15 +18,18 @@
     { before: note('06'), after: note('02'), realBefore: real20a, realAfter: real20b, value: 20, from: 1992, to: 2011, who: 'whoKheireddine' },
     { before: note('14'), after: note('01'), realBefore: real50a, realAfter: real50b, value: 50, from: 2008, to: 2011, who: 'whoRachiq' },
   ];
-  let real = false;   // illustrations or photos of the real notes
+  import { realNotes, realPhoto } from '../Data Viz/Timeline/noteImage.js';
+  $: real = $realNotes;   // same switch as the rest of the piece
   let split = PAIRS.map(() => 50);   // % of the "before" note still showing
 
   // the four backs, in the order they sit in the composite image (2 x 2)
+  // back photos come from the timeline data (PathB, or a local file in RealNotes/); the second 10 DT of 1994 is P87A
+  const backOf = (v, y, b = false) => realPhoto({ Value: v, Issued: y, PathF: b ? 'P087A' : '' }, 'back');
   const BACKS = [
-    { pos: '0% 0%', value: 20, year: 1992, text: 'ecBack0' },
-    { pos: '100% 0%', value: 5, year: 1993, text: 'ecBack1' },
-    { pos: '0% 100%', value: 10, year: 1994, text: 'ecBack2' },
-    { pos: '100% 100%', value: 10, year: 1994, text: 'ecBack3' },
+    { pos: '0% 0%', value: 20, year: 1992, text: 'ecBack0', real: backOf(20, 1992), cut: '37% 24%, 55% 24%, 60% 32%, 72% 35%, 81% 40%, 78% 47%, 68% 50%, 66% 60%, 62% 72%, 56% 78%, 50% 78%, 42% 76%, 40% 68%, 36% 62%, 38% 52%, 44% 46%, 40% 36%' },
+    { pos: '100% 0%', value: 5, year: 1993, text: 'ecBack1', real: backOf(5, 1993), cut: '17% 44%, 26% 42%, 34% 36%, 36% 30%, 48% 28%, 52% 18%, 62% 20%, 73% 38%, 68% 44%, 58% 50%, 62% 54%, 55% 70%, 48% 78%, 36% 76%, 30% 64%, 26% 56%, 17% 54%' },
+    { pos: '0% 100%', value: 10, year: 1994, text: 'ecBack2', real: backOf(10, 1994), cut: '16% 40%, 28% 32%, 36% 24%, 48% 18%, 60% 18%, 64% 28%, 70% 36%, 73% 48%, 66% 62%, 60% 76%, 46% 82%, 34% 90%, 26% 82%, 18% 70%, 14% 52%' },
+    { pos: '100% 100%', value: 10, year: 1994, text: 'ecBack3', real: backOf(10, 1994, true), cut: '16% 40%, 28% 32%, 36% 24%, 48% 18%, 58% 18%, 62% 28%, 66% 36%, 65% 48%, 62% 62%, 58% 76%, 46% 82%, 34% 90%, 26% 82%, 18% 70%, 14% 52%' },
   ];
   let highlight = false;
   let hot = null;
@@ -35,8 +38,8 @@
 <div class="ec">
   <!-- ===== 1. purple out ===== -->
   <div class="view" role="tablist" aria-label={$t('ecShow')}>
-    <button type="button" role="tab" aria-selected={!real} class:on={!real} on:click={() => (real = false)}>{$t('ecIllus')}</button>
-    <button type="button" role="tab" aria-selected={real} class:on={real} on:click={() => (real = true)}>{$t('ecReal')}</button>
+    <button type="button" role="tab" aria-selected={!real} class:on={!real} on:click={() => realNotes.set(false)}>{$t('ecIllus')}</button>
+    <button type="button" role="tab" aria-selected={real} class:on={real} on:click={() => realNotes.set(true)}>{$t('ecReal')}</button>
   </div>
   <div class="pairs">
     {#each PAIRS as p, i}
@@ -69,6 +72,11 @@
               on:focus={() => (hot = i)} on:blur={() => (hot = null)}
               aria-label={`${$money(b.value)}, ${b.year}: ${$t(b.text)}`}>
         <span class="art">
+          {#if real}
+            <!-- real photo: greys out, and the 7 November symbol is cut out in colour and lifts off the note -->
+            <img class="layer photo" src={b.real} alt="" loading="lazy" draggable="false" />
+            <span class="layer cutout" aria-hidden="true"><img src={b.real} alt="" loading="lazy" draggable="false" style="clip-path: polygon({b.cut})" /></span>
+          {/if}
           <span class="layer notes" style="background-image:url({backs}); background-position:{b.pos}"></span>
           <span class="layer marks" style="background-image:url({symbols}); background-position:{b.pos}"></span>
         </span>
@@ -79,6 +87,7 @@
 </div>
 
 <style>
+  .layer.photo { width: 100%; height: 100%; object-fit: contain; z-index: 3; background: #F3ECDF; }
   .ec { font-family: Quicksand, sans-serif; color: #3D2A22; text-align: start; }
 
   /* ---- sliders ---- */
@@ -121,6 +130,12 @@
   .marks { opacity: 0; }
   .back.lit .notes { opacity: .22; filter: grayscale(1); }
   .back.lit .marks { opacity: 1; filter: drop-shadow(0 0 6px rgba(169, 57, 37, .55)); }
+  /* real photos: highlight on the photo itself */
+  .layer.photo { object-fit: fill; }
+  .cutout { z-index: 4; opacity: 0; transition: opacity .35s, transform .35s cubic-bezier(.3, 1.4, .5, 1); filter: drop-shadow(0 6px 8px rgba(61, 42, 34, .35)) drop-shadow(0 0 0 #fff); }
+  .cutout img { display: block; width: 100%; height: 100%; object-fit: fill; }
+  .back.lit .layer.photo { filter: grayscale(1) brightness(1.1); opacity: .5; }
+  .back.lit .cutout { opacity: 1; transform: translate(-3px, -5px) rotate(-1.2deg) scale(1.03); }
   .cap { display: flex; flex-direction: column; gap: .15rem; padding: .65rem .8rem .75rem; font-size: .82rem; line-height: 1.45; }
   .cap b { color: #A93925; font-size: .85rem; }
 

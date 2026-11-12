@@ -10,10 +10,22 @@
   import Scroll from './Scrolly.svelte';
   import { t, money, pick, lang } from '../../i18n.js';
   import PortraitCard from './PortraitCard.svelte';
+  import { realNotes } from '../Timeline/noteImage.js';
   import raw from './Data/data.js';
 
   const FACE = import.meta.glob('../../Components/portraits/*-d.webp', { eager: true, as: 'url' });
-  const face = (k) => FACE[`../../Components/portraits/${k}-d.webp`];
+  const drawn = (k) => FACE[`../../Components/portraits/${k}-d.webp`];
+  // "Real notes": the engraved face from the note. Variants without their own photo use the closest one
+  // (each Bourguiba note -> young or old Bourguiba, the 1992 Kheireddine -> Kheireddine...).
+  const REAL = import.meta.glob('../../Components/portraits/*-r.webp', { eager: true, as: 'url' });
+  const realOf = (k) => {
+    const r = (x) => REAL[`../../Components/portraits/${x}-r.webp`];
+    if (r(k)) return r(k);
+    const m = /^bourguiba-[\d.]+-(\d{4})$/.exec(k);
+    if (m) return r(+m[1] < 1980 ? 'bourguiba-young' : 'bourguiba-old');
+    return r(k.replace(/-brown$|\d{4}$/, ''));
+  };
+  $: face = (k) => ($realNotes && realOf(k)) || drawn(k);
 
   // ---------- data ----------
   const OCC = {
@@ -38,7 +50,7 @@
     const n = name.toLowerCase();
     // each Bourguiba face is cropped from the illustration of its own note (bourguiba-<value>-<year>-d.webp)
     const own = `bourguiba-${value}-${year}`;
-    if (n.includes('bourguiba')) return { key: face(own) ? own : year < 1980 ? 'bourguiba-young' : 'bourguiba-old', name: 'Habib Bourguiba', ar: 'الحبيب بورقيبة' };
+    if (n.includes('bourguiba')) return { key: drawn(own) ? own : year < 1980 ? 'bourguiba-young' : 'bourguiba-old', name: 'Habib Bourguiba', ar: 'الحبيب بورقيبة' };
     if (n.includes('amami')) return { key: 'amami', name: 'Slaheddine El Amami', ar: 'صلاح الدين العمامي' };
     if (n.includes('hached')) return { key: 'hached', name: 'Farhat Hached', ar: 'فرحات حشاد' };
     if (n.includes('chebbi')) return { key: year < 2000 ? 'chebbi30' : 'chebbi10', name: 'Abou El Kacem Chebbi', ar: 'أبو القاسم الشابي' };

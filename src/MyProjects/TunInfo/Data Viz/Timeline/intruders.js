@@ -125,9 +125,15 @@ const eur = url(`
 </svg>`);
 
 // `rate` = dinars per unit, a recent mid-market rate (late 2026), used if the live rate can't be fetched.
+// photos for the "Real notes" view: the $20 from Numista (loaded from there), the €20 from Wikimedia Commons
+// (ECB, 2002 series, design by Robert Kalina; reproduction allowed under ECB decisions ECB/2003/4 and ECB/2003/5)
+import eurReal from './Assets/intruders/eur20.webp';
+// If you save the photo as Assets/intruders/usd20.(jpg|webp|png), the local file is used instead of the Numista link.
+const USD_LOCAL = Object.values(import.meta.glob('./Assets/intruders/usd20.{jpg,jpeg,webp,png}', { eager: true, as: 'url' }))[0];
+const USD_REAL = USD_LOCAL || 'https://en.numista.com/catalogue/photos/etats-unis/65545a9e41b016.59831637-original.jpg';
 export const INTRUDERS = [
-  { key: 'usd', img: usd, tag: '$20', color: '#3E5B45', name: 'bdUsdName', line: 'bdUsd', cur: 'USD', amount: 20, rate: 3.0 },
-  { key: 'eur', img: eur, tag: '€20', color: '#2F5E96', name: 'bdEurName', line: 'bdEur', cur: 'EUR', amount: 20, rate: 3.36 },
+  { key: 'usd', img: usd, tag: '$20', color: '#3E5B45', name: 'bdUsdName', line: 'bdUsd', real: USD_REAL, cur: 'USD', amount: 20, rate: 3.0 },
+  { key: 'eur', img: eur, tag: '€20', color: '#2F5E96', name: 'bdEurName', line: 'bdEur', real: eurReal, cur: 'EUR', amount: 20, rate: 3.36 },
 ];
 
 // Today's rate in dinars for one unit of `cur` (free, no key, CORS-enabled); falls back to `fallback`.

@@ -76,11 +76,11 @@
   .progress { position: fixed; top: 0; left: 0; right: 0; height: 4px; z-index: 950; background: linear-gradient(90deg, #1E5B8C, #B5523B); transform-origin: 0 50%; pointer-events: none; }
   :global([dir='rtl']) .progress { transform-origin: 100% 50%; }
 
-  .float { position: fixed; right: 1rem; bottom: 4.2rem; z-index: 900; display: flex; flex-direction: column; align-items: flex-end; gap: .4rem; }
+  .float { position: fixed; right: 1rem; bottom: 6.9rem; z-index: 900; display: flex; flex-direction: column; align-items: flex-end; gap: .4rem; }
   .pill { display: inline-flex; align-items: center; gap: .5rem; font: 700 .85rem Quicksand, 'Tajawal', sans-serif; color: #FFFFFF; background: #1E3F5C; border: none; border-radius: 999px; padding: .5rem .9rem; cursor: pointer; box-shadow: 0 4px 16px rgba(30, 63, 92, .3); }
   .pct { font-weight: 600; opacity: .75; font-size: .75rem; }
   .menu { list-style: none; margin: 0; padding: .4rem; display: grid; gap: .25rem; background: #FFFBF4; border: 1px solid #E6DCCF; border-radius: 14px; box-shadow: 0 10px 28px rgba(61, 42, 34, .2); }
   .menu button { width: 100%; background: none; border-color: transparent; }
   .menu button.on { background: #EEF4F6; border-color: #C8D9DC; }
-  @media (max-width: 640px) { .float { right: .6rem; bottom: 3.6rem; } .pct { display: none; } }
+  @media (max-width: 640px) { .float { right: .6rem; bottom: 6rem; } .pct { display: none; } }
 </style>

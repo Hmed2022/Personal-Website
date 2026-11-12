@@ -2,8 +2,8 @@
   // Sources and method, at the very end of the piece.
   import { t } from '../i18n.js';
   const GROUPS = [
-    { h: 'srcData', items: ['srcData1', 'srcData2', 'srcData3'] },
-    { h: 'srcImages', items: ['srcImg2', 'srcImg4', 'srcImg1', 'srcImg3'] },
+    { h: 'srcData', items: ['srcData1', 'srcData2', 'srcData3', 'srcData4'] },
+    { h: 'srcImages', items: ['srcImg2', 'srcImg4', 'srcImg1', 'srcImg3', 'srcImg5'] },
     { h: 'srcMethod', items: ['srcM1', 'srcM2', 'srcM3', 'srcM4', 'srcM5', 'srcM6', 'srcM7'] },
   ];
 </script>

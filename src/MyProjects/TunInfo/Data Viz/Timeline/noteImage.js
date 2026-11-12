@@ -1,3 +1,4 @@
+import { writable, derived } from 'svelte/store';
 // Local illustration of a note (BanknotesSmall/Banknote-NN.webp), falling back to its online preview.
 // The local files mostly share the number of the online preview (baknote-NN.png), except these,
 // which were numbered differently when exported. Keyed by the note's value and issue year.
@@ -33,3 +34,12 @@ export function realPhoto(n, side) {
   const id = `${n.Value}-${n.Issued}${/P087A/i.test(n.PathF || '') ? 'b' : ''}`;
   return realByName[`${id}-${side}`] || (side === 'front' ? n.PathF : n.PathB);
 }
+
+// Illustrations or photos of the real notes, for the whole piece (switch above the language switch).
+const KEY = 'tuninfo-real-notes';
+let start = false;
+try { start = localStorage.getItem(KEY) === '1'; } catch (e) { /* storage blocked */ }
+export const realNotes = writable(start);
+realNotes.subscribe((v) => { try { localStorage.setItem(KEY, v ? '1' : '0'); } catch (e) { /* ignore */ } });
+// $noteSrc(n, illustration) -> the illustration, or the front photo when "real notes" is on
+export const noteSrc = derived(realNotes, (real) => (n, illus) => (!real || !n ? illus : n.intruder ? n.real || illus : realPhoto(n, 'front') || illus));

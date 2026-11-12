@@ -5,7 +5,7 @@
   import raw from './Data/data.js';
   import { t, money, pick } from '../../i18n.js';
 
-  import { noteImage } from '../Timeline/noteImage.js';
+  import { noteImage, noteSrc } from '../Timeline/noteImage.js';
   const imageOf = (n) => noteImage(n, null);
   const COLOR = { 0.5: '#0388A6', 1: '#025E73', 5: '#005C53', 10: '#BF5630', 20: '#8C4D3F', 30: '#AB7E56', 50: '#C9A46F' };
   const label = (v) => (v === 0.5 ? '½' : String(v));
@@ -72,7 +72,7 @@
         {/each}
         {#if hot}
           {#if hot.img}
-            <image href={hot.img} x="2" y="2" width={hot.long * k} height={hot.short * k} preserveAspectRatio="none" opacity=".92" transition:fade={{ duration: 150 }} />
+            <image href={$noteSrc(raw[hot.id], hot.img)} x="2" y="2" width={hot.long * k} height={hot.short * k} preserveAspectRatio="none" opacity=".92" transition:fade={{ duration: 150 }} />
           {/if}
           <rect x="2" y="2" width={hot.long * k} height={hot.short * k} rx="3" class="frame" style="stroke:{COLOR[hot.value]}" />
         {/if}

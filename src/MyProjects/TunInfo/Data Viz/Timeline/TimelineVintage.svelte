@@ -9,9 +9,16 @@
   import data from './Data/data.js';
   import ModalContent from './Components/ModalContent.svelte';   // previous details window (kept)
   import NoteModal from './Components/NoteModal.svelte';
-  import { noteImage } from './noteImage.js';
+  import { noteImage, noteSrc, realNotes, realPhoto } from './noteImage.js';
+  import tawhidaReal from '../../Components/portraits/tawhida-r.webp';
+  // "Real notes": the portrait figures become the real notes themselves (the 4 'young' Bourguiba notes of
+  // 1958 – 1962, the 19 'old' ones after), and Tawhida's engraved face
+  const bourguibaNotes = data.filter((n) => /Bourguiba/.test(n.ObserveInEnglish)).sort((a, b) => a.Issued - b.Issued || a.Value - b.Value);
+  const realYoung = bourguibaNotes.filter((n) => n.Issued <= 1962).map((n) => realPhoto(n, 'front'));
+  const realOld = bourguibaNotes.filter((n) => n.Issued > 1962).map((n) => realPhoto(n, 'front'));
   import NoteLifespans from './NoteLifespans.svelte';
   import NoteBinder from './NoteBinder.svelte';
+  import { binderRequest, sortedOnce } from './strayStore.js';
   import daliImg from '../../Components/dali.svg';   // the era stories are Dali talking         // the reader's binder of notes, before they are sorted   // second view of the same notes: how long each one lasted
   import illus60 from './BanknotesSmall/Banknote-41.webp';            // 1958 illustration with Western 5s
   import real58 from '../../Components/eras/real-5-1958.webp';
@@ -46,8 +53,8 @@
       text: 'st0Text',
       ask: 'insTimelineNote',   // your notebook slip; the story is Dali's answer
       figures: [
-        { img: eraYoung, alt: 'Young Bourguiba portraits', caption: 'st0Fig1' },
-        { img: eraOld, alt: 'Old Bourguiba portraits', caption: 'st0Fig2' },
+        { img: eraYoung, alt: 'Young Bourguiba portraits', caption: 'st0Fig1', stack: 'young' },
+        { img: eraOld, alt: 'Old Bourguiba portraits', caption: 'st0Fig2', stack: 'old' },
       ],
     },
     {
@@ -63,7 +70,7 @@
       ask: 'st2Ask',
       note: 'st2Note',
       figures: [
-        { img: eraTawhida, alt: 'Tawhida Ben Cheikh', wide: true, caption: 'st2Fig' },
+        { img: eraTawhida, alt: 'Tawhida Ben Cheikh', wide: true, caption: 'st2Fig', realImg: tawhidaReal },
       ],
     },
   ];
@@ -103,6 +110,8 @@
   // the story builds up in three steps: a binder of unsorted notes, then the notes sorted on a timeline,
   // then the same timeline split into the three eras
   let stage = 'binder';   // 'binder' | 'sorted' | 'eras'
+  binderRequest.subscribe((n) => { if (n) { stage = 'binder'; phase = 'done'; } });
+  $: if (stage !== 'binder') sortedOnce.set(true);
   $: withEras = stage === 'eras';
   // Sorting, step by step: the notes are lifted out of the binder and the binder fades away (lift), the notes
   // shrink and fly onto their place on the timeline (fly), the bars take over from the pictures (land) and
@@ -381,7 +390,15 @@
             <div class="figures">
               {#each st.figures as f}
                 <figure class:wide={f.wide}>
-                  <img src={f.img} alt={f.alt} loading="lazy" />
+                  {#if $realNotes && f.stack}
+                    {@const list = f.stack === 'young' ? realYoung : realOld}
+                    <!-- the real notes, fanned out like a small pile -->
+                    <span class="pile" class:big={list.length > 6} role="img" aria-label={f.alt}>
+                      {#each list as src, i}<img {src} alt="" loading="lazy" style="--i:{i}; --n:{list.length}" />{/each}
+                    </span>
+                  {:else}
+                    <img src={$realNotes && f.realImg ? f.realImg : f.img} alt={f.alt} loading="lazy" />
+                  {/if}
                   <figcaption>{@html $t(f.caption)}</figcaption>
                 </figure>
               {/each}
@@ -417,7 +434,7 @@
                     style="left:{LABEL_W + xOf(n.Issued)}px; top:{laneTops[i] + LANE_PAD + n.track * (BAR_H + GAP)}px; width:{w}px; height:{BAR_H}px; --c:{COLORS[l.value]}; --iw:{Math.min(w, BAR_H * NOTE_AR)}px; --li:{i}"
                     on:pointerenter={(e) => showTip(e, n)} on:pointermove={moveTip} on:pointerleave={() => (tip = null)}
                     on:click|stopPropagation={() => open(n)} aria-label={`${$money(n.Value)}, ${$pick(n.ObserveInEnglish, n.ObserveInArabic)}, ${n.Issued} – ${n.Active === 'Yes' ? $t('today') : n.EndofCirculation}`}>
-              {#if w > 60}<img src={n.img} alt="" loading="lazy" draggable="false" />{/if}
+              {#if w > 60}<img src={$noteSrc(n, n.img)} alt="" loading="lazy" draggable="false" />{/if}
               {#if w > 110}<span class="bar-years">{n.Issued}–{n.Active === 'Yes' ? $t('now') : String(n.EndofCirculation).slice(2)}</span>{/if}
             </button>
           {/each}
@@ -466,7 +483,7 @@
         <button type="button" class="w-note" style="--c:{COLORS[n.Value]}" in:fade={{ duration: 180 }}
                 on:pointerenter={(e) => showTip(e, n)} on:pointermove={moveTip} on:pointerleave={() => (tip = null)}
                 on:click={() => open(n)}>
-          <img src={n.img} alt={`${$money(n.Value)}, ${$pick(n.ObserveInEnglish, n.ObserveInArabic)}`} loading="lazy" draggable="false" />
+          <img src={$noteSrc(n, n.img)} alt={`${$money(n.Value)}, ${$pick(n.ObserveInEnglish, n.ObserveInArabic)}`} loading="lazy" draggable="false" />
           <span class="w-caption">{label(n.Value)} {$t('dt')} · {$pick(n.ObserveInEnglish, n.ObserveInArabic)}</span>
         </button>
       {/each}
@@ -483,7 +500,7 @@
       {#each flyers as f, i (f.id)}
         {@const r = f.to || f.from}
         <span class="flyer" class:lifted={lifted && f.seen && !f.to} class:waiting={!f.seen && !f.to} class:moving={!!f.to}
-              style="left:{r.x}px; top:{r.y}px; width:{r.w}px; height:{r.h}px; --rot:{f.rot}deg; --ms:{FLY_MS}ms; --d:{Math.round((i / flyers.length) * STAGGER)}ms"><img src={f.img} alt="" draggable="false" /></span>
+              style="left:{r.x}px; top:{r.y}px; width:{r.w}px; height:{r.h}px; --rot:{f.rot}deg; --ms:{FLY_MS}ms; --d:{Math.round((i / flyers.length) * STAGGER)}ms"><img src={$noteSrc(notes[f.id], f.img)} alt="" draggable="false" /></span>
       {/each}
     </div>
   {/if}
@@ -496,7 +513,7 @@
     {@const f = facts(n)}
     <div class="tip" class:flip={tip.flipX} class:up={tip.flipY} style="left:{tip.x}px; top:{tip.y}px; --c:{COLORS[n.Value]}" transition:fade={{ duration: 120 }}>
       <div class="tip-img">
-        <img src={n.img} alt="" />
+        <img src={$noteSrc(n, n.img)} alt="" />
         <span class="tip-value">{label(n.Value)} <small>{$t('dt')}</small></span>
         <span class="tip-status" class:live={f.active}>{f.active ? $t('tlStatusIn') : $t('tlWithdrawn', { y: n.EndofCirculation })}</span>
       </div>
@@ -639,6 +656,10 @@
   .figures figure { flex: 1; margin: 0; text-align: center; }
   .figures img { width: 100%; max-width: 9rem; height: auto; }
   .figures figcaption { font-size: .78rem; line-height: 1.4; }
+  .pile { position: relative; display: block; width: 100%; max-width: 12rem; height: 7.6rem; margin: 0 auto .3rem; }
+  .pile img { position: absolute; left: 50%; top: 50%; width: 6.6rem; max-width: none; height: auto; border-radius: 3px; box-shadow: 0 1px 4px rgba(61, 42, 34, .3);
+    transform: translate(-50%, -50%) translate(calc((var(--i) - (var(--n) - 1) / 2) * 1.1rem), calc(((var(--i) * 7) - (var(--i) * 7 / 13) * 13 - 3) * .1rem)) rotate(calc((var(--i) - (var(--n) - 1) / 2) * 3deg)); }
+  .pile.big img { width: 5.8rem; transform: translate(-50%, -50%) translate(calc((var(--i) - (var(--n) - 1) / 2) * .4rem), 0) rotate(calc((var(--i) - (var(--n) - 1) / 2) * 3.5deg)); }
   .figures figure.wide { display: flex; gap: .7rem; align-items: flex-start; text-align: start; }
   .figures figure.wide img { width: 5.5rem; flex: 0 0 auto; }
 

@@ -74,7 +74,8 @@
   const usd = (v) => v.toFixed(2);
 
   // real notes to show under the calculator (local images, same as the timeline)
-  import { noteImage as imgOf } from './noteImage.js';
+  import { noteImage, noteSrc } from './noteImage.js';
+  $: imgOf = (n) => $noteSrc(n, noteImage(n));
   const inUse = (n, yr) => n.Issued <= yr && (n.Active === 'Yes' || yr < n.EndofCirculation);
   $: noteThen = data.filter((n) => n.Value === amount && inUse(n, year)).sort((a, b) => b.Issued - a.Issued)[0];
   $: noteNow = data.filter((n) => n.Value === amount && n.Active === 'Yes').sort((a, b) => b.Issued - a.Issued)[0];

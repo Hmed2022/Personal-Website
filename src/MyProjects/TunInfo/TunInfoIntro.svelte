@@ -6,7 +6,7 @@
     import { style } from 'svelte-body';
 
     function redirectToTunInfo() {
-        window.location.hash = '/tuninfo';
+        window.location.hash = '/tnNotes';
     }
 </script>
 

@@ -8,6 +8,7 @@
   import { fade } from 'svelte/transition';
   import { zellige, frieze, star } from './tunisianPatterns.js';
   import { t, pick } from '../i18n.js';
+  import { realNotes } from '../Data Viz/Timeline/noteImage.js';   // "Real notes": show the engraved faces
 
   const IMG = import.meta.glob('./portraits/*.webp', { eager: true, as: 'url' });
   const src = (k) => IMG[`./portraits/${k}.webp`];
@@ -103,7 +104,7 @@
 
 <svelte:window bind:innerHeight={vh} />
 
-<header class="tp" bind:this={tpEl} style="--zellige:{zellige}; --frieze:{frieze}; --star:{star};">
+<header class="tp" class:real={$realNotes} bind:this={tpEl} style="--zellige:{zellige}; --frieze:{frieze}; --star:{star};">
   <div class="band top" aria-hidden="true"></div>
 
   <div class="heading" bind:clientHeight={headH}>
@@ -205,6 +206,8 @@
   .face.on { transform: translateY(-10px) scale(1.06); filter: drop-shadow(0 10px 14px rgba(30, 63, 92, .35)); }
   .face.on .r { opacity: 1; }
   .face.on .d { opacity: 0; }
+  .tp.real .face .r { opacity: 1; }
+  .tp.real .face .d { opacity: 0; }
   .face.dim { filter: saturate(.55) brightness(1.04); }   /* others stay fully opaque */
 
   .caption { position: relative; z-index: 2; min-height: 2.4rem; display: grid; place-items: center; padding: 0 1rem; }

@@ -13,7 +13,7 @@
     { key: 'eraRevolution', from: 2011, to: 9999, ink: '#BF5630' },
   ];
   const eraOf = (y) => ERAS.find((e) => y >= e.from && y < e.to);
-  import { noteImage as imgOf } from './noteImage.js';
+  import { noteImage as imgOf, noteSrc } from './noteImage.js';
 
   const notes = data.map((n, id) => {
     const active = n.Active === 'Yes';
@@ -72,7 +72,7 @@
     <aside class="side">
       {#if hot}
         <figure class="preview">
-          <img src={imgOf(hot.n)} alt="" />
+          <img src={$noteSrc(hot.n, imgOf(hot.n))} alt="" />
           <figcaption><b>{$money(hot.n.Value)} · {hot.start}</b><br />{$pick(hot.n.ObserveInEnglish, hot.n.ObserveInArabic)} · {hot.years === 1 ? $t('lfYear1') : $t('lfYears', { n: hot.years })}{hot.active ? ` · ${$t('lfStill')}` : ''}</figcaption>
         </figure>
       {:else}

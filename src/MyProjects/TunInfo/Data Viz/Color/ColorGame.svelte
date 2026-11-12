@@ -6,7 +6,7 @@
   import { t, money, lang } from '../../i18n.js';
   import notes from '../Timeline/Data/data.js';
 
-  import { noteImage } from '../Timeline/noteImage.js';
+  import { noteImage, noteSrc } from '../Timeline/noteImage.js';
   const imageOf = (n) => noteImage(n);
   const label = (v) => (v === 0.5 || v === '0.5' ? '½' : String(v));
 
@@ -94,7 +94,7 @@
 
         {#if answer}
           <div class="result" class:ok={correct} in:fade={{ duration: 200 }}>
-            {#if shown}<img src={imageOf(shown)} alt={$money(current)} />{/if}
+            {#if shown}<img src={$noteSrc(shown, imageOf(shown))} alt={$money(current)} />{/if}
             <div>
               <p class="verdict">{correct ? $t('cgCorrect') : $t('cgWrong')} {@html $t('cgItWas', { v: $money(current) })}</p>
               {#if round === 'all'}

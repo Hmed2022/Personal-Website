@@ -9,6 +9,7 @@
   export let lens = [];       // what the box tells you about: 'pol' | 'eco' | 'cul' | 'geo'
   export let note = null;     // strings key of the collector's own jotted note, which the box answers
   export let vars = null;     // values for {placeholders} in the text
+  export let noicon = false;  // Meet Dali: the full figure stands beside the box
   const LENS = {
     pol: { k: 'lensPol', c: '#1E5B8C', d: 'M3 21h18M5 21V10m4 11V10m6 11V10m4 11V10M2 10l10-6 10 6z' },
     eco: { k: 'lensEco', c: '#2F7D4F', d: 'M4 19 9 13l4 3 7-9M15 7h5v5' },
@@ -32,7 +33,8 @@
 
 <!-- the answer: checks the note and explains what was really happening -->
 <aside class="ins {tone}" class:answers={note}>
-  {#if tone === 'gold'}
+  {#if noicon}
+  {:else if tone === 'gold'}
     <!-- Dali, the friend who answers your notes -->
     <span class="ico dali" aria-hidden="true"><img src={daliImg} alt="" draggable="false" /></span>
   {:else}

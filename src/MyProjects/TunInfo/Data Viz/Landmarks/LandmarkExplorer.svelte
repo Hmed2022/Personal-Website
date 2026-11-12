@@ -2,6 +2,7 @@
   // New landmark explorer (Landmark.svelte is kept). Pick a governorate on the map (or the
   // list on phones), filter by city or category, open any landmark in a larger view.
   import { geoMercator, geoPath } from 'd3-geo';
+  import { freehandFor } from './freehand.js';   // Dali's hand-drawn borders
   import { fade, scale, fly } from 'svelte/transition';
   import { flip } from 'svelte/animate';
   import Tun from '../Map/Data/Tunisia.geojson.json';
@@ -22,22 +23,33 @@
   const W = 300, H = 480;
   const projection = geoMercator().fitExtent([[8, 8], [W - 8, H - 8]], Tun);
   const path = geoPath(projection);
+  const freehand = freehandFor(projection);
+  // Grand Tunis is tiny on this map: a zoomed circle on the right shows (and lets you click) its four governorates
+  const GRAND_TUNIS = new Set(['Tunis', 'Ariana', 'Ben Arous', 'Manouba']);
+  const ZOOM_W = 92;                                   // extra room on the right of the map for the circle
   const items = landmarks.map((l, id) => ({ ...l, id, ...parseBill(l.bill) }));
   const byGov = {};
   for (const l of items) (byGov[l.gov] = byGov[l.gov] || []).push(l);
 
   const govs = Tun.features
     .map((f) => {
+      const [cx, cy] = path.centroid(f);
       const name = f.properties.gouv_fr;
       const list = byGov[name] || [];
       // the capital's governorate is written تونس العاصمة, so it is not confused with the country
-      return { name, ar: name === 'Tunis' ? 'تونس العاصمة' : f.properties.gouv_ar, count: f.properties.landmarks, list, cities: [...new Set(list.map((l) => l.city))].sort(), d: path(f) };
+      return { name, ar: name === 'Tunis' ? 'تونس العاصمة' : f.properties.gouv_ar, count: f.properties.landmarks, list, cities: [...new Set(list.map((l) => l.city))].sort(), d: freehand(f), cx, cy, b: path.bounds(f) };
     })
     .sort((a, b) => a.name.localeCompare(b.name));
 
   // "Tunisia": every landmark of every governorate, first in the dropdown
   const ALL = { name: 'Tunisia', ar: 'تونس', all: true, count: items.length, list: items, cities: [...new Set(items.map((l) => l.city))].sort() };
   const choices = [ALL, ...govs];
+  const GT = govs.filter((g) => GRAND_TUNIS.has(g.name));
+  const gtB = GT.map((g) => g.b).reduce((a, b) => [[Math.min(a[0][0], b[0][0]), Math.min(a[0][1], b[0][1])], [Math.max(a[1][0], b[1][0]), Math.max(a[1][1], b[1][1])]]);
+  const GX = (gtB[0][0] + gtB[1][0]) / 2, GY = (gtB[0][1] + gtB[1][1]) / 2, GR = Math.max(gtB[1][0] - gtB[0][0], gtB[1][1] - gtB[0][1]) / 2 + 2;
+  const ICX = W + ZOOM_W / 2 - 4, ICY = 92, IR = 44, ZK = (IR - 4) / GR;
+  const zp = (x, y) => [ICX + (x - GX) * ZK, ICY + (y - GY) * ZK];
+  const connector = `M${(GX + GR * .8).toFixed(1)},${(GY - GR * .5).toFixed(1)} Q${((GX + ICX) / 2).toFixed(1)},${(Math.min(GY, ICY) - 30).toFixed(1)} ${(ICX - IR * .92).toFixed(1)},${(ICY - IR * .3).toFixed(1)}`;
   const govAr = (name) => govs.find((g) => g.name === name)?.ar || name;
 
   // warm ramp by number of landmarks (0 = paper white)
@@ -51,6 +63,9 @@
 
   let selected = govs.find((g) => g.name === 'Tunis');
   let hovered = null;
+  // hover: the governorate gets a red outline and a small tooltip by the cursor (name + landmarks)
+  let tipX = 0, tipY = 0, pageEl;
+  function hoverAt(e, g) { hovered = g; const r = pageEl.getBoundingClientRect(); tipX = e.clientX - r.left; tipY = e.clientY - r.top; }
   let city = 'All';
   let cat = 'All';
   function pick(g) { selected = g; city = 'All'; cat = 'All'; }
@@ -80,23 +95,97 @@
 <section class="lx">
   <!-- ===== left: map + governorate ===== -->
   <aside class="side">
-    <svg dir="ltr" viewBox="0 0 {W} {H}" role="group" aria-label={$t('lxChoose')}>
+    <!-- Dali's map again, on a taped notebook page -->
+    <div class="lx-page" bind:this={pageEl}>
+    <span class="lx-tape" aria-hidden="true"></span>
+    <svg dir="ltr" viewBox="0 0 {W + ZOOM_W} {H}" role="group" aria-label={$t('lxChoose')}>
+      <defs>
+        <filter id="lx-marker" x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="2" seed="7" result="n" />
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="3" result="d" />
+          <feGaussianBlur in="d" stdDeviation="1.4" result="b" />
+          <feComponentTransfer in="b"><feFuncA type="table" tableValues="0 0 .9 1 1" /></feComponentTransfer>
+        </filter>
+        <!-- pencil strokes over the colours, so they look coloured in by hand -->
+        <pattern id="lx-pencil" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(38)">
+          <line x1="0" y1="1.5" x2="6" y2="1.5" stroke="#FFFDF6" stroke-width="1.3" opacity=".55" />
+          <line x1="0" y1="4.4" x2="6" y2="4.4" stroke="#3D2A22" stroke-width=".7" opacity=".12" />
+        </pattern>
+      </defs>
       {#each govs as g (g.name)}
-        <path d={g.d} fill={g === selected ? '#1E5B8C' : g === hovered ? '#9D6D79' : fillOf(g.count)}
+        <path d={g.d} fill={g === selected ? '#1E5B8C' : fillOf(g.count)}
               class="gov" class:sel={g === selected}
               on:click={() => pick(g)} on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && pick(g)}
-              on:pointerenter={() => (hovered = g)} on:pointerleave={() => (hovered = null)}
+              on:pointermove={(e) => hoverAt(e, g)} on:pointerleave={() => (hovered = null)}
               tabindex="0" role="button" aria-pressed={g === selected} aria-label={`${$pickLang(g.name, g.ar)}, ${$t('lmLandmarks', { n: g.count })}`}>
-          <title>{$pickLang(g.name, g.ar)}: {g.count}</title>
         </path>
       {/each}
+      <g aria-hidden="true" style="pointer-events:none">{#each govs as g (g.name)}<path d={g.d} fill="url(#lx-pencil)" />{/each}</g>
+      <g class="lx-ink" filter="url(#lx-marker)" aria-hidden="true">{#each govs as g (g.name)}<path d={g.d} />{/each}</g>
+      {#if hovered}<path d={hovered.d} class="lx-hover" filter="url(#lx-marker)" aria-hidden="true" />{/if}
+      <!-- Grand Tunis, zoomed and clickable -->
+      <g class="gt">
+        <clipPath id="lx-gt-clip"><circle cx={ICX} cy={ICY} r={IR} /></clipPath>
+        <circle cx={ICX} cy={ICY} r={IR} fill="#FFFDF6" />
+        <g clip-path="url(#lx-gt-clip)"><g transform="translate({ICX} {ICY}) scale({ZK}) translate({-GX} {-GY})">
+          {#each GT as g (g.name)}
+            <path d={g.d} fill={g === selected ? '#1E5B8C' : fillOf(g.count)} class="gov" class:sel={g === selected}
+                  on:click={() => pick(g)} on:pointermove={(e) => hoverAt(e, g)} on:pointerleave={() => (hovered = null)}
+                  on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && pick(g)}
+                  tabindex="0" role="button" aria-label={`${$pickLang(g.name, g.ar)}, ${$t('lmLandmarks', { n: g.count })}`} />
+          {/each}
+          {#each GT as g (g.name)}<path d={g.d} class="gt-ink" vector-effect="non-scaling-stroke" class:hot={g === hovered} />{/each}
+        </g></g>
+        <g filter="url(#lx-marker)" aria-hidden="true">
+          <circle cx={ICX} cy={ICY} r={IR} class="gt-ring" />
+          <circle cx={GX} cy={GY} r={GR} class="gt-ring" />
+          <path d={connector} class="gt-ring" />
+        </g>
+        <text x={ICX} y={ICY + IR + 15} class="gt-cap" aria-hidden="true">{$t('lxGrandTunis')}</text>
+      </g>
     </svg>
-    <p class="map-hover">{hovered ? `${$pickLang(hovered.name, hovered.ar)} · ${hovered.count} ${hovered.count === 1 ? $t('lxLandmark') : $t('lxLandmarks')}` : $t('lxClick')}</p>
+    {#if hovered}
+      <div class="lx-tip" style="left:{tipX}px; top:{tipY}px" aria-hidden="true">
+        <b>{$pickLang(hovered.name, hovered.ar)}</b>
+        <span>{hovered.count} {hovered.count === 1 ? $t('lxLandmark') : $t('lxLandmarks')}</span>
+      </div>
+    {/if}
+    </div>
+    <p class="map-hover">{$t('lxClick')}</p>
     <div class="scale" aria-hidden="true">
       <span><i style="background:#FFFFFF"></i>0</span><span><i style="background:#EBD9C1"></i>1</span>
       <span><i style="background:#DBC1A0"></i>2</span><span><i style="background:#C9A277"></i>3–4</span>
       <span><i style="background:#A9754B"></i>26</span>
     </div>
+
+    <!-- filters sit under the map -->
+    {#if selected.list.length}
+      <!-- two dropdowns: city and type -->
+      <div class="filters">
+        {#if selected.cities.length > 1 && !selected.all}
+          <label class="dd">
+            <span>{$t('lxCityLbl')}</span>
+            <select bind:value={city}>
+              {#each ['All', ...selected.cities] as c}
+                <option value={c} disabled={!cityHas(c)}>{c === 'All' ? $t('lxAllCities') : cityName(c)}</option>
+              {/each}
+            </select>
+          </label>
+        {/if}
+        {#if catsHere.length > 1}
+          <label class="dd" style="--tc:{cat === 'All' ? '#1E5B8C' : TAG_COLOR[cat]}">
+            <span>{$t('lxCatLbl')}</span>
+            <span class="dd-box">
+              {#if cat !== 'All'}<img src={icon(cat)} alt="" style="background:{TAG_COLOR[cat]}" />{/if}
+              <select bind:value={cat}>
+                <option value="All">{$t('lxAllTypes')}</option>
+                {#each catsHere as tk}<option value={tk} disabled={!catHas(tk)}>{catName(tk)}</option>{/each}
+              </select>
+            </span>
+          </label>
+        {/if}
+      </div>
+    {/if}
 
     <!-- phones: a list instead of tapping tiny governorates -->
     <label class="gov-select">
@@ -134,25 +223,6 @@
     {/key}
 
     {#if selected.list.length}
-      <div class="filters">
-        {#if selected.cities.length > 1 && !selected.all}
-          <div class="chips" role="group" aria-label={$t('lxCityLbl')}>
-            {#each ['All', ...selected.cities] as c}
-              <button type="button" class="chip" class:on={city === c} disabled={!cityHas(c)} on:click={() => (city = c)}>{c === 'All' ? $t('lxAllCities') : cityName(c)}</button>
-            {/each}
-          </div>
-        {/if}
-        {#if catsHere.length > 1}
-          <div class="chips" role="group" aria-label={$t('lxCatLbl')}>
-            <button type="button" class="chip" class:on={cat === 'All'} on:click={() => (cat = 'All')}>{$t('lxAllTypes')}</button>
-            {#each catsHere as tk}
-              <button type="button" class="chip cat" class:on={cat === tk} disabled={!catHas(tk)} style="--tc:{TAG_COLOR[tk]}" on:click={() => (cat = tk)}>
-                <img src={icon(tk)} alt="" style="background:{TAG_COLOR[tk]}" />{catName(tk)}
-              </button>
-            {/each}
-          </div>
-        {/if}
-      </div>
 
       <div class="grid">
         {#each shown as l, i (l.id)}
@@ -205,7 +275,7 @@
 
 <style>
   .lx {
-    display: grid; grid-template-columns: minmax(220px, 300px) 1fr; gap: 2rem;
+    display: grid; grid-template-columns: minmax(240px, 380px) 1fr; gap: 2rem;
     max-width: 1100px; margin: 1.5rem auto 3rem; padding: 0 1rem; box-sizing: border-box;
     font-family: Quicksand, sans-serif; color: #3D2A22;
   }
@@ -213,8 +283,32 @@
   /* ---- side ---- */
   .side { position: sticky; top: 1rem; align-self: start; text-align: center; }
   svg { width: 100%; height: auto; max-height: 70vh; display: block; }
-  .gov { stroke: #91B4BA; stroke-width: 1; cursor: pointer; transition: fill .2s; outline: none; }
-  .gov.sel { stroke: #0F3553; stroke-width: 1.8; }
+  .gov { stroke: none; cursor: pointer; transition: fill .2s; outline: none; }
+  .gov.sel { stroke: none; }
+  .gt-ink { fill: none; stroke: #24394D; stroke-width: 1.8; stroke-linejoin: round; pointer-events: none; }
+  .gt-ink.hot { stroke: #C62F2F; stroke-width: 3; }
+  .gt-ring { fill: none; stroke: #C62F2F; stroke-width: 2; stroke-linecap: round; pointer-events: none; }
+  .gt-cap { font: 700 13px Caveat, 'Segoe Print', cursive; fill: #C62F2F; text-anchor: middle; pointer-events: none; }
+  .lx-hover { fill: none; stroke: #C62F2F; stroke-width: 3.4; stroke-linejoin: round; pointer-events: none; }
+  .lx-tip {
+    position: absolute; z-index: 5; transform: translate(-50%, calc(-100% - 12px)); pointer-events: none; white-space: nowrap;
+    display: flex; flex-direction: column; align-items: center; padding: .3rem .65rem; border-radius: 8px;
+    background: #FFFBF1; border: 1.5px solid #C62F2F; box-shadow: 0 4px 12px rgba(74, 46, 37, .2); font-family: Quicksand, sans-serif;
+  }
+  .lx-tip b { font: 700 1.15rem/1.1 Caveat, 'Segoe Print', cursive; color: #1E3F5C; }
+  .lx-tip span { font-size: .72rem; font-weight: 700; color: #8C4D3F; }
+  .lx-ink path { fill: none; stroke: #24394D; stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+  /* a page from Dali's notebook, taped down */
+  .lx-page {
+    position: relative; padding: 1.6rem .8rem .8rem 2.4rem; margin-top: .6rem; transform: rotate(-.6deg);
+    background-color: #FFFDF6;
+    background-image:
+      linear-gradient(90deg, transparent 1.6rem, rgba(181, 82, 59, .4) 1.6rem, rgba(181, 82, 59, .4) calc(1.6rem + 1.5px), transparent calc(1.6rem + 1.5px)),
+      repeating-linear-gradient(transparent 0 1.6rem, rgba(30, 91, 140, .28) 1.6rem calc(1.6rem + 1.2px));
+    background-position: 0 0, 0 .9rem;
+    box-shadow: 0 1px 2px rgba(74, 46, 37, .12), 0 10px 26px -8px rgba(74, 46, 37, .32);
+  }
+  .lx-tape { position: absolute; top: -.7rem; left: 50%; width: 6rem; height: 1.5rem; transform: translateX(-50%) rotate(2deg); background: rgba(233, 214, 170, .8); box-shadow: 0 1px 2px rgba(74, 46, 37, .15); }
   .gov:focus-visible { stroke: #B5523B; stroke-width: 2.4; }
   .map-hover { margin: .3rem 0 .4rem; font-size: .85rem; font-weight: 700; color: #4D6473; min-height: 1.2em; }
   .scale { display: flex; justify-content: center; gap: .55rem; font-size: .7rem; font-weight: 700; color: #4D6473; }
@@ -233,22 +327,25 @@
   .stats { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin: .35rem 0 0; font-size: .9rem; color: #4D6473; }
   .stats b { font-size: 1.15rem; color: #B5523B; }
 
-  .chip:disabled { opacity: .38; filter: grayscale(1); cursor: not-allowed; }
   /* ---- filters ---- */
-  .filters { display: grid; gap: .5rem; margin: 1rem 0 1.1rem; }
-  .chips { display: flex; flex-wrap: wrap; gap: .4rem; }
-  .chip {
-    font: 700 .8rem Quicksand, sans-serif; color: #4D6473; cursor: pointer;
-    background: rgba(255, 255, 255, .45); border: 1.5px solid #C8D9DC; border-radius: 999px; padding: .3rem .75rem;
-    display: inline-flex; align-items: center; gap: .35rem; transition: background .15s, color .15s, border-color .15s;
+  .filters { display: grid; gap: .5rem; margin: 1rem 0 1.1rem; text-align: start; }
+  .dd { display: grid; gap: .2rem; text-align: start; }
+  .dd > span:first-child { font: 700 .7rem Quicksand, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #8C6A5C; }
+  .dd-box { position: relative; display: flex; align-items: center; }
+  .dd-box img { position: absolute; left: .55rem; width: 1.1rem; height: 1.1rem; border-radius: 3px; pointer-events: none; }
+  .dd-box img + select { padding-left: 2.1rem; }
+  .dd select {
+    width: 100%; appearance: none; -webkit-appearance: none; cursor: pointer;
+    font: 700 .92rem Quicksand, sans-serif; color: var(--tc, #1E5B8C); background: #FFFBF1;
+    border: 1.5px solid #D9C9B1; border-radius: 10px; padding: .5rem 2rem .5rem .75rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%238C4D3F' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right .7rem center; background-size: .7rem;
   }
-  .chip:hover { border-color: #91B4BA; }
-  .chip.on { background: #1E5B8C; border-color: #1E5B8C; color: #FFFFFF; }
-  .chip.cat.on { background: var(--tc); border-color: var(--tc); }
-  .chip img { width: 1rem; height: 1rem; border-radius: 3px; }
+  .dd select:focus-visible { outline: 3px solid #1E5B8C; outline-offset: 2px; }
+  :global([dir="rtl"]) .dd select { background-position: left .7rem center; padding: .5rem .75rem .5rem 2rem; }
 
   /* ---- cards ---- */
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1rem; }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }   /* always 3 per row on wide screens */
   .card {
     position: relative; display: flex; flex-direction: column; padding: 0; text-align: left; cursor: pointer;
     background: rgba(140, 77, 63, .05); border: 1px solid rgba(140, 77, 63, .16); border-radius: 12px; overflow: hidden;
@@ -302,8 +399,6 @@
     .g-head h3 { font-size: 1.6rem; }
     .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .7rem; }
     .name { font-size: .85rem; }
-    .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: .2rem; scrollbar-width: none; }
-    .chip { flex: 0 0 auto; }
     .lb figcaption { flex-direction: column; align-items: flex-start; }
   }
   @media (prefers-reduced-motion: reduce) {
