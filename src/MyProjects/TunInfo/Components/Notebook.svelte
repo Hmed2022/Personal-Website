@@ -2,11 +2,16 @@
   // Your notebook of questions for Dali, after the timeline. Pick any question, in any order:
   // Dali answers and that part of the story opens below. Read questions get ticked.
   import { createEventDispatcher } from 'svelte';
+  import { slide } from 'svelte/transition';
   import { t, isAr } from '../i18n.js';
   export let items = [];   // [{ id, q }] q = strings key of the question
   export let read = {};    // { id: true } for the ones already opened
   export let open = null;  // the one showing now
   const dispatch = createEventDispatcher();
+  function jump(key) {
+    const el = document.getElementById('q-' + key);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 </script>
 
 <div class="nb" class:ar={$isAr}>
@@ -32,6 +37,14 @@
           <span class="box" aria-hidden="true">{read[it.id] ? '✓' : ''}</span>
           <span class="q">{$t(it.q)}</span>
         </button>
+        <!-- once a question is open, the follow-up questions you wrote under it show up; click one to jump to it -->
+        {#if open === it.id && it.subs && it.subs.length}
+          <ul class="subs" transition:slide={{ duration: 250 }}>
+            {#each it.subs as sq}
+              <li><button type="button" class="sub" on:click={() => jump(sq)}><span class="arrow" aria-hidden="true">↳</span><span class="q">{$t(sq)}</span></button></li>
+            {/each}
+          </ul>
+        {/if}
       </li>
     {/each}
   </ol>
@@ -62,6 +75,9 @@
   button:focus-visible { outline: 3px solid #1E5B8C; outline-offset: 1px; }
   .box { flex: 0 0 auto; width: 1.15rem; height: 1.15rem; margin-top: .4rem; border: 2px solid #1E3F5C; border-radius: 3px; display: grid; place-items: center; font: 800 1.1rem/1 Quicksand, sans-serif; color: #C62F2F; }
   .read .q { color: #6B7F8E; }
+  .subs { list-style: none; margin: 0 0 .2rem; padding: 0; padding-inline-start: 2rem; }
+  button.sub { font-size: 1.2rem; color: #3D5A73; }
+  .sub .arrow { flex: 0 0 auto; color: #C62F2F; font: 700 1.1rem/1.9rem Quicksand, sans-serif; }
   .on .q { color: #C62F2F; background: linear-gradient(transparent 60%, rgba(227, 167, 42, .4) 60%, rgba(227, 167, 42, .4) 92%, transparent 92%); }
   .ar .nb-title, .ar .nb-hint, .ar button { font-family: 'Aref Ruqaa', Tajawal, serif; }
   .ar .nb-title { font-size: 1.6rem; }

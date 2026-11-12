@@ -112,6 +112,10 @@ export default {
 	nbNext: { en: 'Next question', ar: 'السؤال التالي' },
 	nbBack: { en: 'Back to my notebook', ar: 'العودة إلى دفتري' },
 	nbBackBinder: { en: 'Back to the binder', ar: 'العودة إلى الملفّ' },
+	nbT_dictator: { en: 'the three eras', ar: 'العهود الثلاثة' },
+	nbDictatorNote: { en: "I feel like you had a dictator for the first 30 years, and then he either died or got overthrown. Am I right?", ar: 'أشعر أنه كان لديكم دكتاتور طوال الثلاثين سنة الأولى، ثم إما مات أو أُطيح به. هل أنا محق؟' },
+	nbDictator: { en: "<b>Overthrown, not dead, and it happened twice.</b> Habib Bourguiba led us from independence until 1987, when Ben Ali pushed him aside. Ben Ali then ruled until the revolution of 2011. So your notes have <b>three eras</b>, and each one has its own faces, colours and symbols:", ar: '<b>أُطيح به، لم يمت، وحدث ذلك مرتين.</b> قادنا الحبيب بورقيبة منذ الاستقلال حتى 1987، حين أزاحه بن علي. ثم حكم بن علي حتى ثورة 2011. لذلك لأوراقك <b>ثلاثة عهود</b>، ولكل منها وجوهه وألوانه ورموزه:' },
+	nbT_purple: { en: 'Ben Ali and the purple notes', ar: 'بن علي والأوراق البنفسجية' },
 	nbT_eras: { en: 'the French on the back', ar: 'الفرنسية على الظهر' },
 	nbT_vivid: { en: 'the colours', ar: 'الألوان' },
 	nbT_faces: { en: 'the faces', ar: 'الوجوه' },
@@ -139,8 +143,8 @@ export default {
 	// binder (first look at the notes, before they are sorted)
 	bdTitle: { en: 'Your Tunisian banknote collection', ar: 'مجموعتك من الأوراق النقدية التونسية' },
 	bdLede: {
-		en: "Imagine you have finally collected <b>every banknote Tunisia has issued since independence</b>. They sit in your binder in no particular order. Open it and flip through them: tap a note to look at it more closely.",
-		ar: 'تخيّل أنك جمعت أخيرًا <b>كل ورقة نقدية أصدرتها تونس منذ الاستقلال</b>. إنها في ملفّك بلا أي ترتيب. افتحه وتصفّحها، واضغط على أي ورقة لتتأمّلها عن قرب.'
+		en: "Years of trips, eBay auctions and sellers in Ohio, and here it is: all <b>{n} banknotes</b> Tunisia has issued since independence, in no particular order. Wanna check them out? Open the binder and tap any note to look at it up close.",
+		ar: 'سنوات من الرحلات ومزادات eBay وبائعين في أوهايو، وها هي: كل <b>الأوراق النقدية الـ{n}</b> التي أصدرتها تونس منذ الاستقلال، بلا أي ترتيب. أتريد أن تتفقّدها؟ افتح الملفّ وانقر على أي ورقة لتراها عن قرب.',
 	},
 	bdCover: { en: 'Banknotes of Tunisia', ar: 'الأوراق النقدية التونسية' },
 	bdOpen: { en: 'Open the binder', ar: 'افتح الملف' },
@@ -163,6 +167,7 @@ export default {
 	bdEnd: { en: 'That is the whole collection.', ar: 'هذه هي المجموعة كاملة.' },
 	bdSortQ: { en: 'Hard to make sense of them like this? Put them in order, by date and by value.', ar: 'يصعب فهمها هكذا؟ رتّبها حسب التاريخ وحسب القيمة.' },
 	bdSort: { en: 'Sort the notes', ar: 'رتّب الأوراق' },
+	tlUnsort: { en: 'Put the notes back in the binder', ar: 'أعد الأوراق إلى الملفّ' },
 	srTitle: { en: 'Your notes, sorted by date and by value', ar: 'أوراقك، مرتّبة حسب التاريخ والقيمة' },
 	srLede: {
 		en: 'Each row is a value, from ½ dinar to 50 dinars, and each bar is one note, from the year it was issued to the year it was withdrawn.',

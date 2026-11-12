@@ -179,6 +179,50 @@
     await sleep(550);
     phase = 'done';
   }
+
+  // The reverse: the axis goes, the bars shrink back to their pictures, the binder comes back and every note
+  // flies into it (newest first), shrinking as it goes in.
+  async function unsortNotes() {
+    if (building) return;
+    const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || view !== 'time' || vertical || !plotEl) { tip = null; stage = 'binder'; phase = 'done'; wrapEl?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+    stopPlay(); tip = null;
+    plotEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    await sleep(450);
+    phase = 'grow';                      // axis, labels and controls fade out (bars still full length)
+    await sleep(500);
+    phase = 'land';                      // bars shrink back to just the note picture
+    await sleep(950);
+    // the pictures become loose notes, sitting where the bars were
+    const p = plotEl.getBoundingClientRect(), s1 = wrapEl.getBoundingClientRect();
+    const ox = p.left - s1.left, oy = p.top - s1.top;
+    const pos = {};
+    lanes.forEach((l, i) => l.items.forEach((n) => {
+      const w = Math.max(8, xOf(n.end) - xOf(n.Issued));
+      pos[n.id] = { x: ox + LABEL_W + xOf(n.Issued), y: oy + laneTops[i] + LANE_PAD + n.track * (BAR_H + GAP), w: Math.min(w, BAR_H * NOTE_AR), h: BAR_H };
+    }));
+    const newestFirst = [...notes].sort((a, b) => b.Issued - a.Issued || b.Value - a.Value);
+    flyFade = false; lifted = false;
+    flyers = newestFirst.filter((n) => pos[n.id]).map((n) => ({ id: n.id, img: n.img, from: pos[n.id], to: null, rot: 0, seen: true }));
+    phase = 'fly';
+    await tick(); await frame();
+    // the binder comes back (closed), the timeline goes
+    leaving = true; stage = 'binder';
+    await tick();
+    wrapEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    await frame();
+    leaving = false;                     // the binder fades in
+    await sleep(500);
+    const cover = wrapEl.querySelector('.binder-wrap .cover') || wrapEl.querySelector('.binder-wrap .book');
+    const c = cover.getBoundingClientRect(), s2 = wrapEl.getBoundingClientRect();
+    const cx = c.left - s2.left + c.width / 2, cy = c.top - s2.top + c.height / 2;
+    flyers = flyers.map((f, i) => ({ ...f, rot: (Math.random() - 0.5) * 14, to: { x: cx - 32 + (Math.random() - 0.5) * 30, y: cy - 15 + (Math.random() - 0.5) * 40, w: 64, h: 30 } }));
+    await sleep(FLY_MS + STAGGER + 80);
+    flyFade = true;                      // they slip into the binder
+    await sleep(420);
+    flyers = []; flyFade = false;
+    phase = 'done';
+  }
   function splitEras() { stage = 'eras'; }
   let view = 'time';   // 'time' = the timeline, 'life' = how long each note lasted
   let year = 1995;
@@ -302,7 +346,7 @@
       <div in:fade={{ duration: 350 }}>
         {#if stage === 'binder'}
           <h2>{$t('bdTitle')}</h2>
-          <p class="lede">{@html $t('bdLede')}</p>
+          <p class="lede">{@html $t('bdLede', { n: notes.length })}</p>
         {:else if stage === 'sorted'}
           <h2>{$t('srTitle')}</h2>
           <p class="lede">{@html $t('srLede')}</p>
@@ -321,6 +365,8 @@
   {:else}
 
   <!-- the same notes, two ways -->
+  <!-- put everything back: the notes fly back into the binder -->
+  <p class="unsort" class:hold={building}><button type="button" on:click={unsortNotes}>↩ {$t('tlUnsort')}</button></p>
   <div class="views" class:hold={building} role="tablist" aria-label={$t('tlViews')}>
     <button type="button" role="tab" aria-selected={view === 'time'} class:on={view === 'time'} on:click={() => (view = 'time')}>{$t('tlViewTime')}</button>
     <button type="button" role="tab" aria-selected={view === 'life'} class:on={view === 'life'} on:click={() => { view = 'life'; stopPlay(); tip = null; }}>{$t('tlViewLife')}</button>
@@ -329,7 +375,7 @@
   {#if view === 'life'}
   <div class="life" in:fade={{ duration: 300 }}>
     <NoteLifespans />
-    <p class="life-take">{$t('insLife')}</p>
+    <!-- (the 'It's not the paper' takeaway under the lifespans view was removed) -->
   </div>
   {:else}
   <div class="time-view" in:fade={{ duration: 300 }}>
@@ -351,64 +397,7 @@
 
   <!-- ===================== era story (text + counts from the original) ===================== -->
   <!-- all three are stacked in one grid cell, so the chart doesn't jump when the era changes -->
-  {#if !withEras}
-    <div class="split" class:hold={building} in:fade={{ duration: 300 }}>
-      <p>{@html $t('srNotice', { n: notes.length })}</p>
-      <button type="button" class="split-btn" on:click={splitEras}>{$t('srSplit')}</button>
-    </div>
-  {:else}
-  <div class="stories" in:fade={{ duration: 400 }}>
-    {#each STORIES as st, i}
-      <article class="story" class:on={eraIndex === i} aria-hidden={eraIndex !== i} style="--ec:{ERAS[i].ink}">
-        <div class="story-text">
-          <p class="story-years">{st.years.replace('today', $t('today'))}</p>
-          <h3>{$t(st.title)}</h3>
-          {#if st.ask}
-            <div class="jot" class:ar={$isAr}>
-              <span class="tape" aria-hidden="true"></span>
-              <p class="jot-k">{$t('insNoteLabel')}</p>
-              <p class="jot-t">{$t(st.ask)}</p>
-            </div>
-          {/if}
-          <p class="story-who"><img src={daliImg} alt="" draggable="false" />{$t('insLabel')}</p>
-          <p>{@html $t(st.text)}</p>
-        </div>
-        <aside class="story-facts">
-          <p class="total"><span>{st.total}</span> {$t('tlIssued')}</p>
-          <ul class="counts">
-            {#each VALUES as v, k}
-              <li class:zero={st.counts[k] === 0}>
-                <span class="swatch" style="background:{COLORS[v]}"></span>
-                <span class="den">{label(v)} {$t('dt')}</span>
-                <span class="meter"><i style="width:{(st.counts[k] / MAX_COUNT) * 100}%; background:{COLORS[v]}"></i></span>
-                <b>{st.counts[k]}</b>
-              </li>
-            {/each}
-          </ul>
-          {#if st.note}<p class="note">{@html $t(st.note)}</p>{/if}
-          {#if st.figures.length}
-            <div class="figures">
-              {#each st.figures as f}
-                <figure class:wide={f.wide}>
-                  {#if $realNotes && f.stack}
-                    {@const list = f.stack === 'young' ? realYoung : realOld}
-                    <!-- the real notes, fanned out like a small pile -->
-                    <span class="pile" class:big={list.length > 6} role="img" aria-label={f.alt}>
-                      {#each list as src, i}<img {src} alt="" loading="lazy" style="--i:{i}; --n:{list.length}" />{/each}
-                    </span>
-                  {:else}
-                    <img src={$realNotes && f.realImg ? f.realImg : f.img} alt={f.alt} loading="lazy" />
-                  {/if}
-                  <figcaption>{@html $t(f.caption)}</figcaption>
-                </figure>
-              {/each}
-            </div>
-          {/if}
-        </aside>
-      </article>
-    {/each}
-  </div>
-  {/if}
+  <!-- (the eras are no longer split here: they are the first question in your notebook, see EraStories.svelte) -->
 
   <!-- ===================== chart ===================== -->
   <div class="plot" dir="ltr" class:building class:early class:p-fly={phase === 'fly'} class:p-land={phase === 'land'} class:p-grow={phase === 'grow'} bind:this={plotEl} bind:clientWidth={width} on:click={pickYear}
@@ -754,6 +743,11 @@
     transition-delay: var(--d);
   }
   .flyers.fade .flyer { opacity: 0; transition: opacity .4s; }
+  .unsort { position: relative; z-index: 2; text-align: center; margin: 0 0 1rem; transition: opacity .6s ease; }
+  .unsort button { padding: .5rem 1.2rem; border-radius: 999px; border: 1.5px solid #8C4D3F; background: #FFFBF1; color: #8C4D3F; cursor: pointer;
+    font: 800 .88rem Quicksand, sans-serif; transition: background .2s, color .2s, transform .2s; }
+  .unsort button:hover { background: #8C4D3F; color: #FFFBF1; transform: translateY(-1px); }
+  .unsort button:focus-visible { outline: 3px solid #1E5B8C; outline-offset: 2px; }
   .handling {
     position: fixed; left: 50%; bottom: 1.6rem; z-index: 40; transform: translateX(-50%); margin: 0; max-width: calc(100% - 2rem);
     padding: .55rem 1.1rem; border-radius: 999px; background: #FFFBF1; border: 1.5px solid rgba(140, 77, 63, .5);

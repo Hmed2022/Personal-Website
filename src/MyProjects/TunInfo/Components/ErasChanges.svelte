@@ -24,12 +24,17 @@
 
   // the four backs, in the order they sit in the composite image (2 x 2)
   // back photos come from the timeline data (PathB, or a local file in RealNotes/); the second 10 DT of 1994 is P87A
+  // your own cut-out of the 20 dinars symbol (same frame as the photo, transparent around the symbol)
+  import prop20 from '../Data Viz/Timeline/RealNotes/propaganda-20-back.png';
+  import prop5 from '../Data Viz/Timeline/RealNotes/propaganda-5-back.png';
+  import prop10blue from '../Data Viz/Timeline/RealNotes/propaganda-10-blue-back.png';
+  import prop10brown from '../Data Viz/Timeline/RealNotes/propaganda-10-brown-back.png';
   const backOf = (v, y, b = false) => realPhoto({ Value: v, Issued: y, PathF: b ? 'P087A' : '' }, 'back');
   const BACKS = [
-    { pos: '0% 0%', value: 20, year: 1992, text: 'ecBack0', real: backOf(20, 1992), cut: '37% 24%, 55% 24%, 60% 32%, 72% 35%, 81% 40%, 78% 47%, 68% 50%, 66% 60%, 62% 72%, 56% 78%, 50% 78%, 42% 76%, 40% 68%, 36% 62%, 38% 52%, 44% 46%, 40% 36%' },
-    { pos: '100% 0%', value: 5, year: 1993, text: 'ecBack1', real: backOf(5, 1993), cut: '17% 44%, 26% 42%, 34% 36%, 36% 30%, 48% 28%, 52% 18%, 62% 20%, 73% 38%, 68% 44%, 58% 50%, 62% 54%, 55% 70%, 48% 78%, 36% 76%, 30% 64%, 26% 56%, 17% 54%' },
-    { pos: '0% 100%', value: 10, year: 1994, text: 'ecBack2', real: backOf(10, 1994), cut: '16% 40%, 28% 32%, 36% 24%, 48% 18%, 60% 18%, 64% 28%, 70% 36%, 73% 48%, 66% 62%, 60% 76%, 46% 82%, 34% 90%, 26% 82%, 18% 70%, 14% 52%' },
-    { pos: '100% 100%', value: 10, year: 1994, text: 'ecBack3', real: backOf(10, 1994, true), cut: '16% 40%, 28% 32%, 36% 24%, 48% 18%, 58% 18%, 62% 28%, 66% 36%, 65% 48%, 62% 62%, 58% 76%, 46% 82%, 34% 90%, 26% 82%, 18% 70%, 14% 52%' },
+    { pos: '0% 0%', value: 20, year: 1992, text: 'ecBack0', real: backOf(20, 1992), cutImg: prop20, cutTf: 'translate(-2.5%, 4.09%)'   /* measured: the cut-out was made 32px right / 26px up of this photo's frame */ },
+    { pos: '100% 0%', value: 5, year: 1993, text: 'ecBack1', real: backOf(5, 1993), cutImg: prop5 },
+    { pos: '0% 100%', value: 10, year: 1994, text: 'ecBack2', real: backOf(10, 1994), cutImg: prop10blue },
+    { pos: '100% 100%', value: 10, year: 1994, text: 'ecBack3', real: backOf(10, 1994, true), cutImg: prop10brown, cutTf: 'translate(-0.157%, 0) scale(1.005, 0.995)'   /* measured: drawn 0.5% wider / 0.5% shorter, 2px right */ },
   ];
   let highlight = false;
   let hot = null;
@@ -75,10 +80,10 @@
           {#if real}
             <!-- real photo: greys out, and the 7 November symbol is cut out in colour and lifts off the note -->
             <img class="layer photo" src={b.real} alt="" loading="lazy" draggable="false" />
-            <span class="layer cutout" aria-hidden="true"><img src={b.real} alt="" loading="lazy" draggable="false" style="clip-path: polygon({b.cut})" /></span>
+            <span class="layer cutout" class:exact={b.cutImg} aria-hidden="true">{#if b.cutImg}<img src={b.cutImg} alt="" loading="lazy" draggable="false" style="transform-origin: 0 0; transform: {b.cutTf || 'none'}" />{:else}<img src={b.real} alt="" loading="lazy" draggable="false" style="clip-path: polygon({b.cut})" />{/if}</span>
           {/if}
-          <span class="layer notes" style="background-image:url({backs}); background-position:{b.pos}"></span>
-          <span class="layer marks" style="background-image:url({symbols}); background-position:{b.pos}"></span>
+          <span class="layer notes" class:off={real} style="background-image:url({backs}); background-position:{b.pos}"></span>
+          <span class="layer marks" class:off={real} style="background-image:url({symbols}); background-position:{b.pos}"></span>
         </span>
         <span class="cap"><b>{$money(b.value)} · {b.year}</b>{$t(b.text)}</span>
       </button>
@@ -135,6 +140,9 @@
   .cutout { z-index: 4; opacity: 0; transition: opacity .35s, transform .35s cubic-bezier(.3, 1.4, .5, 1); filter: drop-shadow(0 6px 8px rgba(61, 42, 34, .35)) drop-shadow(0 0 0 #fff); }
   .cutout img { display: block; width: 100%; height: 100%; object-fit: fill; }
   .back.lit .layer.photo { filter: grayscale(1) brightness(1.1); opacity: .5; }
+  /* a precise cut-out (your own) stays exactly in place: no offset, just a soft shadow */
+  .layer.off { display: none; }   /* real photos: the illustrated layers would show through the faded photo */
+  .back.lit .cutout.exact { transform: none; filter: drop-shadow(0 3px 6px rgba(61, 42, 34, .35)); }
   .back.lit .cutout { opacity: 1; transform: translate(-3px, -5px) rotate(-1.2deg) scale(1.03); }
   .cap { display: flex; flex-direction: column; gap: .15rem; padding: .65rem .8rem .75rem; font-size: .82rem; line-height: 1.45; }
   .cap b { color: #A93925; font-size: .85rem; }

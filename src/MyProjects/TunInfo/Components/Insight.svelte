@@ -24,7 +24,7 @@
 
 <!-- the collector's note: what "you" noticed, in your own handwriting -->
 {#if note}
-  <div class="jot" class:ar={$isAr}>
+  <div class="jot" class:ar={$isAr} id={"q-" + note}>
     <span class="tape" aria-hidden="true"></span>
     <p class="jot-k">{$t('insNoteLabel')}</p>
     <p class="jot-t">{$t(note)}</p>

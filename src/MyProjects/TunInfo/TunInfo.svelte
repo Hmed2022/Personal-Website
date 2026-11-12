@@ -32,18 +32,21 @@
     import NoteLifespans from "./Data Viz/Timeline/NoteLifespans.svelte"
     import ChapterNav from "./Components/ChapterNav.svelte"   // (floating chapter menu: removed, the notebook navigates now)
     import Notebook from "./Components/Notebook.svelte"
+    import EraStories from "./Data Viz/Timeline/EraStories.svelte"
     import TopicEnd from "./Components/TopicEnd.svelte"
     import BackToBinder from "./Components/BackToBinder.svelte"
     import { tick } from "svelte"
     // the notebook's questions, in the order they're listed (each opens one part of the story)
     const TOPICS = [
-        { id: 'eras', q: 'pErasSameNote', short: 'nbT_eras' },
+        { id: 'dictator', q: 'nbDictatorNote', short: 'nbT_dictator', subs: ['insTimelineNote', 'st1Ask', 'st2Ask'] },
+        { id: 'eras', q: 'pErasSameNote', short: 'nbT_eras', subs: ['pEras0Note'] },
+        { id: 'purple', q: 'pEras1Note', short: 'nbT_purple', subs: ['insErasNote'] },
         { id: 'vivid', q: 'pVividNote', short: 'nbT_vivid' },
-        { id: 'sizes', q: 'pSizeNote', short: 'nbT_sizes' },
-        { id: 'faces', q: 'pFacesNote', short: 'nbT_faces' },
-        { id: 'land', q: 'lmQuestion', short: 'nbT_land' },
+        { id: 'sizes', q: 'pSizeNote', short: 'nbT_sizes', subs: ['insVividNote'] },
+        { id: 'faces', q: 'pFacesNote', short: 'nbT_faces', subs: ['insFacesNote'] },
+        { id: 'land', q: 'lmQuestion', short: 'nbT_land', subs: ['lmRegionsNote'] },
         { id: 'country', q: 'insCountryNote', short: 'nbT_country' },
-        { id: 'worth', q: 'pWorthNote', short: 'nbT_worth' },
+        { id: 'worth', q: 'pWorthNote', short: 'nbT_worth', subs: ['insWorthNote'] },
         { id: 'end', q: 'nbBye', short: '' },
     ];
     let open = null, read = {}, topicEl, hubEl;
@@ -168,6 +171,15 @@
 <!-- ===== your notebook: pick a question, Dali answers and that part opens (one at a time, any order) ===== -->
 <div bind:this={hubEl}><Insight k={$sortedOnce ? 'nbNudge' : 'nbSkip'}/><Notebook items={allRead ? TOPICS : TOPICS.filter((x) => x.id !== 'end')} {read} {open} on:pick={(e) => pick(e.detail)}/></div>
 
+{#if open === 'dictator'}
+<section class="topic" bind:this={topicEl}>
+    <!-- the first question introduces the three eras -->
+    <Insight k="nbDictator" lens={['pol']}/>
+    <EraStories/>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+</section>
+{/if}
+
 {#if open === 'eras'}
 <section class="topic" bind:this={topicEl}>
     <div class="prose">
@@ -182,11 +194,6 @@
     <div class="wide">
         <NumeralsWipe/>
     </div>
-    <Insight k="pEras1" note="pEras1Note" lens={['pol']}/>
-    <div class="wide">
-        <ErasChanges/>
-    </div>
-    <Insight k="insEras" note="insErasNote" lens={['pol']}/>
     <div class="prose">
         <!-- previous version, kept:
         <div class="images">
@@ -217,6 +224,18 @@
         <Propaganda/>
         -->
     </div>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+</section>
+{/if}
+
+{#if open === 'purple'}
+<section class="topic" bind:this={topicEl}>
+    <!-- the eras: Ben Ali's purple and "7 November", then what changed after 2011 -->
+    <Insight k="pEras1" lens={['pol']}/>
+    <div class="wide">
+        <ErasChanges/>
+    </div>
+    <Insight k="insEras" note="insErasNote" lens={['pol']}/>
 <TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
 </section>
 {/if}
