@@ -9,9 +9,7 @@
 	    let monuments = [
       { region: 'Ariana', landmarks: ['Ennahli Park', 'The Andalusian Bridge'] },
       { region: 'Gafsa', landmarks: ['Ancient Roman Pools'] },
-      { region: 'Kebili', landmarks: ['Chott El Jerid'] },
       { region: 'Kef', landmarks: ['kasbah le kef'] },
-      { region: 'Medenine', landmarks: ['Ksar Hallouf', 'El Ghriba Synagogue'] },
       { region: 'Sidi Bouzid', landmarks: ['Martyr Mohamed Bouazizi Square'] },
       { region: 'Siliana', landmarks: ['Maktaris ancient ruins'] },
       { region: 'Tozeur', landmarks: ['Tamerza Canyon Oasis'] }
@@ -183,7 +181,7 @@
 				<p>{$t('lmP2')}</p>
 			</div></section>
 			<section><div class="bubble"><p class="who"><img src={daliImg} alt="" draggable="false" />{$t('insLabel')}</p>
-				<p>{$t('lmP3')}</p>
+				<p>{@html $t('lmP3')}</p>
 			</div></section>
 			<section><div class="bubble"><p class="who"><img src={daliImg} alt="" draggable="false" />{$t('insLabel')}</p>
 				 <p>{$t('lmP4')}</p>

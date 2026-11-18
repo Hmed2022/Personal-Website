@@ -18,7 +18,8 @@
   const realOld = bourguibaNotes.filter((n) => n.Issued > 1962).map((n) => realPhoto(n, 'front'));
   import NoteLifespans from './NoteLifespans.svelte';
   import NoteBinder from './NoteBinder.svelte';
-  import { binderRequest, sortedOnce } from './strayStore.js';
+  import { binderRequest, sortedOnce, closeRequest } from './strayStore.js';
+  let putBack = false, filling = false;   // putting the notes back: the binder opens on its own, pockets fill, then it closes
   import daliImg from '../../Components/dali.svg';   // the era stories are Dali talking         // the reader's binder of notes, before they are sorted   // second view of the same notes: how long each one lasted
   import illus60 from './BanknotesSmall/Banknote-41.webp';            // 1958 illustration with Western 5s
   import real58 from '../../Components/eras/real-5-1958.webp';
@@ -206,21 +207,34 @@
     flyers = newestFirst.filter((n) => pos[n.id]).map((n) => ({ id: n.id, img: n.img, from: pos[n.id], to: null, rot: 0, seen: true }));
     phase = 'fly';
     await tick(); await frame();
-    // the binder comes back (closed), the timeline goes
-    leaving = true; stage = 'binder';
+    // the binder comes back already open, the timeline goes; each note flies into its own pocket
+    putBack = true; filling = true; leaving = true; stage = 'binder';
     await tick();
     wrapEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     await frame();
-    leaving = false;                     // the binder fades in
-    await sleep(500);
-    const cover = wrapEl.querySelector('.binder-wrap .cover') || wrapEl.querySelector('.binder-wrap .book');
-    const c = cover.getBoundingClientRect(), s2 = wrapEl.getBoundingClientRect();
-    const cx = c.left - s2.left + c.width / 2, cy = c.top - s2.top + c.height / 2;
-    flyers = flyers.map((f, i) => ({ ...f, rot: (Math.random() - 0.5) * 14, to: { x: cx - 32 + (Math.random() - 0.5) * 30, y: cy - 15 + (Math.random() - 0.5) * 40, w: 64, h: 30 } }));
+    leaving = false;                     // the open binder fades in
+    await sleep(550);
+    const s2 = wrapEl.getBoundingClientRect();
+    const page = wrapEl.querySelector('.binder-wrap .page.right') || wrapEl.querySelector('.binder-wrap .book');
+    const pr = page.getBoundingClientRect();
+    const midX = pr.left - s2.left + pr.width / 2, midY = pr.top - s2.top + pr.height / 2;
+    flyers = flyers.map((f) => {
+      const img = wrapEl.querySelector(`.binder-wrap .spread .pocket[data-id="${f.id}"] img`);
+      if (img) {
+        const r = img.getBoundingClientRect(), w = img.offsetWidth, h = img.offsetHeight;
+        const n = notes[f.id];
+        return { ...f, rot: n && n.tilt != null ? n.tilt : 0, to: { x: r.left - s2.left + r.width / 2 - w / 2, y: r.top - s2.top + r.height / 2 - h / 2, w, h } };
+      }
+      // notes that live on other pages slip into the middle of the page and disappear
+      return { ...f, gone: true, rot: (Math.random() - 0.5) * 10, to: { x: midX - 40, y: midY - 18, w: 80, h: 36 } };
+    });
     await sleep(FLY_MS + STAGGER + 80);
-    flyFade = true;                      // they slip into the binder
-    await sleep(420);
-    flyers = []; flyFade = false;
+    filling = false;                     // the real pictures take over in the pockets
+    flyers = [];
+    await sleep(500);
+    closeRequest.update((n) => n + 1);   // and the cover closes, like closing the binder yourself
+    await sleep(1100);
+    putBack = false;
     phase = 'done';
   }
   function splitEras() { stage = 'eras'; }
@@ -361,7 +375,7 @@
   </header>
 
   {#if stage === 'binder'}
-    <NoteBinder {notes} colors={COLORS} {leaving} on:sort={sortNotes} on:note={(e) => open(e.detail)} />
+    <NoteBinder {notes} colors={COLORS} {leaving} startOpen={putBack} {filling} on:sort={sortNotes} on:note={(e) => open(e.detail)} />
   {:else}
 
   <!-- the same notes, two ways -->
@@ -488,7 +502,7 @@
     <div class="flyers" class:fade={flyFade} aria-hidden="true">
       {#each flyers as f, i (f.id)}
         {@const r = f.to || f.from}
-        <span class="flyer" class:lifted={lifted && f.seen && !f.to} class:waiting={!f.seen && !f.to} class:moving={!!f.to}
+        <span class="flyer" class:gone={f.gone && f.to} class:lifted={lifted && f.seen && !f.to} class:waiting={!f.seen && !f.to} class:moving={!!f.to}
               style="left:{r.x}px; top:{r.y}px; width:{r.w}px; height:{r.h}px; --rot:{f.rot}deg; --ms:{FLY_MS}ms; --d:{Math.round((i / flyers.length) * STAGGER)}ms"><img src={$noteSrc(notes[f.id], f.img)} alt="" draggable="false" /></span>
       {/each}
     </div>
@@ -743,6 +757,7 @@
     transition-delay: var(--d);
   }
   .flyers.fade .flyer { opacity: 0; transition: opacity .4s; }
+  .flyer.gone { opacity: 0; transition-property: left, top, width, height, transform, box-shadow, opacity; }
   .unsort { position: relative; z-index: 2; text-align: center; margin: 0 0 1rem; transition: opacity .6s ease; }
   .unsort button { padding: .5rem 1.2rem; border-radius: 999px; border: 1.5px solid #8C4D3F; background: #FFFBF1; color: #8C4D3F; cursor: pointer;
     font: 800 .88rem Quicksand, sans-serif; transition: background .2s, color .2s, transform .2s; }

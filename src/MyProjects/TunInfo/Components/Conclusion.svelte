@@ -6,7 +6,7 @@
   export let missed = [];   // strings keys of the topics you never asked about
   const CARDS = [
     { k: 1, ink: '#025E73', num: '1 → 11' },
-    { k: 2, ink: '#5B8C3E', num: '25 / 60' },
+    { k: 2, ink: '#5B8C3E', num: '27 / 67' },
     { k: 3, ink: '#B5523B', num: '−87%' },
   ];
 </script>
@@ -30,7 +30,8 @@
         <p class="who">{$t('insLabel')}</p>
         <p class="last">{$t('endLast')}</p>
         {#if missed.length}<p class="thanks">{$t(missed.length > 1 ? 'endMissedMany' : 'endMissed', { topic: $t(missed[0]), n: missed.length })}</p>{/if}
-        {#if $strayNote.choice === 'gave'}<p class="thanks">{$t('endThanks', { note: $strayNote.tag })}</p>{/if}
+        {#if $strayNote.choice === 'gave'}<p class="thanks">{$t('endThanks', { note: $strayNote.tag })}</p>
+        {:else if $strayNote.choice === 'kept'}<p class="thanks">{$t('endKept', { note: $strayNote.tag })}</p>{/if}
       </div>
       <div class="jot" class:ar={$isAr}>
         <span class="tape" aria-hidden="true"></span>
@@ -55,8 +56,8 @@
   .bubble { position: relative; padding: 1rem 1.3rem; border-radius: 14px; background: #F6ECD4; border: 0; border-inline-start: 4px solid #A4731C; box-shadow: none; color: #3D2A22; }
   .bubble::before { display: none; }
   .who { margin: 0 0 .3rem; font-weight: 800; font-size: .9rem; color: #A4731C; }
-  .last { margin: 0; font-family: 'Playfair Display', Georgia, serif; font-size: 1.15rem; font-style: italic; line-height: 1.5; color: #1E3F5C; }
-  .thanks { margin: .6rem 0 0; font-size: .95rem; font-weight: 700; color: #A4731C; }
+  .last { margin: 0; font-size: .98rem; line-height: 1.6; color: #3D2A22; }   /* same as Dali's other answers */
+  .thanks { margin: .5rem 0 0; font-size: .98rem; line-height: 1.6; color: #3D2A22; }
   /* your last notebook slip: you're going to Tunisia */
   .jot { position: relative; justify-self: end; width: fit-content; max-width: 30rem; padding: 1rem 1.2rem .7rem; transform: rotate(-1.4deg);
     background: repeating-linear-gradient(transparent 0 1.55rem, rgba(30, 91, 140, .2) 1.55rem calc(1.55rem + 1px)), #FFFDF6; background-position: 0 .55rem;

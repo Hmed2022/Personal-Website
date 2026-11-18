@@ -27,7 +27,7 @@
   <div class="jot" class:ar={$isAr} id={"q-" + note}>
     <span class="tape" aria-hidden="true"></span>
     <p class="jot-k">{$t('insNoteLabel')}</p>
-    <p class="jot-t">{$t(note)}</p>
+    <p class="jot-t">{@html $t(note)}</p>
   </div>
 {/if}
 
@@ -83,5 +83,6 @@
   .jot-t { margin: 0; padding-inline-start: 1.1rem; font-family: Caveat, 'Segoe Print', cursive; font-weight: 500; font-size: 1.5rem; line-height: 1.55rem; color: #1E3F5C; }
   .jot.ar .jot-t { font-family: 'Aref Ruqaa', Tajawal, serif; font-size: 1.25rem; line-height: 1.55rem; }
   .jot.ar { transform: rotate(1.3deg); }
+  .jot-t :global(b) { background: linear-gradient(transparent 55%, rgba(227, 167, 42, .45) 55%, rgba(227, 167, 42, .45) 92%, transparent 92%); font-weight: 700; padding: 0 .08em; }
   @media (max-width: 640px) { .ins { margin-inline: 1rem; } .jot-t { font-size: 1.35rem; } }
 </style>

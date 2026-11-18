@@ -539,5 +539,68 @@ export const landmarks = [
   "url": "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
   "img": "Gabes3",
   "tag": "nat"
+ },
+ {
+  "gov": "Kebili",
+  "city": "Douz",
+  "landmark": "Great Mosque of Douz",
+  "bill": "5 Tnd (1973)",
+  "url": "",
+  "img": "Kebili1",
+  "tag": "islam"
+ },
+ {
+  "gov": "Kasserine",
+  "city": "Sbeïtla",
+  "landmark": "Triumphal arch of Diocletian (with camels)",
+  "bill": "5 Tnd (1973)",
+  "url": "",
+  "img": "Kasserine2",
+  "tag": "roman"
+ },
+ {
+  "gov": "Beja",
+  "city": "Teboursouk",
+  "landmark": "Capitol of Dougga",
+  "bill": "5 Tnd (1973)",
+  "url": "",
+  "img": "Beja3",
+  "tag": "roman"
+ },
+ {
+  "gov": "Tunis",
+  "city": "Tunis",
+  "landmark": "Hotel Africa",
+  "bill": "5 Tnd (1973)",
+  "url": "",
+  "img": "Tunis27",
+  "tag": "urban"
+ },
+ {
+  "gov": "Tunis",
+  "city": "Tunis",
+  "landmark": "Ministry of the Interior",
+  "bill": "5 Tnd (1973)",
+  "url": "",
+  "img": "Tunis27",
+  "tag": "gov"
+ },
+ {
+  "gov": "Medenine",
+  "city": "Djerba",
+  "landmark": "Ibadite mosque in Djerba",
+  "bill": "5 Tnd (1973)",
+  "url": "",
+  "img": "Medenine1",
+  "tag": "islam"
+ },
+ {
+  "gov": "Monastir",
+  "city": "Monastir",
+  "landmark": "View of Monastir",
+  "bill": "5 Tnd (1973)",
+  "url": "",
+  "img": "Monastir5",
+  "tag": "urban"
  }
 ];

@@ -37,8 +37,8 @@ export const TAG_FILE = { infra: 'tag1', roman: 'tag2', islam: 'tag3', urban: 't
 
 // the proposals from the text, for the governorates never on a note
 export const PROPOSED = {
-	Ariana: ['Ennahli Park', 'The Andalusian Bridge'], Gafsa: ['Ancient Roman Pools'], Kebili: ['Chott El Jerid'],
-	'El Kef': ['Kasbah of Le Kef'], Medenine: ['Ksar Hallouf', 'El Ghriba Synagogue'],
+	Ariana: ['Ennahli Park', 'The Andalusian Bridge'], Gafsa: ['Ancient Roman Pools'],
+	'El Kef': ['Kasbah of Le Kef'],
 	'Sidi Bouzid': ['Martyr Mohamed Bouazizi Square'], Siliana: ['Maktaris ancient ruins'], Tozeur: ['Tamerza Canyon Oasis'],
 };
 

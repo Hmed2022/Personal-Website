@@ -1,5 +1,5 @@
 // Why each governorate made it onto the banknotes (based on its landmarks in images.js),
-// or, for the eight never shown, a short note. Used by GovernorateCard.svelte.
+// or, for the six never shown, a short note. Used by GovernorateCard.svelte.
 export const WHY = {
 	Tunis: 'The capital and the seat of power. The Medina (a UNESCO World Heritage site), ancient Carthage, the parliament at Le Bardo, Sadiki College and the Central Bank all sit here, so Tunis appears more than every other governorate combined.',
 	Kairouan: 'Home of the Great Mosque of Kairouan, founded in 670 and one of the oldest mosques in North Africa. The city is a UNESCO World Heritage site, often called the fourth holy city of Islam. The Nebhana dam stands for the young state’s water projects.',
@@ -13,11 +13,13 @@ export const WHY = {
 	Beja: 'Dougga (Thugga), one of the best-preserved Roman towns in North Africa and a UNESCO World Heritage site.',
 	Zaghouan: 'The Temple of the Waters and the Roman aqueduct that carried water from Zaghouan to Carthage.',
 	Kasserine: 'The triumphal arch at Sbeïtla, the ancient Roman town of Sufetula.',
+	Kebili: 'The Great Mosque of Douz, the “gateway to the Sahara”, on the 5 dinars of 1973: the only time the deep south made it onto a note.',
+	Medenine: 'An Ibadite mosque on the island of Djerba, on the 5 dinars of 1973. Djerba is home to the Ibadi Muslim community and to the Ghriba synagogue.',
 	Tataouine: 'The Ksar Ouled Soltane, the fortified granaries of the south.',
 	Manouba: 'The El Aroussia dam, part of the country’s water network.',
 	'Ben Arous': 'The Radès – La Goulette bridge, opened in 2009.',
 	Nabeul: 'An aerial view of Korbous, a hot-spring town on Cap Bon.',
 };
 
-export const NEVER = 'One of the eight governorates never shown on a Tunisian banknote since independence.';
+export const NEVER = 'One of the six governorates never shown on a Tunisian banknote since independence.';
 export const COASTAL = new Set(['Jendouba', 'Bizerte', 'Ariana', 'Tunis', 'Ben Arous', 'Nabeul', 'Sousse', 'Monastir', 'Mahdia', 'Sfax', 'Gabes', 'Medenine']);

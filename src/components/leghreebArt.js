@@ -16,7 +16,9 @@ export const JERSEYS = [
   { word: 'DALLAS', num: '50', body: '#FBFAF6', trim: '#123A6B', text: '#123A6B', shadow: '#2E7BC4',
     title: 'Mejri · 50', why: 'Salah Mejri (Mavs), the only Tunisian to make it to the NBA.' },
   { word: 'TUNISIA', num: '619', body: '#D8232F', trim: '#FBFAF6', text: '#FFFFFF', shadow: '#8E1520', flag: true,
-    title: 'Tunisia · 619', why: "Where I'm from. Maana Rabbi wel Nebi!" }
+    title: 'Tunisia · 619', why: "Where I'm from. Maana Rabbi wel Nebi!" },
+  { word: 'SHOHOKU', num: '10', body: '#C0262D', trim: '#FBFAF6', text: '#1A1A1A', shadow: '#FBFAF6',
+    title: 'Hassan · 10', why: 'Anime: Slam Dunk.' }
 ];
 // small sketched Tunisian flag patch on the chest
 const FLAG = `<g transform="translate(350 714) rotate(-4)"><rect x="-4" y="-4" width="64" height="46" rx="5" fill="#FFFFFF" stroke="${INK}" stroke-width="4"/><rect width="56" height="38" rx="3" fill="#D8232F"/>

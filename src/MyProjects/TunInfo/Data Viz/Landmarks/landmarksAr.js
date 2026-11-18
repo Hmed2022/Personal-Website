@@ -1,5 +1,12 @@
 // Arabic names for the landmarks, cities and categories (English names in landmarksMap.js / images.js).
 export const LANDMARK_AR = {
+	'Great Mosque of Douz': 'جامع دوز الكبير',
+	'Triumphal arch of Diocletian (with camels)': 'قوس النصر لديوقلديانوس (مع الجمال)',
+	'Capitol of Dougga': 'كابيتول دقة',
+	'Hotel Africa': 'نزل إفريقيا',
+	'Ministry of the Interior': 'وزارة الداخلية',
+	'Ibadite mosque in Djerba': 'جامع إباضي في جربة',
+	'View of Monastir': 'منظر المنستير',
 	'Temple of Jupiter in the ruins of Dougga': 'معبد جوبيتر في آثار دقة',
 	'Romanesque ruins of the Capitol': 'أطلال الكابيتول الرومانية',
 	'Ksar of Ouled Soltane': 'قصر أولاد سلطان',
@@ -58,7 +65,7 @@ export const LANDMARK_AR = {
 export const CITY_AR = {
 	Teboursouk: 'تبرسق', Tataouine: 'تطاوين', 'El Fahs': 'الفحص', Fernena: 'فرنانة', Jendouba: 'جندوبة', Bizerte: 'بنزرت',
 	Rades: 'رادس', Gabes: 'قابس', Korbous: 'قربص', Sfax: 'صفاقس', Zaghouan: 'زغوان', Monastir: 'المنستير', 'El Djem': 'الجم',
-	'Sousse Medina': 'سوسة العتيقة', Enfidha: 'النفيضة', Kairouan: 'القيروان', Sebikha: 'السبيخة', 'Sbeïtla': 'سبيطلة',
+	'Sousse Medina': 'سوسة العتيقة', Enfidha: 'النفيضة', Kairouan: 'القيروان', Sebikha: 'السبيخة', 'Sbeïtla': 'سبيطلة', Douz: 'دوز', Djerba: 'جربة', Tunis: 'تونس',
 	'La Goulette': 'حلق الوادي', Bardo: 'باردو', Menzeh: 'المنزه', Carthage: 'قرطاج', Medina: 'المدينة العتيقة', Tunis: 'تونس',
 };
 
@@ -74,12 +81,14 @@ export const CATEGORIES_AR = {
 };
 
 export const PROPOSED_AR = {
-	Ariana: ['منتزه النحلي', 'الجسر الأندلسي'], Gafsa: ['الأحواض الرومانية'], Kebili: ['شط الجريد'],
-	'El Kef': ['قصبة الكاف'], Medenine: ['قصر الحلوف', 'كنيس الغريبة'],
+	Ariana: ['منتزه النحلي', 'الجسر الأندلسي'], Gafsa: ['الأحواض الرومانية'],
+	'El Kef': ['قصبة الكاف'],
 	'Sidi Bouzid': ['ساحة الشهيد محمد البوعزيزي'], Siliana: ['آثار مكثر'], Tozeur: ['واحة تمغزة الجبلية'],
 };
 
 export const WHY_AR = {
+	Kebili: 'جامع دوز الكبير، «بوابة الصحراء»، على ورقة 5 دنانير لسنة 1973: المرة الوحيدة التي ظهر فيها أقصى الجنوب على ورقة نقدية.',
+	Medenine: 'جامع إباضي في جزيرة جربة، على ورقة 5 دنانير لسنة 1973. وجربة موطن الجماعة الإباضية وكنيس الغريبة.',
 	Tunis: 'العاصمة ومركز السلطة. ففيها المدينة العتيقة (المدرجة على قائمة التراث العالمي لليونسكو)، وقرطاج الأثرية، ومجلس النواب بباردو، والمدرسة الصادقية، والبنك المركزي؛ ولذلك تظهر تونس أكثر من كل الولايات الأخرى مجتمعة.',
 	Kairouan: 'موطن جامع القيروان الكبير الذي أُسّس سنة 670، وهو من أقدم المساجد في شمال إفريقيا. والمدينة مدرجة على قائمة التراث العالمي لليونسكو، وكثيرًا ما تُوصف برابعة المدن المقدسة في الإسلام. أما سد نبهانة فيرمز إلى مشاريع المياه في الدولة الفتية.',
 	Mahdia: 'مسرح الجم الروماني، من أكبر المسارح التي شُيّدت على الإطلاق، وهو مدرج على قائمة التراث العالمي لليونسكو. وقد عاد إلى الأوراق النقدية مرارًا، من 1972 إلى 2017.',
@@ -97,7 +106,7 @@ export const WHY_AR = {
 	'Ben Arous': 'جسر رادس – حلق الوادي، الذي افتُتح سنة 2009.',
 	Nabeul: 'منظر جوي لقربص، مدينة الينابيع الحارة في الوطن القبلي.',
 };
-export const NEVER_AR = 'إحدى الولايات الثماني التي لم تظهر قط على ورقة نقدية تونسية منذ الاستقلال.';
+export const NEVER_AR = 'إحدى الولايات الست التي لم تظهر قط على ورقة نقدية تونسية منذ الاستقلال.';
 
 export const lmAr = (name) => LANDMARK_AR[(name || '').trim()] || name;
 export const cityAr = (c) => CITY_AR[(c || '').trim()] || c;

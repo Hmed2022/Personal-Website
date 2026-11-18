@@ -47,7 +47,9 @@
   let vh = 900, headH = 200, capH = 40, topOffset = 0;
   const CHROME = 110;   // borders, gaps and padding around the portraits
   $: fitH = Math.max(260, vh - topOffset - headH - capH - CHROME);
-  $: s = stageW > 640 ? Math.min(1, stageW / COMP_W, fitH / COMP_H) : Math.min(1, stageW / COMP_W);
+  // as big as possible (up to 1.4× the drawn size) while the whole title, bands and caption included, fits on one screen
+  const MAX_S = 1.4;
+  $: s = stageW > 640 ? Math.min(MAX_S, stageW / COMP_W, fitH / COMP_H) : Math.min(1, stageW / COMP_W);
 
   let hovered = null;   // index under the pointer / focused (faces only reveal on hover, tap or focus)
   $: shown = hovered;
@@ -192,7 +194,7 @@
   .sub { margin: .35rem 0 0; font-size: clamp(.92rem, 1.6vw, 1.08rem); font-weight: 700; color: #3D5A73; letter-spacing: .02em; }
 
   /* ---- portraits ---- */
-  .stage { position: relative; z-index: 1; width: 100%; max-width: 960px; margin: .6rem auto 0; touch-action: manipulation; }
+  .stage { position: relative; z-index: 1; width: 100%; max-width: 1344px; margin: .6rem auto 0; touch-action: manipulation; }
   .canvas { position: absolute; top: 0; left: 50%; width: 1000px; height: 900px; transform-origin: 0 0; }
   .face {
     position: absolute; display: block; padding: 0; border: 0; background: none; cursor: pointer;

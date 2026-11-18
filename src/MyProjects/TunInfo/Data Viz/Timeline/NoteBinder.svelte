@@ -7,13 +7,15 @@
   import { t, pick, money } from '../../i18n.js';
   import { star, frieze } from '../../Components/tunisianPatterns.js';
   import { INTRUDERS, dinarRate } from './intruders.js';
-  import { strayNote, sortRequest } from './strayStore.js';
+  import { strayNote, sortRequest, closeRequest } from './strayStore.js';
   import { get } from 'svelte/store';
   import { noteSrc } from './noteImage.js';
   import daliImg from '../../Components/dali.svg';
 
   export let notes = [];
   export let colors = {};
+  export let startOpen = false;  // shown already open (the notes are being put back), then closed on request
+  export let filling = false;    // the notes are still flying in: their pictures in the pockets stay hidden
   export let leaving = false;   // the notes are being taken out to be sorted (the timeline animates them)
   const dispatch = createEventDispatcher();
 
@@ -52,7 +54,7 @@
   let toast = false;    // Dali's "can I have it?" popup
   strayNote.set({ tag: stray.tag, choice: null });
   let strayRate = stray.rate;   // dinars per dollar / euro, updated with today's rate
-  dinarRate(stray.cur, stray.rate).then((r) => (strayRate = r));
+  // (the live exchange rate is no longer fetched: Dali's question doesn't show the dinar value any more)
   // the popup stays until the reader taps or clicks anywhere, or presses Escape
   function dismissToast() { if (toast) toast = false; }
   function pickNote(n) {
@@ -79,7 +81,13 @@
   let wrapEl;
   // Dali's button further down the page can ask for the sort too
   let handledSort = get(sortRequest);
-  $: if ($sortRequest > handledSort) { handledSort = $sortRequest; if (!leaving) sortOut(); }
+  $: if ($sortRequest > handledSort) { handledSort = $sortRequest; if (!leaving) sortFromOutside(); }
+  // you can't take the notes out of a closed binder: open it first, then sort
+  function sortFromOutside() {
+    if (opened) { sortOut(); return; }
+    open();
+    setTimeout(() => sortOut(), 1500);   // cover flip (900 ms) + a moment to see the pages
+  }
   function sortOut() {
     toast = false;
     const rects = {};
@@ -158,7 +166,7 @@
   $: firstStart = single ? 0 : -1;
   $: lastStart = single ? pages.length - 1 : -1 + 2 * Math.floor(pages.length / 2);
 
-  let opened = false;      // cover open
+  let opened = startOpen;  // cover open
   let opening = false;     // cover flip in progress
   let at = -1;             // index of the left page (-1 = inside of the cover), or the only page on phones
   // keep the spreads in step when the screen switches between one and two pages
@@ -167,6 +175,8 @@
   let turn = null;         // { dir: 1 | -1 } while a page is turning
   const TURN_MS = 650;
 
+  let handledClose = get(closeRequest);
+  $: if ($closeRequest > handledClose) { handledClose = $closeRequest; close(); }
   function open() {
     if (opened || opening) return;
     at = firstStart;         // a binder always opens on page 1
@@ -210,7 +220,7 @@
 
 <svelte:window on:keydown={onKey} on:pointerdown={dismissToast} />
 
-<div class="binder-wrap" class:leaving bind:this={wrapEl} bind:clientWidth={width} style="--star:{star}; --frieze:{frieze}">
+<div class="binder-wrap" class:filling class:leaving bind:this={wrapEl} bind:clientWidth={width} style="--star:{star}; --frieze:{frieze}">
   <div class="book" class:single class:closed={!opened && !opening} class:opening>
     <!-- inside: the pages -->
     <div class="spread">
@@ -368,7 +378,7 @@
   .binder-wrap { position: relative; z-index: 1; margin: 1.4rem auto 0; max-width: 980px; transition: opacity .55s ease, transform .6s cubic-bezier(.5, 0, .7, .4); }
   /* sorting: the notes are lifted out (drawn by the timeline), the empty binder fades away upwards */
   .binder-wrap.leaving { opacity: 0; transform: translateY(-48px); pointer-events: none; }
-  .binder-wrap.leaving .pocket[data-id] img { visibility: hidden; }
+  .binder-wrap.leaving .pocket[data-id] img, .binder-wrap.filling .pocket[data-id] img { visibility: hidden; }
 
   /* ---------- the book ---------- */
   .book { position: relative; perspective: 5000px; transition: transform .9s cubic-bezier(.4, .1, .2, 1); }

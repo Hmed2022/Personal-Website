@@ -155,7 +155,7 @@
     <div class="scale" aria-hidden="true">
       <span><i style="background:#FFFFFF"></i>0</span><span><i style="background:#EBD9C1"></i>1</span>
       <span><i style="background:#DBC1A0"></i>2</span><span><i style="background:#C9A277"></i>3–4</span>
-      <span><i style="background:#A9754B"></i>26</span>
+      <span><i style="background:#A9754B"></i>{Math.max(...govs.map((g) => g.count))}</span>
     </div>
 
     <!-- filters sit under the map -->

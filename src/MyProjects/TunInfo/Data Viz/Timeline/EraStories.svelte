@@ -58,7 +58,7 @@
             <div class="jot" class:ar={$isAr} id={"q-" + st.ask}>
               <span class="tape" aria-hidden="true"></span>
               <p class="jot-k">{$t('insNoteLabel')}</p>
-              <p class="jot-t">{$t(st.ask)}</p>
+              <p class="jot-t">{@html $t(st.ask)}</p>
             </div>
           {/if}
           <p class="story-who"><img src={daliImg} alt="" draggable="false" />{$t('insLabel')}</p>
@@ -123,6 +123,7 @@
   .story .jot-k { margin: 0; padding-inline-start: .9rem; font: 700 .64rem Quicksand, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #B5523B; }
   .story .jot p.jot-t { margin: 0; padding-inline-start: .9rem; font-family: Caveat, 'Segoe Print', cursive; font-weight: 500; font-size: 1.7rem; line-height: 1.75rem; color: #1E3F5C; }
   .story .jot.ar { transform: rotate(1deg); }
+  .story .jot-t :global(b) { background: linear-gradient(transparent 55%, rgba(227, 167, 42, .45) 55%, rgba(227, 167, 42, .45) 92%, transparent 92%); font-weight: 700; padding: 0 .08em; color: #1E3F5C; }
   .story .jot.ar p.jot-t { font-family: 'Aref Ruqaa', Tajawal, serif; font-size: 1.4rem; }
   .story-who { display: flex; align-items: center; gap: .4rem; margin: .2rem 0 .3rem; font-size: .9rem; font-weight: 800; color: var(--ec); }
   .story-who img { width: 2.4rem; height: 2.5rem; object-fit: contain; object-position: 50% 0; }

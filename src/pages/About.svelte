@@ -317,7 +317,7 @@
 
 
   .captain :global(.jersey) { opacity: 0; transition: opacity .6s; }
-  .captain[data-j="0"] :global(.j0), .captain[data-j="1"] :global(.j1), .captain[data-j="2"] :global(.j2), .captain[data-j="3"] :global(.j3) { opacity: 1; }
+  .captain[data-j="0"] :global(.j0), .captain[data-j="1"] :global(.j1), .captain[data-j="2"] :global(.j2), .captain[data-j="3"] :global(.j3), .captain[data-j="4"] :global(.j4) { opacity: 1; }
   .captain { display: block; width: 175px; height: 272px; cursor: pointer; --face: #FFFFFF; --skin: #FFFFFF; --logo-bg: transparent; --logo-fill: #FFFFFF; --logo-ink: #2E3A40; }
   .captain :global(svg) { display: block; width: 100%; height: 100%; overflow: visible; }
   .captain :global(.hat) { transform-box: fill-box; transform-origin: 50% 85%; transition: transform .45s cubic-bezier(.3, 1.4, .5, 1); }

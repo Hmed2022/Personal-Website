@@ -12,3 +12,6 @@ export const sortedOnce = writable(false);
 
 // asked by Dali's "Sort the notes" button under the binder: the binder sorts itself, same as its own button
 export const sortRequest = writable(0);
+
+// asked at the end of "Put the notes back": the binder closes its cover
+export const closeRequest = writable(0);

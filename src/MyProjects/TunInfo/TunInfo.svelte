@@ -42,7 +42,7 @@
         { id: 'eras', q: 'pErasSameNote', short: 'nbT_eras', subs: ['pEras0Note'] },
         { id: 'purple', q: 'pEras1Note', short: 'nbT_purple', subs: ['insErasNote'] },
         { id: 'vivid', q: 'pVividNote', short: 'nbT_vivid' },
-        { id: 'sizes', q: 'pSizeNote', short: 'nbT_sizes', subs: ['insVividNote'] },
+        { id: 'sizes', q: 'pSizeNote', short: 'nbT_sizes' },
         { id: 'faces', q: 'pFacesNote', short: 'nbT_faces', subs: ['insFacesNote'] },
         { id: 'land', q: 'lmQuestion', short: 'nbT_land', subs: ['lmRegionsNote'] },
         { id: 'country', q: 'insCountryNote', short: 'nbT_country' },
@@ -267,7 +267,6 @@
         <!-- <div class="color"><Scatter/></div> previous version, kept -->
         <SizeChart/>
     </div>
-    <Insight k="insVivid" note="insVividNote" lens={['eco', 'geo']}/>
 <TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
 </section>
 {/if}
@@ -466,7 +465,7 @@
     }
     .Title{
         text-align: center;
-        margin-top: 5%;
+        margin-top: 0;   /* the title starts at the top of the page */
         display: block; 
     }
 

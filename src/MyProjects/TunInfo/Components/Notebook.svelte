@@ -35,13 +35,13 @@
       <li>
         <button type="button" class:read={read[it.id]} class:on={open === it.id} aria-pressed={open === it.id} on:click={() => dispatch('pick', it.id)}>
           <span class="box" aria-hidden="true">{read[it.id] ? '✓' : ''}</span>
-          <span class="q">{$t(it.q)}</span>
+          <span class="q">{@html $t(it.q)}</span>
         </button>
         <!-- once a question is open, the follow-up questions you wrote under it show up; click one to jump to it -->
         {#if open === it.id && it.subs && it.subs.length}
           <ul class="subs" transition:slide={{ duration: 250 }}>
             {#each it.subs as sq}
-              <li><button type="button" class="sub" on:click={() => jump(sq)}><span class="arrow" aria-hidden="true">↳</span><span class="q">{$t(sq)}</span></button></li>
+              <li><button type="button" class="sub" on:click={() => jump(sq)}><span class="arrow" aria-hidden="true">↳</span><span class="q">{@html $t(sq)}</span></button></li>
             {/each}
           </ul>
         {/if}
@@ -75,6 +75,7 @@
   button:focus-visible { outline: 3px solid #1E5B8C; outline-offset: 1px; }
   .box { flex: 0 0 auto; width: 1.15rem; height: 1.15rem; margin-top: .4rem; border: 2px solid #1E3F5C; border-radius: 3px; display: grid; place-items: center; font: 800 1.1rem/1 Quicksand, sans-serif; color: #C62F2F; }
   .read .q { color: #6B7F8E; }
+  .q :global(b) { background: linear-gradient(transparent 55%, rgba(227, 167, 42, .45) 55%, rgba(227, 167, 42, .45) 92%, transparent 92%); font-weight: 700; padding: 0 .08em; }
   .subs { list-style: none; margin: 0 0 .2rem; padding: 0; padding-inline-start: 2rem; }
   button.sub { font-size: 1.2rem; color: #3D5A73; }
   .sub .arrow { flex: 0 0 auto; color: #C62F2F; font: 700 1.1rem/1.9rem Quicksand, sans-serif; }

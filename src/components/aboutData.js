@@ -95,7 +95,7 @@ export const arenas = [
   t('Washington Wizards', 'Capital One Arena', 'East', 'Wizards', 'wiz'),
   // West
   t('Dallas Mavericks', 'American Airlines Center', 'West', 'Dallas', 'mavs'),
-  t('Denver Nuggets', 'Ball Arena', 'West', 'Denver'),
+  t('Denver Nuggets', 'Ball Arena', 'West', 'Denver', 'negut'),
   t('Golden State Warriors', 'Chase Center', 'West', 'Golden'),
   t('Houston Rockets', 'Toyota Center', 'West', 'Rockets', 'hou'),
   t('LA Clippers', 'Intuit Dome', 'West', 'Clip'),

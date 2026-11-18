@@ -2,7 +2,10 @@ import nbaUrl from "../assets/Thumbnails/NBAArticle.gif";
 import klayUrl from "../assets/Thumbnails/klay.png";
 import CardMagicUrl from "../assets/Thumbnails/magic.gif";
 // import CardMagicVideo from "../assets/Thumbnails/magic.mp4";   // TODO: re-export without black bars, ~10 s, then add `video: CardMagicVideo` below (and use magic.png as `url`)
-import tunUrl from "../assets/Thumbnails/Title-Tuninfo.gif";
+import tunOld from "../assets/Thumbnails/Title-Tuninfo.gif";
+// banknotes thumbnail: TunBank.gif when it is in assets/Thumbnails, otherwise the old title GIF
+const tunNew = Object.values(import.meta.glob("../assets/Thumbnails/TunBank.gif", { eager: true, import: "default" }))[0];
+const tunUrl = tunNew || tunOld;
 import namesUrl from "../assets/Thumbnails/names.gif";
 
 // Each project:
@@ -54,17 +57,18 @@ export const imageData = [
   },
   {
     url: tunUrl,
-    rank: 5,
+    rank: 4,
     title: "What Can Tunisia's Banknotes Tell You?",
-    desc: "Infographic | Data Visualization",
+    desc: "Story | Data Visualization",
     description:
-      "An infographic journey through the history and design evolution of Tunisian currency and banknotes.",
+      "Every Tunisian banknote since 1958, in one binder. Sort them and ask Dali what they say about the country.",
     href: "/#/tnNotes",
     tools: ["Svelte", "D3"],
     alt: "Animated title of What Can Tunisia's Banknotes Tell You?, with portraits from the notes",
-    show: false,
-    lang: "EN",
-    tags: "all,dataviz,info,tunisia,svelte,d3,interactive,arabic,culture",
+    show: true,
+    featured: false, // the homepage's big "featured" card (only one project should have this)
+    lang: "AR | EN",
+    tags: "all,dataviz,story,info,tunisia,svelte,d3,interactive,arabic,culture",
   },
   {
     url: CardMagicUrl,
@@ -77,6 +81,7 @@ export const imageData = [
     tools: ["Svelte"],
     alt: "Animation of playing cards being dealt into three piles for the three pile card trick",
     show: true,
+    featured: true,
     lang: "EN",
     tags: "all,interactive,svelte,math",
   },
@@ -90,7 +95,7 @@ export const imageData = [
 // Topic filters (All · Sport · Tunisia & culture · Math) only appear once there are enough
 // projects for filtering to be useful. Change the number to show them sooner or later.
 export const FILTERS_MIN_PROJECTS = 6;
-export const showFilters = imageData.filter((p) => p.show).length >= FILTERS_MIN_PROJECTS;
-
+export const showFilters =
+  imageData.filter((p) => p.show).length >= FILTERS_MIN_PROJECTS;
 
 // title: "Tunisia in Graphics: An Infographic Odyssey",
