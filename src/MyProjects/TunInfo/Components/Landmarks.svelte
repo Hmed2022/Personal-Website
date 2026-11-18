@@ -4,7 +4,7 @@
 	// @ts-ignore
 	import { fade } from 'svelte/transition';
 	import { style } from 'svelte-body';
-	import { onDestroy } from 'svelte';
+	import Insight from './Insight.svelte';
 
 	    let monuments = [
       { region: 'Ariana', landmarks: ['Ennahli Park', 'The Andalusian Bridge'] },
@@ -44,56 +44,25 @@
 	// Before the map exists: the notebook page sits in the middle, bigger, with Dali's answer written where
 	// the map will go. "Yes" folds that part of the page down, he draws (no scrolling meanwhile), and when
 	// you scroll on to "Now count" the page slides to the left, next to his bubbles.
-	let folding = false;
-	// 0 = Dali's answer on the page; 1–5 = drawing steps (scroll, arrow keys or the side arrows move
-	// between them, the page doesn't scroll); 6 = finished, normal scrolling again
-	let dstep = 0;
+	// The map is already drawn when you arrive. "Can I draw it?" is optional: Dali wipes it and redraws it
+	// step by step (arrows only; the page never locks). Scrolling on, or "Skip", finishes it.
+	// 1–5 = drawing steps; 6 = finished
+	let dstep = 6;
 	const LAST = 5;
-	function sayYes() {
-		folding = true; lockScroll(true);
-		setTimeout(() => { dstep = 1; }, 850);
-	}
+	// start from a clean page: remount the map blank (step 0), then draw the outline
+	let run = 0;
+	function startDraw() { run += 1; dstep = 0; setTimeout(() => { if (dstep === 0) dstep = 1; }, 450); }
 	function go(d) {
 		if (dstep < 1 || dstep > LAST) return;
 		const n = dstep + d;
 		if (n < 1) return;
-		dstep = n;
-		if (dstep > LAST) lockScroll(false);
+		dstep = n > LAST ? 6 : n;
 	}
-	let cool = false;
-	function onWheel(e) {
-		e.preventDefault();
-		if (cool || Math.abs(e.deltaY) < 12) return;
-		cool = true; setTimeout(() => (cool = false), 650);
-		go(e.deltaY > 0 ? 1 : -1);
-	}
-	let touchY = null;
-	const onTouchStart = (e) => (touchY = e.touches[0].clientY);
-	function onTouchEnd(e) {
-		if (touchY == null) return;
-		const dy = touchY - e.changedTouches[0].clientY; touchY = null;
-		if (Math.abs(dy) > 40) go(dy > 0 ? 1 : -1);
-	}
-	const block = (e) => e.preventDefault();
-	function onKeys(e) {
-		if (['ArrowDown', 'ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); go(1); }
-		else if (['ArrowUp', 'ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); go(-1); }
-		else if (['Home', 'End'].includes(e.key)) e.preventDefault();
-	}
-	function lockScroll(on) {
-		const el = document.documentElement;
-		el.style.overflow = on ? 'hidden' : '';
-		document.body.style.overflow = on ? 'hidden' : '';
-		const f = on ? 'addEventListener' : 'removeEventListener';
-		window[f]('wheel', onWheel, { passive: false });
-		window[f]('touchmove', block, { passive: false });
-		window[f]('touchstart', onTouchStart, { passive: true });
-		window[f]('touchend', onTouchEnd);
-		window[f]('keydown', onKeys);
-	}
-	// scrolled past without saying yes (or arrived further down): the map is simply finished
-	$: if ((index ?? 0) > 0 && dstep < 6) { dstep = 6; if (typeof window !== 'undefined') lockScroll(false); }
-	onDestroy(() => lockScroll(false));
+	const skipDraw = () => (dstep = 6);
+	// scrolled on to another step mid-drawing: the map is simply finished
+	let lastIdx = 0;
+	$: onIdx(index ?? 0);
+	function onIdx(i) { if (i !== lastIdx) { lastIdx = i; if (dstep < 6) dstep = 6; } }
 	let wrapEl;
 	let demoW = 0, wrapW = 0;
 	let winW = 1200, winH = 900, pageH = 0;
@@ -117,6 +86,8 @@
 </script>
 
 <svelte:window bind:innerWidth={winW} bind:innerHeight={winH} />
+<!-- your question and Dali's answer, like every other question -->
+<Insight k="lmAnswer" note="lmQuestion"/>
 <div class='demo' bind:clientWidth={demoW}>
 
 
@@ -136,24 +107,19 @@
 				<span class="page-tape" aria-hidden="true"></span>
 				<!-- your question at the top of the page; Dali grabbed your notebook and drew his answer under it -->
 				<div class="page-note">
-					<p class="page-k">{$t('insNoteLabel')}</p>
-					<p class="page-t">{$t('lmQuestion')}</p>
+					{#if dstep === 6}
+						<button type="button" class="draw-yes" on:click={startDraw}>✏️ {$t('lmDrawAsk')}</button>
+					{:else}
+						<button type="button" class="draw-skip" on:click={skipDraw}>{$t('lmDrawSkip')} ✕</button>
+					{/if}
 				</div>
-				<LandmarksMap step={index ?? 0} drawStep={dstep} />
+				{#key run}<LandmarksMap step={index ?? 0} drawStep={dstep} />{/key}
 				<!-- drawing steps: side arrows and a little counter -->
 				{#if dstep >= 1 && dstep <= LAST}
 					<div class="step-nav">
 						<button type="button" class="step-arrow" on:click={() => go(-1)} disabled={dstep === 1} aria-label={$t('bdPrev')}>‹</button>
 						<span class="step-count" aria-live="polite">{dstep} / {LAST}<small>{$t('lmStepHint')}</small></span>
 						<button type="button" class="step-arrow next" on:click={() => go(1)} aria-label={$t('bdNext')}>›</button>
-					</div>
-				{/if}
-				<!-- Dali's answer, written on the page where the map will be; it folds down when you say yes -->
-				{#if dstep === 0}
-					<div class="flap" class:folding>
-						<p class="flap-who"><img src={daliImg} alt="" draggable="false" />{$t('insLabel')}</p>
-						<p class="flap-t">{@html $t('lmAnswer')}</p>
-						<button type="button" class="draw-yes" on:click={sayYes} disabled={folding}>{$t('lmDrawYes')}</button>
 					</div>
 				{/if}
 			</div>
@@ -309,35 +275,19 @@
 	.step-arrow:disabled { opacity: .3; cursor: default; }
 	.step-count { display: flex; flex-direction: column; align-items: center; min-width: 6.5rem; font: 800 .85rem Quicksand, sans-serif; color: #8C4D3F; background: rgba(255, 253, 246, .9); border-radius: 6px; padding: .1rem .4rem; }
 	.step-count small { font-size: .62rem; font-weight: 700; color: #8C6A5C; }
-	/* Dali's answer on the page, over the (still blank) map area */
-	.flap {
-		position: absolute; left: 0; right: 0; top: 9.4rem; bottom: 0; z-index: 20; pointer-events: auto;   /* the scroller background ignores the mouse; this must not */ box-sizing: border-box;
-		display: flex; flex-direction: column; justify-content: center; gap: .6rem; padding: 1.2rem 1.6rem 1.2rem 3.2rem; text-align: start;
-		background-color: #FFFDF6;
-		background-image:
-			linear-gradient(90deg, transparent 2.6rem, rgba(181, 82, 59, .4) 2.6rem, rgba(181, 82, 59, .4) calc(2.6rem + 1.5px), transparent calc(2.6rem + 1.5px)),
-			repeating-linear-gradient(transparent 0 1.6rem, rgba(30, 91, 140, .28) 1.6rem calc(1.6rem + 1.2px));
-		transform-origin: 50% 100%; backface-visibility: hidden;
-		transition: transform .85s cubic-bezier(.5, 0, .6, .4), box-shadow .85s, opacity .3s .6s;
-	}
-	/* folding down: the page turns towards you and away, showing the fresh page underneath */
-	.flap.folding { transform: perspective(1400px) rotateX(-178deg); box-shadow: 0 -18px 30px rgba(74, 46, 37, .25); opacity: 0; }
-	.flap-who { display: flex; align-items: center; gap: .4rem; margin: 0; font: 800 .95rem Quicksand, sans-serif; color: #A4731C; }
-	.flap-who img { width: 2.8rem; height: 3rem; object-fit: contain; object-position: 50% 0; }
-	.flap-t { margin: 0; font: 600 1.45rem/1.6rem Caveat, 'Segoe Print', cursive; color: #8C2A22; }
-	.flap-t :global(b) { color: #C62F2F; }
-	:global(.tn-ar) .flap-t { font-family: 'Aref Ruqaa', Tajawal, serif; font-size: 1.2rem; }
-	@media (prefers-reduced-motion: reduce) { .drawing-wrap, .flap { transition: none; } }
+	@media (prefers-reduced-motion: reduce) { .drawing-wrap { transition: none; } }
 	/* "Yes, draw it!": pulses until clicked, then Dali draws the map */
 	.draw-yes {
-		display: block; margin: .4rem auto 0; padding: .55rem 1.4rem; border: 0; border-radius: 999px; cursor: pointer;
-		background: #C62F2F; color: #FFFBF1; font: 800 .9rem Quicksand, sans-serif;
-		box-shadow: 0 0 0 0 rgba(198, 47, 47, .55); animation: nudge 1.4s ease-out infinite;
+		position: relative; z-index: 21; pointer-events: auto; padding: .4rem 1rem; border: 1.5px solid #C62F2F; border-radius: 999px; cursor: pointer;
+		background: #FFFDF6; color: #C62F2F; font: 600 1.25rem/1.2 Caveat, 'Segoe Print', cursive;
+		box-shadow: 0 2px 6px rgba(74, 46, 37, .15); transform: rotate(-1.5deg);
 	}
-	.draw-yes:hover { background: #A82626; }
+	.draw-yes:hover { background: #C62F2F; color: #FFFDF6; }
+	.draw-skip { position: relative; z-index: 21; pointer-events: auto; padding: .3rem .8rem; border: 0; border-radius: 999px; cursor: pointer; background: rgba(140, 77, 63, .1); color: #8C4D3F; font: 800 .78rem Quicksand, sans-serif; }
+	.draw-skip:hover { background: rgba(140, 77, 63, .2); }
+	:global(.tn-ar) .draw-yes { font-family: 'Aref Ruqaa', Tajawal, serif; font-size: 1rem; }
 	.draw-yes:focus-visible { outline: 3px solid #1E5B8C; outline-offset: 2px; }
 	@keyframes nudge { 0% { box-shadow: 0 0 0 0 rgba(198, 47, 47, .55); } 70% { box-shadow: 0 0 0 12px rgba(198, 47, 47, 0); } 100% { box-shadow: 0 0 0 0 rgba(198, 47, 47, 0); } }
-	@media (prefers-reduced-motion: reduce) { .draw-yes { animation: none; } }
 	.lead { margin: 0 0 .7rem; padding-bottom: .7rem; border-bottom: 1px dashed rgba(164, 115, 28, .4); }
 	.lead :global(b) { color: #A4731C; }
 	.who { display: flex; align-items: center; gap: .4rem; margin: 0 0 .3rem; font: 800 .9rem Quicksand, sans-serif; color: #A4731C; }
