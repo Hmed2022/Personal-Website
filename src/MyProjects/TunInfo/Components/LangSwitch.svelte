@@ -16,5 +16,5 @@
   button { font: 700 .88rem Quicksand, 'Tajawal', sans-serif; color: #4D6473; background: none; border: none; border-radius: 999px; padding: .4rem .9rem; cursor: pointer; }
   button[lang='ar'] { font-family: 'Tajawal', sans-serif; font-size: .95rem; }
   button.on { background: #1E5B8C; color: #FFFFFF; }
-  @media (max-width: 640px) { .ls { right: .6rem; bottom: .6rem; } button { padding: .35rem .75rem; } }
+  @media (max-width: 640px) { .ls { right: .5rem; bottom: .5rem; padding: .18rem; } button { padding: .26rem .55rem; font-size: .74rem; } button[lang='ar'] { font-size: .8rem; } }
 </style>

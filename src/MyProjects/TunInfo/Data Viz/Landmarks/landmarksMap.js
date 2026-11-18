@@ -543,7 +543,7 @@ export const landmarks = [
  {
   "gov": "Kebili",
   "city": "Douz",
-  "landmark": "Great Mosque of Douz",
+  "landmark": "Great Mosque of Douz*",
   "bill": "5 Tnd (1973)",
   "url": "",
   "img": "Kebili1",
@@ -588,7 +588,7 @@ export const landmarks = [
  {
   "gov": "Medenine",
   "city": "Djerba",
-  "landmark": "Ibadite mosque in Djerba",
+  "landmark": "Ibadite mosque in Djerba*",
   "bill": "5 Tnd (1973)",
   "url": "",
   "img": "Medenine1",

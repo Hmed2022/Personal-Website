@@ -26,5 +26,5 @@
   }
   .bb:hover { background: #1E5B8C; }
   .bb:focus-visible { outline: 3px solid #E3A72A; outline-offset: 2px; }
-  @media (max-width: 640px) { .bb { right: .6rem; bottom: 6rem; font-size: .8rem; } }
+  @media (max-width: 640px) { .bb { right: .5rem; bottom: 3rem; padding: .38rem .75rem; font-size: .74rem; } }
 </style>

@@ -265,6 +265,7 @@
         <div>
           <h4>{lmName(current.landmark)}</h4>
           <p>{cityName(current.city)}{$isAr ? '،' : ','} {$isAr ? govAr(current.gov) : current.gov} · <b>{$money(current.value === '½' ? 0.5 : +current.value)}, {current.year}</b></p>
+          {#if current.landmark.endsWith('*')}<p class="unconf">{$t('lmUnconfirmed')}</p>{/if}
           {#if current.tag}<span class="tag" style="--tc:{TAG_COLOR[current.tag]}"><img src={icon(current.tag)} alt="" />{catName(current.tag)}</span>{/if}
         </div>
         {#if current.url}<a href={current.url} target="_blank" rel="noopener noreferrer">{$t('lxReadMore')}</a>{/if}
@@ -279,6 +280,8 @@
     max-width: 1100px; margin: 1.5rem auto 3rem; padding: 0 1rem; box-sizing: border-box;
     font-family: Quicksand, sans-serif; color: #3D2A22;
   }
+
+  .unconf { margin: .1rem 0 .3rem; font: italic 600 .78rem Quicksand, sans-serif; color: #B5523B; }
 
   /* ---- side ---- */
   .side { position: sticky; top: 1rem; align-self: start; text-align: center; }

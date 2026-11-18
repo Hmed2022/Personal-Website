@@ -128,7 +128,7 @@ const eur = url(`
 // photos for the "Real notes" view: the $20 from Numista (loaded from there), the €20 from Wikimedia Commons
 // (ECB, 2002 series, design by Robert Kalina; reproduction allowed under ECB decisions ECB/2003/4 and ECB/2003/5)
 import eurReal from './Assets/intruders/eur20.webp';
-// If you save the photo as Assets/intruders/usd20.(jpg|webp|png), the local file is used instead of the Numista link.
+// The $20 photo: Assets/intruders/usd20.jpg (Series 2006, public domain, Wikimedia Commons). Numista link kept only as a fallback.
 const USD_LOCAL = Object.values(import.meta.glob('./Assets/intruders/usd20.{jpg,jpeg,webp,png}', { eager: true, as: 'url' }))[0];
 const USD_REAL = USD_LOCAL || 'https://en.numista.com/catalogue/photos/etats-unis/65545a9e41b016.59831637-original.jpg';
 export const INTRUDERS = [

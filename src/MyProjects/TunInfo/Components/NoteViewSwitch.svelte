@@ -17,5 +17,5 @@
   button { font: 700 .82rem Quicksand, 'Tajawal', sans-serif; color: #4D6473; background: none; border: none; border-radius: 999px; padding: .38rem .8rem; cursor: pointer; }
   button.on { background: #8C4D3F; color: #FFFFFF; }
   button:focus-visible { outline: 3px solid #1E5B8C; outline-offset: 2px; }
-  @media (max-width: 640px) { .vs { right: .6rem; bottom: 3.3rem; } button { padding: .32rem .65rem; font-size: .76rem; } }
+  @media (max-width: 640px) { .vs { right: auto; left: .5rem; bottom: .5rem; padding: .18rem; } button { padding: .26rem .5rem; font-size: .7rem; } }
 </style>

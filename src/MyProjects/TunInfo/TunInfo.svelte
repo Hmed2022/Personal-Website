@@ -463,6 +463,7 @@
     .lan{
         text-align: center;
     }
+    @media (max-width: 640px) { .tn-page { padding-bottom: 3.5rem; } }
     .Title{
         text-align: center;
         margin-top: 0;   /* the title starts at the top of the page */

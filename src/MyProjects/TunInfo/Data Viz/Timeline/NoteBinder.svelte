@@ -192,6 +192,15 @@
     await tick();
     requestAnimationFrame(() => requestAnimationFrame(() => (opening = false)));
   }
+  // phones: swipe left / right on the binder to turn the pages
+  let sx = null, sy = null;
+  function swipeStart(e) { const p = e.touches[0]; sx = p.clientX; sy = p.clientY; }
+  function swipeEnd(e) {
+    if (sx == null || !opened) return;
+    const p = e.changedTouches[0], dx = p.clientX - sx, dy = p.clientY - sy;
+    sx = null;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4) go(dx < 0 ? 1 : -1);
+  }
   function go(dir) {
     const next = at + dir * step;
     if (turn || next < firstStart || next > lastStart) return;
@@ -221,7 +230,7 @@
 <svelte:window on:keydown={onKey} on:pointerdown={dismissToast} />
 
 <div class="binder-wrap" class:filling class:leaving bind:this={wrapEl} bind:clientWidth={width} style="--star:{star}; --frieze:{frieze}">
-  <div class="book" class:single class:closed={!opened && !opening} class:opening>
+  <div class="book" class:single class:closed={!opened && !opening} class:opening on:touchstart|passive={swipeStart} on:touchend={swipeEnd}>
     <!-- inside: the pages -->
     <div class="spread">
       {#if !single}
