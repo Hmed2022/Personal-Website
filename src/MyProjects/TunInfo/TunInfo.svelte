@@ -56,7 +56,13 @@
         if (!id) return;
         open = id; read = { ...read, [id]: true };
         await tick();
-        topicEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // find the open section on the page: the binding can be cleared when the previous section is removed
+        const el = document.querySelector('section.topic') || topicEl;
+        if (!el) return;
+        // a little room above, so the first line isn't hidden under the top edge
+        const go = () => window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 24, behavior: 'smooth' });
+        go();
+        setTimeout(go, 700);   // again once the section's images have taken their space
     }
     // next unread question in list order (the goodbye last); null when there's nothing left
     const nextOf = (cur) => (TOPICS.find((x) => x.id !== cur && x.id !== 'end' && !read[x.id]) || (cur !== 'end' ? TOPICS[TOPICS.length - 1] : null))?.id;
@@ -114,7 +120,7 @@
 
 
 <NoteViewSwitch/>
-<LangSwitch/>
+<!-- <LangSwitch/> Arabic switched off for now (see AR_ENABLED in i18n.js) -->
 <BackToBinder/>
 <div class="tn-page" class:tn-ar={$lang === 'ar'} lang={$lang} dir={$dir}>
 <div class="Title">

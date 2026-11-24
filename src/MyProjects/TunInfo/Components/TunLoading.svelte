@@ -4,6 +4,10 @@
   // the small (≈9 KB) webp versions; only their URLs end up in this bundle
   const notes = Object.values(import.meta.glob('../Data Viz/Timeline/BanknotesSmall/*.webp', { eager: true, import: 'default' }));
   const src = notes[Math.floor(Math.random() * notes.length)];
+  import { onMount } from 'svelte';
+  // still here after 15 s? something went wrong: offer a reload instead of spinning forever
+  let slow = false;
+  onMount(() => { const id = setTimeout(() => (slow = true), 15000); return () => clearTimeout(id); });
 </script>
 
 <div class="tl" role="status" aria-live="polite">
@@ -11,7 +15,8 @@
     <span class="slot"></span>
     <div class="paper"><img {src} alt="" /></div>
   </div>
-  <span class="sr">Loading… / جارٍ التحميل…</span>
+  {#if slow}<button type="button" class="retry" on:click={() => window.location.reload()}>Taking too long? Reload the page</button>{/if}
+  <span class="sr">Loading…</span>
 </div>
 
 <style>
@@ -28,5 +33,6 @@
     100% { transform: translateY(0); opacity: 0; }
   }
   @media (prefers-reduced-motion: reduce) { img { animation: none; } }
+  .retry { position: absolute; top: calc(50% + 7rem); left: 50%; transform: translateX(-50%); padding: .55rem 1.2rem; border: 0; border-radius: 999px; cursor: pointer; background: #8C4D3F; color: #FFFBF1; font: 800 .9rem Quicksand, sans-serif; }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 </style>

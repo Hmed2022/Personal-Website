@@ -11,7 +11,7 @@
 
 <style>
   .vs {
-    position: fixed; right: 1rem; bottom: 3.9rem; z-index: 900; display: inline-flex; gap: .2rem; padding: .25rem;
+    position: fixed; right: 1rem; bottom: 1rem; z-index: 900; display: inline-flex; gap: .2rem; padding: .25rem;
     border-radius: 999px; background: rgba(255, 251, 244, .95); box-shadow: 0 4px 16px rgba(61, 42, 34, .22); border: 1px solid #E6DCCF;
   }
   button { font: 700 .82rem Quicksand, 'Tajawal', sans-serif; color: #4D6473; background: none; border: none; border-radius: 999px; padding: .38rem .8rem; cursor: pointer; }

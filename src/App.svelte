@@ -76,7 +76,19 @@
 
 	// Every other page is its own chunk, downloaded only when visited
 	// (e.g. #/cardmagic no longer downloads the Names / TunInfo / All-Star code and data).
-	const lazy = (load) => wrap({ asyncComponent: load, loadingComponent: RouteLoading });
+	// After a new deploy, a browser still holding the old page asks for old chunk names that no longer
+	// exist, and the loader would spin forever. If a page fails to load, reload once to get the new files.
+	const safe = (load) => () => load().then((m) => {
+		try { sessionStorage.removeItem('chunk-reload'); } catch (e) { /* ignore */ }
+		return m;
+	}).catch((err) => {
+		let tried = false;
+		try { tried = sessionStorage.getItem('chunk-reload') === '1'; sessionStorage.setItem('chunk-reload', '1'); } catch (e) { tried = true; }
+		if (!tried) window.location.reload();
+		throw err;
+	});
+	const lazy = (load) => wrap({ asyncComponent: safe(load), loadingComponent: RouteLoading });
+	const tunPage = () => wrap({ asyncComponent: safe(() => import('./MyProjects/TunInfo/TunInfo.svelte')), loadingComponent: TunLoading });
 
 	const routes = {
     '/': Home,
@@ -85,10 +97,10 @@
     '/leghreeb': lazy(() => import('./pages/Leghreeb.svelte')),
     '/allstarintro': lazy(() => import('./MyProjects/All-Star/AllStarIntro.svelte')),
     '/allstar': lazy(() => import('./MyProjects/All-Star/NBA.svelte')),
-    '/tnNotes': wrap({ asyncComponent: () => import('./MyProjects/TunInfo/TunInfo.svelte'), loadingComponent: TunLoading }),
+    '/tnNotes': tunPage(),
     '/tnNotesIntro': lazy(() => import('./MyProjects/TunInfo/TunInfoIntro.svelte')),
     // old addresses (TunInfo), kept so links already shared keep working
-    '/tuninfo': wrap({ asyncComponent: () => import('./MyProjects/TunInfo/TunInfo.svelte'), loadingComponent: TunLoading }),
+    '/tuninfo': tunPage(),
     '/tuninfointro': lazy(() => import('./MyProjects/TunInfo/TunInfoIntro.svelte')),
     '/klay': lazy(() => import('./MyProjects/Klay/klay.svelte')),
     // '/Anniv': lazy(() => import('./MyProjects/Anniversary/Aniv.svelte')),

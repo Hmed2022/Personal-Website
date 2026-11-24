@@ -67,8 +67,8 @@ export const imageData = [
     alt: "Animated title of What Can Tunisia's Banknotes Tell You?, with portraits from the notes",
     show: true,
     featured: false, // the homepage's big "featured" card (only one project should have this)
-    lang: "AR | EN",
-    tags: "all,dataviz,story,info,tunisia,svelte,d3,interactive,arabic,culture",
+    lang: "EN",
+    tags: "all,dataviz,story,info,tunisia,svelte,d3,interactive,culture",
   },
   {
     url: CardMagicUrl,

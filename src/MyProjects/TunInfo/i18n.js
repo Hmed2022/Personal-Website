@@ -5,7 +5,10 @@ import { writable, derived } from 'svelte/store';
 import STRINGS from './strings.js';
 
 const KEY = 'tuninfo-lang';
+// Arabic is switched off for now: the piece is English only (set to true to bring the switch back)
+export const AR_ENABLED = false;
 function initial() {
+	if (!AR_ENABLED) return 'en';
 	try {
 		const saved = localStorage.getItem(KEY);
 		if (saved === 'en' || saved === 'ar') return saved;
