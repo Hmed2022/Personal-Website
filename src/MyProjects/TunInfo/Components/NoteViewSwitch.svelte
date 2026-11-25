@@ -6,8 +6,8 @@
 </script>
 
 <div class="vs" class:away={$floatHidden} role="radiogroup" aria-label={$t('viewLbl')}>
-  <button type="button" role="radio" aria-checked={!$realNotes} class:on={!$realNotes} on:click={() => realNotes.set(false)}>✎ {$t('viewIllus')}</button>
-  <button type="button" role="radio" aria-checked={$realNotes} class:on={$realNotes} on:click={() => realNotes.set(true)}>◫ {$t('viewReal')}</button>
+  <button type="button" role="radio" aria-checked={!$realNotes} class:on={!$realNotes} on:click={() => realNotes.set(false)}>{$t('viewIllus')}</button>
+  <button type="button" role="radio" aria-checked={$realNotes} class:on={$realNotes} on:click={() => realNotes.set(true)}>{$t('viewReal')}</button>
 </div>
 
 <style>

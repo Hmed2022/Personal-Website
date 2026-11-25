@@ -17,7 +17,7 @@
 <svelte:window on:scroll|passive={check} on:resize={check} />
 
 {#if show}
-  <button type="button" class="bb" class:away={$floatHidden} on:click={go}>↩ {$t('nbBackBinder')}</button>
+  <button type="button" class="bb" class:away={$floatHidden} on:click={go}>{$t('nbBackBinder')}</button>
 {/if}
 
 <style>

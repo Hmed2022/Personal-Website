@@ -26,7 +26,7 @@
   // back photos come from the timeline data (PathB, or a local file in RealNotes/); the second 10 DT of 1994 is P87A
   // your own cut-out of the 20 dinars symbol (same frame as the photo, transparent around the symbol)
   import prop20 from '../Data Viz/Timeline/RealNotes/propaganda-20-back.png';
-  import prop5 from '../Data Viz/Timeline/RealNotes/propaganda-5-back-v2.png';   // your cleaner cut-out, fitted to the photo's frame
+  import prop5 from '../Data Viz/Timeline/RealNotes/propaganda-5-back-v3.png';   // your cut-out from the photo itself (same frame), cleaned up
   import prop10blue from '../Data Viz/Timeline/RealNotes/propaganda-10-blue-back.png';
   import prop10brown from '../Data Viz/Timeline/RealNotes/propaganda-10-brown-back.png';
   const backOf = (v, y, b = false) => realPhoto({ Value: v, Issued: y, PathF: b ? 'P087A' : '' }, 'back');
@@ -139,10 +139,11 @@
   .layer.photo { object-fit: fill; }
   .cutout { z-index: 4; opacity: 0; transition: opacity .35s, transform .35s cubic-bezier(.3, 1.4, .5, 1); filter: drop-shadow(0 6px 8px rgba(61, 42, 34, .35)) drop-shadow(0 0 0 #fff); }
   .cutout img { display: block; width: 100%; height: 100%; object-fit: fill; }
-  .back.lit .layer.photo { filter: grayscale(1) brightness(1.1); opacity: .5; }
+  .back.lit .layer.photo { filter: grayscale(1) brightness(1.12); opacity: .4; }
   /* a precise cut-out (your own) stays exactly in place: no offset, just a soft shadow */
   .layer.off { display: none; }   /* real photos: the illustrated layers would show through the faded photo */
-  .back.lit .cutout.exact { transform: none; filter: drop-shadow(0 3px 6px rgba(61, 42, 34, .35)); }
+  /* lifted off the faded note: a tight dark edge, a deeper soft shadow and a faint warm glow */
+  .back.lit .cutout.exact { transform: translate(-2px, -4px) scale(1.02); filter: drop-shadow(0 0 1px rgba(30, 20, 15, .55)) drop-shadow(0 8px 12px rgba(40, 25, 18, .5)) drop-shadow(0 0 10px rgba(169, 57, 37, .35)); }
   .back.lit .cutout { opacity: 1; transform: translate(-3px, -5px) rotate(-1.2deg) scale(1.03); }
   .cap { display: flex; flex-direction: column; gap: .15rem; padding: .65rem .8rem .75rem; font-size: .82rem; line-height: 1.45; }
   .cap b { color: #A93925; font-size: .85rem; }

@@ -401,7 +401,8 @@
   .book.single .spread { grid-template-columns: 1fr; }
 
   .page {
-    position: relative; box-sizing: border-box; aspect-ratio: 3 / 3.4; padding: 1.1rem 1rem 1.8rem;
+    --pt: 1.1rem; --px: 1rem; --pb: 1.8rem;
+    position: relative; box-sizing: border-box; aspect-ratio: 3 / 3.4; padding: var(--pt) var(--px) var(--pb);
     background:
       linear-gradient(to right, rgba(74, 46, 37, .08), transparent 8%, transparent 92%, rgba(74, 46, 37, .06)),
       #FBF6EA;
@@ -413,9 +414,19 @@
   .book.single .page.right { border-radius: 10px; }
 
   /* three rows of two clear pockets */
-  .pockets { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 1fr); gap: .7rem .6rem; height: 100%; }
+  .pockets { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: repeat(3, minmax(0, 1fr)); gap: .7rem .6rem; height: 100%; }
+  /* on a page, the grid is pinned to the page's edges instead of "height: 100%": Safari can't always
+     resolve a percentage height inside a box sized by aspect-ratio, and the notes then spilled out of
+     the binder over the buttons below */
+  .page > .pockets { position: absolute; top: var(--pt); bottom: var(--pb); left: var(--px); right: var(--px); height: auto; }
+  .page { overflow: hidden; }
+  /* older Safari without aspect-ratio: same page shape from padding */
+  @supports not (aspect-ratio: 1 / 1) {
+    .page { height: 0; padding-bottom: 113.3%; }
+    @media (max-width: 700px) { .page { padding-bottom: 120%; } }
+  }
   .pocket {
-    position: relative; display: grid; place-items: center; padding: .45rem; border: 0; cursor: pointer; font: inherit;
+    position: relative; display: grid; place-items: center; min-width: 0; min-height: 0; padding: .45rem; border: 0; cursor: pointer; font: inherit;
     border-radius: 4px;
     background: linear-gradient(160deg, rgba(255, 255, 255, .7), rgba(255, 255, 255, .15) 45%, rgba(255, 255, 255, .45));
     box-shadow: inset 0 0 0 1px rgba(140, 77, 63, .18), inset 0 -6px 0 rgba(140, 77, 63, .05);
@@ -531,7 +542,7 @@
   .nav { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1rem; transition: opacity .3s; }
   .nav.hidden { opacity: 0; pointer-events: none; }
   .arrow {
-    width: 2.4rem; height: 2.4rem; border-radius: 50%; border: 1.5px solid #8C4D3F; background: #FFFBF1; color: #8C4D3F;
+    flex: 0 0 auto; width: 2.4rem; height: 2.4rem; min-width: 2.4rem; box-sizing: border-box; aspect-ratio: 1; border-radius: 50%; border: 1.5px solid #8C4D3F; background: #FFFBF1; color: #8C4D3F;
     font-size: 1.4rem; line-height: 1; cursor: pointer; display: grid; place-items: center; padding: 0 0 .15rem;
   }
   .arrow:disabled { opacity: .35; cursor: default; }
@@ -580,7 +591,11 @@
   .sort-btn:hover { background: #6E3A2F; transform: translateY(-2px); }
 
   @media (max-width: 700px) {
-    .page { aspect-ratio: 3 / 3.6; padding: .8rem .7rem 1.6rem; }
+    /* phones: arrows and page count on one row, "Close the binder" centred under them */
+    .nav { flex-wrap: wrap; gap: .6rem 1rem; }
+    .count { min-width: 0; flex: 0 1 auto; }
+    .close-btn { flex-basis: 100%; max-width: max-content; margin: 0 auto; }
+    .page { aspect-ratio: 3 / 3.6; --pt: .8rem; --px: .7rem; --pb: 1.6rem; }
     .pockets { gap: .5rem .4rem; }
   }
   @media (prefers-reduced-motion: reduce) {

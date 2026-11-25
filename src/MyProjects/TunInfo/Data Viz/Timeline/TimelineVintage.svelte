@@ -381,7 +381,7 @@
 
   <!-- the same notes, two ways -->
   <!-- put everything back: the notes fly back into the binder -->
-  <p class="unsort" class:hold={building}><button type="button" on:click={unsortNotes}>↩ {$t('tlUnsort')}</button></p>
+  <p class="unsort" class:hold={building}><button type="button" on:click={unsortNotes}>{$t('tlUnsort')}</button></p>
   <div class="views" class:hold={building} role="tablist" aria-label={$t('tlViews')}>
     <button type="button" role="tab" aria-selected={view === 'time'} class:on={view === 'time'} on:click={() => (view = 'time')}>{$t('tlViewTime')}</button>
     <button type="button" role="tab" aria-selected={view === 'life'} class:on={view === 'life'} on:click={() => { view = 'life'; stopPlay(); tip = null; }}>{$t('tlViewLife')}</button>
