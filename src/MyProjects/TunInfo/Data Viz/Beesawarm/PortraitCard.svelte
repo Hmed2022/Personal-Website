@@ -30,12 +30,12 @@
 <style>
   .card {
     background: #F6ECD4; border: 0; border-inline-start: 4px solid #A4731C; box-shadow: none; color: #3D2A22; border-radius: 14px; padding: 1.1rem 1.4rem;
-    font-family: Quicksand, sans-serif;
+    font-family: Quicksand, Vazirmatn, sans-serif;
   }
   .who { display: flex; align-items: center; gap: .45rem; margin: 0 0 .2rem; font-weight: 800; font-size: .95rem; color: #A4731C; }
   .who img { width: 2.6rem; height: 2.8rem; object-fit: contain; object-position: 50% 0; }
   .kicker { margin: 0; font-size: .72rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: #B5523B; }
-  h3 { margin: .1rem 0 .5rem; font-family: Quicksand, sans-serif; font-weight: 800; font-size: 1.1rem; color: #A4731C; }
+  h3 { margin: .1rem 0 .5rem; font-family: Quicksand, Vazirmatn, sans-serif; font-weight: 800; font-size: 1.1rem; color: #A4731C; }
   p { margin: 0 0 .6rem; font-size: .95rem; line-height: 1.6; }
   p:last-child { margin-bottom: 0; }
   .card :global(.c1) { color: #025E73; } .card :global(.c2) { color: #7C4A8C; } .card :global(.c3) { color: #BF5630; } .card :global(.pink) { color: #B8457A; }

@@ -47,3 +47,19 @@ export function parseBill(bill = '') {
 	const m = /([\d/.]+)\s*Tnd\s*\((\d{4})\)/i.exec(bill);
 	return m ? { value: m[1] === '1/2' ? '½' : m[1], year: m[2] } : { value: '', year: '' };
 }
+
+// The same place often comes back on several notes, sometimes drawn from another angle
+// (El Djem from the side and from the air, the Great Mosque of Kairouan inside and out...).
+// SAME_SITE maps those entries to one place, so the piece can show both numbers:
+// every appearance on a note ("all") and the different places ("unique").
+export const SAME_SITE = {
+  'Romanesque ruins of the Capitol': 'Capitol of Dougga',
+  'Temple of Jupiter in the ruins of Dougga': 'Capitol of Dougga',
+  'Arches of the interior of the great mosque of Kairouan': 'Great Mosque of Kairouan',
+  'Triumphal arch of Diocletian (with camels)': 'Triumphal arch of Diocletian',
+  'Roman amphitheater (Aerial View)': 'Roman amphitheater',
+  'Roman amphitheater (Side View)': 'Roman amphitheater',
+  'Temple of Water and Roman aqueducts': 'Roman aqueducts',
+};
+export const siteOf = (l) => `${l.gov}|${SAME_SITE[l.landmark] || l.landmark}`;
+export const uniqueCount = (list) => new Set(list.map(siteOf)).size;

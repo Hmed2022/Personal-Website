@@ -135,7 +135,7 @@ export default [
     Issued: 1986,
     EndofCirculation: 2012,
     ValueDayofIssue: 12.59,
-    ValueEndofCirculation: 3.41,
+    ValueEndofCirculation: 6.4,   // was 3.41 (copied from the 2019 rows); 2012 rate ≈ $0.64 per dinar
     Value2: 36,
     Preview: "https://i.ibb.co/fFJctwt/Banknotes-1-Recovered-2.png",
     PathF:

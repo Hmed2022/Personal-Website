@@ -2,6 +2,7 @@
   // Floating "Back to the binder" button (replaces the chapter menu). Shows once you've scrolled past the binder.
   import { t } from '../i18n.js';
   import { binderRequest } from '../Data Viz/Timeline/strayStore.js';
+  import { floatHidden } from './floatHide.js';
   let show = false;
   function check() {
     const el = document.querySelector('.timeline');
@@ -16,15 +17,17 @@
 <svelte:window on:scroll|passive={check} on:resize={check} />
 
 {#if show}
-  <button type="button" class="bb" on:click={go}>↩ {$t('nbBackBinder')}</button>
+  <button type="button" class="bb" class:away={$floatHidden} on:click={go}>↩ {$t('nbBackBinder')}</button>
 {/if}
 
 <style>
   .bb {
     position: fixed; right: 1rem; bottom: 3.9rem; z-index: 900; padding: .5rem 1rem; border: 0; border-radius: 999px; cursor: pointer;
-    background: #1E3F5C; color: #FFFFFF; font: 800 .88rem Quicksand, 'Tajawal', sans-serif; box-shadow: 0 4px 16px rgba(30, 63, 92, .3);
+    background: #1E3F5C; color: #FFFFFF; font: 800 .88rem Quicksand, 'Vazirmatn', sans-serif; box-shadow: 0 4px 16px rgba(30, 63, 92, .3);
   }
   .bb:hover { background: #1E5B8C; }
+  .bb { transition: transform .3s ease, opacity .3s ease, background .15s; }
+  .bb.away { transform: translateY(250%); opacity: 0; pointer-events: none; }
   .bb:focus-visible { outline: 3px solid #E3A72A; outline-offset: 2px; }
   @media (max-width: 640px) { .bb { right: .5rem; bottom: .5rem; padding: .38rem .75rem; font-size: .74rem; } }
 </style>

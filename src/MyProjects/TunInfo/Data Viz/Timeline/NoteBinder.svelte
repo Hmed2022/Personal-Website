@@ -440,7 +440,7 @@
     border-radius: 6px; box-shadow: 0 2px 6px rgba(74, 46, 37, .15);
   }
   .plate-star { width: 34px; height: 34px; background-image: var(--star); background-size: contain; background-repeat: no-repeat; }
-  .plate-k { font-family: 'Playfair Display', Georgia, serif; font-weight: 800; font-size: 1.05rem; color: #4A2E25; }
+  .plate-k { font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 1.05rem; color: #4A2E25; }
   .plate-line { display: block; width: 80%; height: 1.6rem; border-bottom: 1.5px dotted #8C4D3F; }
   /* the signature line: draw on it like a felt-tip marker */
   .plate-line.sign { position: relative; height: 3.4rem; margin-top: -.4rem; }
@@ -452,7 +452,7 @@
   .sign-hint { position: absolute; left: 0; right: 0; bottom: .35rem; pointer-events: none; font-size: .8rem; font-style: italic; color: rgba(107, 74, 62, .55); }
   .sign-clear {
     position: absolute; right: -1.6rem; top: -.2rem; padding: 0 .3rem; border: 0; background: none; cursor: pointer;
-    font: 700 .68rem Quicksand, sans-serif; color: #8C4D3F; text-decoration: underline; opacity: .75;
+    font: 700 .68rem Quicksand, Vazirmatn, sans-serif; color: #8C4D3F; text-decoration: underline; opacity: .75;
   }
   .sign-clear:hover { opacity: 1; }
   .plate-sub { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
@@ -518,7 +518,7 @@
   /* crescent and star in a ring, in the cover palette (cream emblem, ochre ring) */
   .cover-crescent { display: block; width: 74px; height: 74px; filter: drop-shadow(0 1px 0 rgba(0, 0, 0, .35)); }
   .cover-star { display: block; width: 58px; height: 58px; background-image: var(--star); background-size: contain; background-repeat: no-repeat; }
-  .cover-title { font-family: 'Playfair Display', Georgia, serif; font-weight: 800; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.15; letter-spacing: .01em; }
+  .cover-title { font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.15; letter-spacing: .01em; }
   .cover-sub { font-size: .8rem; font-weight: 700; letter-spacing: .25em; text-transform: uppercase; opacity: .85; }
   .cover-cta {
     margin-top: .4rem; padding: .45rem 1.1rem; border-radius: 999px; background: #F3E7CC; color: #7A3E31;
@@ -538,7 +538,7 @@
   .arrow:not(:disabled):hover { background: #8C4D3F; color: #FFFBF1; }
   .close-btn {
     margin-inline-start: .4rem; padding: .4rem .9rem; border: 1.5px solid #8C4D3F; border-radius: 999px; background: transparent; color: #8C4D3F;
-    font: 700 .8rem Quicksand, sans-serif; cursor: pointer; transition: background .2s, color .2s;
+    font: 700 .8rem Quicksand, Vazirmatn, sans-serif; cursor: pointer; transition: background .2s, color .2s;
   }
   .close-btn:hover { background: #8C4D3F; color: #FFFBF1; }
   .close-btn:disabled { opacity: .4; cursor: default; }
@@ -561,10 +561,10 @@
   }
   .toast-who { display: flex; align-items: center; justify-content: center; gap: .4rem; margin: 0; font-weight: 800; font-size: .9rem; color: var(--c); }
   .toast-who img { width: 2.4rem; height: 2.5rem; object-fit: contain; object-position: 50% 0; }
-  .toast b { font-family: 'Playfair Display', Georgia, serif; font-size: 1.15rem; color: var(--c); }
+  .toast b { font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 1.15rem; color: var(--c); }
   .toast span { font-size: .88rem; line-height: 1.4; color: #4A2E25; }
   .toast-btns { display: flex; justify-content: center; gap: .6rem; margin-top: .5rem; flex-wrap: wrap; }
-  .t-btn { padding: .45rem 1.05rem; border-radius: 999px; cursor: pointer; font: 800 .85rem Quicksand, sans-serif; transition: transform .15s, background .15s; }
+  .t-btn { padding: .45rem 1.05rem; border-radius: 999px; cursor: pointer; font: 800 .85rem Quicksand, Vazirmatn, sans-serif; transition: transform .15s, background .15s; }
   .t-btn:hover { transform: translateY(-1px); }
   .t-btn:focus-visible { outline: 3px solid #1E5B8C; outline-offset: 2px; }
   .t-btn.toss { border: 0; background: var(--c); color: #FFFBF1; }
@@ -575,7 +575,7 @@
   .sort p { margin: 0 0 .7rem; font-size: .95rem; }
   .sort-btn {
     padding: .65rem 1.5rem; border: 0; border-radius: 999px; background: #8C4D3F; color: #FFFBF1; cursor: pointer;
-    font: 800 .95rem Quicksand, sans-serif; box-shadow: 0 3px 10px rgba(74, 46, 37, .3); transition: transform .2s, background .2s;
+    font: 800 .95rem Quicksand, Vazirmatn, sans-serif; box-shadow: 0 3px 10px rgba(74, 46, 37, .3); transition: transform .2s, background .2s;
   }
   .sort-btn:hover { background: #6E3A2F; transform: translateY(-2px); }
 

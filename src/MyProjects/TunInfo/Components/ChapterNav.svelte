@@ -67,7 +67,7 @@
 <style>
   .row { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem; max-width: 56rem; margin: 1.2rem auto 0; padding: 0 1rem; }
   .row button, .menu button {
-    display: inline-flex; align-items: center; gap: .4rem; font: 700 .85rem Quicksand, 'Tajawal', sans-serif; color: #1E3F5C; cursor: pointer;
+    display: inline-flex; align-items: center; gap: .4rem; font: 700 .85rem Quicksand, 'Vazirmatn', sans-serif; color: #1E3F5C; cursor: pointer;
     background: rgba(255, 255, 255, .75); border: 1.5px solid #E1D6C8; border-radius: 999px; padding: .3rem .8rem .3rem .35rem;
   }
   .row button:hover { border-color: #1E5B8C; }
@@ -77,7 +77,7 @@
   :global([dir='rtl']) .progress { transform-origin: 100% 50%; }
 
   .float { position: fixed; right: 1rem; bottom: 6.9rem; z-index: 900; display: flex; flex-direction: column; align-items: flex-end; gap: .4rem; }
-  .pill { display: inline-flex; align-items: center; gap: .5rem; font: 700 .85rem Quicksand, 'Tajawal', sans-serif; color: #FFFFFF; background: #1E3F5C; border: none; border-radius: 999px; padding: .5rem .9rem; cursor: pointer; box-shadow: 0 4px 16px rgba(30, 63, 92, .3); }
+  .pill { display: inline-flex; align-items: center; gap: .5rem; font: 700 .85rem Quicksand, 'Vazirmatn', sans-serif; color: #FFFFFF; background: #1E3F5C; border: none; border-radius: 999px; padding: .5rem .9rem; cursor: pointer; box-shadow: 0 4px 16px rgba(30, 63, 92, .3); }
   .pct { font-weight: 600; opacity: .75; font-size: .75rem; }
   .menu { list-style: none; margin: 0; padding: .4rem; display: grid; gap: .25rem; background: #FFFBF4; border: 1px solid #E6DCCF; border-radius: 14px; box-shadow: 0 10px 28px rgba(61, 42, 34, .2); }
   .menu button { width: 100%; background: none; border-color: transparent; }

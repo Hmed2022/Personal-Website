@@ -383,7 +383,7 @@ button {
         display: flex;
     }
 	p, text{
-		font-family: Quicksand;
+		font-family: Quicksand, Vazirmatn;
 		font-weight: 400;
 	}
 
@@ -407,14 +407,14 @@ span{
   }
 
   h3 {
-          font-family:Quicksand;
+          font-family:Quicksand, Vazirmatn;
           font-size:1.4em;
 		      margin-top: 0;
           margin-bottom:0;
           color:white
     }
        h2 {
-          font-family:Quicksand;
+          font-family:Quicksand, Vazirmatn;
           font-size:1.7em;
 			     margin-top: 0;
           margin-bottom:0;

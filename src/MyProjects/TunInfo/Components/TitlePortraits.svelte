@@ -34,6 +34,17 @@
   ];
   // The front row (faces with `base`) sits on one flat baseline; `base` is the transparent strip under the drawing, in px.
   const BASELINE = 588, CANVAS_H = 900;
+  // clicking a face opens the person's Wikipedia page (English; El Amami only has a French one)
+  const WIKI = {
+    'hannibal-new': 'https://en.wikipedia.org/wiki/Hannibal', 'hannibal-old': 'https://en.wikipedia.org/wiki/Hannibal',
+    amami: 'https://fr.wikipedia.org/wiki/Slaheddine_El_Amami',
+    'bourguiba-young': 'https://en.wikipedia.org/wiki/Habib_Bourguiba', 'bourguiba-old': 'https://en.wikipedia.org/wiki/Habib_Bourguiba',
+    chebbi30: 'https://en.wikipedia.org/wiki/Aboul-Qacem_Echebbi', chebbi10: 'https://en.wikipedia.org/wiki/Aboul-Qacem_Echebbi',
+    nouira: 'https://en.wikipedia.org/wiki/H%C3%A9di_Amara_Nouira', tawhida: 'https://en.wikipedia.org/wiki/Tewhida_Ben_Sheikh',
+    khaldoun: 'https://en.wikipedia.org/wiki/Ibn_Khaldun', elissa: 'https://en.wikipedia.org/wiki/Dido', hached: 'https://en.wikipedia.org/wiki/Farhat_Hached',
+    kheireddine: 'https://en.wikipedia.org/wiki/Hayreddin_Pasha', rachiq: 'https://en.wikipedia.org/wiki/Ibn_Rachiq',
+  };
+  const openWiki = (i) => { const u = i != null && WIKI[FACES[i].k]; if (u) window.open(u, '_blank', 'noopener'); };
   const FACES = FACES_RAW.map((f) => ({
     ...f,
     left: CX + (f.left - CX) * TIGHT_X,
@@ -76,10 +87,18 @@
     if (e.pointerType !== 'mouse') return;
     hovered = faceAt(e.clientX, e.clientY);
   }
+  // touch: first tap shows the engraved face and its name, a second tap on it opens its Wikipedia page
   function onTap(e) {
     if (e.pointerType === 'mouse') return;
     const i = faceAt(e.clientX, e.clientY);
-    hovered = i === hovered ? null : i;
+    if (i != null && i === hovered) openWiki(i);
+    else hovered = i;
+  }
+  // mouse: click the face under the pointer; keyboard (Enter / Space on a focused face): the focused one
+  function onClick(e) {
+    if (e.detail === 0) return openWiki(hovered);
+    if (e.pointerType && e.pointerType !== 'mouse') return;
+    openWiki(faceAt(e.clientX, e.clientY));
   }
 
   let tpEl;
@@ -118,13 +137,13 @@
   </div>
 
   <div class="stage" bind:clientWidth={stageW} style="height:{COMP_H * s}px" style:cursor={hovered != null ? "pointer" : "default"}
-       on:pointermove={onMove} on:pointerleave={() => (hovered = null)} on:pointerdown={onTap}>
+       on:pointermove={onMove} on:pointerleave={() => (hovered = null)} on:pointerdown={onTap} on:click={onClick}>
     <div class="canvas" style="transform: scale({s}) translateX(-{COMP_CX}px)">
       {#each FACES as f, i}
         <button type="button" class="face" bind:this={els[i]}
                 class:on={shown === i} class:dim={shown != null && shown !== i}
                 style="top:{f.top}%; left:{f.left}%; z-index:{shown === i ? 60 : i + 1}"
-                aria-label={`${$pick(f.name, f.nameAr)}, ${$pick(f.note, f.noteAr)}`} tabindex="0"
+                aria-label={`${$pick(f.name, f.nameAr)}, ${$pick(f.note, f.noteAr)}. Opens Wikipedia`} tabindex="0"
                 on:focus={() => (hovered = i)} on:blur={() => (hovered = null)}>
           <img class="d" src={src(f.k + '-d')} alt="" style="height:{f.h}px" draggable="false" />
           <img class="r" src={src(f.k + '-r')} alt="" style="height:{f.h}px" draggable="false" />
@@ -147,7 +166,7 @@
 </header>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
   @font-face {
     font-family: 'HacenSaudi';
     src: url('../Assets/Fonts/Hacen Saudi Arabia.ttf') format('truetype');
@@ -157,12 +176,12 @@
   .tp {
     position: relative;
     width: 100%;
-    max-width: 1240px;
+    max-width: 1240px;   /* wider on big screens, see below: the blue bands run longer */
     margin: 0 auto;
     padding: 0;           /* the bottom band is the title's last edge: no tiles below it */
     overflow: hidden;
     text-align: center;
-    font-family: Quicksand, sans-serif;
+    font-family: Quicksand, Vazirmatn, sans-serif;
     color: #3D2A22;
     background: var(--tn-paper, #FAF3E8);   /* covers the page pattern so the title's own zellige is the only one */
   }
@@ -186,10 +205,10 @@
   @keyframes spin { to { transform: rotate(360deg); } }
   .kicker { margin: 0; font-size: .78rem; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: #B5523B; }
   h1 {
-    margin: .25rem 0 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 800;
-    font-size: clamp(1.8rem, 4.4vw, 3.3rem); line-height: 1.08; color: #1E3F5C;
+    margin: .25rem 0 0; font-family: 'Acme', Quicksand, sans-serif; font-weight: 400;
+    font-size: clamp(1.9rem, 4.6vw, 3.6rem); line-height: 1.08; letter-spacing: .01em; color: #1E3F5C;
   }
-  h1 span { color: #1E5B8C; font-style: italic; font-weight: 600; }
+  h1 span { color: #1E5B8C; }   /* Acme has one weight and no italic: the colour sets it apart */
   .byline { margin: .35rem 0 0; font-size: .85rem; font-weight: 600; color: rgba(61, 90, 115, .75); }
   .sub { margin: .35rem 0 0; font-size: clamp(.92rem, 1.6vw, 1.08rem); font-weight: 700; color: #3D5A73; letter-spacing: .02em; }
 
@@ -214,7 +233,7 @@
 
   .caption { position: relative; z-index: 2; min-height: 2.4rem; display: grid; place-items: center; padding: 0 1rem; }
   .caption p { grid-area: 1 / 1; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: .2rem .6rem; }
-  .caption b { font-family: 'Playfair Display', Georgia, serif; font-size: 1.25rem; color: #1E3F5C; }
+  .caption b { font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 1.35rem; color: #1E3F5C; }
   .caption span { font-size: .9rem; font-weight: 700; color: #B5523B; }
   .h-touch { display: none; }
   .caption .hint { font-size: .85rem; font-weight: 600; color: rgba(61, 42, 34, .65); }
@@ -223,6 +242,7 @@
     .h-mouse { display: none; }
     .h-touch { display: inline !important; }
   }
+  @media (min-width: 1400px) { .tp { max-width: min(1640px, 100%); } }
   @media (max-width: 640px) {
     .band.top { margin-bottom: 1rem; }
     .kicker { letter-spacing: .2em; font-size: .7rem; }

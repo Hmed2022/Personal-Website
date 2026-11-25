@@ -49,7 +49,7 @@
     {#each groups as g}
       <section class="era" style="--ec:{g.ink}; --et:{g.tint}">
         <h4>{$t(g.key)}</h4>
-        <p class="count">{$t('ccLandmarks', { n: g.list.length })}</p>
+        <p class="count">{$t(g.list.length === 1 ? 'lmLandmark1' : 'ccLandmarks', { n: g.list.length })}</p>
         <div class="grid" on:pointerleave={() => (hotItem = null)}>
           {#each g.list as l}
             <button type="button" class="sq" class:dim={(hotTag && l.tag !== hotTag) || (hotItem && hotItem !== l)}
@@ -72,16 +72,16 @@
 </div>
 
 <style>
-  .cc { font-family: Quicksand, sans-serif; color: #3D2A22; }
+  .cc { font-family: Quicksand, Vazirmatn, sans-serif; color: #3D2A22; }
   .legend { display: flex; flex-wrap: wrap; gap: .35rem .5rem; justify-content: center; }
-  .leg { display: inline-flex; align-items: center; gap: .35rem; padding: .25rem .6rem .25rem .3rem; border-radius: 999px; border: 1.5px solid color-mix(in srgb, var(--tc) 35%, transparent); background: color-mix(in srgb, var(--tc) 12%, transparent); font: 700 .78rem Quicksand, sans-serif; color: var(--tc); cursor: default; transition: opacity .2s; }
+  .leg { display: inline-flex; align-items: center; gap: .35rem; padding: .25rem .6rem .25rem .3rem; border-radius: 999px; border: 1.5px solid color-mix(in srgb, var(--tc) 35%, transparent); background: color-mix(in srgb, var(--tc) 12%, transparent); font: 700 .78rem Quicksand, Vazirmatn, sans-serif; color: var(--tc); cursor: default; transition: opacity .2s; }
   .leg img { width: 1.1rem; height: 1.1rem; border-radius: 4px; background: var(--tc); }
   .leg.dim { opacity: .35; }
   .hint { margin: .4rem 0 1.1rem; text-align: center; font-size: .78rem; color: #7A8B92; }
 
   .eras { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 1rem; align-items: start; }
   .era { background: var(--et); border: 1px solid color-mix(in srgb, var(--ec) 25%, transparent); border-top: 5px solid var(--ec); border-radius: 12px; padding: .9rem 1rem 1rem; }
-  .era h4 { margin: 0; font-family: 'Playfair Display', Georgia, serif; font-size: 1.15rem; color: var(--ec); }
+  .era h4 { margin: 0; font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 1.15rem; color: var(--ec); }
   .count { margin: .1rem 0 .7rem; font-size: .8rem; font-weight: 700; color: #7A8B92; }
   .grid { display: flex; flex-wrap: wrap; gap: 5px; }
   .sq { width: 30px; height: 30px; padding: 4px; border: none; border-radius: 6px; background: var(--tc); cursor: pointer; transition: opacity .2s, transform .15s; }

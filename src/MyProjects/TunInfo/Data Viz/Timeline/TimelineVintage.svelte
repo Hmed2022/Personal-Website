@@ -1,4 +1,5 @@
 <script>
+  import { SELLER_CITY } from '../../sellerCity.js';
   // New interactive timeline (the original Timeline.svelte is kept untouched).
   // Lanes per denomination, notes as bars from issue to withdrawal, era bands behind,
   // a year slider ("what was in your wallet?") with play, the hover tooltip from the
@@ -360,7 +361,7 @@
       <div in:fade={{ duration: 350 }}>
         {#if stage === 'binder'}
           <h2>{$t('bdTitle')}</h2>
-          <p class="lede">{@html $t('bdLede', { n: notes.length })}</p>
+          <p class="lede">{@html $t('bdLede', { n: notes.length, city: SELLER_CITY })}</p>
         {:else if stage === 'sorted'}
           <h2>{$t('srTitle')}</h2>
           <p class="lede">{@html $t('srLede')}</p>
@@ -555,7 +556,7 @@
 </section>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
 
   /* ---------- aged banknote paper ---------- */
   .vintage {
@@ -566,7 +567,7 @@
     margin: 1.5rem auto;
     padding: 3.2rem 2.2rem 2.6rem;
     color: #4A2E25;
-    font-family: Quicksand, sans-serif;
+    font-family: Quicksand, Vazirmatn, sans-serif;
     background-color: #F3E7CC;
     border: 2px solid #8C4D3F;
     outline: 1px solid rgba(140, 77, 63, .5);
@@ -623,7 +624,7 @@
   }
   .story.on { opacity: 1; visibility: visible; transition: opacity .5s ease .1s, visibility 0s; }
   .story-years { margin: 0; font-size: .72rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--ec); }
-  .story h3 { margin: .1rem 0 .5rem; font-family: 'Playfair Display', Georgia, serif; font-size: 1.45rem; font-weight: 800; color: #3D2A22; }
+  .story h3 { margin: .1rem 0 .5rem; font-family: 'Acme', Quicksand, sans-serif; font-size: 1.45rem; font-weight: 400; color: #3D2A22; }
   .story-text p:last-child { margin: 0; font-size: .95rem; line-height: 1.6; }
   /* your notebook slip inside a story (same look as the slips above Dali's replies) */
   .story .jot {
@@ -634,10 +635,10 @@
   }
   .story .jot::before { content: ''; position: absolute; top: 0; bottom: 0; inset-inline-start: 1.3rem; border-inline-start: 1px solid rgba(181, 82, 59, .35); }
   .story .tape { position: absolute; top: -.55rem; left: 50%; width: 4.5rem; height: 1.1rem; transform: translateX(-50%) rotate(2deg); background: rgba(233, 214, 170, .75); }
-  .story .jot-k { margin: 0; padding-inline-start: .9rem; font: 700 .64rem Quicksand, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #B5523B; }
+  .story .jot-k { margin: 0; padding-inline-start: .9rem; font: 700 .64rem Quicksand, Vazirmatn, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #B5523B; }
   .story .jot-t { margin: 0; padding-inline-start: .9rem; font-family: Caveat, 'Segoe Print', cursive; font-weight: 500; font-size: 1.7rem; line-height: 1.75rem; color: #1E3F5C; }
   .story .jot.ar { transform: rotate(1deg); }
-  .story .jot.ar .jot-t { font-family: 'Aref Ruqaa', Tajawal, serif; font-size: 1.4rem; }
+  .story .jot.ar .jot-t { font-family: 'Aref Ruqaa', Vazirmatn, serif; font-size: 1.4rem; }
   .story-who { display: flex; align-items: center; gap: .4rem; margin: .2rem 0 .3rem; font-size: .9rem; font-weight: 800; color: var(--ec); }
   .story-who img { width: 2.4rem; height: 2.5rem; object-fit: contain; object-position: 50% 0; }
   .story :global(b) { font-weight: 700; color: #3D2A22; }
@@ -645,7 +646,7 @@
   .story :global(a) { color: var(--ec); }
   .story-facts { border-inline-start: 1px dashed rgba(140, 77, 63, .35); padding-inline-start: 1.2rem; }
   .total { margin: 0 0 .5rem; font-weight: 700; font-size: .9rem; }
-  .total span { font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 800; color: var(--ec); margin-inline-end: .2rem; vertical-align: -.15em; }
+  .total span { font-family: 'Acme', Quicksand, sans-serif; font-size: 2rem; font-weight: 400; color: var(--ec); margin-inline-end: .2rem; vertical-align: -.15em; }
   .counts { list-style: none; margin: 0; padding: 0; display: grid; gap: .25rem; }
   .counts li { display: grid; grid-template-columns: .65rem 3rem 1fr 1.2rem; align-items: center; gap: .45rem; font-size: .82rem; }
   .counts .den { font-weight: 700; }
@@ -670,16 +671,16 @@
   .controls.no-eras { justify-content: center; }
   .split { position: relative; z-index: 1; max-width: 40rem; margin: 0 auto 1.2rem; padding: 1rem 1.3rem; text-align: center; border: 1.5px dashed rgba(140, 77, 63, .45); border-radius: 12px; background: rgba(255, 251, 241, .6); }
   .split p { margin: 0 0 .8rem; font-size: .95rem; line-height: 1.5; }
-  .split-btn { padding: .6rem 1.4rem; border: 0; border-radius: 999px; background: #8C4D3F; color: #FFFBF1; cursor: pointer; font: 800 .92rem Quicksand, sans-serif; box-shadow: 0 3px 10px rgba(74, 46, 37, .3); transition: transform .2s, background .2s; }
+  .split-btn { padding: .6rem 1.4rem; border: 0; border-radius: 999px; background: #8C4D3F; color: #FFFBF1; cursor: pointer; font: 800 .92rem Quicksand, Vazirmatn, sans-serif; box-shadow: 0 3px 10px rgba(74, 46, 37, .3); transition: transform .2s, background .2s; }
   .split-btn:hover { background: #6E3A2F; transform: translateY(-2px); }
   .views { position: relative; z-index: 1; display: flex; width: fit-content; gap: .25rem; margin: 0 auto 1.2rem; padding: .25rem; border-radius: 999px; background: rgba(140, 77, 63, .1); }
-  .views button { font: 700 .88rem Quicksand, sans-serif; color: #6B4A3E; background: none; border: none; border-radius: 999px; padding: .45rem 1.1rem; cursor: pointer; transition: background .2s, color .2s; }
+  .views button { font: 700 .88rem Quicksand, Vazirmatn, sans-serif; color: #6B4A3E; background: none; border: none; border-radius: 999px; padding: .45rem 1.1rem; cursor: pointer; transition: background .2s, color .2s; }
   .views button.on { background: #8C4D3F; color: #FFFBF1; box-shadow: 0 1px 4px rgba(74, 46, 37, .25); }
   .life { position: relative; z-index: 1; }
   .life-take { margin: 1.2rem 0 0; padding: .8rem 1rem; border-inline-start: 4px solid #8C4D3F; border-radius: 6px; background: rgba(255, 251, 241, .7); font-size: .92rem; line-height: 1.55; }
   .time-view { position: relative; z-index: 1; }
   .kicker { margin: 0; font-size: .75rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #8C4D3F; }
-  h2 { margin: .2rem 0 .4rem; font-family: 'Playfair Display', Georgia, serif; font-weight: 800; font-size: 2.1rem; color: #4A2E25; }
+  h2 { margin: .2rem 0 .4rem; font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 2.1rem; color: #4A2E25; }
   .lede { margin: 0; font-size: .95rem; line-height: 1.5; }
   .lede + .lede { margin-top: .6rem; }
   .lede.how { font-size: .85rem; opacity: .75; }
@@ -700,7 +701,7 @@
     background: #8C4D3F; color: #FDF6F5; font-size: .8rem;
   }
   .year-badge {
-    font-family: 'Playfair Display', Georgia, serif; font-weight: 800; font-size: 1.4rem; color: #8C4D3F; min-width: 3.2rem; text-align: right;
+    font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 1.4rem; color: #8C4D3F; min-width: 3.2rem; text-align: right;
   }
 
   /* ---------- chart ---------- */
@@ -760,7 +761,7 @@
   .flyer.gone { opacity: 0; transition-property: left, top, width, height, transform, box-shadow, opacity; }
   .unsort { position: relative; z-index: 2; text-align: center; margin: 0 0 1rem; transition: opacity .6s ease; }
   .unsort button { padding: .5rem 1.2rem; border-radius: 999px; border: 1.5px solid #8C4D3F; background: #FFFBF1; color: #8C4D3F; cursor: pointer;
-    font: 800 .88rem Quicksand, sans-serif; transition: background .2s, color .2s, transform .2s; }
+    font: 800 .88rem Quicksand, Vazirmatn, sans-serif; transition: background .2s, color .2s, transform .2s; }
   .unsort button:hover { background: #8C4D3F; color: #FFFBF1; transform: translateY(-1px); }
   .unsort button:focus-visible { outline: 3px solid #1E5B8C; outline-offset: 2px; }
   .handling {
@@ -792,7 +793,7 @@
   /* ---------- wallet ---------- */
   .wallet { margin-top: 2.6rem; border-top: 2px dashed rgba(140, 77, 63, .4); padding-top: 1.2rem; }
   .wallet-head { text-align: center; margin-bottom: 1rem; }
-  .wallet-head h3 { margin: 0; font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 800; }
+  .wallet-head h3 { margin: 0; font-family: 'Acme', Quicksand, sans-serif; font-size: 1.5rem; font-weight: 400; }
   .wallet-head p { margin: .2rem 0 0; font-size: .9rem; }
   .year-ink { color: #8C4D3F; }
   .wallet-notes { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; min-height: 7rem; }
@@ -822,7 +823,7 @@
   .tip-status.live { background: #2E7D5B; }
   .tip-body { padding: .6rem .75rem .65rem; display: grid; gap: .45rem; }
   .tip-name { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
-  .tip-name b { font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem; color: #3D2A22; }
+  .tip-name b { font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 1.05rem; color: #3D2A22; }
   .tip-name span { font-size: .9rem; color: #8C4D3F; }
   .tip-era { justify-self: start; margin-top: -.25rem; font-size: .66rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--ec); }
   .tip-num { display: block; margin-top: .2rem; font-size: .72rem; font-weight: 700; color: #8C4D3F; }

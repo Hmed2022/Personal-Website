@@ -63,7 +63,7 @@
   .ar .doodles { transform: rotate(-4deg) scaleX(-1); }
   @media (max-width: 640px) { .doodles { width: 5.5rem; top: .4rem; } }
   .tape { position: absolute; top: -.75rem; left: 50%; width: 7rem; height: 1.6rem; transform: translateX(-50%) rotate(2deg); background: rgba(233, 214, 170, .8); box-shadow: 0 1px 2px rgba(74, 46, 37, .15); }
-  .nb-k { margin: 0; font: 700 .7rem Quicksand, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #B5523B; }
+  .nb-k { margin: 0; font: 700 .7rem Quicksand, Vazirmatn, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #B5523B; }
   .nb-title { margin: .1rem 0 0; font: 700 2rem/1.9rem Caveat, 'Segoe Print', cursive; color: #1E3F5C; }
   .nb-hint { margin: 0 0 .5rem; font: 500 1.15rem/1.9rem Caveat, 'Segoe Print', cursive; color: #8C6A5C; }
   ol { list-style: none; margin: 0; padding: 0; }
@@ -73,14 +73,16 @@
   }
   button:hover { background: rgba(227, 167, 42, .14); }
   button:focus-visible { outline: 3px solid #1E5B8C; outline-offset: 1px; }
-  .box { flex: 0 0 auto; width: 1.15rem; height: 1.15rem; margin-top: .4rem; border: 2px solid #1E3F5C; border-radius: 3px; display: grid; place-items: center; font: 800 1.1rem/1 Quicksand, sans-serif; color: #C62F2F; }
+  .box { flex: 0 0 auto; width: 1.15rem; height: 1.15rem; margin-top: .4rem; border: 2px solid #1E3F5C; border-radius: 3px; display: grid; place-items: center; font: 800 1.1rem/1 Quicksand, Vazirmatn, sans-serif; color: #C62F2F; }
   .read .q { color: #6B7F8E; }
+  /* finished questions (read, not the one open now) are crossed out in pen */
+  .read:not(.on) .q { text-decoration: line-through; text-decoration-color: rgba(30, 63, 92, .7); text-decoration-thickness: 2px; text-decoration-skip-ink: none; }
   .q :global(b) { background: linear-gradient(transparent 55%, rgba(227, 167, 42, .45) 55%, rgba(227, 167, 42, .45) 92%, transparent 92%); font-weight: 700; padding: 0 .08em; }
   .subs { list-style: none; margin: 0 0 .2rem; padding: 0; padding-inline-start: 2rem; }
   button.sub { font-size: 1.2rem; color: #3D5A73; }
-  .sub .arrow { flex: 0 0 auto; color: #C62F2F; font: 700 1.1rem/1.9rem Quicksand, sans-serif; }
+  .sub .arrow { flex: 0 0 auto; color: #C62F2F; font: 700 1.1rem/1.9rem Quicksand, Vazirmatn, sans-serif; }
   .on .q { color: #C62F2F; background: linear-gradient(transparent 60%, rgba(227, 167, 42, .4) 60%, rgba(227, 167, 42, .4) 92%, transparent 92%); }
-  .ar .nb-title, .ar .nb-hint, .ar button { font-family: 'Aref Ruqaa', Tajawal, serif; }
+  .ar .nb-title, .ar .nb-hint, .ar button { font-family: 'Aref Ruqaa', Vazirmatn, serif; }
   .ar .nb-title { font-size: 1.6rem; }
   .ar button { font-size: 1.15rem; }
   .nb.ar { transform: rotate(.5deg); }

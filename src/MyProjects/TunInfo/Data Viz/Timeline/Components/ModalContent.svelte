@@ -86,7 +86,7 @@ function toggleStatus() {
 	} */
 	p, h1{
 		text-align: center;
-		font-family:Quicksand;
+		font-family:Quicksand, Vazirmatn;
 			padding:0;
 			margin:0
 	}

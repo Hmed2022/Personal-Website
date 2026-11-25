@@ -296,32 +296,32 @@
 
   <!-- phones: the text for the chosen tab, under the chart (no scrolling steps) -->
   <div class="mobile-text">
-    {#key view}<div in:fade={{ duration: 250 }}><PortraitCard k={view} bourguibaNotes={notes.filter((d) => d.name === 'Habib Bourguiba').length} women={women.length} {total} women2005={women2005.length} since2005={since2005.length} /></div>{/key}
+    {#key view}<div in:fade={{ duration: 250 }}><PortraitCard k={view} bourguibaNotes={notes.filter((d) => d.name === 'Habib Bourguiba').length + 1} women={women.length} {total} women2005={women2005.length} since2005={since2005.length} /></div>{/key}
   </div>
 
   <!-- ===== scrolling text ===== -->
   <div class="steps">
     <Scroll bind:value={step}>
-      <div class="step" class:active={view === 0}><PortraitCard k={0} bourguibaNotes={notes.filter((d) => d.name === 'Habib Bourguiba').length} women={women.length} {total} women2005={women2005.length} since2005={since2005.length} /></div>
-      <div class="step" class:active={view === 1}><PortraitCard k={1} bourguibaNotes={notes.filter((d) => d.name === 'Habib Bourguiba').length} women={women.length} {total} women2005={women2005.length} since2005={since2005.length} /></div>
-      <div class="step" class:active={view === 2}><PortraitCard k={2} bourguibaNotes={notes.filter((d) => d.name === 'Habib Bourguiba').length} women={women.length} {total} women2005={women2005.length} since2005={since2005.length} /></div>
+      <div class="step" class:active={view === 0}><PortraitCard k={0} bourguibaNotes={notes.filter((d) => d.name === 'Habib Bourguiba').length + 1} women={women.length} {total} women2005={women2005.length} since2005={since2005.length} /></div>
+      <div class="step" class:active={view === 1}><PortraitCard k={1} bourguibaNotes={notes.filter((d) => d.name === 'Habib Bourguiba').length + 1} women={women.length} {total} women2005={women2005.length} since2005={since2005.length} /></div>
+      <div class="step" class:active={view === 2}><PortraitCard k={2} bourguibaNotes={notes.filter((d) => d.name === 'Habib Bourguiba').length + 1} women={women.length} {total} women2005={women2005.length} since2005={since2005.length} /></div>
     </Scroll>
   </div>
 </section>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
 
   .ps {
     display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 2rem;
     width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 1rem; box-sizing: border-box;
-    font-family: Quicksand, sans-serif; color: #3D2A22;
+    font-family: Quicksand, Vazirmatn, sans-serif; color: #3D2A22;
   }
   .sticky { position: sticky; top: 4vh; height: 90vh; display: flex; flex-direction: column; align-self: start; }
 
   .tabs { display: flex; flex-wrap: wrap; gap: .4rem; justify-content: center; }
   .tabs button {
-    font: 700 .85rem Quicksand, sans-serif; color: #4D6473; cursor: pointer;
+    font: 700 .85rem Quicksand, Vazirmatn, sans-serif; color: #4D6473; cursor: pointer;
     background: rgba(255, 255, 255, .45); border: 1.5px solid #C8D9DC; border-radius: 999px; padding: .35rem .9rem;
   }
   .tabs button.on { background: #1E5B8C; border-color: #1E5B8C; color: #FFFFFF; }
@@ -346,7 +346,7 @@
   .break-zig { fill: none; stroke: #8FA5AA; stroke-width: 1.5; }
   .scale-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .4rem .8rem; margin: -.2rem 0 .3rem; }
   .scale-toggle { display: inline-flex; gap: .2rem; padding: .2rem; border-radius: 999px; background: #EFE6DA; }
-  .scale-toggle button { font: 700 .78rem Quicksand, sans-serif; color: #4D6473; background: none; border: none; border-radius: 999px; padding: .28rem .75rem; cursor: pointer; }
+  .scale-toggle button { font: 700 .78rem Quicksand, Vazirmatn, sans-serif; color: #4D6473; background: none; border: none; border-radius: 999px; padding: .28rem .75rem; cursor: pointer; }
   .scale-toggle button.on { background: #FFFFFF; color: #1E3F5C; box-shadow: 0 1px 4px rgba(61, 42, 34, .18); }
   .scale-note { font-size: .74rem; color: #7A8B92; max-width: 30rem; }
   .alive-label { font-size: 12px; font-weight: 800; fill: #025E73; text-anchor: end; }

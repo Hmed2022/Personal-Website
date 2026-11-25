@@ -78,7 +78,7 @@
 	.tick {
 		font-size: 1em;
 		font-weight: 500;
-		font-family: Quicksand;
+		font-family: Quicksand, Vazirmatn;
 	}
 
 	line,

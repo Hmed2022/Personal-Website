@@ -571,7 +571,7 @@
 	}
 
 	p, h3,h4{
-		font-family: Quicksand;
+		font-family: Quicksand, Vazirmatn;
 	}
 
 	h3 {
@@ -598,7 +598,7 @@
   }
 
 .items{
-		font-family: Quicksand;
+		font-family: Quicksand, Vazirmatn;
 		font-size:1em;
 		margin:0
 	}

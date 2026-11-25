@@ -93,10 +93,10 @@
 <NoteModal bind:open={showModal} bind:note={selected} notes={modalNotes} colors={COLORS} eras={ERAS} lastYear={NOW} />
 
 <style>
-  .lf { font-family: Quicksand, sans-serif; color: #3D2A22; }
+  .lf { font-family: Quicksand, Vazirmatn, sans-serif; color: #3D2A22; }
   .top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .6rem; margin-bottom: .8rem; }
   .sort { display: inline-flex; gap: .2rem; padding: .2rem; border-radius: 999px; background: #EFE6DA; }
-  .sort button { font: 700 .8rem Quicksand, sans-serif; color: #4D6473; background: none; border: none; border-radius: 999px; padding: .3rem .8rem; cursor: pointer; }
+  .sort button { font: 700 .8rem Quicksand, Vazirmatn, sans-serif; color: #4D6473; background: none; border: none; border-radius: 999px; padding: .3rem .8rem; cursor: pointer; }
   .sort button.on { background: #FFFFFF; color: #1E3F5C; box-shadow: 0 1px 4px rgba(61, 42, 34, .18); }
   .legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .76rem; font-weight: 600; color: #4D6473; }
   .legend i { display: inline-block; width: .8rem; height: .8rem; border-radius: 3px; margin-inline-end: .3rem; vertical-align: -.1rem; }

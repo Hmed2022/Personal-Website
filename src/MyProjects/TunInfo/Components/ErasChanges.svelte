@@ -26,7 +26,7 @@
   // back photos come from the timeline data (PathB, or a local file in RealNotes/); the second 10 DT of 1994 is P87A
   // your own cut-out of the 20 dinars symbol (same frame as the photo, transparent around the symbol)
   import prop20 from '../Data Viz/Timeline/RealNotes/propaganda-20-back.png';
-  import prop5 from '../Data Viz/Timeline/RealNotes/propaganda-5-back.png';
+  import prop5 from '../Data Viz/Timeline/RealNotes/propaganda-5-back-v2.png';   // your cleaner cut-out, fitted to the photo's frame
   import prop10blue from '../Data Viz/Timeline/RealNotes/propaganda-10-blue-back.png';
   import prop10brown from '../Data Viz/Timeline/RealNotes/propaganda-10-brown-back.png';
   const backOf = (v, y, b = false) => realPhoto({ Value: v, Issued: y, PathF: b ? 'P087A' : '' }, 'back');
@@ -93,11 +93,11 @@
 
 <style>
   .layer.photo { width: 100%; height: 100%; object-fit: contain; z-index: 3; background: #F3ECDF; }
-  .ec { font-family: Quicksand, sans-serif; color: #3D2A22; text-align: start; }
+  .ec { font-family: Quicksand, Vazirmatn, sans-serif; color: #3D2A22; text-align: start; }
 
   /* ---- sliders ---- */
   .view { display: inline-flex; gap: .25rem; padding: .25rem; margin-bottom: .9rem; border-radius: 999px; background: #EFE6DA; }
-  .view button { font: 700 .85rem Quicksand, sans-serif; color: #4D6473; background: none; border: none; border-radius: 999px; padding: .35rem .9rem; cursor: pointer; }
+  .view button { font: 700 .85rem Quicksand, Vazirmatn, sans-serif; color: #4D6473; background: none; border: none; border-radius: 999px; padding: .35rem .9rem; cursor: pointer; }
   .view button.on { background: #FFFFFF; color: #1E3F5C; box-shadow: 0 1px 4px rgba(61, 42, 34, .18); }
   .credit { margin-inline-start: .4rem; font-size: .72rem; color: #A39582; }
   .pairs { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
@@ -108,7 +108,7 @@
   .handle { position: absolute; top: 0; bottom: 0; left: var(--split); width: 3px; margin-left: -1.5px; background: #FFFFFF; box-shadow: 0 0 6px rgba(0, 0, 0, .35); pointer-events: none; }
   .handle i {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 2.4rem; height: 2.4rem; border-radius: 50%;
-    display: grid; place-items: center; background: #FFFFFF; color: #1E5B8C; font: 800 .9rem/1 Quicksand, sans-serif; font-style: normal; box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+    display: grid; place-items: center; background: #FFFFFF; color: #1E5B8C; font: 800 .9rem/1 Quicksand, Vazirmatn, sans-serif; font-style: normal; box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
   }
   .tag { position: absolute; top: .5rem; padding: .1rem .5rem; border-radius: 999px; background: rgba(30, 42, 48, .72); color: #FFFFFF; font-size: .75rem; font-weight: 800; pointer-events: none; }
   .tag.l { left: .5rem; } .tag.r { right: .5rem; }
@@ -120,8 +120,8 @@
 
   /* ---- propaganda ---- */
   .prop-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .6rem; margin: 2.4rem 0 .9rem; }
-  .prop-head h4 { margin: 0; font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; color: #1E3F5C; }
-  .switch { display: inline-flex; align-items: center; gap: .5rem; font: 700 .85rem Quicksand, sans-serif; color: #4D6473; background: rgba(255, 255, 255, .45); border: 1.5px solid #C8D9DC; border-radius: 999px; padding: .3rem .8rem .3rem .35rem; cursor: pointer; }
+  .prop-head h4 { margin: 0; font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 1.3rem; color: #1E3F5C; }
+  .switch { display: inline-flex; align-items: center; gap: .5rem; font: 700 .85rem Quicksand, Vazirmatn, sans-serif; color: #4D6473; background: rgba(255, 255, 255, .45); border: 1.5px solid #C8D9DC; border-radius: 999px; padding: .3rem .8rem .3rem .35rem; cursor: pointer; }
   .knob { position: relative; width: 2.1rem; height: 1.2rem; border-radius: 999px; background: #C8D9DC; transition: background .2s; }
   .knob::after { content: ''; position: absolute; top: .15rem; left: .15rem; width: .9rem; height: .9rem; border-radius: 50%; background: #FFFFFF; transition: transform .2s; }
   .switch.on { border-color: #A93925; color: #A93925; }

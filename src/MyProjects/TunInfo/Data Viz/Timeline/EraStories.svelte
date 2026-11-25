@@ -6,7 +6,11 @@
   import { realNotes, realPhoto } from './noteImage.js';
   import daliImg from '../../Components/dali.svg';
   import eraYoung from './Assets/era-young.webp';
+  import real60 from '../../Components/eras/real-5-1960.webp';
   import eraOld from './Assets/era-old.webp';
+  // Real notes mode: the engraved portraits from the notes, gathered into one group each
+  import eraYoungReal from './Assets/era-young-real.webp';
+  import eraOldReal from './Assets/era-old-real.webp';
   import eraTawhida from './Assets/era-tawhida.webp';
   import tawhidaReal from '../../Components/portraits/tawhida-r.webp';
   const VALUES = [0.5, 1, 5, 10, 20, 30, 50];
@@ -14,18 +18,21 @@
   const label = (v) => (v === 0.5 ? '½' : String(v));
   const ERAS = [{ ink: '#025E73' }, { ink: '#7C4A8C' }, { ink: '#BF5630' }];
   const bourguibaNotes = data.filter((n) => /Bourguiba/.test(n.ObserveInEnglish)).sort((a, b) => a.Issued - b.Issued || a.Value - b.Value);
+  // the young-Bourguiba pile includes the 1960 reprint of the 5 dinars (it is in the binder too)
   const realYoung = bourguibaNotes.filter((n) => n.Issued <= 1962).map((n) => realPhoto(n, 'front'));
+  realYoung.splice(3, 0, real60);
   const realOld = bourguibaNotes.filter((n) => n.Issued > 1962).map((n) => realPhoto(n, 'front'));
   // The era stories and counts from the original timeline (same text, same numbers).
   // counts follow VALUES: ½, 1, 5, 10, 20, 30, 50
   const STORIES = [
     {
-      title: 'st0Title', years: '1956 – 1987', total: 23, counts: [4, 5, 7, 5, 2, 0, 0],
+      // 24 = the 23 Bourguiba notes in the data + the 1960 reprint of the 5 dinars (24 + 7 + 8 = the binder's 39)
+      title: 'st0Title', years: '1956 – 1987', total: 24, counts: [4, 5, 8, 5, 2, 0, 0],
       text: 'st0Text',
       ask: 'insTimelineNote',   // your notebook slip; the story is Dali's answer
       figures: [
-        { img: eraYoung, alt: 'Young Bourguiba portraits', caption: 'st0Fig1', stack: 'young' },
-        { img: eraOld, alt: 'Old Bourguiba portraits', caption: 'st0Fig2', stack: 'old' },
+        { img: eraYoung, alt: 'Young Bourguiba portraits', caption: 'st0Fig1', stack: 'young', realImg: eraYoungReal },
+        { img: eraOld, alt: 'Old Bourguiba portraits', caption: 'st0Fig2', stack: 'old', realImg: eraOldReal },
       ],
     },
     {
@@ -45,7 +52,7 @@
       ],
     },
   ];
-  const MAX_COUNT = 7;
+  const MAX_COUNT = 8;
 </script>
 
   <div class="stories">
@@ -81,7 +88,7 @@
             <div class="figures">
               {#each st.figures as f}
                 <figure class:wide={f.wide}>
-                  {#if $realNotes && f.stack}
+                  {#if $realNotes && f.stack && !f.realImg}
                     {@const list = f.stack === 'young' ? realYoung : realOld}
                     <!-- the real notes, fanned out like a small pile -->
                     <span class="pile" class:big={list.length > 6} role="img" aria-label={f.alt}>
@@ -101,7 +108,7 @@
   </div>
 
 <style>
-  .stories { display: grid; gap: 1.6rem; max-width: 62rem; margin: 1.5rem auto; padding: 0 1rem; box-sizing: border-box; font-family: Quicksand, sans-serif; color: #4A2E25; text-align: start; }
+  .stories { display: grid; gap: 1.6rem; max-width: 62rem; margin: 1.5rem auto; padding: 0 1rem; box-sizing: border-box; font-family: Quicksand, Vazirmatn, sans-serif; color: #4A2E25; text-align: start; }
   .story {
     display: grid; grid-template-columns: 1.55fr 1fr; gap: 1.4rem;
     padding: 1.1rem 1.3rem; border-radius: 8px;
@@ -109,7 +116,7 @@
     box-shadow: 0 2px 8px rgba(74, 46, 37, .1);
   }
   .story-years { margin: 0; font-size: .72rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--ec); }
-  .story h3 { margin: .1rem 0 .5rem; font-family: 'Playfair Display', Georgia, serif; font-size: 1.45rem; font-weight: 800; color: #3D2A22; }
+  .story h3 { margin: .1rem 0 .5rem; font-family: 'Acme', Quicksand, sans-serif; font-size: 1.45rem; font-weight: 400; color: #3D2A22; }
   .story-text p:last-child { margin: 0; font-size: .95rem; line-height: 1.6; }
   /* your notebook slip inside a story (same look as the slips above Dali's replies) */
   .story .jot {
@@ -120,11 +127,11 @@
   }
   .story .jot::before { content: ''; position: absolute; top: 0; bottom: 0; inset-inline-start: 1.3rem; border-inline-start: 1px solid rgba(181, 82, 59, .35); }
   .story .tape { position: absolute; top: -.55rem; left: 50%; width: 4.5rem; height: 1.1rem; transform: translateX(-50%) rotate(2deg); background: rgba(233, 214, 170, .75); }
-  .story .jot-k { margin: 0; padding-inline-start: .9rem; font: 700 .64rem Quicksand, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #B5523B; }
+  .story .jot-k { margin: 0; padding-inline-start: .9rem; font: 700 .64rem Quicksand, Vazirmatn, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #B5523B; }
   .story .jot p.jot-t { margin: 0; padding-inline-start: .9rem; font-family: Caveat, 'Segoe Print', cursive; font-weight: 500; font-size: 1.7rem; line-height: 1.75rem; color: #1E3F5C; }
   .story .jot.ar { transform: rotate(1deg); }
   .story .jot-t :global(b) { background: linear-gradient(transparent 55%, rgba(227, 167, 42, .45) 55%, rgba(227, 167, 42, .45) 92%, transparent 92%); font-weight: 700; padding: 0 .08em; color: #1E3F5C; }
-  .story .jot.ar p.jot-t { font-family: 'Aref Ruqaa', Tajawal, serif; font-size: 1.4rem; }
+  .story .jot.ar p.jot-t { font-family: 'Aref Ruqaa', Vazirmatn, serif; font-size: 1.4rem; }
   .story-who { display: flex; align-items: center; gap: .4rem; margin: .2rem 0 .3rem; font-size: .9rem; font-weight: 800; color: var(--ec); }
   .story-who img { width: 2.4rem; height: 2.5rem; object-fit: contain; object-position: 50% 0; }
   .story :global(b) { font-weight: 700; color: #3D2A22; }
@@ -132,7 +139,7 @@
   .story :global(a) { color: var(--ec); }
   .story-facts { border-inline-start: 1px dashed rgba(140, 77, 63, .35); padding-inline-start: 1.2rem; }
   .total { margin: 0 0 .5rem; font-weight: 700; font-size: .9rem; }
-  .total span { font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 800; color: var(--ec); margin-inline-end: .2rem; vertical-align: -.15em; }
+  .total span { font-family: 'Acme', Quicksand, sans-serif; font-size: 2rem; font-weight: 400; color: var(--ec); margin-inline-end: .2rem; vertical-align: -.15em; }
   .counts { list-style: none; margin: 0; padding: 0; display: grid; gap: .25rem; }
   .counts li { display: grid; grid-template-columns: .65rem 3rem 1fr 1.2rem; align-items: center; gap: .45rem; font-size: .82rem; }
   .counts .den { font-weight: 700; }

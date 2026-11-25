@@ -155,12 +155,12 @@
   dialog[open] { animation: pop .3s cubic-bezier(.34, 1.56, .64, 1); }
   @keyframes pop { from { transform: scale(.95); opacity: 0; } to { transform: none; opacity: 1; } }
 
-  .nm { font-family: Quicksand, sans-serif; border-top: 6px solid var(--c); }
+  .nm { font-family: Quicksand, Vazirmatn, sans-serif; border-top: 6px solid var(--c); }
   header { display: flex; align-items: center; gap: .8rem; padding: 1rem 1.2rem .6rem; flex-wrap: wrap; }
   .badge { padding: .25rem .7rem; border-radius: 999px; background: var(--c); color: #FFFFFF; font-weight: 800; font-size: 1.2rem; }
   .badge small { font-size: .7rem; }
   .who { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; flex: 1; min-width: 0; }
-  .who h3 { margin: 0; font-family: 'Playfair Display', Georgia, serif; font-size: 1.45rem; color: #1E3F5C; }
+  .who h3 { margin: 0; font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 1.45rem; color: #1E3F5C; }
   .ar { font-size: 1.05rem; color: #8C4D3F; }
   .era { font-size: .7rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--ec); }
   .close { width: 2.1rem; height: 2.1rem; border: none; border-radius: 50%; background: #F1E8DC; font-size: 1.3rem; line-height: 1; cursor: pointer; color: #3D2A22; }
@@ -176,7 +176,7 @@
   .face img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
   .nav { flex: 0 0 auto; width: 2.4rem; height: 2.4rem; border: none; border-radius: 50%; background: #FFFFFF; box-shadow: 0 2px 8px rgba(0, 0, 0, .15); font-size: 1.5rem; line-height: 1; cursor: pointer; color: #1E3F5C; }
   .sides { display: flex; align-items: center; gap: .4rem; padding: .7rem 1.2rem 0; }
-  .sides button { font: 700 .8rem Quicksand, sans-serif; color: #4D6473; background: #FFFFFF; border: 1.5px solid #D9CFC2; border-radius: 999px; padding: .25rem .75rem; cursor: pointer; }
+  .sides button { font: 700 .8rem Quicksand, Vazirmatn, sans-serif; color: #4D6473; background: #FFFFFF; border: 1.5px solid #D9CFC2; border-radius: 999px; padding: .25rem .75rem; cursor: pointer; }
   .sides button.on { background: var(--c); border-color: var(--c); color: #FFFFFF; }
   .sides .tip { font-size: .72rem; color: #9C8B7B; margin-left: .3rem; }
 
@@ -190,7 +190,7 @@
 
   /* worth */
   .worth { margin: 1rem 1.2rem 0; padding: .9rem 1rem; border-radius: 12px; border: 1px solid #E6DCCF; background: #FFFFFF; }
-  .worth h4, footer h4 { margin: 0 0 .6rem; font-family: 'Playfair Display', Georgia, serif; font-size: 1.02rem; color: #1E3F5C; }
+  .worth h4, footer h4 { margin: 0 0 .6rem; font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 1.02rem; color: #1E3F5C; }
   .bars { display: grid; gap: .45rem; }
   .bar-row { display: grid; grid-template-columns: 3.4rem 1fr 4.2rem; align-items: center; gap: .6rem; }
   .when { font-size: .8rem; font-weight: 700; color: #4D6473; }

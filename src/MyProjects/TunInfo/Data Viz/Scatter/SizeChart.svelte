@@ -127,9 +127,9 @@
 </div>
 
 <style>
-  .sz { font-family: Quicksand, sans-serif; color: #3D2A22; text-align: start; }
+  .sz { font-family: Quicksand, Vazirmatn, sans-serif; color: #3D2A22; text-align: start; }
   .modes { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
-  .modes button { font: 700 .85rem Quicksand, sans-serif; color: #4D6473; cursor: pointer; background: rgba(255, 255, 255, .45); border: 1.5px solid #C8D9DC; border-radius: 999px; padding: .35rem .9rem; }
+  .modes button { font: 700 .85rem Quicksand, Vazirmatn, sans-serif; color: #4D6473; cursor: pointer; background: rgba(255, 255, 255, .45); border: 1.5px solid #C8D9DC; border-radius: 999px; padding: .35rem .9rem; }
   .modes button.on { background: #1E5B8C; border-color: #1E5B8C; color: #FFFFFF; }
 
   .layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 1.5rem; align-items: start; }

@@ -15,7 +15,7 @@
   import GovernorateCard from './GovernorateCard.svelte';
   import { t, lang, dir, isAr, money, pick } from '../../i18n.js';
   import { lmAr, cityAr, CATEGORIES_AR, PROPOSED_AR } from './landmarksAr.js';
-  import { parseBill } from './landmarkMeta.js';
+  import { parseBill, uniqueCount } from './landmarkMeta.js';
   const billText = (bill, m) => { const b = parseBill(bill); return b.value ? `${m(b.value === '½' ? 0.5 : +b.value)} (${b.year})` : bill; };
 
   export let step = 0;
@@ -236,7 +236,7 @@
     return { destroy() { node.remove(); } };
   }
   $: summary = active && (active.count > 0
-    ? (active.count === 1 ? $t('lmOnNotes1') : $t('lmOnNotes', { n: active.count }))
+    ? (active.count === 1 ? $t('lmOnNotes1') : uniqueCount(active.items) < active.count ? $t(uniqueCount(active.items) === 1 ? 'lmOnNotesU1' : 'lmOnNotesU', { n: active.count, u: uniqueCount(active.items) }) : $t('lmOnNotes', { n: active.count }))
     : $t('lmNever'));
 </script>
 
@@ -304,7 +304,7 @@
     {#each govs as g (g.name)}
       <path d={g.d} fill={fillUrl(active === g ? 'hover' : fillKey(g, step))} class="gov" class:hot={active === g}
             on:pointermove={(e) => move(e, g)} on:pointerleave={() => (hovered = null)} on:click={() => openCard(g)}
-            on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && openCard(g)} tabindex="0" role="button" aria-label={`${$pick(g.name, g.ar)}: ${$t('lmLandmarks', { n: g.count })}`} />
+            on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && openCard(g)} tabindex="0" role="button" aria-label={`${$pick(g.name, g.ar)}: ${$t(g.count === 1 ? 'lmLandmark1' : 'lmLandmarks', { n: g.count })}`} />
     {/each}
     </g>
     <!-- Grand Tunis, zoomed (only while Dali talks about it) -->
@@ -431,7 +431,7 @@
   .gov.hot { stroke: #9D6D79; stroke-width: 2; stroke-linejoin: round; }
   .ink path { fill: none; stroke: #24394D; stroke-width: 2.8; stroke-linejoin: round; stroke-linecap: round; }
   .gov:focus-visible { stroke: #1E5B8C; stroke-width: 2.4; }
-  .labels { pointer-events: none; font-family: Quicksand, sans-serif; }
+  .labels { pointer-events: none; font-family: Quicksand, Vazirmatn, sans-serif; }
   /* slate-teal badges, the same blue-grey as the map borders and the section text */
   .badge { fill: #557C81; stroke: #FDF6F5; stroke-width: 1.5; filter: drop-shadow(0 1px 1.5px rgba(40, 60, 66, .3)); }
   .badge.big { fill: #2F4F5A; stroke-width: 2; }
@@ -460,7 +460,7 @@
     font: 700 1.3rem/1.3 Caveat, 'Segoe Print', cursive; color: #C62F2F; text-align: center; transform: rotate(-2deg);
     background: rgba(255, 253, 246, .85); border-radius: 6px; pointer-events: none; }
   .narr :global(b) { color: #C62F2F; background: linear-gradient(transparent 55%, rgba(227, 167, 42, .45) 55%, rgba(227, 167, 42, .45) 92%, transparent 92%); padding: 0 .1em; }
-  :global(.tn-ar) .narr { font-family: 'Aref Ruqaa', Tajawal, serif; font-size: 1.1rem; }
+  :global(.tn-ar) .narr { font-family: 'Aref Ruqaa', Vazirmatn, serif; font-size: 1.1rem; }
   @media (prefers-reduced-motion: reduce) { .ink path, .surround, .geo, .gov, .labels, .icons, .legend, .hint, .circles { transition: none !important; } }
   .gt-zoom { opacity: 0; transition: opacity .6s ease; pointer-events: none; }
   .gt-zoom.on { opacity: 1; }
@@ -479,19 +479,19 @@
   .sea { font: 600 22px Caveat, 'Segoe Print', cursive; fill: #3F6E7B; text-anchor: middle; }
   .land { font: 700 23px Caveat, 'Segoe Print', cursive; fill: #8A6A4C; text-anchor: middle; }
   .icons { pointer-events: none; }
-  .legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; justify-content: center; font: 700 .75rem Quicksand, sans-serif; color: #4D6473; margin-top: .3rem; }
+  .legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; justify-content: center; font: 700 .75rem Quicksand, Vazirmatn, sans-serif; color: #4D6473; margin-top: .3rem; }
   .legend i.inland { background: #9CC3E6 repeating-linear-gradient(-52deg, #3F7FB8 0 1.5px, transparent 1.5px 3.5px); }
   .legend i { display: inline-block; width: .9rem; height: .9rem; border: 1.5px solid #24394D; border-radius: 3px; margin-inline-end: .3rem; vertical-align: -.15rem;
     background: repeating-linear-gradient(-48deg, var(--h) 0 2px, transparent 2px 5px); }
   .legend i.blank { background: transparent; }
   .hint { position: relative; margin: .3rem 0 0; font: 500 1.15rem/1.25 Caveat, 'Segoe Print', cursive; color: #1E3F5C; text-align: center; transform: rotate(-1deg); }
-  :global(.tn-ar) .hint { font-family: 'Aref Ruqaa', Tajawal, serif; font-size: 1rem; }
+  :global(.tn-ar) .hint { font-family: 'Aref Ruqaa', Vazirmatn, serif; font-size: 1rem; }
 
   /* tooltip lives on <body>, so its styles are global */
   :global(.lm-tip) {
     position: fixed; z-index: 1000; width: 18rem; transform: translate(16px, -40%); pointer-events: none;
     background: #FFFBF4; border: 1px solid #C9B79C; border-radius: 10px; padding: .7rem .8rem;
-    box-shadow: 0 10px 28px rgba(61, 42, 34, .22); font-family: Quicksand, sans-serif; color: #3D2A22;
+    box-shadow: 0 10px 28px rgba(61, 42, 34, .22); font-family: Quicksand, Vazirmatn, sans-serif; color: #3D2A22;
   }
   :global(.lm-tip.flip) { transform: translate(calc(-100% - 16px), -40%); }
   :global(.lm-tip.below) { transform: translate(16px, 10px); }

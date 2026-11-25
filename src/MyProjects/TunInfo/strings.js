@@ -20,8 +20,8 @@ export default {
 
 	// ---------- page ----------
 	intro: {
-		en: "It started with a <b>few notes</b> left over from a <b>trip</b>, too pretty to change back. Then you <b>stopped travelling</b>, but you didn't stop collecting: you just moved it to <b>eBay</b>. Somewhere between a quarter-life crisis and a midlife one, other people buy a motorbike. You bought your first note on eBay: a 1965 half-dinar, from a seller in Ohio. Auction after auction, the set is finally complete: <b>every Tunisian banknote since independence</b>, safe in a <b>binder</b>.",
-		ar: 'بدأ الأمر <b>ببضع أوراق نقدية</b> بقيت من <b>رحلة</b>، أجمل من أن تُصرف من جديد. ثم <b>توقّفت عن السفر</b>، لكنك لم تتوقّف عن الجمع: نقلته فقط إلى <b>eBay</b>. في مكان ما بين أزمة ربع العمر وأزمة منتصفه، يشتري الناس درّاجة نارية. أما أنت فاشتريت أول ورقة لك على eBay: نصف دينار من سنة 1965، من بائع في أوهايو. مزادًا بعد مزاد، اكتملت المجموعة أخيرًا: <b>كل الأوراق النقدية التونسية منذ الاستقلال</b>، محفوظة في <b>ملفّ</b>.',
+		en: "It started with a <b>few notes</b> left over from a <b>trip</b>, too pretty to change back. Then you <b>stopped travelling</b>, but you didn't stop collecting: you just moved it to <b>eBay</b>. Somewhere between a quarter-life crisis and a midlife one, other people buy a motorbike. You bought your first note on eBay: a 1965 half-dinar, from a seller in {city}. Auction after auction, the set is finally complete: <b>every Tunisian banknote since independence</b>, safe in a <b>binder</b>.",
+		ar: 'بدأ الأمر <b>ببضع أوراق نقدية</b> بقيت من <b>رحلة</b>، أجمل من أن تُصرف من جديد. ثم <b>توقّفت عن السفر</b>، لكنك لم تتوقّف عن الجمع: نقلته فقط إلى <b>eBay</b>. في مكان ما بين أزمة ربع العمر وأزمة منتصفه، يشتري الناس درّاجة نارية. أما أنت فاشتريت أول ورقة لك على eBay: نصف دينار من سنة 1965، من بائع في {city}. مزادًا بعد مزاد، اكتملت المجموعة أخيرًا: <b>كل الأوراق النقدية التونسية منذ الاستقلال</b>، محفوظة في <b>ملفّ</b>.',
 	},
 	intro2: {
 		en: "Once everything was in the binder, you <b>started wondering</b> about the notes: “Who are these people? What are these landmarks? Is that the Colosseum? I think I know who Hannibal is, but who's that woman?” <b>You had no idea.</b> So you took the binder to <b>Dali, your Tunisian friend,</b> and started <b>asking</b>.",
@@ -29,7 +29,7 @@ export default {
 	},
 
 
-	byline: { en: 'By Ahmed Bendaly | December 2027', ar: 'بقلم أحمد بن دالي | ديسمبر 2027' },
+	byline: { en: 'By Ahmed Bendaly | December 2026', ar: 'بقلم أحمد بن دالي | ديسمبر 2026' },
 	hTimeline: { en: 'The Tunisian Banknote Timeline', ar: 'الخط الزمني للأوراق النقدية التونسية' },
 	pTimeline: {
 		en: 'Explore the history of Tunisian banknotes since 1958 through our interactive timeline. Hover over a note to preview it, click it for the full story, or move through the years to see what was in a Tunisian wallet.',
@@ -56,7 +56,7 @@ export default {
 	},
 	pEras1Note: { en: 'The president after Bourguiba did not put his <b>face on the notes</b>, was that on purpose?', ar: 'الرئيس الذي جاء بعد بورقيبة لم يضع <b>وجهه على الأوراق</b>، هل كان ذلك مقصودًا؟' },
 	pEras1: {
-		en: "<b>Totally on purpose.</b> He never put it there. He did something smarter: <mark class=\"purple\">purple</mark>, the colour of his party, the RCD, and <b>7 November 1987</b>, the day he took power, which the regime called “the Change”. Look at the backs, they are full of it.",
+		en: "<b>Totally on purpose.</b> He never put it there. He did something smarter: <mark class=\"purple\">purple</mark>, the colour of his party, the <a href=\"https://en.wikipedia.org/wiki/Democratic_Constitutional_Rally\" target=\"_blank\" rel=\"noopener\">RCD</a>, and <b>7 November 1987</b>, the day he took power, which the regime called “the Change”. Look at the backs, they are full of it.",
 		ar: '<b>مقصود تمامًا.</b> لم يضعه قط. فعل ما هو أذكى: <mark class="purple">البنفسجي</mark>، لون حزبه، التجمّع الدستوري الديمقراطي، و<b>السابع من نوفمبر 1987</b>، يوم استيلائه على الحكم، الذي سمّاه النظام «التغيير». انظر إلى ظهور الأوراق، إنها مليئة بهما.',
 	},
 
@@ -138,15 +138,15 @@ export default {
 
 	// ---------- title ----------
 	tpKicker: { en: 'Portraits & Landmarks', ar: 'وجوه ومعالم' },
-	tpHint: { en: 'Hover over a face to see it as it is engraved on the note', ar: 'مرّر المؤشر فوق وجه لتراه كما نُقش على الورقة' },
-	tpHintTouch: { en: 'Tap a face to see it as it is engraved on the note', ar: 'المس وجهًا لتراه كما نُقش على الورقة' },
+	tpHint: { en: 'Hover over a face to see it as it is engraved on the note, click it to read about them', ar: 'مرّر المؤشر فوق وجه لتراه كما نُقش على الورقة' },
+	tpHintTouch: { en: 'Tap a face to see it as it is engraved on the note, tap again to read about them', ar: 'المس وجهًا لتراه كما نُقش على الورقة' },
 
 	// ---------- timeline ----------
 	// binder (first look at the notes, before they are sorted)
 	bdTitle: { en: 'Your Tunisian banknote collection', ar: 'مجموعتك من الأوراق النقدية التونسية' },
 	bdLede: {
-		en: "Years of trips, eBay auctions and sellers in Ohio, and here it is: all <b>{n} banknotes</b> Tunisia has issued since independence, in no particular order. Wanna check them out? Open the binder and tap any note to look at it up close.",
-		ar: 'سنوات من الرحلات ومزادات eBay وبائعين في أوهايو، وها هي: كل <b>الأوراق النقدية الـ{n}</b> التي أصدرتها تونس منذ الاستقلال، بلا أي ترتيب. أتريد أن تتفقّدها؟ افتح الملفّ وانقر على أي ورقة لتراها عن قرب.',
+		en: "Years of trips, eBay auctions and sellers in {city}, and here it is: all <b>{n} banknotes</b> Tunisia has issued since independence, in no particular order. Wanna check them out? Open the binder and tap any note to look at it up close.",
+		ar: 'سنوات من الرحلات ومزادات eBay وبائعين في {city}، وها هي: كل <b>الأوراق النقدية الـ{n}</b> التي أصدرتها تونس منذ الاستقلال، بلا أي ترتيب. أتريد أن تتفقّدها؟ افتح الملفّ وانقر على أي ورقة لتراها عن قرب.',
 	},
 	bdCover: { en: 'Banknotes of Tunisia', ar: 'الأوراق النقدية التونسية' },
 	bdOpen: { en: 'Open the binder', ar: 'افتح الملف' },
@@ -213,19 +213,19 @@ export default {
 	// era stories (timeline)
 	st0Title: { en: 'Habib Bourguiba Era', ar: 'عهد الحبيب بورقيبة' },
 	st0Text: {
-		en: "<b>Depends who you ask.</b> To some, <b>Habib Bourguiba</b> was a dictator: one party, opponents jailed or exiled, and president for life from 1975. To others, he was the father of the nation: he led the fight for independence, won in 1956, gave women rights no other Arab country had (the Personal Status Code, the same year), and built schools and clinics across the country. He truly believed only he could lift Tunisia off the ground. Honestly? He was a bit of both. Either way, he is on all <b>23 notes</b> of his time, and nobody else is. Put them in order and you can watch him get older.",
+		en: "<b>Depends who you ask.</b> To some, <b>Habib Bourguiba</b> was a <b>dictator</b>: one party, opponents jailed or exiled, and president for life from 1975. To others, including my grandma, he was the <b>father of the nation</b>: he led the fight for independence, won in 1956, gave women rights no other Arab country had (the <a href=\"https://en.wikipedia.org/wiki/Code_of_Personal_Status_in_Tunisia\" target=\"_blank\" rel=\"noopener\">Personal Status Code</a>, the same year), and built schools and clinics across the country. He truly believed only he could lift Tunisia off the ground. Honestly? I feel like he was <b>a bit of both</b>. Either way, he is on all <b>24 notes</b> of his time, and nobody else is. Put them in order and you can watch him get older. And look closely: every other face on our money has its <b>name printed</b> next to it. <b>Not his.</b> Who would need to be told?",
 		ar: '<b>يتوقّف ذلك على من تسأل.</b> عند البعض، كان <b>الحبيب بورقيبة</b> دكتاتورًا: حزب واحد، ومعارضون في السجون أو المنفى، ورئاسة مدى الحياة منذ 1975. وعند آخرين، كان أبا الأمة: قاد معركة الاستقلال حتى نالته تونس سنة 1956، ومنح المرأة حقوقًا لم يمنحها أي بلد عربي آخر (مجلة الأحوال الشخصية، في السنة نفسها)، وبنى المدارس والمستوصفات في كل أنحاء البلاد. كان مؤمنًا حقًّا بأنه وحده قادر على النهوض بتونس. بصراحة؟ كان شيئًا من الاثنين. وفي كل الأحوال، هو على كل <b>الأوراق الثلاث والعشرين</b> في عهده، ولا أحد غيره. رتّبها وسترى صورته تكبر في السن.',
 	},
-	st0Fig1: { en: "<b>4</b> portraits of 'young' Bourguiba", ar: '<b>4</b> صور لبورقيبة «الشاب»' },
+	st0Fig1: { en: "<b>5</b> portraits of 'young' Bourguiba", ar: '<b>5</b> صور لبورقيبة «الشاب»' },
 	st0Fig2: { en: "<b>19</b> portraits of 'old' Bourguiba", ar: '<b>19</b> صورة لبورقيبة «المسنّ»' },
 	st1Title: { en: 'Zine El Abidine Ben Ali Era', ar: 'عهد زين العابدين بن علي' },
 	st1Ask: { en: 'What happened in 1987? Did Bourguiba die? His face is gone from the notes.', ar: 'ماذا حدث سنة 1987؟ هل مات بورقيبة؟ وجهه اختفى من الأوراق.' },
 	st1Text: {
-		en: "<b>No, he lived until 2000.</b> He had made himself president for life, until the <b>coup of 7 November 1987</b> put <b>Zine El Abidine Ben Ali</b> in his place. Ben Ali took Bourguiba's face off the notes and put historical figures on them instead, to look less like one-man rule. Not everyone was convinced: the notes turned <mark class=\"purple\">purple</mark>, the colour of his party, the RCD <a href=\"https://en.wikipedia.org/wiki/Democratic_Constitutional_Rally\" target=\"_blank\" rel=\"noopener\">(Democratic Constitutional Rally)</a>, and the backs celebrated 7 November. More on that later.",
+		en: "<b>No, he lived until 2000.</b> He had made himself president for life, until the <b>coup of 7 November 1987</b> put <b>Zine El Abidine Ben Ali</b> in his place. Ben Ali took Bourguiba's face off the notes and put historical figures on them instead, to look less like one-man rule. Not everyone was convinced: the notes turned <mark class=\"purple\">purple</mark>, the colour of his party, the RCD <a href=\"https://en.wikipedia.org/wiki/Democratic_Constitutional_Rally\" target=\"_blank\" rel=\"noopener\">(Democratic Constitutional Rally)</a>, and the backs celebrated 7 November. I'll show you the banknotes later.",
 		ar: '<b>لا، عاش حتى سنة 2000.</b> كان قد جعل نفسه رئيسًا مدى الحياة، إلى أن جاء <b>انقلاب السابع من نوفمبر 1987</b> <b>بزين العابدين بن علي</b> مكانه. أزال بن علي وجه بورقيبة من الأوراق ووضع مكانه شخصيات تاريخية، كي لا يبدو الحكم حكم رجل واحد. لكن لم يقتنع الجميع: فقد صارت الأوراق <mark class="purple">بنفسجية</mark>، بلون حزبه <a href="https://ar.wikipedia.org/wiki/التجمع_الدستوري_الديمقراطي" target="_blank" rel="noopener">(التجمّع الدستوري الديمقراطي)</a>، واحتفت ظهورها بالسابع من نوفمبر. سنعود إلى ذلك لاحقًا.',
 	},
 	st1Note: {
-		en: 'Inflation led to the discontinuation of the <b>0.5 TND and 1 TND</b> notes, while higher denominations like <b>30 TND and 50 TND</b> were introduced to meet economic demands.',
+		en: 'Inflation led to the discontinuation of the <b>0.5 TND and 1 TND</b> as notes (they became coins), while higher denominations like <b>30 TND and 50 TND</b> were introduced to meet economic demands.',
 		ar: 'أدّى التضخّم إلى سحب ورقتَي <b>نصف الدينار والدينار</b>، بينما أُدخلت فئات أعلى مثل <b>30 و50 دينارًا</b> لتلبية حاجات الاقتصاد.',
 	},
 	st2Title: { en: 'Post Revolution Era', ar: 'عهد ما بعد الثورة' },
@@ -239,7 +239,7 @@ export default {
 		ar: 'سُحبت ورقة <b>30 دينارًا</b> بسبب ضعف تداولها وقلّة إقبال الناس عليها.',
 	},
 	st2Fig: {
-		en: 'Look at the 2020 10 dinars: <b>Dr. Tawhida Ben Cheikh</b>. Only the second woman on a Tunisian note, after the Carthaginian queen Elissa (Dido) on the 2005 10 dinars, and the <b>first Arab woman</b> on a banknote. It came out during COVID-19, for Tunisian women and for the health workers.',
+		en: 'Look at the 2020 10 dinars: <b>Dr. Tawhida Ben Cheikh</b>. Only the second woman on a Tunisian note, after the Carthaginian queen Elissa (Dido) on the 2005 10 dinars, and the <b>first Arab woman</b> on a banknote. It came out during COVID-19, as a tribute to Tunisian women, and especially the health workers.',
 		ar: 'انظر إلى ورقة 10 دنانير لسنة 2020: <b>الدكتورة توحيدة بن الشيخ</b>. ثاني امرأة فقط على ورقة تونسية، بعد الملكة القرطاجية عليسة (ديدون) على ورقة 10 دنانير لسنة 2005، و<b>أول امرأة عربية</b> على ورقة نقدية. صدرت أثناء جائحة كوفيد-19، تكريمًا للمرأة التونسية ولعاملي الصحة.',
 	},
 
@@ -356,15 +356,15 @@ export default {
 	lmDiverse: { en: 'Diverse Landmarks', ar: 'معالم متنوعة' },
 	lmP1: { en: "Here, I shaded every governorate that has a landmark on a note: 18 out of 24. Three quarters of the country. Not bad, eh? Wait.", ar: 'هنا، ظلّلت كل ولاية لها معلم على ورقة نقدية: 18 من أصل 24. ثلاثة أرباع البلاد. ليس سيئًا، أليس كذلك؟ انتظر.' },
 	lmH2: { en: 'Representation Imbalance', ar: 'اختلال في التمثيل' },
-	lmP2: { en: "Now count. Tunis alone: 27 landmarks. The next one? Five. Five! The capital eats everything, like always.", ar: 'الآن عُدّ. تونس العاصمة وحدها: 27 معلمًا. والتي تليها؟ خمسة. خمسة! العاصمة تأكل كل شيء، كالعادة.' },
+	lmP2: { en: "Now count. Tunis alone: 27 landmarks, 24 different places (some come back, sometimes from another angle). The next one? Five. Five! The capital eats everything, like always.", ar: 'الآن عُدّ. تونس العاصمة وحدها: 27 معلمًا. والتي تليها؟ خمسة. خمسة! العاصمة تأكل كل شيء، كالعادة.' },
 	lmH3: { en: 'Coastal vs. Inland Governorate Representation', ar: 'تمثيل الولايات الساحلية مقابل الداخلية' },
 	lmP3: {
-		en: "And look where they are. The coast: eleven of twelve governorates. <b>Ariana is the only coastal governorate that has never been on a note.</b> Inland: seven of twelve, sharing just 14 of the 67 landmarks. Where the money is, that's what goes on the money.",
+		en: "And look where they are. The coast: eleven of twelve governorates. <b>Ariana is the only coastal governorate that has never been on a note.</b> Inland: seven of twelve, sharing just 14 of the 67 landmarks, and only 8 of the 51 different places. Where the money is, that's what goes on the money.",
 		ar: 'وانظر أين تقع. الساحل: إحدى عشرة ولاية من اثنتي عشرة. <b>أريانة هي الولاية الساحلية الوحيدة التي لم تظهر قط على ورقة.</b> الداخل: سبع من اثنتي عشرة، تتقاسم 14 معلمًا فقط من أصل 67. حيث يوجد المال، هذا ما يوضع على المال.',
 	},
 	lmRegionsNote: { en: "That kinda sucks for the inland. I mean, in the US nobody cares about Iowa or Nebraska either. Is it the same?", ar: 'هذا ظلم للداخل نوعًا ما. أعني، في أمريكا لا أحد يهتمّ بآيوا أو نبراسكا أيضًا. هل هو الأمر نفسه؟' },
 	lmRegions: {
-		en: "<b>Worse.</b> We even have a word for it: <i>el-jihawiyat</i> (الجهويات), the feeling that where you're born decides how much the state cares about you. Count them: the coast has <b>53</b> of the 67 landmarks, the interior just <b>14</b>. Tunis and the Sahel (Sousse, Monastir, Mahdia) hold <b>40 of the 67</b> landmarks. That's where power came from: Bourguiba was born in Monastir, Ben Ali in Hammam Sousse. Monastir got its mosque, fort and port on the money; Ben Ali put an airport near Sousse that carried his own name on a 50 dinars. The grain of El Kef and Siliana, the phosphate of Gafsa, the real wealth of the interior? Never once. Neither has Sidi Bouzid, where the revolution began in December 2010. The few inland places that made it are mostly Roman ruins and dams: things to show off or put to work, not the people who live there.",
+		en: "<b>Worse.</b> We even have a word for it: <i>el-jihawiyat</i> (الجهويات), the feeling that where you're born decides how much the state cares about you. Count them: the coast has <b>53</b> of the 67 landmarks (43 of the 51 different places), the interior just <b>14</b> (8 places). Tunis and the Sahel (Sousse, Monastir, Mahdia) hold <b>40 of the 67</b> (33 places). That's where power came from: Bourguiba was born in Monastir, Ben Ali in Hammam Sousse. Monastir got its mosque, fort and port on the money; Ben Ali put an airport near Sousse that carried his own name on a 50 dinars. The grain of El Kef and Siliana, the phosphate of Gafsa, the real wealth of the interior? Never once. Neither has Sidi Bouzid, where the revolution began in December 2010. The few inland places that made it are mostly Roman ruins and dams: things to show off or put to work, not the people who live there.",
 		ar: '<b>أسوأ.</b> عندنا كلمة لهذا: <i>الجهويات</i>، الإحساس بأن مكان ولادتك يحدّد مقدار اهتمام الدولة بك. عُدّها: للساحل <b>53</b> معلمًا من أصل 67، وللداخل <b>14</b> فقط. تونس العاصمة والساحل (سوسة والمنستير والمهدية) تضمّ <b>40 من أصل 67</b> معلمًا. ومن هناك جاءت السلطة: وُلد بورقيبة في المنستير، وبن علي في حمام سوسة. نالت المنستير جامعها وحصنها ومينائها على العملة، ووضع بن علي مطارًا قرب سوسة يحمل اسمه على ورقة 50 دينارًا. أما قمح الكاف وسليانة وفسفاط قفصة، ثروة الداخل الحقيقية؟ ولا مرة. ولا سيدي بوزيد، حيث انطلقت الثورة في ديسمبر 2010. والقليل من أماكن الداخل التي ظهرت أغلبها آثار رومانية وسدود: أشياء للتباهي أو للاستغلال، لا الناس الذين يعيشون هناك.',
 	},
 	lmAbsent: {
@@ -372,7 +372,7 @@ export default {
 		ar: 'وما يغيب يقول بقدر ما يحضر. منذ 1958، لا حرف أمازيغي ولا شخصية أمازيغية، رغم أن جذورنا الأمازيغية عميقة؛ وأقرب شيء مخزن حبوب أمازيغي، قصر أولاد سلطان، على ورقة 20 دينارًا لسنة 2011. امرأتان فقط، إحداهما ملكة من الأساطير. وجربة، موطن إحدى أقدم الجاليات اليهودية في العالم العربي وكنيس الغريبة؟ إنها في مدنين، إحدى دوائري الثماني. العملة صورة ترسمها الدولة لنا، والفجوات جزء من الصورة.',
 	},
 	lmP4: { en: "I circled the six that have never been on a note, not once since independence. Sidi Bouzid, where the revolution started? Never. Hover over one to see what I'd put on it.", ar: 'وضعت دائرة حول الولايات الست التي لم تظهر قط على أي ورقة، ولا مرة منذ الاستقلال. سيدي بوزيد، حيث انطلقت الثورة؟ ولا مرة. مرّر المؤشر فوق إحداها لترى ما كنت سأضعه لها.' },
-	lmP5: { en: "And if you sort all 67 landmarks, you get 8 kinds:", ar: 'وإذا صنّفت المعالم الـ67 كلها، تحصل على 8 أنواع:' },
+	lmP5: { en: "And if you sort all 67 landmarks (51 different places), you get 8 kinds:", ar: 'وإذا صنّفت المعالم الـ67 كلها، تحصل على 8 أنواع:' },
 	lmHint: { en: 'Hover over a governorate for its landmarks,<br>click it for the full profile', ar: 'مرّر المؤشر فوق ولاية لرؤية معالمها،<br>وانقر عليها لعرض بطاقتها كاملة' },
 	lmAria: { en: "Map of Tunisia's governorates and their landmarks on banknotes", ar: 'خريطة ولايات تونس ومعالمها على الأوراق النقدية' },
 	lmSea: { en: 'Mediterranean', ar: 'البحر' },
@@ -383,10 +383,13 @@ export default {
 	lmLegInland: { en: 'Inland, on notes', ar: 'داخلية، على الأوراق' },
 	lmLegNever: { en: 'Never on notes', ar: 'لم تظهر قط' },
 	lmOnNotes: { en: '{n} landmarks on banknotes', ar: '{n} معالم على الأوراق النقدية' },
+	lmOnNotesU1: { en: '{n} landmarks on banknotes ({u} place, from different angles)', ar: '{n} معالم على الأوراق النقدية (مكان واحد من زوايا مختلفة)' },
+	lmOnNotesU: { en: '{n} landmarks on banknotes ({u} different places)', ar: '{n} معالم على الأوراق النقدية ({u} أماكن مختلفة)' },
 	lmOnNotes1: { en: '1 landmark on banknotes', ar: 'معلم واحد على الأوراق النقدية' },
 	lmNever: { en: 'Never shown on a banknote', ar: 'لم تظهر قط على ورقة نقدية' },
 	lmMore: { en: '+{n} more', ar: '+{n} أخرى' },
 	lmCould: { en: 'Could feature:', ar: 'يمكن أن تمثّلها:' },
+	lmLandmark1: { en: '{n} landmark', ar: 'معلم واحد' },
 	lmLandmarks: { en: '{n} landmarks', ar: '{n} معالم' },
 
 	// ---------- governorate profile ----------
@@ -412,6 +415,9 @@ export default {
 	lxClick: { en: 'Click a governorate', ar: 'انقر على ولاية' },
 	lxLandmark: { en: 'landmark', ar: 'معلم' },
 	lxLandmarks: { en: 'landmarks', ar: 'معالم' },
+	lxUnique1: { en: 'unique place', ar: 'مكان واحد' },
+	lxUnique: { en: 'unique places', ar: 'أماكن مختلفة' },
+	lxSameHint: { en: 'Some places come back on more than one note, sometimes drawn from a different angle.', ar: 'بعض الأماكن تعود على أكثر من ورقة، وأحيانًا من زاوية مختلفة.' },
 	lxCity: { en: 'city', ar: 'مدينة' },
 	lxCities: { en: 'cities', ar: 'مدن' },
 	lxFrom: { en: 'on notes from', ar: 'على الأوراق من' },
@@ -456,7 +462,7 @@ export default {
 
 	// ---------- what kind of country ----------
 	hCountry: { en: 'What Kind of Country Do the Notes Show?', ar: 'أي بلد تُظهره الأوراق النقدية؟' },
-	pCountry: { en: 'Sort the 67 landmarks by the era of the note they appeared on, and each regime\'s idea of Tunisia comes into focus. Every square below is one landmark on one note.', ar: 'رتّب المعالم الستين حسب عهد الورقة التي ظهرت عليها، فتتّضح صورة تونس كما أرادها كل نظام. كل مربع أدناه معلمٌ واحد على ورقة واحدة.' },
+	pCountry: { en: 'Sort the 67 landmarks by the era of the note they appeared on, and each regime\'s idea of Tunisia comes into focus. Every square below is one landmark on one note, so a place that came back, sometimes from another angle, counts each time: 67 squares, 51 different places.', ar: 'رتّب المعالم الستين حسب عهد الورقة التي ظهرت عليها، فتتّضح صورة تونس كما أرادها كل نظام. كل مربع أدناه معلمٌ واحد على ورقة واحدة.' },
 	ccLandmarks: { en: '{n} landmarks', ar: '{n} معلمًا' },
 	ccB: { en: 'Building a modern state: <b>{p}%</b> of its landmarks are dams, ports, stadiums and factories.', ar: 'بناء دولة حديثة: <b>{p}%</b> من معالمه سدود وموانئ وملاعب ومصانع.' },
 	ccBA: { en: 'Looking back: <b>{p}%</b> of its landmarks are historical, religious and cultural sites.', ar: 'نظرة إلى الماضي: <b>{p}%</b> من معالمه مواقع تاريخية ودينية وثقافية.' },
@@ -470,6 +476,9 @@ export default {
 	pWorth1: { en: 'The timeline data records what every note was worth in US dollars when it was issued and when it was withdrawn. Divide by the note\'s value and you get the dinar\'s story in one line: in 1958, one dinar bought <b>$2.38</b>. Today it buys about <b>$0.32</b>.', ar: 'تسجّل بيانات الخط الزمني قيمة كل ورقة بالدولار الأمريكي عند إصدارها وعند سحبها. اقسمها على فئة الورقة، تحصل على قصة الدينار في خط واحد: في 1958 كان الدينار الواحد يساوي <b>2.38 دولار</b>، أما اليوم فلا يساوي سوى <b>0.32 دولار</b> تقريبًا.' },
 	pWorth2: { en: 'That is a loss of about <b>87%</b> against the dollar. The fall was slow under Bourguiba, steady under Ben Ali, and fastest after 2011.', ar: 'أي خسارة بنحو <b>87%</b> أمام الدولار. كان التراجع بطيئًا في عهد بورقيبة، ومنتظمًا في عهد بن علي، وأسرع ما يكون بعد 2011.' },
 	dvTitle: { en: 'One dinar in US dollars', ar: 'الدينار الواحد بالدولار الأمريكي' },
+	eraShortB: { en: 'Bourguiba', ar: 'بورقيبة' },
+	eraShortBA: { en: 'Ben Ali', ar: 'بن علي' },
+	eraShortR: { en: 'Since 2011', ar: 'منذ 2011' },
 	dvNote: { en: 'Dollars of the time, not adjusted for US inflation. Each dot is a note at its issue or withdrawal.', ar: 'بالدولار في حينه، دون احتساب التضخم الأمريكي. كل نقطة ورقةٌ عند إصدارها أو سحبها.' },
 	dvRead: { en: 'In {y}, one dinar was worth <b>${v}</b>', ar: 'في {y}، كان الدينار الواحد يساوي <b>{v} دولار</b>' },
 	dvLost: { en: '<span class="e">{era}</span> the dinar lost <b>{p}%</b> of its dollar value.', ar: '<span class="e">{era}</span> خسر الدينار <b>{p}%</b> من قيمته بالدولار.' },
@@ -488,7 +497,8 @@ export default {
 	end1T: { en: 'From one face to many', ar: 'من وجه واحد إلى وجوه كثيرة' },
 	end1: { en: 'For 28 years only Habib Bourguiba appeared on the notes. Since then they have honoured generals, poets, a trade unionist, an agronomist and, in 2020, the first Arab woman on a banknote.', ar: 'طوال 28 سنة لم يظهر على الأوراق سوى الحبيب بورقيبة. ومنذ ذلك الحين كرّمت قادة وشعراء ونقابيًا ومهندسًا زراعيًا، ثم في 2020 أول امرأة عربية على ورقة نقدية.' },
 	end2T: { en: 'A map with blank spaces', ar: 'خريطة بمساحات فارغة' },
-	end2: { en: 'Tunis holds 27 of the 67 landmarks, the coast dominates, and six governorates have never appeared at all.', ar: 'تستأثر تونس العاصمة بـ27 معلمًا من أصل 67، ويهيمن الساحل، بينما لم تظهر ست ولايات على الإطلاق.' },
+	endSub2: { en: 'landmarks · 24 / 51 unique places', ar: 'معلمًا · 24 من 51 مكانًا مختلفًا' },
+	end2: { en: 'Tunis holds 27 of the 67 landmarks (24 of the 51 different places), the coast dominates, and six governorates have never appeared at all.', ar: 'تستأثر تونس العاصمة بـ27 معلمًا من أصل 67، ويهيمن الساحل، بينما لم تظهر ست ولايات على الإطلاق.' },
 	end3T: { en: 'Clearer notes, weaker dinar', ar: 'أوراق أوضح، ودينار أضعف' },
 	end3: { en: 'The notes became easier to tell apart, with one colour and size per value, while the dinar lost about 87% of its dollar value.', ar: 'صارت الأوراق أسهل تمييزًا، بلون وحجم لكل فئة، بينما خسر الدينار نحو 87% من قيمته بالدولار.' },
 	endLast: { en: "Look at you, you know more about our money than most Tunisians now. Go spend some of it before it loses another 10%.", ar: 'انظر إلى نفسك، صرت تعرف عن عملتنا أكثر من معظم التونسيين. اذهب واصرف بعضها قبل أن تخسر 10% أخرى.' },
@@ -533,8 +543,8 @@ export default {
 	// ---------- sources ----------
 	hSources: { en: 'Sources and Method', ar: 'المصادر والمنهجية' },
 	srcData: { en: 'Data', ar: 'البيانات' },
-	srcData1: { en: 'Banknote data (issue and withdrawal years, people portrayed, sizes, and each note\'s value in US dollars at issue and at withdrawal) compiled by Ahmed Bendaly from the <a href="https://numizon.com" target="_blank" rel="noopener">Numizon</a> and <a href="https://en.numista.com" target="_blank" rel="noopener">Numista</a> catalogues and, for some notes, the <a href="https://www.bct.gov.tn" target="_blank" rel="noopener">Central Bank of Tunisia</a>.', ar: 'بيانات الأوراق النقدية (سنوات الإصدار والسحب، والشخصيات المرسومة، والمقاسات، وقيمة كل ورقة بالدولار الأمريكي عند إصدارها وسحبها) جمعها أحمد بن دالي من كتالوجَي <a href="https://numizon.com" target="_blank" rel="noopener">نوميزون</a> و<a href="https://en.numista.com" target="_blank" rel="noopener">نوميستا</a>، ومن <a href="https://www.bct.gov.tn" target="_blank" rel="noopener">البنك المركزي التونسي</a> لبعض الأوراق.' },
-	srcData2: { en: 'Landmarks on the notes, their cities and governorates: identified by the author from the notes themselves. * Not confirmed: the Great Mosque of Douz and the Ibadite mosque in Djerba (5 dinars, 1973) are our best identification.', ar: 'المعالم الظاهرة على الأوراق ومدنها وولاياتها: حدّدها الكاتب من الأوراق نفسها. * غير مؤكَّد: جامع دوز الكبير والجامع الإباضي في جربة (5 دنانير، 1973) هما أفضل تحديد توصّلنا إليه.' },
+	srcData1: { en: 'Banknote data (issue and withdrawal years, people portrayed, sizes, and each note\'s value in US dollars at issue and at withdrawal) compiled by the author from the <a href="https://numizon.com" target="_blank" rel="noopener">Numizon</a> and <a href="https://en.numista.com" target="_blank" rel="noopener">Numista</a> catalogues and, for some notes, the <a href="https://www.bct.gov.tn" target="_blank" rel="noopener">Central Bank of Tunisia</a>.', ar: 'بيانات الأوراق النقدية (سنوات الإصدار والسحب، والشخصيات المرسومة، والمقاسات، وقيمة كل ورقة بالدولار الأمريكي عند إصدارها وسحبها) جمعها الكاتب من كتالوجَي <a href="https://numizon.com" target="_blank" rel="noopener">نوميزون</a> و<a href="https://en.numista.com" target="_blank" rel="noopener">نوميستا</a>، ومن <a href="https://www.bct.gov.tn" target="_blank" rel="noopener">البنك المركزي التونسي</a> لبعض الأوراق.' },
+	srcData2: { en: 'Landmarks on the notes, their cities and governorates: identified by the author from the notes themselves and the <a href="https://numizon.com" target="_blank" rel="noopener">Numizon</a> catalogue. Some landmarks appear on several notes, sometimes from a different angle: the piece counts every appearance (67) and the different places (51). * Not confirmed: the Great Mosque of Douz and the Ibadite mosque in Djerba (5 dinars, 1973) are our best identification.', ar: 'المعالم الظاهرة على الأوراق ومدنها وولاياتها: حدّدها الكاتب من الأوراق نفسها ومن كتالوج <a href="https://numizon.com" target="_blank" rel="noopener">Numizon</a>. بعض المعالم تظهر على عدّة أوراق، وأحيانًا من زاوية مختلفة: يُحتسب كل ظهور (67) وكل مكان مختلف (51). * غير مؤكَّد: جامع دوز الكبير والجامع الإباضي في جربة (5 دنانير، 1973) هما أفضل تحديد توصّلنا إليه.' },
 	lmUnconfirmed: { en: '* Not confirmed', ar: '* غير مؤكَّد' },
 	srcData3: { en: 'Governorate boundaries and populations: open administrative data for Tunisia; populations are approximate.', ar: 'حدود الولايات وعدد سكانها: بيانات إدارية مفتوحة عن تونس؛ وأعداد السكان تقريبية.' },
 	srcData4: { en: 'What the $20 or €20 in the binder is worth in dinars today: the live exchange rate from <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate-API</a> (open.er-api.com), or a recent fixed rate if it cannot be reached.', ar: 'قيمة ورقة 20 دولارًا أو 20 يورو في الملفّ بالدينار اليوم: سعر الصرف المباشر من <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate-API</a>، أو سعر ثابت حديث إن تعذّر الوصول إليه.' },
@@ -543,16 +553,19 @@ export default {
 	srcImg3: { en: 'Older photos still in use: <a href="https://numizon.com" target="_blank" rel="noopener">numizon.com</a> (including scans watermarked <a href="https://www.cgb.fr" target="_blank" rel="noopener">cgb.fr</a>) and the International Bank Note Society, <a href="https://www.theibns.org" target="_blank" rel="noopener">theibns.org</a>.', ar: 'صور قديمة لا تزال مستخدمة: <a href="https://numizon.com" target="_blank" rel="noopener">numizon.com</a> (ومنها صور تحمل العلامة المائية لموقع <a href="https://www.cgb.fr" target="_blank" rel="noopener">cgb.fr</a>) والجمعية الدولية للأوراق النقدية، <a href="https://www.theibns.org" target="_blank" rel="noopener">theibns.org</a>.' },
 	srcImg4: { en: 'The ornaments across the piece, the tile wall and the frieze bands, draw on Tunisian Qallaline tiles and medina doors.', ar: 'تستلهم الزخارف في هذا العمل، من جدار الزليج إلى الأشرطة المزخرفة، بلاط القلالين التونسي وأبواب المدينة العتيقة.' },
 	srcImg5: { en: 'The foreign notes in the binder: the €20 (2002 series, design by Robert Kalina) from <a href="https://commons.wikimedia.org/wiki/File:EUR_20_obverse_(2002_issue).jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, reproduced under ECB decisions ECB/2003/4 and ECB/2003/5; the $20 (2006 series, a public-domain work of the US government) from <a href="https://commons.wikimedia.org/wiki/File:US_$20_Series_2006_Obverse.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>.', ar: 'الأوراق الأجنبية في الملفّ: ورقة 20 يورو (إصدار 2002، تصميم روبرت كالينا) من <a href="https://commons.wikimedia.org/wiki/File:EUR_20_obverse_(2002_issue).jpg" target="_blank" rel="noopener">ويكيميديا كومنز</a>، وفق قراري البنك المركزي الأوروبي ECB/2003/4 وECB/2003/5؛ وورقة 20 دولارًا (إصدار 2006، عمل للحكومة الأمريكية في الملك العام) من <a href="https://commons.wikimedia.org/wiki/File:US_$20_Series_2006_Obverse.jpg" target="_blank" rel="noopener">ويكيميديا كومنز</a>.' },
-	srcImg2: { en: 'All illustrations of the notes, portrait drawings and the title artwork: made by Ahmed Bendaly.', ar: 'جميع الرسوم التوضيحية للأوراق ورسوم الوجوه ورسم العنوان: من إنجاز أحمد بن دالي.' },
+	srcImg2: { en: 'All illustrations of the notes, portrait drawings and the title artwork: made by the author. The flat illustration style was inspired by the work of <a href="https://www.dreamstime.com/nazhusupbekova_info" target="_blank" rel="noopener">Nazhusupbekova</a> on Dreamstime; every drawing here was made from scratch.', ar: 'جميع الرسوم التوضيحية للأوراق ورسوم الوجوه ورسم العنوان: من إنجاز الكاتب. استُلهم أسلوب الرسم المسطّح من أعمال <a href="https://www.dreamstime.com/nazhusupbekova_info" target="_blank" rel="noopener">Nazhusupbekova</a> على Dreamstime؛ وكل رسم هنا أُنجز من الصفر.' },
 	srcMethod: { en: 'Method', ar: 'المنهجية' },
-	srcM1: { en: 'One dinar in US dollars = the note\'s recorded dollar value divided by its face value. Dollars of the time, not adjusted for US inflation. One record (a 10 dinars note withdrawn in 2012) looked like a data error and was left out.', ar: 'الدينار الواحد بالدولار = قيمة الورقة المسجّلة بالدولار مقسومةً على فئتها. بالدولار في حينه، دون احتساب التضخم الأمريكي. استُبعد سجلّ واحد (ورقة 10 دنانير سُحبت سنة 2012) بدا خطأً في البيانات.' },
+	srcM1: { en: 'One dinar in US dollars = the note\'s recorded dollar value divided by its face value. Dollars of the time, not adjusted for US inflation.', ar: 'الدينار الواحد بالدولار = قيمة الورقة المسجّلة بالدولار مقسومةً على فئتها. بالدولار في حينه، دون احتساب التضخم الأمريكي.' },
 	srcM2: { en: '“Years until honoured” = year of issue minus the person\'s year of death. Negative values mean the person was alive.', ar: '«سنوات قبل التكريم» = سنة الإصدار ناقص سنة وفاة الشخصية. والقيم السالبة تعني أن الشخصية كانت على قيد الحياة.' },
 	srcM3: { en: 'Landmark categories were assigned by the author. In the size chart, two notes listed with the wrong value (the 30 dinars of 1997 and the 50 dinars of 2011) were corrected.', ar: 'صنّف الكاتب المعالم إلى فئات. وفي مخطط الأحجام، صُحّحت ورقتان سُجّلتا بفئة خاطئة (30 دينارًا لسنة 1997 و50 دينارًا لسنة 2011).' },
-	srcM4: { en: 'Era colours and colour strips are based on the dominant colours of each note. The governorate stories and fun facts were written for this piece from general sources. Historical dates (independence and the Personal Status Code in 1956, president for life in March 1975, the coup of 7 November 1987) follow <a href="https://www.britannica.com/biography/Habib-Bourguiba" target="_blank" rel="noopener">Britannica</a>; the 2020 10 dinars follows the <a href="https://www.imf.org/en/Publications/fandd/issues/2020/09/tunisia-honors-first-female-physician-on-currency" target="_blank" rel="noopener">IMF</a> and <a href="https://www.mintageworld.com/media/detail/11723-for-the-first-time-in-arab-history-a-banknote-features-a-woman/" target="_blank" rel="noopener">Mintage World</a>.', ar: 'تستند ألوان العهود وأشرطة الألوان إلى الألوان الغالبة على كل ورقة. وقد كُتبت قصص الولايات ومعلومات «هل تعلم؟» لهذا العمل اعتمادًا على مصادر عامة. وتتبع التواريخ التاريخية (الاستقلال ومجلة الأحوال الشخصية سنة 1956، والرئاسة مدى الحياة في مارس 1975، وانقلاب 7 نوفمبر 1987) موسوعة <a href="https://www.britannica.com/biography/Habib-Bourguiba" target="_blank" rel="noopener">بريتانيكا</a>؛ ومعلومات ورقة 10 دنانير لسنة 2020 مقال <a href="https://www.imf.org/en/Publications/fandd/issues/2020/09/tunisia-honors-first-female-physician-on-currency" target="_blank" rel="noopener">صندوق النقد الدولي</a> و<a href="https://www.mintageworld.com/media/detail/11723-for-the-first-time-in-arab-history-a-banknote-features-a-woman/" target="_blank" rel="noopener">Mintage World</a>.' },
+	srcM4: { en: 'Era colours and colour strips are based on the dominant colours of each note, picked with the <a href="https://coolors.co/image-picker" target="_blank" rel="noopener">Coolors</a> image picker.', ar: 'تستند ألوان العهود وأشرطة الألوان إلى الألوان الغالبة على كل ورقة.' },
+	srcM4b: { en: 'The governorate stories and fun facts were written for this piece from general sources.', ar: 'وقد كُتبت قصص الولايات ومعلومات «هل تعلم؟» لهذا العمل اعتمادًا على مصادر عامة.' },
+	srcM4c: { en: 'Historical dates (independence and the Personal Status Code in 1956, president for life in March 1975, the coup of 7 November 1987) follow <a href="https://www.britannica.com/biography/Habib-Bourguiba" target="_blank" rel="noopener">Britannica</a>; the 2020 10 dinars follows the <a href="https://www.imf.org/en/Publications/fandd/issues/2020/09/tunisia-honors-first-female-physician-on-currency" target="_blank" rel="noopener">IMF</a> and <a href="https://www.mintageworld.com/media/detail/11723-for-the-first-time-in-arab-history-a-banknote-features-a-woman/" target="_blank" rel="noopener">Mintage World</a>.', ar: 'وتتبع التواريخ التاريخية (الاستقلال ومجلة الأحوال الشخصية سنة 1956، والرئاسة مدى الحياة في مارس 1975، وانقلاب 7 نوفمبر 1987) موسوعة <a href="https://www.britannica.com/biography/Habib-Bourguiba" target="_blank" rel="noopener">بريتانيكا</a>؛ ومعلومات ورقة 10 دنانير لسنة 2020 مقال <a href="https://www.imf.org/en/Publications/fandd/issues/2020/09/tunisia-honors-first-female-physician-on-currency" target="_blank" rel="noopener">صندوق النقد الدولي</a> و<a href="https://www.mintageworld.com/media/detail/11723-for-the-first-time-in-arab-history-a-banknote-features-a-woman/" target="_blank" rel="noopener">Mintage World</a>.' },
 	srcM6: { en: 'Front in Arabic, back in French: checked on the photos of 36 of the 38 notes (the two 2022 notes could not be checked). The data lists 38 notes; the binder also holds the 1960 reprint of the 1958 5 dinars, which makes 39. Its illustration is the 1958 one with the digits replaced.', ar: 'الوجه بالعربية والظهر بالفرنسية: تحقّقنا من ذلك في صور 36 ورقة من أصل 38 (تعذّر التحقّق من ورقتَي 2022). تضمّ البيانات 38 ورقة؛ ويضمّ الملفّ أيضًا إعادة طبع ورقة الخمسة دنانير لسنة 1958 في 1960، فيصير العدد 39. ورسمها هو رسم 1958 بعد استبدال أرقامه.' },
 	srcM7: { en: 'Dali is a fictional character. Everything he says is based on the sources and data listed here.', ar: 'دالي شخصية متخيّلة. كل ما يقوله مبنيّ على المصادر والبيانات المذكورة هنا.' },
 	srcM5: { en: 'The 1958 – 1960 switch from Eastern to Western Arabic numerals is documented on the notes themselves; the reason given for it is our interpretation, as we found no official explanation.', ar: 'التحوّل من الأرقام المشرقية إلى المغاربية بين 1958 و1960 موثّق على الأوراق نفسها؛ أما سببه فهو تفسيرنا، إذ لم نعثر على تفسير رسمي.' },
-	srcUpdated: { en: 'Last updated: December 2027', ar: 'آخر تحديث: ديسمبر 2027' },
+	srcM8: { en: 'AI tools: <b>Claude</b> (Anthropic) helped turn some of the Figma designs into web pages and helped refine and edit the code; <b>Gemini</b> (Google) helped cut out and clean up some pictures, especially the engraved portraits. Most of the charts and data visualizations, every idea, the story and the visuals are by the author.', ar: 'أدوات الذكاء الاصطناعي: ساعد <b>Claude</b> (Anthropic) في تحويل بعض تصاميم Figma إلى صفحات ويب وفي تحسين الشيفرة وتحريرها، وساعد <b>Gemini</b> (Google) في قصّ بعض الصور وتنظيفها، ولا سيّما الوجوه المنقوشة. أغلب الرسوم البيانية والتصوّرات، وكل الأفكار والقصة والعناصر البصرية من إنجاز الكاتب.' },
+	srcUpdated: { en: 'Last updated: December 2026', ar: 'آخر تحديث: ديسمبر 2026' },
 
 	// ---------- insights: reading the notes like a collector ----------
 	lensPol: { en: 'Politics', ar: 'سياسة' },

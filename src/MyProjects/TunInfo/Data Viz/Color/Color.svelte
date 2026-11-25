@@ -23,7 +23,7 @@ Fast forward to the modern era, there’s been a strategic shift. Each denominat
 <style>
 
       p{
-          font-family: Quicksand;
+          font-family: Quicksand, Vazirmatn;
           /* font-size: 0.75em */
       }
   

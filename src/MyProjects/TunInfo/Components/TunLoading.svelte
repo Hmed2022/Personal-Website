@@ -33,6 +33,6 @@
     100% { transform: translateY(0); opacity: 0; }
   }
   @media (prefers-reduced-motion: reduce) { img { animation: none; } }
-  .retry { position: absolute; top: calc(50% + 7rem); left: 50%; transform: translateX(-50%); padding: .55rem 1.2rem; border: 0; border-radius: 999px; cursor: pointer; background: #8C4D3F; color: #FFFBF1; font: 800 .9rem Quicksand, sans-serif; }
+  .retry { position: absolute; top: calc(50% + 7rem); left: 50%; transform: translateX(-50%); padding: .55rem 1.2rem; border: 0; border-radius: 999px; cursor: pointer; background: #8C4D3F; color: #FFFBF1; font: 800 .9rem Quicksand, Vazirmatn, sans-serif; }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 </style>

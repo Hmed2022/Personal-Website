@@ -308,7 +308,7 @@ button {
         display: flex;
     }
 	p, text{
-		font-family: Quicksand;
+		font-family: Quicksand, Vazirmatn;
 		font-weight: 400;
 	}
 

@@ -113,14 +113,14 @@
  
   
      .title {
-          font-family:Quicksand;
+          font-family:Quicksand, Vazirmatn;
           font-size:1.4em;
 		      margin-top: 0;
           margin-bottom:0;
           color:#90B5BB
     }
        .title2 {
-          font-family:Quicksand;
+          font-family:Quicksand, Vazirmatn;
           font-size:1.7em;
 			     margin-top: 0;
           margin-bottom:0;

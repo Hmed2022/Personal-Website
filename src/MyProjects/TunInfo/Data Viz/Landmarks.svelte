@@ -258,12 +258,12 @@
           width:auto
       }
       p{
-          font-family: Quicksand;
+          font-family: Quicksand, Vazirmatn;
           font-size: 0.75em
       }
   
       li,ul{
-              font-family: Quicksand;
+              font-family: Quicksand, Vazirmatn;
           font-size: 0.85em;
           margin-top: 0;
           margin-bottom:0;
@@ -316,14 +316,14 @@
     }
   
     h3 {
-          font-family:Quicksand;
+          font-family:Quicksand, Vazirmatn;
           font-size:1em;
       margin-top: 0;
           margin-bottom:0;
           color:#90B5BB
     }
        h2 {
-          font-family:Quicksand;
+          font-family:Quicksand, Vazirmatn;
           font-size:1.3em;
       margin-top: 0;
           margin-bottom:0;

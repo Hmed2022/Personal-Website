@@ -322,12 +322,12 @@
     }
       h1, h3{
           margin: 0;
-          font-family: Quicksand;
+          font-family: Quicksand, Vazirmatn;
           font-size:medium
       }
 
       button{
-        font-family: Quicksand;
+        font-family: Quicksand, Vazirmatn;
         font-size: large;
         font-weight: bold;
         color:#2088A6;

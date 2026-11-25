@@ -15,6 +15,7 @@
     import SizeChart from "./Data Viz/Scatter/SizeChart.svelte";
     import Title from "./Components/Title.svelte"                 // previous animated title (kept)
     import TitlePortraits from "./Components/TitlePortraits.svelte"
+    import { SELLER_CITY } from "./sellerCity.js"   // "a seller in …": near the reader (time zone)
     // @ts-ignore
     import Landmark from "./Data Viz/Landmarks/Landmark.svelte"            // previous explorer (kept)
     import LandmarkExplorer from "./Data Viz/Landmarks/LandmarkExplorer.svelte"
@@ -52,10 +53,20 @@
     let open = null, read = {}, topicEl, hubEl;
     // the goodbye ("Thanks, Dali!") only shows up once every question has been asked
     $: allRead = TOPICS.every((x) => x.id === 'end' || read[x.id]);
-    async function pick(id) {
+    // fromNext: "Next question" goes back up to the notebook so you read the question first,
+    // with the open question a quarter down the screen and Dali's answer starting under it
+    async function pick(id, fromNext = false) {
         if (!id) return;
         open = id; read = { ...read, [id]: true };
         await tick();
+        if (fromNext) {
+            const q = document.querySelector('.nb button.on');
+            if (q) {
+                const up = () => window.scrollTo({ top: q.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.25, behavior: 'smooth' });
+                up(); setTimeout(up, 700);
+                return;
+            }
+        }
         // find the open section on the page: the binding can be cleared when the previous section is removed
         const el = document.querySelector('section.topic') || topicEl;
         if (!el) return;
@@ -133,7 +144,7 @@
     <!-- <img src="{Title}" alt="title" /> -->
     <!-- <h1> My name is Ahmed Bendaly</h1> -->
  
-    <p class="introText">{@html $t('intro')}</p>
+    <p class="introText">{@html $t('intro', { city: SELLER_CITY })}</p>
     <p class="introText second">{@html $t('intro2')}</p>
     <!-- meet Dali: Leghreeb (About page) in his dingri and chechia, beside how the piece works -->
     <div class="meet-dali">
@@ -182,7 +193,7 @@
     <!-- the first question introduces the three eras -->
     <Insight k="nbDictator" lens={['pol']}/>
     <EraStories/>
-<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open), true)} on:back={backToNotebook}/>
 </section>
 {/if}
 
@@ -230,7 +241,7 @@
         <Propaganda/>
         -->
     </div>
-<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open), true)} on:back={backToNotebook}/>
 </section>
 {/if}
 
@@ -242,7 +253,7 @@
         <ErasChanges/>
     </div>
     <Insight k="insEras" note="insErasNote" lens={['pol']}/>
-<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open), true)} on:back={backToNotebook}/>
 </section>
 {/if}
 
@@ -262,7 +273,7 @@
     </div>
 
     </div>
-<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open), true)} on:back={backToNotebook}/>
 </section>
 {/if}
 
@@ -273,7 +284,7 @@
         <!-- <div class="color"><Scatter/></div> previous version, kept -->
         <SizeChart/>
     </div>
-<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open), true)} on:back={backToNotebook}/>
 </section>
 {/if}
 
@@ -291,7 +302,7 @@
     <PortraitStory/>
     </div>
 <Insight k="insFaces" note="insFacesNote" lens={['pol', 'cul']}/>
-<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open), true)} on:back={backToNotebook}/>
 </section>
 {/if}
 
@@ -307,7 +318,7 @@
 </div>
 <Insight k="lmRegions" note="lmRegionsNote" lens={['geo', 'pol']}/>
 <!-- (Dali's map exchange moved above the map) -->
-<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open), true)} on:back={backToNotebook}/>
 </section>
 {/if}
 
@@ -320,7 +331,7 @@
 <Insight k="pLandmarks"/>
 <!-- <Landmark/> previous explorer, kept -->
 <LandmarkExplorer/>
-<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open), true)} on:back={backToNotebook}/>
 </section>
 {/if}
 
@@ -333,7 +344,7 @@
 <Insight k="pWorthDali" lens={['eco']}/>
 <div class="wide"><DinarValue/></div>
 <Insight k="insWorth" note="insWorthNote" lens={['eco']}/>
-<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open))} on:back={backToNotebook}/>
+<TopicEnd hasNext={!!nextOf(open)} on:next={() => pick(nextOf(open), true)} on:back={backToNotebook}/>
 </section>
 {/if}
 
@@ -367,15 +378,17 @@
 <Footer theme={{ logoBg: 'transparent', logoFill: 'transparent', logoInk: '#1E3F5C' }} />
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
 
     /* Arabic: one readable Arabic font everywhere, except text marked lang="en"
        (the parts that stay bilingual, e.g. the English title) */
     :global(.tn-ar *:not([lang=en]):not([lang=en] *)) {
-        font-family: 'Tajawal', 'Quicksand', sans-serif !important;
+        font-family: 'Vazirmatn', 'Quicksand', sans-serif !important;
         letter-spacing: normal !important;
     }
     :global(.tn-ar) { line-height: 1.75; }
+    /* Arabic shown inside the English piece (names on the notes, the bank's name...) uses the same font */
+    :global([lang="ar"]), :global(.tn-page .ar) { font-family: 'Vazirmatn', 'Quicksand', sans-serif; }
     :global(mark.purple) { background-color: #C6AFC0; color: #FDF6F5; padding: 0 .25em; border-radius: 3px; }
 
 
@@ -405,7 +418,7 @@
         .caption {
             margin-top: 0%;
             text-align:center;
-            font-family: Quicksand;
+            font-family: Quicksand, Vazirmatn;
             color:#BF5630;
             font-size: 0.75rem;
             font-weight:bold
@@ -451,7 +464,7 @@
     .sort-nudge { margin: 2.5rem 0 4rem; }
     .sn { text-align: center; margin: -1.2rem 0 0; }
     .sn button { padding: .65rem 1.5rem; border: 0; border-radius: 999px; background: #8C4D3F; color: #FFFBF1; cursor: pointer;
-        font: 800 .95rem Quicksand, sans-serif; box-shadow: 0 3px 10px rgba(74, 46, 37, .3); transition: transform .2s, background .2s; }
+        font: 800 .95rem Quicksand, Vazirmatn, sans-serif; box-shadow: 0 3px 10px rgba(74, 46, 37, .3); transition: transform .2s, background .2s; }
     .sn button:hover { background: #6E3A2F; transform: translateY(-2px); }
     .introText.second { margin-top: .9rem; }
     /* key phrases for readers who scan: a highlighter stroke, like the collector's own notes */
@@ -492,7 +505,7 @@
     } */
 
     p, h1, h2,h3,option{
-        font-family: Quicksand;
+        font-family: Quicksand, Vazirmatn;
     }
 
     .centered { text-align: center; }
@@ -527,8 +540,7 @@
         position: relative;
         display: inline-block;
         padding: .55em 1.4em .5em;
-        font-family: 'Playfair Display', Georgia, serif;
-        font-weight: 800;
+        font-family: 'Acme', Quicksand, sans-serif; font-weight: 400;
         font-size: clamp(1.6rem, 3.4vw, 2.4rem);
         line-height: 1.15;
         color: #1E3F5C;
@@ -574,8 +586,7 @@
         color: #8C4D3F;
     }
     .tn-page h2:not(.chapter) > span, .tn-page h3:not(.chapter) > span{
-        font-family: 'Playfair Display', Georgia, serif;
-        font-weight: 700;
+        font-family: 'Acme', Quicksand, sans-serif; font-weight: 400;
         font-size: clamp(1.25rem, 2.4vw, 1.65rem);
         color: #8C4D3F;
     }

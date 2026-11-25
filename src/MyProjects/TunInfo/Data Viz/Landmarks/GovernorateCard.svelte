@@ -127,7 +127,7 @@
   dialog[open] { animation: pop .3s cubic-bezier(.34, 1.56, .64, 1); }
   @keyframes pop { from { transform: scale(.95); opacity: 0; } to { transform: none; opacity: 1; } }
 
-  .gc { position: relative; padding: 1.2rem 1.3rem 1.3rem; text-align: start; font-family: Quicksand, sans-serif; border-top: 6px solid #1E5B8C; }
+  .gc { position: relative; padding: 1.2rem 1.3rem 1.3rem; text-align: start; font-family: Quicksand, Vazirmatn, sans-serif; border-top: 6px solid #1E5B8C; }
   .close { position: absolute; top: .8rem; inset-inline-end: .8rem; width: 2.1rem; height: 2.1rem; border: none; border-radius: 50%; background: #F1E8DC; font-size: 1.3rem; line-height: 1; cursor: pointer; color: #3D2A22; }
 
   .top { display: grid; grid-template-columns: 230px 1fr; gap: 1.2rem; align-items: center; }
@@ -137,7 +137,7 @@
   .outline path.on { fill: #DBC1A0; }
 
   .kicker { margin: 0; font-size: .7rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #B5523B; }
-  h3 { margin: .15rem 0 .6rem; font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; color: #1E3F5C; display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  h3 { margin: .15rem 0 .6rem; font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 2rem; color: #1E3F5C; display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
   h3 .ar { font-size: 1.15rem; color: #B5523B; font-weight: 400; }
   .stats { display: flex; flex-wrap: wrap; gap: .5rem; }
   .stats div { display: flex; flex-direction: column; padding: .45rem .7rem; border-radius: 10px; background: #F6EEE3; min-width: 5.5rem; }
@@ -149,7 +149,7 @@
   section { margin-top: 1.1rem; }
   .why { padding: .8rem 1rem; border-radius: 12px; background: #EEF4F6; border-inline-start: 4px solid #1E5B8C; }
   .why.none { background: #FBEFF1; border-inline-start-color: #D9669B; }
-  h4 { margin: 0 0 .3rem; font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem; color: #1E3F5C; }
+  h4 { margin: 0 0 .3rem; font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 1.05rem; color: #1E3F5C; }
   .why p { margin: 0; font-size: .92rem; line-height: 1.55; }
   h5 { margin: 0 0 .4rem; font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #8A7A6B; }
   .chips-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }

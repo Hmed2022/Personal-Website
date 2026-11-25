@@ -102,7 +102,7 @@
 
 /* .Reference{
         color: rgb(139, 139, 139);
-        font-family: Quicksand;
+        font-family: Quicksand, Vazirmatn;
         font-family: 300;
         font-size: 1.1rem;
         margin-top: 2%;

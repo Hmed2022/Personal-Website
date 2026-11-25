@@ -14,8 +14,6 @@
     if (+n.ValueDayofIssue) pts.push({ y: n.Issued, v: n.ValueDayofIssue / n.Value });
     if (+n.ValueEndofCirculation) pts.push({ y: n.Active === 'Yes' ? NOW : n.EndofCirculation, v: n.ValueEndofCirculation / n.Value });
   }
-  // a 10 DT note withdrawn in 2012 is recorded at $0.34 per dinar (the rate that year was about $0.64): a data slip, left out
-  pts = pts.filter((p) => !(p.y === 2012 && p.v < 0.4));
 
   // yearly median, for the line
   const byYear = {};
@@ -34,9 +32,9 @@
   }
 
   const ERAS = [
-    { key: 'eraBourguiba', from: 1956, to: 1987, tint: 'rgba(3, 136, 166, .08)', ink: '#025E73' },
-    { key: 'eraBenAli', from: 1987, to: 2011, tint: 'rgba(124, 74, 140, .09)', ink: '#7C4A8C' },
-    { key: 'eraRevolution', from: 2011, to: 2024, tint: 'rgba(191, 86, 48, .08)', ink: '#BF5630' },
+    { key: 'eraBourguiba', short: 'eraShortB', from: 1956, to: 1987, tint: 'rgba(3, 136, 166, .08)', ink: '#025E73' },
+    { key: 'eraBenAli', short: 'eraShortBA', from: 1987, to: 2011, tint: 'rgba(124, 74, 140, .09)', ink: '#7C4A8C' },
+    { key: 'eraRevolution', short: 'eraShortR', from: 2011, to: 2024, tint: 'rgba(191, 86, 48, .08)', ink: '#BF5630' },
   ];
   const eraLoss = ERAS.map((e) => {
     const a = valueAt(Math.max(1958, e.from)), b = valueAt(Math.min(NOW, e.to));
@@ -93,7 +91,7 @@
       <svg width={w} height={h} on:pointermove={move} on:pointerleave={() => (hoverYear = null)} on:click={pickYear} style="cursor:pointer" role="img" aria-label={$t('dvTitle')}>
         {#each ERAS as e}
           <rect x={x(e.from)} y={m.top} width={x(e.to) - x(e.from)} height={h - m.top - m.bottom} fill={e.tint} />
-          <text class="era" x={x(e.from) + 6} y={m.top - 6} style="fill:{e.ink}">{$t(e.key)}</text>
+          <text class="era" x={x(e.from) + 6} y={m.top - 6} style="fill:{e.ink}">{$t(w < 560 ? e.short : e.key)}</text>
         {/each}
         {#each yTicks as v}
           <line class="grid" x1={m.left} x2={w - m.right} y1={y(v)} y2={y(v)} />
@@ -180,10 +178,10 @@
 </div>
 
 <style>
-  .dv { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 1.2rem; font-family: Quicksand, sans-serif; color: #3D2A22; }
+  .dv { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 1.2rem; font-family: Quicksand, Vazirmatn, sans-serif; color: #3D2A22; }
   .chart-card, .calc { background: rgba(181, 82, 59, .06); border: 1px solid rgba(181, 82, 59, .18); border-radius: 14px; padding: 1rem 1.1rem; box-shadow: 0 4px 16px rgba(61, 42, 34, .06); }
   .head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .3rem 1rem; }
-  h4 { margin: 0; font-family: 'Playfair Display', Georgia, serif; font-size: 1.15rem; color: #1E3F5C; }
+  h4 { margin: 0; font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 1.15rem; color: #1E3F5C; }
   .read { margin: 0; font-size: .9rem; color: #4D6473; }
   .read :global(b) { color: #B5523B; font-size: 1.05rem; }
   .chart { margin-top: .5rem; }
@@ -212,10 +210,10 @@
   .row { display: flex; align-items: center; gap: .6rem; margin-bottom: .8rem; flex-wrap: wrap; }
   .lbl { width: 3.2rem; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #8A7A6B; }
   .chips { display: flex; flex-wrap: wrap; gap: .3rem; flex: 1; }
-  .chips button { font: 700 .8rem Quicksand, sans-serif; color: #4D6473; background: rgba(255, 255, 255, .45); border: 1.5px solid #D9CFC2; border-radius: 999px; padding: .2rem .55rem; cursor: pointer; }
+  .chips button { font: 700 .8rem Quicksand, Vazirmatn, sans-serif; color: #4D6473; background: rgba(255, 255, 255, .45); border: 1.5px solid #D9CFC2; border-radius: 999px; padding: .2rem .55rem; cursor: pointer; }
   .chips button.on { background: #B5523B; border-color: #B5523B; color: #FFFFFF; }
   .row input { flex: 1; accent-color: #B5523B; }
-  .yr { font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; color: #B5523B; }
+  .yr { font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 1.3rem; color: #B5523B; }
   .compare { display: flex; align-items: center; gap: .5rem; margin-top: .4rem; }
   .side { flex: 1; display: flex; flex-direction: column; gap: .1rem; padding: .7rem; border-radius: 10px; background: rgba(181, 82, 59, .08); text-align: center; }
   .side span { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: #8A7A6B; }

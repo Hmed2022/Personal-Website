@@ -44,7 +44,7 @@
         color:#FDF6F5;
     }
     p, h1, h2,option{
-        font-family: Quicksand;
+        font-family: Quicksand, Vazirmatn;
     }
 </style>
 

@@ -44,6 +44,6 @@
   
   <style>
       text {
-          font-family: Quicksand
+          font-family: Quicksand, Vazirmatn
       }
   </style>

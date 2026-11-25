@@ -44,25 +44,7 @@
 	// Before the map exists: the notebook page sits in the middle, bigger, with Dali's answer written where
 	// the map will go. "Yes" folds that part of the page down, he draws (no scrolling meanwhile), and when
 	// you scroll on to "Now count" the page slides to the left, next to his bubbles.
-	// The map is already drawn when you arrive. "Can I draw it?" is optional: Dali wipes it and redraws it
-	// step by step (arrows only; the page never locks). Scrolling on, or "Skip", finishes it.
-	// 1–5 = drawing steps; 6 = finished
-	let dstep = 6;
-	const LAST = 5;
-	// start from a clean page: remount the map blank (step 0), then draw the outline
-	let run = 0;
-	function startDraw() { run += 1; dstep = 0; setTimeout(() => { if (dstep === 0) dstep = 1; }, 450); }
-	function go(d) {
-		if (dstep < 1 || dstep > LAST) return;
-		const n = dstep + d;
-		if (n < 1) return;
-		dstep = n > LAST ? 6 : n;
-	}
-	const skipDraw = () => (dstep = 6);
-	// scrolled on to another step mid-drawing: the map is simply finished
-	let lastIdx = 0;
-	$: onIdx(index ?? 0);
-	function onIdx(i) { if (i !== lastIdx) { lastIdx = i; if (dstep < 6) dstep = 6; } }
+	// The map is always shown finished (the step-by-step drawing was removed; LandmarksMap still supports drawStep).
 	let wrapEl;
 	let demoW = 0, wrapW = 0;
 	let winW = 1200, winH = 900, pageH = 0;
@@ -106,22 +88,7 @@
 			<div class="drawing" style="--grain:url({grain})" bind:offsetHeight={pageH}>
 				<span class="page-tape" aria-hidden="true"></span>
 				<!-- your question at the top of the page; Dali grabbed your notebook and drew his answer under it -->
-				<div class="page-note">
-					{#if dstep === 6}
-						<button type="button" class="draw-yes" on:click={startDraw}>✏️ {$t('lmDrawAsk')}</button>
-					{:else}
-						<button type="button" class="draw-skip" on:click={skipDraw}>{$t('lmDrawSkip')} ✕</button>
-					{/if}
-				</div>
-				{#key run}<LandmarksMap step={index ?? 0} drawStep={dstep} />{/key}
-				<!-- drawing steps: side arrows and a little counter -->
-				{#if dstep >= 1 && dstep <= LAST}
-					<div class="step-nav">
-						<button type="button" class="step-arrow" on:click={() => go(-1)} disabled={dstep === 1} aria-label={$t('bdPrev')}>‹</button>
-						<span class="step-count" aria-live="polite">{dstep} / {LAST}<small>{$t('lmStepHint')}</small></span>
-						<button type="button" class="step-arrow next" on:click={() => go(1)} aria-label={$t('bdNext')}>›</button>
-					</div>
-				{/if}
+				<LandmarksMap step={index ?? 0} drawStep={6} />
 			</div>
 		</div>
 		<!--
@@ -195,7 +162,8 @@
 			background: rgba(250, 243, 232, .95); border-radius: 12px;
 			box-shadow: 0 4px 18px rgba(77, 100, 115, .18);
 		}
-		[slot="foreground"] section:first-child { margin-top: 55vh; }
+		[slot="foreground"] section:first-child { margin: 0 0 45vh; padding: 0; height: 0; box-shadow: none; background: none; }
+		[slot="foreground"] section:last-child { margin-bottom: 15vh; }
 	}
 
 	/* let the mouse reach the interactive map under the text layer */
@@ -217,7 +185,7 @@
 		text-align:center;
 		justify-content: center;
 		align-items: center; 
-		font-family: Quicksand;
+		font-family: Quicksand, Vazirmatn;
 	
 	}
 
@@ -250,10 +218,9 @@
 	/* the sea's faded edge stays on the page */
 	.drawing { clip-path: inset(-2rem 0 -1.5rem 0); }   /* the tape shows above; the sea is cut at the page's sides */
 	/* the page's handwritten header (same as the notebook slips) */
-	.page-note { text-align: start; padding: 0 0 .3rem 2.4rem; transform: rotate(.4deg); }
-	.page-k { margin: 0; font: 700 .68rem Quicksand, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #B5523B; }
+	.page-k { margin: 0; font: 700 .68rem Quicksand, Vazirmatn, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #B5523B; }
 	.page-t { margin: 0; font: 500 1.55rem/1.6rem Caveat, 'Segoe Print', cursive; color: #1E3F5C; max-width: 22rem; }
-	:global(.tn-ar) .page-t { font-family: 'Aref Ruqaa', Tajawal, serif; font-size: 1.25rem; }
+	:global(.tn-ar) .page-t { font-family: 'Aref Ruqaa', Vazirmatn, serif; font-size: 1.25rem; }
 	/* the whole page (question + map + legend) must fit a laptop screen below the sticky top offset */
 	.drawing :global(svg) { height: clamp(250px, calc(88vh - 17rem), 500px); }
 	/* the page glides from the middle to the left when you reach "Now count" */
@@ -263,34 +230,12 @@
 	.fg section { transition: opacity .5s ease; }
 	.fg.centered section { opacity: 0; pointer-events: none; }
 	/* stepping through the drawing */
-	/* the two arrows sit together just above Dali's commentary, with the step counter between them */
-	.step-nav { position: absolute; right: 1rem; top: 58%; z-index: 21; display: flex; flex-direction: column; align-items: center; gap: .5rem; pointer-events: none; }   /* empty paper right of the map */
-	.step-arrow {
-		position: relative; flex: 0 0 auto; pointer-events: auto; width: 2.4rem; height: 2.4rem; border-radius: 50%;
-		border: 2px solid #C62F2F; background: #FFFDF6; color: #C62F2F; font: 700 1.6rem/1 Quicksand, sans-serif; cursor: pointer;
-		box-shadow: 0 3px 10px rgba(74, 46, 37, .18); transition: transform .15s, background .15s;
-	}
-	.step-arrow.next { animation: nudge 1.4s ease-out infinite; }
-	.step-arrow:hover:not(:disabled) { background: #C62F2F; color: #FFFDF6; }
-	.step-arrow:disabled { opacity: .3; cursor: default; }
-	.step-count { display: flex; flex-direction: column; align-items: center; min-width: 6.5rem; font: 800 .85rem Quicksand, sans-serif; color: #8C4D3F; background: rgba(255, 253, 246, .9); border-radius: 6px; padding: .1rem .4rem; }
-	.step-count small { font-size: .62rem; font-weight: 700; color: #8C6A5C; }
+	/* the two arrows sit together just above Dali's commentary, with the step counter between them */   /* empty paper right of the map */
 	@media (prefers-reduced-motion: reduce) { .drawing-wrap { transition: none; } }
-	/* "Yes, draw it!": pulses until clicked, then Dali draws the map */
-	.draw-yes {
-		position: relative; z-index: 21; pointer-events: auto; padding: .4rem 1rem; border: 1.5px solid #C62F2F; border-radius: 999px; cursor: pointer;
-		background: #FFFDF6; color: #C62F2F; font: 600 1.25rem/1.2 Caveat, 'Segoe Print', cursive;
-		box-shadow: 0 2px 6px rgba(74, 46, 37, .15); transform: rotate(-1.5deg);
-	}
-	.draw-yes:hover { background: #C62F2F; color: #FFFDF6; }
-	.draw-skip { position: relative; z-index: 21; pointer-events: auto; padding: .3rem .8rem; border: 0; border-radius: 999px; cursor: pointer; background: rgba(140, 77, 63, .1); color: #8C4D3F; font: 800 .78rem Quicksand, sans-serif; }
-	.draw-skip:hover { background: rgba(140, 77, 63, .2); }
-	:global(.tn-ar) .draw-yes { font-family: 'Aref Ruqaa', Tajawal, serif; font-size: 1rem; }
-	.draw-yes:focus-visible { outline: 3px solid #1E5B8C; outline-offset: 2px; }
 	@keyframes nudge { 0% { box-shadow: 0 0 0 0 rgba(198, 47, 47, .55); } 70% { box-shadow: 0 0 0 12px rgba(198, 47, 47, 0); } 100% { box-shadow: 0 0 0 0 rgba(198, 47, 47, 0); } }
 	.lead { margin: 0 0 .7rem; padding-bottom: .7rem; border-bottom: 1px dashed rgba(164, 115, 28, .4); }
 	.lead :global(b) { color: #A4731C; }
-	.who { display: flex; align-items: center; gap: .4rem; margin: 0 0 .3rem; font: 800 .9rem Quicksand, sans-serif; color: #A4731C; }
+	.who { display: flex; align-items: center; gap: .4rem; margin: 0 0 .3rem; font: 800 .9rem Quicksand, Vazirmatn, sans-serif; color: #A4731C; }
 	.who img { width: 2.4rem; height: 2.5rem; object-fit: contain; object-position: 50% 0; }
 	.bubble :global(h3), .bubble :global(h4) { margin: .2rem 0 .4rem; color: #4A2E25; }
 	@media (max-width: 760px) {

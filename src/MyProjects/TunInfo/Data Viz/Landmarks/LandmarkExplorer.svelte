@@ -7,7 +7,7 @@
   import { flip } from 'svelte/animate';
   import Tun from '../Map/Data/Tunisia.geojson.json';
   import { landmarks } from './landmarksMap.js';
-  import { CATEGORIES, TAG_COLOR, TAG_ICON, PROPOSED, parseBill } from './landmarkMeta.js';
+  import { CATEGORIES, TAG_COLOR, TAG_ICON, PROPOSED, parseBill, uniqueCount } from './landmarkMeta.js';
   import { t, isAr, money, pick as pickLang } from '../../i18n.js';
   import { lmAr, cityAr, CATEGORIES_AR, PROPOSED_AR } from './landmarksAr.js';
   $: catName = (k) => ($isAr ? CATEGORIES_AR[k] : CATEGORIES[k]);
@@ -117,7 +117,7 @@
               class="gov" class:sel={g === selected}
               on:click={() => pick(g)} on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && pick(g)}
               on:pointermove={(e) => hoverAt(e, g)} on:pointerleave={() => (hovered = null)}
-              tabindex="0" role="button" aria-pressed={g === selected} aria-label={`${$pickLang(g.name, g.ar)}, ${$t('lmLandmarks', { n: g.count })}`}>
+              tabindex="0" role="button" aria-pressed={g === selected} aria-label={`${$pickLang(g.name, g.ar)}, ${$t(g.count === 1 ? 'lmLandmark1' : 'lmLandmarks', { n: g.count })}`}>
         </path>
       {/each}
       <g aria-hidden="true" style="pointer-events:none">{#each govs as g (g.name)}<path d={g.d} fill="url(#lx-pencil)" />{/each}</g>
@@ -132,7 +132,7 @@
             <path d={g.d} fill={g === selected ? '#1E5B8C' : fillOf(g.count)} class="gov" class:sel={g === selected}
                   on:click={() => pick(g)} on:pointermove={(e) => hoverAt(e, g)} on:pointerleave={() => (hovered = null)}
                   on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && pick(g)}
-                  tabindex="0" role="button" aria-label={`${$pickLang(g.name, g.ar)}, ${$t('lmLandmarks', { n: g.count })}`} />
+                  tabindex="0" role="button" aria-label={`${$pickLang(g.name, g.ar)}, ${$t(g.count === 1 ? 'lmLandmark1' : 'lmLandmarks', { n: g.count })}`} />
           {/each}
           {#each GT as g (g.name)}<path d={g.d} class="gt-ink" vector-effect="non-scaling-stroke" class:hot={g === hovered} />{/each}
         </g></g>
@@ -147,7 +147,7 @@
     {#if hovered}
       <div class="lx-tip" style="left:{tipX}px; top:{tipY}px" aria-hidden="true">
         <b>{$pickLang(hovered.name, hovered.ar)}</b>
-        <span>{hovered.count} {hovered.count === 1 ? $t('lxLandmark') : $t('lxLandmarks')}</span>
+        <span>{hovered.count} {hovered.count === 1 ? $t('lxLandmark') : $t('lxLandmarks')}{#if hovered.list && uniqueCount(hovered.list) < hovered.list.length} · {uniqueCount(hovered.list)} {uniqueCount(hovered.list) === 1 ? $t('lxUnique1') : $t('lxUnique')}{/if}</span>
       </div>
     {/if}
     </div>
@@ -214,9 +214,12 @@
           {#if selected.count}
             <p class="stats">
               <span><b>{selected.list.length}</b> {selected.list.length === 1 ? $t('lxLandmark') : $t('lxLandmarks')}</span>
+              <!-- the same place can come back on several notes (sometimes from another angle): show the different places too -->
+              {#if uniqueCount(selected.list) < selected.list.length}<span><b>{uniqueCount(selected.list)}</b> {uniqueCount(selected.list) === 1 ? $t('lxUnique1') : $t('lxUnique')}</span>{/if}
               <span><b>{selected.cities.length}</b> {selected.cities.length === 1 ? $t('lxCity') : $t('lxCities')}</span>
               {#if span}<span>{$t('lxFrom')} <b dir="ltr">{span}</b></span>{/if}
             </p>
+            {#if uniqueCount(selected.list) < selected.list.length}<p class="same-hint">{$t('lxSameHint')}</p>{/if}
           {/if}
         </div>
       </header>
@@ -278,10 +281,10 @@
   .lx {
     display: grid; grid-template-columns: minmax(240px, 380px) 1fr; gap: 2rem;
     max-width: 1100px; margin: 1.5rem auto 3rem; padding: 0 1rem; box-sizing: border-box;
-    font-family: Quicksand, sans-serif; color: #3D2A22;
+    font-family: Quicksand, Vazirmatn, sans-serif; color: #3D2A22;
   }
 
-  .unconf { margin: .1rem 0 .3rem; font: italic 600 .78rem Quicksand, sans-serif; color: #B5523B; }
+  .unconf { margin: .1rem 0 .3rem; font: italic 600 .78rem Quicksand, Vazirmatn, sans-serif; color: #B5523B; }
 
   /* ---- side ---- */
   .side { position: sticky; top: 1rem; align-self: start; text-align: center; }
@@ -296,7 +299,7 @@
   .lx-tip {
     position: absolute; z-index: 5; transform: translate(-50%, calc(-100% - 12px)); pointer-events: none; white-space: nowrap;
     display: flex; flex-direction: column; align-items: center; padding: .3rem .65rem; border-radius: 8px;
-    background: #FFFBF1; border: 1.5px solid #C62F2F; box-shadow: 0 4px 12px rgba(74, 46, 37, .2); font-family: Quicksand, sans-serif;
+    background: #FFFBF1; border: 1.5px solid #C62F2F; box-shadow: 0 4px 12px rgba(74, 46, 37, .2); font-family: Quicksand, Vazirmatn, sans-serif;
   }
   .lx-tip b { font: 700 1.15rem/1.1 Caveat, 'Segoe Print', cursive; color: #1E3F5C; }
   .lx-tip span { font-size: .72rem; font-weight: 700; color: #8C4D3F; }
@@ -319,7 +322,7 @@
   .gov-select { display: none; }
 
   /* ---- header ---- */
-  .g-head h3 { margin: 0; font-family: 'Playfair Display', Georgia, serif; font-size: 2.1rem; font-weight: 800; color: #1E3F5C; display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; }
+  .g-head h3 { margin: 0; font-family: 'Acme', Quicksand, sans-serif; font-size: 2.1rem; font-weight: 400; color: #1E3F5C; display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; }
   /* the governorate name is itself a dropdown: a native <select> laid invisibly over it */
   .name-pick { position: relative; display: inline-flex; align-items: center; gap: .45rem; cursor: pointer; border-radius: 10px; padding: 0 .35rem 0 0; transition: background .15s; }
   .name-pick:hover, .name-pick:focus-within { background: #EEF4F6; }
@@ -333,13 +336,13 @@
   /* ---- filters ---- */
   .filters { display: grid; gap: .5rem; margin: 1rem 0 1.1rem; text-align: start; }
   .dd { display: grid; gap: .2rem; text-align: start; }
-  .dd > span:first-child { font: 700 .7rem Quicksand, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #8C6A5C; }
+  .dd > span:first-child { font: 700 .7rem Quicksand, Vazirmatn, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #8C6A5C; }
   .dd-box { position: relative; display: flex; align-items: center; }
   .dd-box img { position: absolute; left: .55rem; width: 1.1rem; height: 1.1rem; border-radius: 3px; pointer-events: none; }
   .dd-box img + select { padding-left: 2.1rem; }
   .dd select {
     width: 100%; appearance: none; -webkit-appearance: none; cursor: pointer;
-    font: 700 .92rem Quicksand, sans-serif; color: var(--tc, #1E5B8C); background: #FFFBF1;
+    font: 700 .92rem Quicksand, Vazirmatn, sans-serif; color: var(--tc, #1E5B8C); background: #FFFBF1;
     border: 1.5px solid #D9C9B1; border-radius: 10px; padding: .5rem 2rem .5rem .75rem;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%238C4D3F' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat; background-position: right .7rem center; background-size: .7rem;
@@ -380,25 +383,30 @@
   .lb figure { position: relative; margin: 0; width: min(860px, 100%); background: #FFFBF4; border-radius: 14px; overflow: hidden; box-shadow: 0 20px 50px rgba(0, 0, 0, .4); }
   /* fills its frame (same 4:3 as the cards) and crops what doesn't fit, instead of black bars */
   .lb figure > img { display: block; width: 100%; aspect-ratio: 4 / 3; max-height: 70vh; object-fit: cover; object-position: center; background: #EEE4D6; }
-  .lb figcaption { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; padding: .9rem 1.1rem 1rem; font-family: Quicksand, sans-serif; }
-  .lb h4 { margin: 0; font-family: 'Playfair Display', Georgia, serif; font-size: 1.35rem; color: #1E3F5C; }
+  .lb figcaption { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; padding: .9rem 1.1rem 1rem; font-family: Quicksand, Vazirmatn, sans-serif; }
+  .lb h4 { margin: 0; font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 1.35rem; color: #1E3F5C; }
   .lb p { margin: .2rem 0 .3rem; font-size: .88rem; color: #4D6473; }
   .lb p b { color: #8C4D3F; }
   .lb a { flex: 0 0 auto; font-weight: 700; font-size: .85rem; color: #1E5B8C; }
   .lb-close { position: absolute; top: .5rem; right: .6rem; z-index: 2; width: 2.2rem; height: 2.2rem; border: none; border-radius: 50%; background: rgba(255, 255, 255, .9); font-size: 1.4rem; line-height: 1; cursor: pointer; }
   .lb-nav { position: absolute; top: 35%; z-index: 2; width: 2.6rem; height: 2.6rem; border: none; border-radius: 50%; background: rgba(255, 255, 255, .9); font-size: 1.6rem; line-height: 1; cursor: pointer; }
   .lb-nav.prev { left: .6rem; } .lb-nav.next { right: .6rem; }
-  .lb-count { position: absolute; top: .7rem; left: .8rem; padding: .1rem .5rem; border-radius: 999px; background: rgba(0, 0, 0, .55); color: #FFF; font: 700 .75rem Quicksand, sans-serif; }
+  .same-hint { margin: .2rem 0 0; font-size: .78rem; font-style: italic; color: #8C6A5C; }
+  .lb-count { position: absolute; top: .7rem; left: .8rem; padding: .1rem .5rem; border-radius: 999px; background: rgba(0, 0, 0, .55); color: #FFF; font: 700 .75rem Quicksand, Vazirmatn, sans-serif; }
 
   /* ---- phones ---- */
   @media (max-width: 760px) {
     .lx { grid-template-columns: 1fr; gap: 1rem; }
-    .side { position: static; display: grid; grid-template-columns: 38% 1fr; gap: .8rem; align-items: center; text-align: left; }
-    .side svg { grid-row: span 2; max-height: 40vh; }
+    /* the map takes the full width, the legend and filters sit underneath */
+    .side { position: static; display: block; text-align: center; }
+    .lx-page { width: 100%; max-width: 26rem; margin: 0 auto; box-sizing: border-box; }
+    .side svg { max-height: 62vh; }
+    .scale { justify-content: center !important; margin-top: .6rem; }
+    .filters { text-align: left; }
     .map-hover { display: none; }
-    .scale { justify-content: flex-start; flex-wrap: wrap; }
+    .scale { flex-wrap: wrap; }
     /* .gov-select { display: grid; ... }  replaced by the dropdown on the governorate name */
-    .gov-select select { font: 700 1rem Quicksand, sans-serif; color: #1E5B8C; background: #FFFFFF; border: 1.5px solid #C8D9DC; border-radius: 8px; padding: .45rem .5rem; }
+    .gov-select select { font: 700 1rem Quicksand, Vazirmatn, sans-serif; color: #1E5B8C; background: #FFFFFF; border: 1.5px solid #C8D9DC; border-radius: 8px; padding: .45rem .5rem; }
     .g-head h3 { font-size: 1.6rem; }
     .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .7rem; }
     .name { font-size: .85rem; }

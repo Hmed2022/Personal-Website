@@ -4,7 +4,7 @@
   const GROUPS = [
     { h: 'srcData', items: ['srcData1', 'srcData2', 'srcData3'] },
     { h: 'srcImages', items: ['srcImg2', 'srcImg4', 'srcImg1', 'srcImg3', 'srcImg5'] },
-    { h: 'srcMethod', items: ['srcM1', 'srcM2', 'srcM3', 'srcM4', 'srcM5', 'srcM6', 'srcM7'] },
+    { h: 'srcMethod', items: ['srcM7', 'srcM1', 'srcM2', 'srcM4', 'srcM4b', 'srcM4c', 'srcM5', 'srcM8'] },
   ];
 </script>
 
@@ -19,7 +19,7 @@
 </div>
 
 <style>
-  .src { display: grid; grid-template-columns: 1fr 1fr 1.4fr; gap: 1.4rem; font-family: Quicksand, sans-serif; color: #4D5A60; padding: 1.2rem 1.3rem; border-radius: 14px; background: rgba(30, 63, 92, .05); border: 1px solid rgba(30, 63, 92, .12); }
+  .src { display: grid; grid-template-columns: 1fr 1fr 1.4fr; gap: 1.4rem; font-family: Quicksand, Vazirmatn, sans-serif; color: #4D5A60; padding: 1.2rem 1.3rem; border-radius: 14px; background: rgba(30, 63, 92, .05); border: 1px solid rgba(30, 63, 92, .12); }
   h4 { margin: 0 0 .4rem; font-size: .75rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #1E3F5C; }
   ul { margin: 0; padding-inline-start: 1.1rem; display: grid; gap: .35rem; }
   li { font-size: .82rem; line-height: 1.5; }

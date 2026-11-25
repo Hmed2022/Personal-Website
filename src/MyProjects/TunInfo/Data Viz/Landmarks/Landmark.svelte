@@ -153,7 +153,7 @@ $: if (selectedGovernorate=='Tunis'){
 <div class="right">
 	<div class="btn">
 			<select style="color-background:#FAE4DD" bind:value={selectedGovernorate}>
-    <option value="" style="font-family:Quicksand">Select a Governorate</option>
+    <option value="" style="font-family:Quicksand, Vazirmatn">Select a Governorate</option>
     {#each governorates as governorate}
         <option value={governorate.name}>{governorate.name}</option>
     {/each}
@@ -209,7 +209,7 @@ $: if (selectedGovernorate=='Tunis'){
 		}
 
     select{
-        font-family: Quicksand;
+        font-family: Quicksand, Vazirmatn;
         font-weight: bold;
         font-size: 1rem;
         color:#2088A6;
@@ -219,7 +219,7 @@ $: if (selectedGovernorate=='Tunis'){
     }
 
     .caption{
-        font-family:Quicksand;
+        font-family:Quicksand, Vazirmatn;
         text-align: center;
         color:#2088A6
     }
@@ -228,7 +228,7 @@ $: if (selectedGovernorate=='Tunis'){
         margin-top:0;
         font-weight: bold;
         padding:3px;
-        font-family:Quicksand;
+        font-family:Quicksand, Vazirmatn;
         text-align: center;
         color:#2088A6;
         background-color:#C8E5ED

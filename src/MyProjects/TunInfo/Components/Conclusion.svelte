@@ -6,7 +6,7 @@
   export let missed = [];   // strings keys of the topics you never asked about
   const CARDS = [
     { k: 1, ink: '#025E73', num: '1 → 11' },
-    { k: 2, ink: '#5B8C3E', num: '27 / 67' },
+    { k: 2, ink: '#5B8C3E', num: '27 / 67', sub: 'endSub2' },   // all appearances, and the different places under it
     { k: 3, ink: '#B5523B', num: '−87%' },
   ];
 </script>
@@ -16,7 +16,7 @@
   <div class="cards">
     {#each CARDS as c}
       <article style="--ec:{c.ink}">
-        <span class="num" dir="ltr">{c.num}</span>
+        <span class="num" dir="ltr">{c.num}</span>{#if c.sub}<span class="num-sub">{$t(c.sub)}</span>{/if}
         <h4>{$t(`end${c.k}T`)}</h4>
         <p>{$t(`end${c.k}`)}</p>
       </article>
@@ -43,12 +43,13 @@
 </div>
 
 <style>
-  .end { font-family: Quicksand, sans-serif; color: #3D2A22; text-align: center; }
+  .end { font-family: Quicksand, Vazirmatn, sans-serif; color: #3D2A22; text-align: center; }
   .lead { margin: 0 auto 1.3rem; max-width: 40rem; font-size: 1.05rem; }
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; text-align: start; }
   article { background: color-mix(in srgb, var(--ec) 9%, transparent); border: 1px solid color-mix(in srgb, var(--ec) 22%, transparent); border-top: 5px solid var(--ec); border-radius: 12px; padding: 1rem 1.1rem 1.1rem; }
-  .num { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 800; color: var(--ec); line-height: 1.1; }
-  h4 { margin: .3rem 0 .4rem; font-family: 'Playfair Display', Georgia, serif; font-size: 1.15rem; color: #1E3F5C; }
+  .num-sub { display: block; margin-top: .1rem; font-size: .78rem; font-weight: 700; color: var(--ec); opacity: .85; }
+  .num { display: block; font-family: 'Acme', Quicksand, sans-serif; font-size: 2rem; font-weight: 400; color: var(--ec); line-height: 1.1; }
+  h4 { margin: .3rem 0 .4rem; font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 1.15rem; color: #1E3F5C; }
   article p { margin: 0; font-size: .9rem; line-height: 1.55; }
   .bye { display: flex; align-items: flex-end; justify-content: center; gap: 1.6rem; max-width: 52rem; margin: 2.4rem auto 0; text-align: start; }
   .bye-dali { flex: 0 0 auto; width: 150px; height: auto; filter: drop-shadow(0 6px 10px rgba(74, 46, 37, .18)); }
@@ -64,11 +65,11 @@
     box-shadow: 0 1px 2px rgba(74, 46, 37, .12), 0 8px 18px -8px rgba(74, 46, 37, .3); }
   .jot::before { content: ''; position: absolute; top: 0; bottom: 0; inset-inline-start: 1.4rem; border-inline-start: 1px solid rgba(181, 82, 59, .35); }
   .tape { position: absolute; top: -.6rem; left: 50%; width: 5rem; height: 1.2rem; transform: translateX(-50%) rotate(2deg); background: rgba(233, 214, 170, .8); }
-  .jot-k { margin: 0; padding-inline-start: 1rem; font: 700 .66rem Quicksand, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #B5523B; }
+  .jot-k { margin: 0; padding-inline-start: 1rem; font: 700 .66rem Quicksand, Vazirmatn, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #B5523B; }
   .jot-t { margin: 0; padding-inline-start: 1rem; font: 500 1.5rem/1.55rem Caveat, 'Segoe Print', cursive; color: #1E3F5C; }
   .jot-t :global(b) { color: #C62F2F; }
   .jot.ar { transform: rotate(1.4deg); }
-  .jot.ar .jot-t { font-family: 'Aref Ruqaa', Tajawal, serif; font-size: 1.25rem; }
+  .jot.ar .jot-t { font-family: 'Aref Ruqaa', Vazirmatn, serif; font-size: 1.25rem; }
   @media (max-width: 640px) { .bye { flex-direction: column; align-items: center; } .bye-dali { width: 110px; } .bubble::before { display: none; } .jot { justify-self: center; } }
   @media (max-width: 820px) { .cards { grid-template-columns: minmax(0, 1fr); } }
 </style>

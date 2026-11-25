@@ -111,7 +111,7 @@ export const landmarks = [
  {
   "gov": "Nabeul",
   "city": "Korbous",
-  "landmark": "Ariel View of the city",
+  "landmark": "Aerial view of Korbous",
   "bill": "1 Tnd (1980)",
   "url": "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
   "img": "Nabeul",
@@ -138,7 +138,7 @@ export const landmarks = [
  {
   "gov": "Zaghouan",
   "city": "Zaghouan",
-  "landmark": "Roman ruins of the Temple of Water Roman aqueducts",
+  "landmark": "Temple of Water and Roman aqueducts",
   "bill": "5 Tnd (1980)",
   "url": "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
   "img": "Zaghouan1",
@@ -201,7 +201,7 @@ export const landmarks = [
  {
   "gov": "Mahdia",
   "city": "El Djem",
-  "landmark": "Roman amphitheater - 20 Tnd (1980)",
+  "landmark": "Roman amphitheater",
   "bill": "20 Tnd (1980)",
   "url": "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
   "img": "Mahdia2",
@@ -372,7 +372,7 @@ export const landmarks = [
  {
   "gov": "Tunis",
   "city": "Carthage",
-  "landmark": "Carthagian Ships",
+  "landmark": "Carthaginian ships",
   "bill": "5 Tnd (2013)",
   "url": "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
   "img": "Carthage6",
@@ -390,7 +390,7 @@ export const landmarks = [
  {
   "gov": "Tunis",
   "city": "Medina",
-  "landmark": "Panaroamic view of Tunis",
+  "landmark": "Panoramic view of Tunis",
   "bill": "1/2 Tnd (1972)",
   "url": "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
   "img": "Medina2",
@@ -453,7 +453,7 @@ export const landmarks = [
  {
   "gov": "Tunis",
   "city": "Tunis",
-  "landmark": "The bay of Tunis - 1/2 Tnd (1973)",
+  "landmark": "The bay of Tunis",
   "bill": "1/2 Tnd (1973)",
   "url": "https://www.tripadvisor.com/Tourism-g2446676-Korbous_Nabeul_Governorate-Vacations.html",
   "img": "Tunis1",

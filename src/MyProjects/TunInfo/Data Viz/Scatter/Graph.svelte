@@ -131,7 +131,7 @@
   <style>
       button {
           margin-bottom: 5%;
-          font-family: Quicksand;
+          font-family: Quicksand, Vazirmatn;
         font-weight: bold;
         font-size: 1rem;
         color:#2088A6;

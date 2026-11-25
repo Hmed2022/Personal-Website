@@ -52,7 +52,7 @@
 </aside>
 
 <style>
-  .ins { --c: #A4731C; --bg: rgba(217, 164, 65, .12); display: flex; gap: .9rem; align-items: flex-start; max-width: 50rem; margin: 1.4rem auto 2.6rem; padding: 1rem 1.2rem; border-radius: 14px; background: var(--bg); border-inline-start: 4px solid var(--c); font-family: Quicksand, sans-serif; color: #3D2A22; box-sizing: border-box; text-align: start; }
+  .ins { --c: #A4731C; --bg: rgba(217, 164, 65, .12); display: flex; gap: .9rem; align-items: flex-start; max-width: 50rem; margin: 1.4rem auto 2.6rem; padding: 1rem 1.2rem; border-radius: 14px; background: var(--bg); border-inline-start: 4px solid var(--c); font-family: Quicksand, Vazirmatn, sans-serif; color: #3D2A22; box-sizing: border-box; text-align: start; }
   .ins.blue { --c: #1E5B8C; --bg: rgba(30, 91, 140, .08); }
   .ico { flex: 0 0 auto; width: 2.4rem; height: 2.4rem; border-radius: 50%; display: grid; place-items: center; background: var(--c); }
   /* just Dali's drawing, no frame */
@@ -79,9 +79,9 @@
   }
   .jot::before { content: ''; position: absolute; top: 0; bottom: 0; inset-inline-start: 1.6rem; border-inline-start: 1px solid rgba(181, 82, 59, .35); }   /* margin line */
   .tape { position: absolute; top: -.6rem; left: 50%; width: 5.5rem; height: 1.3rem; transform: translateX(-50%) rotate(2deg); background: rgba(233, 214, 170, .75); box-shadow: 0 1px 2px rgba(74, 46, 37, .15); }
-  .jot-k { margin: 0 0 .1rem; padding-inline-start: 1.1rem; font: 700 .68rem Quicksand, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #B5523B; }
+  .jot-k { margin: 0 0 .1rem; padding-inline-start: 1.1rem; font: 700 .68rem Quicksand, Vazirmatn, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #B5523B; }
   .jot-t { margin: 0; padding-inline-start: 1.1rem; font-family: Caveat, 'Segoe Print', cursive; font-weight: 500; font-size: 1.5rem; line-height: 1.55rem; color: #1E3F5C; }
-  .jot.ar .jot-t { font-family: 'Aref Ruqaa', Tajawal, serif; font-size: 1.25rem; line-height: 1.55rem; }
+  .jot.ar .jot-t { font-family: 'Aref Ruqaa', Vazirmatn, serif; font-size: 1.25rem; line-height: 1.55rem; }
   .jot.ar { transform: rotate(1.3deg); }
   .jot-t :global(b) { background: linear-gradient(transparent 55%, rgba(227, 167, 42, .45) 55%, rgba(227, 167, 42, .45) 92%, transparent 92%); font-weight: 700; padding: 0 .08em; }
   @media (max-width: 640px) { .ins { margin-inline: 1rem; } .jot-t { font-size: 1.35rem; } }

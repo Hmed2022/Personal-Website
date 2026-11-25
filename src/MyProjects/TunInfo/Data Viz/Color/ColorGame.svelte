@@ -151,7 +151,7 @@
 </div>
 
 <style>
-  .cg { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2rem; max-width: 880px; margin: 0 auto; font-family: Quicksand, sans-serif; color: #3D2A22; text-align: start; }
+  .cg { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2rem; max-width: 880px; margin: 0 auto; font-family: Quicksand, Vazirmatn, sans-serif; color: #3D2A22; text-align: start; }
 
   /* ---- game ---- */
   .game { background: rgba(30, 91, 140, .05); border: 1px solid rgba(30, 91, 140, .16); border-radius: 14px; padding: 1.1rem; box-shadow: 0 4px 16px rgba(61, 42, 34, .07); }
@@ -165,14 +165,14 @@
   .rounds button.on { background: #1E5B8C; color: #FFFFFF; }
 
   .nudge { margin: -.3rem 0 .7rem; font-size: .85rem; font-weight: 600; color: #B5523B; }
-  .q { margin: 0 0 .5rem; font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 800; color: #1E3F5C; }
+  .q { margin: 0 0 .5rem; font-family: 'Acme', Quicksand, sans-serif; font-size: 1.3rem; font-weight: 400; color: #1E3F5C; }
   .strip { display: flex; height: 28px; border-radius: 6px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .06); }
   .strip span { flex-grow: 0; flex-shrink: 0; min-width: 1px; }
   .strip.big { height: 74px; border-radius: 10px; }
 
   .answers { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .9rem; }
   .ans {
-    flex: 1 1 4rem; font: 800 1.05rem Quicksand, sans-serif; color: #1E3F5C; cursor: pointer;
+    flex: 1 1 4rem; font: 800 1.05rem Quicksand, Vazirmatn, sans-serif; color: #1E3F5C; cursor: pointer;
     background: rgba(255, 255, 255, .45); border: 1.5px solid #C8D9DC; border-radius: 10px; padding: .55rem .4rem;
     box-shadow: 0 2px 0 #C8D9DC; transition: transform .1s;
   }
@@ -187,10 +187,10 @@
   .result img { width: 9.5rem; height: auto; border-radius: 6px; box-shadow: 0 2px 6px rgba(0, 0, 0, .15); flex: 0 0 auto; }
   .verdict { margin: 0; font-size: .92rem; }
   .why { margin: .2rem 0 .5rem; font-size: .8rem; color: #4D6473; }
-  .next { font: 700 .85rem Quicksand, sans-serif; color: #FFFFFF; background: #1E5B8C; border: none; border-radius: 999px; padding: .4rem .9rem; cursor: pointer; }
+  .next { font: 700 .85rem Quicksand, Vazirmatn, sans-serif; color: #FFFFFF; background: #1E5B8C; border: none; border-radius: 999px; padding: .4rem .9rem; cursor: pointer; }
 
   /* ---- fingerprints ---- */
-  .prints h4 { margin: 0 0 .7rem; font-family: 'Playfair Display', Georgia, serif; font-size: 1.15rem; color: #1E3F5C; }
+  .prints h4 { margin: 0 0 .7rem; font-family: 'Acme', Quicksand, sans-serif; font-weight: 400; font-size: 1.15rem; color: #1E3F5C; }
   .grid { display: grid; grid-template-columns: 3.2rem 1fr 1fr; gap: .45rem .6rem; align-items: center; }
   .col-h { font-size: .74rem; font-weight: 800; letter-spacing: .04em; color: #4D6473; }
   .row-h { font-weight: 800; font-size: .95rem; color: #3D2A22; }
@@ -202,12 +202,12 @@
   .grid-wrap.hidden .grid { filter: blur(9px) saturate(.7); pointer-events: none; user-select: none; }
   .veil { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: .5rem; text-align: center; padding: 1rem; }
   .veil p { margin: 0; padding: .4rem .8rem; border-radius: 999px; background: rgba(255, 251, 244, .92); font-weight: 700; font-size: .9rem; color: #1E3F5C; box-shadow: 0 2px 10px rgba(61, 42, 34, .12); }
-  .veil button { font: 700 .82rem Quicksand, sans-serif; color: #FFFFFF; background: #1E5B8C; border: none; border-radius: 999px; padding: .4rem .9rem; cursor: pointer; }
+  .veil button { font: 700 .82rem Quicksand, Vazirmatn, sans-serif; color: #FFFFFF; background: #1E5B8C; border: none; border-radius: 999px; padding: .4rem .9rem; cursor: pointer; }
   .foot { margin: .6rem 0 0; font-size: .75rem; color: #7A8B92; }
   .seg-tip {
     position: fixed; z-index: 50; transform: translate(10px, -130%); pointer-events: none;
     display: flex; align-items: center; gap: .35rem; padding: .25rem .5rem; border-radius: 6px;
-    background: #1E2A30; color: #FFFFFF; font: 700 .75rem Quicksand, sans-serif;
+    background: #1E2A30; color: #FFFFFF; font: 700 .75rem Quicksand, Vazirmatn, sans-serif;
   }
   .seg-tip i { width: .7rem; height: .7rem; border-radius: 2px; border: 1px solid rgba(255, 255, 255, .6); }
 

@@ -57,7 +57,7 @@
 	}
 	.name {
 		display: inline;
-		font-family: Quicksand;
+		font-family: Quicksand, Vazirmatn;
 		font-weight:500;
 		font-size: .8rem;
 		text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;

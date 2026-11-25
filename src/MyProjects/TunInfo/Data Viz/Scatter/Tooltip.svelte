@@ -25,7 +25,7 @@
   
   
       p{
-          font-family: Quicksand;
+          font-family: Quicksand, Vazirmatn;
           font-size:0.8rem;
       }
       
