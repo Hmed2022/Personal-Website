@@ -4,9 +4,15 @@ import CardMagicUrl from "../assets/Thumbnails/magic.gif";
 // import CardMagicVideo from "../assets/Thumbnails/magic.mp4";   // TODO: re-export without black bars, ~10 s, then add `video: CardMagicVideo` below (and use magic.png as `url`)
 import tunOld from "../assets/Thumbnails/Title-Tuninfo.gif";
 // banknotes thumbnail: TunBank.gif when it is in assets/Thumbnails, otherwise the old title GIF
-const tunNew = Object.values(import.meta.glob("../assets/Thumbnails/TunBank.gif", { eager: true, import: "default" }))[0];
+const tunNew = Object.values(
+  import.meta.glob("../assets/Thumbnails/TunBank.gif", {
+    eager: true,
+    import: "default",
+  }),
+)[0];
 const tunUrl = tunNew || tunOld;
 import namesUrl from "../assets/Thumbnails/names.gif";
+import mosqUrl from "../assets/Thumbnails/mosq.gif";
 
 // Each project:
 //   tags   topics the home page filters by (sports, tunisia, culture, math...) + legacy tool tags
@@ -85,6 +91,20 @@ export const imageData = [
     lang: "EN",
     tags: "all,interactive,svelte,math",
   },
+  {
+    url: mosqUrl,
+    rank: 5,
+    title: "Mapping Every Mosque in Tunisia",
+    desc: "Map | Data Collection",
+    description:
+      "Every minaret and neighbourhood masjid on one map: how close they are, what they're called, and which way they face. Work in progress.",
+    href: "/#/tnMosq",
+    tools: ["Svelte", "Python"],
+    alt: "Animated mosaic: Tunisian mosques flip tile by tile beside the title Mapping every mosque in Tunisia",
+    show: false,
+    lang: "EN",
+    tags: "all,dataviz,map,tunisia,svelte,culture",
+  },
   // {
   //   url: "https://via.placeholder.com/350x350/1",
   //   title: "Lorem Ipsum",
@@ -97,5 +117,3 @@ export const imageData = [
 export const FILTERS_MIN_PROJECTS = 6;
 export const showFilters =
   imageData.filter((p) => p.show).length >= FILTERS_MIN_PROJECTS;
-
-// title: "Tunisia in Graphics: An Infographic Odyssey",

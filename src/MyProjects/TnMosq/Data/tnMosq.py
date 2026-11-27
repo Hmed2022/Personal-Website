@@ -60,7 +60,8 @@ USE_OVERTURE = True
 USE_FOURSQUARE = True          # skipped with a message if the bucket isn't reachable
 OVERTURE_MIN_CONFIDENCE = 0.3  # Overture gives each place a 0-1 confidence score
 
-UA = {"User-Agent": "tn-mosques-atlas/0.2 (contact: you@example.com)"}  # put your email
+# overpass-api.de refuses the placeholder address with HTTP 406; a plain client name works
+UA = {"User-Agent": "tn-mosque-map/0.3 (open data journalism project)", "Accept": "application/json"}
 
 OVERPASS_SERVERS = [
     "https://overpass-api.de/api/interpreter",
@@ -124,23 +125,89 @@ def looks_like_mosque_name(n):
 # ============================================================================
 # Overpass (OpenStreetMap)
 # ============================================================================
-OSM_MOSQUES_Q = """
-[out:json][timeout:900];
-area["ISO3166-1"="TN"][admin_level=2]->.tn;
-rel(area.tn)["boundary"="administrative"]["admin_level"="4"];
-map_to_area->.govs;
-foreach.govs->.g(
-  .g out tags;
-  (
-    nwr["amenity"="place_of_worship"]["religion"="muslim"](area.g);
-    nwr["building"="mosque"](area.g);
-    nwr["amenity"="place_of_worship"][!"religion"](area.g);
-    nwr["name"~"(^| )(ال)?(جامع|مسجد)( |$)|mosqu|masj|d?j[ae]m[aâ]a",i]
-       [!"highway"][!"shop"][!"place"][!"railway"][!"public_transport"](area.g);
-  );
-  out tags geom;
+# Tunisia is fetched in small squares, one request each, then merged. (A single country-wide query
+# times out on every public Overpass server; the first version looped over governorates inside one
+# request and quietly came back with only 12 of the 24.) Points outside Tunisia are dropped later,
+# when each one is matched to its governorate.
+OSM_TILE_DEG = 0.75
+# pass 1: tagged mosques (fast). pass 2: things *named* mosque/جامع/مسجد but not tagged (slow regex),
+# on smaller squares so each request stays light.
+OSM_TAG_Q = """
+[out:json][timeout:180][bbox:{s},{w},{n},{e}];
+(
+  nwr["amenity"="place_of_worship"]["religion"="muslim"];
+  nwr["building"="mosque"];
+  nwr["amenity"="place_of_worship"][!"religion"];
 );
+out tags geom;
 """
+OSM_NAME_Q = """
+[out:json][timeout:180][bbox:{s},{w},{n},{e}];
+nwr["name"~"(^| )(ال)?(جامع|مسجد)( |$)|mosqu|masj|d?j[ae]m[aâ]a",i]
+   [!"highway"][!"shop"][!"place"][!"railway"][!"public_transport"][!"amenity"="school"];
+out tags geom;
+"""
+OSM_CACHE = "osm_cache"   # one file per finished square, so a crash or restart keeps finished work
+
+
+def _squares(govs, step):
+    from shapely.geometry import box
+    land = unary_union([g["shape"] for g in govs]).buffer(0.05) if govs else None
+    out, y = [], TN_BBOX["ymin"]
+    while y < TN_BBOX["ymax"]:
+        x = TN_BBOX["xmin"]
+        while x < TN_BBOX["xmax"]:
+            b = (round(y, 4), round(x, 4), round(min(y + step, TN_BBOX["ymax"]), 4), round(min(x + step, TN_BBOX["xmax"]), 4))
+            if land is None or land.intersects(box(b[1], b[0], b[3], b[2])):
+                out.append(b)
+            x += step
+        y += step
+    return out
+
+
+def _fetch_square(query, b, label):
+    """One square, cached on disk. Returns its elements, or None if every server failed."""
+    os.makedirs(OSM_CACHE, exist_ok=True)
+    path = os.path.join(OSM_CACHE, f"{label}_{b[0]}_{b[1]}_{b[2]}_{b[3]}.json")
+    if os.path.exists(path):
+        return json.load(open(path, encoding="utf-8"))
+    try:
+        data = fetch_overpass(query.format(s=b[0], w=b[1], n=b[2], e=b[3]), f"{label} {b}")
+    except SystemExit:
+        return None
+    els = data.get("elements", [])
+    json.dump(els, open(path, "w", encoding="utf-8"))
+    return els
+
+
+def fetch_osm_tiled(govs):
+    """Both passes over every square that touches Tunisia; failed squares are retried at the end."""
+    seen, elements = set(), []
+    jobs = [(OSM_TAG_Q, b, "tags") for b in _squares(govs, OSM_TILE_DEG)]
+    jobs += [(OSM_NAME_Q, b, "names") for b in _squares(govs, OSM_TILE_DEG / 2)]
+    failed = []
+    for round_ in (1, 2):
+        todo = jobs if round_ == 1 else failed
+        failed = []
+        for k, (q, b, label) in enumerate(todo, 1):
+            els = _fetch_square(q, b, label)
+            if els is None:
+                failed.append((q, b, label))
+                tqdm.write(f"  {label} {b}: failed, will retry")
+                continue
+            new = 0
+            for el in els:
+                key = (el["type"], el["id"])
+                if key not in seen:
+                    seen.add(key); elements.append(el); new += 1
+            tqdm.write(f"  [{round_}] {label} {k}/{len(todo)}: {new} new  (total {len(elements)})")
+            time.sleep(1)
+        if not failed:
+            break
+    if failed:
+        tqdm.write(f"  WARNING: {len(failed)} squares still failed: {[f[1] for f in failed]}")
+    return {"elements": elements}
+
 
 OSM_GOVERNORATES_Q = """
 [out:json][timeout:300];
@@ -191,12 +258,18 @@ def fetch_overpass(query, label):
             tqdm.write(f"  {host}: connection problem ({e.__class__.__name__}), trying next…")
             continue
         if data is not None:
+            # Overpass answers HTTP 200 even when it gave up halfway (timeout, out of memory):
+            # it returns what it had so far plus a "remark". Treat that as a failure.
+            remark = data.get("remark") or ""
+            if re.search(r"error|timed out|out of memory|runtime", remark, re.I):
+                tqdm.write(f"  {host}: incomplete answer ({remark[:200]}), trying next…")
+                continue
             return data
         body = r.text[:400].replace("\n", " ")
         tqdm.write(f"  {host}: HTTP {r.status_code} — {body}")
         if r.status_code == 400:
             sys.exit("Overpass rejected the query (HTTP 400). Message above says why.")
-        wait = 60 if r.status_code in (429, 504) else 10
+        wait = 60 if r.status_code in (429, 502, 504) else 10
         for _ in tqdm(range(wait), desc="Waiting before next try", unit="s", leave=False):
             time.sleep(1)
     sys.exit("All Overpass servers failed. Try again later (they are busiest in European daytime).")
@@ -349,6 +422,23 @@ def parse_governorates(osm):
     return govs
 
 
+LOCAL_OUTLINES = os.path.join("..", "..", "TunInfo", "Data Viz", "Map", "Data", "Tunisia.geojson.json")
+
+
+def local_governorates():
+    """Governorate polygons from the outline file the site's maps already use (no download needed)."""
+    from shapely.geometry import shape
+    if not os.path.exists(LOCAL_OUTLINES):
+        return []
+    geo = json.load(open(LOCAL_OUTLINES, encoding="utf-8"))
+    out = []
+    for f in geo["features"]:
+        shp = shape(f["geometry"]).buffer(0)
+        out.append({"gov": f["properties"]["gouv_fr"], "gov_ar": f["properties"].get("gouv_ar"),
+                    "shape": shp, "prep": prep(shp)})
+    return out
+
+
 def assign_governorate(df, govs, osm_df=None):
     """Label points with their governorate; drop points outside Tunisia."""
     if df.empty:
@@ -360,7 +450,7 @@ def assign_governorate(df, govs, osm_df=None):
             hit = next((g for g in govs if g["prep"].contains(p)), None)
             if hit is None:   # just offshore / on the border line: nearest within ~1 km
                 near = min(govs, key=lambda g: g["shape"].distance(p))
-                hit = near if near["shape"].distance(p) < 0.01 else None
+                hit = near if near["shape"].distance(p) < 0.03 else None
             g_en.append(hit and hit["gov"]); g_ar.append(hit and hit["gov_ar"]); keep.append(hit is not None)
     elif osm_df is not None and len(osm_df):
         # fallback: governorate of the nearest OSM mosque, if within 10 km
@@ -698,17 +788,24 @@ def main():
     frames = []
     osm_df, govs = pd.DataFrame(), []
 
-    if USE_OSM:
-        print("\n[1] OpenStreetMap")
-        osm_df = parse_osm(fetch_overpass(OSM_MOSQUES_Q, "OSM mosques"))
-        print(f"  osm: {len(osm_df)} records  ({osm_df.match_type.value_counts().to_dict()})")
-        frames.append(osm_df)
-    if USE_OVERTURE or USE_FOURSQUARE:
+    # governorate borders first: every source (OSM included) is labelled with them
+    govs = local_governorates()
+    if govs:
+        print(f"  {len(govs)} governorate polygons (from the site's own outline file)")
+    else:
         try:
             govs = parse_governorates(fetch_overpass(OSM_GOVERNORATES_Q, "Governorate borders"))
-            print(f"  {len(govs)} governorate polygons")
+            print(f"  {len(govs)} governorate polygons (from OpenStreetMap)")
         except SystemExit as e:
             print(f"  governorate borders unavailable ({e}); using nearest OSM mosque")
+    if USE_OSM:
+        print("\n[1] OpenStreetMap")
+        osm_df = parse_osm(fetch_osm_tiled(govs))
+        if govs:
+            osm_df = assign_governorate(osm_df, govs)
+        print(f"  osm: {len(osm_df)} records  ({osm_df.match_type.value_counts().to_dict()})")
+        print("  per governorate:", osm_df.governorate.value_counts().to_dict())
+        frames.append(osm_df)
     if USE_OVERTURE:
         print("\n[2] Overture Maps")
         ov = assign_governorate(run_source("overture", fetch_overture), govs, osm_df)

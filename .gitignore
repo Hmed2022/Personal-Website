@@ -25,3 +25,4 @@ dist-ssr
 
 # Supabase keys
 .env
+src/MyProjects/TnMosq/Data/osm_cache/

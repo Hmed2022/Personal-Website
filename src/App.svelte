@@ -55,7 +55,8 @@
 		'/tuninfo': `What Can Tunisia's Banknotes Tell You? · ${SITE}`,
 		'/klay': `Klay BBJ: A Mirror of Tunisian Society · ${SITE}`,
 		'/names': `The Names We Memorized Before We Understood · ${SITE}`,
-		'/cardmagic': `The Math Behind the Magic · ${SITE}`
+		'/cardmagic': `The Math Behind the Magic · ${SITE}`,
+		'/tnmosq': `Mapping Every Mosque in Tunisia · ${SITE}`
 	};
 	const titleFor = (path) => TITLES[path] ?? `Uncharted territory · ${SITE}`;
 
@@ -106,6 +107,7 @@
     // '/Anniv': lazy(() => import('./MyProjects/Anniversary/Aniv.svelte')),
     '/Names': lazy(() => import('./MyProjects/Names/names.svelte')),
     '/cardmagic': lazy(() => import('./MyProjects/CardMagic/CardMagic.svelte')),
+    '/tnMosq': lazy(() => import('./MyProjects/TnMosq/TunMosq.svelte')),   // draft
     // anything else (e.g. #/oops): a small "uncharted territory" page instead of a blank screen
     '*': lazy(() => import('./pages/NotFound.svelte'))
   };
@@ -132,7 +134,8 @@
     normalizedPath === '/tnnotes' ||   // (lowercased: matches /tnNotes)
     normalizedPath === '/tuninfo' ||
     normalizedPath === '/klay' ||
-    normalizedPath === '/cardmagic';
+    normalizedPath === '/cardmagic' ||
+    normalizedPath === '/tnmosq';
 
 
   // night mode applies to the personal pages only; project stories always keep their own colours
